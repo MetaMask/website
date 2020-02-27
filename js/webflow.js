@@ -2326,7 +2326,8 @@ var _find = _interopRequireDefault(__webpack_require__(63));
 /* eslint-env browser */
 
 
-var IS_BROWSER_ENV = typeof window !== 'undefined';
+var IS_BROWSER_ENV = typeof window !== 'undefined'; // $FlowFixMe
+
 exports.IS_BROWSER_ENV = IS_BROWSER_ENV;
 
 var withBrowser = function withBrowser(fn, fallback) {
@@ -2376,7 +2377,7 @@ var TRANSFORM_PREFIXED = withBrowser(function () {
     var length = prefixes.length;
 
     for (var i = 0; i < length; i++) {
-      var prop = prefixes[i] + suffix;
+      var prop = prefixes[i] + suffix; // $FlowFixMe
 
       if (el.style[prop] !== undefined) {
         return prop;
@@ -2385,7 +2386,8 @@ var TRANSFORM_PREFIXED = withBrowser(function () {
   }
 
   return 'transform';
-}, 'transform');
+}, 'transform'); // $FlowFixMe
+
 exports.TRANSFORM_PREFIXED = TRANSFORM_PREFIXED;
 var TRANSFORM_PREFIX = TRANSFORM_PREFIXED.split('transform')[0];
 var TRANSFORM_STYLE_PREFIXED = TRANSFORM_PREFIX ? TRANSFORM_PREFIX + 'TransformStyle' : 'transformStyle';
@@ -3244,8 +3246,10 @@ var _shared$IX2EngineActi = _shared.IX2EngineActionTypes,
     IX2_ACTION_LIST_PLAYBACK_CHANGED = _shared$IX2EngineActi.IX2_ACTION_LIST_PLAYBACK_CHANGED,
     IX2_VIEWPORT_WIDTH_CHANGED = _shared$IX2EngineActi.IX2_VIEWPORT_WIDTH_CHANGED,
     IX2_MEDIA_QUERIES_DEFINED = _shared$IX2EngineActi.IX2_MEDIA_QUERIES_DEFINED;
-var GENERAL_START_ACTION = _shared.IX2EngineItemTypes.GENERAL_START_ACTION;
-var reifyState = _shared.IX2VanillaUtils.reifyState;
+var _shared$IX2EngineItem = _shared.IX2EngineItemTypes,
+    GENERAL_START_ACTION = _shared$IX2EngineItem.GENERAL_START_ACTION,
+    GENERAL_CONTINUOUS_ACTION = _shared$IX2EngineItem.GENERAL_CONTINUOUS_ACTION;
+var reifyState = _shared.IX2VanillaUtils.reifyState; // TODO: Figure out what this is and elevate it
 
 var rawDataImported = function rawDataImported(rawData) {
   return {
@@ -3270,8 +3274,7 @@ exports.sessionInitialized = sessionInitialized;
 
 var sessionStarted = function sessionStarted() {
   return {
-    type: IX2_SESSION_STARTED,
-    payload: {}
+    type: IX2_SESSION_STARTED
   };
 };
 
@@ -3279,8 +3282,7 @@ exports.sessionStarted = sessionStarted;
 
 var sessionStopped = function sessionStopped() {
   return {
-    type: IX2_SESSION_STOPPED,
-    payload: {}
+    type: IX2_SESSION_STOPPED
   };
 };
 
@@ -3342,8 +3344,7 @@ exports.stopRequested = stopRequested;
 
 var clearRequested = function clearRequested() {
   return {
-    type: IX2_CLEAR_REQUESTED,
-    payload: {}
+    type: IX2_CLEAR_REQUESTED
   };
 };
 
@@ -3485,8 +3486,7 @@ exports.viewportWidthChanged = viewportWidthChanged;
 
 var mediaQueriesDefined = function mediaQueriesDefined() {
   return {
-    type: IX2_MEDIA_QUERIES_DEFINED,
-    payload: {}
+    type: IX2_MEDIA_QUERIES_DEFINED
   };
 };
 
@@ -6458,7 +6458,7 @@ var _shared$IX2VanillaPlu = _shared.IX2VanillaPlugins,
 var ua = navigator.userAgent;
 var IS_MOBILE_SAFARI = ua.match(/iPad/i) || ua.match(/iPhone/); // Keep throttled events at ~80fps to reduce reflows while maintaining render accuracy
 
-var THROTTLED_EVENT_WAIT = 12;
+var THROTTLED_EVENT_WAIT = 12; // $FlowFixMe
 
 function observeRequests(store) {
   observeStore({
@@ -6568,11 +6568,15 @@ function handlePlaybackRequest(playback, store) {
   var rawData = playback.rawData;
 
   if (actionListId && actionItemId && rawData && immediate) {
-    rawData = reduceListToGroup({
-      actionListId: actionListId,
-      actionItemId: actionItemId,
-      rawData: rawData
-    });
+    var actionList = rawData.actionLists[actionListId];
+
+    if (actionList) {
+      rawData = reduceListToGroup({
+        actionList: actionList,
+        actionItemId: actionItemId,
+        rawData: rawData
+      });
+    }
   }
 
   startEngine({
@@ -6632,7 +6636,8 @@ function handleClearRequest(state, store) {
     store: store,
     elementApi: elementApi
   });
-}
+} // $FlowFixMe
+
 
 function startEngine(_ref9) {
   var store = _ref9.store,
@@ -6668,9 +6673,10 @@ function startEngine(_ref9) {
 
 function addDocumentClass() {
   var _document = document,
-      documentElement = _document.documentElement;
+      documentElement = _document.documentElement; // $FlowFixMe
 
   if (documentElement.className.indexOf(W_MOD_IX) === -1) {
+    // $FlowFixMe
     documentElement.className += " ".concat(W_MOD_IX);
   }
 }
@@ -6693,7 +6699,8 @@ function startRenderLoop(store, testManual) {
   };
 
   handleFrame(window.performance.now());
-}
+} // $FlowFixMe
+
 
 function stopEngine(store) {
   var _store$getState3 = store.getState(),
@@ -6781,12 +6788,14 @@ function createGroupInstances(_ref11) {
     var actionGroups = instanceActionGroups[key];
     var actionItem = (0, _get["default"])(actionGroups, "[0].actionItems[0]", {});
     var actionTypeId = actionItem.actionTypeId;
-    var pluginInstance = isPluginType(actionTypeId) ? createPluginInstance(actionTypeId)(element, actionItem) : null;
+    var pluginInstance = isPluginType(actionTypeId) ? // $FlowFixMe
+    createPluginInstance(actionTypeId)(element, actionItem) : null;
     var destination = getDestinationValues({
       element: element,
       actionItem: actionItem,
       elementApi: elementApi
-    }, pluginInstance);
+    }, // $FlowFixMe
+    pluginInstance);
     createInstance({
       store: store,
       element: element,
@@ -7033,7 +7042,8 @@ function bindEventType(_ref13) {
         types = _ref15.types,
         shouldThrottle = _ref15.throttle;
     types.split(' ').filter(Boolean).forEach(function (type) {
-      var handlerFunc = shouldThrottle ? handleEventThrottled : handleEvent;
+      var handlerFunc = shouldThrottle ? handleEventThrottled : handleEvent; // $FlowFixMe
+
       target.addEventListener(type, handlerFunc);
       store.dispatch((0, _IX2EngineActions.eventListenerAdded)(target, [type, handlerFunc]));
     });
@@ -7063,7 +7073,7 @@ function injectBehaviorCSSFixes(events) {
     var _events$eventId = events[eventId],
         eventTypeId = _events$eventId.eventTypeId,
         target = _events$eventId.target;
-    var selector = elementApi.getQuerySelector(target);
+    var selector = elementApi.getQuerySelector(target); // $FlowFixMe
 
     if (injectedSelectors[selector]) {
       continue;
@@ -7071,14 +7081,17 @@ function injectBehaviorCSSFixes(events) {
 
 
     if (eventTypeId === MOUSE_CLICK || eventTypeId === MOUSE_SECOND_CLICK) {
+      // $FlowFixMe
       injectedSelectors[selector] = true;
-      cssText += selector + '{' + 'cursor: pointer;' + 'touch-action: manipulation;' + '}';
+      cssText += // $FlowFixMe
+      selector + '{' + 'cursor: pointer;' + 'touch-action: manipulation;' + '}';
     }
   }
 
   if (cssText) {
     var style = document.createElement('style');
-    style.textContent = cssText;
+    style.textContent = cssText; // $FlowFixMe
+
     document.body.appendChild(style);
   }
 }
@@ -7116,13 +7129,15 @@ function renderInitialGroup(_ref16) {
       });
       var shouldUsePlugin = isPluginType(actionTypeId);
       itemElements.forEach(function (element) {
-        var pluginInstance = shouldUsePlugin ? createPluginInstance(actionTypeId)(element, actionItem) : null;
+        var pluginInstance = shouldUsePlugin ? // $FlowFixMe
+        createPluginInstance(actionTypeId)(element, actionItem) : null;
         createInstance({
           destination: getDestinationValues({
             element: element,
             actionItem: actionItem,
             elementApi: elementApi
-          }, pluginInstance),
+          }, // $FlowFixMe
+          pluginInstance),
           immediate: true,
           store: store,
           element: element,
@@ -7134,7 +7149,8 @@ function renderInitialGroup(_ref16) {
       });
     });
   }
-}
+} // $FlowFixMe
+
 
 function stopAllActionGroups(_ref17) {
   var store = _ref17.store;
@@ -7156,7 +7172,8 @@ function stopAllActionGroups(_ref17) {
       }
     }
   });
-}
+} // $FlowFixMe
+
 
 function stopActionGroup(_ref18) {
   var store = _ref18.store,
@@ -7192,7 +7209,8 @@ function stopActionGroup(_ref18) {
       }
     }
   });
-}
+} // $FlowFixMe
+
 
 function startActionGroup(_ref19) {
   var store = _ref19.store,
@@ -7215,7 +7233,12 @@ function startActionGroup(_ref19) {
       mediaQueries = _event$mediaQueries3 === void 0 ? ixData.mediaQueryKeys : _event$mediaQueries3;
   var actionList = (0, _get["default"])(ixData, "actionLists.".concat(actionListId), {});
   var actionItemGroups = actionList.actionItemGroups,
-      useFirstGroupAsInitialState = actionList.useFirstGroupAsInitialState; // Reset to first group when event loop is configured
+      useFirstGroupAsInitialState = actionList.useFirstGroupAsInitialState; // Abort playback if no action groups
+
+  if (!actionItemGroups || !actionItemGroups.length) {
+    return false;
+  } // Reset to first group when event loop is configured
+
 
   if (groupIndex >= actionItemGroups.length && (0, _get["default"])(event, 'config.loop')) {
     groupIndex = 0;
@@ -7264,8 +7287,10 @@ function startActionGroup(_ref19) {
       elementApi: elementApi
     });
     elements.forEach(function (element, elementIndex) {
-      var pluginInstance = shouldUsePlugin ? createPluginInstance(actionTypeId)(element, actionItem) : null;
-      var pluginDuration = shouldUsePlugin ? getPluginDuration(actionTypeId)(element, actionItem) : null;
+      var pluginInstance = shouldUsePlugin ? // $FlowFixMe
+      createPluginInstance(actionTypeId)(element, actionItem) : null;
+      var pluginDuration = shouldUsePlugin ? // $FlowFixMe
+      getPluginDuration(actionTypeId)(element, actionItem) : null;
       groupStartResult = true;
       var isCarrier = carrierIndex === actionIndex && elementIndex === 0;
       var computedStyle = getComputedStyle({
@@ -7276,7 +7301,8 @@ function startActionGroup(_ref19) {
         element: element,
         actionItem: actionItem,
         elementApi: elementApi
-      }, pluginInstance);
+      }, // $FlowFixMe
+      pluginInstance);
       createInstance({
         store: store,
         element: element,
@@ -7301,10 +7327,13 @@ function startActionGroup(_ref19) {
 }
 
 function createInstance(options) {
+  // $FlowFixMe
   var store = options.store,
       computedStyle = options.computedStyle,
-      rest = (0, _objectWithoutProperties2["default"])(options, ["store", "computedStyle"]);
-  var autoStart = !rest.continuous;
+      rest = (0, _objectWithoutProperties2["default"])(options, ["store", "computedStyle"]); // $FlowFixMe
+
+  var autoStart = !rest.continuous; // $FlowFixMe
+
   var element = rest.element,
       actionItem = rest.actionItem,
       immediate = rest.immediate,
@@ -7321,7 +7350,8 @@ function createInstance(options) {
       refState = _ref20.refState;
 
   var refType = elementApi.getRefType(element);
-  var origin = getInstanceOrigin(element, refState, computedStyle, actionItem, elementApi, pluginInstance);
+  var origin = getInstanceOrigin(element, refState, computedStyle, actionItem, elementApi, // $FlowFixMe
+  pluginInstance);
   store.dispatch((0, _IX2EngineActions.instanceAdded)((0, _objectSpread2["default"])({
     instanceId: instanceId,
     elementId: elementId,
@@ -7373,7 +7403,8 @@ function removeInstance(instance, store) {
 
 function dispatchCustomEvent(element, eventName, detail) {
   var event = document.createEvent('CustomEvent');
-  event.initCustomEvent(eventName, true, true, detail);
+  event.initCustomEvent(eventName, true, true, detail); // $FlowFixMe
+
   element.dispatchEvent(event);
 }
 
@@ -11576,10 +11607,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.clearPlugin = exports.renderPlugin = exports.createPluginInstance = exports.getPluginDestination = exports.getPluginOrigin = exports.getPluginDuration = exports.getPluginConfig = void 0;
 /* eslint-env browser */
+// $FlowFixMe
 
 var getPluginConfig = function getPluginConfig(actionItemConfig) {
   return actionItemConfig.value;
-};
+}; // $FlowFixMe
+
 
 exports.getPluginConfig = getPluginConfig;
 
@@ -11595,7 +11628,8 @@ var getPluginDuration = function getPluginDuration(element, actionItem) {
   }
 
   return parseFloat(element.getAttribute('data-default-duration')) * 1000;
-};
+}; // $FlowFixMe
+
 
 exports.getPluginDuration = getPluginDuration;
 
@@ -11603,7 +11637,8 @@ var getPluginOrigin = function getPluginOrigin(refState) {
   return refState || {
     value: 0
   };
-};
+}; // $FlowFixMe
+
 
 exports.getPluginOrigin = getPluginOrigin;
 
@@ -11611,7 +11646,8 @@ var getPluginDestination = function getPluginDestination(actionItemConfig) {
   return {
     value: actionItemConfig.value
   };
-};
+}; // $FlowFixMe
+
 
 exports.getPluginDestination = getPluginDestination;
 
@@ -11621,7 +11657,8 @@ var createPluginInstance = function createPluginInstance(element) {
   instance.stop();
   instance.setSubframe(true);
   return instance;
-};
+}; // $FlowFixMe
+
 
 exports.createPluginInstance = createPluginInstance;
 
@@ -11632,7 +11669,8 @@ var renderPlugin = function renderPlugin(pluginInstance, refState, actionItem) {
 
   var percent = refState[actionItem.actionTypeId].value / 100;
   pluginInstance.goToFrame(pluginInstance.frames * percent);
-};
+}; // $FlowFixMe
+
 
 exports.renderPlugin = renderPlugin;
 
@@ -11726,7 +11764,7 @@ function getInstanceId() {
   return 'i' + instanceCount++;
 }
 
-var elementCount = 1;
+var elementCount = 1; // $FlowFixMe
 
 function getElementId(ixElements, ref) {
   // TODO: optimize element lookup
@@ -11739,7 +11777,8 @@ function getElementId(ixElements, ref) {
   }
 
   return 'e' + elementCount++;
-}
+} // $FlowFixMe
+
 
 function reifyState() {
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -11782,7 +11821,8 @@ function reifyState() {
 
 var strictEqual = function strictEqual(a, b) {
   return a === b;
-};
+}; // $FlowFixMe
+
 
 function observeStore(_ref2) {
   var store = _ref2.store,
@@ -11837,7 +11877,8 @@ function normalizeTarget(target) {
   }
 
   return {};
-}
+} // $FlowFixMe
+
 
 function getAffectedElements(_ref3) {
   var config = _ref3.config,
@@ -11956,7 +11997,8 @@ function getAffectedElements(_ref3) {
   } else {
     return queryDocument(finalSelector);
   }
-}
+} // $FlowFixMe
+
 
 function getComputedStyle(_ref4) {
   var element = _ref4.element,
@@ -11993,16 +12035,20 @@ var getFilterDefaults = function getFilterDefaults(actionState, filters) {
   }, actionState || {});
 };
 
-function getInstanceOrigin(element) {
+function getInstanceOrigin( // $FlowFixMe
+element) {
   var refState = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var computedStyle = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-  var actionItem = arguments.length > 3 ? arguments[3] : undefined;
-  var elementApi = arguments.length > 4 ? arguments[4] : undefined;
+  var // $FlowFixMe
+  actionItem = arguments.length > 3 ? arguments[3] : undefined;
+  var // $FlowFixMe
+  elementApi = arguments.length > 4 ? arguments[4] : undefined;
   var getStyle = elementApi.getStyle;
   var actionTypeId = actionItem.actionTypeId,
       config = actionItem.config;
 
   if ((0, _IX2VanillaPlugins.isPluginType)(actionTypeId)) {
+    // $FlowFixMe
     return (0, _IX2VanillaPlugins.getPluginOrigin)(actionTypeId)(refState[actionTypeId]);
   }
 
@@ -12077,10 +12123,12 @@ var reduceFilters = function reduceFilters(result, filter) {
   }
 
   return result;
-};
+}; // $FlowFixMe
+
 
 var getItemConfigByKey = function getItemConfigByKey(actionTypeId, key, config) {
   if ((0, _IX2VanillaPlugins.isPluginType)(actionTypeId)) {
+    // $FlowFixMe
     return (0, _IX2VanillaPlugins.getPluginConfig)(actionTypeId)(config, key);
   }
 
@@ -12097,7 +12145,8 @@ var getItemConfigByKey = function getItemConfigByKey(actionTypeId, key, config) 
     default:
       return config[key];
   }
-};
+}; // $FlowFixMe
+
 
 exports.getItemConfigByKey = getItemConfigByKey;
 
@@ -12108,6 +12157,7 @@ function getDestinationValues(_ref6) {
   var actionTypeId = actionItem.actionTypeId;
 
   if ((0, _IX2VanillaPlugins.isPluginType)(actionTypeId)) {
+    // $FlowFixMe
     return (0, _IX2VanillaPlugins.getPluginDestination)(actionTypeId)(actionItem.config);
   }
 
@@ -12198,7 +12248,8 @@ function getDestinationValues(_ref6) {
         };
       }
   }
-}
+} // $FlowFixMe
+
 
 function getRenderType(actionTypeId) {
   if (/^TRANSFORM_/.test(actionTypeId)) {
@@ -12216,13 +12267,23 @@ function getRenderType(actionTypeId) {
   if (/^PLUGIN_/.test(actionTypeId)) {
     return _IX2EngineConstants.RENDER_PLUGIN;
   }
-}
+} // $FlowFixMe
+
 
 function getStyleProp(renderType, actionTypeId) {
   return renderType === _IX2EngineConstants.RENDER_STYLE ? actionTypeId.replace('STYLE_', '').toLowerCase() : null;
 }
 
-function renderHTMLElement(element, refState, actionState, eventId, actionItem, styleProp, elementApi, renderType, pluginInstance) {
+function renderHTMLElement( // $FlowFixMe
+element, // $FlowFixMe
+refState, // $FlowFixMe
+actionState, // $FlowFixMe
+eventId, // $FlowFixMe
+actionItem, // $FlowFixMe
+styleProp, // $FlowFixMe
+elementApi, // $FlowFixMe
+renderType, // $FlowFixMe
+pluginInstance) {
   switch (renderType) {
     case _IX2EngineConstants.RENDER_TRANSFORM:
       {
@@ -12244,6 +12305,7 @@ function renderHTMLElement(element, refState, actionState, eventId, actionItem, 
         var actionTypeId = actionItem.actionTypeId;
 
         if ((0, _IX2VanillaPlugins.isPluginType)(actionTypeId)) {
+          // $FlowFixMe
           return (0, _IX2VanillaPlugins.renderPlugin)(actionTypeId)(pluginInstance, refState, actionItem);
         }
       }
@@ -12481,7 +12543,8 @@ function renderGeneral(element, actionItem, elementApi) {
 function addWillChange(element, prop, elementApi) {
   if (!_IX2BrowserSupport.IS_BROWSER_ENV) {
     return;
-  }
+  } // $FlowFixMe
+
 
   var validProp = willChangeProps[prop];
 
@@ -12508,7 +12571,8 @@ function addWillChange(element, prop, elementApi) {
 function removeWillChange(element, prop, elementApi) {
   if (!_IX2BrowserSupport.IS_BROWSER_ENV) {
     return;
-  }
+  } // $FlowFixMe
+
 
   var validProp = willChangeProps[prop];
 
@@ -12527,7 +12591,8 @@ function removeWillChange(element, prop, elementApi) {
   setStyle(element, _IX2EngineConstants.WILL_CHANGE, value.split(_IX2EngineConstants.COMMA_DELIMITER).map(trim).filter(function (v) {
     return v !== validProp;
   }).join(_IX2EngineConstants.COMMA_DELIMITER));
-}
+} // $FlowFixMe
+
 
 function clearAllStyles(_ref12) {
   var store = _ref12.store,
@@ -12560,7 +12625,8 @@ function clearAllStyles(_ref12) {
       elementApi: elementApi
     });
   });
-}
+} // $FlowFixMe
+
 
 function clearActionListStyles(_ref13) {
   var _ref13$actionList = _ref13.actionList,
@@ -12614,7 +12680,8 @@ function clearActionGroupStyles(_ref14) {
       elementApi: elementApi
     }).forEach(clearElement);
   });
-}
+} // $FlowFixMe
+
 
 function cleanupHTMLElement(element, actionItem, elementApi) {
   var setStyle = elementApi.setStyle,
@@ -12689,7 +12756,8 @@ function clearStyleProp(element, prop, elementApi) {
   if (prop === _IX2BrowserSupport.TRANSFORM_PREFIXED) {
     setStyle(element, _IX2BrowserSupport.TRANSFORM_STYLE_PREFIXED, '');
   }
-}
+} // $FlowFixMe
+
 
 function getMaxDurationItemIndex(actionItems) {
   var maxDuration = 0;
@@ -12704,7 +12772,8 @@ function getMaxDurationItemIndex(actionItems) {
     }
   });
   return resultIndex;
-}
+} // $FlowFixMe
+
 
 function getActionListProgress(actionList, instance) {
   var actionItemGroups = actionList.actionItemGroups,
@@ -12732,19 +12801,13 @@ function getActionListProgress(actionList, instance) {
     totalDuration += config.delay + duration;
   });
   return totalDuration > 0 ? (0, _IX2EasingUtils.optimizeFloat)(elapsedDuration / totalDuration) : 0;
-}
+} // $FlowFixMe
+
 
 function reduceListToGroup(_ref17) {
-  var actionListId = _ref17.actionListId,
+  var actionList = _ref17.actionList,
       actionItemId = _ref17.actionItemId,
       rawData = _ref17.rawData;
-  var actionLists = rawData.actionLists;
-  var actionList = actionLists[actionListId];
-
-  if (!actionList) {
-    throw new Error(["IX2VanillaUtils: Could not find action list with ID ".concat(JSON.stringify(actionListId)), '', "Raw Data:", JSON.stringify(rawData)].join('\n'));
-  }
-
   var actionItemGroups = actionList.actionItemGroups,
       continuousParameterGroups = actionList.continuousParameterGroups;
   var newActionItems = [];
@@ -12768,13 +12831,14 @@ function reduceListToGroup(_ref17) {
       return actionItems.some(takeItemUntilMatch);
     });
   });
-  return (0, _timm.setIn)(rawData, ['actionLists'], (0, _defineProperty2["default"])({}, actionListId, {
-    id: actionListId,
+  return (0, _timm.setIn)(rawData, ['actionLists'], (0, _defineProperty2["default"])({}, actionList.id, {
+    id: actionList.id,
     actionItemGroups: [{
       actionItems: newActionItems
     }]
   }));
-}
+} // $FlowFixMe
+
 
 function shouldNamespaceEventParameter(eventTypeId, _ref21) {
   var basedOn = _ref21.basedOn;
@@ -12782,8 +12846,10 @@ function shouldNamespaceEventParameter(eventTypeId, _ref21) {
 }
 
 function getNamespacedParameterId(eventStateKey, continuousParameterGroupId) {
-  return eventStateKey + _IX2EngineConstants.COLON_DELIMITER + continuousParameterGroupId;
-}
+  var namespacedParameterId = eventStateKey + _IX2EngineConstants.COLON_DELIMITER + continuousParameterGroupId;
+  return namespacedParameterId;
+} // $FlowFixMe
+
 
 function shouldAllowMediaQuery(mediaQueries, mediaQueryKey) {
   // During design mode, current media query key does not exist
@@ -12792,11 +12858,13 @@ function shouldAllowMediaQuery(mediaQueries, mediaQueryKey) {
   }
 
   return mediaQueries.indexOf(mediaQueryKey) !== -1;
-}
+} // $FlowFixMe
+
 
 function mediaQueriesEqual(listA, listB) {
   return (0, _shallowEqual["default"])(listA && listA.sort(), listB && listB.sort());
-}
+} // $FlowFixMe
+
 
 function stringifyTarget(target) {
   if (typeof target === 'string') {
@@ -13318,7 +13386,7 @@ var initialState = {
   hasBoundaryNodes: false,
   hasDefinedMediaQueries: false
 };
-var TEST_FRAME_STEPS_SIZE = 20;
+var TEST_FRAME_STEPS_SIZE = 20; // $FlowFixMe
 
 var ixSession = function ixSession() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -13512,7 +13580,7 @@ var continuousInstance = function continuousInstance(state, action) {
       var key = destinationKeys[_i];
       current[key] = getItemConfigByKey(actionTypeId, key, fromActionItem.config);
     }
-  } else if (fromActionItem && toActionItem) {
+  } else if (fromActionItem && toActionItem && positionOffset !== undefined && positionRange !== undefined) {
     var localPosition = (position - positionOffset) / positionRange;
     var easing = fromActionItem.config.easing;
     var eased = applyEasing(easing, localPosition, customEasingFn);
@@ -13520,8 +13588,10 @@ var continuousInstance = function continuousInstance(state, action) {
     for (var _i2 = 0, _length2 = destinationKeys.length; _i2 < _length2; _i2++) {
       var _key = destinationKeys[_i2];
       var fromVal = getItemConfigByKey(actionTypeId, _key, fromActionItem.config);
-      var toVal = getItemConfigByKey(actionTypeId, _key, toActionItem.config);
-      var diff = toVal - fromVal;
+      var toVal = getItemConfigByKey(actionTypeId, _key, toActionItem.config); // $FlowFixMe — toVal and fromVal could potentially be null, need to update type higher to determine number
+
+      var diff = toVal - fromVal; // $FlowFixMe
+
       var value = diff * eased + fromVal;
       current[_key] = value;
     }
@@ -15103,18 +15173,22 @@ var _shared$IX2EngineCons = _shared.IX2EngineConstants,
     WF_PAGE = _shared$IX2EngineCons.WF_PAGE;
 
 function setStyle(element, prop, value) {
+  // $FlowIgnore — flow complains that prop should be a number. Will need to update upstream
   element.style[prop] = value;
 }
 
 function getStyle(element, prop) {
+  // $FlowIgnore — flow complains that prop should be a number. Will need to update upstream
   return element.style[prop];
 }
 
 function getProperty(element, prop) {
+  // $FlowIgnore — flow complains that prop should be a number. Will need to update upstream
   return element[prop];
 }
 
 function matchSelector(selector) {
+  // $FlowIgnore — ELEMENT_MATCHES is the name of the method on the element's prototype depending on browser
   return function (element) {
     return element[ELEMENT_MATCHES](selector);
   };
@@ -15131,6 +15205,7 @@ function getQuerySelector(_ref) {
       var pair = id.split(IX2_ID_DELIMITER);
       var pageId = pair[0];
       nodeId = pair[1]; // Short circuit query if we're on the wrong page
+      // $FlowIgnore — if documentElement is null crash
 
       if (pageId !== document.documentElement.getAttribute(WF_PAGE)) {
         return null;
@@ -15144,7 +15219,8 @@ function getQuerySelector(_ref) {
 }
 
 function getValidDocument(pageId) {
-  if (pageId == null || pageId === document.documentElement.getAttribute(WF_PAGE)) {
+  if (pageId == null || // $FlowIgnore — if documentElement is null crash
+  pageId === document.documentElement.getAttribute(WF_PAGE)) {
     return document;
   }
 
@@ -15163,11 +15239,10 @@ function isSiblingNode(a, b) {
   return a !== b && a.parentNode === b.parentNode;
 }
 
-function getChildElements() {
-  var sourceElements = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var elements = [];
+function getChildElements(sourceElements) {
+  var childElements = [];
 
-  for (var i = 0, length = sourceElements.length; i < length; i++) {
+  for (var i = 0, _ref2 = sourceElements || [], length = _ref2.length; i < length; i++) {
     var children = sourceElements[i].children;
     var childCount = children.length;
 
@@ -15176,12 +15251,13 @@ function getChildElements() {
     }
 
     for (var j = 0; j < childCount; j++) {
-      elements.push(children[j]);
+      childElements.push(children[j]);
     }
   }
 
-  return elements;
-}
+  return childElements;
+} // $FlowFixMe
+
 
 function getSiblingElements() {
   var sourceElements = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -15215,12 +15291,14 @@ function getSiblingElements() {
 }
 
 var getClosestElement = Element.prototype.closest ? function (element, selector) {
+  // $FlowIgnore — ELEMENT_MATCHES is the name of the method on the element's prototype depending on browser
   if (!document.documentElement.contains(element)) {
     return null;
   }
 
   return element.closest(selector);
 } : function (element, selector) {
+  // $FlowIgnore — if documentElement is null crash
   if (!document.documentElement.contains(element)) {
     return null;
   }
@@ -15228,6 +15306,7 @@ var getClosestElement = Element.prototype.closest ? function (element, selector)
   var el = element;
 
   do {
+    // $FlowIgnore — if documentElement is null crash
     if (el[ELEMENT_MATCHES] && el[ELEMENT_MATCHES](selector)) {
       return el;
     }
@@ -15402,11 +15481,14 @@ var actionGroupCreator = function actionGroupCreator(_ref4, state) {
     actionListId: actionListId
   });
   return state;
-};
+}; // $FlowFixMe
+
 
 var withFilter = function withFilter(filter, handler) {
   return function (options, state) {
-    return filter(options, state) === true ? handler(options, state) : state;
+    return (// $FlowFixMe
+      filter(options, state) === true ? handler(options, state) : state
+    );
   };
 };
 
@@ -15440,13 +15522,21 @@ var getDocumentState = function () {
   var rootElement = isCSS1Compat ? document.documentElement : document.body;
   return function () {
     return {
+      // $FlowFixMe
       scrollLeft: supportOffset ? window.pageXOffset : rootElement.scrollLeft,
+      // $FlowFixMe
       scrollTop: supportOffset ? window.pageYOffset : rootElement.scrollTop,
       // required to remove elasticity in Safari scrolling.
-      stiffScrollTop: (0, _clamp["default"])(supportOffset ? window.pageYOffset : rootElement.scrollTop, 0, rootElement.scrollHeight - window.innerHeight),
+      stiffScrollTop: (0, _clamp["default"])( // $FlowFixMe
+      supportOffset ? window.pageYOffset : rootElement.scrollTop, 0, // $FlowFixMe
+      rootElement.scrollHeight - window.innerHeight),
+      // $FlowFixMe
       scrollWidth: rootElement.scrollWidth,
+      // $FlowFixMe
       scrollHeight: rootElement.scrollHeight,
+      // $FlowFixMe
       clientWidth: rootElement.clientWidth,
+      // $FlowFixMe
       clientHeight: rootElement.clientHeight,
       innerWidth: window.innerWidth,
       innerHeight: window.innerHeight
@@ -15528,7 +15618,8 @@ var whenElementHoverChange = function whenElementHoverChange(handler) {
 
     return newState;
   };
-};
+}; // $FlowFixMe
+
 
 var whenElementVisibiltyChange = function whenElementVisibiltyChange(handler) {
   return function (options, oldState) {
@@ -15542,7 +15633,8 @@ var whenElementVisibiltyChange = function whenElementVisibiltyChange(handler) {
 
     return newState;
   };
-};
+}; // $FlowFixMe
+
 
 var whenScrollDirectionChange = function whenScrollDirectionChange(handler) {
   return function (options) {
@@ -15735,7 +15827,8 @@ var _default = (_default2 = {}, (0, _defineProperty2["default"])(_default2, SLID
   }))
 }), (0, _defineProperty2["default"])(_default2, MOUSE_MOVE, {
   types: 'mousemove mouseout scroll',
-  handler: function handler(_ref8) {
+  handler: function handler( // $FlowFixMe
+  _ref8) {
     var store = _ref8.store,
         element = _ref8.element,
         eventConfig = _ref8.eventConfig,
@@ -15825,7 +15918,8 @@ var _default = (_default2 = {}, (0, _defineProperty2["default"])(_default2, SLID
     } // Only update based on element if the mouse is moving over or has just left the element
 
 
-    if (basedOn !== ELEMENT || elementHovered || elementHovered !== state.elementHovered) {
+    if (basedOn !== ELEMENT || elementHovered || // $FlowFixMe
+    elementHovered !== state.elementHovered) {
       value = reverse ? 1 - value : value;
       store.dispatch((0, _IX2EngineActions.parameterChanged)(namespacedParameterId, value));
     }
@@ -15840,6 +15934,7 @@ var _default = (_default2 = {}, (0, _defineProperty2["default"])(_default2, SLID
   }
 }), (0, _defineProperty2["default"])(_default2, PAGE_SCROLL, {
   types: SCROLL_EVENT_TYPES,
+  // $FlowFixMe
   handler: function handler(_ref9) {
     var store = _ref9.store,
         eventConfig = _ref9.eventConfig;
@@ -15857,7 +15952,8 @@ var _default = (_default2 = {}, (0, _defineProperty2["default"])(_default2, SLID
   }
 }), (0, _defineProperty2["default"])(_default2, SCROLLING_IN_VIEW, {
   types: SCROLL_EVENT_TYPES,
-  handler: function handler(_ref10) {
+  handler: function handler( // $FlowFixMe
+  _ref10) {
     var element = _ref10.element,
         store = _ref10.store,
         eventConfig = _ref10.eventConfig,
@@ -17767,7 +17863,6 @@ Webflow.define('navbar', module.exports = function ($, _) {
   var overlay = '<div class="w-nav-overlay" data-wf-ignore />';
   var namespace = '.w-nav';
   var navbarOpenedButton = 'w--open';
-  var navbarOpenedMenu = 'w--nav-menu-open';
   var navbarOpenedDropdown = 'w--nav-dropdown-open';
   var navbarOpenedDropdownToggle = 'w--nav-dropdown-toggle-open';
   var navbarOpenedDropdownList = 'w--nav-dropdown-list-open';
@@ -17851,7 +17946,7 @@ Webflow.define('navbar', module.exports = function ($, _) {
       data.el.on('setting' + namespace, handler(data));
     } else {
       addOverlay(data);
-      data.button.on('tap' + namespace, toggle(data));
+      data.button.on('click' + namespace, toggle(data));
       data.menu.on('click' + namespace, 'a', navigate(data));
     } // Trigger initial resize
 
@@ -17959,9 +18054,9 @@ Webflow.define('navbar', module.exports = function ($, _) {
   }
 
   function outside(data) {
-    // Unbind previous tap handler if it exists
+    // Unbind previous click handler if it exists
     if (data.outside) {
-      $doc.off('tap' + namespace, data.outside);
+      $doc.off('click' + namespace, data.outside);
     }
 
     return function (evt) {
@@ -17969,7 +18064,7 @@ Webflow.define('navbar', module.exports = function ($, _) {
 
       if (inEditor && $target.closest('.w-editor-bem-EditorOverlay').length) {
         return;
-      } // Close menu when tapped outside, debounced to wait for state
+      } // Close menu when clicked outside, debounced to wait for state
 
 
       outsideDebounced(data, $target);
@@ -18030,13 +18125,21 @@ Webflow.define('navbar', module.exports = function ($, _) {
     };
   }
 
+  function addMenuOpen(i, el) {
+    el.setAttribute('data-nav-menu-open', '');
+  }
+
+  function removeMenuOpen(i, el) {
+    el.removeAttribute('data-nav-menu-open');
+  }
+
   function open(data, immediate) {
     if (data.open) {
       return;
     }
 
     data.open = true;
-    data.menu.addClass(navbarOpenedMenu);
+    data.menu.each(addMenuOpen);
     data.links.addClass(navbarOpenedLink);
     data.dropdowns.addClass(navbarOpenedDropdown);
     data.dropdownToggle.addClass(navbarOpenedDropdownToggle);
@@ -18056,10 +18159,10 @@ Webflow.define('navbar', module.exports = function ($, _) {
     var navbarEl = data.el[0];
     resize(0, navbarEl);
     ix.intro(0, navbarEl);
-    Webflow.redraw.up(); // Listen for tap outside events
+    Webflow.redraw.up(); // Listen for click outside events
 
     if (!designer) {
-      $doc.on('tap' + namespace, data.outside);
+      $doc.on('click' + namespace, data.outside);
     } // No transition for immediate
 
 
@@ -18122,9 +18225,9 @@ Webflow.define('navbar', module.exports = function ($, _) {
       immediate = true;
     }
 
-    ix.outro(0, data.el[0]); // Stop listening for tap outside events
+    ix.outro(0, data.el[0]); // Stop listening for click outside events
 
-    $doc.off('tap' + namespace, data.outside);
+    $doc.off('click' + namespace, data.outside);
 
     if (immediate) {
       tram(data.menu).stop();
@@ -18156,7 +18259,7 @@ Webflow.define('navbar', module.exports = function ($, _) {
         x: 0,
         y: 0
       });
-      data.menu.removeClass(navbarOpenedMenu);
+      data.menu.each(removeMenuOpen);
       data.links.removeClass(navbarOpenedLink);
       data.dropdowns.removeClass(navbarOpenedDropdown);
       data.dropdownToggle.removeClass(navbarOpenedDropdownToggle);
@@ -18314,8 +18417,8 @@ Webflow.define('slider', module.exports = function ($, _) {
       data.hasTimer = false;
     } else {
       data.el.on('swipe' + namespace, handler(data));
-      data.left.on('tap' + namespace, previousFunction(data));
-      data.right.on('tap' + namespace, next(data)); // Start timer if autoplay is true, only once
+      data.left.on('click' + namespace, previousFunction(data));
+      data.right.on('click' + namespace, next(data)); // Start timer if autoplay is true, only once
 
       if (data.config.autoplay && !data.hasTimer) {
         data.hasTimer = true;
@@ -18325,7 +18428,7 @@ Webflow.define('slider', module.exports = function ($, _) {
     } // Listen to nav events
 
 
-    data.nav.on('tap' + namespace, '> div', handler(data)); // Remove gaps from formatted html (for inline-blocks)
+    data.nav.on('click' + namespace, '> div', handler(data)); // Remove gaps from formatted html (for inline-blocks)
 
     if (!inApp) {
       data.mask.contents().filter(function () {

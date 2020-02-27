@@ -20,8 +20,8 @@ body {
 h1 {
   margin-top: 0px;
   margin-bottom: 20px;
-  font-family: Roboto;
-  font-size: 35px;
+  font-family: 'Circularxxweb book', sans-serif;
+  font-size: 20px;
   line-height: 40px;
   font-weight: 500;
 }
@@ -74,6 +74,8 @@ h6 {
 p {
   margin-top: 0px;
   margin-bottom: 20px;
+  color: #5d5d5d;
+  font-size: 14px;
   line-height: 22px;
   font-weight: 400;
 }
@@ -96,7 +98,8 @@ ol {
 }
 
 strong {
-  font-weight: bold;
+  color: #000;
+  font-weight: 700;
 }
 
 blockquote {
@@ -205,15 +208,17 @@ figcaption {
 }
 
 .button.blue-button-solid.button-large {
+  display: inline-block;
   padding: 16px 24px;
   border-radius: 30px;
+  font-family: 'Circularxxweb book', sans-serif;
 }
 
 .navigation-link {
   height: auto;
   padding-top: 0px;
   padding-bottom: 0px;
-  font-family: 'Circularstd book', sans-serif;
+  font-family: 'Circularxxweb book', sans-serif;
 }
 
 .navigation-link:hover {
@@ -352,9 +357,11 @@ figcaption {
 
 .section {
   position: relative;
-  padding-top: 24px;
-  padding-bottom: 24px;
+  display: block;
+  padding-top: 48px;
+  padding-bottom: 48px;
   background-color: #fff;
+  line-height: 30px;
 }
 
 .section.centered {
@@ -374,6 +381,10 @@ figcaption {
   padding-top: 48px;
   padding-bottom: 48px;
   background-color: #f7f9fb;
+}
+
+.section.newsletter {
+  display: none;
 }
 
 .hero-slider {
@@ -412,7 +423,7 @@ figcaption {
 .page-heading {
   margin-top: 0px;
   margin-bottom: 11px;
-  font-family: 'Circularstd book', sans-serif;
+  font-family: 'Circularstd book';
 }
 
 .cta-section {
@@ -441,7 +452,8 @@ figcaption {
   display: inline-block;
   margin-top: 0px;
   margin-right: 13px;
-  font-family: 'Circularstd book', sans-serif;
+  font-family: Circularxxweb, sans-serif;
+  color: #fff;
 }
 
 .align-right {
@@ -499,6 +511,7 @@ figcaption {
   background-color: transparent;
   -webkit-transition: background-color 300ms ease, border 300ms ease, color 300ms ease;
   transition: background-color 300ms ease, border 300ms ease, color 300ms ease;
+  font-family: 'Circularxxweb book', sans-serif;
   color: #fff;
   font-size: 16px;
   line-height: 19px;
@@ -522,13 +535,13 @@ figcaption {
 
 .section-heading {
   margin-bottom: 0px;
-  font-family: Circularstd, sans-serif;
+  font-family: Circularxxweb, sans-serif;
 }
 
 .section-heading.centered {
   padding-bottom: 20px;
   float: left;
-  font-family: 'Circularstd book', sans-serif;
+  font-family: Circularxxweb, sans-serif;
   font-weight: 400;
   text-align: left;
 }
@@ -546,21 +559,25 @@ figcaption {
 }
 
 .section-subheading {
-  font-family: 'Circularstd book', sans-serif;
-  color: #000;
+  position: static;
+  display: block;
+  font-family: 'Circularxxweb book', sans-serif;
+  color: #333;
+  line-height: 22px;
   text-align: left;
 }
 
 .section-subheading.center {
   margin-top: 20px;
   float: right;
-  font-family: 'Circularstd book', sans-serif;
+  font-family: 'Circularstd book';
   font-size: 20px;
   font-weight: 400;
   text-align: center;
 }
 
 .section-subheading.center.h5 {
+  font-family: 'Circularxxweb book', sans-serif;
   font-size: 16px;
 }
 
@@ -570,6 +587,7 @@ figcaption {
 }
 
 .section-subheading.white.center.h4 {
+  font-family: 'Circularxxweb book', sans-serif;
   font-size: 14px;
 }
 
@@ -732,7 +750,7 @@ figcaption {
 
 .footer.accent {
   padding-bottom: 60px;
-  background-color: #f1f1f1;
+  background-color: #e9ebee;
 }
 
 .footer.centered-accented {
@@ -806,6 +824,7 @@ figcaption {
 .footer-link {
   display: block;
   margin-bottom: 0px;
+  font-family: 'Circularxxweb book', sans-serif;
   color: rgba(0, 0, 0, 0.74);
   font-size: 12px;
   line-height: 30px;
@@ -1033,14 +1052,16 @@ figcaption {
 }
 
 .body {
-  font-family: 'Circularstd book', sans-serif;
+  font-family: 'Circularxxweb book', sans-serif;
   white-space: normal;
 }
 
 .heading {
-  font-family: Circularstd, sans-serif;
-  font-size: 58px;
-  line-height: 65px;
+  position: static;
+  height: auto;
+  font-family: Circularxxweb, sans-serif;
+  font-size: 48px;
+  line-height: 53px;
   font-weight: 500;
 }
 
@@ -1100,18 +1121,20 @@ figcaption {
 }
 
 .blue-button-solid {
+  display: block;
   margin-right: 10px;
-  border-radius: 20px;
+  border-radius: 40px;
   background-color: #037dd6;
-  font-family: 'Circularstd book', sans-serif;
+  font-family: 'Circularstd book';
   font-size: 14px;
   font-weight: 400;
 }
 
 .blue-button-solid.large-button {
   display: inline-block;
-  padding: 14px 30px;
+  padding: 12px 20px;
   border-radius: 40px;
+  font-family: 'Circularxxweb book', sans-serif;
   font-size: 20px;
 }
 
@@ -1128,7 +1151,7 @@ figcaption {
 }
 
 .heading-2 {
-  font-family: Circularstd, sans-serif;
+  font-family: Circularxxweb, sans-serif;
   text-align: center;
 }
 
@@ -1138,6 +1161,7 @@ figcaption {
 }
 
 .text-block {
+  font-family: 'Circularxxweb book', sans-serif;
   font-size: 12px;
   text-align: center;
 }
@@ -1161,9 +1185,9 @@ figcaption {
 }
 
 .heading-3 {
-  font-family: Circularstd, sans-serif;
+  font-family: Circularstd;
   color: #fff;
-  font-size: 18px;
+  font-size: 32px;
   font-weight: 400;
   text-align: center;
 }
@@ -1264,12 +1288,13 @@ figcaption {
 }
 
 .heading-4 {
-  font-family: 'Circularstd book', sans-serif;
+  font-family: 'Circularxxweb book', sans-serif;
   color: #fff;
+  font-size: 32px;
 }
 
 .heading-5 {
-  font-family: Circularstd, sans-serif;
+  font-family: Circularstd;
   text-align: center;
 }
 
@@ -1280,28 +1305,30 @@ figcaption {
 }
 
 .heading-6 {
-  font-family: Circularstd, sans-serif;
+  font-family: Circularstd;
 }
 
 .heading-6.orange-text {
   margin-top: 0px;
+  font-family: Circularxxweb, sans-serif;
   color: #f6851b;
   line-height: 40px;
 }
 
 .heading-7 {
   margin-bottom: 0px;
-  font-family: 'Circularstd book', sans-serif;
+  font-family: 'Circularstd book';
   font-size: 20px;
 }
 
 .heading-7.orange-text {
+  font-family: 'Circularxxweb book', sans-serif;
   color: #f6851b;
 }
 
 .heading-8 {
   margin-bottom: 12px;
-  font-family: Circularstd, sans-serif;
+  font-family: Circularxxweb, sans-serif;
 }
 
 .container-10 {
@@ -1340,12 +1367,12 @@ figcaption {
 .heading-9 {
   margin-bottom: 52px;
   padding-top: 20px;
-  font-family: Circularstd, sans-serif;
+  font-family: Circularxxweb, sans-serif;
   text-align: center;
 }
 
 .body-2 {
-  font-family: 'Circularstd book', sans-serif;
+  font-family: 'Circularxxweb book', sans-serif;
 }
 
 .image-4 {
@@ -1397,7 +1424,7 @@ figcaption {
 
 .heading-10 {
   margin-top: 4px;
-  font-family: Circularstd, sans-serif;
+  font-family: Circularxxweb, sans-serif;
   text-align: center;
 }
 
@@ -1405,7 +1432,7 @@ figcaption {
   min-height: 46px;
   margin-top: 0px;
   padding-top: 0px;
-  font-family: 'Circularstd book', sans-serif;
+  font-family: 'Circularxxweb book', sans-serif;
   font-size: 13px;
   font-weight: 400;
   text-align: center;
@@ -1445,12 +1472,13 @@ figcaption {
 .bold-text {
   display: block;
   max-width: 800px;
-  font-family: Circularstd, sans-serif;
+  font-family: Circularstd;
   font-weight: 400;
   text-align: center;
 }
 
 .bold-text.faq-header {
+  font-family: Circularxxweb, sans-serif;
   font-size: 24px;
 }
 
@@ -1459,6 +1487,7 @@ figcaption {
 }
 
 .paragraph-2.faq-paragraph {
+  font-family: 'Circularxxweb book', sans-serif;
   color: #474747;
   font-size: 14px;
   line-height: 19px;
@@ -1512,7 +1541,7 @@ figcaption {
 }
 
 .heading-11 {
-  font-family: 'Circularstd book', sans-serif;
+  font-family: 'Circularstd book';
 }
 
 .slide-nav {
@@ -1536,7 +1565,8 @@ figcaption {
 }
 
 .heading-12 {
-  font-family: Circularstd, sans-serif;
+  font-family: Circularxxweb, sans-serif;
+  font-size: 35px;
   text-align: center;
 }
 
@@ -1655,18 +1685,19 @@ figcaption {
 }
 
 .paragraph-3 {
-  font-family: 'Circularstd book', sans-serif;
+  font-family: 'Circularxxweb book', sans-serif;
   font-weight: 400;
   text-align: left;
 }
 
 .heading-13 {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'DM Sans';
   font-size: 18px;
   text-align: center;
 }
 
 .bold-text-2 {
+  font-family: 'Circularxxweb book', sans-serif;
   font-size: 18px;
 }
 
@@ -1896,8 +1927,8 @@ figcaption {
 }
 
 .grid-7 {
-  -ms-grid-columns: 1fr 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  -ms-grid-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   -ms-grid-rows: auto;
   grid-template-rows: auto;
 }
@@ -1922,6 +1953,85 @@ figcaption {
 .browsers {
   padding-top: 0px;
   padding-bottom: 50px;
+}
+
+.paragraph-4 {
+  color: #333;
+  font-weight: 400;
+}
+
+.text-block-25 {
+  font-family: 'Circularxxweb book', sans-serif;
+}
+
+.paragraph-5 {
+  font-family: 'Circularxxweb book', sans-serif;
+  color: #333;
+  font-size: 16px;
+}
+
+.text-block-26 {
+  font-family: 'Circularxxweb book', sans-serif;
+}
+
+.italic-text {
+  font-size: 20px;
+  line-height: 40px;
+  text-decoration: none;
+}
+
+.bold-text-3 {
+  font-family: 'Circularxxweb book', sans-serif;
+}
+
+.section-7 {
+  font-family: 'Circularxxweb book', sans-serif;
+}
+
+.rich-text-block {
+  font-family: 'Circularxxweb book', sans-serif;
+}
+
+.bold-text-4 {
+  font-family: 'Circularxxweb book', sans-serif;
+}
+
+.paragraph-6 {
+  font-family: 'Circularxxweb book', sans-serif;
+  font-size: 12px;
+}
+
+.grid-9 {
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  -ms-grid-rows: auto auto auto auto;
+  grid-template-rows: auto auto auto auto;
+}
+
+.grid-9.terms-grid {
+  border: 1px none #000;
+}
+
+.terms-paragraph {
+  margin-bottom: 0px;
+  padding: 10px;
+  border: 1px solid #000;
+}
+
+.container-14 {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.heading-14 {
+  margin-bottom: 4px;
+  font-size: 32px;
+}
+
+.text-field {
+  border-radius: 20px;
 }
 
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
@@ -1973,7 +2083,7 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   transform: scale(0.01, 0.01);
 }
 
-@media (max-width: 991px) {
+@media screen and (max-width: 991px) {
   .navigation-link {
     padding-top: 8px;
     padding-bottom: 8px;
@@ -2004,6 +2114,10 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   }
   .hero-slider {
     height: 400px;
+  }
+  .section-heading {
+    padding-right: 20px;
+    padding-left: 20px;
   }
   .form-wrapper.squeezed {
     padding-right: 10%;
@@ -2045,8 +2159,17 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   .content-column {
     padding-top: 0px;
   }
+  .heading {
+    height: auto;
+    font-size: 46px;
+  }
   .blue-button-solid {
+    display: inline;
     margin-right: 16px;
+  }
+  .blue-button-solid.large-button {
+    display: block;
+    text-align: center;
   }
   .collection-item {
     min-width: 25%;
@@ -2108,7 +2231,7 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   }
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .navigation-link {
     padding-top: 16px;
     padding-bottom: 16px;
@@ -2169,6 +2292,9 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
     height: 380px;
     margin-bottom: 10px;
   }
+  .image-column.about-img {
+    height: 310px;
+  }
   .content-column {
     margin-top: 9px;
     margin-bottom: 13px;
@@ -2177,6 +2303,9 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   .container {
     padding-right: 20px;
     padding-left: 20px;
+  }
+  .heading {
+    height: auto;
   }
   .columns {
     background-position: 50% 100%;
@@ -2194,6 +2323,10 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   .mask.sexyslider {
     height: auto;
   }
+  .download-image {
+    -o-object-fit: cover;
+    object-fit: cover;
+  }
   .container-12 {
     -ms-grid-columns: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
@@ -2204,7 +2337,7 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   }
 }
 
-@media (max-width: 479px) {
+@media screen and (max-width: 479px) {
   .button.white.blue-button-solid {
     margin-bottom: 16px;
   }
@@ -2244,11 +2377,24 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
     padding-right: 53px;
     padding-left: 53px;
   }
+  .hollow-button {
+    padding-right: 36px;
+    padding-left: 36px;
+  }
+  .section-heading {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
   .section-heading.centered {
     margin-bottom: 20px;
   }
+  .section-heading.faq {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
   .footer-link {
-    line-height: 34px;
+    font-size: 16px;
+    line-height: 44px;
   }
   .grid-fours {
     width: 50%;
@@ -2257,23 +2403,31 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
     height: 190px;
   }
   .image-column.about-img {
-    height: 140px;
+    height: 198px;
   }
   .content-column {
-    height: 290px;
+    height: auto;
   }
   .heading {
-    font-size: 28px;
-    line-height: 35px;
+    height: auto;
+    margin-bottom: 20px;
+    font-size: 34px;
+    line-height: 43px;
   }
   .columns {
+    height: 610px;
     background-position: 50% 100%;
   }
   .columns.about-hero {
+    height: auto;
     background-position: 50% 100%;
   }
   .container-2 {
     padding-bottom: 0px;
+  }
+  .blue-button-solid {
+    min-width: 100%;
+    font-family: 'Circularxxweb book', sans-serif;
   }
   .blue-button-solid.large-button {
     display: block;
@@ -2291,6 +2445,10 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   .container-8 {
     padding-top: 0px;
     padding-bottom: 0px;
+  }
+  .columns-2 {
+    display: block;
+    text-align: center;
   }
   .image-5 {
     width: 80px;
@@ -2423,6 +2581,10 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
     -webkit-flex-wrap: nowrap;
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
+  }
+  .heading-12 {
+    padding-right: 10px;
+    padding-left: 10px;
   }
   .download-image {
     display: inline-block;
@@ -2789,6 +2951,34 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   justify-self: center;
 }
 
+#w-node-7a4777db715b-8ddd1a2f {
+  -ms-grid-column-align: center;
+  justify-self: center;
+  -ms-grid-column: span 1;
+  grid-column-start: span 1;
+  -ms-grid-row: span 1;
+  grid-row-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-7a4777db715c-8ddd1a2f {
+  -ms-grid-column-align: center;
+  justify-self: center;
+}
+
+#w-node-7a4777db715d-8ddd1a2f {
+  -ms-grid-column-align: center;
+  justify-self: center;
+}
+
+#w-node-7a4777db715f-8ddd1a2f {
+  -ms-grid-column-align: center;
+  justify-self: center;
+}
+
 #w-node-ebbadc3d104a-8ddd1a2f {
   -ms-grid-column-align: center;
   justify-self: center;
@@ -3013,51 +3203,26 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   justify-self: center;
 }
 
-@font-face {
-  font-family: 'Circularstd';
-  src: url('../fonts/CircularStd-BookItalic.otf') format('opentype');
-  font-weight: 400;
-  font-style: italic;
+#w-node-22af8beb32c8-6752c828 {
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-column: span 1;
+  grid-column-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+  -ms-grid-row: span 1;
+  grid-row-start: span 1;
 }
+
 @font-face {
-  font-family: 'Circularstd';
-  src: url('../fonts/CircularStd-BlackItalic.otf') format('opentype');
-  font-weight: 900;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'Circularstd';
-  src: url('../fonts/CircularStd-Bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Circularstd book';
-  src: url('../fonts/CircularStd-Book.otf') format('opentype');
+  font-family: 'Circularxxweb book';
+  src: url('../fonts/CircularXXWeb-Book.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Circularstd';
-  src: url('../fonts/CircularStd-Black.otf') format('opentype');
-  font-weight: 900;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Circularstd';
-  src: url('../fonts/CircularStd-BoldItalic.otf') format('opentype');
-  font-weight: 700;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'Circularstd';
-  src: url('../fonts/CircularStd-Medium.otf') format('opentype');
+  font-family: 'Circularxxweb';
+  src: url('../fonts/CircularXXWeb-Medium.woff') format('woff');
   font-weight: 500;
   font-style: normal;
-}
-@font-face {
-  font-family: 'Circularstd';
-  src: url('../fonts/CircularStd-MediumItalic.otf') format('opentype');
-  font-weight: 500;
-  font-style: italic;
 }
