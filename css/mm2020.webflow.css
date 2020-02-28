@@ -540,7 +540,7 @@ figcaption {
 
 .section-heading.centered {
   padding-bottom: 20px;
-  float: left;
+  float: none;
   font-family: Circularxxweb, sans-serif;
   font-weight: 400;
   text-align: left;
@@ -1133,6 +1133,10 @@ figcaption {
 .blue-button-solid.large-button {
   display: inline-block;
   padding: 12px 20px;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center;
   border-radius: 40px;
   font-family: 'Circularxxweb book', sans-serif;
   font-size: 20px;
@@ -1618,7 +1622,16 @@ figcaption {
 .download-block {
   position: relative;
   z-index: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   padding: 40px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 1px 1px 8px 1px #dbdbdb;
@@ -1962,6 +1975,7 @@ figcaption {
 
 .text-block-25 {
   font-family: 'Circularxxweb book', sans-serif;
+  color: #333;
 }
 
 .paragraph-5 {
@@ -2032,6 +2046,32 @@ figcaption {
 
 .text-field {
   border-radius: 20px;
+}
+
+.link-3 {
+  margin-top: 30px;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center;
+}
+
+.text-block-27 {
+  margin-top: 19px;
+}
+
+.text-block-28 {
+  margin-top: 20px;
+  color: #5d5d5d;
+  font-size: 12px;
+}
+
+.text-block-29 {
+  color: #333;
+}
+
+.text-block-30 {
+  color: #333;
 }
 
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
