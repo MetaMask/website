@@ -937,7 +937,7 @@ figcaption {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  width: 260px;
+  width: 500px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -1132,6 +1132,7 @@ figcaption {
 
 .blue-button-solid.large-button {
   display: inline-block;
+  margin-top: 22px;
   padding: 12px 20px;
   -webkit-align-self: center;
   -ms-flex-item-align: center;
@@ -2072,6 +2073,26 @@ figcaption {
 
 .text-block-30 {
   color: #333;
+}
+
+.image-12 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 auto;
+  -ms-flex: 0 auto;
+  flex: 0 auto;
+}
+
+.heading-15 {
+  margin-top: 20px;
+  font-family: Circularxxweb, sans-serif;
+}
+
+.text-block-31 {
+  font-family: 'Circularxxweb book', sans-serif;
 }
 
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
