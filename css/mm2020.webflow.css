@@ -2095,6 +2095,12 @@ figcaption {
   font-family: 'Circularxxweb book', sans-serif;
 }
 
+.html-embed {
+  display: inline-block;
+  width: 230px;
+  height: 230px;
+}
+
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
   opacity: 0;
   -webkit-transform: translate(0px, 50px);
@@ -2694,6 +2700,13 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   .grid-6 {
     -ms-grid-columns: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
+  }
+  .html-embed {
+    width: 230px;
+    height: 230px;
+    border-style: none;
+    border-color: #fff;
+    background-color: transparent;
   }
 }
 
