@@ -18963,6 +18963,7 @@ Webflow.define('tabs', module.exports = function ($) {
   var safari = env.safari;
   var inApp = env();
   var tabAttr = 'data-w-tab';
+  var paneAttr = 'data-w-pane';
   var namespace = '.w-tabs';
   var linkCurrent = 'w--current';
   var tabActive = 'w--tab-active';
@@ -19030,6 +19031,7 @@ Webflow.define('tabs', module.exports = function ($) {
   }
 
   function build(i, el) {
+    var widgetHash = namespace.substr(1) + '-' + i;
     var $el = $(el); // Store state in data
 
     var data = $.data(el, namespace);
@@ -19042,18 +19044,25 @@ Webflow.define('tabs', module.exports = function ($) {
     }
 
     data.current = null;
+    data.tabIdentifier = widgetHash + '-' + tabAttr;
+    data.paneIdentifier = widgetHash + '-' + paneAttr;
     data.menu = $el.children('.w-tab-menu');
     data.links = data.menu.children('.w-tab-link');
     data.content = $el.children('.w-tab-content');
     data.panes = data.content.children('.w-tab-pane'); // Remove old events
 
     data.el.off(namespace);
-    data.links.off(namespace); // Set config from data attributes
+    data.links.off(namespace); // This role is necessary in the ARIA spec
+
+    data.menu.attr('role', 'tablist'); // Set all tabs unfocusable
+
+    data.links.attr('tabindex', '-1'); // Set config from data attributes
 
     configure(data); // Wire up events when not in design mode
 
     if (!design) {
-      data.links.on('click' + namespace, linkSelect(data)); // Trigger first intro event from current tab
+      data.links.on('click' + namespace, linkSelect(data));
+      data.links.on('keydown' + namespace, handleLinkKeydown(data)); // Trigger first intro event from current tab
 
       var $link = data.links.filter('.' + linkCurrent);
       var tab = $link.attr(tabAttr);
@@ -19079,12 +19088,58 @@ Webflow.define('tabs', module.exports = function ($) {
     data.config = config;
   }
 
+  function getActiveTabIdx(data) {
+    var tab = data.current;
+    return Array.prototype.findIndex.call(data.links, function (t) {
+      return t.getAttribute(tabAttr) === tab;
+    }, null);
+  }
+
   function linkSelect(data) {
     return function (evt) {
+      evt.preventDefault();
       var tab = evt.currentTarget.getAttribute(tabAttr);
       tab && changeTab(data, {
         tab: tab
       });
+    };
+  }
+
+  function handleLinkKeydown(data) {
+    return function (evt) {
+      var currentIdx = getActiveTabIdx(data);
+      var keyName = evt.key;
+      var keyMap = {
+        ArrowLeft: currentIdx - 1,
+        ArrowUp: currentIdx - 1,
+        ArrowRight: currentIdx + 1,
+        ArrowDown: currentIdx + 1,
+        End: data.links.length - 1,
+        Home: 0
+      }; // Bail out of function if this key is not
+      // involved in tab management
+
+      if (!(keyName in keyMap)) return;
+      evt.preventDefault();
+      var nextIdx = keyMap[keyName]; // go back to end of tabs if we wrap past the start
+
+      if (nextIdx === -1) {
+        nextIdx = data.links.length - 1;
+      } // go back to start if we wrap past the last tab
+
+
+      if (nextIdx === data.links.length) {
+        nextIdx = 0;
+      }
+
+      var tabEl = data.links[nextIdx];
+      var tab = tabEl.getAttribute(tabAttr);
+      tab && changeTab(data, {
+        tab: tab
+      });
+      setTimeout(function () {
+        tabEl.focus();
+      }, 10);
     };
   }
 
@@ -19101,12 +19156,45 @@ Webflow.define('tabs', module.exports = function ($) {
     data.current = tab; // Select the current link
 
     data.links.each(function (i, el) {
-      var $el = $(el);
+      var $el = $(el); // Add important attributes at build time.
+
+      if (options.immediate || config.immediate) {
+        // Store corresponding pane for reference.
+        var pane = data.panes[i]; // IDs are necessary for ARIA relationships,
+        // so if the user did not create one, we create one
+        // using our generated identifier
+
+        if (!el.id) {
+          el.id = data.tabIdentifier + '-' + i;
+        }
+
+        if (!pane.id) {
+          pane.id = data.paneIdentifier + '-' + i;
+        }
+
+        el.href = '#' + pane.id; // Tab elements must take this role
+
+        el.setAttribute('role', 'tab'); // Tab elements must reference the unique ID of the panel
+        // that they control
+
+        el.setAttribute('aria-controls', pane.id); // Panes must take on the `Tabpanel` role
+
+        pane.setAttribute('role', 'tabpanel'); // Elements with tabpanel role must be labelled by
+        // their controlling tab
+
+        pane.setAttribute('aria-labelledby', el.id);
+      }
 
       if (el.getAttribute(tabAttr) === tab) {
-        $el.addClass(linkCurrent).each(ix.intro);
+        $el.addClass(linkCurrent).attr({
+          tabindex: '0',
+          'aria-selected': 'true'
+        }).each(ix.intro);
       } else if ($el.hasClass(linkCurrent)) {
-        $el.removeClass(linkCurrent).each(ix.outro);
+        $el.removeClass(linkCurrent).attr({
+          tabindex: '-1',
+          'aria-selected': 'false'
+        }).each(ix.outro);
       }
     }); // Find the new tab panes and keep track of previous
 
