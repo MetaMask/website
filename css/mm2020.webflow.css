@@ -2288,6 +2288,13 @@ figcaption {
   font-weight: 500;
 }
 
+.text-block-35 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  text-align: center;
+}
+
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
   opacity: 0;
   -webkit-transform: translate(0px, 50px);
