@@ -1613,6 +1613,7 @@ figcaption {
 }
 
 .heading-12 {
+  padding-bottom: 20px;
   font-family: Circularxxweb, sans-serif;
   font-size: 35px;
   text-align: center;
@@ -1984,8 +1985,8 @@ figcaption {
 }
 
 .grid-7 {
-  -ms-grid-columns: 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   -ms-grid-rows: auto;
   grid-template-rows: auto;
 }

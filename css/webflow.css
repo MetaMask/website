@@ -1073,6 +1073,9 @@ textarea.w-select {
   cursor: pointer;
   padding-right: 40px;
 }
+.w-dropdown-toggle:focus {
+  outline: 0;
+}
 .w-icon-dropdown-toggle {
   position: absolute;
   top: 0;
@@ -1099,6 +1102,9 @@ textarea.w-select {
 }
 .w-dropdown-link.w--current {
   color: #0082f3;
+}
+.w-dropdown-link:focus {
+  outline: 0;
 }
 @media screen and (max-width: 767px) {
   .w-nav-brand {

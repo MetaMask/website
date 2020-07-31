@@ -35250,11 +35250,7 @@ Webflow.define('dropdown', module.exports = function ($, _) {
 
     data.links.each(function (idx, link) {
       if (!link.hasAttribute('tabindex')) link.setAttribute('tabindex', '0');
-    }); // Hide focus outline (temporarily, until more widespread a11y
-    // support and communication)
-
-    data.toggle.css('outline', 'none');
-    data.links.css('outline', 'none'); // Remove old events
+    }); // Remove old events
 
     data.el.off(namespace);
     data.toggle.off(namespace);
