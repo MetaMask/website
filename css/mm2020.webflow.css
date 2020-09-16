@@ -225,6 +225,14 @@ figcaption {
   font-family: 'Circularxxweb book', sans-serif;
 }
 
+.button.standard-button {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-radius: 50px;
+  background-color: #037dd6;
+  font-family: Circularxxweb, sans-serif;
+}
+
 .navigation-link {
   height: auto;
   padding-top: 0px;
@@ -400,7 +408,7 @@ figcaption {
 }
 
 .section.newsletter {
-  display: none;
+  display: block;
 }
 
 .section.mobile-launch {
@@ -1185,6 +1193,12 @@ figcaption {
   font-size: 20px;
 }
 
+.blue-button-solid.center {
+  display: inline;
+  font-family: Circularxxweb, sans-serif;
+  text-align: center;
+}
+
 .value-prop {
   padding-top: 40px;
 }
@@ -1335,12 +1349,11 @@ figcaption {
 }
 
 .heading-4 {
-  font-family: 'Circularxxweb book', sans-serif;
   color: #fff;
   font-size: 32px;
 }
 
-.heading-5 {
+.heading-4 {
   font-family: Circularstd;
   text-align: center;
 }
@@ -1740,7 +1753,20 @@ figcaption {
 }
 
 .columns-5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   margin: 20px 0px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .paragraph-3 {
@@ -2015,8 +2041,10 @@ figcaption {
 }
 
 .paragraph-4 {
+  font-family: Circularxxweb, sans-serif;
   color: #333;
   font-weight: 400;
+  text-align: center;
 }
 
 .text-block-25 {
@@ -2089,6 +2117,7 @@ figcaption {
 .heading-14 {
   margin-bottom: 4px;
   font-size: 32px;
+  text-align: center;
 }
 
 .text-field {
@@ -2701,6 +2730,126 @@ figcaption {
 .container-18 {
   padding-right: 20px;
   padding-left: 20px;
+}
+
+.container-19 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.column-4 {
+  text-align: center;
+}
+
+.container-20 {
+  text-align: center;
+}
+
+.modal-wrapper {
+  position: fixed;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  z-index: 9999;
+  display: none;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.div-block-14 {
+  padding: 30px;
+  border-radius: 24px;
+  background-color: #fff;
+  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.modal-heading {
+  margin-top: 0px;
+  margin-bottom: 20px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  text-align: left;
+}
+
+.div-block-15 {
+  position: absolute;
+  left: auto;
+  top: auto;
+  right: 0%;
+  bottom: 0%;
+  background-color: #d32f2f;
+}
+
+.close-modal-button {
+  position: static;
+  left: auto;
+  top: 20px;
+  right: 20px;
+  bottom: auto;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.div-block-16 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.image-17 {
+  -webkit-box-ordinal-group: 1;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 auto;
+  -ms-flex: 0 auto;
+  flex: 0 auto;
+  text-align: left;
+}
+
+.sign-up-form {
+  margin-right: 10px;
+  margin-left: 10px;
+  padding: 30px;
+  border-radius: 24px;
+  background-color: #fff;
+}
+
+.heading-18 {
+  color: #fff;
+}
+
+.flex-1 {
+  height: auto;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.html-embed-2 {
+  padding-top: 20px;
 }
 
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
@@ -3417,6 +3566,10 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   .grid-6 {
     -ms-grid-columns: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
+  }
+  .heading-14 {
+    font-family: Circularxxweb, sans-serif;
+    font-weight: 400;
   }
   .html-embed {
     width: 230px;
