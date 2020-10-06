@@ -2504,7 +2504,13 @@ figcaption {
 .faq-container {
   max-width: 600px;
   min-width: 600px;
-  margin-bottom: 60px;
+  margin-top: 0px;
+  margin-bottom: 40px;
+}
+
+.faq-container.getting-started {
+  margin-top: 100px;
+  margin-bottom: 0px;
 }
 
 .marker {
@@ -2612,7 +2618,7 @@ figcaption {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #6a737d;
+  background-color: #1d1d1d;
   color: #fff;
   font-size: 16px;
   font-weight: 600;
@@ -2870,6 +2876,12 @@ figcaption {
 
 .video {
   margin-top: 20px;
+}
+
+.section-id {
+  display: block;
+  height: 100px;
+  background-color: #d81b60;
 }
 
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
