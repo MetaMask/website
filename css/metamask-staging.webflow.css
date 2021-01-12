@@ -23,7 +23,7 @@ h1 {
   padding-top: 20px;
   padding-bottom: 10px;
   font-family: 'Circularxxweb book', sans-serif;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 30px;
   font-weight: 500;
 }
@@ -1405,7 +1405,7 @@ figcaption {
 
 .paragraph {
   font-family: Circularxxweb, sans-serif;
-  color: #5d5d5d;
+  color: #333;
   font-size: 10px;
   font-weight: 400;
 }
