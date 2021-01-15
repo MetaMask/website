@@ -22,7 +22,7 @@ h1 {
   margin-bottom: 0px;
   padding-top: 20px;
   padding-bottom: 10px;
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   font-size: 30px;
   line-height: 30px;
   font-weight: 500;
@@ -32,7 +32,7 @@ h2 {
   margin-top: 40px;
   margin-bottom: 0px;
   padding-top: 0px;
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Circularxxweb book';
   font-size: 32px;
   line-height: 36px;
   font-weight: 500;
@@ -41,7 +41,7 @@ h2 {
 h3 {
   margin-top: 30px;
   margin-bottom: 10px;
-  font-family: Circularxxweb, sans-serif;
+  font-family: Circularxxweb;
   font-size: 24px;
   line-height: 33px;
   font-weight: 400;
@@ -50,16 +50,16 @@ h3 {
 h4 {
   margin-top: 0px;
   margin-bottom: 0px;
-  font-family: Circularxxweb, sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   font-size: 20px;
   line-height: 27px;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 h5 {
   margin-top: 9px;
   margin-bottom: 10px;
-  font-family: Circularxxweb, sans-serif;
+  font-family: Circularxxweb;
   font-size: 18px;
   line-height: 22px;
   font-weight: 500;
@@ -68,7 +68,7 @@ h5 {
 h6 {
   margin-top: 20px;
   margin-bottom: 0px;
-  font-family: Circularxxweb, sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   font-size: 16px;
   line-height: 22px;
   font-weight: 500;
@@ -77,6 +77,7 @@ h6 {
 p {
   margin-top: 0px;
   margin-bottom: 20px;
+  font-family: 'Euclid Circular B', sans-serif;
   color: #000;
   font-size: 16px;
   line-height: 22px;
@@ -103,13 +104,16 @@ ol {
 li {
   margin-top: 10px;
   margin-bottom: 10px;
+  font-family: 'Euclid Circular B', sans-serif;
   color: #000;
   font-size: 16px;
   line-height: 24px;
 }
 
 strong {
+  font-family: 'Euclid Circular B', sans-serif;
   color: #000;
+  font-size: 16px;
   font-weight: 700;
 }
 
@@ -222,7 +226,7 @@ figcaption {
   display: inline-block;
   padding: 16px 24px;
   border-radius: 30px;
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
 }
 
 .button.standard-button {
@@ -230,18 +234,22 @@ figcaption {
   padding-bottom: 16px;
   border-radius: 50px;
   background-color: #037dd6;
-  font-family: Circularxxweb, sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
 }
 
 .navigation-link {
   height: auto;
   padding-top: 0px;
   padding-bottom: 0px;
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
 }
 
 .navigation-link:hover {
   color: #2196f3;
+}
+
+.navigation-link.w--current {
+  font-family: 'Euclid Circular B', sans-serif;
 }
 
 .navigation-link.white {
@@ -454,10 +462,11 @@ figcaption {
 }
 
 .page-heading {
-  margin-top: 100px;
-  margin-bottom: 100px;
-  font-family: Circularxxweb, sans-serif;
+  margin-top: 46px;
+  margin-bottom: 46px;
+  font-family: 'Euclid Circular B', sans-serif;
   font-size: 24px;
+  font-weight: 700;
   text-align: center;
 }
 
@@ -487,8 +496,9 @@ figcaption {
   display: inline-block;
   margin-top: 0px;
   margin-right: 13px;
-  font-family: Circularxxweb, sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   color: #fff;
+  font-weight: 700;
 }
 
 .align-right {
@@ -547,7 +557,7 @@ figcaption {
   background-color: transparent;
   -webkit-transition: background-color 300ms ease, border 300ms ease, color 300ms ease;
   transition: background-color 300ms ease, border 300ms ease, color 300ms ease;
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   color: #fff;
   font-size: 16px;
   line-height: 19px;
@@ -571,14 +581,15 @@ figcaption {
 
 .section-heading {
   margin-bottom: 0px;
-  font-family: Circularxxweb, sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
+  font-weight: 700;
 }
 
 .section-heading.centered {
   padding-bottom: 20px;
   float: none;
-  font-family: Circularxxweb, sans-serif;
-  font-weight: 400;
+  font-family: 'Euclid Circular B', sans-serif;
+  font-weight: 700;
   text-align: left;
 }
 
@@ -597,7 +608,7 @@ figcaption {
 .section-subheading {
   position: static;
   display: block;
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   color: #333;
   line-height: 22px;
   text-align: left;
@@ -613,7 +624,7 @@ figcaption {
 }
 
 .section-subheading.center.h5 {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   font-size: 16px;
 }
 
@@ -623,7 +634,7 @@ figcaption {
 }
 
 .section-subheading.white.center.h4 {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   font-size: 14px;
 }
 
@@ -860,7 +871,7 @@ figcaption {
 .footer-link {
   display: block;
   margin-bottom: 0px;
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   color: rgba(0, 0, 0, 0.74);
   font-size: 12px;
   line-height: 30px;
@@ -1094,17 +1105,17 @@ figcaption {
 .faq {
   padding-right: 10px;
   padding-left: 10px;
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Circularxxweb book';
   white-space: normal;
 }
 
 .heading {
   position: static;
   height: auto;
-  font-family: Circularxxweb, sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   font-size: 48px;
   line-height: 53px;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .heading.ml-header {
@@ -1194,13 +1205,13 @@ figcaption {
   -ms-grid-row-align: center;
   align-self: center;
   border-radius: 40px;
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   font-size: 20px;
 }
 
 .blue-button-solid.center {
   display: inline;
-  font-family: Circularxxweb, sans-serif;
+  font-family: Circularxxweb;
   text-align: center;
 }
 
@@ -1217,7 +1228,8 @@ figcaption {
 }
 
 .heading-2 {
-  font-family: Circularxxweb, sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
+  font-weight: 700;
   text-align: center;
 }
 
@@ -1227,7 +1239,7 @@ figcaption {
 }
 
 .text-block {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   font-size: 12px;
   text-align: center;
 }
@@ -1371,14 +1383,15 @@ figcaption {
 
 .heading-6 {
   margin-bottom: 4px;
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Circularxxweb book';
 }
 
 .heading-6.orange-text {
   margin-top: 0px;
-  font-family: Circularxxweb, sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   color: #f6851b;
   line-height: 40px;
+  font-weight: 400;
 }
 
 .heading-7 {
@@ -1388,13 +1401,13 @@ figcaption {
 }
 
 .heading-7.orange-text {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Circularxxweb book';
   color: #f6851b;
 }
 
 .heading-8 {
   margin-bottom: 12px;
-  font-family: Circularxxweb, sans-serif;
+  font-family: Circularxxweb;
 }
 
 .container-10 {
@@ -1404,7 +1417,7 @@ figcaption {
 }
 
 .paragraph {
-  font-family: Circularxxweb, sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   color: #333;
   font-size: 10px;
   font-weight: 400;
@@ -1435,12 +1448,17 @@ figcaption {
 .heading-9 {
   margin-bottom: 52px;
   padding-top: 20px;
-  font-family: Circularxxweb, sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
+  font-weight: 700;
   text-align: center;
 }
 
 .body-2 {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Circularxxweb book';
+}
+
+.body-2.institutions {
+  font-family: 'Euclid Circular B', sans-serif;
 }
 
 .image-4 {
@@ -1492,7 +1510,8 @@ figcaption {
 
 .heading-10 {
   margin-top: 4px;
-  font-family: Circularxxweb, sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
+  font-weight: 700;
   text-align: center;
 }
 
@@ -1500,7 +1519,7 @@ figcaption {
   min-height: 46px;
   margin-top: 0px;
   padding-top: 0px;
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   font-size: 13px;
   font-weight: 400;
   text-align: center;
@@ -1546,7 +1565,7 @@ figcaption {
 }
 
 .bold-text.faq-header {
-  font-family: Circularxxweb, sans-serif;
+  font-family: Circularxxweb;
   font-size: 24px;
 }
 
@@ -1555,7 +1574,7 @@ figcaption {
 }
 
 .paragraph-2.faq-paragraph {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Circularxxweb book';
   color: #474747;
   font-size: 14px;
   line-height: 19px;
@@ -1634,8 +1653,9 @@ figcaption {
 
 .heading-12 {
   padding-bottom: 20px;
-  font-family: Circularxxweb, sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   font-size: 35px;
+  font-weight: 700;
   text-align: center;
 }
 
@@ -1783,7 +1803,7 @@ figcaption {
 }
 
 .paragraph-3 {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Circularxxweb book';
   font-weight: 400;
   text-align: left;
 }
@@ -1795,8 +1815,9 @@ figcaption {
 }
 
 .bold-text-2 {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   font-size: 18px;
+  font-weight: 400;
 }
 
 .left-arrow {
@@ -2055,26 +2076,27 @@ figcaption {
 }
 
 .paragraph-4 {
-  font-family: Circularxxweb, sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   color: #333;
   font-weight: 400;
   text-align: center;
 }
 
 .text-block-25 {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   color: #333;
 }
 
 .paragraph-5 {
+  position: static;
   margin-top: 25px;
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   color: #333;
   font-size: 16px;
 }
 
 .text-block-26 {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
 }
 
 .italic-text {
@@ -2084,23 +2106,24 @@ figcaption {
 }
 
 .bold-text-3 {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
 }
 
 .section-7 {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
 }
 
 .rich-text-block {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
+  font-weight: 400;
 }
 
 .bold-text-4 {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
 }
 
 .paragraph-6 {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Circularxxweb book';
   font-size: 12px;
 }
 
@@ -2130,7 +2153,9 @@ figcaption {
 
 .heading-14 {
   margin-bottom: 4px;
+  font-family: 'Euclid Circular B', sans-serif;
   font-size: 32px;
+  font-weight: 700;
   text-align: center;
 }
 
@@ -2157,6 +2182,7 @@ figcaption {
 }
 
 .text-block-29 {
+  font-family: 'Euclid Circular B', sans-serif;
   color: #333;
 }
 
@@ -2177,11 +2203,14 @@ figcaption {
 
 .heading-15 {
   margin-top: 20px;
-  font-family: Circularxxweb, sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
+  font-weight: 700;
 }
 
 .text-block-31 {
-  font-family: 'Circularxxweb book', sans-serif;
+  margin-top: 14px;
+  margin-bottom: 23px;
+  font-family: 'Euclid Circular B', sans-serif;
 }
 
 .html-embed {
@@ -2201,7 +2230,7 @@ figcaption {
 
 .paragraph-7 {
   margin-top: 40px;
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
 }
 
 .section-8 {
@@ -2260,7 +2289,7 @@ figcaption {
 }
 
 .text-block-34 {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Circularxxweb book';
   color: #f1f1f1;
   font-weight: 400;
 }
@@ -2363,7 +2392,7 @@ figcaption {
 }
 
 .rich-text-block-2 {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Circularxxweb book';
   font-weight: 500;
 }
 
@@ -2376,7 +2405,7 @@ figcaption {
 }
 
 .rich-text-block-3 {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Circularxxweb book';
 }
 
 .tabs {
@@ -2503,7 +2532,7 @@ figcaption {
 
 .faq-answer {
   margin-bottom: 0px;
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
 }
 
 .faq-container {
@@ -2582,19 +2611,20 @@ figcaption {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  font-family: 'Euclid Circular B', sans-serif;
 }
 
 .toggle-text {
   position: relative;
   z-index: 2;
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   font-size: 16px;
   line-height: 24px;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .subtitle {
-  font-family: Circularxxweb, sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   color: #727272;
   font-size: 17px;
   font-weight: 500;
@@ -2604,6 +2634,7 @@ figcaption {
 .faq-body-cont {
   padding: 30px;
   border-top: 1px none #000;
+  font-family: 'Euclid Circular B', sans-serif;
   font-size: 16px;
   line-height: 32px;
   font-weight: 300;
@@ -2623,7 +2654,7 @@ figcaption {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #1d1d1d;
+  background-color: #037dd6;
   color: #fff;
   font-size: 16px;
   font-weight: 600;
@@ -2647,6 +2678,7 @@ figcaption {
 
 .title {
   margin-bottom: 20px;
+  font-weight: 700;
   text-align: center;
 }
 
@@ -2686,16 +2718,17 @@ figcaption {
 }
 
 .rich-text-block-5 {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Circularxxweb book';
 }
 
 .body-3 {
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Circularxxweb book';
 }
 
 .heading-17 {
   margin-top: 0px;
   margin-bottom: 20px;
+  font-family: 'Euclid Circular B', sans-serif;
 }
 
 .link-block-4 {
@@ -2721,7 +2754,7 @@ figcaption {
 
 .text-block-36 {
   position: static;
-  font-family: 'Circularxxweb book', sans-serif;
+  font-family: 'Circularxxweb book';
   font-size: 12px;
 }
 
@@ -2857,7 +2890,9 @@ figcaption {
 }
 
 .heading-18 {
+  font-family: 'Euclid Circular B', sans-serif;
   color: #fff;
+  font-weight: 700;
 }
 
 .flex-1 {
@@ -2920,7 +2955,7 @@ figcaption {
 .updates-message-body {
   padding-right: 20px;
   padding-left: 20px;
-  font-family: Circularxxweb, sans-serif;
+  font-family: Circularxxweb;
   font-weight: 500;
 }
 
@@ -2967,7 +3002,7 @@ figcaption {
   bottom: auto;
   z-index: 1030;
   display: block;
-  width: 100%;
+  width: auto;
   margin-top: 20px;
   margin-bottom: 0px;
   padding: 0px;
@@ -3137,11 +3172,7 @@ figcaption {
   height: 50%;
   padding-top: 60px;
   padding-bottom: 60px;
-  background-image: url('../images/quorum-gradient-2000.jpg');
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
+  background-image: linear-gradient(252deg, #2c55de, #ff944a);
 }
 
 .section-body-institutions {
@@ -3205,14 +3236,21 @@ figcaption {
 
 .container-23 {
   max-width: 1196px;
+  padding-right: 50px;
+  padding-left: 50px;
+}
+
+.container-23.inst_header {
+  padding-left: 0px;
 }
 
 .heading-22 {
   min-width: 220px;
+  font-family: 'Euclid Circular B', sans-serif;
   color: #fff;
   font-size: 29px;
   line-height: 32px;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .columns-7 {
@@ -3229,7 +3267,7 @@ figcaption {
 }
 
 .text-block-37 {
-  font-family: Circularxxweb, sans-serif;
+  font-family: 'Euclid Circular B', sans-serif;
   color: #000;
   font-size: 24px;
 }
@@ -3255,7 +3293,7 @@ figcaption {
   border: 0px none salmon;
   border-radius: 0px;
   background-color: #fff;
-  box-shadow: 1px 1px 3px 0 #000;
+  box-shadow: 1px 1px 3px 0 #ccc;
 }
 
 .column-6 {
@@ -3274,11 +3312,13 @@ figcaption {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  margin-right: 0px;
+  margin-left: 0px;
 }
 
 .column-7 {
-  padding-right: 31px;
-  padding-left: 31px;
+  padding-right: 70px;
+  padding-left: 50px;
   -webkit-box-flex: 0;
   -webkit-flex: 0 auto;
   -ms-flex: 0 auto;
@@ -3286,6 +3326,7 @@ figcaption {
 }
 
 .heading-23 {
+  font-family: 'Euclid Circular B', sans-serif;
   font-size: 24px;
   line-height: 100%;
   font-weight: 400;
@@ -3308,6 +3349,8 @@ figcaption {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  font-family: 'Euclid Circular B', sans-serif;
+  font-weight: 700;
   text-align: left;
 }
 
@@ -3317,8 +3360,8 @@ figcaption {
   margin-top: 40px;
   margin-right: auto;
   margin-left: auto;
-  padding-right: 31px;
-  padding-left: 31px;
+  padding-right: 0px;
+  padding-left: 0px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -3328,7 +3371,7 @@ figcaption {
   -ms-flex-align: center;
   align-items: center;
   grid-auto-columns: 1fr;
-  grid-column-gap: 16px;
+  grid-column-gap: 70px;
   grid-row-gap: 16px;
   -ms-grid-columns: 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -3346,6 +3389,8 @@ figcaption {
 }
 
 .grid-12 {
+  padding-right: 0px;
+  padding-left: 0px;
   -ms-grid-columns: 1fr;
   grid-template-columns: 1fr;
   -ms-grid-rows: auto auto;
@@ -3368,13 +3413,17 @@ figcaption {
 .eap-heading {
   position: static;
   height: auto;
+  padding-top: 0px;
+  font-family: 'Euclid Circular B', sans-serif;
   line-height: 45px;
+  font-weight: 700;
   -o-object-fit: fill;
   object-fit: fill;
 }
 
 .heading-25 {
   margin-top: 0px;
+  font-family: 'Euclid Circular B', sans-serif;
 }
 
 .heading-26 {
@@ -3412,6 +3461,7 @@ figcaption {
 }
 
 .grid-13 {
+  padding-left: 0px;
   grid-auto-flow: row;
   grid-column-gap: 13px;
   -ms-grid-columns: 0.25fr 1fr 1fr;
@@ -3427,8 +3477,9 @@ figcaption {
 }
 
 .grid-14 {
-  -ms-grid-columns: 0.25fr 1fr;
-  grid-template-columns: 0.25fr 1fr;
+  grid-column-gap: 70px;
+  -ms-grid-columns: 1fr 3.75fr;
+  grid-template-columns: 1fr 3.75fr;
   -ms-grid-rows: auto;
   grid-template-rows: auto;
 }
@@ -3445,8 +3496,54 @@ figcaption {
   height: 0px;
 }
 
+.bold-text-11 {
+  font-size: 20px;
+}
+
 .section-12 {
   padding-bottom: 40px;
+}
+
+.body-4 {
+  font-family: 'Euclid Circular B', sans-serif;
+}
+
+.paragraph-20 {
+  font-family: 'Euclid Circular B', sans-serif;
+  font-weight: 400;
+}
+
+.text-block-38 {
+  font-family: 'Euclid Circular B', sans-serif;
+}
+
+.text-block-39 {
+  font-family: 'Euclid Circular B', sans-serif;
+}
+
+.text-block-40 {
+  font-family: 'Euclid Circular B', sans-serif;
+}
+
+.section-13 {
+  font-family: 'Euclid Circular B', sans-serif;
+}
+
+.bold-text-12 {
+  font-family: 'Euclid Circular B', sans-serif;
+}
+
+.heading-29 {
+  font-family: 'Euclid Circular B', sans-serif;
+  font-weight: 700;
+}
+
+.heading-30 {
+  font-family: 'Euclid Circular B', sans-serif;
+}
+
+.submit-button {
+  font-family: 'Euclid Circular B', sans-serif;
 }
 
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
@@ -3700,6 +3797,20 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   .faq-img {
     width: 50px;
     height: 50px;
+  }
+
+  .paragraph-12 {
+    margin-right: 0px;
+    padding-right: 10px;
+  }
+
+  .container-23 {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+
+  .div-block-20 {
+    margin-right: auto;
   }
 
   .column-7 {
@@ -3992,6 +4103,10 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
     padding-left: 0px;
   }
 
+  .div-block-20 {
+    margin-right: auto;
+  }
+
   .columns-8 {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -4008,6 +4123,11 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
     grid-auto-flow: row;
     -ms-grid-columns: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
+  }
+
+  .grid-12 {
+    padding-right: 0px;
+    padding-left: 0px;
   }
 
   .column-9 {
@@ -4161,7 +4281,7 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   }
 
   .heading.ml-header {
-    font-family: Circularxxweb, sans-serif;
+    font-family: Circularxxweb;
     font-size: 28px;
     line-height: 34px;
   }
@@ -4193,7 +4313,7 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
 
   .blue-button-solid {
     min-width: 100%;
-    font-family: 'Circularxxweb book', sans-serif;
+    font-family: 'Circularxxweb book';
   }
 
   .blue-button-solid.large-button {
@@ -4458,7 +4578,7 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   }
 
   .heading-14 {
-    font-family: Circularxxweb, sans-serif;
+    font-family: Circularxxweb;
     font-weight: 400;
   }
 
@@ -4563,6 +4683,18 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   }
 
   .html-embed-3 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     border: 3px none #d81b60;
     border-radius: 0px;
   }
@@ -4643,7 +4775,13 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   }
 
   .container-23 {
+    padding-right: 0px;
+    padding-left: 0px;
     text-align: center;
+  }
+
+  .container-23.inst_header {
+    padding-right: 0px;
   }
 
   .heading-22 {
@@ -4658,6 +4796,10 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   }
 
   .div-block-20 {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     border-style: none;
   }
 
@@ -5397,16 +5539,16 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
 }
 
 @font-face {
-  font-family: 'Circularxxweb book';
-  src: url('../fonts/CircularXXWeb-Book.woff') format('woff');
+  font-family: 'Euclid Circular B';
+  src: url('../fonts/EuclidCircularB-Regular-WebXL.woff2') format('woff2'), url('../fonts/EuclidCircularB-Regular-WebXL.woff') format('woff');
   font-weight: 400;
   font-style: normal;
-  font-display: auto;
+  font-display: swap;
 }
 @font-face {
-  font-family: 'Circularxxweb';
-  src: url('../fonts/CircularXXWeb-Medium.woff') format('woff');
-  font-weight: 500;
+  font-family: 'Euclid Circular B';
+  src: url('../fonts/EuclidCircularB-Bold-WebXL.woff2') format('woff2'), url('../fonts/EuclidCircularB-Bold-WebXL.woff') format('woff');
+  font-weight: 700;
   font-style: normal;
-  font-display: auto;
+  font-display: swap;
 }
