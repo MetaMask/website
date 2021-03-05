@@ -34791,12 +34791,6 @@ Webflow.define('links', module.exports = function ($, _) {
 var Webflow = __webpack_require__(7);
 
 Webflow.define('scroll', module.exports = function ($) {
-  // Native browser events & namespaces used in this module
-  var CLICK = 'click';
-  var CHANGE = 'change';
-  var CHANGE_NS = '.wf-change';
-  var EMPTY_LINK_NS = '.wf-empty-link';
-  var SCROLL_NS = '.wf-scroll';
   /**
    * A collection of namespaced events found in this module.
    * Namespaced events encapsulate our code, and make it safer and easier
@@ -34804,17 +34798,22 @@ Webflow.define('scroll', module.exports = function ($) {
    * @see https://api.jquery.com/on/#event-names
    * @typedef {Object.<string>} NamespacedEventsCollection
    */
-
   var NS_EVENTS = {
-    WF_CHANGE: CHANGE + CHANGE_NS,
-    WF_CLICK_EMPTY: CLICK + EMPTY_LINK_NS,
-    WF_CLICK_SCROLL: CLICK + SCROLL_NS
+    WF_CLICK_EMPTY: 'click.wf-empty-link',
+    WF_CLICK_SCROLL: 'click.wf-scroll'
   };
+  var loc = window.location;
+  var history = inIframe() ? null : window.history;
+  var $win = $(window);
   var $doc = $(document);
-  var win = window;
-  var loc = win.location;
-  var history = inIframe() ? null : win.history;
-  var validHash = /^[a-zA-Z0-9][\w:.-]*$/;
+  var $body = $(document.body);
+
+  var animate = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || function (fn) {
+    window.setTimeout(fn, 15);
+  };
+
+  var rootTag = Webflow.env('editor') ? '.w-editor-body' : 'body';
+  var headerSelector = 'header, ' + rootTag + ' > .header, ' + rootTag + ' > .w-nav:not([data-no-scroll])';
   var emptyHrefSelector = 'a[href="#"]';
   /**
    * Select only links whose href:
@@ -34824,62 +34823,71 @@ Webflow.define('scroll', module.exports = function ($) {
    */
 
   var localHrefSelector = 'a[href*="#"]:not(.w-tab-link):not(' + emptyHrefSelector + ')';
-  /**
-   * The current page url, minus the hash.
-   * Will be set in the `ready` function
-   */
-
-  var locHref;
 
   function inIframe() {
     try {
-      return Boolean(win.frameElement);
+      return Boolean(window.frameElement);
     } catch (e) {
       return true;
     }
+  }
+
+  var validHash = /^#[a-zA-Z0-9][\w:.-]*$/;
+  /**
+   * Determine if link navigates to current page
+   * @param {HTMLAnchorElement} link
+   */
+
+  function linksToCurrentPage(link) {
+    return validHash.test(link.hash) && link.host + link.pathname === loc.host + loc.pathname;
+  }
+  /**
+   * Check if the designer has indicated that this page should
+   * have no scroll animation, or if the end user has set
+   * prefers-reduced-motion in their OS
+   */
+
+
+  function reducedMotionEnabled() {
+    // Delete this conditional to enable reduced-motion feature
+    if (!document.body.hasAttribute('data-wf-reduce-scroll-motion')) return false;
+    return document.body.getAttribute('data-wf-scroll-motion') === 'none' || 'function' === typeof window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
   /**
    * Determine if we should execute custom scroll
    */
 
 
-  function validateScroll(e) {
-    if (Webflow.env('design')) {
+  function validateScroll(evt) {
+    var target = evt.target;
+
+    if ( // Bail if in Designer
+    Webflow.env('design') || // Ignore links being used by jQuery mobile
+    window.$.mobile && /(?:^|\s)ui-link(?:$|\s)/.test(target.className)) {
       return;
-    } // Ignore links being used by jQuery mobile
-
-
-    if (window.$.mobile && $(e.currentTarget).hasClass('ui-link')) {
-      return;
-    } // The href property always contains the full url so we can compare
-    // with the document’s location to only target links on this page.
-
-
-    var parts = this.href.split('#');
-    var hash = parts[0] === locHref ? parts[1] : null;
-
-    if (hash) {
-      findEl(hash, e);
     }
+
+    var hash = linksToCurrentPage(target) ? target.hash : '';
+    if (hash === '') return;
+    var $el = $(hash);
+
+    if (!$el.length) {
+      return;
+    }
+
+    if (evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+    }
+
+    updateHistory(hash, evt);
+    window.setTimeout(function () {
+      scroll($el);
+    }, evt ? 0 : 300);
   }
 
-  function findEl(hash, e) {
-    if (!validHash.test(hash)) {
-      return;
-    }
-
-    var el = $('#' + hash);
-
-    if (!el.length) {
-      return;
-    }
-
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    } // Push new history state
-
-
+  function updateHistory(hash) {
+    // Push new history state
     if (loc.hash !== hash && history && history.pushState && // Navigation breaks Chrome when the protocol is `file:`.
     !(Webflow.env.chrome && loc.protocol === 'file:')) {
       var oldHash = history.state && history.state.hash;
@@ -34887,66 +34895,60 @@ Webflow.define('scroll', module.exports = function ($) {
       if (oldHash !== hash) {
         history.pushState({
           hash: hash
-        }, '', '#' + hash);
+        }, '', hash);
       }
-    } // If a fixed header exists, offset for the height
-
-
-    var rootTag = Webflow.env('editor') ? '.w-editor-body' : 'body';
-    var header = $('header, ' + rootTag + ' > .header, ' + rootTag + ' > .w-nav:not([data-no-scroll])');
-    var offset = header.css('position') === 'fixed' ? header.outerHeight() : 0;
-    win.setTimeout(function () {
-      scroll(el, offset);
-    }, e ? 0 : 300);
+    }
   }
 
-  function scroll(el, offset) {
-    var start = $(win).scrollTop();
-    var end = el.offset().top - offset; // If specified, scroll so that the element ends up in the middle of the viewport
-
-    if (el.data('scroll') === 'mid') {
-      var available = $(win).height() - offset;
-      var elHeight = el.outerHeight();
-
-      if (elHeight < available) {
-        end -= Math.round((available - elHeight) / 2);
-      }
-    }
-
-    var mult = 1; // Check for custom time multiplier on the body and the element
-
-    $('body').add(el).each(function () {
-      var time = parseFloat($(this).attr('data-scroll-time'), 10);
-
-      if (!isNaN(time) && (time === 0 || time > 0)) {
-        mult = time;
-      }
-    }); // Shim for IE8 and below
-
-    if (!Date.now) {
-      Date.now = function () {
-        return new Date().getTime();
-      };
-    }
-
+  function scroll($targetEl) {
+    var start = $win.scrollTop();
+    var end = calculateScrollEndPosition($targetEl);
+    if (start === end) return;
+    var duration = calculateScrollDuration($targetEl, start, end);
     var clock = Date.now();
-
-    var animate = win.requestAnimationFrame || win.mozRequestAnimationFrame || win.webkitRequestAnimationFrame || function (fn) {
-      win.setTimeout(fn, 15);
-    };
-
-    var duration = (472.143 * Math.log(Math.abs(start - end) + 125) - 2000) * mult;
 
     var step = function step() {
       var elapsed = Date.now() - clock;
-      win.scroll(0, getY(start, end, elapsed, duration));
+      window.scroll(0, getY(start, end, elapsed, duration));
 
       if (elapsed <= duration) {
         animate(step);
       }
     };
 
-    step();
+    animate(step);
+  }
+
+  function calculateScrollEndPosition($targetEl) {
+    // If a fixed header exists, offset for the height
+    var $header = $(headerSelector);
+    var offsetY = $header.css('position') === 'fixed' ? $header.outerHeight() : 0;
+    var end = $targetEl.offset().top - offsetY; // If specified, scroll so that the element ends up in the middle of the viewport
+
+    if ($targetEl.data('scroll') === 'mid') {
+      var available = $win.height() - offsetY;
+      var elHeight = $targetEl.outerHeight();
+
+      if (elHeight < available) {
+        end -= Math.round((available - elHeight) / 2);
+      }
+    }
+
+    return end;
+  }
+
+  function calculateScrollDuration($targetEl, start, end) {
+    if (reducedMotionEnabled()) return 0;
+    var mult = 1; // Check for custom time multiplier on the body and the scroll target
+
+    $body.add($targetEl).each(function (_, el) {
+      var time = parseFloat(el.getAttribute('data-scroll-time'));
+
+      if (!isNaN(time) && time >= 0) {
+        mult = time;
+      }
+    });
+    return (472.143 * Math.log(Math.abs(start - end) + 125) - 2000) * mult;
   }
 
   function getY(start, end, elapsed, duration) {
@@ -34959,30 +34961,12 @@ Webflow.define('scroll', module.exports = function ($) {
 
   function ease(t) {
     return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
-  } // TODO: Re-implement after customer-facing comms
-  // function handleReducedMotionChange(evt) {
-  //   var {WF_CLICK_SCROLL} = NS_EVENTS;
-  //   if (evt.target.matches) {
-  //     $doc.off(WF_CLICK_SCROLL);
-  //   } else {
-  //     $doc.on(WF_CLICK_SCROLL, localHrefSelector, validateScroll);
-  //   }
-  // }
-
+  }
 
   function ready() {
-    // eslint-disable-next-line no-unused-vars
-    var WF_CHANGE = NS_EVENTS.WF_CHANGE,
-        WF_CLICK_EMPTY = NS_EVENTS.WF_CLICK_EMPTY,
+    var WF_CLICK_EMPTY = NS_EVENTS.WF_CLICK_EMPTY,
         WF_CLICK_SCROLL = NS_EVENTS.WF_CLICK_SCROLL;
-    locHref = loc.href.split('#')[0]; // var reducedMotionQ = window.matchMedia(
-    //   '(prefers-reduced-motion: reduce)'
-    // );
-    // if (!reducedMotionQ.matches) {
-
-    $doc.on(WF_CLICK_SCROLL, localHrefSelector, validateScroll); // }
-    // $(reducedMotionQ).on(WF_CHANGE, handleReducedMotionChange);
-
+    $doc.on(WF_CLICK_SCROLL, localHrefSelector, validateScroll);
     /**
      * Prevent empty hash links from triggering scroll.
      * Legacy feature to preserve: use the default "#" link
