@@ -1,15 +1,15 @@
 <!DOCTYPE html><!--  This site was created in Webflow. http://www.webflow.com  -->
 <!--  Last Published: Wed Mar 17 2021 21:59:21 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="604ec65d7935b4681e51b35d" data-wf-site="604ec65d7935b45ce251b35e">
+<html data-wf-page="604ec65d7935b4d6ca51b370" data-wf-site="604ec65d7935b45ce251b35e">
 <head>
   <meta charset="utf-8">
-  <title>MetaMask</title>
-  <meta content="A crypto wallet &amp; gateway to blockchain apps" name="description">
-  <meta content="MetaMask" property="og:title">
-  <meta content="A crypto wallet &amp; gateway to blockchain apps" property="og:description">
+  <title>Buy, Store and Swap Tokens | MetaMask</title>
+  <meta content="The easiest way to swap Ethereum tokens across all of the leading decentralized exchanges and liquidity data providers." name="description">
+  <meta content="Buy, Store and Swap Tokens | MetaMask" property="og:title">
+  <meta content="The easiest way to swap Ethereum tokens across all of the leading decentralized exchanges and liquidity data providers." property="og:description">
   <meta content="https://uploads-ssl.webflow.com/5b479ea1731aa13135a70342/5e6010110671f79d5c96adf9_open%20graph.png" property="og:image">
-  <meta content="MetaMask" property="twitter:title">
-  <meta content="A crypto wallet &amp; gateway to blockchain apps" property="twitter:description">
+  <meta content="Buy, Store and Swap Tokens | MetaMask" property="twitter:title">
+  <meta content="The easiest way to swap Ethereum tokens across all of the leading decentralized exchanges and liquidity data providers." property="twitter:description">
   <meta content="https://uploads-ssl.webflow.com/5b479ea1731aa13135a70342/5e6010110671f79d5c96adf9_open%20graph.png" property="twitter:image">
   <meta property="og:type" content="website">
   <meta content="summary_large_image" name="twitter:card">
@@ -25,14 +25,24 @@
   <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.png" rel="apple-touch-icon">
-  <link href="https://metamask.io/" rel="canonical">
+  <link href="https://metamask.io/swaps" rel="canonical">
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-37075177-6"></script>
   <script type="text/javascript">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-37075177-6', {'anonymize_ip': true});</script>
+  <script>
+document.getElementById("downloadButtonPageSwaps").onclick = function(){
+	if (gtag) {
+		gtag('event', 'Click', {
+		'event_category': 'Download',
+		'event_label': 'Swaps Page Buttons'
+	});
+	}
+}
+</script>
 </head>
-<body class="body-4">
+<body class="body-2 swaps">
   <div data-collapse="medium" data-animation="default" data-duration="200" data-easing="ease-in-out" data-easing2="ease-in-out" id="downloadButtonNav" role="banner" class="navigation-bar dark w-nav">
     <div class="container-27 w-container">
-      <a href="index.html" aria-current="page" class="brand-link w-nav-brand w--current"><img src="images/mm-logo.svg" width="211" alt="" class="image-3"></a>
+      <a href="index.html" class="brand-link w-nav-brand"><img src="images/mm-logo.svg" width="211" alt="" class="image-3"></a>
       <nav role="navigation" class="navigation-menu w-nav-menu">
         <div data-hover="1" data-delay="0" class="w-dropdown">
           <div class="dropdown w-dropdown-toggle">
@@ -40,7 +50,7 @@
             <div>Features</div>
           </div>
           <nav class="dropdown-list w-dropdown-list">
-            <a href="swaps.html" class="dropdown-link w-dropdown-link">Swaps</a>
+            <a href="swaps.html" aria-current="page" class="dropdown-link w-dropdown-link w--current">Swaps</a>
           </nav>
         </div>
         <div data-hover="1" data-delay="0" class="w-dropdown">
@@ -81,134 +91,95 @@
       </div>
     </div>
   </div>
-  <div class="section">
+  <div class="section swaps-header">
     <div class="container-2 w-container">
-      <div data-w-id="7dbc2cc8-8525-0cc6-75f0-6344b31d065e" class="columns w-row">
+      <div class="columns swaps-hero w-row">
         <div class="content-column w-col w-col-6">
-          <h1 class="heading">A crypto wallet &amp; gateway to blockchain apps</h1>
-          <p class="paragraph-5">Start exploring blockchain applications in seconds.  Trusted by over 1 million users worldwide.</p>
-          <a href="download.html" class="blue-button-solid large-button w-button">Download now</a>
+          <h1 class="heading">The most trusted way to access, store and swap Ethereum tokens</h1>
+          <a href="download.html" id="downloadButtonPageSwaps" class="button blue-button-solid button-large">Download now</a>
         </div>
-        <div class="image-column w-col w-col-6"></div>
+        <div class="image-column about-img w-col w-col-6"></div>
       </div>
     </div>
   </div>
-  <div>
-    <div class="container-5 w-container">
-      <div class="text-block">LEARN MORE</div><img src="images/social-35.svg" alt="" class="image-2">
+  <div class="section-5 section-margins">
+    <div class="w-container">
+      <h1 class="heading-31 mobile">Swap from anywhere, anytime</h1>
+      <p class="paragraph-23 mobile">Swap tokens directly from your desktop or mobile wallet. The Swaps feature combines data from decentralized exchange aggregators, market makers, and DEXs, to ensure you get the very best price with the lowest network fees.</p><img src="images/swapsscreens.png" loading="lazy" sizes="(max-width: 479px) 90vw, (max-width: 991px) 94vw, 940px" srcset="images/swapsscreens-p-500.png 500w, images/swapsscreens-p-800.png 800w, images/swapsscreens-p-1080.png 1080w, images/swapsscreens-p-1600.png 1600w, images/swapsscreens.png 1869w" alt="Start to end view of a token swap." class="image-21">
     </div>
   </div>
+  <div class="section-14">
+    <div class="container-29 w-container">
+      <h1 class="heading-31">How it Works</h1>
+      <div style="padding-top:56.17021276595745%" class="video-3 w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2Fzeu-a-W2qJQ%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dzeu-a-W2qJQ&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2Fzeu-a-W2qJQ%2Fhqdefault.jpg&key=96f1f04c5f4143bcb0f2e68c87d65feb&type=text%2Fhtml&schema=youtube" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div>
+      <p class="section-subheading center h5">Unlike other crypto wallets out there, MetaMask is built to be privacy-first. We empower you to access, store and swap tokens, without having to worry about dapps or exchanges accessing more personal data than you’ve consented to give. Whether you’re participating in decentralized finance, or surfing Web 3.0, with MetaMask, you are always in complete control of your data.</p>
+    </div>
+  </div>
+  <h1 class="heading-9">Why Swap with MetaMask?</h1>
   <div class="section">
     <div class="w-container">
       <div class="columns-3 learn-more w-row">
-        <div data-w-id="1ca73b17-0478-b676-9063-4bf6bf250b0f" style="opacity:0" class="value-prop w-col w-col-5">
+        <div class="value-prop w-col w-col-6">
           <div class="section-title-group">
-            <h2 class="section-heading centered">Buy, store, send and swap tokens</h2>
-            <div class="section-subheading">Available as a browser extension and as a mobile app, MetaMask equips you with a key vault, secure login, token wallet, and token exchange—everything you need to manage your digital assets.<a href="#"></a>
-            </div>
+            <h2 class="section-heading centered">Find the best price every time</h2>
+            <div class="section-subheading">Swaps ensures that you always has access to the largest selection of tokens and the most competitive prices, by providing prices from multiple aggregators and individual market makers in one place. A service fee of 0.875% is automatically factored into each quote, which supports ongoing development to make MetaMask even better.</div>
           </div>
         </div>
-        <div data-w-id="1ca73b17-0478-b676-9063-4bf6bf250b10" style="opacity:0" class="column w-col w-col-7"><img src="images/wallet-illo.svg" width="414" alt=""></div>
+        <div class="column w-col w-col-6"><img src="images/best-pices.png" width="400" sizes="(max-width: 479px) 84vw, (max-width: 767px) 400px, (max-width: 991px) 354px, 400px" srcset="images/best-pices-p-500.png 500w, images/best-pices.png 880w" alt="MetaMask compares prices from multiple aggregators and market makers."></div>
       </div>
     </div>
   </div>
   <div class="section">
     <div class="w-container">
       <div class="w-row">
-        <div data-w-id="962a7f59-2486-e86f-153e-119973efe3f2" style="opacity:0" class="column-2 w-col w-col-7"><img src="images/Explore-illo.svg" alt=""></div>
-        <div data-w-id="962a7f59-2486-e86f-153e-119973efe3f8" style="opacity:0" class="value-prop w-col w-col-5">
-          <h2 class="section-heading centered">Explore blockchain apps</h2>
-          <div class="section-subheading">MetaMask provides the simplest yet most secure way to connect to blockchain-based applications. You are always in control when interacting on the new decentralized web.</div>
+        <div class="column-2 w-col w-col-6"><img src="images/Quotes.png" width="414" height="" sizes="(max-width: 479px) 86vw, (max-width: 767px) 414px, (max-width: 991px) 354px, 414px" srcset="images/Quotes-p-500.png 500w, images/Quotes-p-800.png 800w, images/Quotes.png 828w" alt="Analyze quotes from all sources of liquidity"></div>
+        <div class="value-prop w-col w-col-6">
+          <h2 class="section-heading centered">Reduced gas costs</h2>
+          <div class="section-subheading">We pursue a different path to locate the best  trade. Each route requires a varying amount of  gas fees to execute the transaction. Swaps sources the best prices and determines which liquidity  source is the most gas efficient for every trade.</div>
         </div>
       </div>
     </div>
   </div>
   <div class="section">
     <div class="w-container">
-      <div class="columns-4 w-row">
-        <div data-w-id="d61b3cad-a106-3658-c6dc-8268a3bfaaa9" style="opacity:0" class="value-prop w-col w-col-5">
+      <div class="columns-3 learn-more w-row">
+        <div class="value-prop w-col w-col-6">
           <div class="section-title-group">
-            <h2 class="section-heading centered">Own your data</h2>
-            <div class="section-subheading">MetaMask generates passwords and keys on your device, so only you have access to your accounts and data. You always choose what to share and what to keep private.</div>
+            <h2 class="section-heading centered">Fewer approvals</h2>
+            <div class="section-subheading">With Swaps, you only need to approve each token once to gain access to all the available liquidity on DeFi, reducing time and gas costs.</div>
           </div>
         </div>
-        <div class="w-col w-col-7"><img src="images/Browse-illo.svg" style="opacity:0" data-w-id="bed6f617-0166-7970-9982-9f675d2d86e9" alt=""></div>
+        <div class="column w-col w-col-6"><img src="images/Approvals.png" srcset="images/Approvals-p-500.png 500w, images/Approvals-p-800.png 800w, images/Approvals.png 958w" sizes="(max-width: 479px) 87vw, (max-width: 767px) 88vw, (max-width: 991px) 354px, 460px" width="437" alt="Approve each token once" class="image-22"></div>
       </div>
     </div>
   </div>
-  <div class="cta-section centered-accented">
-    <div id="logo-container" class="html-embed w-embed w-script">
-      <script src="https://metamask.io/logo.js"></script>
-    </div>
-    <div class="container-3 w-container">
-      <h2 class="cta-heading inline-block">Get started</h2>
-    </div>
-    <a href="download.html" class="button blue-button-solid button-large">Download MetaMask Today</a>
-  </div>
-  <div class="section accent video-explainer">
+  <div class="section">
     <div class="w-container">
-      <h1 class="heading-2">What is MetaMask?</h1>
-    </div>
-    <div class="container-4 w-container">
-      <div style="padding-top:56.17021276595745%" class="video w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FYVgfHZMFFFQ%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DYVgfHZMFFFQ&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FYVgfHZMFFFQ%2Fhqdefault.jpg&key=96f1f04c5f4143bcb0f2e68c87d65feb&type=text%2Fhtml&schema=youtube" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div>
-    </div>
-  </div>
-  <div class="section light-gray-bg">
-    <div class="container-6 w-container">
-      <div class="section-title-group w-clearfix">
-        <h2 class="section-heading">Your key to blockchain applications</h2>
-        <div class="section-subheading center h5">MetaMask provides an essential utility for blockchain newcomers, token traders, crypto gamers, and developers. Over a million downloads and counting!</div>
-      </div>
-      <div class="w-layout-grid grid-3"><img src="images/dapp-aave.png" sizes="100vw" srcset="images/dapp-aave-p-500.png 500w, images/dapp-aave.png 560w" alt=""><img src="images/dapp-axieinfinity.png" sizes="100vw" srcset="images/dapp-axieinfinity-p-500.png 500w, images/dapp-axieinfinity.png 560w" alt=""><img src="images/dapp-compound.png" alt=""><img src="images/dapp-gitcoin.png" alt=""><img src="images/dapp-maker.png" alt=""><img src="images/dapp-opensea.png" alt=""><img src="images/dapp-rarible.png" alt=""><img src="images/dapp-uniswap.png" alt=""></div>
-    </div>
-  </div>
-  <div class="section-3">
-    <div class="container-7 w-container">
-      <h1 class="cta-heading inline-block">Developers</h1>
-      <div class="section-subheading white center h4">MetaMask is powered by a strong community from across the globe. Interested in contributing? Find out how and what to contribute using the resources below.</div>
-      <a href="https://github.com/MetaMask/metamask-extension/issues" target="_blank" class="link-block w-inline-block">
-        <div class="text-block-26">Open Issues &gt;</div>
-      </a>
-      <a href="https://gitcoin.co/metamask/active" target="_blank" class="link-block w-inline-block">
-        <div class="text-block-26">Open Bounties &gt;</div>
-      </a>
-      <a href="https://metamask.github.io/metamask-docs/" target="_blank" class="link-block w-inline-block">
-        <div class="text-block-26">Documentation &gt;</div>
-      </a>
-      <a href="https://github.com/MetaMask/metamask-extension/blob/739b5dfe72dad93f97603a22e61632a2ae872c84/.github/CONTRIBUTING.md" target="_blank" class="link-block w-inline-block">
-        <div class="text-block-26">Contributing Guidelines &gt;</div>
-      </a>
-    </div>
-  </div>
-  <div class="section-4 section shop">
-    <div class="container-8 w-container">
-      <div class="columns-2 w-row">
-        <div class="w-col w-col-5"><img src="images/mm-shop-hoodie.png" sizes="100vw" srcset="images/mm-shop-hoodie-p-500.png 500w, images/mm-shop-hoodie.png 786w" alt=""></div>
-        <div class="w-col w-col-7">
-          <h2 class="heading-18">Shop MetaMask Swag</h2>
-          <a rel="noreferer, noopener" href="https://shop.spreadshirt.com/metamask/" target="_blank" class="hollow-button w-button">Shop Now</a>
+      <div class="w-row">
+        <div class="column-2 w-col w-col-6"><img src="images/Slippage.png" width="440" sizes="(max-width: 479px) 87vw, (max-width: 767px) 88vw, (max-width: 991px) 354px, 440px" srcset="images/Slippage-p-500.png 500w, images/Slippage-p-800.png 800w, images/Slippage.png 880w" alt="Manually set your max slippage"></div>
+        <div class="value-prop w-col w-col-6">
+          <h2 class="section-heading centered">Slippage protection</h2>
+          <div class="section-subheading">Large swaps are often subject to wild price swings when there is insufficient liquidity available on a particular DEX. When swapping with MetaMask, orders are spread across virtually all DEXs to  reduce slippage impact on the final price.</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="section newsletter">
-    <div class="container-20 w-container">
-      <h1 class="heading-14">Receive our Newsletter</h1>
-      <p class="paragraph-4">Sign up to receive updates and announcements</p>
-      <a href="#" data-w-id="06d857cc-ded7-495b-d399-bf0589c25527" class="button standard-button">Sign up</a>
+  <div class="section-5 section-margins liquidity-section">
+    <div class="container-28 w-container">
+      <div class="liquidity-left"><img src="images/get-the-best-price.png" loading="lazy" width="316" alt="">
+        <div class="section-subheading liquidity-section">Get the <span class="text-span">best price</span> from<br>the<span class="text-span"> top liquidity</span> sources.</div>
+      </div>
+      <div class="liquidity-right">
+        <div class="section-subheading liquidity-section">Find the <span class="text-span">best swap</span> across...</div>
+        <div class="liquidity-logos"><img src="images/Automated-market_1Automated-market.png" loading="lazy" width="180" alt="Automated Market Makers"><img src="images/Totle.png" loading="lazy" width="110" alt="Totle logo"><img src="images/paraswap.png" loading="lazy" width="110" alt="Paraswap logo"><img src="images/Curve.png" loading="lazy" width="100" alt="Curve logo"><img src="images/Airswap.png" loading="lazy" width="140" alt="Airswap logo"><img src="images/1inch.png" loading="lazy" width="95" alt="1inch logo"><img src="images/0x-Api.png" loading="lazy" width="80" alt="Ox API logo"><img src="images/Automated-market_1Automated-market.png" loading="lazy" width="110" alt="Automated Market Makers"><img src="images/more-coming.png" loading="lazy" width="102" alt="More coming soon!"></div>
+        <a rel="noreferer, noopener" href="https://consensys.net/diligence/audits/2020/08/metaswap/" target="_blank">Review our official contracts audit</a>
+      </div>
     </div>
   </div>
-  <div data-w-id="f28e67e0-be54-a43b-c875-045d3e6a7e92" class="modal-wrapper">
-    <div class="sign-up-form">
-      <div class="div-block-16">
-        <h3 class="modal-heading">Newsletter sign up</h3>
-        <div data-w-id="ee6262fc-4b4a-154a-939c-590d16c36847" class="close-modal-button"><img src="images/mm-close-black.svg" loading="lazy" width="30" height="30" alt="" class="image-17"></div>
-      </div>
-      <div class="html-embed-2 w-embed w-script">
-        <!-- [if lte IE 8]><script charset="utf-8" type="text/javascript" src="https://js.hsforms.net/forms/v2-legacy.js"></script><![endif] -->
-        <script charset="utf-8" type="text/javascript" src="https://js.hsforms.net/forms/v2.js"></script>
-        <script> hbspt.forms.create({ portalId: "4795067", formId: "2b64112b-f442-4840-9ace-b11dccd5f744", cssClass: 'signupForm'});</script>
-      </div>
+  <div class="section">
+    <div class="container-25 w-container">
+      <h1 class="heading-9">Download MetaMask and start swapping</h1>
+      <a href="download.html" id="downloadButtonPageSwaps" class="button blue-button-solid button-large">Download</a>
     </div>
   </div>
   <div class="footer accent">
