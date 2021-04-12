@@ -2951,6 +2951,7 @@ figcaption {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  font-family: 'Euclid Circular B', sans-serif;
   text-align: left;
 }
 
