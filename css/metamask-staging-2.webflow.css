@@ -6850,56 +6850,6 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   justify-self: center;
 }
 
-#w-node-c24ce894-8fb3-feae-15bd-6a9570bc48f2-242e4edf {
-  -ms-grid-row: span 1;
-  grid-row-start: span 1;
-  -ms-grid-row-span: 1;
-  grid-row-end: span 1;
-  -ms-grid-column: span 1;
-  grid-column-start: span 1;
-  -ms-grid-column-span: 1;
-  grid-column-end: span 1;
-  -ms-grid-row-align: center;
-  align-self: center;
-}
-
-#w-node-a7a196ac-6aa1-92c0-1a2b-8f9c78749076-242e4edf {
-  -webkit-align-self: start;
-  -ms-flex-item-align: start;
-  -ms-grid-row-align: start;
-  align-self: start;
-}
-
-#w-node-_720ed803-95b1-9709-5e6f-65896ab90708-242e4edf {
-  -webkit-align-self: start;
-  -ms-flex-item-align: start;
-  -ms-grid-row-align: start;
-  align-self: start;
-}
-
-#w-node-_38f8bbae-1341-b18c-b29b-7415aabdd585-242e4edf {
-  -webkit-align-self: start;
-  -ms-flex-item-align: start;
-  -ms-grid-row-align: start;
-  align-self: start;
-  -ms-grid-column-align: start;
-  justify-self: start;
-}
-
-#w-node-c61c9cd4-155c-2da4-8db8-7d11663ecec3-242e4edf {
-  -webkit-align-self: start;
-  -ms-flex-item-align: start;
-  -ms-grid-row-align: start;
-  align-self: start;
-}
-
-#w-node-_520b0462-23b5-163c-7370-fd02d976b285-242e4edf {
-  -webkit-align-self: start;
-  -ms-flex-item-align: start;
-  -ms-grid-row-align: start;
-  align-self: start;
-}
-
 #w-node-_8745dfa0-2050-b7e0-00ee-a6da6ab5063c-4d2e4ee1 {
   -ms-grid-column: 1;
   grid-column-start: 1;
@@ -7012,24 +6962,6 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
     grid-column-start: span 1;
     -ms-grid-column-span: 1;
     grid-column-end: span 1;
-  }
-
-  #w-node-c24ce894-8fb3-feae-15bd-6a9570bc48f2-242e4edf {
-    -ms-grid-row: span 1;
-    grid-row-start: span 1;
-    -ms-grid-row-span: 1;
-    grid-row-end: span 1;
-    -ms-grid-column: span 1;
-    grid-column-start: span 1;
-    -ms-grid-column-span: 1;
-    grid-column-end: span 1;
-    -ms-grid-row-align: center;
-    align-self: center;
-  }
-
-  #w-node-b576f105-97fd-833b-04cb-cdafa5a52136-242e4edf {
-    -ms-grid-column-align: auto;
-    justify-self: auto;
   }
 
   #w-node-_8745dfa0-2050-b7e0-00ee-a6da6ab5063c-4d2e4ee1 {
