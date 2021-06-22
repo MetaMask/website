@@ -1240,7 +1240,9 @@ figcaption {
 }
 
 .columns.swaps-hero {
-  background-image: none;
+  background-image: url('../images/swaps-header2.png');
+  background-position: 100% 0%;
+  background-size: auto 100%;
 }
 
 .columns.institutions-hero {
@@ -1248,6 +1250,10 @@ figcaption {
   background-position: 100% 100%;
   background-size: contain;
   background-attachment: scroll;
+}
+
+.columns.rn-header {
+  background-image: none;
 }
 
 .section-2 {
