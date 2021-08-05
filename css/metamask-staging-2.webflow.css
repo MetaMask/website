@@ -30,12 +30,12 @@ h1 {
 
 h2 {
   margin-top: 40px;
-  margin-bottom: 0px;
+  margin-bottom: 14px;
   padding-top: 0px;
-  font-family: 'Circularxxweb book';
+  font-family: 'Euclid Circular B', sans-serif;
   font-size: 32px;
   line-height: 36px;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 h3 {
@@ -110,6 +110,11 @@ li {
   line-height: 24px;
 }
 
+img {
+  display: inline-block;
+  max-width: 100%;
+}
+
 strong {
   font-family: 'Euclid Circular B', sans-serif;
   color: #000;
@@ -125,6 +130,8 @@ blockquote {
 }
 
 figure {
+  display: block;
+  width: auto;
   margin-bottom: 20px;
 }
 
@@ -451,6 +458,12 @@ figcaption {
   padding-top: 64px;
   padding-bottom: 64px;
   background-color: #fff;
+}
+
+.section._1559-header {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background-color: #f7f9fb;
 }
 
 .hero-slider {
@@ -1107,12 +1120,19 @@ figcaption {
   background-color: #fff;
 }
 
+.rich-text {
+  margin-bottom: 40px;
+  font-size: 40px;
+}
+
 .rich-text h1 {
   margin-top: 30px;
+  font-size: 40px;
 }
 
 .rich-text h3 {
   margin-top: 30px;
+  font-weight: 700;
 }
 
 .rich-text h5 {
@@ -1121,6 +1141,7 @@ figcaption {
 
 .rich-text h4 {
   margin-top: 30px;
+  font-size: 18px;
 }
 
 .rich-text h6 {
@@ -1132,11 +1153,14 @@ figcaption {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  height: 490px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+  height: 400px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
   text-align: center;
 }
 
@@ -1175,8 +1199,16 @@ figcaption {
 
 .heading {
   position: static;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   height: auto;
-  margin-bottom: 11px;
+  margin-bottom: 0px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   font-family: 'Euclid Circular B', sans-serif;
   font-size: 48px;
   line-height: 53px;
@@ -1248,7 +1280,7 @@ figcaption {
 .columns.swaps-hero {
   background-image: url('../images/swaps-header2.png');
   background-position: 100% 0%;
-  background-size: auto 100%;
+  background-size: contain;
 }
 
 .columns.institutions-hero {
@@ -1260,6 +1292,21 @@ figcaption {
 
 .columns.rn-header {
   background-image: none;
+}
+
+.columns._1559-hero {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+  background-image: none;
+  background-size: auto;
+  text-align: left;
 }
 
 .section-2 {
@@ -1510,7 +1557,7 @@ figcaption {
 .paragraph {
   font-family: 'Euclid Circular B', sans-serif;
   color: #333;
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 400;
 }
 
@@ -3885,6 +3932,7 @@ figcaption {
   padding-right: 187px;
   padding-left: 187px;
   font-family: 'Euclid Circular B', sans-serif;
+  line-height: 40px;
   font-weight: 700;
   text-align: center;
 }
@@ -3981,7 +4029,23 @@ figcaption {
 }
 
 .column-11 {
-  margin-top: 48px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 0px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
 }
 
 .image-23 {
@@ -4469,6 +4533,27 @@ figcaption {
   text-align: center;
 }
 
+.image-34 {
+  position: static;
+  text-align: center;
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+
+.grid-15 {
+  grid-row-gap: 16px;
+  grid-template-areas: "Area";
+  -ms-grid-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-rows: auto 16px auto 16px auto 16px auto;
+  grid-template-rows: auto auto auto auto;
+  border: 1px solid #000;
+}
+
+.text-block-41 {
+  border: 1px solid #000;
+}
+
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
   opacity: 0;
   -webkit-transform: translate(0px, 50px);
@@ -4652,7 +4737,12 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   .heading {
     height: auto;
     padding-top: 10px;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     font-size: 46px;
+    text-align: left;
   }
 
   .columns.about-hero {
@@ -4921,6 +5011,7 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   h2 {
     padding-top: 40px;
     font-size: 40px;
+    line-height: 50px;
   }
 
   .button.blue-button-solid.button-large.institutions-v2-form {
@@ -4964,6 +5055,14 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   .section.faq-section {
     padding-right: 0px;
     padding-left: 0px;
+  }
+
+  .section.swaps-header {
+    background-color: #fff;
+  }
+
+  .section._1559-header {
+    background-color: #fff;
   }
 
   .hero-slider {
@@ -5025,7 +5124,7 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
 
   .image-column {
     display: block;
-    height: 430px;
+    height: 220px;
     margin-bottom: 10px;
   }
 
@@ -5063,6 +5162,7 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    height: 500px;
     -webkit-box-orient: vertical;
     -webkit-box-direction: reverse;
     -webkit-flex-direction: column-reverse;
@@ -5100,6 +5200,14 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
     background-size: 382px;
     background-repeat: no-repeat;
     background-attachment: scroll;
+  }
+
+  .columns._1559-hero {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
 
   .container-2 {
@@ -5334,8 +5442,18 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   }
 
   .column-11 {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(9%, #fff));
-    background-image: linear-gradient(180deg, transparent, #fff 9%);
+    margin-top: 0px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, 0)), color-stop(27%, #fff));
+    background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0), #fff 27%);
     text-align: center;
   }
 
@@ -5400,6 +5518,11 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
     grid-template-columns: 1fr 1fr;
   }
 
+  .body-section {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
   .hero-2 {
     padding: 40px 20px;
   }
@@ -5431,6 +5554,11 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
 
   .paragraph-3 {
     text-align: center;
+  }
+
+  .section-15 {
+    padding-right: 20px;
+    padding-left: 20px;
   }
 }
 
@@ -5493,6 +5621,10 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
 
   .section.newsletter {
     padding-top: 50px;
+  }
+
+  .section.swaps-header {
+    background-color: #fff;
   }
 
   .section.institutions-header {
@@ -5657,6 +5789,10 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   }
 
   .columns.rn-header {
+    height: auto;
+  }
+
+  .columns._1559-hero {
     height: auto;
   }
 
@@ -6342,11 +6478,6 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
     background-image: linear-gradient(0deg, #fff 68%, hsla(0, 0%, 100%, 0));
   }
 
-  .column-11 {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, 0)), color-stop(7%, #fff));
-    background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0), #fff 7%);
-  }
-
   .column-11.institutions-v2 {
     margin-top: -9px;
   }
@@ -6864,34 +6995,6 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
 }
 
 #w-node-_550d667d-e7dc-0316-a0b7-ebbadc3d104e-e12e4ed3 {
-  -ms-grid-column-align: center;
-  justify-self: center;
-}
-
-#w-node-bf389eb0-ffa0-9d92-047b-53d168da6699-e12e4ed3 {
-  -ms-grid-column-align: center;
-  justify-self: center;
-  -ms-grid-column: span 1;
-  grid-column-start: span 1;
-  -ms-grid-row: span 1;
-  grid-row-start: span 1;
-  -ms-grid-column-span: 1;
-  grid-column-end: span 1;
-  -ms-grid-row-span: 1;
-  grid-row-end: span 1;
-}
-
-#w-node-bf389eb0-ffa0-9d92-047b-53d168da669a-e12e4ed3 {
-  -ms-grid-column-align: center;
-  justify-self: center;
-}
-
-#w-node-bf389eb0-ffa0-9d92-047b-53d168da669b-e12e4ed3 {
-  -ms-grid-column-align: center;
-  justify-self: center;
-}
-
-#w-node-bf389eb0-ffa0-9d92-047b-53d168da669d-e12e4ed3 {
   -ms-grid-column-align: center;
   justify-self: center;
 }
