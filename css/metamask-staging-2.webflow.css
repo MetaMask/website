@@ -33,7 +33,7 @@ h2 {
   margin-bottom: 14px;
   padding-top: 0px;
   font-family: 'Euclid Circular B', sans-serif;
-  font-size: 32px;
+  font-size: 24px;
   line-height: 36px;
   font-weight: 700;
 }
@@ -91,8 +91,9 @@ a {
 
 ul {
   margin-top: 0px;
-  margin-bottom: 20px;
-  padding-left: 40px;
+  margin-bottom: 10px;
+  padding-left: 0px;
+  list-style-type: none;
 }
 
 ol {
@@ -955,7 +956,7 @@ figcaption {
 }
 
 .footer-link.release-notes-footer {
-  display: none;
+  display: block;
 }
 
 .hero-title-wrapper {
@@ -1561,6 +1562,11 @@ figcaption {
   font-weight: 400;
 }
 
+.paragraph.footer-legal {
+  font-size: 12px;
+  text-decoration: none;
+}
+
 .image-3 {
   position: static;
   padding-top: 0px;
@@ -1610,7 +1616,7 @@ figcaption {
 
 .heading-9 {
   margin-bottom: 10px;
-  padding-top: 40px;
+  padding-top: 20px;
   padding-right: 187px;
   padding-left: 187px;
   font-family: 'Euclid Circular B', sans-serif;
@@ -2941,6 +2947,7 @@ figcaption {
   box-shadow: 0 3px 14px 0 rgba(0, 0, 0, 0.19);
   color: #fff;
   background-clip: border-box;
+  -webkit-text-fill-color: inherit;
 }
 
 .text-block-36 {
@@ -3821,6 +3828,17 @@ figcaption {
   font-family: 'Euclid Circular B', sans-serif;
 }
 
+.container-27.mmi {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .dropdown-link {
   margin: 4px;
   padding: 8px;
@@ -3938,6 +3956,7 @@ figcaption {
 }
 
 .heading-31.mobile.institution-v2 {
+  margin-top: 0px;
   padding-top: 20px;
   padding-right: 148px;
   padding-left: 148px;
@@ -4552,6 +4571,30 @@ figcaption {
 
 .text-block-41 {
   border: 1px solid #000;
+}
+
+.mmi-logo {
+  width: 262px;
+  padding-top: 6px;
+}
+
+.team-grid {
+  margin-top: 40px;
+}
+
+.site-map-header {
+  padding-bottom: 28px;
+  border-bottom: 1px solid #a8a8a8;
+}
+
+.grid-16 {
+  -ms-grid-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid-16.sm-grid {
+  margin-top: 20px;
+  margin-bottom: 187px;
 }
 
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
@@ -6589,6 +6632,11 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   .image-33 {
     position: static;
     display: inline-block;
+  }
+
+  .mmi-logo {
+    width: 230px;
+    padding-top: 8px;
   }
 }
 
