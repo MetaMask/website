@@ -1,4 +1,3 @@
-global.Promise = require('bluebird') // polyfill for airtable plugin
 const path = require('path')
 const kebabCase = require('lodash').kebabCase
 
