@@ -1,2 +1,0 @@
-# metmask-website
-Metamask Website
