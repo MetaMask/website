@@ -57,6 +57,9 @@ const Left = styled.div`
   p {
     font-size: 32px;
     line-height: 1.5;
+    @media (max-width: ${({theme}) => theme.device.mobileMediaMax}) {
+      font-size: 20px;
+    }
   }
 `;
 const Right = styled.div``;

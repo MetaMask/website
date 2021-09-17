@@ -3,7 +3,7 @@ import React from 'react';
 import styled, { withTheme } from 'styled-components';
 import axios from 'axios';
 
-import ArrowIcon from './ArrowIcon';
+import ArrowMiniIcon from './ArrowMiniIcon';
 import * as globalThemes from '../lib/theme';
 import { FooterTitle } from './StyledGeneral'
 
@@ -138,7 +138,7 @@ class NewsletterForm extends React.PureComponent {
             onClick={this.onSubmit}
             theme={selectedTheme}
           >
-            <ArrowIcon
+            <ArrowMiniIcon
               fill={"white"}
               width={"16px"}
             />

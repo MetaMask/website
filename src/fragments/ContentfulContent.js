@@ -205,6 +205,13 @@ export const ContentfulHtmlEmbedFields = graphql`
     embedTag {
       embedTag
     }
+    htmlPublishDate
+    htmlEmbedTitle
+    htmlBackground {
+      file {
+        url
+      }
+    }
   }
 `;
 

@@ -43,11 +43,6 @@ const Container = styled.div`
     }
   ` : ""}
 
-  @media (max-width: ${({theme}) => theme.device.mobile}) {
-    padding-left: ${({theme}) => theme.spacingLRMobile};
-    padding-right: ${({theme}) => theme.spacingLRMobile};
-  }
-
   ${({columns}) => columns ? (columns < 4 ? `
     display: grid;
     grid-template-columns: 1fr;
@@ -65,7 +60,6 @@ const Container = styled.div`
     ${({columns}) => (`
       grid-template-columns: repeat(${columns || 1}, 1fr);
     `)}
-    max-width: 100%;
   }
 
   @media (min-width: ${({theme}) => theme.device.desktop}) {
@@ -78,6 +72,22 @@ const Container = styled.div`
       `;
     }}
   }
+  @media (max-width: ${({theme}) => theme.device.desktopMediaMax}) {
+    width: 100vw;
+    max-width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  @media (max-width: ${({theme}) => theme.device.mobileMediaMax}) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (max-width: ${({theme}) => theme.device.tabletMediaMax}) {
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+  }
+
   ${({size}) => size === 'full' ? `
     padding: 0 !important;
   ` : ""}

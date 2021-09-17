@@ -23,7 +23,7 @@ const ContentfulModuleContainer = props => {
       <ContentWrapper
         size={containerWidth}
         columns={columns}
-        styleOverride={`margin-top: 0 !important;margin-bottom: 0!important;`}
+        styleOverride={`margin-top: 0 !important;margin-bottom: 0!important;padding-left: 0 !important;padding-right: 0!important;`}
       >
         {modules.map(m =>
           contentfulModuleToComponent({
