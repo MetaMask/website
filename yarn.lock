@@ -2632,15 +2632,6 @@ aggregate-error@^3.0.0:
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
 
-airtable@^0.5.6:
-  version "0.5.10"
-  resolved "https://registry.yarnpkg.com/airtable/-/airtable-0.5.10.tgz#89ea398393fac46f04a1ea810b97bfcf6bf07012"
-  integrity sha512-dasOg2FpNsydcqlYJ0rsteop54i0uU4kYINkjv3AMW5w9ledIY1W0mwEP8ZVrOokH8o9BLyNAEvaWJUTMFAJhg==
-  dependencies:
-    lodash "4.17.11"
-    request "2.88.0"
-    xhr "2.3.3"
-
 ajax-request@^1.2.0:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/ajax-request/-/ajax-request-1.2.3.tgz#99fcbec1d6d2792f85fa949535332bd14f5f3790"
@@ -7615,12 +7606,6 @@ gatsby-recipes@^0.7.1:
     ws "^7.3.0"
     xstate "^4.9.1"
     yoga-layout-prebuilt "^1.9.6"
-
-"gatsby-source-airtable@https://github.com/traversal/gatsby-source-airtable.git":
-  version "2.0.3"
-  resolved "https://github.com/traversal/gatsby-source-airtable.git#b146948484644a50143c3c3c2d9bfb9d8a076cdd"
-  dependencies:
-    airtable "^0.5.6"
 
 gatsby-source-contentful@^3.0.0:
   version "3.1.3"

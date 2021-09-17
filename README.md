@@ -9,8 +9,6 @@
 Built With:
 - [React](http://www.reactjs.org)
 - [Gatsby](https://gatsbyjs.org/)
-- [Netlify](https://app.netlify.com)
-- [Airtable](https://airtable.com)
 - :heart: from ConsenSys Digital Experiences Circle
 
 ## 🚀 Quick start
