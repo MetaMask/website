@@ -1,8 +1,8 @@
 <p align="center" style="background-color: #151C24; height: 15vh;">
   <a href="https://metamask.io">
-    <img alt="Labs Logo"
+    <img alt="MetaMask Logo"
     style="margin: 4% 0;"
-    src="./src/images/metamask-logo.svg" width="300px" />
+    src="./src/images/metamask-logo.svg" width="100px" />
   </a>
 </p>
 
