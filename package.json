@@ -2,7 +2,19 @@
   "name": "metamask-website",
   "description": "Website of MetaMask",
   "version": "1.0.0",
-  "author": "etaMask • A ConsenSys Formation",
+  "author": "MetaMask • A ConsenSys Formation",
+  "license": "MIT",
+  "scripts": {
+    "develop": "gatsby develop",
+    "build": "gatsby build",
+    "deploy": "yarn build && touch public/.nojekyll && touch public/CNAME && echo \"metamask.io\" >> public/CNAME",
+    "serve": "gatsby serve --port 8000",
+    "clean": "rm -rf node_modules; rm -rf .cache; rm -rf public; yarn install;",
+    "start": "npm run develop",
+    "format": "prettier --write \"src/**/*.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:css": "stylelint './src/**/*.js'"
+  },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^13.2.0",
     "@loadable/component": "^5.14.1",
@@ -49,18 +61,6 @@
   "keywords": [
     "gatsby"
   ],
-  "license": "MIT",
-  "scripts": {
-    "develop": "gatsby develop",
-    "build": "gatsby build",
-    "deploy": "yarn build && touch public/.nojekyll && touch public/CNAME && echo \"metamask.io\" >> public/CNAME",
-    "serve": "gatsby serve --port 8000",
-    "clean": "rm -rf node_modules; rm -rf .cache; rm -rf public; yarn install;",
-    "start": "npm run develop",
-    "format": "prettier --write \"src/**/*.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint:css": "stylelint './src/**/*.js'"
-  },
   "devDependencies": {
     "babel-plugin-inline-react-svg": "^1.1.1",
     "babel-plugin-styled-components": "^1.10.0",

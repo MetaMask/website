@@ -2,7 +2,7 @@
   <a href="https://metamask.io">
     <img alt="Labs Logo"
     style="margin: 4% 0;"
-    src="./src/images/consensys-labs-logo.png" width="300px" />
+    src="./src/images/metamask-logo.svg" width="300px" />
   </a>
 </p>
 
@@ -13,12 +13,12 @@ Built With:
 
 ## 🚀 Quick start
 
-### **Ask @dexter.lasaca or @kiba.gateaux for config files**
+### **Ask @davidnguyen88 or @jlazoff for config files**
 
 1.  **Start it up**
 
     ```sh
-    git clone https://github.com/ConsenSys/metamask.io.git
+    git clone https://github.com/ConsenSys/metamask-website.git
     npm install
     gatsby develop
     ```
@@ -43,16 +43,17 @@ Built With:
           ├── BasicSpokeInformation.js
           ├──GraphQL_Documentation.md
         ├── images/
-          ├── spoke-logos/
-          ├── labs-team/
-          ├── labs-logo.png
+          ├── icons/
+          ├── social-icons/
+          ├── metamask-logo.svg
           ├── ...
+        ├── lib/
+          ├── theme.js
         ├── pages/
           ├── index.js
           ├── about.js
           ├── ...
         ├── html.js
-        ├── theme.js
     ├── gatsby-config.js
     ├── [development.env]
     ├── GraphQL_Query_Documentation.md
@@ -68,6 +69,9 @@ The main configuration file for a Gatsby site. This is where you can specify inf
 **`src/fragments/`**
 GraphQL query fragments that create standard data requests across componenets
 
+**`src/lib/theme.js`**
+Contains styling constants for font sizes and weights, device sizes for media queries, shadows, and colors.
+
 **`public/`**
 
 Automatically generated output of `gatsby build` process for production.
@@ -77,9 +81,6 @@ Automatically generated output of `gatsby build` process for production.
 Files within this directory are turned into routes with the name of the file (e.g. `about.js` becomes `/about`).
 Only files within /pages are allowed to make dynamic GraphQL queries which cascade data down to components.
 
-
-**`src/theme.js`**
-Contains styling constants for font sizes and weights, device sizes for media queries, shadows, and colors.
 
 **`src/html.js`**
 Entry file used by Gatsby for all rendered pages html template
