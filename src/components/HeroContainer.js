@@ -129,7 +129,7 @@ const HeroContentContainer = styled.section`
   z-index: 100;
   width: 100%;
   margin: 0 auto;
-  padding: 5rem 1rem;
+  padding: 3rem 1.5rem;
   @media(min-width: ${({theme}) => theme.device.desktop}) {
     width: ${({theme}) => theme.heroContentWidth || theme.container.wide};
     margin-top: 88px;

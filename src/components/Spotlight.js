@@ -76,7 +76,7 @@ Spotlight.propTypes = {
 const SpotlightContainer = styled.div`
   display: flex;
   flex-direction: column-reverse;
-  padding: 3em 1.25em;
+  padding: 3em 1.5rem;
   @media(min-width: ${({theme}) => theme.device.desktop}) {
     flex-direction: row;
     align-items: center;
@@ -86,9 +86,14 @@ const SpotlightContainer = styled.div`
   }
   ${({isBanner}) => isBanner ? `
     width: 100% !important;
-    padding: 100px 0 !important;
+    padding: 100px 0;
     min-height: 420px !important;
   ` : ``}
+  @media(max-width: ${({theme}) => theme.device.tabletMediaMax}) {
+    ${({isBanner}) => isBanner ? `
+    padding: 3rem 0
+  ` : ``}
+  }
 `;
 
 const SpotlightTextContainer = styled.div`

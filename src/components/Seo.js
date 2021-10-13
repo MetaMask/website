@@ -49,12 +49,13 @@ const SEO = (props) => {
           ] :
           []
         );
-
+        const urlImageMeta = (image && image?.fixed?.src) ? image?.fixed?.src.split("?")[0] : '';
+        const urlImageMetaClean = urlImageMeta && typeof urlImageMeta === 'string' && urlImageMeta.startsWith('//') ? `https:${urlImageMeta}` : urlImageMeta;
         const meta = [
           { property:"og:type", content: pageType },
           ...getMetaTags('title', seo.title),
           ...getMetaTags('description', seo.desc),
-          ...getMetaTags('image', image && image?.fixed?.src),
+          ...getMetaTags('image', urlImageMetaClean),
           ...(metaTags || []),
         ];
 

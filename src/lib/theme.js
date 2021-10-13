@@ -101,9 +101,13 @@ const theme = {
   },
   device: { // device max-width
     mobile: "480px",
+    mobileMediaMax: "479px",
     tablet: "768px",
-    miniDesktop: "1024px",
-    desktop: "1160px"
+    tabletMediaMax: "767px",
+    miniDesktop: "1025px",
+    miniDesktopMediaMax: "1024px",
+    desktop: "1200px",
+    desktopMediaMax: "1199px"
   },
   spacingLRMobile: '16px',
   footerBg: '#000',

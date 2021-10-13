@@ -54,7 +54,7 @@ const StyledFooter = props => {
           <SubFooterContainer>
             <PolicyCopy>
               <PolicyCopyLink as="span">
-                @{new Date().getFullYear()} MetaMask
+                @{new Date().getFullYear()} ConsenSys Mesh
               </PolicyCopyLink>
             </PolicyCopy>
             <PolicyCopy>
@@ -91,7 +91,10 @@ StyledFooter.propTypes = {
 const FooterContainer = styled.div`
   width: 100%;
   background-color: ${({ theme }) => theme.footerBg};
-  margin: 5rem 0 0 0;
+  margin: 3rem 0 0 0;
+  @media (min-width: ${({theme}) => theme.device.tablet}) {
+    margin: 5rem 0 0 0;
+  }
 `
 
 const FooterInner = styled.div`
@@ -99,8 +102,11 @@ const FooterInner = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  padding: 90px 0 25px 0;
+  padding: 3rem 0 1.5rem 0;
   min-height: 400px;
+  @media (min-width: ${({theme}) => theme.device.tablet}) {
+    padding-top: 5rem;
+  }
 `
 
 const ColumnContainer = styled.div`
