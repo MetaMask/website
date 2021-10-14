@@ -19,10 +19,6 @@ jobs:
       - name: Create env file
         run: |
           touch gatsby.production.env
-          echo GATSBY_AUTH0_CLIENT_ID =${{ secrets.GATSBY_AUTH0_CLIENT_ID }} >> gatsby.production.env
-          echo GATSBY_AUTH0_DOMAIN =${{ secrets.GATSBY_AUTH0_DOMAIN }} >> gatsby.production.env
-          echo GATSBY_AUTH0_NAMESPACE =${{ secrets.GATSBY_AUTH0_NAMESPACE }} >> gatsby.production.env
-          echo GATSBY_AUTH0_REDIRECT_URL =${{ secrets.GATSBY_AUTH0_REDIRECT_URL }} >> gatsby.production.env
           echo GATSBY_CONTENTFUL_API_KEY =${{ secrets.GATSBY_CONTENTFUL_API_KEY }} >> gatsby.production.env
           echo GATSBY_CONTENTFUL_DOWNLOAD_LOCAL =${{ secrets.GATSBY_CONTENTFUL_DOWNLOAD_LOCAL }} >> gatsby.production.env
           echo GATSBY_CONTENTFUL_ENVIRONMENT =${{ secrets.GATSBY_CONTENTFUL_ENVIRONMENT }} >> gatsby.production.env
