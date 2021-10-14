@@ -65,80 +65,76 @@ if (env.errors) {
           }
         }
       },
-      {
-        resolve: `gatsby-plugin-sitemap`,
-        options: {
-          exclude: [
-            '/portal/**/*',
-            '/login/callback',
-          ],
-          query: `
-          {
-            site {
-              siteMetadata {
-                siteUrl
-              }
-            }
-            allSitePage {
-              edges {
-                node {
-                  path
-                }
-              }
-            }
-            allContentfulPage(filter: {isPrivate: {eq: true}}) {
-              edges {
-                node {
-                  slug
-                }
-              }
-            }
-            allContentfulArticlePage(filter: {isPrivate: {eq: true}}) {
-            edges {
-              node {
-                articleTitle
-                primaryCategory {
-                  categoryName
-                }
-                articleCategories {
-                  categoryName
-                }
-              }
-            }
-          }
-          }`,
-          serialize: ({
-                        site,
-                        allSitePage,
-                        allContentfulPage,
-                        allContentfulArticlePage,
-                      }) => {
-            let privatePages = []
-            allContentfulPage.edges.map(edge => {
-              privatePages.push(edge.node.slug)
-            })
-
-            allContentfulArticlePage.edges.map(edge => {
-              const category = getArticleCategory(edge.node.primaryCategory,
-                edge.node.articleCategories)
-              privatePages.push(`/blog/${ kebabCase(category) }/${ kebabCase(
-                edge.node.articleTitle) }/`)
-            })
-
-            let pages = []
-            allSitePage.edges.map(edge => {
-              if (privatePages.indexOf(edge.node.path) === -1) {
-                pages.push({
-                  url: site.siteMetadata.siteUrl + edge.node.path,
-                  changefreq: `daily`,
-                  priority: 0.7,
-                })
-              }
-            })
-            return pages
-          },
-        },
-      },
+      // {
+      //   resolve: `gatsby-plugin-sitemap`,
+      //   options: {
+      //     query: `
+      //     {
+      //       site {
+      //         siteMetadata {
+      //           siteUrl
+      //         }
+      //       }
+      //       allSitePage {
+      //         edges {
+      //           node {
+      //             path
+      //           }
+      //         }
+      //       }
+      //       allContentfulPage(filter: {isPrivate: {eq: true}}) {
+      //         edges {
+      //           node {
+      //             slug
+      //           }
+      //         }
+      //       }
+      //       allContentfulArticlePage(filter: {isPrivate: {eq: true}}) {
+      //       edges {
+      //         node {
+      //           articleTitle
+      //           primaryCategory {
+      //             categoryName
+      //           }
+      //           articleCategories {
+      //             categoryName
+      //           }
+      //         }
+      //       }
+      //     }
+      //     }`,
+      //     serialize: ({
+      //                   site,
+      //                   allSitePage,
+      //                   allContentfulPage,
+      //                   allContentfulArticlePage,
+      //                 }) => {
+      //       let privatePages = []
+      //       allContentfulPage.edges.map(edge => {
+      //         privatePages.push(edge.node.slug)
+      //       })
+      //
+      //       allContentfulArticlePage.edges.map(edge => {
+      //         const category = getArticleCategory(edge.node.primaryCategory,
+      //           edge.node.articleCategories)
+      //         privatePages.push(`/blog/${ kebabCase(category) }/${ kebabCase(
+      //           edge.node.articleTitle) }/`)
+      //       })
+      //
+      //       let pages = []
+      //       allSitePage.edges.map(edge => {
+      //         if (privatePages.indexOf(edge.node.path) === -1) {
+      //           pages.push({
+      //             url: site.siteMetadata.siteUrl + edge.node.path,
+      //             changefreq: `daily`,
+      //             priority: 0.7,
+      //           })
+      //         }
+      //       })
+      //       return pages
+      //     },
+      //   },
+      // },
       'gatsby-plugin-well-known',
       'gatsby-plugin-preact',
       {
