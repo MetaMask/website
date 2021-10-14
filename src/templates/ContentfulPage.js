@@ -2,8 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent';
 import { flatMapDeep, isArray } from 'lodash';
-import PrivateLayout from './PrivatePageLayout';
-import PublicLayout from './PublicPageLayout';
+import Layout from './PageLayout';
 import { lightTheme, darkTheme } from '../lib/theme';
 
 /**
@@ -67,7 +66,6 @@ const ContentfulPage = (props) => {
   //   return acc && isCorrectPosition;
   // }, true);
 
-  const Layout = accessLevel === "public" ?  PublicLayout : PrivateLayout;
   const theme = themeColor === "light" ? lightTheme : darkTheme;
 
   return (

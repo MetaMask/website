@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 
-import PrivateLayout from './PrivatePageLayout'
-import PublicLayout from './PublicPageLayout'
+import Layout from './PageLayout'
 import ArticleHero from '../components/ArticleHero'
 import styled from 'styled-components'
 import ArrowLeftIcon from '../images/icons/icon-arrow-left.svg'
@@ -58,7 +57,6 @@ const ArticlePage = props => {
     pageType: 'article',
   }
   const heroImage = image ? image.fluid : defaultImage.fluid
-  const Layout = isPrivate ? PrivateLayout : PublicLayout
   const theme = articleThemeColor === 'light' ? lightTheme : darkTheme
   const heroTextColor = articleThemeColor === 'light' ? 'black' : 'white'
   return (

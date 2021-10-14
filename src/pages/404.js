@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 
 import Header from '../components/Contentful/ContentfulHeader';
 import Arrow from '../components/ArrowIcon';
-import Layout from '../templates/PublicPageLayout';
+import Layout from '../templates/PageLayout';
 
 const NotFoundPage = ({ data: { header }}) => (
   <Layout>

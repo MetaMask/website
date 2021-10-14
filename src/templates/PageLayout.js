@@ -11,11 +11,11 @@ import { darkTheme } from '../lib/theme'
 import 'react-toastify/dist/ReactToastify.css';
 
 /**
- * @name PublicPageLayout
+ * @name PageLayout
  * @summary - Wrapper container to hold all public pages
- * @description - 
+ * @description -
  */
-const PublicPageLayout= (props) => {
+const PageLayout= (props) => {
   const {
     location,
     children,
@@ -46,4 +46,4 @@ const PublicPageLayout= (props) => {
   )
 };
 
-export default PublicPageLayout;
+export default PageLayout;

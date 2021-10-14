@@ -7,7 +7,7 @@ import { uniqBy } from 'lodash';
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent';
 import { getArticleCategory } from '../lib/utils/blog';
 
-import Layout from './PublicPageLayout';
+import Layout from './PageLayout';
 import ArticleHero from '../components/ArticleHero';
 import ArticleList from '../components/Contentful/ContentfulArticleList';
 import ContentWrapper from '../components/ContentWrapper';
