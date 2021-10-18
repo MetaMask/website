@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
-const PartnerImage = ({
+const LogoImage = ({
   alt,
   src,
 }) => {
@@ -19,7 +19,7 @@ const PartnerImage = ({
   );
 };
 
-export default PartnerImage;
+export default LogoImage;
 
 const StyledPartnerImageContainer = styled.div`
   display: flex;  
@@ -40,7 +40,7 @@ const StyledPartnerImage = styled(Img)`
   }
 `;
 
-PartnerImage.propTypes = {
+LogoImage.propTypes = {
   alt: PropTypes.string.isRequired,
   src: PropTypes.object.isRequired,
 }

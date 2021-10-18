@@ -40,7 +40,6 @@ Built With:
         ├── components/
         ├── fonts/
         ├── fragments/
-          ├── BasicSpokeInformation.js
           ├──GraphQL_Documentation.md
         ├── images/
           ├── icons/

@@ -3,62 +3,19 @@ import React from 'react'
 import styled, { css, withTheme } from 'styled-components'
 
 import Link from './Link'
-import ResponsiveLabsLogo from './ResponsiveLabslogo'
-import ProfileSocialIcon from './Profile/ProfileSocialIcon'
 
 const StyledHeader = props => {
-  const { links, shadow, theme } = props
-  const twitterLink = 'https://twitter.com/ConsenSysMesh';
-  const linkedInLink = 'https://www.linkedin.com/company/consensys-mesh';
-  const borderColor = theme.theme === 'light' ? theme.black : theme.white
-  const linkActiveStyle = {
-    backgroundSize: '1px 1em',
-    boxShadow: `inset 0 -0.1em 0 ${borderColor}`,
-  }
-
-  const renderLinks = () =>
-    links.map(link => {
-      const { to, text, newTab } = link
-      return (
-        <StyledLink
-          key={to}
-          to={to}
-          activeStyle={linkActiveStyle}
-          newTab={newTab}
-        >
-          {text}
-        </StyledLink>
-      )
-    })
+  const {  } = props
 
   return (
-    <HeaderElement shadow={shadow}>
+    <HeaderElement>
       <HeaderContainer>
         <LogoContainer>
           <Link to="/">
-            <ResponsiveLabsLogo logoType="typeface" />
+
           </Link>
         </LogoContainer>
         <NavMain>
-          {renderLinks()}
-          {(twitterLink || linkedInLink) && (
-            <SocialWrapper>
-              {twitterLink && (
-                <ProfileSocialIcon
-                  newTab
-                  to={twitterLink}
-                  icon="twitter"
-                ></ProfileSocialIcon>
-              )}
-              {linkedInLink && (
-                <ProfileSocialIcon
-                  newTab
-                  to={linkedInLink}
-                  icon="linkedin"
-                ></ProfileSocialIcon>
-              )}
-            </SocialWrapper>
-          )}
         </NavMain>
       </HeaderContainer>
     </HeaderElement>
@@ -68,19 +25,25 @@ const StyledHeader = props => {
 export default withTheme(StyledHeader)
 
 StyledHeader.propTypes = {
-  links: PropTypes.arrayOf(
+  logo: PropTypes.object,
+  columns: PropTypes.arrayOf(
     PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      to: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      links: PropTypes.arrayOf(
+        PropTypes.shape({
+          text: PropTypes.string,
+          to: PropTypes.string,
+        })
+      ).isRequired,
     })
   ).isRequired,
+  downloadButton: PropTypes.object
 }
 
 const HeaderElement = styled.header`
   z-index: 999;
   top: 0;
   width: 100%;   
-  background-color: ${({ theme }) => theme.primaryColor};
   ${({ shadow }) =>
     shadow
       ? `box-shadow: 0px 4px 20px rgba(114, 114, 114, 0.1);`

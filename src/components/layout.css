@@ -195,7 +195,7 @@ html {
   box-sizing: inherit;
 }
 body {
-  color: #595959;
+  color: #333333;
   font-family: georgia, serif;
   font-weight: normal;
   word-wrap: break-word;
@@ -217,7 +217,7 @@ img {
   margin-bottom: 1.45rem;
 }
 h1,h2,h3,h4,h5,h6 {
-  color: #121212;
+  color: #333333;
 }
 h1 {
   margin-left: 0;
@@ -232,7 +232,7 @@ h1 {
   text-rendering: optimizeLegibility;
   font-size: 3.8125rem;
   line-height: 1.1;
-  
+
 }
 h2 {
   margin-left: 0;
@@ -387,7 +387,7 @@ p {
   padding-right: 0;
   padding-top: 0;
   margin-bottom: 1.5rem;
-  
+
 }
 @media (max-width: 479px) {
   p {

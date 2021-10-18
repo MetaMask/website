@@ -2,15 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ContentWrapper from '../ContentWrapper';
-import Section from '../Section'
+import RichText from '../RichText'
 
-
-const ContentfulSectionText = (props) => {
+const ContentfulRichText = (props) => {
   const {
     containerWidth,
     moduleConfig: {
-      sectionBody,
-      sectionTitle: title,
+      richTextBody,
+      richTextTitle: title,
       hasModuleContainer,
       displayTitle,
       fontWeightManual,
@@ -31,15 +30,15 @@ const ContentfulSectionText = (props) => {
 
   let bodyConfig;
   // handle different data formats in preview vs graphql mode
-  if(sectionBody && sectionBody.content)
-    bodyConfig = sectionBody.content;
+  if(richTextBody && richTextBody.content)
+    bodyConfig = richTextBody.content;
 
-  if(sectionBody && sectionBody.internal)
-    bodyConfig = JSON.parse(sectionBody.internal.content).content;
+  if(richTextBody && richTextBody.internal)
+    bodyConfig = JSON.parse(richTextBody.internal.content).content;
 
   return (
     <El>
-      <Section
+      <RichText
         title={title}
         content={bodyConfig}
         displayTitle={displayTitle}
@@ -50,14 +49,14 @@ const ContentfulSectionText = (props) => {
   );
 };
 
-export default ContentfulSectionText;
+export default ContentfulRichText;
 
 
-ContentfulSectionText.propTypes = {
+ContentfulRichText.propTypes = {
   moduleConfig: PropTypes.shape({
     moduleConfig: PropTypes.shape({
-      sectionTitle: PropTypes.string,
-      sectionBody: PropTypes.shape({
+      richTextTitle: PropTypes.string,
+      richTextBody: PropTypes.shape({
         internal: PropTypes.shape({
           content: PropTypes.string
         })

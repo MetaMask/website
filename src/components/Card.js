@@ -5,23 +5,21 @@ import styled, { css } from 'styled-components';
 import Arrow from './ArrowIcon';
 import Link from './Link';
 import Img from 'gatsby-image';
-import RichText from './RichText';
 
 /**
  * @name Card
- * @summary - 
+ * @summary -
  * @description - Module for blog content
  */
 const StyledCard = (props) => {
   const {
-    body,
+    description,
     image,
     link,
     title,
     newTab,
-    richText,
   } = props;
-  
+
   const WrapperEl = link ?
     (props) => (
       <LinkedCardContainer
@@ -31,12 +29,6 @@ const StyledCard = (props) => {
         {props.children}
       </LinkedCardContainer>) :
     CardContainer;
-    let rcConfig;
-    if(richText && richText.content)
-     rcConfig = richText.content;
-  
-    if(richText && richText.internal)
-     rcConfig = JSON.parse(richText.internal.content).content;
 
   return (
     <WrapperEl>
@@ -44,10 +36,7 @@ const StyledCard = (props) => {
       <CardTextContainer>
         <CardTitle> {title} </CardTitle>
         <CardBody>
-          {body}
-          {richText ? (
-            <RichText content={rcConfig} />
-          ) : null}
+          {description}
         </CardBody>
         {link && <Arrow fill="black" width="65px" />}
       </CardTextContainer>
@@ -63,7 +52,7 @@ StyledCard.propTypes = {
   image: PropTypes.object,
   link: PropTypes.string,
   title: PropTypes.string,
-  richText: PropTypes.object,
+  description: PropTypes.string,
 }
 
 const cardContainerStyles = css`

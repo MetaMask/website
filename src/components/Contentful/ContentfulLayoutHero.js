@@ -5,29 +5,28 @@ import Hero from '../HeroContainer';
 import CTA from '../CTA';
 
 
-const ContentfulHero = (props) => {
+const ContentfulLayoutHero = (props) => {
   const {
     moduleConfig: {
-      heroBackgroundImage,
-      heroCtaLink,
-      heroCtaText,
+      eyebrowLogo,
+      backgroundImage,
+      ctaLink,
+      ctaText,
       heroEyebrow,
       heroSubtitle,
       heroTheme = {},
       heroTitle,
-      heroTextColor = "white",
       modules
     }
   } = props;
-  const bgUrl = parseContentfulAssetUrl(heroBackgroundImage);
+  const bgUrl = parseContentfulAssetUrl(backgroundImage);
 
   let HeroCTA;
-  if(heroCtaLink) {
+  if(ctaLink) {
     HeroCTA = (
       <CTA
-        text={heroCtaText}
-        link={heroCtaLink}
-        color={heroTextColor}
+        text={ctaText}
+        link={ctaLink}
       />
     )
   }
@@ -45,18 +44,20 @@ const ContentfulHero = (props) => {
   );
 };
 
-export default ContentfulHero;
+export default ContentfulLayoutHero;
 
 
-ContentfulHero.propTypes = {
+ContentfulLayoutHero.propTypes = {
   moduleConfig: PropTypes.shape({
-    heroBackgroundImage: PropTypes.object,
-    heroCtaLink: PropTypes.string,
-    heroCtaText: PropTypes.string,
+    eyebrowLogo: PropTypes.object,
+    sideImage: PropTypes.object,
+    backgroundImage: PropTypes.object,
+    ctaLink: PropTypes.string,
+    ctaText: PropTypes.string,
     heroEyebrow: PropTypes.string,
-    heroSubtitle: PropTypes.string,
-    heroTheme: PropTypes.object,
-    heroTitle: PropTypes.string,
-    heroTextColor: PropTypes.string,
+    description: PropTypes.string,
+    headline: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    layout: PropTypes.string,
   }),
 }

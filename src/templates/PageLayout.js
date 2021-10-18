@@ -7,7 +7,6 @@ import {
   toast
 } from 'react-toastify';
 
-import { darkTheme } from '../lib/theme'
 import 'react-toastify/dist/ReactToastify.css';
 
 /**
@@ -39,7 +38,7 @@ const PageLayout= (props) => {
   }
 
   return (
-    <Layout theme={theme || darkTheme} {...rest}>
+    <Layout theme={theme} {...rest}>
       <Notifications />
       {children}
     </Layout>

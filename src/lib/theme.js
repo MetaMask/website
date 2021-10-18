@@ -1,9 +1,11 @@
 const theme = {
-  darkBlue: "#151C24",
-  lightBlue: "#2C56DD",
+  darkBlue: "#037dd6",
+  lightBlue: "#3898EC",
   white: "#FFFFFF",
   black: "#000000",
-  gray: "#9E9E9E",
+  gray: "#F7F9FB",
+  darkGray: "#6A737D",
+  dark: "#24292E",
   colors: {
     /* Orange */
     "orange-4": "#c43e00",
@@ -99,6 +101,7 @@ const theme = {
     heroLineHeight: '3.8125rem',
     heroPadding: '7.5rem',
   },
+
   device: { // device max-width
     mobile: "480px",
     mobileMediaMax: "479px",
@@ -110,21 +113,7 @@ const theme = {
     desktopMediaMax: "1199px"
   },
   spacingLRMobile: '16px',
-  footerBg: '#000',
+  footerBg: '#e9ebee',
 };
-
-export const darkTheme = {
-  ...theme,
-  primaryColor: theme.darkBlue,
-  secondaryColor: theme.white,
-  theme: 'dark',
-}
-
-export const lightTheme = {
-  ...theme,
-  primaryColor: theme.white,
-  secondaryColor: theme.darkBlue,
-  theme: 'light',
-}
 
 export default theme;
