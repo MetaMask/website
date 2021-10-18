@@ -56,6 +56,7 @@ export const ContentfulLayoutHeroFields = graphql`
     }
     ctaText
     ctaLink
+    getInTouchPopup
     backgroundColor
     backgroundImage {
       fluid(quality: 100, toFormat: WEBP) {
@@ -119,11 +120,12 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     }
     contentful_id
     headline
-    description
-    columns
-    contentAlignment
+    description {
+      internal {
+        content
+      }
+    }
     backgroundColor
-    layoutType
     displayHeadline
   }
 `;
@@ -147,7 +149,8 @@ export const ContentfulCardFields = graphql`
     }
     link
     newTab
-    cardType
+    shadow
+    showArrowIcon
   }
 `;
 
@@ -254,7 +257,14 @@ export const ContentfulModuleContainerFields = graphql`
         type
       }
     title
+    description {
+      internal {
+        content
+      }
+    }
     columns
+    contentAlignment
+    splitModules
     displayTitle
   }
 `;

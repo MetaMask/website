@@ -142,35 +142,27 @@ query(
           ...ContentfulLayoutModuleContainerFields
           modules {
             ...on ContentfulCard {
-              id
               ...ContentfulCardFields
             }
             ...on ContentfulDownloadTab {
-              id
               ...ContentfulDownloadTabFields
             }
             ...on ContentfulRichText {
-              id
               ...ContentfulRichTextFields
             }
             ...on ContentfulCta {
-              id
               ...ContentfulCtaFields
             }
             ...on ContentfulFaq {
-              id
               ...ContentfulFaqFields
             }
             ...on ContentfulEmbed {
-              id
               ...ContentfulEmbedFields
             }
             ...on ContentfulLogo {
-              id
               ...ContentfulLogoFields
             }
             ...on ContentfulModuleContainer {
-              id
               ...ContentfulModuleContainerFields
             }
           }
@@ -228,6 +220,9 @@ query(
             }
             ...on ContentfulLogo {
               ...ContentfulLogoFields
+            }
+            ...on ContentfulModuleContainer {
+              ...ContentfulModuleContainerFields
             }
           }
         }
