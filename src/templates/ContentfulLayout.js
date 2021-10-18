@@ -89,7 +89,7 @@ query(
           displayTitle
           modules {
             ...on ContentfulCta {
-                ...ContentfulCtaFields
+              ...ContentfulCtaFields
             }
           }
         }
@@ -108,7 +108,7 @@ query(
           displayTitle
           modules {
             ...on ContentfulCta {
-                ...ContentfulCtaFields
+              ...ContentfulCtaFields
             }
           }
         }
@@ -141,26 +141,14 @@ query(
         node {
           ...ContentfulLayoutModuleContainerFields
           modules {
-            ...on ContentfulCard {
-              ...ContentfulCardFields
-            }
-            ...on ContentfulDownloadTab {
-              ...ContentfulDownloadTabFields
-            }
             ...on ContentfulRichText {
               ...ContentfulRichTextFields
             }
             ...on ContentfulCta {
               ...ContentfulCtaFields
             }
-            ...on ContentfulFaq {
-              ...ContentfulFaqFields
-            }
             ...on ContentfulEmbed {
               ...ContentfulEmbedFields
-            }
-            ...on ContentfulLogo {
-              ...ContentfulLogoFields
             }
             ...on ContentfulModuleContainer {
               ...ContentfulModuleContainerFields
