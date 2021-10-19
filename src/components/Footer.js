@@ -7,7 +7,7 @@ import Wrapper from './ContentWrapper'
 import { FooterTitle } from './StyledGeneral'
 
 const StyledFooter = props => {
-  const { logo, columns, copyright } = props
+  const { columns, copyright } = props
 
   const renderLinks = links =>
     links.map(link => (

@@ -216,11 +216,12 @@ export const ContentfulFaqFields = graphql`
 `;
 
 export const ContentfulLogoFields = graphql`
-  fragment ContentfulPartnerFields on ContentfulPartner {
+  fragment ContentfulLogoFields on ContentfulLogo {
     contentful_id
     internal {
       type
     }
+    title
     logo {
       fixed(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFixed_withWebp
@@ -228,7 +229,6 @@ export const ContentfulLogoFields = graphql`
     }
     link
     newTab
-    Title
     displayTitle
   }
 `;

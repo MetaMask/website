@@ -65,6 +65,7 @@ if (env.errors) {
       {
         resolve: `gatsby-plugin-sitemap`,
         options: {
+          exclude: [],
           query: `
           {
             site {
@@ -79,7 +80,7 @@ if (env.errors) {
                 }
               }
             }
-            allContentfulLayout {
+            allContentfulLayout(filter: {isPrivate: {eq: true}}) {
               edges {
                 node {
                   slug

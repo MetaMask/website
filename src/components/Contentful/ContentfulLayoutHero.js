@@ -19,6 +19,7 @@ const ContentfulLayoutHero = (props) => {
       modules
     }
   } = props;
+  const eyebrowUrl = parseContentfulAssetUrl(eyebrowLogo);
   const bgUrl = parseContentfulAssetUrl(backgroundImage);
 
   let HeroCTA;
@@ -36,6 +37,7 @@ const ContentfulLayoutHero = (props) => {
       title={heroTitle}
       subtitle={heroSubtitle}
       header={heroEyebrow}
+      eyebrowLogo={eyebrowUrl}
       backgroundImage={bgUrl}
       CTA={HeroCTA}
       themeOverride={heroTheme}
