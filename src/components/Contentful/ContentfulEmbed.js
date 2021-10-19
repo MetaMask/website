@@ -7,7 +7,7 @@ const ContentfulEmbed = props => {
   const {
     moduleConfig: {
       hasModuleContainer,
-      embedTag: { embedTag },
+      embed: { embed },
     },
   } = props
   const El = !hasModuleContainer
@@ -20,7 +20,7 @@ const ContentfulEmbed = props => {
 
   return (
     <El>
-      <EmbedHtml dangerouslySetInnerHTML={{ __html: embedTag }} />
+      <EmbedHtml dangerouslySetInnerHTML={{ __html: embed }} />
     </El>
   )
 }

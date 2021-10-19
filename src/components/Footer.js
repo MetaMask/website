@@ -9,23 +9,6 @@ import { FooterTitle } from './StyledGeneral'
 const StyledFooter = props => {
   const { columns, copyright } = props
 
-  const renderLinks = links =>
-    links.map(link => (
-      <div key={link.to}>
-        <FooterLink to={link.to} newTab={link.newTab}>
-          {link.text}
-        </FooterLink>
-      </div>
-    ))
-
-  const renderLinkColumns = () =>
-    columns.map(c => (
-      <Column key={c.title}>
-        {c.title && <FooterTitle> {c.title} </FooterTitle>}
-        {renderLinks(c.links)}
-      </Column>
-    ))
-
   return (
     <FooterContainer>
       <Wrapper
@@ -35,7 +18,6 @@ const StyledFooter = props => {
         <FooterInner>
           <ColumnContainer cols={(columns.length || 0) + 1}>
             <LinkContainer cols={columns.length}>
-              {renderLinkColumns()}
             </LinkContainer>
           </ColumnContainer>
 
@@ -135,13 +117,6 @@ const linkStyles = css`
   &:hover {
     color: #fff;
   }
-`
-
-const FooterLink = styled(Link)`
-  display: block;
-  ${linkStyles}
-  line-height: 2.5;
-  font-weight: 400;
 `
 
 const SubFooterContainer = styled.div`
