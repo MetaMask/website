@@ -26,6 +26,7 @@ if (env.errors) {
       'gatsby-plugin-sharp',
       `gatsby-plugin-styled-components`,
       'gatsby-transformer-sharp',
+      'gatsby-transformer-remark',
       {
         resolve: `gatsby-source-contentful`,
         options: {
@@ -80,7 +81,7 @@ if (env.errors) {
                 }
               }
             }
-            allContentfulLayout(filter: {isPrivate: {eq: true}}) {
+            allContentfulLayout(filter: {isPrivate: {eq: false}}) {
               edges {
                 node {
                   slug
@@ -121,10 +122,10 @@ if (env.errors) {
           sitemap: 'https://metamask.io/sitemap.xml',
           policy: [{ userAgent: '*', disallow: '/' }]
         }
-      }
+      },
       // this (optional) plugin enables Progressive Web App + Offline functionality
       // To learn more, visit: https://gatsby.app/offline
-      // 'gatsby-plugin-offline',
+      'gatsby-plugin-offline',
     ],
   }
 }

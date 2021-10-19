@@ -24,7 +24,7 @@ export default class HTML extends React.Component {
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
           {this.props.postBodyComponents}
-          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-64552723-14"/>
+          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-37075177-6"/>
           {process.env.NODE_ENV === "production" && <script dangerouslySetInnerHTML={{ __html: gdprConsentScript }} />}
         </body>
       </html>

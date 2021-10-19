@@ -5,7 +5,7 @@ exports.createPages = ({ graphql, actions }) => {
 
   /* Customized Pages Built Inside Contentful CMS */
   const contentfulLayouts = graphql(`{
-    pages: allContentfulLayout {
+    pages: allContentfulLayout(filter: {isPrivate: {eq: false}}) {
       edges {
         node {
           slug

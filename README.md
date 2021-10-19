@@ -2,7 +2,7 @@
   <a href="https://metamask.io">
     <img alt="MetaMask Logo"
     style="margin: 4% 0;"
-    src="./src/images/metamask-logo.svg" width="100px" />
+    src="./src/images/metamask-logo.png" width="100px" />
   </a>
 </p>
 
@@ -19,8 +19,8 @@ Built With:
 
     ```sh
     git clone https://github.com/ConsenSys/metamask-website.git
-    npm install
-    gatsby develop
+    yarn
+    yarn develop
     ```
 
 

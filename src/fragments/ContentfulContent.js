@@ -7,9 +7,7 @@ export const ContentfulLayoutHeaderFields = graphql`
       type
     }
     logo {
-      fixed(quality: 100, toFormat: WEBP) {
-        ...GatsbyContentfulFixed_withWebp
-      }
+      ...ContentfulLogoFields
     }
     downloadButton {
       ...ContentfulCtaFields
@@ -24,9 +22,7 @@ export const ContentfulLayoutFooterFields = graphql`
       type
     }
     logo {
-      fixed(quality: 100, toFormat: WEBP) {
-        ...GatsbyContentfulFixed_withWebp
-      }
+      ...ContentfulLogoFields
     }
     copyright
   }
@@ -40,13 +36,14 @@ export const ContentfulLayoutHeroFields = graphql`
     }
     headline
     description {
-      internal {
-        content
+      childMarkdownRemark {
+        html
       }
     }
     eyebrowLogo {
-      fixed(quality: 100, toFormat: WEBP) {
-        ...GatsbyContentfulFixed_withWebp
+      file {
+        url
+        fileName
       }
     }
     sideImage {
@@ -74,8 +71,8 @@ export const ContentfulLayoutFeatureFields = graphql`
     }
     headline
     description {
-      internal {
-        content
+      childMarkdownRemark {
+        html
       }
     }
     image {
@@ -102,8 +99,8 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
     showLogoAnimation
     headline
     description {
-      internal {
-        content
+      childMarkdownRemark {
+        html
       }
     }
     ctaText
@@ -121,8 +118,8 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     contentful_id
     headline
     description {
-      internal {
-        content
+      childMarkdownRemark {
+        html
       }
     }
     backgroundColor
@@ -143,8 +140,8 @@ export const ContentfulCardFields = graphql`
       }
     }
     description {
-      internal {
-        content
+      childMarkdownRemark {
+        html
       }
     }
     link
@@ -223,8 +220,9 @@ export const ContentfulLogoFields = graphql`
     }
     title
     logo {
-      fixed(quality: 100, toFormat: WEBP) {
-        ...GatsbyContentfulFixed_withWebp
+      file {
+        url
+        fileName
       }
     }
     link
@@ -258,8 +256,8 @@ export const ContentfulModuleContainerFields = graphql`
       }
     title
     description {
-      internal {
-        content
+      childMarkdownRemark {
+        html
       }
     }
     columns
