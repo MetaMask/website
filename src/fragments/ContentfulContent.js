@@ -41,10 +41,7 @@ export const ContentfulLayoutHeroFields = graphql`
       }
     }
     eyebrowLogo {
-      file {
-        url
-        fileName
-      }
+      ...ContentfulLogoFields
     }
     sideImage {
       fixed(quality: 100, toFormat: WEBP) {
@@ -55,6 +52,7 @@ export const ContentfulLayoutHeroFields = graphql`
     ctaLink
     getInTouchPopup
     backgroundColor
+    contentAlignment
     backgroundImage {
       fluid(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
@@ -76,6 +74,11 @@ export const ContentfulLayoutFeatureFields = graphql`
       }
     }
     image {
+      fixed(quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFixed_withWebp
+      }
+    }
+    imageMobile {
       fixed(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFixed_withWebp
       }
@@ -205,9 +208,9 @@ export const ContentfulFaqFields = graphql`
     }
     question
     answer {
-      internal {
-          content
-        }
+      childMarkdownRemark {
+        html
+      }
     }
   }
 `;

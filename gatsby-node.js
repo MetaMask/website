@@ -38,6 +38,7 @@ exports.createPages = ({ graphql, actions }) => {
               contentful_id
             }
           }
+          isFaqPage
         }
       }
     }
@@ -48,6 +49,7 @@ exports.createPages = ({ graphql, actions }) => {
       const pageData = pages.edges
       pageData.map(p => {
         const {
+          isFaqPage,
           modules,
           slug,
           seo,
@@ -56,7 +58,7 @@ exports.createPages = ({ graphql, actions }) => {
           },
           header: {
             contentful_id: headerId,
-          },
+          }
         } = p.node
         const moduleIds = modules.map(m => m.contentful_id)
         const seoId = seo ? seo.contentful_id : ''
@@ -69,7 +71,8 @@ exports.createPages = ({ graphql, actions }) => {
             footerId,
             seoId,
             modules: moduleIds,
-            pathBuild: slug,
+            isFaqPage,
+            pathBuild: slug
           },
         })
       })
