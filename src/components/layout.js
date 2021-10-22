@@ -34,7 +34,7 @@ const Layout = (props) => {
               meta={[
                 {
                   name: 'description',
-                  content: data.site.siteMetadata.title,
+                  content: data.site.siteMetadata.description,
                 },
                 {
                   name: 'keywords',

@@ -195,7 +195,7 @@ html {
   box-sizing: inherit;
 }
 body {
-  color: #595959;
+  color: #333333;
   font-family: georgia, serif;
   font-weight: normal;
   word-wrap: break-word;
@@ -217,7 +217,7 @@ img {
   margin-bottom: 1.45rem;
 }
 h1,h2,h3,h4,h5,h6 {
-  color: #121212;
+  color: #333333;
 }
 h1 {
   margin-left: 0;
@@ -232,7 +232,7 @@ h1 {
   text-rendering: optimizeLegibility;
   font-size: 3.8125rem;
   line-height: 1.1;
-  
+
 }
 h2 {
   margin-left: 0;
@@ -387,7 +387,7 @@ p {
   padding-right: 0;
   padding-top: 0;
   margin-bottom: 1.5rem;
-  
+
 }
 @media (max-width: 479px) {
   p {
@@ -700,44 +700,21 @@ pre tt:after {
   font-display: swap;
 }
 
-/* cyrillic-ext */
+/* Regular */
 @font-face {
-  font-family: 'Source Code Pro';
-  font-style: normal;
+  font-family: 'Euclid Circular B';
+  src: url('../fonts/EuclidCircularB-Regular-WebXL.woff2') format('woff2'), url('../fonts/EuclidCircularB-Regular-WebXL.woff') format('woff');
   font-weight: 400;
+  font-style: normal;
   font-display: swap;
-  src: url('../fonts/SourceCodePro-Regular.ttf') format('truetype');
 }
 
+/* Bold */
 @font-face {
-  font-family: 'Source Code Pro';
-  font-style: normal;
+  font-family: 'Euclid Circular B';
+  src: url('../fonts/EuclidCircularB-Bold-WebXL.woff2') format('woff2'), url('../fonts/EuclidCircularB-Bold-WebXL.woff') format('woff');
   font-weight: 700;
-  src: url('../fonts/SourceCodePro-Bold.ttf') format('truetype');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Source Sans Pro';
   font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('../fonts/SourceSansPro-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Source Code Pro';
-  font-style: normal;
-  font-weight: 600;
-  src: url('../fonts/SourceSansPro-SemiBold.ttf') format('truetype');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Source Code Pro';
-  font-style: normal;
-  font-weight: 700;
-  src: url('../fonts/SourceSansPro-Bold.ttf') format('truetype');
   font-display: swap;
 }
 

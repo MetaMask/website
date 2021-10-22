@@ -7,9 +7,6 @@ const envConfig = {
 const env = require('dotenv').config(envConfig)
 console.log('------- CURRENT ENVIRONMENT -------', activeEnv.toUpperCase())
 
-const { kebabCase } = require('lodash')
-const { getArticleCategory } = require(`./src/lib/utils/blog`)
-
 const low = require('lowlight');
 const { definer: solidityLangDef } = require('highlightjs-solidity');
 
@@ -29,6 +26,7 @@ if (env.errors) {
       'gatsby-plugin-sharp',
       `gatsby-plugin-styled-components`,
       'gatsby-transformer-sharp',
+      'gatsby-transformer-remark',
       {
         resolve: `gatsby-source-contentful`,
         options: {
@@ -44,10 +42,10 @@ if (env.errors) {
           name: 'gatsby-starter-default',
           short_name: 'starter',
           start_url: '/',
-          background_color: '#000000',
-          theme_color: '#151C24',
+          background_color: '#FFFFFF',
+          theme_color: '#333333',
           display: 'minimal-ui',
-          icon: `${ __dirname }/src/images/metamask-icon-logo-black.png`,
+          icon: `${ __dirname }/src/images/metamask-logo.png`,
         },
       },
       {
@@ -68,10 +66,7 @@ if (env.errors) {
       {
         resolve: `gatsby-plugin-sitemap`,
         options: {
-          exclude: [
-            '/portal/**/*',
-            '/login/callback',
-          ],
+          exclude: [],
           query: `
           {
             site {
@@ -86,43 +81,22 @@ if (env.errors) {
                 }
               }
             }
-            allContentfulPage(filter: {isPrivate: {eq: true}}) {
+            allContentfulLayout(filter: {isPrivate: {eq: false}}) {
               edges {
                 node {
                   slug
                 }
               }
             }
-            allContentfulArticlePage(filter: {isPrivate: {eq: true}}) {
-            edges {
-              node {
-                articleTitle
-                primaryCategory {
-                  categoryName
-                }
-                articleCategories {
-                  categoryName
-                }
-              }
-            }
-          }
           }`,
           serialize: ({
-                        site,
-                        allSitePage,
-                        allContentfulPage,
-                        allContentfulArticlePage,
-                      }) => {
+              site,
+              allSitePage,
+              allContentfulLayout,
+            }) => {
             let privatePages = []
-            allContentfulPage.edges.map(edge => {
+            allContentfulLayout.edges.map(edge => {
               privatePages.push(edge.node.slug)
-            })
-
-            allContentfulArticlePage.edges.map(edge => {
-              const category = getArticleCategory(edge.node.primaryCategory,
-                edge.node.articleCategories)
-              privatePages.push(`/blog/${ kebabCase(category) }/${ kebabCase(
-                edge.node.articleTitle) }/`)
             })
 
             let pages = []
@@ -146,7 +120,7 @@ if (env.errors) {
         options: {
           host: 'https://metamask.io',
           sitemap: 'https://metamask.io/sitemap.xml',
-          policy: [{ userAgent: '*', allow: '/' }]
+          policy: [{ userAgent: '*', disallow: '/' }]
         }
       }
       // this (optional) plugin enables Progressive Web App + Offline functionality

@@ -7,10 +7,10 @@
   "scripts": {
     "develop": "gatsby develop",
     "build": "gatsby build",
-    "deploy": "yarn build && touch public/.nojekyll && touch public/CNAME && echo \"metamask.io\" >> public/CNAME",
+    "deploy": "yarn build && touch public/.nojekyll && touch public/CNAME && echo \"metamask.consensys.net\" >> public/CNAME",
     "serve": "gatsby serve --port 8000",
     "clean": "rm -rf node_modules; rm -rf .cache; rm -rf public; yarn install;",
-    "start": "npm run develop",
+    "start": "yarn develop",
     "format": "prettier --write \"src/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint:css": "stylelint './src/**/*.js'"
@@ -40,6 +40,7 @@
     "gatsby-plugin-well-known": "^1.0.0",
     "gatsby-source-contentful": "^3.0.0",
     "gatsby-source-filesystem": "^2.1.31",
+    "gatsby-transformer-remark": "^2.16.1",
     "gatsby-transformer-sharp": "^2.2.21",
     "lodash": "^4.17.11",
     "path": "^0.12.7",

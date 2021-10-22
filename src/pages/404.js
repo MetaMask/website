@@ -2,17 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
 
-import Header from '../components/Contentful/ContentfulHeader';
-import Arrow from '../components/ArrowIcon';
-import Layout from '../templates/PublicPageLayout';
+import Seo from '../components/Contentful/ContentfulSeo';
+import Layout from '../templates/PageLayout';
 
-const NotFoundPage = ({ data: { header }}) => (
+const NotFoundPage = ({ data: { seo }, location }) => (
   <Layout>
-    <Header moduleConfig={header} />
+    {seo && <Seo moduleConfig={{...seo, seoPagePath: location.pathname}} />}
     <Container>
-      <NotFoundTitle>  404 PAGE NOT FOUND  </NotFoundTitle>
+      <NotFoundTitle>Whoops, something went wrong</NotFoundTitle>
+      <NotFoundDescription>The page you are looking for doesn't exist or has been moved.</NotFoundDescription>
       <ReturnHomeButton href="/">
-        RETURN HOME  <Arrow fill="white" width="50px" height="auto"/>
+        GO TO HOMEPAGE
       </ReturnHomeButton>
     </Container>
   </Layout>
@@ -20,38 +20,49 @@ const NotFoundPage = ({ data: { header }}) => (
 
 export const NullPageQuery = graphql`
 query {
-  header:
-    contentfulHeaderNavMenu (
-      contentful_id: { eq: "7DqWYbDbKAyRbLhr8hJ9Vn" }
+  seo:
+    contentfulSeo (
+      contentful_id: { eq: "5NNWEdsyK6bxwhsYBmzzVc" }
     ) {
-      ...ContentfulHeaderNavMenuFields
+      ...ContentfulSeoFields
     }
 }
 `;
-const ReturnHomeButton = styled.a`
-  align-self: flex-start;
-  margin-left: 3%;
-  padding: 0.5rem;
-  color:  ${({theme}) => theme.white};
-  text-decoration: none;
-  
-  @media(min-width: ${({theme}) => theme.device.mobile}) {
-    align-self: center;
-  }
+const ReturnHomeButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid ${({ theme }) => theme.darkBlue};
+  border-radius: 40px;
+  height: 46px;
+  padding: 12px 20px;
+  color: ${({ theme }) => theme.white};
+  background: ${({ theme }) => theme.darkBlue};
+  font-weight: 400;
+  font-size: 20px;
+  text-transform: uppercase;
+  box-shadow: none;
+  outline: none;
+  cursor: pointer;
 `;
 
 const NotFoundTitle = styled.h1`
+  margin-top: 20px;
   padding: 1rem;
-  color:  ${({theme}) => theme.white};
+  font-size: 1.5rem;
+`;
+
+const NotFoundDescription = styled.div`
+  margin-top: 1rem;
 `;
 
 const Container = styled.div`
   display: flex;
+  width: 100vw;
+  height: 100vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80vh; 
-  background-color: ${({theme}) => theme.primaryColor};
 `;
 
 export default NotFoundPage

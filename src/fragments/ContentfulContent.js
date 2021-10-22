@@ -1,28 +1,132 @@
 import { graphql } from 'gatsby';
 
-export const ContentfulSeoFields = graphql`
-  fragment ContentfulSeoFields on ContentfulSeo {
+export const ContentfulLayoutHeaderFields = graphql`
+  fragment ContentfulLayoutHeaderFields on ContentfulLayoutHeader {
     contentful_id
     internal {
       type
     }
-    seoPageTitle
-    seoPageDescription
-    seoMetaTags {
-      internal {
-        content
+    logo {
+      ...ContentfulLogoFields
+    }
+    downloadButton {
+      ...ContentfulCtaFields
+    }
+  }
+`;
+
+export const ContentfulLayoutFooterFields = graphql`
+  fragment ContentfulLayoutFooterFields on ContentfulLayoutFooter {
+    contentful_id
+    internal {
+      type
+    }
+    logo {
+      ...ContentfulLogoFields
+    }
+    copyright
+  }
+`;
+
+export const ContentfulLayoutHeroFields = graphql`
+  fragment ContentfulLayoutHeroFields on ContentfulLayoutHero {
+    contentful_id
+    internal {
+      type
+    }
+    headline
+    description {
+      childMarkdownRemark {
+        html
       }
     }
-    seoLinkTags {
-      internal {
-        content
-      }
+    eyebrowLogo {
+      ...ContentfulLogoFields
     }
-    seoFeaturedImage {
-      fixed(width: 1000, height: 600, quality: 100, toFormat: WEBP) {
+    sideImage {
+      fixed(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFixed_withWebp
       }
     }
+    ctaText
+    ctaLink
+    getInTouchPopup
+    backgroundColor
+    contentAlignment
+    backgroundImage {
+      fluid(quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
+  }
+`;
+
+export const ContentfulLayoutFeatureFields = graphql`
+  fragment ContentfulLayoutFeatureFields on ContentfulLayoutFeature {
+    contentful_id
+    internal {
+      type
+    }
+    headline
+    description {
+      childMarkdownRemark {
+        html
+      }
+    }
+    image {
+      fixed(quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFixed_withWebp
+      }
+    }
+    imageMobile {
+      fixed(quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFixed_withWebp
+      }
+    }
+    contentAlignment
+    ratioContentImage
+    eyebrow
+    ctaText
+    ctaLink
+    newTab
+    backgroundColor
+  }
+`;
+
+export const ContentfulLayoutFullWidthCtaFields = graphql`
+  fragment ContentfulLayoutFullWidthCtaFields on ContentfulLayoutFullWidthCta {
+    contentful_id
+    internal {
+      type
+    }
+    showLogoAnimation
+    headline
+    description {
+      childMarkdownRemark {
+        html
+      }
+    }
+    ctaText
+    ctaLink
+    backgroundColor
+    newsletterSignUp
+  }
+`;
+
+export const ContentfulLayoutModuleContainerFields = graphql`
+  fragment ContentfulLayoutModuleContainerFields on ContentfulLayoutModuleContainer {
+    internal {
+        type
+    }
+    contentful_id
+    headline
+    description {
+      childMarkdownRemark {
+        html
+      }
+    }
+    backgroundColor
+    displayHeadline
   }
 `;
 
@@ -32,60 +136,21 @@ export const ContentfulCardFields = graphql`
     internal {
       type
     }
-    cardTitle
-    cardImage {
+    title
+    image {
       fluid(maxWidth: 600) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
-    cardDescription {
-      internal {
-        content
+    description {
+      childMarkdownRemark {
+        html
       }
     }
-    cardLink
-    cardLinkText
-    cardLinkOpensNewTab
-    isFeatured
-    featuredBackground {
-      fluid(maxWidth: 2000) {
-        ...GatsbyContentfulFluid_withWebp
-      }
-    }
-  }
-`;
-
-export const ContentfulModuleContainerFields = graphql`
-  fragment ContentfulModuleContainerFields on ContentfulModuleContainer {
-    containerWidth
-    contentful_id
-    columns
-    displayModuleName
-    moduleName
-    internal {
-      type
-    }
-  }
-`;
-
-
-export const ContentfulProfileFields = graphql`
-  fragment ContentfulProfileFields on ContentfulProfile {
-    contentful_id
-    internal {
-      type
-    }
-    profileTitle
-    profileSubtitle
-    profileImage {
-      fixed(width: 100, quality: 100, toFormat: WEBP) {
-        ...GatsbyContentfulFixed_withWebp
-      }
-    }
-    profileDescription
-    profileTwitterLink
-    profileLinkedInLink
-    profileContentAlignment
+    link
+    newTab
+    shadow
+    showArrowIcon
   }
 `;
 
@@ -95,270 +160,138 @@ export const ContentfulCtaFields = graphql`
     internal {
       type
     }
-    ctaAlignment
     ctaLink
-    ctaNewTab
-    ctaText
-    isButton
+    displayText
+    newTab
+    buttonDisplay
   }
 `;
 
-export const ContentfulSectionTextFields = graphql`
-  fragment ContentfulSectionTextFields on ContentfulSectionText {
+export const ContentfulDownloadTabFields = graphql`
+  fragment ContentfulDownloadTabFields on ContentfulDownloadTab {
     contentful_id
     internal {
       type
     }
-    displayTitle
-    sectionTitle
-    sectionBody {
-      internal {
-        content
-      }
-    }
-  }
-`;
-
-export const ContentfulHeroFields = graphql`
-  fragment ContentfulHeroFields on ContentfulHero {
-    contentful_id
-    internal {
-      type
-    }
-    heroTitle
-    heroSubtitle
-    heroEyebrow
-    heroCtaLink
-    heroCtaText
-    heroTheme {
-      heroHeight
-      heroFontSize
-      heroLineHeight
-      heroPadding
-    }
-    modules {
-      ...on ContentfulModuleContainer {
-        ...ContentfulModuleContainerFields
-        moduleName
-        modules {
-          ...on ContentfulSectionText {
-            ...ContentfulSectionTextFields
-          }
-        }
-      }
-      ...on ContentfulSectionText {
-        ...ContentfulSectionTextFields
-      }
-    }
-    heroBackgroundImage {
-      fluid(maxWidth: 3000, quality: 100, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
-    }
-  }
-`;
-
-export const ContentfulPageSubHeaderFields = graphql`
-  fragment ContentfulPageSubHeaderFields on ContentfulPageSubHeader {
-    contentful_id
-    internal {
-      type
-    }
-    subheaderLinks {
-      ...ContentfulPageLinkFields
-    }
-    subheaderBackgroundColor
-  }
-`;
-
-export const ContentfulFooterNavMenuFields = graphql`
-  fragment ContentfulFooterNavMenuFields on ContentfulFooterNavMenu {
-    contentful_id
-    internal {
-      type
-    }
-    config {
-      columns
-      moduleName
-      modules {
-        ...on ContentfulModuleContainer {
-          moduleName
-          modules {
-            ...on ContentfulPageLink {
-              ...ContentfulPageLinkFields
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-
-
-export const ContentfulHtmlEmbedFields = graphql`
-  fragment ContentfulHtmlEmbedFields on ContentfulHtmlEmbed {
-    contentful_id
-    internal {
-      type
-    }
-    embedTag {
-      embedTag
-    }
-    htmlPublishDate
-    htmlEmbedTitle
-    htmlBackground {
-      file {
-        url
-      }
-    }
-  }
-`;
-
-export const ContentfulSplitTextFields = graphql`
-  fragment ContentfulSplitTextFields on ContentfulSplitText {
-    contentful_id
-    internal {
-      type
-    }
-    splitTextBody {
-      internal {
-        content
-      }
-    }
-    splitTextDescription {
-      internal {
-        content
-      }
-    }
-  }
-`;
-
-export const ContentfulPartnerFields = graphql`
-  fragment ContentfulPartnerFields on ContentfulPartner {
-    contentful_id
-    internal {
-      type
-    }
-    partnerLogo {
+    name
+    headline
+    image {
       fixed(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFixed_withWebp
       }
     }
-    partnerLink
-    partnerLinkOpensNewTab
-    partnerTitle
+    downloadText
+    downloadLink
   }
 `;
 
-
-export const ContentfulHeaderNavMenuFields = graphql`
-  fragment ContentfulHeaderNavMenuFields on ContentfulHeaderNavMenu {
+export const ContentfulEmbedFields = graphql`
+  fragment ContentfulEmbedFields on ContentfulEmbed {
     contentful_id
     internal {
       type
     }
-    links {
-      ...ContentfulPageLinkFields
+    moduleId
+    embed {
+      embed
     }
-    menuName
-    shadow
-    ctaButton {
-      navigateTo
-      action
-      active
-      text
-    }
+    title
+    displayTitle
   }
 `;
 
-
-export const ContentfulPageLinkFields = graphql`
-  fragment ContentfulPageLinkFields on ContentfulPageLink {
+export const ContentfulFaqFields = graphql`
+  fragment ContentfulFaqFields on ContentfulFaq {
     contentful_id
     internal {
       type
     }
-    to
-    text
+    question
+    answer {
+      childMarkdownRemark {
+        html
+      }
+    }
+  }
+`;
+
+export const ContentfulLogoFields = graphql`
+  fragment ContentfulLogoFields on ContentfulLogo {
+    contentful_id
+    internal {
+      type
+    }
+    title
+    logo {
+      file {
+        url
+        fileName
+      }
+    }
+    link
     newTab
-    linkName
-    isPrivateRoute
+    displayTitle
   }
 `;
 
-export const ContentfulArticleCategoryFields = graphql`
-  fragment ContentfulArticleCategoryFields on ContentfulArticleCategory {
+export const ContentfulRichTextFields = graphql`
+  fragment ContentfulRichTextFields on ContentfulRichText {
     contentful_id
     internal {
       type
     }
-    categoryName
-    parentCategory {
-      ...on ContentfulArticleCategory {
-        contentful_id
-        categoryName
-      }
-    }
-  }
-`;
-
-export const ContentfulArticlePageFields = graphql`
-  fragment ContentfulArticlePageFields on ContentfulArticlePage {
-    contentful_id
-    internal {
-      type
-    }
-    articleSubtitle
-    articleTitle
-    articlePublishDate
-    articleThemeColor
-    articleHeroImage {
-      ...HeroImageContentful
-    }
-    articleThumbnail {
-      fluid(maxWidth: 600, quality: 100, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
-    }
-    isPrivate
-    articleContent {
+    moduleId
+    title
+    body {
       internal {
         content
       }
     }
-    articleAuthors {
-      ...ContentfulProfileFields
-    }
-    articleCategories {
-      ...ContentfulArticleCategoryFields
-    }
-    primaryCategory {
-      ...ContentfulArticleCategoryFields
-    }
-    articleHeader {
-      ...ContentfulHeaderNavMenuFields
-    }
-    articleFooter {
-      ...ContentfulFooterNavMenuFields
-    }
+    displayTitle
   }
 `;
 
-export const ContentfulArticleListFields = graphql`
-  fragment ContentfulArticleListFields on ContentfulArticleList {
+export const ContentfulModuleContainerFields = graphql`
+  fragment ContentfulModuleContainerFields on ContentfulModuleContainer {
+    contentful_id
+    internal {
+        type
+      }
+    title
+    description {
+      childMarkdownRemark {
+        html
+      }
+    }
+    columns
+    contentAlignment
+    splitModules
+    displayTitle
+  }
+`;
+
+export const ContentfulSeoFields = graphql`
+  fragment ContentfulSeoFields on ContentfulSeo {
     contentful_id
     internal {
       type
     }
-    allArticles
-    articleListTitle
-    articles {
-      ...ContentfulArticlePageFields
+    pageTitle
+    pageDescription
+    metaTags {
+      internal {
+        content
+      }
     }
-    columns
-    containerWidth
+    linkTags {
+      internal {
+        content
+      }
+    }
+    featuredImage {
+      fixed(width: 1000, height: 600, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFixed_withWebp
+      }
+    }
   }
 `;
-
-// add isPrivateRoute

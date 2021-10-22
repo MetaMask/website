@@ -3,30 +3,11 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import Link from './Link'
-import ResponsiveLabsLogo from './ResponsiveLabslogo'
-import NewsletterForm from './NewsletterForm'
 import Wrapper from './ContentWrapper'
 import { FooterTitle } from './StyledGeneral'
 
 const StyledFooter = props => {
-  const { columns } = props
-
-  const renderLinks = links =>
-    links.map(link => (
-      <div key={link.to}>
-        <FooterLink to={link.to} newTab={link.newTab}>
-          {link.text}
-        </FooterLink>
-      </div>
-    ))
-
-  const renderLinkColumns = () =>
-    columns.map(c => (
-      <Column key={c.title}>
-        {c.title && <FooterTitle> {c.title} </FooterTitle>}
-        {renderLinks(c.links)}
-      </Column>
-    ))
+  const { columns, copyright } = props
 
   return (
     <FooterContainer>
@@ -36,33 +17,14 @@ const StyledFooter = props => {
       >
         <FooterInner>
           <ColumnContainer cols={(columns.length || 0) + 1}>
-            <Column>
-              <ResponsiveLabsLogo logoType="icon" forceColor="white" />
-            </Column>
             <LinkContainer cols={columns.length}>
-              {renderLinkColumns()}
             </LinkContainer>
-            <Column>
-              <NewsletterForm
-                alignSelf="left"
-                backgroundColor="dark"
-                location={'footer'}
-              />
-            </Column>
           </ColumnContainer>
 
           <SubFooterContainer>
             <PolicyCopy>
               <PolicyCopyLink as="span">
-                @{new Date().getFullYear()} ConsenSys Mesh
-              </PolicyCopyLink>
-            </PolicyCopy>
-            <PolicyCopy>
-              <PolicyCopyLink to="https://consensys.net/privacy-policy/">
-                Privacy Policy
-              </PolicyCopyLink>
-              <PolicyCopyLink to="https://consensys.net/terms-of-use/">
-                Terms of use
+                @{new Date().getFullYear()} {copyright}
               </PolicyCopyLink>
             </PolicyCopy>
           </SubFooterContainer>
@@ -75,6 +37,7 @@ const StyledFooter = props => {
 export default StyledFooter
 
 StyledFooter.propTypes = {
+  logo: PropTypes.object,
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
@@ -86,6 +49,7 @@ StyledFooter.propTypes = {
       ).isRequired,
     })
   ).isRequired,
+  copyright: PropTypes.string
 }
 
 const FooterContainer = styled.div`
@@ -153,13 +117,6 @@ const linkStyles = css`
   &:hover {
     color: #fff;
   }
-`
-
-const FooterLink = styled(Link)`
-  display: block;
-  ${linkStyles}
-  line-height: 2.5;
-  font-weight: 400;
 `
 
 const SubFooterContainer = styled.div`

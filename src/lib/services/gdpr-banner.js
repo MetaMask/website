@@ -17,7 +17,7 @@ window.addGTM = function () {
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'UA-64552723-14');
+  gtag('config', 'UA-37075177-6');
   
   // Google Tag Manager
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});

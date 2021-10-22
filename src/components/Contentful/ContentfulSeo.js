@@ -7,36 +7,36 @@ import SEO from '../Seo';
 const ContentfulSeo = (props) => {
   const {
     moduleConfig: {
-      seoPageTitle,
-      seoPageDescription,
-      seoMetaTags,
-      seoLinkTags,
+      pageTitle,
+      pageDescription,
+      metaTags,
+      linkTags,
       seoFeaturedImage,
       seoPagePath
     }
   } = props;
 
   const extractTags = (list) => list ? list.map(tag => JSON.parse(tag.internal.content)) : null;
-  const [metaTags, linkTags] = [seoMetaTags, seoLinkTags].map(extractTags);
+  const [ex_metaTags, ex_linkTags] = [metaTags, linkTags].map(extractTags);
 
   return (
     <SEO
-      title={seoPageTitle}
-      description={seoPageDescription}
+      title={pageTitle}
+      description={pageDescription}
       pagePath={seoPagePath}
       image={seoFeaturedImage}
-      metaTags={metaTags}
-      linkTags={linkTags}
+      metaTags={ex_metaTags}
+      linkTags={ex_linkTags}
     />
   )
 };
 
 ContentfulSeo.propTypes = {
   seoPage: PropTypes.object,
-  seoPageTitle: PropTypes.string,
-  seoPageDescription: PropTypes.string,
-  seoMetaTags: PropTypes.arrayOf(PropTypes.object),
-  seoLinkTags: PropTypes.arrayOf(PropTypes.object),
+  pageTitle: PropTypes.string,
+  pageDescription: PropTypes.string,
+  metaTags: PropTypes.arrayOf(PropTypes.object),
+  linkTags: PropTypes.arrayOf(PropTypes.object),
   seoFeaturedImage: PropTypes.object,
   seoPagePath: PropTypes.string
 };

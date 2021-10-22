@@ -1,33 +1,33 @@
-import ContentfulHero from './ContentfulHero'
-import ContentfulCta from './ContentfulCTA'
-import ContentfulModuleContainer from './ContentfulModuleContainer'
-import ContentfulProfile from './ContentfulProfile'
-import ContentfulSectionText from './ContentfulSectionText'
+import ContentfulLayoutHeader from './ContentfulLayoutHeader'
+import ContentfulLayoutFooter from './ContentfulLayoutFooter'
+import ContentfulLayoutHero from './ContentfulLayoutHero'
+import ContentfulLayoutFeature from './ContentfulLayoutFeature'
+import ContentfulLayoutFullWidthCta from './ContentfulLayoutFullWidthCta'
+import ContentfulLayoutModuleContainer from './ContentfulLayoutModuleContainer'
 import ContentfulCard from './ContentfulCard'
-import ContentfulHeaderNavMenu from './ContentfulHeader'
-import ContentfulHtmlEmbed from './ContentfulHtmlEmbed'
-import ContentfulPageSubHeader from './ContentfulPageSubHeader'
-import ContentfulFooterNavMenu from './ContentfulFooter'
-import ContentfulArticleList from './ContentfulArticleList'
+import ContentfulCta from './ContentfulCta'
+import ContentfulDownloadTab from './ContentfulDownloadTab'
+import ContentfulEmbed from './ContentfulEmbed'
+import ContentfulFaq from './ContentfulFaq'
+import ContentfulLogo from './ContentfulLogo'
+import ContentfulModuleContainer from './ContentfulModuleContainer'
+import ContentfulRichText from './ContentfulRichText'
 import ContentfulSeo from './ContentfulSeo'
-import ContentfulNewsletterForm from './ContentfulNewsletterForm'
-import ContentfulSplitText from './ContentfulSplitText'
-import ContentfulPartner from './ContentfulPartner'
 
 export {
-  ContentfulHero,
-  ContentfulCta,
-  ContentfulModuleContainer,
-  ContentfulProfile,
-  ContentfulSectionText,
+  ContentfulLayoutHeader,
+  ContentfulLayoutFooter,
+  ContentfulLayoutHero,
+  ContentfulLayoutFeature,
+  ContentfulLayoutFullWidthCta,
+  ContentfulLayoutModuleContainer,
   ContentfulCard,
-  ContentfulHeaderNavMenu,
-  ContentfulHtmlEmbed,
-  ContentfulPageSubHeader,
-  ContentfulFooterNavMenu,
-  ContentfulArticleList,
+  ContentfulCta,
+  ContentfulDownloadTab,
+  ContentfulEmbed,
+  ContentfulFaq,
+  ContentfulLogo,
+  ContentfulModuleContainer,
+  ContentfulRichText,
   ContentfulSeo,
-  ContentfulNewsletterForm,
-  ContentfulSplitText,
-  ContentfulPartner,
 };
