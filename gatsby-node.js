@@ -32,7 +32,7 @@ exports.createPages = ({ graphql, actions }) => {
               contentful_id
             }
           }
-          isFaqPage
+          isFaqLayout
         }
       }
     }
