@@ -53,6 +53,7 @@ export const ContentfulLayoutHeroFields = graphql`
     getInTouchPopup
     backgroundColor
     contentAlignment
+    showLearnMore
     backgroundImage {
       fluid(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
