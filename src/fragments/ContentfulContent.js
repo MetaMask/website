@@ -54,6 +54,7 @@ export const ContentfulLayoutHeroFields = graphql`
     backgroundColor
     contentAlignment
     showLearnMore
+    headlineBorderBottom
     backgroundImage {
       fluid(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
