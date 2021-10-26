@@ -168,24 +168,6 @@ export const ContentfulCtaFields = graphql`
   }
 `;
 
-export const ContentfulDownloadTabFields = graphql`
-  fragment ContentfulDownloadTabFields on ContentfulDownloadTab {
-    contentful_id
-    internal {
-      type
-    }
-    name
-    headline
-    image {
-      fixed(quality: 100, toFormat: WEBP) {
-        ...GatsbyContentfulFixed_withWebp
-      }
-    }
-    downloadText
-    downloadLink
-  }
-`;
-
 export const ContentfulEmbedFields = graphql`
   fragment ContentfulEmbedFields on ContentfulEmbed {
     contentful_id

@@ -25,7 +25,6 @@ const ContentfulLayout = (props) => {
       faqs: FAQ,
       embeds: HTML,
       logos: L,
-      downloadTabs: D,
       fullWidthCtas: FWC,
     },
     pageContext: {
@@ -44,7 +43,7 @@ const ContentfulLayout = (props) => {
   };
 
   // extract all top-level page modules from GraphQL and return in a flat array for rendering
-  const pageModules = flatMapDeep([H,F,RT,LMC,MC,C,CTA,FAQ,HTML,L,D,FWC], getNodes);
+  const pageModules = flatMapDeep([H,F,RT,LMC,MC,C,CTA,FAQ,HTML,L,FWC], getNodes);
 
   // Take unordered list of data from pageModules and reorder
   // based on contentful_id sequence in pageContext.modules
@@ -191,9 +190,6 @@ query(
             ...on ContentfulCard {
               ...ContentfulCardFields
             }
-            ...on ContentfulDownloadTab {
-              ...ContentfulDownloadTabFields
-            }
             ...on ContentfulRichText {
               ...ContentfulRichTextFields
             }
@@ -235,17 +231,6 @@ query(
       edges {
         node {
           ...ContentfulCtaFields
-        }
-      }
-    }
-    
-  downloadTabs:
-    allContentfulDownloadTab(
-      filter: { contentful_id: { in: $modules } }
-    ) {
-      edges {
-        node {
-          ...ContentfulDownloadTabFields
         }
       }
     }
