@@ -25,6 +25,7 @@ const ContentfulLayout = (props) => {
       faqs: FAQ,
       embeds: HTML,
       logos: L,
+      hubspotForms: HF,
       fullWidthCtas: FWC,
     },
     pageContext: {
@@ -43,7 +44,7 @@ const ContentfulLayout = (props) => {
   };
 
   // extract all top-level page modules from GraphQL and return in a flat array for rendering
-  const pageModules = flatMapDeep([H,F,RT,LMC,MC,C,CTA,FAQ,HTML,L,FWC], getNodes);
+  const pageModules = flatMapDeep([H,F,RT,LMC,MC,C,CTA,FAQ,HTML,L,HF,FWC], getNodes);
 
   // Take unordered list of data from pageModules and reorder
   // based on contentful_id sequence in pageContext.modules
@@ -152,6 +153,9 @@ query(
             ...on ContentfulModuleContainer {
               ...ContentfulModuleContainerFields
             }
+            ...on ContentfulHubspotForm {
+              ...ContentfulHubspotFormFields
+            }
           }
         }
       }
@@ -189,6 +193,9 @@ query(
           modules {
             ...on ContentfulCard {
               ...ContentfulCardFields
+            }
+            ...on ContentfulHubspotForm {
+              ...ContentfulHubspotFormFields
             }
             ...on ContentfulRichText {
               ...ContentfulRichTextFields
@@ -231,6 +238,17 @@ query(
       edges {
         node {
           ...ContentfulCtaFields
+        }
+      }
+    }
+    
+  hubspotForms:
+    allContentfulHubspotForm(
+      filter: { contentful_id: { in: $modules } }
+    ) {
+      edges {
+        node {
+          ...ContentfulHubspotFormFields
         }
       }
     }

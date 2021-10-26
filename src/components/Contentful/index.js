@@ -6,7 +6,7 @@ import ContentfulLayoutFullWidthCta from './ContentfulLayoutFullWidthCta'
 import ContentfulLayoutModuleContainer from './ContentfulLayoutModuleContainer'
 import ContentfulCard from './ContentfulCard'
 import ContentfulCta from './ContentfulCta'
-import ContentfulDownloadTab from './ContentfulDownloadTab'
+import ContentfulHubspotForm from './ContentfulHubspotForm'
 import ContentfulEmbed from './ContentfulEmbed'
 import ContentfulFaq from './ContentfulFaq'
 import ContentfulLogo from './ContentfulLogo'
@@ -23,7 +23,7 @@ export {
   ContentfulLayoutModuleContainer,
   ContentfulCard,
   ContentfulCta,
-  ContentfulDownloadTab,
+  ContentfulHubspotForm,
   ContentfulEmbed,
   ContentfulFaq,
   ContentfulLogo,

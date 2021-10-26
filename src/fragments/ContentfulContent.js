@@ -168,6 +168,24 @@ export const ContentfulCtaFields = graphql`
   }
 `;
 
+export const ContentfulHubspotFormFields = graphql`
+  fragment ContentfulHubspotFormFields on ContentfulHubspotForm {
+    contentful_id
+    internal {
+      type
+    }
+    name
+    headline
+    image {
+      fixed(quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFixed_withWebp
+      }
+    }
+    downloadText
+    downloadLink
+  }
+`;
+
 export const ContentfulEmbedFields = graphql`
   fragment ContentfulEmbedFields on ContentfulEmbed {
     contentful_id
