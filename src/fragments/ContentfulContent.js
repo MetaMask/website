@@ -174,15 +174,11 @@ export const ContentfulHubspotFormFields = graphql`
     internal {
       type
     }
-    name
-    headline
-    image {
-      fixed(quality: 100, toFormat: WEBP) {
-        ...GatsbyContentfulFixed_withWebp
-      }
-    }
+    title
+    portalId
+    formId
     downloadText
-    downloadLink
+    displayTitle
   }
 `;
 
