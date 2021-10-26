@@ -153,8 +153,8 @@ query(
             ...on ContentfulModuleContainer {
               ...ContentfulModuleContainerFields
             }
-            ...on ContentfulHubspotForm {
-              ...ContentfulHubspotFormFields
+            ...on ContentfulHubSpotForm {
+              ...ContentfulHubSpotFormFields
             }
           }
         }
@@ -194,8 +194,8 @@ query(
             ...on ContentfulCard {
               ...ContentfulCardFields
             }
-            ...on ContentfulHubspotForm {
-              ...ContentfulHubspotFormFields
+            ...on ContentfulHubSpotForm {
+              ...ContentfulHubSpotFormFields
             }
             ...on ContentfulRichText {
               ...ContentfulRichTextFields
@@ -243,12 +243,12 @@ query(
     }
     
   hubspotForms:
-    allContentfulHubspotForm(
+    allContentfulHubSpotForm(
       filter: { contentful_id: { in: $modules } }
     ) {
       edges {
         node {
-          ...ContentfulHubspotFormFields
+          ...ContentfulHubSpotFormFields
         }
       }
     }

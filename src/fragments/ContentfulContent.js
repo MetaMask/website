@@ -169,8 +169,8 @@ export const ContentfulCtaFields = graphql`
   }
 `;
 
-export const ContentfulHubspotFormFields = graphql`
-  fragment ContentfulHubspotFormFields on ContentfulHubspotForm {
+export const ContentfulHubSpotFormFields = graphql`
+  fragment ContentfulHubSpotFormFields on ContentfulHubSpotForm {
     contentful_id
     internal {
       type
@@ -178,7 +178,6 @@ export const ContentfulHubspotFormFields = graphql`
     title
     portalId
     formId
-    downloadText
     displayTitle
   }
 `;
