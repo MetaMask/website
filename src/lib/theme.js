@@ -1,11 +1,12 @@
 const theme = {
   darkBlue: "#037dd6",
-  lightBlue: "#3898EC",
+  lightBlue: "#3b99d9",
   white: "#FFFFFF",
   black: "#000000",
   gray: "#F7F9FB",
   darkGray: "#6A737D",
   dark: "#24292E",
+  orange: "#f6851b",
   colors: {
     /* Orange */
     "orange-4": "#c43e00",
@@ -107,8 +108,8 @@ const theme = {
     mobileMediaMax: "479px",
     tablet: "768px",
     tabletMediaMax: "767px",
-    miniDesktop: "1025px",
-    miniDesktopMediaMax: "1024px",
+    miniDesktop: "992px",
+    miniDesktopMediaMax: "991px",
     desktop: "1200px",
     desktopMediaMax: "1199px"
   },

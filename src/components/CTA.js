@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
-
 import Arrow from './ArrowIcon'
 import Link from './Link'
+import Button from './Button'
 
 const CTA = props => {
   const {
@@ -13,23 +13,28 @@ const CTA = props => {
     newTab,
     iconConfig,
     color,
-    containerWidth,
     button = false,
+    isHideArrow = true,
+    typeLayout = '',
+    buttonSize,
   } = props
 
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
   const icon = { ...defaultIconConfig, fill: color, ...iconConfig }
 
+  if (button) {
+    return <Button size={buttonSize} link={link} text={text} newTab={newTab} color={color} />
+  }
+
   return (
-    <CTAContainer align={align} containerWidth={containerWidth}>
-      <ContentWrapper to={link} newTab={newTab} color={color} button={button}>
-        {button ? (
-          text
-        ) : (
-          <>
-            {text} <Arrow {...icon} />
-          </>
-        )}
+    <CTAContainer align={align}>
+      <ContentWrapper
+        to={link}
+        newTab={newTab}
+        color={color}
+        typeLayout={typeLayout}
+      >
+        {text} {!isHideArrow ? <Arrow {...icon} /> : null}
       </ContentWrapper>
     </CTAContainer>
   )
@@ -43,11 +48,10 @@ CTA.propTypes = {
   button: PropTypes.bool,
   align: PropTypes.string,
   iconConfig: PropTypes.object,
+  isHideArrow: PropTypes.bool,
 }
 
 const CTAContainer = styled.div`
-  width: ${({ containerWidth, theme }) =>
-    (containerWidth && theme.container[containerWidth]) || '100%'};
   ${({ align }) =>
     align
       ? `
@@ -59,26 +63,53 @@ const CTAContainer = styled.div`
 
 const ContentWrapper = styled(Link)`
   transition: all 0.15s ease;
-  color: ${({ color }) => color};
-  font-size: ${({ theme }) => theme.font.size.xl}rem;
-  font-weight: ${({ theme }) => theme.font.weight.semiBold};
   text-decoration: none;
-  &:hover {
-    opacity: 0.6;
-  }
-  ${({button, theme}) => button ? `
-    background: ${theme.lightBlue};
-    color: #fff;
+ 
+  ${({ typeLayout, color, theme }) =>
+    typeLayout === ''
+      ? `
+      color: ${color};
+      font-size: ${theme.font.size.xl}rem;
+      font-weight: ${theme.font.weight.semiBold};
+    &:hover {
+      opacity: 0.6;
+    }
+  `
+      : ``}
+  ${({ typeLayout, theme }) =>
+    typeLayout === 'header'
+      ? `
+    font-size: 16px;
+    line-height: 22px;
     height: 56px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 32px;
-    border-radius: 3px;
-    font-weight: 600;
-    font-size: 13px;
-    text-transform: uppercase;
-  ` : ``}
+    margin: 4px;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: transparent;
+    font-weight: 400;
+    height: auto;
+    color: #222;
+    &:hover {
+      background-color: #e6eaee;
+      color: ${theme.darkBlue};
+    }
+  `
+      : ``}
+  ${({ typeLayout, theme }) =>
+    typeLayout === 'footer'
+      ? `
+    color: rgba(0, 0, 0, 0.74);
+    font-size: 12px;
+    line-height: 30px;
+    font-weight: 400;
+    &:hover {
+      color: ${theme.lightBlue};
+    }
+  `
+      : ``}
 `
 
 const alignMapping = align => {

@@ -16,7 +16,7 @@ const ContentfulLayoutFooter = (props) => {
   return (
     <Footer
       logo={logo}
-      columns={menuItems}
+      menus={menuItems}
       copyright={copyright}
     />
   )

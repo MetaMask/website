@@ -6,21 +6,21 @@ import ContentWrapper from '../ContentWrapper';
 
 const ContentfulCta = (props) => {
   const {
-    containerWidth,
     moduleConfig: {
       ctaLink,
       ctaText,
       ctaNewTab,
-      isButton,
+      buttonDisplay,
       ctaAlignment,
       hasModuleContainer,
+      displayText,
+      typeLayout = '',
+      isHideArrow= true,
     },
   } = props;
 
-  const size = containerWidth || "wide";
   const El = !hasModuleContainer ? ({children, ...props}) => (
     <ContentWrapper
-      size={size}
       {...props}
     >
       {children}
@@ -31,12 +31,13 @@ const ContentfulCta = (props) => {
     <El>
       <CTA
         link={ctaLink}
-        text={ctaText}
+        text={displayText || ctaText}
         newTab={ctaNewTab}
-        button={isButton}
+        button={buttonDisplay}
         align={ctaAlignment}
         color="black"
-        containerWidth={containerWidth}
+        typeLayout={typeLayout}
+        isHideArrow={isHideArrow}
       />
     </El>
   );
@@ -51,5 +52,7 @@ ContentfulCta.propTypes = {
     ctaNewTab: PropTypes.bool,
     ctaText: PropTypes.string,
     isButton: PropTypes.bool,
+    typeLayout: PropTypes.string,
+    isHideArrow: PropTypes.bool,
   }),
 }

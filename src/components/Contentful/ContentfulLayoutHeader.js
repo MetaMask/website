@@ -15,7 +15,7 @@ const ContentfulLayoutHeader = (props) => {
   return (
     <Header
       logo={logo}
-      columns={menuItems}
+      menus={menuItems}
       downloadButton={downloadButton}
     />
   );
