@@ -7,14 +7,12 @@ const ContentWrapper = (props) => {
     children,
     columns,
     styleOverride,
-    listingGrid,
     ...rest
   } = props;
 
   return (
     <Container
       styleOverride={styleOverride}
-      listingGrid={listingGrid}
       {...rest}
     >
       <ContainerInner>
@@ -26,6 +24,8 @@ const ContentWrapper = (props) => {
 export default ContentWrapper
 
 ContentWrapper.propTypes = {
+  columns: PropTypes.number,
+  styleOverride: PropTypes.string,
 };
 
 const Container = styled.div`

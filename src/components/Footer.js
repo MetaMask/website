@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Link from './Link'
 import Wrapper from './ContentWrapper'
@@ -17,7 +17,6 @@ const StyledFooter = props => {
       },
     },
   } = props
-  console.log(props)
 
   return (
     <FooterContainer>

@@ -117,15 +117,9 @@ export default withTheme(StyledHeader)
 
 StyledHeader.propTypes = {
   logo: PropTypes.object,
-  columns: PropTypes.arrayOf(
+  menus: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
-      links: PropTypes.arrayOf(
-        PropTypes.shape({
-          text: PropTypes.string,
-          to: PropTypes.string,
-        })
-      ).isRequired,
     })
   ).isRequired,
   downloadButton: PropTypes.object,
