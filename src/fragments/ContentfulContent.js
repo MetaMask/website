@@ -43,6 +43,7 @@ export const ContentfulLayoutHeroFields = graphql`
     eyebrowLogo {
       ...ContentfulLogoFields
     }
+    eyebrowLink
     sideImage {
       fixed(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFixed_withWebp
@@ -55,6 +56,7 @@ export const ContentfulLayoutHeroFields = graphql`
     contentAlignment
     showLearnMore
     headlineBorderBottom
+    hideHeadline
     backgroundImage {
       fluid(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
@@ -85,6 +87,7 @@ export const ContentfulLayoutFeatureFields = graphql`
         ...GatsbyContentfulFixed_withWebp
       }
     }
+    link
     contentAlignment
     ratioContentImage
     eyebrow
