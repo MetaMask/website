@@ -86,7 +86,7 @@ export const ContentfulLayoutFeatureFields = graphql`
         ...GatsbyContentfulFixed_withWebp
       }
     }
-    link
+    imageLink
     contentAlignment
     ratioContentImage
     eyebrow
