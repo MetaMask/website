@@ -43,7 +43,6 @@ export const ContentfulLayoutHeroFields = graphql`
     eyebrowLogo {
       ...ContentfulLogoFields
     }
-    eyebrowLink
     sideImage {
       fixed(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFixed_withWebp
