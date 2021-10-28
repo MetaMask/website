@@ -126,21 +126,21 @@ StyledHeader.propTypes = {
 }
 
 const HeaderElement = styled.header`
-  z-index: 999;
-  padding: 24px 20px;
-  position: sticky;
-  left: 0;
-  top: 0;
-  right: 0;
+  background-color: #fff;
   bottom: 20px;
   display: block;
-  overflow: visible;
-  margin-top: 0px;
-  margin-right: auto;
+  left: 0;
   margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+  overflow: visible;
   padding: 24px 20px;
-  background-color: #fff;
+  padding: 24px 20px;
   position: relative;
+  position: sticky;
+  right: 0;
+  top: 0;
+  z-index: 999;
 `
 
 const HeaderContainer = styled.div`
@@ -213,15 +213,15 @@ const NavMenu = styled.div`
 `
 
 const NavMenuChild = styled.div`
-  display: flex;
-  flex-direction: column;
+  background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 13px 0 rgb(0 0 0 / 28%);
-  background-color: #fff;
-  position: absolute;
-  top: 100%;
+  display: flex;
+  flex-direction: column;
   left: 0;
   min-width: 100%;
+  position: absolute;
+  top: 100%;
   a {
     white-space: nowrap;
     width: 100%;

@@ -79,7 +79,7 @@ StyledFooter.propTypes = {
           text: PropTypes.string,
           to: PropTypes.string,
         })
-      ).isRequired,
+      ),
     })
   ).isRequired,
   copyright: PropTypes.string,

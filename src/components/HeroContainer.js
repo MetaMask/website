@@ -1,104 +1,67 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import styled, { withTheme } from 'styled-components';
-import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent';
+import PropTypes from 'prop-types'
+import React from 'react'
+import styled, { withTheme } from 'styled-components'
+import ContentWrapper from './ContentWrapper'
+import { useLocation } from '@reach/router'
 
-const HeroContainerComponent = (props) => {
+const HeroContainerComponent = props => {
   const {
     backgroundImage,
     CTA,
-    header,
-    HeroImage,
-    subtitle,
-    theme,
-    themeOverride,
-    title,
-    SideText,
-    modules
-  } = props;
-  if(themeOverride && typeof themeOverride === 'object'){
-    Object.keys(themeOverride).forEach((k) => themeOverride[k] == null && delete themeOverride[k])
-  }
-  const heroTheme = {...theme, hero: {...theme.hero,...themeOverride}};
+    headline,
+    hideHeadline,
+    description,
+    sideImage: { fluid },
+    showLearnMore,
+  } = props
+  const location = useLocation()
+  const isHome = location.pathname === '/'
   return (
-    <HeroContainer theme={heroTheme} image={backgroundImage}>
-      <HeroContentContainer theme={heroTheme}>
-        <HeroImageTextContainer>
-          {header && <HeroHeader> {header} </HeroHeader>}
-          {title && <HeroTitle> {title} </HeroTitle>}
-          {subtitle && !title && <HeroSubTitle theme={heroTheme}> {subtitle} </HeroSubTitle>}
-          {SideText && !subtitle && SideText}
-          <ModulesWrapper>
-            {modules && modules.length ? modules.map(m =>
-              contentfulModuleToComponent({
-                ...m,
-                childHeroContainer: true,
-                fontWeightManual: true,
-              })
-            ) : null}
-          </ModulesWrapper>
-        </HeroImageTextContainer>
-
-        <HeroCTA>
-          {CTA}
-        </HeroCTA>
-      </HeroContentContainer>
-      {HeroImage || null}
+    <HeroContainer
+      className="section"
+      image={backgroundImage}
+      showLearnMore={showLearnMore}
+    >
+      <ContentWrapper>
+        <HeroContentContainer bgSrc={fluid.src}>
+          <HeroImageTextContainer isHome={isHome}>
+            {headline && (
+              <HeroTitle hideHeadline={hideHeadline}> {headline} </HeroTitle>
+            )}
+            {description && (
+              <HeroDescription>
+                <div dangerouslySetInnerHTML={{ __html: description }} />
+              </HeroDescription>
+            )}
+            <HeroCTA>{CTA}</HeroCTA>
+          </HeroImageTextContainer>
+          <HeroSideImage></HeroSideImage>
+        </HeroContentContainer>
+        {showLearnMore ? (
+          <LearnMoreWrapper>
+            <LearnMoreInner className="text-block">
+              Learn More
+              <Icon className="w-icon w-icon-dropdown-toggle"></Icon>
+            </LearnMoreInner>
+          </LearnMoreWrapper>
+        ) : null}
+      </ContentWrapper>
     </HeroContainer>
-  );
+  )
 }
 
-export default withTheme(HeroContainerComponent);
+export default withTheme(HeroContainerComponent)
 
 HeroContainerComponent.propTypes = {
   backgroundImage: PropTypes.string,
   button: PropTypes.element,
   header: PropTypes.string,
-  HeroImage: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.func
-  ]),
-  theme:  PropTypes.object,
+  HeroImage: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  theme: PropTypes.object,
   title: PropTypes.string,
   subtitle: PropTypes.string,
   modules: PropTypes.arrayOf(PropTypes.object.isRequired),
-};
-
-const ModulesWrapper = styled.div`
-  /* special case for hero about */
-  > * {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  > *:last-child {
-    margin-bottom: 0 !important;
-  }
-  > div:nth-child(2) {
-    h3 {
-      margin-bottom: 12px;
-    }
-  }
-  > div:nth-child(3) {
-    margin-top: 2rem !important;
-    h3 {
-      margin: 0;
-    }
-  }
-  h1,h2,h3,h4, h5, h6{
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-  h3 {
-    margin-bottom: 1.25rem;
-  }
-  h4 {
-    margin-bottom: 0;
-  }
-  p:empty {
-    display: none;
-  }
-`;
+}
 
 const HeroContainer = styled.div`
   display: flex;
@@ -107,107 +70,122 @@ const HeroContainer = styled.div`
   justify-content: center;
   min-width: 100%;
   padding: 0;
-  background-color: ${({theme}) => theme.primaryColor};
-  color: ${({theme}) => theme.theme === 'light'
-    ? theme.black : theme.white};
-  h1, h2, h3, h4, h5, h6 {
-    color: ${({theme}) => theme.theme === 'light'
-    ? theme.black : theme.white};
-  }
-  ${({ image }) => image ?
-  ` background-image: url(${image});
+  background-color: ${({ theme }) => theme.primaryColor};
+  ${({ image }) =>
+    image
+      ? ` background-image: url(${image});
     background-size: cover;
-   ` : ""}
+   `
+      : ''}
+  ${({ showLearnMore }) =>
+    showLearnMore
+      ? `padding-bottom: 0 !important;
+    `
+      : ''}
+`
 
-  @media(min-width: ${({theme}) => theme.device.desktop}) {
-    min-height: ${({theme}) => theme.hero.heroHeight};
-    /* padding: 4em 1.25rem; */
+const HeroContentContainer = styled.div`
+  display: flex;
+  margin: -10px;
+  margin-top: 10px;
+  & > * {
+    width: 50%;
+    padding: 10px;
   }
-`;
+  ${({ bgSrc }) =>
+    bgSrc
+      ? `
+    background-image: url(${bgSrc});
+    background-position: 100% 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+  `
+      : ''}
 
-const HeroContentContainer = styled.section`
-  z-index: 100;
-  width: 100%;
-  margin: 0 auto;
-  padding: 3rem 1.5rem;
-  @media(min-width: ${({theme}) => theme.device.desktop}) {
-    width: ${({theme}) => theme.heroContentWidth || theme.container.wide};
-    margin-top: 88px;
-    padding: ${({theme}) => theme.hero.heroPadding} 0;
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
+    flex-direction: column;
+    flex-direction: column-reverse;
+    background-position: 50% 0%;
+    background-size: 90%;
+    background-attachment: scroll;
+    & > * {
+    width: 100%;
   }
-`;
+  }
+`
 
 const HeroImageTextContainer = styled.div`
-  letter-spacing: 0.1em;
-  @media(min-width: ${({theme}) => theme.device.mobile}) {
-    flex-direction: column;
-    justify-content: space-evenly;
+  display: block;
+  ${({ isHome, theme }) =>
+    isHome
+      ? `
+  @media (min-width: ${theme.device.miniDesktop}){
+    margin-top: 50px;
   }
-`;
+  `
+      : ''}
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
+
+    margin-top: -5px;
+    padding-top: 0px;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, 0)), color-stop(11%, #fff));
+    background-image: linear-gradient(
+  180deg
+  , hsla(0, 0%, 100%, 0), #fff 11%);
+    text-align: center;
+  }
+
+`
 
 const HeroTitle = styled.h1`
-  color: ${({theme, color}) =>
-    color || (theme.theme === 'light'
-    ? theme.black : theme.white)};
-  font-weight: ${({theme}) => theme.font.weight.bold};
-  @media(min-width: ${({theme}) => theme.device.desktop}) {
-    flex: 1;
-    margin-bottom: 0;
-    font-size: 5.96rem;
-    word-wrap: break-word;
-    word-spacing: 0.15em;
-  }
-`;
+  font-weight: ${({ theme }) => theme.font.weight.bold};
+  font-size: ${({ theme }) => theme.font.size.xxxl}rem;
+  line-height: 1.1;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  ${({ hideHeadline }) =>
+    hideHeadline
+      ? `
+    display: none;
+  `
+      : ''}
+`
 
-const HeroHeader = styled.p`
-  color: ${({theme, color}) =>
-    color || (theme.theme === 'light'
-    ? theme.black : theme.white)};
-  @media(min-width: ${({theme}) => theme.device.desktop}) {
-    margin-bottom: 30px;
-    font-size: ${({theme}) => theme.font.size.md}rem;
-    font-weight: ${({theme}) => theme.font.weight.semiBold}; 
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  } 
-`;
+const HeroDescription = styled.div`
+  display: block;
+  margin-bottom: 24px;
+`
 
-const HeroSubTitle = styled.h1`
-  margin-bottom: 3rem;
-  color: ${({theme, color}) =>
-    color || (theme.theme === 'light'
-    ? theme.black : theme.white)};
-  font-weight: ${({theme}) => theme.font.weight.bold};
-  letter-spacing: -0.4px;
-  font-size: 2.5rem;
-  @media(min-width: ${({theme}) => theme.device.tablet}) {
-    max-width: 824px;
-    font-size: ${({theme}) => theme.hero.heroFontSize};
+const HeroSideImage = styled.div`
+  display: block;
+  min-height: 400px;
+  @media (min-width: ${({ theme }) => theme.device.desktop}) {
+    padding: 0 !important;
   }
-  @media(min-width: ${({theme}) => theme.device.desktop}) {
-    margin-bottom: 3.5rem;
-    line-height: ${({theme}) => theme.hero.heroLineHeight};
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    min-height: 220px;
+    margin-bottom: 10px;
+    padding-bottom: 0;
   }
-`;
+`
 
-export const SideText = styled.div`
-  position: absolute;
-  top: 55%;
-  left: 40%;
-  width: 50%;
-  max-width: 675px;
-  color: ${({theme}) =>
-    (theme.theme === 'light'
-    ? theme.black : theme.white)};
-  font-size: ${({theme}) => theme.font.size.md}rem;
-  line-height: ${({theme}) => theme.font.size.xl}rem;
-`;
+const HeroCTA = styled.div`
+  display: block;
+`
+const LearnMoreWrapper = styled.div`
+  padding-top: 48px;
+`
 
-export const HeroCTA = styled.div`
-  @media(min-width: ${({theme}) => theme.device.desktop}) {
-    display: inline-block;
-    margin-bottom: 15px;
-    font-size: ${({theme}) => theme.font.size.xl}rem;
-    cursor: pointer;
-  }
-`;
+const LearnMoreInner = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+`
+
+const Icon = styled.span`
+  font-size: 20px;
+`
