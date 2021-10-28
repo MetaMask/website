@@ -57,7 +57,6 @@ const ContentfulLayout = props => {
   }, Array(modules.length - 1)) // prepopulate array so we can insert last elements if they appear first
 
   const allModules = [header, ...orderedPageModules, footer]
-  console.log(allModules)
 
   return (
     <Layout {...rest}>
