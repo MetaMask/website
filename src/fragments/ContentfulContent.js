@@ -1,4 +1,4 @@
-import { graphql } from 'gatsby';
+import { graphql } from 'gatsby'
 
 export const ContentfulLayoutHeaderFields = graphql`
   fragment ContentfulLayoutHeaderFields on ContentfulLayoutHeader {
@@ -13,7 +13,7 @@ export const ContentfulLayoutHeaderFields = graphql`
       ...ContentfulCtaFields
     }
   }
-`;
+`
 
 export const ContentfulLayoutFooterFields = graphql`
   fragment ContentfulLayoutFooterFields on ContentfulLayoutFooter {
@@ -26,7 +26,7 @@ export const ContentfulLayoutFooterFields = graphql`
     }
     copyright
   }
-`;
+`
 
 export const ContentfulLayoutHeroFields = graphql`
   fragment ContentfulLayoutHeroFields on ContentfulLayoutHero {
@@ -35,6 +35,7 @@ export const ContentfulLayoutHeroFields = graphql`
       type
     }
     headline
+    hideHeadline
     description {
       childMarkdownRemark {
         html
@@ -44,8 +45,8 @@ export const ContentfulLayoutHeroFields = graphql`
       ...ContentfulLogoFields
     }
     sideImage {
-      fixed(quality: 100, toFormat: WEBP) {
-        ...GatsbyContentfulFixed_withWebp
+      fluid(quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
       }
     }
     ctaText
@@ -62,7 +63,7 @@ export const ContentfulLayoutHeroFields = graphql`
       }
     }
   }
-`;
+`
 
 export const ContentfulLayoutFeatureFields = graphql`
   fragment ContentfulLayoutFeatureFields on ContentfulLayoutFeature {
@@ -77,13 +78,13 @@ export const ContentfulLayoutFeatureFields = graphql`
       }
     }
     image {
-      fixed(quality: 100, toFormat: WEBP) {
-        ...GatsbyContentfulFixed_withWebp
+      fluid(quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
       }
     }
     imageMobile {
-      fixed(quality: 100, toFormat: WEBP) {
-        ...GatsbyContentfulFixed_withWebp
+      fluid(quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
       }
     }
     imageLink
@@ -95,7 +96,7 @@ export const ContentfulLayoutFeatureFields = graphql`
     newTab
     backgroundColor
   }
-`;
+`
 
 export const ContentfulLayoutFullWidthCtaFields = graphql`
   fragment ContentfulLayoutFullWidthCtaFields on ContentfulLayoutFullWidthCta {
@@ -115,12 +116,12 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
     backgroundColor
     newsletterSignUp
   }
-`;
+`
 
 export const ContentfulLayoutModuleContainerFields = graphql`
   fragment ContentfulLayoutModuleContainerFields on ContentfulLayoutModuleContainer {
     internal {
-        type
+      type
     }
     contentful_id
     headline
@@ -131,8 +132,9 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     }
     backgroundColor
     displayHeadline
+    noPaddingBottom
   }
-`;
+`
 
 export const ContentfulCardFields = graphql`
   fragment ContentfulCardFields on ContentfulCard {
@@ -156,7 +158,7 @@ export const ContentfulCardFields = graphql`
     shadow
     showArrowIcon
   }
-`;
+`
 
 export const ContentfulCtaFields = graphql`
   fragment ContentfulCtaFields on ContentfulCta {
@@ -169,7 +171,7 @@ export const ContentfulCtaFields = graphql`
     newTab
     buttonDisplay
   }
-`;
+`
 
 export const ContentfulHubSpotFormFields = graphql`
   fragment ContentfulHubSpotFormFields on ContentfulHubSpotForm {
@@ -182,7 +184,7 @@ export const ContentfulHubSpotFormFields = graphql`
     formId
     displayTitle
   }
-`;
+`
 
 export const ContentfulEmbedFields = graphql`
   fragment ContentfulEmbedFields on ContentfulEmbed {
@@ -197,7 +199,7 @@ export const ContentfulEmbedFields = graphql`
     title
     displayTitle
   }
-`;
+`
 
 export const ContentfulFaqFields = graphql`
   fragment ContentfulFaqFields on ContentfulFaq {
@@ -212,7 +214,7 @@ export const ContentfulFaqFields = graphql`
       }
     }
   }
-`;
+`
 
 export const ContentfulLogoFields = graphql`
   fragment ContentfulLogoFields on ContentfulLogo {
@@ -231,7 +233,7 @@ export const ContentfulLogoFields = graphql`
     newTab
     displayTitle
   }
-`;
+`
 
 export const ContentfulRichTextFields = graphql`
   fragment ContentfulRichTextFields on ContentfulRichText {
@@ -248,14 +250,14 @@ export const ContentfulRichTextFields = graphql`
     }
     displayTitle
   }
-`;
+`
 
 export const ContentfulModuleContainerFields = graphql`
   fragment ContentfulModuleContainerFields on ContentfulModuleContainer {
     contentful_id
     internal {
-        type
-      }
+      type
+    }
     title
     description {
       childMarkdownRemark {
@@ -267,7 +269,7 @@ export const ContentfulModuleContainerFields = graphql`
     splitModules
     displayTitle
   }
-`;
+`
 
 export const ContentfulSeoFields = graphql`
   fragment ContentfulSeoFields on ContentfulSeo {
@@ -293,4 +295,4 @@ export const ContentfulSeoFields = graphql`
       }
     }
   }
-`;
+`

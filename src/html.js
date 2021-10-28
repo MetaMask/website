@@ -1,6 +1,6 @@
-import PropTypes from "prop-types"
-import React from "react"
-import gdprConsentScript from "./lib/services/gdpr-banner"
+import PropTypes from 'prop-types'
+import React from 'react'
+import gdprConsentScript from './lib/services/gdpr-banner'
 
 export default class HTML extends React.Component {
   render() {
@@ -16,7 +16,6 @@ export default class HTML extends React.Component {
           {this.props.headComponents}
         </head>
         <body {...this.props.bodyAttributes}>
-
           {this.props.preBodyComponents}
           <div
             key={`body`}
@@ -24,8 +23,13 @@ export default class HTML extends React.Component {
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
           {this.props.postBodyComponents}
-          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-37075177-6"/>
-          {process.env.NODE_ENV === "production" && <script dangerouslySetInnerHTML={{ __html: gdprConsentScript }} />}
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-37075177-6"
+          />
+          {process.env.NODE_ENV === 'production' && (
+            <script dangerouslySetInnerHTML={{ __html: gdprConsentScript }} />
+          )}
         </body>
       </html>
     )

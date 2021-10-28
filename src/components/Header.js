@@ -24,18 +24,18 @@ const StyledHeader = props => {
   const menuRef = React.useRef()
 
   React.useEffect(() => {
-    const handleOuterClick = (e) => {
+    const handleOuterClick = e => {
       if (hamburgerActive && menuRef && menuRef.current) {
         const ref = menuRef.current
         if (!ref.contains(e.target) && hamburgerActive) {
           setHamburgerActive(false)
         }
       }
-    };
+    }
     document.addEventListener('click', handleOuterClick)
     return () => document.removeEventListener('click', handleOuterClick)
   }, [hamburgerActive])
-  
+
   const handleMenuClick = id => {
     if (menuActive === id) {
       setMenuActive('')
@@ -227,7 +227,7 @@ const NavMenuChild = styled.div`
     width: 100%;
     justify-content: flex-start;
   }
-  
+
   @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
     opacity: 0;
     visibility: hidden;

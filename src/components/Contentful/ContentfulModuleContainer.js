@@ -3,10 +3,7 @@ import PropTypes from 'prop-types'
 import ContentWrapper from '../ContentWrapper'
 
 const ContentfulModuleContainer = props => {
-  return (
-    <ContentWrapper>
-    </ContentWrapper>
-  )
+  return <ContentWrapper></ContentWrapper>
 }
 
 export default ContentfulModuleContainer

@@ -23,7 +23,15 @@ const CTA = props => {
   const icon = { ...defaultIconConfig, fill: color, ...iconConfig }
 
   if (button) {
-    return <Button size={buttonSize} link={link} text={text} newTab={newTab} color={color} />
+    return (
+      <Button
+        size={buttonSize}
+        link={link}
+        text={text}
+        newTab={newTab}
+        color={color}
+      />
+    )
   }
 
   return (

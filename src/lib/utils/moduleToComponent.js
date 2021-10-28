@@ -1,5 +1,5 @@
-import React from 'react';
-import * as ContenfulComponents from '../../components/Contentful';
+import React from 'react'
+import * as ContenfulComponents from '../../components/Contentful'
 
 /**
  * @name contentfulModuleToComponent
@@ -11,19 +11,16 @@ import * as ContenfulComponents from '../../components/Contentful';
  * @returns {React.Component}
  */
 export const contentfulModuleToComponent = (moduleConfig = {}) => {
-  const {
-    internal,
-    contentful_id
-  } = moduleConfig;
-  if(!internal || !internal.type) return null;
-  const Component = ContenfulComponents[internal.type]; // route data to component based on auto generated type by Contentful CMS
-  if(!Component) {
+  const { internal, contentful_id } = moduleConfig
+  if (!internal || !internal.type) return null
+  const Component = ContenfulComponents[internal.type] // route data to component based on auto generated type by Contentful CMS
+  if (!Component) {
     console.log(`No component defined for - ${internal.type} CMS model.
       Check that CMS component names have not been changed.
       If new content-type, define in components/Contentful/[type]
-    `);
-    return null;
+    `)
+    return null
   }
-  const key = `${internal.type}__${contentful_id}`; // React key for component
-  return <Component key={key} moduleConfig={moduleConfig} />;
+  const key = `${internal.type}__${contentful_id}` // React key for component
+  return <Component key={key} moduleConfig={moduleConfig} />
 }

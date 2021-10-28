@@ -1,5 +1,4 @@
-export default
-`
+export default `
 window.getGDPRCookie = function ( ) {
   if (document.cookie.length > 0) {
     var cookies = "; " + document.cookie;
@@ -91,4 +90,4 @@ if(window.getGDPRCookie() === undefined) {
   window.addEventListener("load", window.removeGDPRBanner);
 }
 
-`;
+`

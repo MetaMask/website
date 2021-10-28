@@ -779,4 +779,19 @@ input[type="submit"].hs-button {
   display: block;
   padding-top: 48px;
   padding-bottom: 48px;
+
+}
+@media (max-width: 767px){
+  .section {
+    padding-top: 0;
+  }
+}
+
+.fz-12 {
+  font-size: 12px;
+}
+
+.text-block {
+  font-size: 12px;
+  text-align: center;
 }

@@ -1,13 +1,11 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
-const ContentfulHubSpotForm = (props) => {
-  return null;
-};
+const ContentfulHubSpotForm = props => {
+  return null
+}
 
-export default ContentfulHubSpotForm;
-
+export default ContentfulHubSpotForm
 
 ContentfulHubSpotForm.propTypes = {
-  moduleConfig: PropTypes.shape({
-  }),
+  moduleConfig: PropTypes.shape({}),
 }

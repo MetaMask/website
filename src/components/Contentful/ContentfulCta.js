@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import CTA from '../CTA';
-import ContentWrapper from '../ContentWrapper';
+import CTA from '../CTA'
+import ContentWrapper from '../ContentWrapper'
 
-const ContentfulCta = (props) => {
+const ContentfulCta = props => {
   const {
     moduleConfig: {
       ctaLink,
@@ -15,17 +15,15 @@ const ContentfulCta = (props) => {
       hasModuleContainer,
       displayText,
       typeLayout = '',
-      isHideArrow= true,
+      isHideArrow = true,
     },
-  } = props;
+  } = props
 
-  const El = !hasModuleContainer ? ({children, ...props}) => (
-    <ContentWrapper
-      {...props}
-    >
-      {children}
-    </ContentWrapper>
-  ) : React.Fragment;
+  const El = !hasModuleContainer
+    ? ({ children, ...props }) => (
+        <ContentWrapper {...props}>{children}</ContentWrapper>
+      )
+    : React.Fragment
 
   return (
     <El>
@@ -40,10 +38,10 @@ const ContentfulCta = (props) => {
         isHideArrow={isHideArrow}
       />
     </El>
-  );
-};
+  )
+}
 
-export default ContentfulCta;
+export default ContentfulCta
 
 ContentfulCta.propTypes = {
   moduleConfig: PropTypes.shape({

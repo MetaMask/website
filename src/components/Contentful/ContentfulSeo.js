@@ -1,10 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import SEO from '../Seo';
+import SEO from '../Seo'
 
-
-const ContentfulSeo = (props) => {
+const ContentfulSeo = props => {
   const {
     moduleConfig: {
       pageTitle,
@@ -12,12 +11,13 @@ const ContentfulSeo = (props) => {
       metaTags,
       linkTags,
       seoFeaturedImage,
-      seoPagePath
-    }
-  } = props;
+      seoPagePath,
+    },
+  } = props
 
-  const extractTags = (list) => list ? list.map(tag => JSON.parse(tag.internal.content)) : null;
-  const [ex_metaTags, ex_linkTags] = [metaTags, linkTags].map(extractTags);
+  const extractTags = list =>
+    list ? list.map(tag => JSON.parse(tag.internal.content)) : null
+  const [ex_metaTags, ex_linkTags] = [metaTags, linkTags].map(extractTags)
 
   return (
     <SEO
@@ -29,7 +29,7 @@ const ContentfulSeo = (props) => {
       linkTags={ex_linkTags}
     />
   )
-};
+}
 
 ContentfulSeo.propTypes = {
   seoPage: PropTypes.object,
@@ -38,7 +38,7 @@ ContentfulSeo.propTypes = {
   metaTags: PropTypes.arrayOf(PropTypes.object),
   linkTags: PropTypes.arrayOf(PropTypes.object),
   seoFeaturedImage: PropTypes.object,
-  seoPagePath: PropTypes.string
-};
+  seoPagePath: PropTypes.string,
+}
 
-export default ContentfulSeo;
+export default ContentfulSeo

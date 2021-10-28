@@ -56,7 +56,7 @@ const StyledFooter = props => {
 
           <SubFooterContainer>
             <PolicyCopy>
-              <PolicyCopyLink className='paragraph' as="span">
+              <PolicyCopyLink className="paragraph" as="span">
                 @{new Date().getFullYear()} {copyright}
               </PolicyCopyLink>
             </PolicyCopy>
@@ -100,7 +100,6 @@ const FooterInner = styled.div`
   justify-content: space-between;
   width: 100%;
   padding: 60px 0 60px 0;
-  
 `
 
 const SubFooterContainer = styled.div`

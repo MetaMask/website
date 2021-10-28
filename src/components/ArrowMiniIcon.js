@@ -19,7 +19,6 @@ const ArrowIcon = props => {
         fill="white"
       />
     </svg>
-
   )
 }
 

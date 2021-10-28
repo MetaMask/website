@@ -4,21 +4,10 @@ import styled from 'styled-components'
 import Link from './Link'
 
 const Button = props => {
-  const {
-    link,
-    text,
-    newTab,
-    color,
-    size,
-  } = props
+  const { link, text, newTab, color, size } = props
 
   return (
-    <ButtonWrapper
-      to={link}
-      newTab={newTab}
-      color={color}
-      size={size}
-    >
+    <ButtonWrapper to={link} newTab={newTab} color={color} size={size}>
       {text}
     </ButtonWrapper>
   )
@@ -44,9 +33,12 @@ const ButtonWrapper = styled(Link)`
   border-radius: 999px;
   font-size: 16px;
   line-height: 22px;
-  ${({size}) => size === 'large' ? `
+  ${({ size }) =>
+    size === 'large'
+      ? `
   padding: 12px 20px;
   height: 56px;
   font-size: 20px;
-  ` : ''}
+  `
+      : ''}
 `

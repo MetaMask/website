@@ -1,20 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Card from '../Card';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Card from '../Card'
 
-const ContentfulCard = (props) => {
+const ContentfulCard = props => {
   const {
-    moduleConfig: {
-      hasModuleContainer,
-      ...cardDisplayData
-    },
-  } = props;
+    moduleConfig: { hasModuleContainer, ...cardDisplayData },
+  } = props
 
-  return renderCard({...cardDisplayData});
-};
+  return renderCard({ ...cardDisplayData })
+}
 
-export default ContentfulCard;
-
+export default ContentfulCard
 
 ContentfulCard.propTypes = {
   moduleConfig: PropTypes.shape({
@@ -28,15 +24,14 @@ ContentfulCard.propTypes = {
   }),
 }
 
-
-const renderCard = (props) => {
+const renderCard = props => {
   const {
     cardDescription,
     cardTitle,
     cardImage,
     cardLink,
     cardLinkOpensNewTab,
-  } = props;
+  } = props
 
   return (
     <Card
@@ -48,4 +43,4 @@ const renderCard = (props) => {
       newTab={cardLinkOpensNewTab}
     />
   )
-};
+}

@@ -30,4 +30,4 @@ export {
   ContentfulModuleContainer,
   ContentfulRichText,
   ContentfulSeo,
-};
+}

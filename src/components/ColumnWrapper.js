@@ -1,14 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import React from 'react'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
-const ColumnWrapper = (props) => {
-  const {
-    children,
-    columns,
-    gapColumns = '10px',
-    styleOverride,
-  } = props;
+const ColumnWrapper = props => {
+  const { children, columns, gapColumns = '10px', styleOverride } = props
 
   return (
     <Container
@@ -16,7 +11,7 @@ const ColumnWrapper = (props) => {
       columns={columns}
       gapColumns={gapColumns}
     >
-        {children}
+      {children}
     </Container>
   )
 }
@@ -25,16 +20,16 @@ export default ColumnWrapper
 ColumnWrapper.propTypes = {
   columns: PropTypes.number,
   gapColumns: PropTypes.string,
-};
+}
 
 const Container = styled.div`
   display: flex;
   flex-flow: wrap;
-  margin: ${({gapColumns}) => `-${gapColumns}`};
+  margin: ${({ gapColumns }) => `-${gapColumns}`};
   > * {
-    width: calc(100%/${({columns}) => columns});
-    padding: ${({gapColumns}) => gapColumns};
+    width: calc(100% / ${({ columns }) => columns});
+    padding: ${({ gapColumns }) => gapColumns};
   }
 
-  ${({styleOverride}) => styleOverride}
-`;
+  ${({ styleOverride }) => styleOverride}
+`
