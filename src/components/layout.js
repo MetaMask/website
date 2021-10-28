@@ -12,8 +12,8 @@ import '../fonts/Graphik-Extralight-Web.woff'
 import '../fonts/Graphik-Semibold-Web.woff'
 import '../fonts/Graphik-Regular-Web.woff'
 
-const Layout = (props) => {
-  const { children, theme = {} } = props;
+const Layout = props => {
+  const { children, theme = {} } = props
   return (
     <ThemeProvider theme={{ ...globalTheme, ...theme }}>
       <StaticQuery

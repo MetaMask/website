@@ -51,7 +51,7 @@ ContentfulModuleContainer.propTypes = {
 
 const Title = styled.h2`
   margin-bottom: 1rem;
-  @media(min-width: ${({theme}) => theme.device.desktop}) {
+  @media (min-width: ${({ theme }) => theme.device.desktop}) {
     margin-bottom: 2rem;
   }
 `

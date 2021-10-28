@@ -1,40 +1,35 @@
-import React from 'react';
+import React from 'react'
 
-import Layout from '../components/layout';
+import Layout from '../components/layout'
 
-import {
-  ToastContainer as Notifications,
-  toast
-} from 'react-toastify';
+import { ToastContainer as Notifications, toast } from 'react-toastify'
 
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'
 
 /**
  * @name PageLayout
  * @summary - Wrapper container to hold all public pages
  * @description -
  */
-const PageLayout= (props) => {
-  const {
-    location,
-    children,
-    theme,
-    ...rest
-  } = props
+const PageLayout = props => {
+  const { location, children, theme, ...rest } = props
   const renderNotification = (state = {}) => {
-    if( state.error ) {
-      const { type, description } = state.error;
+    if (state.error) {
+      const { type, description } = state.error
       const errorMessage = `
-        ${type.split("_").join(" ").toUpperCase()} -
-        ${decodeURIComponent(description)}`;
+        ${type
+          .split('_')
+          .join(' ')
+          .toUpperCase()} -
+        ${decodeURIComponent(description)}`
 
-      toast.error(errorMessage);
+      toast.error(errorMessage)
     }
-  };
+  }
 
-  const navigationState = (location && location.state) || {};
-  if(navigationState.notification) {
-    renderNotification(navigationState.notification);
+  const navigationState = (location && location.state) || {}
+  if (navigationState.notification) {
+    renderNotification(navigationState.notification)
   }
 
   return (
@@ -43,6 +38,6 @@ const PageLayout= (props) => {
       {children}
     </Layout>
   )
-};
+}
 
-export default PageLayout;
+export default PageLayout

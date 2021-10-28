@@ -1,48 +1,47 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import CTA from '../CTA';
-import ContentWrapper from '../ContentWrapper';
+import CTA from '../CTA'
+import ContentWrapper from '../ContentWrapper'
 
-const ContentfulCta = (props) => {
+const ContentfulCta = props => {
   const {
-    containerWidth,
     moduleConfig: {
       ctaLink,
       ctaText,
       ctaNewTab,
-      isButton,
+      buttonDisplay,
       ctaAlignment,
       hasModuleContainer,
+      displayText,
+      typeLayout = '',
+      isHideArrow = true,
     },
-  } = props;
+  } = props
 
-  const size = containerWidth || "wide";
-  const El = !hasModuleContainer ? ({children, ...props}) => (
-    <ContentWrapper
-      size={size}
-      {...props}
-    >
-      {children}
-    </ContentWrapper>
-  ) : React.Fragment;
+  const El = !hasModuleContainer
+    ? ({ children, ...props }) => (
+        <ContentWrapper {...props}>{children}</ContentWrapper>
+      )
+    : React.Fragment
 
   return (
     <El>
       <CTA
         link={ctaLink}
-        text={ctaText}
+        text={displayText || ctaText}
         newTab={ctaNewTab}
-        button={isButton}
+        button={buttonDisplay}
         align={ctaAlignment}
         color="black"
-        containerWidth={containerWidth}
+        typeLayout={typeLayout}
+        isHideArrow={isHideArrow}
       />
     </El>
-  );
-};
+  )
+}
 
-export default ContentfulCta;
+export default ContentfulCta
 
 ContentfulCta.propTypes = {
   moduleConfig: PropTypes.shape({
@@ -51,5 +50,7 @@ ContentfulCta.propTypes = {
     ctaNewTab: PropTypes.bool,
     ctaText: PropTypes.string,
     isButton: PropTypes.bool,
+    typeLayout: PropTypes.string,
+    isHideArrow: PropTypes.bool,
   }),
 }

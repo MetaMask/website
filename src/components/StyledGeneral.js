@@ -1,4 +1,4 @@
-import Link from './Link';
+import Link from './Link'
 import styled from 'styled-components'
 export const ButtonBlue = styled.button`
   display: inline-flex;

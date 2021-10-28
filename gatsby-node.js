@@ -25,20 +25,14 @@ exports.createPages = ({ graphql, actions }) => {
             ...on ContentfulLayoutFeature {
               contentful_id
             }
-            ...on ContentfulRichText {
-              contentful_id
-            }
             ...on ContentfulLayoutModuleContainer {
               contentful_id
             }
             ...on ContentfulLayoutFullWidthCta {
               contentful_id
             }
-            ...on ContentfulEmbed {
-              contentful_id
-            }
           }
-          isFaqPage
+          isFaqLayout
         }
       }
     }

@@ -5,7 +5,7 @@ const envConfig = {
 }
 
 const env = require('dotenv').config(envConfig)
-console.log('------- CURRENT ENVIRONMENT -------', activeEnv.toUpperCase())
+console.log('------- CURRENT ENVIRONMENT: ', activeEnv.toUpperCase())
 
 const low = require('lowlight');
 const { definer: solidityLangDef } = require('highlightjs-solidity');

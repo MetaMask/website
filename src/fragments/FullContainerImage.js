@@ -1,4 +1,4 @@
-import { graphql } from 'gatsby';
+import { graphql } from 'gatsby'
 
 export const FullContainerImageSharp = graphql`
   fragment FullContainerImageSharp on ImageSharp {
@@ -6,7 +6,7 @@ export const FullContainerImageSharp = graphql`
       ...GatsbyImageSharpFluid
     }
   }
-`;
+`
 
 export const HeroImageSharp = graphql`
   fragment HeroImageSharp on ImageSharp {
@@ -14,7 +14,7 @@ export const HeroImageSharp = graphql`
       ...GatsbyImageSharpFluid
     }
   }
-`;
+`
 
 export const FullContainerImageContentful = graphql`
   fragment FullContainerImageContentful on ContentfulAsset {
@@ -22,7 +22,7 @@ export const FullContainerImageContentful = graphql`
       ...GatsbyContentfulFluid_withWebp
     }
   }
-`;
+`
 
 export const HeroImageContentful = graphql`
   fragment HeroImageContentful on ContentfulAsset {
@@ -30,4 +30,4 @@ export const HeroImageContentful = graphql`
       ...GatsbyContentfulFluid_withWebp
     }
   }
-`;
+`

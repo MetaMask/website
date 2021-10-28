@@ -41,9 +41,9 @@ const EmbedHtml = styled.div`
   position: relative;
   z-index: 2;
   position: relative;
-  @media (max-width: ${({theme}) => theme.device.desktopMediaMax}) {
+  @media (max-width: ${({ theme }) => theme.device.desktopMediaMax}) {
     &:before {
-      content: "";
+      content: '';
       display: block;
       padding-bottom: 56.25%;
     }

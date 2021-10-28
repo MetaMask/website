@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { graphql ,StaticQuery } from 'gatsby';
-import Helmet from 'react-helmet';
-
+import React from 'react'
+import PropTypes from 'prop-types'
+import { graphql, StaticQuery } from 'gatsby'
+import Helmet from 'react-helmet'
 
 /**
  * @name - SEO
@@ -10,7 +9,7 @@ import Helmet from 'react-helmet';
  * @description -
  * @prop -
  */
-const SEO = (props) => {
+const SEO = props => {
   const {
     title,
     description,
@@ -19,62 +18,58 @@ const SEO = (props) => {
     linkTags,
     pageType,
     pagePath,
-  } = props;
+  } = props
 
   return (
     <StaticQuery
       query={siteSeoQuery}
-      render={(data) => {
+      render={data => {
         const {
           site: {
-            siteMetadata: {
-              defaultTitle,
-              defaultDescription,
-              siteUrl,
-            }
-          }
-        } = data;
+            siteMetadata: { defaultTitle, defaultDescription, siteUrl },
+          },
+        } = data
 
         const seo = {
           title: title || defaultTitle,
           desc: description || defaultDescription,
           canonicalUrl: `${siteUrl}${pagePath}`,
-        };
+        }
 
-        const getMetaTags = (name, value) => ((name && value) ?
-          [
-            {name,  content: value},
-            {property: `og:${name}`,  content: value},
-            {name: `twitter:${name}`,  content: value},
-          ] :
-          []
-        );
-        const urlImageMeta = (image && image?.fixed?.src) ? image?.fixed?.src.split("?")[0] : '';
-        const urlImageMetaClean = urlImageMeta && typeof urlImageMeta === 'string' && urlImageMeta.startsWith('//') ? `https:${urlImageMeta}` : urlImageMeta;
+        const getMetaTags = (name, value) =>
+          name && value
+            ? [
+                { name, content: value },
+                { property: `og:${name}`, content: value },
+                { name: `twitter:${name}`, content: value },
+              ]
+            : []
+        const urlImageMeta =
+          image && image?.fixed?.src ? image?.fixed?.src.split('?')[0] : ''
+        const urlImageMetaClean =
+          urlImageMeta &&
+          typeof urlImageMeta === 'string' &&
+          urlImageMeta.startsWith('//')
+            ? `https:${urlImageMeta}`
+            : urlImageMeta
         const meta = [
-          { property:"og:type", content: pageType },
+          { property: 'og:type', content: pageType },
           ...getMetaTags('title', seo.title),
           ...getMetaTags('description', seo.desc),
           ...getMetaTags('image', urlImageMetaClean),
           ...(metaTags || []),
-        ];
+        ]
 
         const link = [
           { rel: 'canonical', href: seo.canonicalUrl },
           ...(linkTags || []),
-        ];
+        ]
 
-        return (
-          <Helmet
-            meta={meta}
-            link={link}
-            title={seo.title}
-          />
-        )
+        return <Helmet meta={meta} link={link} title={seo.title} />
       }}
     />
-  );
-};
+  )
+}
 
 SEO.propTypes = {
   title: PropTypes.string.isRequired,
@@ -84,7 +79,7 @@ SEO.propTypes = {
   metaTags: PropTypes.arrayOf(PropTypes.object),
   linkTags: PropTypes.arrayOf(PropTypes.object),
   image: PropTypes.object,
-};
+}
 
 SEO.defaultProps = {
   image: undefined,
@@ -92,9 +87,9 @@ SEO.defaultProps = {
   pageType: 'page',
   metaTags: [],
   linktags: [],
-};
+}
 
-export default SEO;
+export default SEO
 
 const siteSeoQuery = graphql`
   query {
@@ -106,4 +101,4 @@ const siteSeoQuery = graphql`
       }
     }
   }
-`;
+`

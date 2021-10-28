@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import CTA from '../CTA';
-import ContentWrapper from '../ContentWrapper';
+import CTA from '../CTA'
+import ContentWrapper from '../ContentWrapper'
 
-const ContentfulFaq = (props) => {
+const ContentfulFaq = props => {
   const {
     containerWidth,
     moduleConfig: {
@@ -15,17 +15,16 @@ const ContentfulFaq = (props) => {
       ctaAlignment,
       hasModuleContainer,
     },
-  } = props;
+  } = props
 
-  const size = containerWidth || "wide";
-  const El = !hasModuleContainer ? ({children, ...props}) => (
-    <ContentWrapper
-      size={size}
-      {...props}
-    >
-      {children}
-    </ContentWrapper>
-  ) : React.Fragment;
+  const size = containerWidth || 'wide'
+  const El = !hasModuleContainer
+    ? ({ children, ...props }) => (
+        <ContentWrapper size={size} {...props}>
+          {children}
+        </ContentWrapper>
+      )
+    : React.Fragment
 
   return (
     <El>
@@ -39,10 +38,10 @@ const ContentfulFaq = (props) => {
         containerWidth={containerWidth}
       />
     </El>
-  );
-};
+  )
+}
 
-export default ContentfulFaq;
+export default ContentfulFaq
 
 ContentfulFaq.propTypes = {
   moduleConfig: PropTypes.shape({
