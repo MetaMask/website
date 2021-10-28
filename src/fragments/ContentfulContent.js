@@ -58,7 +58,6 @@ export const ContentfulLayoutHeroFields = graphql`
     showLearnMore
     headlineBorderBottom
     hideHeadline
-    isSmallPageHeader
     backgroundImage {
       fluid(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
