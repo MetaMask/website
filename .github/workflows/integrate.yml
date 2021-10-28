@@ -16,7 +16,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Create env file
+      - name: Create production env file
         run: |
           touch gatsby.production.env
           echo GATSBY_CONTENTFUL_API_KEY =${{ secrets.GATSBY_CONTENTFUL_API_KEY }} >> gatsby.production.env
@@ -24,6 +24,15 @@ jobs:
           echo GATSBY_CONTENTFUL_ENVIRONMENT =${{ secrets.GATSBY_CONTENTFUL_ENVIRONMENT }} >> gatsby.production.env
           echo GATSBY_CONTENTFUL_HOST =${{ secrets.GATSBY_CONTENTFUL_HOST }} >> gatsby.production.env
           echo GATSBY_CONTENTFUL_SPACE_ID =${{ secrets.GATSBY_CONTENTFUL_SPACE_ID }} >> gatsby.production.env
+
+      - name: Create development env file
+        run: |
+          touch gatsby.development.env
+          echo GATSBY_CONTENTFUL_API_KEY =${{ secrets.GATSBY_CONTENTFUL_API_KEY }} >> gatsby.development.env
+          echo GATSBY_CONTENTFUL_DOWNLOAD_LOCAL =${{ secrets.GATSBY_CONTENTFUL_DOWNLOAD_LOCAL }} >> gatsby.development.env
+          echo GATSBY_CONTENTFUL_ENVIRONMENT =${{ secrets.GATSBY_CONTENTFUL_ENVIRONMENT }} >> gatsby.development.env
+          echo GATSBY_CONTENTFUL_HOST =${{ secrets.GATSBY_CONTENTFUL_HOST }} >> gatsby.development.env
+          echo GATSBY_CONTENTFUL_SPACE_ID =${{ secrets.GATSBY_CONTENTFUL_SPACE_ID }} >> gatsby.development.env
 
       - name: Install and Build 🔧
         uses: actions/setup-node@v1
