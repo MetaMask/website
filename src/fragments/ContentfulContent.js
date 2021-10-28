@@ -135,6 +135,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     }
     backgroundColor
     displayHeadline
+    headlineAlignCenter
     noPaddingBottom
   }
 `
