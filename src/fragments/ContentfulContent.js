@@ -89,7 +89,7 @@ export const ContentfulLayoutFeatureFields = graphql`
     }
     imageLink
     contentAlignment
-    ratioContentImage
+    withContent
     eyebrow
     ctaText
     ctaLink
