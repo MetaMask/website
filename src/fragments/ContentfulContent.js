@@ -49,6 +49,7 @@ export const ContentfulLayoutHeroFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
+    sideImageAlignment
     ctaText
     ctaLink
     getInTouchPopup
@@ -87,6 +88,8 @@ export const ContentfulLayoutFeatureFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
+    imageWidth
+    imageAlignment
     imageLink
     contentAlignment
     withContent
