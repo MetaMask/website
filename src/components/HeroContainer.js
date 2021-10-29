@@ -3,7 +3,7 @@ import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import { useLocation } from '@reach/router'
-import { parseContentfulAssetUrl } from "../lib/utils/urlParser";
+import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
 
 const HeroContainerComponent = props => {
   const {

@@ -4,7 +4,7 @@ import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import CTA from './CTA'
 import ScrollAnimation from 'react-animate-on-scroll'
-import { parseContentfulAssetUrl } from "../lib/utils/urlParser";
+import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
 
 const FeatureComponent = props => {
   const {

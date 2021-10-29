@@ -5,10 +5,7 @@ import styled from 'styled-components'
 
 const ContentfulModuleContainer = props => {
   const {
-    moduleConfig: {
-      moduleName,
-      displayModuleName,
-    },
+    moduleConfig: { moduleName, displayModuleName },
   } = props
 
   return (

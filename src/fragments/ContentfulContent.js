@@ -64,9 +64,9 @@ export const ContentfulLayoutHeroFields = graphql`
     hideHeadline
     backgroundImage {
       file {
-          url
-          fileName
-        }
+        url
+        fileName
+      }
       fluid(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
