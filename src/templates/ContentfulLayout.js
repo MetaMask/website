@@ -61,7 +61,7 @@ const ContentfulLayout = props => {
 
   return (
     <Layout {...rest}>
-      {seo && contentfulModuleToComponent({ ...seo, seoPagePath: pathBuild })}
+      {seo && contentfulModuleToComponent({ ...seo, pagePath: pathBuild })}
       {allModules.map(contentfulModuleToComponent)}
     </Layout>
   )

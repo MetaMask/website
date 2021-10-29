@@ -20,7 +20,8 @@ export const parseContentfulAssetUrl = asset => {
   const url =
     asset.assetUrl ||
     (asset.fluid && asset.fluid.src) ||
-    (asset.fixed && asset.fixed.src)
+    (asset.fixed && asset.fixed.src) ||
+    (asset.file && asset.file.url)
 
   if (!url || typeof url !== 'string') return false
 

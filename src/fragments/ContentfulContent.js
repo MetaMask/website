@@ -45,6 +45,10 @@ export const ContentfulLayoutHeroFields = graphql`
       ...ContentfulLogoFields
     }
     sideImage {
+      file {
+        url
+        fileName
+      }
       fluid(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
@@ -59,6 +63,10 @@ export const ContentfulLayoutHeroFields = graphql`
     headlineBorderBottom
     hideHeadline
     backgroundImage {
+      file {
+          url
+          fileName
+        }
       fluid(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
@@ -99,12 +107,15 @@ export const ContentfulLayoutFeatureFields = graphql`
     imageWidth
     imageAlignment
     imageLink
+    alignItemsCenter
     contentAlignment
+    contentPaddingTop
     withContent
     eyebrow
     ctaText
     ctaLink
     newTab
+    animation
     backgroundColor
   }
 `
@@ -259,6 +270,11 @@ export const ContentfulRichTextFields = graphql`
     body {
       internal {
         content
+      }
+    }
+    htmlBody {
+      childMarkdownRemark {
+        html
       }
     }
     displayTitle

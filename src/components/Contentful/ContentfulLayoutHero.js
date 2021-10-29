@@ -19,9 +19,7 @@ const ContentfulLayoutHero = props => {
       showLearnMore,
     },
   } = props
-  const {
-    childMarkdownRemark: { html },
-  } = description || {}
+  const { childMarkdownRemark: { html } = {} } = description || {}
   const eyebrowUrl = parseContentfulAssetUrl(eyebrowLogo)
   const bgUrl = parseContentfulAssetUrl(backgroundImage)
 

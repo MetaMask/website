@@ -12,11 +12,16 @@ const ContentfulLayoutFeature = props => {
       image,
       imageMobile,
       imageLink,
+      alignItemsCenter,
       contentAlignment,
+      contentPaddingTop,
       eyebrow,
       withContent,
       imageWidth,
       imageAlignment,
+      newTab,
+      animation,
+      backgroundColor,
     },
   } = props
 
@@ -32,10 +37,15 @@ const ContentfulLayoutFeature = props => {
       ctaLink={ctaLink}
       ctaText={ctaText}
       image={image}
+      alignItemsCenter={alignItemsCenter}
       contentAlignment={contentAlignment}
+      contentPaddingTop={contentPaddingTop}
       withContent={withContent}
       imageWidth={imageWidth}
       imageAlignment={imageAlignment}
+      newTab={newTab}
+      animation={animation}
+      backgroundColor={backgroundColor}
     />
   )
 }

@@ -7,8 +7,10 @@ import Layout from '../templates/PageLayout'
 
 const DownloadPage = ({ data: { seo }, location }) => (
   <Layout>
-    {seo && <Seo moduleConfig={{ ...seo, seoPagePath: location.pathname }} />}
-    <Container></Container>
+    {seo && <Seo moduleConfig={{ ...seo, pagePath: location.pathname }} />}
+    <Container>
+      <DownloadTitle>Download Page</DownloadTitle>
+    </Container>
   </Layout>
 )
 
@@ -63,6 +65,12 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`
+
+const DownloadTitle = styled.h1`
+  margin-top: 20px;
+  padding: 1rem;
+  font-size: 1.5rem;
 `
 
 export default DownloadPage

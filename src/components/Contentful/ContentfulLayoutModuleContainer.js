@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import ContentWrapper from '../ContentWrapper'
 import styled from 'styled-components'
 
@@ -9,32 +8,12 @@ const ContentfulModuleContainer = props => {
     moduleConfig: {
       moduleName,
       displayModuleName,
-      columns,
-      containerWidth = 'wide',
-      modules,
-      childHeroContainer,
-      fontWeightManual,
     },
   } = props
 
   return (
-    <ContentWrapper size={containerWidth}>
+    <ContentWrapper>
       {displayModuleName ? <Title>{moduleName}</Title> : null}
-      <ContentWrapper
-        size={containerWidth}
-        columns={columns}
-        styleOverride={`margin-top: 0 !important;margin-bottom: 0!important;padding-left: 0 !important;padding-right: 0!important;`}
-      >
-        {modules.map(m =>
-          contentfulModuleToComponent({
-            ...m,
-            hasModuleContainer: true,
-            containerWidth,
-            childHeroContainer,
-            fontWeightManual,
-          })
-        )}
-      </ContentWrapper>
     </ContentWrapper>
   )
 }

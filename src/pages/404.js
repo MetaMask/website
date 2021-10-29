@@ -7,7 +7,7 @@ import Layout from '../templates/PageLayout'
 
 const NotFoundPage = ({ data: { seo }, location }) => (
   <Layout>
-    {seo && <Seo moduleConfig={{ ...seo, seoPagePath: location.pathname }} />}
+    {seo && <Seo moduleConfig={{ ...seo, pagePath: location.pathname }} />}
     <Container>
       <NotFoundTitle>Whoops, something went wrong</NotFoundTitle>
       <NotFoundDescription>
