@@ -79,11 +79,19 @@ export const ContentfulLayoutFeatureFields = graphql`
       }
     }
     image {
+      file {
+        url
+        fileName
+      }
       fluid(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
     imageMobile {
+      file {
+        url
+        fileName
+      }
       fluid(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }

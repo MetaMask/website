@@ -7,35 +7,42 @@ import CTA from '../CTA'
 const ContentfulLayoutHero = props => {
   const {
     moduleConfig: {
-      eyebrowLogo,
       backgroundImage,
       ctaLink,
       ctaText,
-      heroEyebrow,
-      heroSubtitle,
-      heroTheme = {},
-      heroTitle,
+      description,
+      headline,
       modules,
+      sideImage,
+      eyebrowLogo,
+      hideHeadline,
+      showLearnMore,
     },
   } = props
+  const {
+    childMarkdownRemark: { html },
+  } = description || {}
   const eyebrowUrl = parseContentfulAssetUrl(eyebrowLogo)
   const bgUrl = parseContentfulAssetUrl(backgroundImage)
 
   let HeroCTA
   if (ctaLink) {
-    HeroCTA = <CTA text={ctaText} link={ctaLink} />
+    HeroCTA = (
+      <CTA text={ctaText} link={ctaLink} button={true} buttonSize="large" />
+    )
   }
 
   return (
     <Hero
-      title={heroTitle}
-      subtitle={heroSubtitle}
-      header={heroEyebrow}
+      headline={headline}
+      description={html}
       eyebrowLogo={eyebrowUrl}
-      backgroundImage={bgUrl}
+      backgroundImage={bgUrl || ''}
       CTA={HeroCTA}
-      themeOverride={heroTheme}
       modules={modules}
+      sideImage={sideImage}
+      hideHeadline={hideHeadline}
+      showLearnMore={showLearnMore}
     />
   )
 }
@@ -49,10 +56,10 @@ ContentfulLayoutHero.propTypes = {
     backgroundImage: PropTypes.object,
     ctaLink: PropTypes.string,
     ctaText: PropTypes.string,
-    heroEyebrow: PropTypes.string,
-    description: PropTypes.string,
-    headline: PropTypes.string,
     backgroundColor: PropTypes.string,
     layout: PropTypes.string,
+    description: PropTypes.object,
+    headline: PropTypes.string,
+    hideHeadline: PropTypes.bool,
   }),
 }
