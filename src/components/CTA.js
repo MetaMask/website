@@ -57,6 +57,7 @@ CTA.propTypes = {
   align: PropTypes.string,
   iconConfig: PropTypes.object,
   isHideArrow: PropTypes.bool,
+  newTab: PropTypes.bool,
 }
 
 const CTAContainer = styled.div`

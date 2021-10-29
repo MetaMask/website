@@ -29,8 +29,8 @@ export default ContentfulEmbed
 
 ContentfulEmbed.propTypes = {
   moduleConfig: PropTypes.shape({
-    embedTag: PropTypes.shape({
-      embedTag: PropTypes.string.isRequired,
+    embed: PropTypes.shape({
+      embed: PropTypes.string.isRequired,
     }).isRequired,
   }),
 }
@@ -40,7 +40,6 @@ const EmbedHtml = styled.div`
   justify-content: center;
   position: relative;
   z-index: 2;
-  position: relative;
   @media (max-width: ${({ theme }) => theme.device.desktopMediaMax}) {
     &:before {
       content: '';

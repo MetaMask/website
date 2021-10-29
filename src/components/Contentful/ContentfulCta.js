@@ -9,7 +9,7 @@ const ContentfulCta = props => {
     moduleConfig: {
       ctaLink,
       ctaText,
-      ctaNewTab,
+      newTab,
       buttonDisplay,
       ctaAlignment,
       hasModuleContainer,
@@ -30,7 +30,7 @@ const ContentfulCta = props => {
       <CTA
         link={ctaLink}
         text={displayText || ctaText}
-        newTab={ctaNewTab}
+        newTab={newTab}
         button={buttonDisplay}
         align={ctaAlignment}
         color="black"
@@ -47,7 +47,7 @@ ContentfulCta.propTypes = {
   moduleConfig: PropTypes.shape({
     ctaAlignment: PropTypes.string,
     ctaLink: PropTypes.string,
-    ctaNewTab: PropTypes.bool,
+    newTab: PropTypes.bool,
     ctaText: PropTypes.string,
     isButton: PropTypes.bool,
     typeLayout: PropTypes.string,

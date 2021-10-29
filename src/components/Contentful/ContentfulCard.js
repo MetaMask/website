@@ -15,13 +15,11 @@ export default ContentfulCard
 
 ContentfulCard.propTypes = {
   moduleConfig: PropTypes.shape({
-    cardDescription: PropTypes.object,
-    cardLink: PropTypes.string,
-    cardTitle: PropTypes.string,
-    cardImage: PropTypes.object,
-    cardLinkOpensNewTab: PropTypes.boolean,
-    isFeatured: PropTypes.bool,
-    featuredBackground: PropTypes.object,
+    description: PropTypes.object,
+    link: PropTypes.string,
+    title: PropTypes.string,
+    image: PropTypes.object,
+    newTab: PropTypes.bool,
   }),
 }
 
