@@ -4,7 +4,7 @@ import RawHTML from './RawHTML'
 import { kebabCase } from 'lodash'
 
 const RichText = props => {
-  const { title, content, displayTitle = true, fontWeightManual } = props
+  const { title, content, html, displayTitle = true, fontWeightManual } = props
 
   return (
     <RichTextWrapper id={kebabCase(title || '')}>
@@ -12,6 +12,7 @@ const RichText = props => {
       {content && (
         <RawHTML content={content} fontWeightManual={fontWeightManual} />
       )}
+      {html && <div dangerouslySetInnerHTML={{ __html: html }} />}
     </RichTextWrapper>
   )
 }

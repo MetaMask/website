@@ -132,11 +132,9 @@ const HeaderElement = styled.header`
   left: 0;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 0px;
+  margin-top: 0;
   overflow: visible;
   padding: 24px 20px;
-  padding: 24px 20px;
-  position: relative;
   position: sticky;
   right: 0;
   top: 0;

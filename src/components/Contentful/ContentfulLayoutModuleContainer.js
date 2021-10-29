@@ -5,12 +5,23 @@ import styled from 'styled-components'
 
 const ContentfulModuleContainer = props => {
   const {
-    moduleConfig: { moduleName, displayModuleName },
+    moduleConfig: {
+      headline,
+      description,
+      backgroundColor,
+      displayHeadline,
+      headlineAlignCenter,
+      contentAlignCenter,
+      noPaddingBottom,
+    },
   } = props
+
+  const { childMarkdownRemark: { html } = {} } = description || {}
 
   return (
     <ContentWrapper>
-      {displayModuleName ? <Title>{moduleName}</Title> : null}
+      {displayHeadline ? <Title>{headline}</Title> : null}
+      <div dangerouslySetInnerHTML={{ __html: html }} />
     </ContentWrapper>
   )
 }
@@ -19,9 +30,13 @@ export default ContentfulModuleContainer
 
 ContentfulModuleContainer.propTypes = {
   moduleConfig: PropTypes.shape({
-    columns: PropTypes.number,
-    modules: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-    containerWidth: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.object,
+    backgroundColor: PropTypes.string,
+    headlineAlignCenter: PropTypes.bool,
+    contentAlignCenter: PropTypes.bool,
+    displayHeadline: PropTypes.bool,
+    noPaddingBottom: PropTypes.bool,
   }),
 }
 

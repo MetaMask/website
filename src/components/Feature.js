@@ -177,7 +177,7 @@ const Description = styled.div`
 
 const FeatureWrapper = styled.div`
   display: flex;
-  margin: -10px 0;
+  margin: -10px;
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     flex-direction: column;
     margin: 0;
