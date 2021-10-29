@@ -168,6 +168,10 @@ export const ContentfulCardFields = graphql`
     }
     title
     image {
+      file {
+        url
+        fileName
+      }
       fluid(maxWidth: 600) {
         ...GatsbyContentfulFluid_withWebp
       }
