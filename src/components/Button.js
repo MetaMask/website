@@ -41,4 +41,9 @@ const ButtonWrapper = styled(Link)`
   font-size: 20px;
   `
       : ''}
+  @media (min-width: ${({ theme }) => theme.device.miniDesktop}){
+    &:hover {
+      background: ${({ theme }) => theme.darkerBlue};
+    }
+  }
 `

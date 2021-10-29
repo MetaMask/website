@@ -49,6 +49,7 @@ export const ContentfulLayoutHeroFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
+    sideImageAlignment
     ctaText
     ctaLink
     getInTouchPopup
@@ -78,15 +79,25 @@ export const ContentfulLayoutFeatureFields = graphql`
       }
     }
     image {
+      file {
+        url
+        fileName
+      }
       fluid(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
     imageMobile {
+      file {
+        url
+        fileName
+      }
       fluid(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
+    imageWidth
+    imageAlignment
     imageLink
     contentAlignment
     withContent
@@ -132,6 +143,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     }
     backgroundColor
     displayHeadline
+    headlineAlignCenter
     noPaddingBottom
   }
 `
