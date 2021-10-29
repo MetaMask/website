@@ -121,8 +121,8 @@ if (env.errors) {
                 policy: [{ userAgent: '*', allow: '/' }],
               }
             : {
-                host: 'https://consensys.github.io/metamask-website/',
-                sitemap: 'https://consensys.github.io/metamask-website/sitemap.xml',
+                host: 'https://metamask.consensys.net',
+                sitemap: 'https://metamask.consensys.net/sitemap.xml',
                 policy: [{ userAgent: '*', disallow: '/' }],
               },
       },

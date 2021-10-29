@@ -1,11 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { parseContentfulAssetUrl } from '../../lib/utils/urlParser';
-import Hero from '../HeroContainer';
-import CTA from '../CTA';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
+import Hero from '../HeroContainer'
+import CTA from '../CTA'
 
-
-const ContentfulLayoutHero = (props) => {
+const ContentfulLayoutHero = props => {
   const {
     moduleConfig: {
       eyebrowLogo,
@@ -16,20 +15,15 @@ const ContentfulLayoutHero = (props) => {
       heroSubtitle,
       heroTheme = {},
       heroTitle,
-      modules
-    }
-  } = props;
-  const eyebrowUrl = parseContentfulAssetUrl(eyebrowLogo);
-  const bgUrl = parseContentfulAssetUrl(backgroundImage);
+      modules,
+    },
+  } = props
+  const eyebrowUrl = parseContentfulAssetUrl(eyebrowLogo)
+  const bgUrl = parseContentfulAssetUrl(backgroundImage)
 
-  let HeroCTA;
-  if(ctaLink) {
-    HeroCTA = (
-      <CTA
-        text={ctaText}
-        link={ctaLink}
-      />
-    )
+  let HeroCTA
+  if (ctaLink) {
+    HeroCTA = <CTA text={ctaText} link={ctaLink} />
   }
 
   return (
@@ -43,11 +37,10 @@ const ContentfulLayoutHero = (props) => {
       themeOverride={heroTheme}
       modules={modules}
     />
-  );
-};
+  )
+}
 
-export default ContentfulLayoutHero;
-
+export default ContentfulLayoutHero
 
 ContentfulLayoutHero.propTypes = {
   moduleConfig: PropTypes.shape({

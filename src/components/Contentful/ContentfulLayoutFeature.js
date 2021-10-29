@@ -1,25 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import CTA from '../CTA';
+import React from 'react'
+import PropTypes from 'prop-types'
+import CTA from '../CTA'
 
-const ContentfulLayoutFeature = (props) => {
+const ContentfulLayoutFeature = props => {
   const {
-    moduleConfig: {
-      ctaLink,
-      ctaText,
-    }
-  } = props;
+    moduleConfig: { ctaLink, ctaText },
+  } = props
 
-  return (
-    <CTA
-      text={ctaText}
-      link={ctaLink}
-    />
-  );
-};
+  return <CTA text={ctaText} link={ctaLink} />
+}
 
-export default ContentfulLayoutFeature;
-
+export default ContentfulLayoutFeature
 
 ContentfulLayoutFeature.propTypes = {
   moduleConfig: PropTypes.shape({
