@@ -43,7 +43,7 @@ const ContentfulLayoutHero = props => {
       showLearnMore={showLearnMore}
     />
   )
-}
+};
 
 export default ContentfulLayoutHero
 
