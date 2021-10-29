@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import gdprConsentScript from './lib/services/gdpr-banner'
+import accessiBeScript from './lib/services/accessibe'
 
 export default class HTML extends React.Component {
   render() {
@@ -29,6 +30,9 @@ export default class HTML extends React.Component {
           />
           {process.env.NODE_ENV === 'production' && (
             <script dangerouslySetInnerHTML={{ __html: gdprConsentScript }} />
+          )}
+          {process.env.NODE_ENV === 'production' && (
+            <script dangerouslySetInnerHTML={{ __html: accessiBeScript }} />
           )}
         </body>
       </html>
