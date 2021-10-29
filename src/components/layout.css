@@ -789,7 +789,7 @@ input[type="submit"].hs-button {
 }
 
 .fz-12 {
-  font-size: 12px;
+  font-size: 12px!important;;
 }
 
 .text-block {
@@ -798,70 +798,70 @@ input[type="submit"].hs-button {
 }
 
 .mt-0{
-  margin-top: 0;
+  margin-top: 0!important;;
 }
 .mt-1{
-  margin-top: 8px;
+  margin-top: 8px!important;;
 }
 .mt-2{
-  margin-top: 16px;
+  margin-top: 16px!important;;
 }
 .mt-3{
-  margin-top: 24px;
+  margin-top: 24px!important;;
 }
 .mt-4{
-  margin-top: 32px;
+  margin-top: 32px!important;;
 }
 .mt-5{
-  margin-top: 40px;
+  margin-top: 40px!important;;
 }
 .mt-6{
-  margin-top: 48px;
+  margin-top: 48px!important;;
 }
 .mt-7{
   margin-top: 56px;
 }
 .mt-8{
-  margin-top: 64px;
+  margin-top: 64px!important;;
 }
 .mt-9{
-  margin-top: 72px;
+  margin-top: 72px!important;;
 }
 .mt-10{
-  margin-top: 80px;
+  margin-top: 80px!important;;
 }
 .mb-0{
-  margin-bottom: 0;
+  margin-bottom: 0!important;;
 }
 .mb-1{
-  margin-bottom: 8px;
+  margin-bottom: 8px!important;;
 }
 .mb-2{
-  margin-bottom: 16px;
+  margin-bottom: 16px!important;;
 }
 .mb-3{
-  margin-bottom: 24px;
+  margin-bottom: 24px!important;;
 }
 .mb-4{
-  margin-bottom: 32px;
+  margin-bottom: 32px!important;;
 }
 .mb-5{
-  margin-bottom: 40px;
+  margin-bottom: 40px!important;;
 }
 .mb-6{
-  margin-bottom: 48px;
+  margin-bottom: 48px!important;;
 }
 .mb-7{
-  margin-bottom: 56px;
+  margin-bottom: 56px!important;;
 }
 .mb-8{
-  margin-bottom: 64px;
+  margin-bottom: 64px!important;;
 }
 .mb-9{
-  margin-bottom: 72px;
+  margin-bottom: 72px!important;;
 }
 .mb-10{
-  margin-bottom: 80px;
+  margin-bottom: 80px!important;
 }
 
 .btn {
@@ -872,6 +872,7 @@ input[type="submit"].hs-button {
   justify-content: center;
   padding: 8px 20px;
   border-radius: 999px;
+  border-color: transparent;
   font-size: 16px;
   line-height: 1.375;
 }

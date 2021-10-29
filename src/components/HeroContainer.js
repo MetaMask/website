@@ -3,6 +3,7 @@ import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import { useLocation } from '@reach/router'
+import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
 
 const HeroContainerComponent = props => {
   const {
@@ -11,11 +12,12 @@ const HeroContainerComponent = props => {
     headline,
     hideHeadline,
     description,
-    sideImage: { fluid },
+    sideImage,
     showLearnMore,
   } = props
   const location = useLocation()
   const isHome = location.pathname === '/'
+  const imageUrl = parseContentfulAssetUrl(sideImage)
   return (
     <HeroContainer
       className="section"
@@ -23,7 +25,7 @@ const HeroContainerComponent = props => {
       showLearnMore={showLearnMore}
     >
       <ContentWrapper>
-        <HeroContentContainer bgSrc={fluid.src}>
+        <HeroContentContainer bgSrc={imageUrl}>
           <HeroImageTextContainer isHome={isHome}>
             {headline && (
               <HeroTitle hideHeadline={hideHeadline}> {headline} </HeroTitle>
@@ -88,6 +90,7 @@ const HeroContentContainer = styled.div`
   display: flex;
   margin: -10px;
   margin-top: 10px;
+  padding-bottom: 48px;
   & > * {
     width: 50%;
     padding: 10px;
@@ -109,6 +112,7 @@ const HeroContentContainer = styled.div`
     background-position: 50% 0%;
     background-size: 90%;
     background-attachment: scroll;
+    padding-bottom: 0;
     & > * {
     width: 100%;
   }
@@ -150,6 +154,13 @@ const HeroTitle = styled.h1`
     display: none;
   `
       : ''}
+  @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+    font-size: 46px;
+  }
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    font-size: 34px;
+    line-height: 43px;
+  }
 `
 
 const HeroDescription = styled.div`
@@ -175,6 +186,9 @@ const HeroCTA = styled.div`
 `
 const LearnMoreWrapper = styled.div`
   padding-top: 48px;
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    padding: 24px 0;
+  }
 `
 
 const LearnMoreInner = styled.div`

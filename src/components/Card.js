@@ -24,7 +24,7 @@ const StyledCard = props => {
 
   return (
     <WrapperEl>
-      {image && <CardImageContainer fluid={image} />}
+      {image && <CardImageContainer image={image} />}
       <CardTextContainer>
         <CardTitle> {title} </CardTitle>
         <CardBody>{description}</CardBody>
@@ -70,7 +70,7 @@ const CardImageContainer = styled(Img)`
   width: 100%;
   height: 12rem;
   margin-bottom: 1.25rem;
-  background-image: url(${({ src }) => src});
+  background-image: url(${({ image }) => image});
   background-repeat: no-repeat;
   background-position: 50% 30%;
   background-size: cover;

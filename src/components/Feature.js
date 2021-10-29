@@ -4,69 +4,104 @@ import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import CTA from './CTA'
 import ScrollAnimation from 'react-animate-on-scroll'
+import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
 
 const FeatureComponent = props => {
   const {
     ctaLink,
     ctaText,
+    newTab,
     headline,
     hideHeadline,
     description,
-    image: {
-      file: { url },
-    },
+    image,
     withContent,
     imageWidth,
+    alignItemsCenter,
     contentAlignment,
+    contentPaddingTop,
     imageAlignment,
+    animation,
+    backgroundColor,
   } = props
+  const url = parseContentfulAssetUrl(image)
   return (
     <FeatureContainer className="section">
       <ContentWrapper>
         <FeatureWrapper
           contentAlignment={contentAlignment}
+          alignItemsCenter={alignItemsCenter}
           imageWidth={imageWidth}
+          backgroundColor={backgroundColor}
         >
           <SideImage>
             {url ? (
               <Image>
-                <ScrollAnimation
-                  animateIn={
-                    contentAlignment === 'right' ? 'fadeInLeft' : 'fadeInRight'
-                  }
-                  animateOnce
-                  delay={0}
-                  offset={0}
-                >
+                {animation ? (
+                  <ScrollAnimation
+                    animateIn={
+                      contentAlignment === 'right'
+                        ? 'fadeInLeft'
+                        : 'fadeInRight'
+                    }
+                    animateOnce
+                    delay={0}
+                    offset={0}
+                  >
+                    <ImageSrc
+                      src={url}
+                      widthImg={imageWidth}
+                      imageAlignment={imageAlignment}
+                    />
+                  </ScrollAnimation>
+                ) : (
                   <ImageSrc
                     src={url}
                     widthImg={imageWidth}
                     imageAlignment={imageAlignment}
                   />
-                </ScrollAnimation>
+                )}
               </Image>
             ) : null}
           </SideImage>
-          <FeatureInner withContent={withContent}>
-            <ScrollAnimation
-              animateIn={
-                contentAlignment === 'left' ? 'fadeInLeft' : 'fadeInRight'
-              }
-              animateOnce
-              delay={0}
-              offset={0}
-            >
-              {headline ? (
-                <Headline hideHeadline={hideHeadline}>{headline}</Headline>
-              ) : null}
-              {description ? (
-                <Description>
-                  <div dangerouslySetInnerHTML={{ __html: description }} />
-                </Description>
-              ) : null}
-            </ScrollAnimation>
+          <FeatureInner
+            withContent={withContent}
+            contentPaddingTop={contentPaddingTop}
+          >
+            {animation ? (
+              <ScrollAnimation
+                animateIn={
+                  contentAlignment === 'left' ? 'fadeInLeft' : 'fadeInRight'
+                }
+                animateOnce
+                delay={0}
+                offset={0}
+              >
+                {headline ? (
+                  <Headline hideHeadline={hideHeadline}>{headline}</Headline>
+                ) : null}
+                {description ? (
+                  <Description>
+                    <div dangerouslySetInnerHTML={{ __html: description }} />
+                  </Description>
+                ) : null}
+              </ScrollAnimation>
+            ) : (
+              <div>
+                {headline ? (
+                  <Headline hideHeadline={hideHeadline}>{headline}</Headline>
+                ) : null}
+                {description ? (
+                  <Description>
+                    <div dangerouslySetInnerHTML={{ __html: description }} />
+                  </Description>
+                ) : null}
+              </div>
+            )}
           </FeatureInner>
-          {ctaLink ? <CTA ctaLink={ctaLink} ctaText={ctaText} /> : null}
+          {ctaLink ? (
+            <CTA link={ctaLink} text={ctaText} newTab={newTab} button={true} />
+          ) : null}
         </FeatureWrapper>
       </ContentWrapper>
     </FeatureContainer>
@@ -122,29 +157,49 @@ const Headline = styled.h2`
     display: none;
   `
       : ''}
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 15px;
+    margin-top: 16px;
+    padding-bottom: 0;
+    padding-top: 0;
+    text-align: center;
+  }
 `
 
 const Description = styled.div`
   display: block;
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    text-align: center;
+  }
 `
 
 const FeatureWrapper = styled.div`
   display: flex;
-  margin: -10px;
+  margin: -10px 0;
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     flex-direction: column;
+    margin: 0;
   }
-  ${({ contentAlignment, theme }) =>
+  ${({ contentAlignment }) =>
     contentAlignment === 'left'
       ? `
     flex-direction: row-reverse;
-    @media (max-width: ${theme.device.tabletMediaMax}){
-      flex-direction: column-reverse;
-    }
+  `
+      : ''}
+  ${({ alignItemsCenter }) =>
+    alignItemsCenter
+      ? `
+    align-items: center;
+    justify-content: center;
   `
       : ''}
   & > * {
     padding: 10px;
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      padding: 0 10px;
+    }
   }
 `
 
@@ -156,6 +211,12 @@ const SideImage = styled.div`
 
 const FeatureInner = styled.div`
   display: block;
+  ${({ contentPaddingTop }) =>
+    contentPaddingTop
+      ? `
+    padding-top: ${contentPaddingTop};
+  `
+      : ''}
   ${({ withContent }) =>
     withContent
       ? `
@@ -164,5 +225,6 @@ const FeatureInner = styled.div`
       : 'width: 50%'}
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     width: 100%;
+    padding-top: 0;
   }
 `

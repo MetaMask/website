@@ -10,8 +10,8 @@ const ContentfulSeo = props => {
       pageDescription,
       metaTags,
       linkTags,
-      seoFeaturedImage,
-      seoPagePath,
+      featuredImage,
+      pagePath,
     },
   } = props
 
@@ -23,8 +23,8 @@ const ContentfulSeo = props => {
     <SEO
       title={pageTitle}
       description={pageDescription}
-      pagePath={seoPagePath}
-      image={seoFeaturedImage}
+      pagePath={pagePath}
+      image={featuredImage}
       metaTags={ex_metaTags}
       linkTags={ex_linkTags}
     />
@@ -37,8 +37,8 @@ ContentfulSeo.propTypes = {
   pageDescription: PropTypes.string,
   metaTags: PropTypes.arrayOf(PropTypes.object),
   linkTags: PropTypes.arrayOf(PropTypes.object),
-  seoFeaturedImage: PropTypes.object,
-  seoPagePath: PropTypes.string,
+  featuredImage: PropTypes.object,
+  pagePath: PropTypes.string,
 }
 
 export default ContentfulSeo

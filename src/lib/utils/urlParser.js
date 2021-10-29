@@ -16,11 +16,14 @@ export const parseContentfulAssetUrl = asset => {
 
   // url path can take to forms depending on where module data is called
   // `assetUrl` is from function `fetchContentfulData` for previews
-  // `asset.fluid|fixed.src` is from GraphQL during production page building
+  // `asset.fluid|fluid.src` is from GraphQL during production page building
+  // `asset.fixed|fixed.src` is from GraphQL during production page building
+  // `asset.file|file.src` is from GraphQL during production page building
   const url =
     asset.assetUrl ||
     (asset.fluid && asset.fluid.src) ||
-    (asset.fixed && asset.fixed.src)
+    (asset.fixed && asset.fixed.src) ||
+    (asset.file && asset.file.url)
 
   if (!url || typeof url !== 'string') return false
 
@@ -28,6 +31,6 @@ export const parseContentfulAssetUrl = asset => {
   if (url.startsWith('//')) return `https://${url.slice(2)}`
   // if it is already http protocol then return
   if (url.startsWith('http')) return url
-  // specify https if no protocol addeds
+  // specify https if no protocol added
   return `https://${url}`
 }

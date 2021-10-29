@@ -46,4 +46,8 @@ const ButtonWrapper = styled(Link)`
       background: ${({ theme }) => theme.darkerBlue};
     }
   }
+  
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    width: 100%;
+  }
 `
