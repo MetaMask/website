@@ -2,19 +2,25 @@ import React from 'react'
 import styled from 'styled-components'
 import { graphql } from 'gatsby'
 
-import Seo from '../components/Contentful/ContentfulSeo'
+import {
+  ContentfulSeo as Seo,
+  ContentfulLayoutHeader as Header,
+  ContentfulLayoutFooter as Footer,
+} from '../components/Contentful'
 import Layout from '../templates/PageLayout'
 
-const DownloadPage = ({ data: { seo }, location }) => (
+const DownloadPage = ({ data: { seo, header, footer }, location }) => (
   <Layout>
     {seo && <Seo moduleConfig={{ ...seo, pagePath: location.pathname }} />}
+    <Header moduleConfig={header} />
     <Container>
       <DownloadTitle>Download Page</DownloadTitle>
     </Container>
+    <Footer moduleConfig={footer} />
   </Layout>
 )
 
-export const NullPageQuery = graphql`
+export const DownloadPageQuery = graphql`
   query {
     header: contentfulLayoutHeader(
       contentful_id: { eq: "6I0knvqLf0DS5PB72DqUlM" }
