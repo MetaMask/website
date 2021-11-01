@@ -7,7 +7,7 @@ import globalTheme from '../lib/theme'
 
 import GDPRBanner from './GDPRBanner'
 
-import './layout.css'
+import './layout.scss'
 import './animate.css'
 import '../fonts/Graphik-Extralight-Web.woff'
 import '../fonts/Graphik-Semibold-Web.woff'

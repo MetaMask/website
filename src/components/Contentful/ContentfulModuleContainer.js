@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ContentWrapper from '../ContentWrapper'
 import styled from 'styled-components'
+import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
+import classnames from 'classnames'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -12,15 +13,42 @@ const ContentfulModuleContainer = props => {
       contentAlignment,
       splitModules,
       displayTitle,
+      modules = [],
     },
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
 
-  return <ContentWrapper>
-    {displayTitle ? <Title>{title}</Title> : null}
-    <div dangerouslySetInnerHTML={{ __html: html }} />
-  </ContentWrapper>
+  return (
+    <Wrapper>
+      {title ? (
+        <Title
+          className={classnames({
+            hidden: !displayTitle,
+          })}
+        >
+          {title}
+        </Title>
+      ) : null}
+      <div
+        className={classnames({
+          'txt-center': contentAlignment === 'center',
+        })}
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+      <Modules
+        columns={columns}
+        contentAlignment={contentAlignment}
+        splitModules={splitModules}
+      >
+        {modules.map(m =>
+          contentfulModuleToComponent({
+            ...m,
+          })
+        )}
+      </Modules>
+    </Wrapper>
+  )
 }
 
 export default ContentfulModuleContainer
@@ -35,9 +63,28 @@ ContentfulModuleContainer.propTypes = {
   }),
 }
 
+const Wrapper = styled.div`
+  display: block;
+`
+
 const Title = styled.h2`
   margin-bottom: 1rem;
   @media (min-width: ${({ theme }) => theme.device.desktop}) {
     margin-bottom: 2rem;
   }
+`
+const Modules = styled.div`
+  display: flex;
+  flex-flow: wrap;
+  ${({ columns, theme }) =>
+    columns
+      ? `
+  > * {
+    width: calc(100%/${columns});
+    @media (max-width: ${theme.device.mobileMediaMax}){
+      width: 50%;
+    }
+  }
+  `
+      : ``}
 `

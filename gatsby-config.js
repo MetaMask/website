@@ -22,6 +22,7 @@ if (env.errors) {
       siteUrl: 'https://metamask.io',
     },
     plugins: [
+      `gatsby-plugin-sass`,
       'gatsby-plugin-react-helmet',
       'gatsby-plugin-sharp',
       `gatsby-plugin-styled-components`,

@@ -17,6 +17,7 @@ const CTA = props => {
     isHideArrow = true,
     typeLayout = '',
     buttonSize,
+    buttonColor,
   } = props
 
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
@@ -29,7 +30,7 @@ const CTA = props => {
         link={link}
         text={text}
         newTab={newTab}
-        color={color}
+        color={buttonColor}
       />
     )
   }
@@ -78,8 +79,7 @@ const ContentWrapper = styled(Link)`
     typeLayout === ''
       ? `
       color: ${color};
-      font-size: ${theme.font.size.xl}rem;
-      font-weight: ${theme.font.weight.semiBold};
+      padding: 22px;
     &:hover {
       opacity: 0.6;
     }

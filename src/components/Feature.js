@@ -5,6 +5,7 @@ import ContentWrapper from './ContentWrapper'
 import CTA from './CTA'
 import ScrollAnimation from 'react-animate-on-scroll'
 import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
+import classnames from 'classnames'
 
 const FeatureComponent = props => {
   const {
@@ -26,7 +27,11 @@ const FeatureComponent = props => {
   } = props
   const url = parseContentfulAssetUrl(image)
   return (
-    <FeatureContainer className="section">
+    <FeatureContainer
+      className={classnames('section', {
+        [`bg-${backgroundColor}`]: backgroundColor,
+      })}
+    >
       <ContentWrapper>
         <FeatureWrapper
           contentAlignment={contentAlignment}
@@ -96,12 +101,24 @@ const FeatureComponent = props => {
                     <div dangerouslySetInnerHTML={{ __html: description }} />
                   </Description>
                 ) : null}
+                {ctaLink ? (
+                  <CTAWrapper>
+                    <CTA
+                      link={ctaLink}
+                      text={ctaText}
+                      newTab={newTab}
+                      button={true}
+                      buttonColor={
+                        backgroundColor === 'white'
+                          ? 'primary'
+                          : 'white-outline'
+                      }
+                    />
+                  </CTAWrapper>
+                ) : null}
               </div>
             )}
           </FeatureInner>
-          {ctaLink ? (
-            <CTA link={ctaLink} text={ctaText} newTab={newTab} button={true} />
-          ) : null}
         </FeatureWrapper>
       </ContentWrapper>
     </FeatureContainer>
@@ -228,3 +245,9 @@ const FeatureInner = styled.div`
     padding-top: 0;
   }
 `
+const CTAWrapper = styled.div`
+  margin-top: 20px;
+  a {
+    min-width: 160px;
+  }
+`;

@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ContentWrapper from '../ContentWrapper'
 import styled from 'styled-components'
+import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
+import classnames from 'classnames'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -13,16 +15,56 @@ const ContentfulModuleContainer = props => {
       headlineAlignCenter,
       contentAlignCenter,
       noPaddingBottom,
+      modules,
     },
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
 
   return (
-    <ContentWrapper>
-      {displayHeadline ? <Title>{headline}</Title> : null}
-      <div dangerouslySetInnerHTML={{ __html: html }} />
-    </ContentWrapper>
+    <Container
+      className={classnames('section', {
+        noPaddingBottom: noPaddingBottom,
+        [`bg-${backgroundColor}`]: backgroundColor,
+      })}
+    >
+      <ContentWrapper>
+        <ContentInfo>
+          {headline ? (
+            <Title
+              className={classnames({
+                hidden: !displayHeadline,
+                'txt-center': headlineAlignCenter,
+              })}
+            >
+              {headline}
+            </Title>
+          ) : null}
+          {html ? (
+            <SubInfo
+              className={classnames({
+                'txt-center': contentAlignCenter,
+              })}
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
+          ) : null}
+        </ContentInfo>
+        <Modules
+          className={classnames({
+            'txt-center': contentAlignCenter,
+          })}
+          contentAlignCenter={contentAlignCenter}
+        >
+          {modules.map(m =>
+            contentfulModuleToComponent({
+              ...m,
+              hasModuleContainer: true,
+              color: ['dark'].includes(backgroundColor) ? 'white' : 'black'
+            })
+          )}
+        </Modules>
+      </ContentWrapper>
+    </Container>
   )
 }
 
@@ -41,8 +83,23 @@ ContentfulModuleContainer.propTypes = {
 }
 
 const Title = styled.h2`
-  margin-bottom: 1rem;
-  @media (min-width: ${({ theme }) => theme.device.desktop}) {
-    margin-bottom: 2rem;
-  }
+  display: block;
 `
+const Container = styled.div`
+  display: block;
+`
+
+const Modules = styled.div`
+  display: block;
+  ${({contentAlignCenter}) => contentAlignCenter ? `
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `:``}
+`
+const ContentInfo = styled.div`
+  margin-bottom: 1rem;
+`
+const SubInfo = styled.div`
+  display: block; 
+`;

@@ -36,6 +36,7 @@
     "gatsby-plugin-react-helmet": "^3.1.11",
     "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-plugin-robots-txt": "^1.5.5",
+    "gatsby-plugin-sass": "^5.0.0",
     "gatsby-plugin-sharp": "2.2.29",
     "gatsby-plugin-sitemap": "^2.2.17",
     "gatsby-plugin-styled-components": "^3.1.9",
@@ -61,6 +62,7 @@
     "react-toastify": "^5.4.0",
     "recompose": "^0.30.0",
     "rimble-ui": "^0.14.0",
+    "sass": "^1.43.4",
     "styled-components": "^4.4.0",
     "three": "^0.120.1"
   },

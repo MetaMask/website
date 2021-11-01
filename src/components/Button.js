@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Link from './Link'
 
 const Button = props => {
-  const { link, text, newTab, color, size } = props
+  const { link, text, newTab, color = 'primary', size } = props
 
   return (
     <ButtonWrapper to={link} newTab={newTab} color={color} size={size}>
@@ -36,16 +36,45 @@ const ButtonWrapper = styled(Link)`
   ${({ size }) =>
     size === 'large'
       ? `
+  padding: 16px 24px;
+  height: 52px;
+  font-size: 16px;
+  `
+      : ''}
+  ${({ size }) =>
+    size === 'hero'
+      ? `
   padding: 12px 20px;
   height: 56px;
   font-size: 20px;
   `
       : ''}
-  @media (min-width: ${({ theme }) => theme.device.miniDesktop}){
+  ${({ color, theme }) =>
+    color === 'white-outline'
+      ? `
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  @media (min-width: ${theme.device.miniDesktop}){
     &:hover {
-      background: ${({ theme }) => theme.darkerBlue};
+      border-color: ${theme.darkBlue};
+      color: ${theme.darkBlue};
     }
   }
+  `
+      : ''}
+
+  ${({ color, theme }) =>
+    color === 'primary'
+      ? `
+      @media (min-width: ${theme.device.miniDesktop}){
+    &:hover {
+      background: ${theme.darkerBlue};
+    }
+  }
+  `
+      : ''}
+  
   
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     width: 100%;
