@@ -301,6 +301,11 @@ export const ContentfulModuleContainerFields = graphql`
     contentAlignment
     splitModules
     displayTitle
+    modules {
+      ... on ContentfulLogo {
+        ...ContentfulLogoFields
+      }
+    }
   }
 `
 

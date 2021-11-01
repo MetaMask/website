@@ -88,10 +88,6 @@ StyledFooter.propTypes = {
 const FooterContainer = styled.div`
   width: 100%;
   background-color: ${({ theme }) => theme.footerBg};
-  margin: 3rem 0 0 0;
-  @media (min-width: ${({ theme }) => theme.device.tablet}) {
-    margin: 5rem 0 0 0;
-  }
 `
 
 const FooterInner = styled.div`

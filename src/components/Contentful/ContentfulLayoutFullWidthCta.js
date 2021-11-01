@@ -1,13 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import CTA from '../CTA'
+import FullwidthCta from '../FullWidthCta'
 
 const ContentfulLayoutFullWidthCta = props => {
   const {
-    moduleConfig: { ctaLink, ctaText },
+    moduleConfig: {
+      ctaLink,
+      ctaText,
+      headline,
+      showLogoAnimation,
+      backgroundColor,
+      description,
+    },
   } = props
-
-  return <CTA text={ctaText} link={ctaLink} />
+  const { childMarkdownRemark: { html } = {} } = description || {}
+  return (
+    <FullwidthCta
+      ctaText={ctaText}
+      ctaLink={ctaLink}
+      description={html}
+      showLogoAnimation={showLogoAnimation}
+      backgroundColor={backgroundColor}
+      headline={headline}
+    />
+  )
 }
 
 export default ContentfulLayoutFullWidthCta
@@ -19,6 +35,6 @@ ContentfulLayoutFullWidthCta.propTypes = {
     ctaLink: PropTypes.string,
     ctaText: PropTypes.string,
     backgroundColor: PropTypes.string,
-    layout: PropTypes.string,
+    showLogoAnimation: PropTypes.bool,
   }),
 }

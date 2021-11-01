@@ -26,7 +26,7 @@ const ContentfulLayoutHero = props => {
   let HeroCTA
   if (ctaLink) {
     HeroCTA = (
-      <CTA text={ctaText} link={ctaLink} button={true} buttonSize="large" />
+      <CTA text={ctaText} link={ctaLink} button={true} buttonSize="hero" />
     )
   }
 

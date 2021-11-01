@@ -16,6 +16,7 @@ const ContentfulCta = props => {
       displayText,
       typeLayout = '',
       isHideArrow = true,
+      color = 'black',
     },
   } = props
 
@@ -33,7 +34,7 @@ const ContentfulCta = props => {
         newTab={newTab}
         button={buttonDisplay}
         align={ctaAlignment}
-        color="black"
+        color={color}
         typeLayout={typeLayout}
         isHideArrow={isHideArrow}
       />

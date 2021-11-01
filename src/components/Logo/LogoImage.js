@@ -1,4 +1,3 @@
-import Img from 'gatsby-image'
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
@@ -7,10 +6,8 @@ const LogoImage = ({ alt, src }) => {
   return (
     <StyledPartnerImageContainer>
       <StyledPartnerImage
-        fixed={src}
+        src={src}
         alt={alt}
-        objectFit="contain"
-        objectPosition="50% 50%"
       />
     </StyledPartnerImageContainer>
   )
@@ -26,15 +23,10 @@ const StyledPartnerImageContainer = styled.div`
   height: auto;
 `
 
-const StyledPartnerImage = styled(Img)`
-  width: 100% !important;
-  height: 130px !important;
-  margin: auto;
-
-  & img {
-    margin-bottom: 0;
-    object-fit: contain !important;
-  }
+const StyledPartnerImage = styled.img`
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 `
 
 LogoImage.propTypes = {

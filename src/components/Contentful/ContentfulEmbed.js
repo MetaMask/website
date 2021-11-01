@@ -1,27 +1,30 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ContentWrapper from '../ContentWrapper'
 import styled from 'styled-components'
+import classnames from 'classnames'
 
 const ContentfulEmbed = props => {
   const {
     moduleConfig: {
-      hasModuleContainer,
       embed: { embed },
+      title,
+      displayTitle,
     },
   } = props
-  const El = !hasModuleContainer
-    ? ({ children, ...props }) => (
-        <ContentWrapper htmlEmbed {...props}>
-          {children}
-        </ContentWrapper>
-      )
-    : React.Fragment
-
+  console.log(embed)
   return (
-    <El>
+    <div>
+      {title ? (
+        <Title
+          className={classnames({
+            hidden: !displayTitle,
+          })}
+        >
+          {title}
+        </Title>
+      ) : null}
       <EmbedHtml dangerouslySetInnerHTML={{ __html: embed }} />
-    </El>
+    </div>
   )
 }
 
@@ -29,11 +32,19 @@ export default ContentfulEmbed
 
 ContentfulEmbed.propTypes = {
   moduleConfig: PropTypes.shape({
+    displayTitle: PropTypes.bool,
+    title: PropTypes.string,
     embed: PropTypes.shape({
       embed: PropTypes.string.isRequired,
     }).isRequired,
   }),
 }
+
+const Title = styled.h2`
+  font-weight: ${({ theme }) => theme.font.weight.bold};
+  text-align: center;
+  margin-bottom: 32px;
+`
 
 const EmbedHtml = styled.div`
   display: flex;

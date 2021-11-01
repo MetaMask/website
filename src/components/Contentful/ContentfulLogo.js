@@ -6,14 +6,13 @@ const ContentfulLogo = props => {
   const {
     moduleConfig: { logo, link, linkOpensNewTab, title, hasModuleContainer },
   } = props
-
   return (
     <Wrapper
       link={link}
       opensNewTab={linkOpensNewTab}
       child={hasModuleContainer}
     >
-      {logo && logo.fixed && <Image src={logo.fixed} alt={title} />}
+      {logo && logo.file && <Image src={logo.file.url} alt={title} />}
     </Wrapper>
   )
 }
