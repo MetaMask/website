@@ -3,8 +3,6 @@ import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import CTA from './CTA'
-import './logoMetaMaskAnimation'
-
 const FullWidthCta = props => {
   const {
     ctaText,
@@ -14,11 +12,21 @@ const FullWidthCta = props => {
     backgroundColor,
     headline,
   } = props
+  React.useEffect(() => {
+    // This runs the script logo
+    if(typeof window !== 'undefined' && window.document) {
+      const runScriptLogo = require('./logoMetaMaskAnimation.js')
+    }
+  }, [])
   return (
     <Container backgroundColor={backgroundColor} className="section">
       <ContentWrapper>
         <FeatureWrapper>
-          {showLogoAnimation ? <div id="logo-container"></div> : null}
+          {showLogoAnimation ? (
+            <div id="logo-container">
+            
+            </div>
+          ) : null}
           <FeatureInner backgroundColor={backgroundColor}>
             {headline ? (
               <Headline
@@ -122,4 +130,3 @@ const Description = styled.div`
     margin-top: 24px;
   }
 `
-
