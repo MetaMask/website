@@ -34,8 +34,14 @@ jobs:
           echo GATSBY_CONTENTFUL_HOST =${{ secrets.GATSBY_CONTENTFUL_HOST }} >> gatsby.development.env
           echo GATSBY_CONTENTFUL_SPACE_ID =${{ secrets.GATSBY_CONTENTFUL_SPACE_ID }} >> gatsby.development.env
 
+      - name: Read .nvmrc
+        run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
+        id: nvm
+
       - name: Install and Build 🔧
         uses: actions/setup-node@v1
+        with:
+          node-version: "${{ steps.nvm.outputs.NVMRC }}"
       - run: |
           yarn
           yarn deploy:dev
