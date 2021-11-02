@@ -250,4 +250,4 @@ const CTAWrapper = styled.div`
   a {
     min-width: 160px;
   }
-`;
+`

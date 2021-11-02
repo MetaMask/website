@@ -11,6 +11,7 @@ const ContentfulModuleContainer = props => {
       headline,
       description,
       backgroundColor,
+      paddingTop,
       displayHeadline,
       headlineAlignCenter,
       contentAlignCenter,
@@ -29,7 +30,7 @@ const ContentfulModuleContainer = props => {
       })}
     >
       <ContentWrapper>
-        <ContentInfo>
+        <ContentInfo paddingTop={paddingTop}>
           {headline ? (
             <Title
               className={classnames({
@@ -55,13 +56,15 @@ const ContentfulModuleContainer = props => {
           })}
           contentAlignCenter={contentAlignCenter}
         >
-          {modules && modules.length ? modules.map(m =>
-            contentfulModuleToComponent({
-              ...m,
-              hasModuleContainer: true,
-              color: ['dark'].includes(backgroundColor) ? 'white' : 'black'
-            })
-          ) : null}
+          {modules && modules.length
+            ? modules.map(m =>
+                contentfulModuleToComponent({
+                  ...m,
+                  hasModuleContainer: true,
+                  color: ['dark'].includes(backgroundColor) ? 'white' : 'black',
+                })
+              )
+            : null}
         </Modules>
       </ContentWrapper>
     </Container>
@@ -74,6 +77,7 @@ ContentfulModuleContainer.propTypes = {
   moduleConfig: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.object,
+    paddingTop: PropTypes.string,
     backgroundColor: PropTypes.string,
     headlineAlignCenter: PropTypes.bool,
     contentAlignCenter: PropTypes.bool,
@@ -83,7 +87,19 @@ ContentfulModuleContainer.propTypes = {
 }
 
 const Title = styled.h2`
-  display: block;
+  padding-bottom: 20px;
+  font-weight: 700;
+  margin-top: 40px;
+
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 15px;
+    margin-top: 16px;
+    padding-bottom: 0;
+    padding-top: 0;
+    text-align: center;
+  }
 `
 const Container = styled.div`
   display: block;
@@ -91,15 +107,27 @@ const Container = styled.div`
 
 const Modules = styled.div`
   display: block;
-  ${({contentAlignCenter}) => contentAlignCenter ? `
+  ${({ contentAlignCenter }) =>
+    contentAlignCenter
+      ? `
     display: flex;
     flex-direction: column;
     align-items: center;
-  `:``}
+  `
+      : ``}
 `
 const ContentInfo = styled.div`
   margin-bottom: 1rem;
+  ${({ paddingTop }) =>
+    paddingTop
+      ? `
+    padding-top: ${paddingTop};
+  `
+      : ''}
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+  padding-top: 0;
+}
 `
 const SubInfo = styled.div`
-  display: block; 
-`;
+  display: block;
+`
