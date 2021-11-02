@@ -55,13 +55,13 @@ const ContentfulModuleContainer = props => {
           })}
           contentAlignCenter={contentAlignCenter}
         >
-          {modules.map(m =>
+          {modules && modules.length ? modules.map(m =>
             contentfulModuleToComponent({
               ...m,
               hasModuleContainer: true,
               color: ['dark'].includes(backgroundColor) ? 'white' : 'black'
             })
-          )}
+          ) : null}
         </Modules>
       </ContentWrapper>
     </Container>
