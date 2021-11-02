@@ -64,6 +64,7 @@ export const ContentfulLayoutHeroFields = graphql`
     showLearnMore
     headlineBorderBottom
     hideHeadline
+    showFavIcon
     backgroundImage {
       file {
         url
@@ -165,6 +166,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     paddingTop
     sectionPadding
     noPaddingBottom
+    sectionPadding
   }
 `
 
@@ -219,6 +221,7 @@ export const ContentfulHubSpotFormFields = graphql`
     portalId
     formId
     displayTitle
+    campaignId
   }
 `
 

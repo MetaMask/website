@@ -11,6 +11,7 @@ import * as ContenfulComponents from '../../components/Contentful'
  * @returns {React.Component}
  */
 export const contentfulModuleToComponent = (moduleConfig = {}) => {
+  if(!moduleConfig) return null
   const { internal, contentful_id } = moduleConfig
   if (!internal || !internal.type) return null
   const Component = ContenfulComponents[internal.type] // route data to component based on auto generated type by Contentful CMS

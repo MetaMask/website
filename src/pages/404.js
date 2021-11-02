@@ -9,8 +9,9 @@ const NotFoundPage = ({ data: { seo }, location }) => (
   <Layout>
     {seo && <Seo moduleConfig={{ ...seo, pagePath: location.pathname }} />}
     <Container>
+      <Logo src={'/images/metamask-logo.png'} alt="logo" />
       <NotFoundTitle>Whoops, something went wrong</NotFoundTitle>
-      <NotFoundDescription>
+      <NotFoundDescription className="mb-3">
         The page you are looking for doesn't exist or has been moved.
       </NotFoundDescription>
       <ReturnHomeButton href="/">GO TO HOMEPAGE</ReturnHomeButton>
@@ -43,10 +44,9 @@ const ReturnHomeButton = styled.button`
   cursor: pointer;
 `
 
-const NotFoundTitle = styled.h1`
+const NotFoundTitle = styled.h2`
   margin-top: 20px;
-  padding: 1rem;
-  font-size: 1.5rem;
+  margin-bottom: 14px;
 `
 
 const NotFoundDescription = styled.div`
@@ -61,5 +61,9 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
 `
+const Logo = styled.img`
+  width: 214px;
+  max-width: 100%;
+`;
 
 export default NotFoundPage

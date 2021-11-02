@@ -22,6 +22,8 @@ const ContentfulLayoutFeature = props => {
       newTab,
       animation,
       backgroundColor,
+      headlineMarginTop0,
+      sectionPadding,
     },
   } = props
 
@@ -46,6 +48,8 @@ const ContentfulLayoutFeature = props => {
       newTab={newTab}
       animation={animation}
       backgroundColor={backgroundColor}
+      headlineMarginTop0={headlineMarginTop0}
+      sectionPadding={sectionPadding}
     />
   )
 }

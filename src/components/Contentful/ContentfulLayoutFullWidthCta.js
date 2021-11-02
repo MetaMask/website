@@ -11,6 +11,7 @@ const ContentfulLayoutFullWidthCta = props => {
       showLogoAnimation,
       backgroundColor,
       description,
+      hubSpotForm,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -22,6 +23,7 @@ const ContentfulLayoutFullWidthCta = props => {
       showLogoAnimation={showLogoAnimation}
       backgroundColor={backgroundColor}
       headline={headline}
+      hubSpotForm={hubSpotForm}
     />
   )
 }

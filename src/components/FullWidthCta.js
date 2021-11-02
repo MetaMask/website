@@ -3,6 +3,12 @@ import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import CTA from './CTA'
+import Loadable from '@loadable/component'
+import Popup from './Popup'
+import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
+import { Section } from './StyledGeneral'
+
+const LogoAnimation = Loadable(() => import('./LogoAnimation'))
 const FullWidthCta = props => {
   const {
     ctaText,
@@ -11,18 +17,21 @@ const FullWidthCta = props => {
     showLogoAnimation,
     backgroundColor,
     headline,
+    hubSpotForm,
   } = props
-  React.useEffect(() => {
-    // This runs the script logo
-    if (typeof window !== 'undefined' && window.document) {
-      const runScriptLogo = require('./logoMetaMaskAnimation.js')
-    }
-  }, [])
+
+  const [showPopup, setShowPopup] = React.useState(false)
+  const togglePopup = () => {
+    setShowPopup(!showPopup)
+  }
+  const onClosePopup = () => {
+    setShowPopup(false)
+  }
   return (
-    <Container backgroundColor={backgroundColor} className="section">
+    <Container backgroundColor={backgroundColor}>
       <ContentWrapper>
         <FeatureWrapper>
-          {showLogoAnimation ? <div id="logo-container"></div> : null}
+          {showLogoAnimation ? <LogoAnimation /> : null}
           <FeatureInner backgroundColor={backgroundColor}>
             {headline ? (
               <Headline
@@ -40,12 +49,20 @@ const FullWidthCta = props => {
             {ctaText ? (
               <CTAWrapper>
                 <CTA
-                  link={ctaLink}
+                  link={hubSpotForm ? '' : ctaLink}
                   text={ctaText}
                   button={true}
                   buttonSize={'large'}
+                  customClick={hubSpotForm ? () => togglePopup() : null}
                 />
               </CTAWrapper>
+            ) : null}
+            {hubSpotForm ? (
+              <Popup showPopup={showPopup} onClosePopup={onClosePopup}>
+                {contentfulModuleToComponent({
+                  ...hubSpotForm,
+                })}
+              </Popup>
             ) : null}
           </FeatureInner>
         </FeatureWrapper>
@@ -63,9 +80,8 @@ FullWidthCta.propTypes = {
   modules: PropTypes.arrayOf(PropTypes.object.isRequired),
 }
 
-const Container = styled.div`
+const Container = styled(Section)`
   display: block;
-  padding: 50px 0;
   ${({ backgroundColor, theme }) =>
     backgroundColor === 'dark'
       ? `
@@ -85,7 +101,6 @@ const FeatureWrapper = styled.div`
 `
 
 const Headline = styled.h2`
-  font-weight: ${({ theme }) => theme.font.weight.bold};
   ${({ backgroundColor, theme }) =>
     backgroundColor === 'dark'
       ? `

@@ -4,10 +4,10 @@ import styled from 'styled-components'
 import Link from '../Link'
 
 const Wrapper = props => {
-  const { children, opensNewTab, link } = props
+  const { children, opensNewTab, link, cleanStyle } = props
 
   return (
-    <Item>
+    <Item cleanStyle={cleanStyle}>
       <Link newTab={opensNewTab} to={link}>
         {children}
       </Link>
@@ -23,5 +23,11 @@ Wrapper.propTypes = {
 
 const Item = styled.div`
   display: block;
+
+  ${({ cleanStyle }) =>
+    !cleanStyle
+      ? `
   padding: 0 18px;
+  
+  `: ``}
 `

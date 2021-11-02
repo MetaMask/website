@@ -52,9 +52,11 @@ exports.createPages = ({ graphql, actions }) => {
             modules,
             slug,
             seo,
-            footer: { contentful_id: footerId },
-            header: { contentful_id: headerId },
+            footer,
+            header,
           } = p.node
+          const { contentful_id: footerId = '' } = footer || {};
+          const { contentful_id: headerId = '' } = header || {};
           const moduleIds = modules.map(m => m.contentful_id)
           const seoId = seo ? seo.contentful_id : ''
 
