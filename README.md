@@ -26,7 +26,7 @@ Built With:
 
 1.  **View site**
 
-    Labs is now running at `http://localhost:8000`!
+    MetaMask is now running at `http://localhost:8000`!
 
     There is also a GraphQL API at `http://localhost:8000/___graphql`. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql).
 
@@ -54,7 +54,7 @@ Built With:
           ├── ...
         ├── html.js
     ├── gatsby-config.js
-    ├── [development.env]
+    ├── gatsby.[development].env]
     ├── GraphQL_Query_Documentation.md
     ├── package.json
     └── README.md
