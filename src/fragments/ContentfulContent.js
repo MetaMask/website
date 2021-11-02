@@ -56,7 +56,9 @@ export const ContentfulLayoutHeroFields = graphql`
     sideImageAlignment
     ctaText
     ctaLink
-    getInTouchPopup
+    hubSpotForm {
+      ...ContentfulHubSpotFormFields
+    }
     backgroundColor
     contentAlignment
     showLearnMore
@@ -135,8 +137,10 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
     }
     ctaText
     ctaLink
+    hubSpotForm {
+      ...ContentfulHubSpotFormFields
+    }
     backgroundColor
-    newsletterSignUp
   }
 `
 
