@@ -41,11 +41,13 @@ const ContentfulModuleContainer = props => {
         contentAlignment={contentAlignment}
         splitModules={splitModules}
       >
-        {modules && modules.map ? modules.map(m =>
-          contentfulModuleToComponent({
-            ...m,
-          })
-        ) : null}
+        {modules && modules.map
+          ? modules.map(m =>
+              contentfulModuleToComponent({
+                ...m,
+              })
+            )
+          : null}
       </Modules>
     </Wrapper>
   )

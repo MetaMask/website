@@ -112,6 +112,7 @@ export const ContentfulLayoutFeatureFields = graphql`
     alignItemsCenter
     contentAlignment
     contentPaddingTop
+    headlineMarginTop0
     withContent
     eyebrow
     ctaText
@@ -160,6 +161,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     displayHeadline
     headlineAlignCenter
     contentAlignCenter
+    paddingTop
     noPaddingBottom
   }
 `

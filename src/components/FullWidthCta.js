@@ -14,7 +14,7 @@ const FullWidthCta = props => {
   } = props
   React.useEffect(() => {
     // This runs the script logo
-    if(typeof window !== 'undefined' && window.document) {
+    if (typeof window !== 'undefined' && window.document) {
       const runScriptLogo = require('./logoMetaMaskAnimation.js')
     }
   }, [])
@@ -22,11 +22,7 @@ const FullWidthCta = props => {
     <Container backgroundColor={backgroundColor} className="section">
       <ContentWrapper>
         <FeatureWrapper>
-          {showLogoAnimation ? (
-            <div id="logo-container">
-            
-            </div>
-          ) : null}
+          {showLogoAnimation ? <div id="logo-container"></div> : null}
           <FeatureInner backgroundColor={backgroundColor}>
             {headline ? (
               <Headline
