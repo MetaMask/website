@@ -4,10 +4,10 @@ import styled from 'styled-components'
 import Link from './Link'
 
 const Button = props => {
-  const { link, text, newTab, color = 'primary', size } = props
+  const { link, text, newTab, color = 'primary', size, customClick } = props
 
   return (
-    <ButtonWrapper to={link} newTab={newTab} color={color} size={size}>
+    <ButtonWrapper to={link} newTab={newTab} color={color} size={size} onClick={customClick}>
       {text}
     </ButtonWrapper>
   )
@@ -55,10 +55,11 @@ const ButtonWrapper = styled(Link)`
   background: transparent;
   color: #fff;
   border: 2px solid #fff;
+  transition: background-color 300ms ease, border 300ms ease, color 300ms ease;
   @media (min-width: ${theme.device.miniDesktop}){
     &:hover {
-      border-color: ${theme.darkBlue};
-      color: ${theme.darkBlue};
+      border-color: ${theme.darkerBlue};
+      color: ${theme.darkerBlue};
     }
   }
   `

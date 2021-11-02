@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import classnames from 'classnames'
+import {SectionTitle} from '../StyledGeneral'
 
 const ContentfulEmbed = props => {
   const {
@@ -11,7 +12,6 @@ const ContentfulEmbed = props => {
       displayTitle,
     },
   } = props
-  console.log(embed)
   return (
     <div>
       {title ? (
@@ -40,8 +40,7 @@ ContentfulEmbed.propTypes = {
   }),
 }
 
-const Title = styled.h2`
-  font-weight: ${({ theme }) => theme.font.weight.bold};
+const Title = styled(SectionTitle)`
   text-align: center;
   margin-bottom: 32px;
 `
@@ -51,6 +50,11 @@ const EmbedHtml = styled.div`
   justify-content: center;
   position: relative;
   z-index: 2;
+  border-radius: 12px;
+  overflow: hidden;
+  iframe {
+    border-radius: 12px;
+  }
   @media (max-width: ${({ theme }) => theme.device.desktopMediaMax}) {
     &:before {
       content: '';

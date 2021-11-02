@@ -4,6 +4,7 @@ import ContentWrapper from '../ContentWrapper'
 import styled from 'styled-components'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import classnames from 'classnames'
+import {SectionTitle, Section} from '../StyledGeneral'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -17,14 +18,16 @@ const ContentfulModuleContainer = props => {
       contentAlignCenter,
       noPaddingBottom,
       modules,
+      sectionPadding,
     },
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
 
   return (
-    <Container
-      className={classnames('section', {
+    <Section
+      sectionPadding={sectionPadding}
+      className={classnames({
         noPaddingBottom: noPaddingBottom,
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
@@ -67,7 +70,7 @@ const ContentfulModuleContainer = props => {
             : null}
         </Modules>
       </ContentWrapper>
-    </Container>
+    </Section>
   )
 }
 
@@ -86,25 +89,10 @@ ContentfulModuleContainer.propTypes = {
   }),
 }
 
-const Title = styled.h2`
+const Title = styled(SectionTitle)`
   padding-bottom: 20px;
-  font-weight: 700;
-  margin-top: 40px;
-
-  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-    font-size: 28px;
-    line-height: 32px;
-    margin-bottom: 15px;
-    margin-top: 16px;
-    padding-bottom: 0;
-    padding-top: 0;
-    text-align: center;
-  }
+  
 `
-const Container = styled.div`
-  display: block;
-`
-
 const Modules = styled.div`
   display: block;
   ${({ contentAlignCenter }) =>

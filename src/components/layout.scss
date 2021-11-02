@@ -30,7 +30,7 @@
 .w-icon-dropdown-toggle:before {
   content: "\e603";
 }
-.w-icon-file-upload-remove:before {
+.w-icon-close:before {
   content: "\e900";
 }
 .w-icon-file-upload-icon:before {
@@ -42,7 +42,6 @@
   box-sizing: border-box;
 }
 html {
-  overflow-x: hidden;
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -227,7 +226,6 @@ textarea {
 html {
   font: 100%;
   box-sizing: border-box;
-  overflow-y: scroll;
 }
 * {
   box-sizing: inherit;
@@ -472,7 +470,6 @@ iframe {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
   max-width: 100%;
 }
 hr {
@@ -775,25 +772,24 @@ input[type="submit"].hs-button {
   font-weight: 400;
 }
 
-.section {
-  position: relative;
-  display: block;
-  padding-top: 48px;
-  padding-bottom: 48px;
-
-}
-@media (max-width: 767px){
-  .section {
-    padding-top: 0;
-  }
-}
-
-.section.noPaddingBottom {
-  padding-bottom: 0;
-}
-
 .fz-12 {
   font-size: 12px!important;;
+}
+
+.fz-14 {
+  font-size: 14px!important;;
+}
+
+.br-round {
+  border-radius: 999px !important;
+}
+
+.br-10 {
+  border-radius: 10px !important;
+}
+
+.br-20 {
+  border-radius: 20px !important;
 }
 
 .text-block {

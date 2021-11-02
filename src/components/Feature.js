@@ -6,6 +6,7 @@ import CTA from './CTA'
 import ScrollAnimation from 'react-animate-on-scroll'
 import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
 import classnames from 'classnames'
+import {Section} from './StyledGeneral';
 
 const FeatureComponent = props => {
   const {
@@ -24,11 +25,14 @@ const FeatureComponent = props => {
     imageAlignment,
     animation,
     backgroundColor,
+    headlineMarginTop0,
+    sectionPadding,
   } = props
   const url = parseContentfulAssetUrl(image)
   return (
     <FeatureContainer
-      className={classnames('section', {
+    sectionPadding={sectionPadding}
+      className={classnames({
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
     >
@@ -46,8 +50,8 @@ const FeatureComponent = props => {
                   <ScrollAnimation
                     animateIn={
                       contentAlignment === 'right'
-                        ? 'fadeInLeft'
-                        : 'fadeInRight'
+                        ? 'fadeInLeftMini'
+                        : 'fadeInRightMini'
                     }
                     animateOnce
                     delay={0}
@@ -76,14 +80,19 @@ const FeatureComponent = props => {
             {animation ? (
               <ScrollAnimation
                 animateIn={
-                  contentAlignment === 'left' ? 'fadeInLeft' : 'fadeInRight'
+                  contentAlignment === 'left' ? 'fadeInLeftMini' : 'fadeInRightMini'
                 }
                 animateOnce
                 delay={0}
                 offset={0}
               >
                 {headline ? (
-                  <Headline hideHeadline={hideHeadline}>{headline}</Headline>
+                  <Headline
+                    hideHeadline={hideHeadline}
+                    headlineMarginTop0={headlineMarginTop0}
+                  >
+                    {headline}
+                  </Headline>
                 ) : null}
                 {description ? (
                   <Description>
@@ -134,7 +143,7 @@ FeatureComponent.propTypes = {
   modules: PropTypes.arrayOf(PropTypes.object.isRequired),
 }
 
-const FeatureContainer = styled.div`
+const FeatureContainer = styled(Section)`
   display: block;
 `
 const Image = styled.div`
@@ -167,13 +176,19 @@ const ImageSrc = styled.img`
 const Headline = styled.h2`
   padding-bottom: 20px;
   font-weight: 700;
-  margin-top: 40px;
   ${({ hideHeadline }) =>
     hideHeadline
       ? `
     display: none;
   `
       : ''}
+      
+  ${({ headlineMarginTop0 }) =>
+    headlineMarginTop0
+      ? `
+  margin-top: 0;
+`
+      : 'margin-top: 40px;'}
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     font-size: 28px;
     line-height: 32px;

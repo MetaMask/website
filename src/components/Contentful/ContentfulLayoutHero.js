@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
 import Hero from '../HeroContainer'
-import CTA from '../CTA'
 
 const ContentfulLayoutHero = props => {
   const {
@@ -17,30 +16,28 @@ const ContentfulLayoutHero = props => {
       eyebrowLogo,
       hideHeadline,
       showLearnMore,
+      showFavIcon,
+      hubSpotForm,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
-  const eyebrowUrl = parseContentfulAssetUrl(eyebrowLogo)
   const bgUrl = parseContentfulAssetUrl(backgroundImage)
-
-  let HeroCTA
-  if (ctaLink) {
-    HeroCTA = (
-      <CTA text={ctaText} link={ctaLink} button={true} buttonSize="hero" />
-    )
-  }
+  const sideImageUrl=parseContentfulAssetUrl(sideImage)
 
   return (
     <Hero
       headline={headline}
       description={html}
-      eyebrowLogo={eyebrowUrl}
+      eyebrowLogo={eyebrowLogo}
       backgroundImage={bgUrl || ''}
-      CTA={HeroCTA}
+      ctaText={ctaText}
+      ctaLink={ctaLink}
       modules={modules}
-      sideImage={sideImage}
+      sideImage={sideImageUrl}
       hideHeadline={hideHeadline}
       showLearnMore={showLearnMore}
+      showFavIcon={showFavIcon}
+      hubSpotForm={hubSpotForm}
     />
   )
 }

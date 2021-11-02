@@ -3,41 +3,98 @@ import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import { useLocation } from '@reach/router'
-import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
+import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
+import CTA from './CTA'
+import Popup from './Popup'
+import { Section } from './StyledGeneral'
 
 const HeroContainerComponent = props => {
   const {
     backgroundImage,
-    CTA,
     headline,
     hideHeadline,
     description,
     sideImage,
     showLearnMore,
+    eyebrowLogo,
+    showFavIcon,
+    hubSpotForm,
+    ctaText,
+    ctaLink,
   } = props
+  const [showPopup, setShowPopup] = React.useState(false)
+  const togglePopup = () => {
+    setShowPopup(!showPopup)
+  }
+  const onClosePopup = () => {
+    setShowPopup(false)
+  }
   const location = useLocation()
   const isHome = location.pathname === '/'
-  const imageUrl = parseContentfulAssetUrl(sideImage)
+  let hubspotWrapper
+
+  if (hubSpotForm) {
+    hubspotWrapper = ctaText ? (
+      <Popup showPopup={showPopup} onClosePopup={onClosePopup}>
+        {contentfulModuleToComponent({
+          ...hubSpotForm,
+        })}
+      </Popup>
+    ) : (
+      <HubSpotDefault>
+        {contentfulModuleToComponent({
+          ...hubSpotForm,
+        })}
+      </HubSpotDefault>
+    )
+  }
+  const isStyleHubspot = hubSpotForm && !ctaText
+
   return (
-    <HeroContainer
-      className="section"
-      image={backgroundImage}
-      showLearnMore={showLearnMore}
-    >
+    <HeroContainer image={backgroundImage} showLearnMore={showLearnMore}>
       <ContentWrapper>
-        <HeroContentContainer bgSrc={imageUrl}>
-          <HeroImageTextContainer isHome={isHome}>
+        {showFavIcon ? (
+          <FavIconWrapper>
+            <FavIcon src={'/images/metamask-logo.png'} alt="logo" />
+          </FavIconWrapper>
+        ) : null}
+        <HeroContentContainer bgSrc={!isStyleHubspot ? sideImage : ''}>
+          <HeroImageTextContainer
+            isStyleHubspot={isStyleHubspot}
+            isHome={isHome}
+          >
+            {eyebrowLogo ? (
+              <EyebrowWrapper hideHeadline={hideHeadline}>
+                {contentfulModuleToComponent({
+                  ...eyebrowLogo,
+                  cleanStyle: true,
+                })}
+              </EyebrowWrapper>
+            ) : null}
             {headline && (
-              <HeroTitle hideHeadline={hideHeadline}> {headline} </HeroTitle>
+              <HeroTitle isStyleHubspot={isStyleHubspot} hideHeadline={hideHeadline}> {headline} </HeroTitle>
             )}
             {description && (
               <HeroDescription>
                 <div dangerouslySetInnerHTML={{ __html: description }} />
               </HeroDescription>
             )}
-            <HeroCTA>{CTA}</HeroCTA>
+            {ctaText ? (
+              <HeroCTA>
+                <CTA
+                  text={ctaText}
+                  link={ctaLink}
+                  button={true}
+                  buttonSize="hero"
+                  customClick={hubSpotForm ? () => togglePopup() : null}
+                />
+              </HeroCTA>
+            ) : null}
+            {hubspotWrapper ? hubspotWrapper : null}
           </HeroImageTextContainer>
-          <HeroSideImage></HeroSideImage>
+          <HeroSideImage isStyleHubspot={isStyleHubspot}>
+            {isStyleHubspot ? <img src={sideImage} alt="hero hubspot" /> : null}
+          </HeroSideImage>
         </HeroContentContainer>
         {showLearnMore ? (
           <LearnMoreWrapper>
@@ -65,7 +122,7 @@ HeroContainerComponent.propTypes = {
   modules: PropTypes.arrayOf(PropTypes.object.isRequired),
 }
 
-const HeroContainer = styled.div`
+const HeroContainer = styled(Section)`
   display: flex;
   position: relative;
   flex-direction: column;
@@ -84,6 +141,9 @@ const HeroContainer = styled.div`
       ? `padding-bottom: 0 !important;
     `
       : ''}
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
+    padding-top: 0 !important;
+  }
 `
 
 const HeroContentContainer = styled.div`
@@ -95,6 +155,7 @@ const HeroContentContainer = styled.div`
     width: 50%;
     padding: 10px;
   }
+
   ${({ bgSrc }) =>
     bgSrc
       ? `
@@ -121,12 +182,22 @@ const HeroContentContainer = styled.div`
 
 const HeroImageTextContainer = styled.div`
   display: block;
+  position: relative;
   ${({ isHome, theme }) =>
     isHome
       ? `
   @media (min-width: ${theme.device.miniDesktop}){
     margin-top: 50px;
   }
+  `
+      : ''}
+
+  ${({ isStyleHubspot, theme }) =>
+    isStyleHubspot
+      ? `
+  width: auto;
+  flex: 1;
+  min-width: 0;
   `
       : ''}
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
@@ -154,6 +225,12 @@ const HeroTitle = styled.h1`
     display: none;
   `
       : ''}
+  ${({ isStyleHubspot }) =>
+  isStyleHubspot
+      ? `
+      font-size: 16px;
+  `
+      : ''}
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     font-size: 46px;
   }
@@ -170,14 +247,22 @@ const HeroDescription = styled.div`
 
 const HeroSideImage = styled.div`
   display: block;
-  min-height: 400px;
+  height: 400px;
+
+  ${({ isStyleHubspot }) =>
+    isStyleHubspot
+      ? `
+    width: 58.33%;
+  `
+      : ''}
   @media (min-width: ${({ theme }) => theme.device.desktop}) {
     padding: 0 !important;
   }
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-    min-height: 220px;
+    height: 220px;
     margin-bottom: 10px;
     padding-bottom: 0;
+    width: 100%;
   }
 `
 
@@ -202,4 +287,29 @@ const LearnMoreInner = styled.div`
 
 const Icon = styled.span`
   font-size: 20px;
+`
+const EyebrowWrapper = styled.div`
+  display: block;
+  ${({ hideHeadline }) =>
+    hideHeadline
+      ? `
+    margin-bottom: 8px;
+  `
+      : ``}
+
+  img {
+    height: 80px;
+  }
+`
+const FavIconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 16px 0 0 0;
+`
+
+const FavIcon = styled.img`
+  width: 40px;
+`
+const HubSpotDefault = styled.div`
+  display: block;
 `

@@ -18,10 +18,15 @@ const CTA = props => {
     typeLayout = '',
     buttonSize,
     buttonColor,
+    customClick,
   } = props
 
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
   const icon = { ...defaultIconConfig, fill: color, ...iconConfig }
+  const handleCustomClick = (e) => {
+    e.preventDefault();
+    customClick();
+  }
 
   if (button) {
     return (
@@ -31,6 +36,7 @@ const CTA = props => {
         text={text}
         newTab={newTab}
         color={buttonColor}
+        customClick={customClick ? handleCustomClick : null}
       />
     )
   }
@@ -42,6 +48,7 @@ const CTA = props => {
         newTab={newTab}
         color={color}
         typeLayout={typeLayout}
+        onClick={customClick ? handleCustomClick : null}
       >
         {text} {!isHideArrow ? <Arrow {...icon} /> : null}
       </ContentWrapper>
