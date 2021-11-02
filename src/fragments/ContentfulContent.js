@@ -120,6 +120,7 @@ export const ContentfulLayoutFeatureFields = graphql`
     newTab
     animation
     backgroundColor
+    sectionPadding
   }
 `
 
@@ -162,6 +163,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     headlineAlignCenter
     contentAlignCenter
     paddingTop
+    sectionPadding
     noPaddingBottom
   }
 `
