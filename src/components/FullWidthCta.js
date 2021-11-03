@@ -6,7 +6,7 @@ import CTA from './CTA'
 import Loadable from '@loadable/component'
 import Popup from './Popup'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
-import { Section } from './StyledGeneral'
+import { Section, SectionTitle } from './StyledGeneral'
 
 const LogoAnimation = Loadable(() => import('./LogoAnimation'))
 const FullWidthCta = props => {
@@ -30,7 +30,7 @@ const FullWidthCta = props => {
   return (
     <Container backgroundColor={backgroundColor}>
       <ContentWrapper>
-        <FeatureWrapper>
+        <FeatureWrapper showLogoAnimation={showLogoAnimation}>
           {showLogoAnimation ? <LogoAnimation /> : null}
           <FeatureInner backgroundColor={backgroundColor}>
             {headline ? (
@@ -82,6 +82,8 @@ FullWidthCta.propTypes = {
 
 const Container = styled(Section)`
   display: block;
+  padding-top: 50px !important;
+  padding-bottom: 50px !important;
   ${({ backgroundColor, theme }) =>
     backgroundColor === 'dark'
       ? `
@@ -98,9 +100,18 @@ const FeatureWrapper = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
+  ${({ showLogoAnimation, theme }) =>
+    showLogoAnimation
+      ? `
+      @media (max-width: ${theme.device.mobileMediaMax}) {
+        width: 100%;
+        align-items: stretch;
+      }
+  `
+      : ``}
 `
 
-const Headline = styled.h2`
+const Headline = styled(SectionTitle)`
   ${({ backgroundColor, theme }) =>
     backgroundColor === 'dark'
       ? `
@@ -111,12 +122,7 @@ const Headline = styled.h2`
   `}
 
   ${({ showLogoAnimation }) =>
-    !showLogoAnimation
-      ? `
-  font-size: 32px;
-  margin-top: 40px;
-  `
-      : ``}
+    !showLogoAnimation ? 'font-size: 32px !important;' : 'padding-top: 0;'}
 `
 const FeatureInner = styled.div`
   display: block;
@@ -132,6 +138,14 @@ const FeatureInner = styled.div`
 `
 const CTAWrapper = styled.div`
   margin-top: 32px;
+  ${({ showLogoAnimation, theme }) =>
+    showLogoAnimation
+      ? `
+      @media (max-width: ${theme.device.mobileMediaMax}) {
+        width: 100%;
+      }
+  `
+      : ``}
 `
 
 const Description = styled.div`

@@ -18,11 +18,12 @@ const ContentfulLayoutHero = props => {
       showLearnMore,
       showFavIcon,
       hubSpotForm,
+      contentAlignment,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
   const bgUrl = parseContentfulAssetUrl(backgroundImage)
-  const sideImageUrl=parseContentfulAssetUrl(sideImage)
+  const sideImageUrl = parseContentfulAssetUrl(sideImage)
 
   return (
     <Hero
@@ -38,6 +39,7 @@ const ContentfulLayoutHero = props => {
       showLearnMore={showLearnMore}
       showFavIcon={showFavIcon}
       hubSpotForm={hubSpotForm}
+      contentAlignment={contentAlignment}
     />
   )
 }

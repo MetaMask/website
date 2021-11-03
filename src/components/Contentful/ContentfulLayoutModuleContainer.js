@@ -4,7 +4,7 @@ import ContentWrapper from '../ContentWrapper'
 import styled from 'styled-components'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import classnames from 'classnames'
-import {SectionTitle, Section} from '../StyledGeneral'
+import { SectionTitle, Section } from '../StyledGeneral'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -27,6 +27,7 @@ const ContentfulModuleContainer = props => {
   return (
     <Section
       sectionPadding={sectionPadding}
+      backgroundColor={backgroundColor}
       className={classnames({
         noPaddingBottom: noPaddingBottom,
         [`bg-${backgroundColor}`]: backgroundColor,
@@ -91,7 +92,6 @@ ContentfulModuleContainer.propTypes = {
 
 const Title = styled(SectionTitle)`
   padding-bottom: 20px;
-  
 `
 const Modules = styled.div`
   display: block;

@@ -23,11 +23,4 @@ Wrapper.propTypes = {
 
 const Item = styled.div`
   display: block;
-
-  ${({ cleanStyle }) =>
-    !cleanStyle
-      ? `
-  padding: 0 18px;
-  
-  `: ``}
 `

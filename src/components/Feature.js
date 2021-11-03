@@ -6,7 +6,7 @@ import CTA from './CTA'
 import ScrollAnimation from 'react-animate-on-scroll'
 import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
 import classnames from 'classnames'
-import {Section} from './StyledGeneral';
+import { Section } from './StyledGeneral'
 
 const FeatureComponent = props => {
   const {
@@ -31,7 +31,8 @@ const FeatureComponent = props => {
   const url = parseContentfulAssetUrl(image)
   return (
     <FeatureContainer
-    sectionPadding={sectionPadding}
+      sectionPadding={sectionPadding}
+      backgroundColor={backgroundColor}
       className={classnames({
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
@@ -80,7 +81,9 @@ const FeatureComponent = props => {
             {animation ? (
               <ScrollAnimation
                 animateIn={
-                  contentAlignment === 'left' ? 'fadeInLeftMini' : 'fadeInRightMini'
+                  contentAlignment === 'left'
+                    ? 'fadeInLeftMini'
+                    : 'fadeInRightMini'
                 }
                 animateOnce
                 delay={0}
@@ -103,14 +106,16 @@ const FeatureComponent = props => {
             ) : (
               <div>
                 {headline ? (
-                  <Headline hideHeadline={hideHeadline}>{headline}</Headline>
+                  <Headline hasCta={ctaText} hideHeadline={hideHeadline}>
+                    {headline}
+                  </Headline>
                 ) : null}
                 {description ? (
                   <Description>
                     <div dangerouslySetInnerHTML={{ __html: description }} />
                   </Description>
                 ) : null}
-                {ctaLink ? (
+                {ctaText ? (
                   <CTAWrapper>
                     <CTA
                       link={ctaLink}
@@ -185,19 +190,21 @@ const Headline = styled.h2`
       
   ${({ headlineMarginTop0 }) =>
     headlineMarginTop0
-      ? `
-  margin-top: 0;
-`
+      ? 'margin-top: 0;'
       : 'margin-top: 40px;'}
-  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-    font-size: 28px;
-    line-height: 32px;
-    margin-bottom: 15px;
-    margin-top: 16px;
-    padding-bottom: 0;
-    padding-top: 0;
-    text-align: center;
-  }
+
+  ${({ hasCta, theme }) =>
+    !hasCta
+    ? `
+    @media (max-width: ${theme.device.tabletMediaMax}) {
+      font-size: 28px;
+      line-height: 32px;
+      margin-bottom: 15px;
+      margin-top: 16px;
+      padding-bottom: 0;
+      padding-top: 0;
+      text-align: center;
+    }`: 'padding-bottom: 14px;'}
 `
 
 const Description = styled.div`
@@ -213,6 +220,8 @@ const FeatureWrapper = styled.div`
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     flex-direction: column;
     margin: 0;
+    align-items: center;
+    text-align: center;
   }
   ${({ contentAlignment }) =>
     contentAlignment === 'left'

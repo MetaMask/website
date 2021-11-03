@@ -8,6 +8,7 @@ const theme = {
   darkGray: '#6A737D',
   dark: '#24292E',
   orange: '#f6851b',
+  cookiesBg: '#151C24',
   colors: {
     /* Orange */
     'orange-4': '#c43e00',

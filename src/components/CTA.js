@@ -23,9 +23,9 @@ const CTA = props => {
 
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
   const icon = { ...defaultIconConfig, fill: color, ...iconConfig }
-  const handleCustomClick = (e) => {
-    e.preventDefault();
-    customClick();
+  const handleCustomClick = e => {
+    e.preventDefault()
+    customClick()
   }
 
   if (button) {

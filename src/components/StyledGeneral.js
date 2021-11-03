@@ -10,7 +10,12 @@ export const FooterTitle = styled.div`
 `
 export const SectionTitle = styled.h2`
   padding-top: 40px;
-`;
+
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    font-size: 40px;
+    line-height: 46px;
+  }
+`
 
 export const Section = styled.div`
   position: relative;
@@ -18,15 +23,23 @@ export const Section = styled.div`
   padding-top: 48px;
   padding-bottom: 48px;
 
+  ${({ backgroundColor, sectionPadding }) =>
+    backgroundColor && !sectionPadding
+      ? `
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+  `
+      : ``}
+
   ${({ sectionPadding }) =>
-  sectionPadding
+    sectionPadding
       ? `
     padding-top: ${sectionPadding};
     padding-bottom: ${sectionPadding};
   `
       : ``}
 
-  @media (max-width: ${({theme}) => theme.device.tabletMediaMax}){
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
     padding-top: 24px;
     padding-bottom: 24px;
   }
@@ -34,7 +47,7 @@ export const Section = styled.div`
   &.noPaddingBottom {
     padding-bottom: 0;
   }
-`;
+`
 
 export const HubspotModal = styled.div`
   margin-right: 10px;
@@ -44,7 +57,7 @@ export const HubspotModal = styled.div`
   background-color: #fff;
   width: 100%;
   position: relative;
-`;
+`
 
 export const IconCloseModal = styled.span`
   display: inline-flex;
@@ -58,4 +71,4 @@ export const IconCloseModal = styled.span`
   top: 30px;
   right: 30px;
   cursor: pointer;
-`;
+`

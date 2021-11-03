@@ -21,6 +21,7 @@ const HeroContainerComponent = props => {
     hubSpotForm,
     ctaText,
     ctaLink,
+    contentAlignment,
   } = props
   const [showPopup, setShowPopup] = React.useState(false)
   const togglePopup = () => {
@@ -49,16 +50,21 @@ const HeroContainerComponent = props => {
     )
   }
   const isStyleHubspot = hubSpotForm && !ctaText
+  const isStyleCenterSimple = contentAlignment === 'center' && !sideImage;
 
   return (
-    <HeroContainer image={backgroundImage} showLearnMore={showLearnMore}>
+    <HeroContainer isStyleCenterSimple={isStyleCenterSimple} image={backgroundImage} showLearnMore={showLearnMore}>
       <ContentWrapper>
         {showFavIcon ? (
           <FavIconWrapper>
             <FavIcon src={'/images/metamask-logo.png'} alt="logo" />
           </FavIconWrapper>
         ) : null}
-        <HeroContentContainer bgSrc={!isStyleHubspot ? sideImage : ''}>
+        <HeroContentContainer
+          isStyleCenterSimple={isStyleCenterSimple}
+          contentAlignment={contentAlignment}
+          bgSrc={!isStyleHubspot ? sideImage : ''}
+        >
           <HeroImageTextContainer
             isStyleHubspot={isStyleHubspot}
             isHome={isHome}
@@ -72,7 +78,13 @@ const HeroContainerComponent = props => {
               </EyebrowWrapper>
             ) : null}
             {headline && (
-              <HeroTitle isStyleHubspot={isStyleHubspot} hideHeadline={hideHeadline}> {headline} </HeroTitle>
+              <HeroTitle
+                hideHeadline={hideHeadline}
+                fontSize={isStyleHubspot ? '16px' : (contentAlignment === 'center' ? '30px' : '')}
+              >
+                {' '}
+                {headline}{' '}
+              </HeroTitle>
             )}
             {description && (
               <HeroDescription>
@@ -92,9 +104,13 @@ const HeroContainerComponent = props => {
             ) : null}
             {hubspotWrapper ? hubspotWrapper : null}
           </HeroImageTextContainer>
-          <HeroSideImage isStyleHubspot={isStyleHubspot}>
-            {isStyleHubspot ? <img src={sideImage} alt="hero hubspot" /> : null}
-          </HeroSideImage>
+          {sideImage ? (
+            <HeroSideImage isStyleHubspot={isStyleHubspot}>
+              {isStyleHubspot ? (
+                <img src={sideImage} alt="hero hubspot" />
+              ) : null}
+            </HeroSideImage>
+          ) : null}
         </HeroContentContainer>
         {showLearnMore ? (
           <LearnMoreWrapper>
@@ -141,6 +157,15 @@ const HeroContainer = styled(Section)`
       ? `padding-bottom: 0 !important;
     `
       : ''}
+
+  ${({ isStyleCenterSimple }) =>
+  isStyleCenterSimple
+      ? `
+      + div {
+        padding-top: 0 !important;
+      }
+    `
+      : ''}
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
     padding-top: 0 !important;
   }
@@ -164,6 +189,22 @@ const HeroContentContainer = styled.div`
     background-size: contain;
     background-repeat: no-repeat;
     background-attachment: scroll;
+  `
+      : ''}
+
+  ${({ contentAlignment }) =>
+    contentAlignment === 'center'
+      ? `
+    justify-content: center;
+    text-align: center;
+  `
+      : ''}
+
+  ${({ isStyleCenterSimple }) =>
+    isStyleCenterSimple
+      ? `
+    margin: 0 !important;
+    padding: 48px 0 0 0 !important;
   `
       : ''}
 
@@ -225,10 +266,11 @@ const HeroTitle = styled.h1`
     display: none;
   `
       : ''}
-  ${({ isStyleHubspot }) =>
-  isStyleHubspot
+
+  ${({ fontSize }) =>
+  fontSize
       ? `
-      font-size: 16px;
+      font-size: ${fontSize};
   `
       : ''}
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {

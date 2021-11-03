@@ -1,20 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-import ContentWrapper from '../ContentWrapper'
+import Faq from '../Faq'
 
 const ContentfulFaq = props => {
   const {
-    moduleConfig: { question, answer, hasModuleContainer },
+    moduleConfig: { question, answer, activeId, setActiveId, contentful_id },
   } = props
-
-  const El = !hasModuleContainer
-    ? ({ children, ...props }) => (
-        <ContentWrapper {...props}>{children}</ContentWrapper>
-      )
-    : React.Fragment
-
-  return <El></El>
+  const { childMarkdownRemark: { html } = {} } = answer || {}
+  return <Faq answer={html} question={question} activeId={activeId} setActiveId={setActiveId} id={contentful_id}></Faq>
 }
 
 export default ContentfulFaq
@@ -23,5 +16,6 @@ ContentfulFaq.propTypes = {
   moduleConfig: PropTypes.shape({
     question: PropTypes.string,
     answer: PropTypes.string,
+    contentful_id: PropTypes.string,
   }),
 }
