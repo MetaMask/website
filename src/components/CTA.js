@@ -124,6 +124,10 @@ const ContentWrapper = styled(Link)`
     &:hover {
       color: ${theme.lightBlue};
     }
+    @media (max-width: ${theme.device.mobileMediaMax}) {
+      font-size: 16px;
+      line-height: 44px;
+    }
   `
       : ``}
 `

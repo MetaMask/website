@@ -82,8 +82,8 @@ FullWidthCta.propTypes = {
 
 const Container = styled(Section)`
   display: block;
-  padding-top: 50px !important;
-  padding-bottom: 50px !important;
+  padding-top: 48px !important;
+  padding-bottom: 48px !important;
   ${({ backgroundColor, theme }) =>
     backgroundColor === 'dark'
       ? `

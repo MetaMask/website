@@ -32,4 +32,7 @@ const Container = styled.div`
   }
 
   ${({ styleOverride }) => styleOverride}
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    margin: 0!important;
+  }
 `
