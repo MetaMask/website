@@ -14,6 +14,7 @@ export const SectionTitle = styled.h2`
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     font-size: 40px;
     line-height: 46px;
+    padding-top: 0;
   }
 `
 
@@ -26,8 +27,8 @@ export const Section = styled.div`
   ${({ backgroundColor, sectionPadding }) =>
     backgroundColor && !sectionPadding
       ? `
-    padding-top: 50px !important;
-    padding-bottom: 50px !important;
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
   `
       : ``}
 
