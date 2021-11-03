@@ -316,6 +316,9 @@ export const ContentfulModuleContainerFields = graphql`
       ... on ContentfulLogo {
         ...ContentfulLogoFields
       }
+      ... on ContentfulFaq {
+        ...ContentfulFaqFields
+      }
     }
   }
 `

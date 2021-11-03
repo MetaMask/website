@@ -7,7 +7,13 @@ const Button = props => {
   const { link, text, newTab, color = 'primary', size, customClick } = props
 
   return (
-    <ButtonWrapper to={link} newTab={newTab} color={color} size={size} onClick={customClick}>
+    <ButtonWrapper
+      to={link}
+      newTab={newTab}
+      color={color}
+      size={size}
+      onClick={customClick}
+    >
       {text}
     </ButtonWrapper>
   )
@@ -75,9 +81,4 @@ const ButtonWrapper = styled(Link)`
   }
   `
       : ''}
-  
-  
-  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-    width: 100%;
-  }
 `

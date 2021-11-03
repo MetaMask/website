@@ -4,7 +4,14 @@ import { Wrapper, Image } from '../Logo'
 
 const ContentfulLogo = props => {
   const {
-    moduleConfig: { logo, link, linkOpensNewTab, title, hasModuleContainer, cleanStyle },
+    moduleConfig: {
+      logo,
+      link,
+      linkOpensNewTab,
+      title,
+      hasModuleContainer,
+      cleanStyle,
+    },
   } = props
   return (
     <Wrapper

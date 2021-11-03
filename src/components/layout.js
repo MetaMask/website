@@ -4,9 +4,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { ThemeProvider } from 'styled-components'
 import globalTheme from '../lib/theme'
-
 import GDPRBanner from './GDPRBanner'
-
 import './layout.scss'
 import './animate.css'
 import '../fonts/Graphik-Extralight-Web.woff'

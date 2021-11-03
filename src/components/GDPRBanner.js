@@ -45,7 +45,7 @@ const Banner = styled.div`
   justify-content: space-around;
   width: 100vw;
   height: 150px;
-  background-color: ${({ theme }) => theme.primaryColor};
+  background-color: ${({ theme }) => theme.cookiesBg};
   @media (min-width: ${({ theme }) => theme.device.tablet}) {
     flex-direction: row;
     justify-content: center;
@@ -73,9 +73,10 @@ const PrivacyLink = styled.a`
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-evenly;
   width: 100%;
-  margin: 3% 0;
+  margin: 8px 0;
   @media (min-width: ${({ theme }) => theme.device.tablet}) {
     width: 30%;
     margin: 0;
@@ -83,7 +84,7 @@ const ButtonContainer = styled.div`
 `
 
 const buttonStyle = css`
-  padding: 0.4em;
+  padding: 6px;
   border: none;
   cursor: pointer;
 `
@@ -96,6 +97,6 @@ const AcceptButton = styled.button`
 
 const DeclineButton = styled.button`
   ${buttonStyle}
-  background-color: ${({ theme }) => theme.primaryColor};
+  background-color: ${({ theme }) => theme.cookiesBg};
   color:  ${({ theme }) => theme.white};
 `

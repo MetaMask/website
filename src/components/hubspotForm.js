@@ -42,12 +42,12 @@ export default withTheme(HubspotForm)
 const Title = styled.h2`
   display: block;
   margin-bottom: 40px;
-`;
+`
 
 const Wrapper = styled.div`
   display: block;
-`;
+`
 
 const Form = styled.div`
   display: block;
-`;
+`

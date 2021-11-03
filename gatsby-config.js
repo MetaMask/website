@@ -28,6 +28,7 @@ if (env.errors) {
       `gatsby-plugin-styled-components`,
       'gatsby-transformer-sharp',
       'gatsby-transformer-remark',
+      'gatsby-plugin-root-import',
       {
         resolve: `gatsby-source-contentful`,
         options: {

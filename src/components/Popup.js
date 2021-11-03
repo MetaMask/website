@@ -2,13 +2,13 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import PopupModal from 'reactjs-popup'
 import { HubspotModal, IconCloseModal } from './StyledGeneral'
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 
 const Popup = props => {
   const { showPopup, onClosePopup, children } = props
   React.useEffect(() => {
-    const body = document.querySelector('body');
-    if(showPopup) {
+    const body = document.querySelector('body')
+    if (showPopup) {
       disableBodyScroll(body)
     } else {
       enableBodyScroll(body)

@@ -84,6 +84,7 @@ a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
   text-decoration: none;
+  color: #2196f3;
 }
 a:active,
 a:hover {
@@ -274,6 +275,11 @@ h2 {
   font-size: 24px;
   line-height: 36px;
   font-weight: 700;
+
+  @media (max-width: 767px){
+    font-size: 40px;
+    line-height: 46px;
+  }
 }
 
 h3 {

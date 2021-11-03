@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { graphql } from 'gatsby'
-
+import Link from 'components/Link'
 import Seo from '../components/Contentful/ContentfulSeo'
 import Layout from '../templates/PageLayout'
 
@@ -14,7 +14,7 @@ const NotFoundPage = ({ data: { seo }, location }) => (
       <NotFoundDescription className="mb-3">
         The page you are looking for doesn't exist or has been moved.
       </NotFoundDescription>
-      <ReturnHomeButton href="/">GO TO HOMEPAGE</ReturnHomeButton>
+      <ReturnHomeButton to="/">GO TO HOMEPAGE</ReturnHomeButton>
     </Container>
   </Layout>
 )
@@ -26,7 +26,7 @@ export const NullPageQuery = graphql`
     }
   }
 `
-const ReturnHomeButton = styled.button`
+const ReturnHomeButton = styled(Link)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -60,10 +60,11 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
 `
 const Logo = styled.img`
   width: 214px;
   max-width: 100%;
-`;
+`
 
 export default NotFoundPage
