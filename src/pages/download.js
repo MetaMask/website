@@ -39,7 +39,62 @@ export const DownloadPageQuery = graphql`
         }
       }
     }
-
+    download-extension: contentfulAsset(
+      contentful_id: { eq: "6ngCUoU36ABPjs6cDNnuoK" }
+    ) {
+      file {
+        url
+        fileName
+      } 
+    }
+    download-ios: contentfulAsset(
+      contentful_id: { eq: "75bFgEllkMxpVsY8wWlroX" }
+    ) {
+      file {
+        url
+        fileName
+      } 
+    }
+    download-android: contentfulAsset(
+      contentful_id: { eq: "7CU9NE4jlL0XjKEerlEL16" }
+    ) {
+      file {
+        url
+        fileName
+      } 
+    }
+    browser-chrome: contentfulAsset(
+      contentful_id: { eq: "5CEOSBaSKv43i0mNninl5G" }
+    ) {
+      file {
+        url
+        fileName
+      } 
+    }
+    browser-firefox: contentfulAsset(
+      contentful_id: { eq: "4WVycyyYvlfuRrArPRjj1d" }
+    ) {
+      file {
+        url
+        fileName
+      } 
+    }
+    browser-brave: contentfulAsset(
+      contentful_id: { eq: "6HcekwtMp9fRFIphaPlqX5" }
+    ) {
+      file {
+        url
+        fileName
+      } 
+    }
+    browser-edge: contentfulAsset(
+      contentful_id: { eq: "2O0Uh2Nt1OciYoK96DscLF" }
+    ) {
+      file {
+        url
+        fileName
+      } 
+    }
     footer: contentfulLayoutFooter(
       contentful_id: { eq: "75bFgEllkMxpVsY8wWlroX" }
     ) {
