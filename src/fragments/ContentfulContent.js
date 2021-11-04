@@ -44,6 +44,9 @@ export const ContentfulLayoutHeroFields = graphql`
     eyebrowLogo {
       ...ContentfulLogoFields
     }
+    eyebrowMobileLogo {
+      ...ContentfulLogoFields
+    }
     sideImage {
       file {
         url
@@ -220,8 +223,8 @@ export const ContentfulHubSpotFormFields = graphql`
     title
     portalId
     formId
-    displayTitle
     campaignId
+    displayTitle
   }
 `
 
@@ -252,6 +255,7 @@ export const ContentfulFaqFields = graphql`
         html
       }
     }
+    backgroundColor
   }
 `
 

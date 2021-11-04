@@ -14,6 +14,7 @@ const ContentfulLayoutHero = props => {
       modules,
       sideImage,
       eyebrowLogo,
+      eyebrowMobileLogo,
       hideHeadline,
       showLearnMore,
       showFavIcon,
@@ -30,6 +31,7 @@ const ContentfulLayoutHero = props => {
       headline={headline}
       description={html}
       eyebrowLogo={eyebrowLogo}
+      eyebrowMobileLogo={eyebrowMobileLogo}
       backgroundImage={bgUrl || ''}
       ctaText={ctaText}
       ctaLink={ctaLink}
@@ -49,6 +51,7 @@ export default ContentfulLayoutHero
 ContentfulLayoutHero.propTypes = {
   moduleConfig: PropTypes.shape({
     eyebrowLogo: PropTypes.object,
+    eyebrowMobileLogo: PropTypes.object,
     sideImage: PropTypes.object,
     backgroundImage: PropTypes.object,
     ctaLink: PropTypes.string,

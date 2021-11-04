@@ -10,7 +10,7 @@ const Faq = props => {
   return (
     <FaqItem active={isActive} onClick={() => setActiveId(!isActive ? id : '')}>
       <FaqItemInner>
-        <QuestionItem>
+        <QuestionItem active={isActive}>
           {question}
           <IconClose>
             <IconCloseInner active={isActive}>
@@ -36,10 +36,10 @@ Faq.propTypes = {
 }
 
 const FaqItem = styled.div`
+  cursor: pointer;
   display: block;
   width: 100%;
   margin-bottom: 12px;
-  cursor: pointer;
 `
 
 const FaqItemInner = styled.div`
@@ -58,7 +58,13 @@ const QuestionItem = styled.div`
   font-weight: 700;
   color: #fff;
   border-radius: 4px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   min-height: 80px;
+
+  ${({ active }) =>
+    active ? `
+      border-radius: 4px 4px 0 0;
+    ` : ``}
 
   svg {
     path {
@@ -73,16 +79,17 @@ const AnswerItem = styled.div`
   transition: max-height 500ms ease;
 
   ${({ active }) =>
-    active
+    !active
       ? `
-    max-height: 200px;
+    max-height: 0;
   `
-      : `max-height: 0;`}
+      : ``}
 `
 
 const AnswerItemInner = styled.div`
+  border-radius: 0 0 4px 4px;
   display: block;
-  padding: 30px;
+  padding: 30px 30px 6px 30px;
   background: #f4f6f8;
 `
 const IconClose = styled.div`

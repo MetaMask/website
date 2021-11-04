@@ -17,6 +17,7 @@ const HeroContainerComponent = props => {
     sideImage,
     showLearnMore,
     eyebrowLogo,
+    eyebrowMobileLogo,
     showFavIcon,
     hubSpotForm,
     ctaText,
@@ -128,14 +129,19 @@ const HeroContainerComponent = props => {
 export default withTheme(HeroContainerComponent)
 
 HeroContainerComponent.propTypes = {
-  backgroundImage: PropTypes.string,
-  button: PropTypes.element,
-  header: PropTypes.string,
-  HeroImage: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  theme: PropTypes.object,
-  title: PropTypes.string,
-  subtitle: PropTypes.string,
-  modules: PropTypes.arrayOf(PropTypes.object.isRequired),
+  backgroundImage: PropTypes.object,
+  eyebrowLogo: PropTypes.object,
+  eyebrowMobileLogo: PropTypes.object,
+  sideImage: PropTypes.object,
+  hubSpotForm: PropTypes.object,
+  headline: PropTypes.string,
+  description: PropTypes.object,
+  ctaText: PropTypes.string,
+  ctaLink: PropTypes.string,
+  contentAlignment: PropTypes.string,
+  hideHeadline: PropTypes.bool,
+  showLearnMore: PropTypes.bool,
+  showFavIcon: PropTypes.bool
 }
 
 const HeroContainer = styled(Section)`
@@ -209,7 +215,6 @@ const HeroContentContainer = styled.div`
       : ''}
 
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
-    flex-direction: column;
     flex-direction: column-reverse;
     background-position: 50% 0%;
     background-size: 90%;
@@ -270,14 +275,14 @@ const HeroTitle = styled.h1`
   ${({ fontSize }) =>
   fontSize
       ? `
-      font-size: ${fontSize};
+      font-size: ${fontSize} !important;
   `
       : ''}
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     font-size: 46px;
   }
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-    font-size: 34px;
+    font-size: 34px !important;
     line-height: 43px;
   }
 `

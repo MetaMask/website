@@ -32,6 +32,7 @@ const ContentfulModuleContainer = props => {
     <Wrapper isFaq={isFaq}>
       {title ? (
         <Title
+          isFaq={isFaq}
           className={classnames({
             hidden: !displayTitle,
           })}
@@ -94,9 +95,18 @@ const Wrapper = styled.div`
 
 const Title = styled.h2`
   margin-bottom: 1rem;
-  @media (min-width: ${({ theme }) => theme.device.desktop}) {
-    margin-bottom: 2rem;
-  }
+  ${({ isFaq, theme }) =>
+    isFaq ? `
+      margin-bottom: 20px;
+      @media (max-width: ${theme.device.tabletMediaMax}) {
+        font-size: 2rem;
+      }
+      @media (max-width: ${theme.device.mobileMediaMax}) {
+        padding-top: 20px;
+        text-align: center;
+      }
+    `
+    : ``}
 `
 const Modules = styled.div`
   display: flex;
