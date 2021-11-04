@@ -39,7 +39,8 @@ export const DownloadPageQuery = graphql`
         }
       }
     }
-    download-extension: contentfulAsset(
+    
+    download_extension: contentfulAsset(
       contentful_id: { eq: "6ngCUoU36ABPjs6cDNnuoK" }
     ) {
       file {
@@ -47,7 +48,7 @@ export const DownloadPageQuery = graphql`
         fileName
       } 
     }
-    download-ios: contentfulAsset(
+    download_ios: contentfulAsset(
       contentful_id: { eq: "75bFgEllkMxpVsY8wWlroX" }
     ) {
       file {
@@ -55,7 +56,7 @@ export const DownloadPageQuery = graphql`
         fileName
       } 
     }
-    download-android: contentfulAsset(
+    download_android: contentfulAsset(
       contentful_id: { eq: "7CU9NE4jlL0XjKEerlEL16" }
     ) {
       file {
@@ -63,7 +64,7 @@ export const DownloadPageQuery = graphql`
         fileName
       } 
     }
-    browser-chrome: contentfulAsset(
+    browser_chrome: contentfulAsset(
       contentful_id: { eq: "5CEOSBaSKv43i0mNninl5G" }
     ) {
       file {
@@ -71,7 +72,7 @@ export const DownloadPageQuery = graphql`
         fileName
       } 
     }
-    browser-firefox: contentfulAsset(
+    browser_firefox: contentfulAsset(
       contentful_id: { eq: "4WVycyyYvlfuRrArPRjj1d" }
     ) {
       file {
@@ -79,7 +80,7 @@ export const DownloadPageQuery = graphql`
         fileName
       } 
     }
-    browser-brave: contentfulAsset(
+    browser_brave: contentfulAsset(
       contentful_id: { eq: "6HcekwtMp9fRFIphaPlqX5" }
     ) {
       file {
@@ -87,7 +88,7 @@ export const DownloadPageQuery = graphql`
         fileName
       } 
     }
-    browser-edge: contentfulAsset(
+    browser_edge: contentfulAsset(
       contentful_id: { eq: "2O0Uh2Nt1OciYoK96DscLF" }
     ) {
       file {
@@ -95,6 +96,7 @@ export const DownloadPageQuery = graphql`
         fileName
       } 
     }
+    
     footer: contentfulLayoutFooter(
       contentful_id: { eq: "75bFgEllkMxpVsY8wWlroX" }
     ) {
