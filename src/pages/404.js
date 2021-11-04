@@ -4,6 +4,7 @@ import { graphql } from 'gatsby'
 import Link from 'components/Link'
 import Seo from '../components/Contentful/ContentfulSeo'
 import Layout from '../templates/PageLayout'
+import redirect from '../lib/services/redirect'
 
 const NotFoundPage = ({ data: { seo }, location }) => (
   <Layout>
@@ -16,6 +17,7 @@ const NotFoundPage = ({ data: { seo }, location }) => (
       </NotFoundDescription>
       <ReturnHomeButton to="/">GO TO HOMEPAGE</ReturnHomeButton>
     </Container>
+    <script dangerouslySetInnerHTML={{ __html: redirect }} />
   </Layout>
 )
 
