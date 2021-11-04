@@ -43,57 +43,64 @@ export const DownloadPageQuery = graphql`
     download_extension: contentfulAsset(
       contentful_id: { eq: "6ngCUoU36ABPjs6cDNnuoK" }
     ) {
+      title
+      description
       file {
         url
-        fileName
       } 
     }
     download_ios: contentfulAsset(
       contentful_id: { eq: "75bFgEllkMxpVsY8wWlroX" }
     ) {
+      title
+      description
       file {
         url
-        fileName
       } 
     }
     download_android: contentfulAsset(
       contentful_id: { eq: "7CU9NE4jlL0XjKEerlEL16" }
     ) {
+      title
+      description
       file {
         url
-        fileName
       } 
     }
     browser_chrome: contentfulAsset(
       contentful_id: { eq: "5CEOSBaSKv43i0mNninl5G" }
     ) {
+      title
+      description
       file {
         url
-        fileName
       } 
     }
     browser_firefox: contentfulAsset(
       contentful_id: { eq: "4WVycyyYvlfuRrArPRjj1d" }
     ) {
+      title
+      description
       file {
         url
-        fileName
       } 
     }
     browser_brave: contentfulAsset(
       contentful_id: { eq: "6HcekwtMp9fRFIphaPlqX5" }
     ) {
+      title
+      description
       file {
         url
-        fileName
       } 
     }
     browser_edge: contentfulAsset(
       contentful_id: { eq: "2O0Uh2Nt1OciYoK96DscLF" }
     ) {
+      title
+      description
       file {
         url
-        fileName
       } 
     }
     
