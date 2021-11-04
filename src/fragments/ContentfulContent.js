@@ -255,6 +255,7 @@ export const ContentfulFaqFields = graphql`
         html
       }
     }
+    backgroundColor
   }
 `
 

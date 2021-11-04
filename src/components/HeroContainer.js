@@ -275,14 +275,14 @@ const HeroTitle = styled.h1`
   ${({ fontSize }) =>
   fontSize
       ? `
-      font-size: ${fontSize};
+      font-size: ${fontSize} !important;
   `
       : ''}
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     font-size: 46px;
   }
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-    font-size: 34px;
+    font-size: 34px !important;
     line-height: 43px;
   }
 `

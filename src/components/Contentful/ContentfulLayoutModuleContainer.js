@@ -113,8 +113,8 @@ const ContentInfo = styled.div`
   `
       : ''}
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-  padding-top: 0;
-}
+    padding-top: 0;
+  }
 `
 const SubInfo = styled.div`
   display: block;
