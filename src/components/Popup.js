@@ -19,14 +19,11 @@ const Popup = props => {
       open={showPopup}
       onClose={onClosePopup}
       contentStyle={{
-        width: '360px',
-        maxWidth: 'calc(100% - 90px)',
         padding: 0,
         border: 'none',
       }}
       overlayStyle={{
         backgroundColor: 'rgba(0, 0, 0, 0.3)',
-        padding: '20px',
         maxHeight: '100%',
         overflowX: 'hidden',
         overflowY: 'auto',

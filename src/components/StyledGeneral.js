@@ -51,23 +51,28 @@ export const Section = styled.div`
 `
 
 export const HubspotModal = styled.div`
+  border-radius: 24px;
+  background-color: #fff;
+  max-height: 80vh;
   margin-right: 10px;
   margin-left: 10px;
   padding: 30px;
-  border-radius: 24px;
-  background-color: #fff;
-  width: 100%;
+  overflow: auto;
   position: relative;
+  
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
+    max-height: 85vh;
+  }
 `
 
 export const IconCloseModal = styled.span`
   display: inline-flex;
   width: 24px;
-  height: 40px;
+  height: 36px;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 20px !important;
+  font-weight: bold !important;
   position: absolute;
   top: 30px;
   right: 30px;
