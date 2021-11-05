@@ -50,7 +50,7 @@ export const Section = styled.div`
   }
 `
 
-export const HubspotModal = styled.div`
+export const ModalInner = styled.div`
   border-radius: 24px;
   background-color: #fff;
   max-height: 80vh;
@@ -59,6 +59,11 @@ export const HubspotModal = styled.div`
   padding: 30px;
   overflow: auto;
   position: relative;
+  max-width: 90vw;
+
+  ${({width}) => width ? `
+    width: ${width};
+  `:''}
   
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
     max-height: 85vh;

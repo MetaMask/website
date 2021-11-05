@@ -4,10 +4,22 @@ import Faq from '../Faq'
 
 const ContentfulFaq = props => {
   const {
-    moduleConfig: { question, answer, activeId, setActiveId, contentful_id },
+    moduleConfig: {
+      question,
+      answer,
+      contentful_id,
+      backgroundColor,
+    },
   } = props
   const { childMarkdownRemark: { html } = {} } = answer || {}
-  return <Faq answer={html} question={question} activeId={activeId} setActiveId={setActiveId} id={contentful_id}></Faq>
+  return (
+    <Faq
+      answer={html}
+      question={question}
+      id={contentful_id}
+      backgroundColor={backgroundColor}
+    ></Faq>
+  )
 }
 
 export default ContentfulFaq
@@ -17,5 +29,6 @@ ContentfulFaq.propTypes = {
     question: PropTypes.string,
     answer: PropTypes.string,
     contentful_id: PropTypes.string,
+    backgroundColor: PropTypes.string,
   }),
 }

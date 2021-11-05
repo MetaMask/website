@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import PopupModal from 'reactjs-popup'
-import { HubspotModal, IconCloseModal } from './StyledGeneral'
+import { ModalInner, IconCloseModal } from './StyledGeneral'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 
 const Popup = props => {
-  const { showPopup, onClosePopup, children } = props
+  const { showPopup, onClosePopup, children, width } = props
   React.useEffect(() => {
     const body = document.querySelector('body')
     if (showPopup) {
@@ -33,13 +33,13 @@ const Popup = props => {
       closeOnDocumentClick
       closeOnEscape
     >
-      <HubspotModal>
+      <ModalInner width={width}>
         <IconCloseModal
           className={'w-icon w-icon-close'}
           onClick={onClosePopup}
         />
         {children}
-      </HubspotModal>
+      </ModalInner>
     </PopupModal>
   )
 }

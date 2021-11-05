@@ -13,6 +13,7 @@ const ContentfulLogo = props => {
       cleanStyle,
     },
   } = props
+  const { title: titleFile, description: descriptionFile, file } = logo || {}
   return (
     <Wrapper
       link={link}
@@ -20,7 +21,9 @@ const ContentfulLogo = props => {
       child={hasModuleContainer}
       cleanStyle={cleanStyle}
     >
-      {logo && logo.file && <Image src={logo.file.url} alt={title} />}
+      {logo && file && (
+        <Image src={file.url} alt={descriptionFile || titleFile || title} />
+      )}
     </Wrapper>
   )
 }

@@ -48,9 +48,10 @@ export const ContentfulLayoutHeroFields = graphql`
       ...ContentfulLogoFields
     }
     sideImage {
+      title
+      description
       file {
         url
-        fileName
       }
       fluid(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
@@ -69,9 +70,10 @@ export const ContentfulLayoutHeroFields = graphql`
     hideHeadline
     showFavIcon
     backgroundImage {
+      title
+      description
       file {
         url
-        fileName
       }
       fluid(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
@@ -93,18 +95,20 @@ export const ContentfulLayoutFeatureFields = graphql`
       }
     }
     image {
+      title
+      description
       file {
         url
-        fileName
       }
       fluid(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
     imageMobile {
+      title
+      description
       file {
         url
-        fileName
       }
       fluid(quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
@@ -181,12 +185,10 @@ export const ContentfulCardFields = graphql`
     }
     title
     image {
+      title
+      description
       file {
         url
-        fileName
-      }
-      fluid(maxWidth: 600) {
-        ...GatsbyContentfulFluid_withWebp
       }
     }
     description {
@@ -225,6 +227,7 @@ export const ContentfulHubSpotFormFields = graphql`
     formId
     campaignId
     displayTitle
+    width
   }
 `
 
@@ -267,9 +270,10 @@ export const ContentfulLogoFields = graphql`
     }
     title
     logo {
+      title
+      description
       file {
         url
-        fileName
       }
     }
     link
@@ -322,6 +326,9 @@ export const ContentfulModuleContainerFields = graphql`
       }
       ... on ContentfulFaq {
         ...ContentfulFaqFields
+      }
+      ... on ContentfulCard {
+        ...ContentfulCardFields
       }
     }
   }

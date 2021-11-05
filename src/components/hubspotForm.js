@@ -5,10 +5,10 @@ import classnames from 'classnames'
 import styled, { withTheme } from 'styled-components'
 
 const HubspotForm = props => {
-  const { portalId, formId, campaignId, title, displayTitle } = props
+  const { portalId, formId, campaignId, title, displayTitle, width } = props
 
   return (
-    <Wrapper>
+    <Wrapper width={width}>
       {title ? (
         <Title
           className={classnames({
@@ -46,6 +46,8 @@ const Title = styled.h2`
 
 const Wrapper = styled.div`
   display: block;
+
+  ${({width}) => width ? `width: ${width}` : ''}
 `
 
 const Form = styled.div`

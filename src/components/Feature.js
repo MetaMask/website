@@ -4,9 +4,9 @@ import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import CTA from './CTA'
 import ScrollAnimation from 'react-animate-on-scroll'
-import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
 import classnames from 'classnames'
 import { Section } from './StyledGeneral'
+import ImageItem from './Image'
 
 const FeatureComponent = props => {
   const {
@@ -27,8 +27,68 @@ const FeatureComponent = props => {
     backgroundColor,
     headlineMarginTop0,
     sectionPadding,
+    imageMobile,
+    eyebrow,
   } = props
-  const url = parseContentfulAssetUrl(image)
+  const contentAlignLR = ['left', 'right'].includes(contentAlignment)
+    ? contentAlignment
+    : ''
+  const isContentAlignVertical = contentAlignment === 'vertical'
+
+  const innerContent = (
+    <>
+      {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
+      {headline ? (
+        <Headline
+          hasCta={ctaText}
+          hideHeadline={hideHeadline}
+          headlineMarginTop0={headlineMarginTop0}
+        >
+          {headline}
+        </Headline>
+      ) : null}
+      {description ? (
+        <Description>
+          <div dangerouslySetInnerHTML={{ __html: description }} />
+        </Description>
+      ) : null}
+      {ctaText ? (
+        <CTAWrapper>
+          <CTA
+            link={ctaLink}
+            text={ctaText}
+            newTab={newTab}
+            button={true}
+            buttonColor={
+              backgroundColor === 'white' ? 'primary' : 'white-outline'
+            }
+          />
+        </CTAWrapper>
+      ) : null}
+    </>
+  )
+  const imageContent = (
+    <>
+      {image ? (
+        <ImageSrc
+          classname={classnames({
+            'hidden-mobile': imageMobile,
+          })}
+          image={image}
+          widthImg={imageWidth}
+          imageAlignment={imageAlignment}
+        />
+      ) : null}
+      {imageMobile ? (
+        <ImageSrc
+          classname={'hidden-desktop'}
+          image={imageMobile}
+          widthImg={imageWidth}
+          imageAlignment={imageAlignment}
+        />
+      ) : null}
+    </>
+  )
   return (
     <FeatureContainer
       sectionPadding={sectionPadding}
@@ -39,18 +99,19 @@ const FeatureComponent = props => {
     >
       <ContentWrapper>
         <FeatureWrapper
-          contentAlignment={contentAlignment}
+          contentAlignLR={contentAlignLR}
+          isContentAlignVertical={isContentAlignVertical}
           alignItemsCenter={alignItemsCenter}
           imageWidth={imageWidth}
           backgroundColor={backgroundColor}
         >
-          <SideImage>
-            {url ? (
+          {image || imageMobile ? (
+            <SideImage>
               <Image>
                 {animation ? (
                   <ScrollAnimation
                     animateIn={
-                      contentAlignment === 'right'
+                      contentAlignLR === 'right'
                         ? 'fadeInLeftMini'
                         : 'fadeInRightMini'
                     }
@@ -58,22 +119,14 @@ const FeatureComponent = props => {
                     delay={0}
                     offset={0}
                   >
-                    <ImageSrc
-                      src={url}
-                      widthImg={imageWidth}
-                      imageAlignment={imageAlignment}
-                    />
+                    {imageContent}
                   </ScrollAnimation>
                 ) : (
-                  <ImageSrc
-                    src={url}
-                    widthImg={imageWidth}
-                    imageAlignment={imageAlignment}
-                  />
+                  imageContent
                 )}
               </Image>
-            ) : null}
-          </SideImage>
+            </SideImage>
+          ) : null}
           <FeatureInner
             withContent={withContent}
             contentPaddingTop={contentPaddingTop}
@@ -81,7 +134,7 @@ const FeatureComponent = props => {
             {animation ? (
               <ScrollAnimation
                 animateIn={
-                  contentAlignment === 'left'
+                  contentAlignLR === 'left'
                     ? 'fadeInLeftMini'
                     : 'fadeInRightMini'
                 }
@@ -89,48 +142,10 @@ const FeatureComponent = props => {
                 delay={0}
                 offset={0}
               >
-                {headline ? (
-                  <Headline
-                    hideHeadline={hideHeadline}
-                    headlineMarginTop0={headlineMarginTop0}
-                  >
-                    {headline}
-                  </Headline>
-                ) : null}
-                {description ? (
-                  <Description>
-                    <div dangerouslySetInnerHTML={{ __html: description }} />
-                  </Description>
-                ) : null}
+                {innerContent}
               </ScrollAnimation>
             ) : (
-              <div>
-                {headline ? (
-                  <Headline hasCta={ctaText} hideHeadline={hideHeadline}>
-                    {headline}
-                  </Headline>
-                ) : null}
-                {description ? (
-                  <Description>
-                    <div dangerouslySetInnerHTML={{ __html: description }} />
-                  </Description>
-                ) : null}
-                {ctaText ? (
-                  <CTAWrapper>
-                    <CTA
-                      link={ctaLink}
-                      text={ctaText}
-                      newTab={newTab}
-                      button={true}
-                      buttonColor={
-                        backgroundColor === 'white'
-                          ? 'primary'
-                          : 'white-outline'
-                      }
-                    />
-                  </CTAWrapper>
-                ) : null}
-              </div>
+              <div>{innerContent}</div>
             )}
           </FeatureInner>
         </FeatureWrapper>
@@ -155,7 +170,7 @@ const Image = styled.div`
   display: block;
   width: 100%;
 `
-const ImageSrc = styled.img`
+const ImageSrc = styled(ImageItem)`
   display: block;
   margin: 0 auto;
   max-width: 100%;
@@ -189,13 +204,11 @@ const Headline = styled.h2`
       : ''}
       
   ${({ headlineMarginTop0 }) =>
-    headlineMarginTop0
-      ? 'margin-top: 0;'
-      : 'margin-top: 40px;'}
+    headlineMarginTop0 ? 'margin-top: 0;' : 'margin-top: 40px;'}
 
   ${({ hasCta, theme }) =>
     !hasCta
-    ? `
+      ? `
     @media (max-width: ${theme.device.tabletMediaMax}) {
       font-size: 28px;
       line-height: 32px;
@@ -204,7 +217,8 @@ const Headline = styled.h2`
       padding-bottom: 0;
       padding-top: 0;
       text-align: center;
-    }`: 'padding-bottom: 14px;'}
+    }`
+      : 'padding-bottom: 14px;'}
 `
 
 const Description = styled.div`
@@ -223,10 +237,17 @@ const FeatureWrapper = styled.div`
     align-items: center;
     text-align: center;
   }
-  ${({ contentAlignment }) =>
-    contentAlignment === 'left'
+  ${({ contentAlignLR }) =>
+  contentAlignLR === 'left'
       ? `
     flex-direction: row-reverse;
+  `
+      : ''}
+
+  ${({ isContentAlignVertical }) =>
+    isContentAlignVertical
+      ? `
+      flex-direction: column-reverse !important;
   `
       : ''}
   ${({ alignItemsCenter }) =>
@@ -234,6 +255,7 @@ const FeatureWrapper = styled.div`
       ? `
     align-items: center;
     justify-content: center;
+    text-align: center;
   `
       : ''}
   & > * {
@@ -274,4 +296,11 @@ const CTAWrapper = styled.div`
   a {
     min-width: 160px;
   }
+`
+const Eyebrow = styled.div`
+  margin-bottom: 0px;
+  color: #f6851b;
+  font-weight: 700;
+  letter-spacing: 5px;
+  margin-bottom: 16px;
 `

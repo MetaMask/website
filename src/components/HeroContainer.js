@@ -7,6 +7,7 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import CTA from './CTA'
 import Popup from './Popup'
 import { Section } from './StyledGeneral'
+import classnames from 'classnames'
 
 const HeroContainerComponent = props => {
   const {
@@ -23,6 +24,7 @@ const HeroContainerComponent = props => {
     ctaText,
     ctaLink,
     contentAlignment,
+    backgroundColor,
   } = props
   const [showPopup, setShowPopup] = React.useState(false)
   const togglePopup = () => {
@@ -34,12 +36,16 @@ const HeroContainerComponent = props => {
   const location = useLocation()
   const isHome = location.pathname === '/'
   let hubspotWrapper
-
   if (hubSpotForm) {
     hubspotWrapper = ctaText ? (
-      <Popup showPopup={showPopup} onClosePopup={onClosePopup}>
+      <Popup
+        width={hubSpotForm.width}
+        showPopup={showPopup}
+        onClosePopup={onClosePopup}
+      >
         {contentfulModuleToComponent({
           ...hubSpotForm,
+          width: '100%'
         })}
       </Popup>
     ) : (
@@ -51,78 +57,114 @@ const HeroContainerComponent = props => {
     )
   }
   const isStyleHubspot = hubSpotForm && !ctaText
-  const isStyleCenterSimple = contentAlignment === 'center' && !sideImage;
+  const isStyleCenterSimple = contentAlignment === 'center' && !sideImage
 
   return (
-    <HeroContainer isStyleCenterSimple={isStyleCenterSimple} image={backgroundImage} showLearnMore={showLearnMore}>
-      <ContentWrapper>
-        {showFavIcon ? (
-          <FavIconWrapper>
-            <FavIcon src={'/images/metamask-logo.png'} alt="logo" />
-          </FavIconWrapper>
-        ) : null}
-        <HeroContentContainer
-          isStyleCenterSimple={isStyleCenterSimple}
-          contentAlignment={contentAlignment}
-          bgSrc={!isStyleHubspot ? sideImage : ''}
-        >
-          <HeroImageTextContainer
-            isStyleHubspot={isStyleHubspot}
-            isHome={isHome}
+    <>
+      {showFavIcon ? (
+        <Section>
+          <ContentWrapper>
+            <FavIconWrapper>
+              <FavIcon src={'/images/metamask-logo.png'} alt="logo" />
+            </FavIconWrapper>
+          </ContentWrapper>
+        </Section>
+      ) : null}
+      <HeroContainer
+        isStyleCenterSimple={isStyleCenterSimple}
+        image={backgroundImage}
+        className={classnames({
+          [`bg-${backgroundColor}`]: backgroundColor,
+        })}
+      >
+        <ContentWrapper>
+          <HeroContentContainer
+            isStyleCenterSimple={isStyleCenterSimple}
+            contentAlignment={contentAlignment}
+            bgSrc={!isStyleHubspot ? sideImage : ''}
           >
-            {eyebrowLogo ? (
-              <EyebrowWrapper hideHeadline={hideHeadline}>
-                {contentfulModuleToComponent({
-                  ...eyebrowLogo,
-                  cleanStyle: true,
-                })}
-              </EyebrowWrapper>
-            ) : null}
-            {headline && (
-              <HeroTitle
-                hideHeadline={hideHeadline}
-                fontSize={isStyleHubspot ? '16px' : (contentAlignment === 'center' ? '30px' : '')}
-              >
-                {' '}
-                {headline}{' '}
-              </HeroTitle>
-            )}
-            {description && (
-              <HeroDescription>
-                <div dangerouslySetInnerHTML={{ __html: description }} />
-              </HeroDescription>
-            )}
-            {ctaText ? (
-              <HeroCTA>
-                <CTA
-                  text={ctaText}
-                  link={ctaLink}
-                  button={true}
-                  buttonSize="hero"
-                  customClick={hubSpotForm ? () => togglePopup() : null}
-                />
-              </HeroCTA>
-            ) : null}
-            {hubspotWrapper ? hubspotWrapper : null}
-          </HeroImageTextContainer>
-          {sideImage ? (
-            <HeroSideImage isStyleHubspot={isStyleHubspot}>
-              {isStyleHubspot ? (
-                <img src={sideImage} alt="hero hubspot" />
+            <HeroImageTextContainer
+              isStyleHubspot={isStyleHubspot}
+              isHome={isHome}
+            >
+              {eyebrowLogo ? (
+                <EyebrowWrapper
+                  className={'hidden-mobile'}
+                  hideHeadline={hideHeadline}
+                >
+                  {contentfulModuleToComponent({
+                    ...eyebrowLogo,
+                    cleanStyle: true,
+                  })}
+                </EyebrowWrapper>
               ) : null}
-            </HeroSideImage>
-          ) : null}
-        </HeroContentContainer>
-        {showLearnMore ? (
-          <LearnMoreWrapper>
-            <LearnMoreInner className="text-block">
-              Learn More
-              <Icon className="w-icon w-icon-dropdown-toggle"></Icon>
-            </LearnMoreInner>
-          </LearnMoreWrapper>
-        ) : null}
-      </ContentWrapper>
-    </HeroContainer>
+              {eyebrowMobileLogo ? (
+                <EyebrowWrapper
+                  className={'hidden-desktop'}
+                  hideHeadline={hideHeadline}
+                >
+                  {contentfulModuleToComponent({
+                    ...eyebrowMobileLogo,
+                    cleanStyle: true,
+                  })}
+                </EyebrowWrapper>
+              ) : null}
+              {headline && (
+                <HeroTitle
+                  hideHeadline={hideHeadline}
+                  fontSize={
+                    isStyleHubspot
+                      ? '16px'
+                      : contentAlignment === 'center'
+                      ? '30px'
+                      : ''
+                  }
+                >
+                  {' '}
+                  {headline}{' '}
+                </HeroTitle>
+              )}
+              {description && (
+                <HeroDescription>
+                  <div dangerouslySetInnerHTML={{ __html: description }} />
+                </HeroDescription>
+              )}
+              {ctaText ? (
+                <HeroCTA>
+                  <CTA
+                    text={ctaText}
+                    link={ctaLink}
+                    button={true}
+                    buttonSize="hero"
+                    customClick={hubSpotForm ? () => togglePopup() : null}
+                  />
+                </HeroCTA>
+              ) : null}
+              {hubspotWrapper ? hubspotWrapper : null}
+            </HeroImageTextContainer>
+            {sideImage ? (
+              <HeroSideImage isStyleHubspot={isStyleHubspot}>
+                {isStyleHubspot ? (
+                  <img src={sideImage} alt="hero hubspot" />
+                ) : null}
+              </HeroSideImage>
+            ) : null}
+          </HeroContentContainer>
+        </ContentWrapper>
+      </HeroContainer>
+      {showLearnMore ? (
+        <div>
+          <ContentWrapper>
+            <LearnMoreWrapper>
+              <LearnMoreInner className="text-block">
+                Learn More
+                <Icon className="w-icon w-icon-dropdown-toggle"></Icon>
+              </LearnMoreInner>
+            </LearnMoreWrapper>
+          </ContentWrapper>
+        </div>
+      ) : null}
+    </>
   )
 }
 
@@ -141,7 +183,7 @@ HeroContainerComponent.propTypes = {
   contentAlignment: PropTypes.string,
   hideHeadline: PropTypes.bool,
   showLearnMore: PropTypes.bool,
-  showFavIcon: PropTypes.bool
+  showFavIcon: PropTypes.bool,
 }
 
 const HeroContainer = styled(Section)`
@@ -150,7 +192,6 @@ const HeroContainer = styled(Section)`
   flex-direction: column;
   justify-content: center;
   min-width: 100%;
-  padding: 0;
   background-color: ${({ theme }) => theme.primaryColor};
   ${({ image }) =>
     image
@@ -158,14 +199,9 @@ const HeroContainer = styled(Section)`
     background-size: cover;
    `
       : ''}
-  ${({ showLearnMore }) =>
-    showLearnMore
-      ? `padding-bottom: 0 !important;
-    `
-      : ''}
 
   ${({ isStyleCenterSimple }) =>
-  isStyleCenterSimple
+    isStyleCenterSimple
       ? `
       + div {
         padding-top: 0 !important;
@@ -181,7 +217,6 @@ const HeroContentContainer = styled.div`
   display: flex;
   margin: -10px;
   margin-top: 10px;
-  padding-bottom: 48px;
   & > * {
     width: 50%;
     padding: 10px;
@@ -273,7 +308,7 @@ const HeroTitle = styled.h1`
       : ''}
 
   ${({ fontSize }) =>
-  fontSize
+    fontSize
       ? `
       font-size: ${fontSize} !important;
   `
@@ -317,10 +352,7 @@ const HeroCTA = styled.div`
   display: block;
 `
 const LearnMoreWrapper = styled.div`
-  padding-top: 48px;
-  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-    padding: 24px 0;
-  }
+  display: block;
 `
 
 const LearnMoreInner = styled.div`
