@@ -1,24 +1,112 @@
 import React from 'react'
 import styled from 'styled-components'
 import { graphql } from 'gatsby'
-
+import { browserName } from 'react-device-detect'
 import {
   ContentfulSeo as Seo,
   ContentfulLayoutHeader as Header,
   ContentfulLayoutFooter as Footer,
 } from '../components/Contentful'
 import Layout from '../templates/PageLayout'
+import DownloadContainer from '../components/DownloadContainer'
+import DownloadBrowser from '../components/DownloadBrowser'
 
-const DownloadPage = ({ data: { seo, header, footer }, location }) => (
-  <Layout>
-    {seo && <Seo moduleConfig={{ ...seo, pagePath: location.pathname }} />}
-    <Header moduleConfig={header} />
-    <Container>
-      <DownloadTitle>Download Page</DownloadTitle>
-    </Container>
-    <Footer moduleConfig={footer} />
-  </Layout>
-)
+const DownloadPage = props => {
+  const {
+    data: {
+      seo,
+      header,
+      footer,
+      download_extension,
+      download_ios,
+      download_android,
+      browser_chrome,
+      browser_firefox,
+      browser_brave,
+      browser_edge,
+      cta_chrome,
+      cta_ios,
+      cta_android,
+      cta_firefox,
+      cta_edge,
+      cta_chrome_browser,
+      cta_firefox_browser,
+    },
+    location,
+  } = props
+  const browsers = [
+    {
+      image: browser_chrome,
+      link: cta_chrome.ctaLink,
+      label: 'Chrome',
+    },
+    {
+      image: browser_firefox,
+      link: cta_firefox.ctaLink,
+      label: 'Firefox',
+    },
+    {
+      image: browser_brave,
+      link: cta_chrome.ctaLink,
+      label: 'Brave',
+    },
+    {
+      image: browser_edge,
+      link: cta_edge.ctaLink,
+      label: 'edge',
+    },
+  ]
+  const isChrome = browserName === 'Chrome' || browserName === 'Brave'
+  const isFirefox = browserName === 'Firefox'
+  const isEdge = browserName === 'Edge'
+  let ctasBrowser = [],
+    ctasBrowserHeading = ''
+  if (isChrome) {
+    ctasBrowser = [cta_chrome]
+  } else if (isFirefox) {
+    ctasBrowser = [cta_firefox]
+  } else if (isEdge) {
+    ctasBrowser = [cta_edge]
+  } else {
+    ctasBrowser = [cta_chrome_browser, cta_firefox_browser]
+    ctasBrowserHeading = `${browserName} is not supported. Please download a browser that supports MetaMask.`
+  }
+
+  const appExtensions = {
+    browser: {
+      image: download_extension,
+      label: browserName,
+      heading: 'Install MetaMask for your browser',
+      ctas: ctasBrowser,
+      ctaHeading: ctasBrowserHeading,
+    },
+    ios: {
+      image: download_ios,
+      label: 'iOS',
+      heading: 'Install MetaMask for iPhone',
+      ctaText: 'Install MetaMask for iPhone',
+      ctas: [cta_ios],
+    },
+    android: {
+      image: download_android,
+      label: 'Android',
+      heading: 'Install MetaMask for Android',
+      ctas: [cta_android],
+    },
+  }
+  console.log('asdas', props)
+  return (
+    <Layout>
+      {seo && <Seo moduleConfig={{ ...seo, pagePath: location.pathname }} />}
+      <Header moduleConfig={header} />
+      <Container>
+        <DownloadContainer appExtensions={appExtensions} />
+        <DownloadBrowser browsers={browsers} />
+      </Container>
+      <Footer moduleConfig={footer} />
+    </Layout>
+  )
+}
 
 export const DownloadPageQuery = graphql`
   query {
@@ -39,7 +127,33 @@ export const DownloadPageQuery = graphql`
         }
       }
     }
-    
+    cta_firefox_browser: contentfulCta(
+      contentful_id: { eq: "417gM11RFHEzJJGiVptS0b" }
+    ) {
+      ...ContentfulCtaFields
+    }
+    cta_chrome_browser: contentfulCta(
+      contentful_id: { eq: "dOfqSHhB8M5UUrAf3c2zF" }
+    ) {
+      ...ContentfulCtaFields
+    }
+    cta_chrome: contentfulCta(contentful_id: { eq: "CrOB61ZSnuQCuYUhhxBP5" }) {
+      ...ContentfulCtaFields
+    }
+    cta_firefox: contentfulCta(
+      contentful_id: { eq: "1xsshciF4UVR84KqFpHXNS" }
+    ) {
+      ...ContentfulCtaFields
+    }
+    cta_edge: contentfulCta(contentful_id: { eq: "5EWyZidEFFdMHvX2cTisje" }) {
+      ...ContentfulCtaFields
+    }
+    cta_ios: contentfulCta(contentful_id: { eq: "6IujWp8Z8TSdB8fpBifwZQ" }) {
+      ...ContentfulCtaFields
+    }
+    cta_android: contentfulCta(contentful_id: { eq: "x5Nr4AbHCHBZDNJURlzsP" }) {
+      ...ContentfulCtaFields
+    }
     download_extension: contentfulAsset(
       contentful_id: { eq: "6ngCUoU36ABPjs6cDNnuoK" }
     ) {
@@ -47,16 +161,16 @@ export const DownloadPageQuery = graphql`
       description
       file {
         url
-      } 
+      }
     }
     download_ios: contentfulAsset(
-      contentful_id: { eq: "75bFgEllkMxpVsY8wWlroX" }
+      contentful_id: { eq: "7Dwln6hVLXZJnOAHNlH2tT" }
     ) {
       title
       description
       file {
         url
-      } 
+      }
     }
     download_android: contentfulAsset(
       contentful_id: { eq: "7CU9NE4jlL0XjKEerlEL16" }
@@ -65,7 +179,7 @@ export const DownloadPageQuery = graphql`
       description
       file {
         url
-      } 
+      }
     }
     browser_chrome: contentfulAsset(
       contentful_id: { eq: "5CEOSBaSKv43i0mNninl5G" }
@@ -74,7 +188,7 @@ export const DownloadPageQuery = graphql`
       description
       file {
         url
-      } 
+      }
     }
     browser_firefox: contentfulAsset(
       contentful_id: { eq: "4WVycyyYvlfuRrArPRjj1d" }
@@ -83,7 +197,7 @@ export const DownloadPageQuery = graphql`
       description
       file {
         url
-      } 
+      }
     }
     browser_brave: contentfulAsset(
       contentful_id: { eq: "6HcekwtMp9fRFIphaPlqX5" }
@@ -92,7 +206,7 @@ export const DownloadPageQuery = graphql`
       description
       file {
         url
-      } 
+      }
     }
     browser_edge: contentfulAsset(
       contentful_id: { eq: "2O0Uh2Nt1OciYoK96DscLF" }
@@ -101,9 +215,9 @@ export const DownloadPageQuery = graphql`
       description
       file {
         url
-      } 
+      }
     }
-    
+
     footer: contentfulLayoutFooter(
       contentful_id: { eq: "75bFgEllkMxpVsY8wWlroX" }
     ) {
@@ -129,18 +243,7 @@ export const DownloadPageQuery = graphql`
 `
 
 const Container = styled.div`
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`
-
-const DownloadTitle = styled.h1`
-  margin-top: 20px;
-  padding: 1rem;
-  font-size: 1.5rem;
+  display: block;
 `
 
 export default DownloadPage

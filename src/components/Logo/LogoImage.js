@@ -28,5 +28,5 @@ const StyledPartnerImage = styled.img`
 
 LogoImage.propTypes = {
   alt: PropTypes.string.isRequired,
-  src: PropTypes.object.isRequired,
+  src: PropTypes.string.isRequired,
 }

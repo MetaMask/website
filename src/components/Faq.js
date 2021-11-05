@@ -2,15 +2,19 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import PlusIcon from '../images/icons/icon-plus.svg'
+import AnimateHeight from 'react-animate-height'
+import Context from './Context/ContextLayoutModuleContainer';
 
 const Faq = props => {
-  const { question, answer, activeId, setActiveId, id } = props
+  const {faq: faqContextValue} = React.useContext(Context);
+  const { question, answer, id, backgroundColor } = props
+  const {idFaqActive: activeId, setIdFaqActive: setActiveId} = faqContextValue;
   const isActive = activeId === id
 
   return (
     <FaqItem active={isActive} onClick={() => setActiveId(!isActive ? id : '')}>
       <FaqItemInner>
-        <QuestionItem active={isActive}>
+        <QuestionItem backgroundColor={backgroundColor} active={isActive}>
           {question}
           <IconClose>
             <IconCloseInner active={isActive}>
@@ -18,10 +22,15 @@ const Faq = props => {
             </IconCloseInner>
           </IconClose>
         </QuestionItem>
-        <AnswerItem active={isActive}>
-          <AnswerItemInner active={isActive}>
-            <div dangerouslySetInnerHTML={{ __html: answer }} />
-          </AnswerItemInner>
+        <AnswerItem>
+          <AnimateHeight
+            duration={500}
+            height={isActive ? 'auto' : '0'} // see props documentation below
+          >
+            <AnswerItemInner>
+              <div dangerouslySetInnerHTML={{ __html: answer }} />
+            </AnswerItemInner>
+          </AnimateHeight>
         </AnswerItem>
       </FaqItemInner>
     </FaqItem>
@@ -52,7 +61,7 @@ const QuestionItem = styled.div`
   padding: 20px;
   align-items: center;
   justify-content: space-between;
-  background-color: #037dd6;
+  background-color: ${({ theme }) => theme.darkBlue};
   font-size: 16px;
   line-height: 24px;
   font-weight: 700;
@@ -61,10 +70,16 @@ const QuestionItem = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   min-height: 80px;
 
+  ${({ backgroundColor }) =>
+    backgroundColor === 'gradient'
+      ? 'background-image: linear-gradient(90deg, #f5841f, #2c56dd);font-weight: 400;': ''}
+
   ${({ active }) =>
-    active ? `
+    active
+      ? `
       border-radius: 4px 4px 0 0;
-    ` : ``}
+    `
+      : ``}
 
   svg {
     path {
@@ -75,15 +90,6 @@ const QuestionItem = styled.div`
 
 const AnswerItem = styled.div`
   display: block;
-  overflow: hidden;
-  transition: max-height 500ms ease;
-
-  ${({ active }) =>
-    !active
-      ? `
-    max-height: 0;
-  `
-      : ``}
 `
 
 const AnswerItemInner = styled.div`
@@ -93,10 +99,12 @@ const AnswerItemInner = styled.div`
   background: #f4f6f8;
 `
 const IconClose = styled.div`
+  min-width: 24px;
   width: 24px;
   height: 24px;
   position: relative;
-`;
+  margin-left: 8px;
+`
 
 const IconCloseInner = styled.div`
   position: absolute;
@@ -109,5 +117,5 @@ const IconCloseInner = styled.div`
   justify-content: center;
   transition: all 400ms ease;
 
-  ${({active}) => active ? 'transform: rotate(225deg);': ''}
-`;
+  ${({ active }) => (active ? 'transform: rotate(225deg);' : '')}
+`

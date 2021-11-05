@@ -3,7 +3,7 @@ import HubspotForm from '../hubspotForm'
 import React from 'react'
 const ContentfulHubSpotForm = props => {
   const {
-    moduleConfig: { portalId, formId, campaignId, title, displayTitle },
+    moduleConfig: { portalId, formId, campaignId, title, displayTitle, width },
   } = props
 
   return (
@@ -13,6 +13,7 @@ const ContentfulHubSpotForm = props => {
       sfdcCampaignId={campaignId}
       title={title}
       displayTitle={displayTitle}
+      width={width}
     />
   )
 }
@@ -20,9 +21,12 @@ const ContentfulHubSpotForm = props => {
 export default ContentfulHubSpotForm
 
 ContentfulHubSpotForm.propTypes = {
-  portalId: PropTypes.string.isRequired,
-  formId: PropTypes.string.isRequired,
-  campaignId: PropTypes.string,
-  title: PropTypes.string,
-  displayTitle: PropTypes.bool,
+  moduleConfig: PropTypes.shape({
+    portalId: PropTypes.string.isRequired,
+    formId: PropTypes.string.isRequired,
+    campaignId: PropTypes.string,
+    title: PropTypes.string,
+    displayTitle: PropTypes.bool,
+    width: PropTypes.string,
+  }),
 }

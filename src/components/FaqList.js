@@ -5,15 +5,12 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 
 const FaqList = props => {
   const { list } = props
-  const [activeId, setActiveId] = React.useState('');
   if (!list.length) return null
   return (
     <Wrapper>
       {list.map(m =>
         contentfulModuleToComponent({
           ...m,
-          activeId,
-          setActiveId
         })
       )}
     </Wrapper>

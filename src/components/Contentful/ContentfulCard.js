@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Card from '../Card'
-import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
 
 const ContentfulCard = props => {
   const {
@@ -26,14 +25,12 @@ ContentfulCard.propTypes = {
 const renderCard = props => {
   const { description, title, image, link, newTab } = props
 
-  const imageUrl = parseContentfulAssetUrl(image)
-
   return (
     <Card
       body={''}
       richText={description}
       title={title}
-      image={imageUrl}
+      image={image}
       link={link}
       newTab={newTab}
     />

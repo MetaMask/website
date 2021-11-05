@@ -20,6 +20,7 @@ const ContentfulLayoutHero = props => {
       showFavIcon,
       hubSpotForm,
       contentAlignment,
+      backgroundColor,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -42,6 +43,7 @@ const ContentfulLayoutHero = props => {
       showFavIcon={showFavIcon}
       hubSpotForm={hubSpotForm}
       contentAlignment={contentAlignment}
+      backgroundColor={backgroundColor}
     />
   )
 }

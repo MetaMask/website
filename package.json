@@ -51,6 +51,7 @@
     "preact": "^10.5.12",
     "preact-render-to-string": "^5.1.12",
     "react": "^16.10.2",
+    "react-animate-height": "^2.0.23",
     "react-animate-on-scroll": "^2.1.5",
     "react-chartjs-2": "^2.7.4",
     "react-cookies": "^0.1.0",

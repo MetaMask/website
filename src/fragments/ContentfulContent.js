@@ -190,9 +190,6 @@ export const ContentfulCardFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 600) {
-        ...GatsbyContentfulFluid_withWebp
-      }
     }
     description {
       childMarkdownRemark {
@@ -230,6 +227,7 @@ export const ContentfulHubSpotFormFields = graphql`
     formId
     campaignId
     displayTitle
+    width
   }
 `
 
@@ -328,6 +326,9 @@ export const ContentfulModuleContainerFields = graphql`
       }
       ... on ContentfulFaq {
         ...ContentfulFaqFields
+      }
+      ... on ContentfulCard {
+        ...ContentfulCardFields
       }
     }
   }
