@@ -37,64 +37,51 @@ const DownloadPage = props => {
   const browsers = [
     {
       image: browser_chrome,
-      link: cta_chrome.ctaLink,
+      cta: cta_chrome,
       label: 'Chrome',
     },
     {
       image: browser_firefox,
-      link: cta_firefox.ctaLink,
+      cta: cta_firefox,
       label: 'Firefox',
     },
     {
       image: browser_brave,
-      link: cta_chrome.ctaLink,
+      cta: cta_chrome,
       label: 'Brave',
     },
     {
       image: browser_edge,
-      link: cta_edge.ctaLink,
+      cta: cta_edge,
       label: 'edge',
     },
   ]
-  const isChrome = browserName === 'Chrome' || browserName === 'Brave'
-  const isFirefox = browserName === 'Firefox'
-  const isEdge = browserName === 'Edge'
-  let ctasBrowser = [],
-    ctasBrowserHeading = ''
-  if (isChrome) {
-    ctasBrowser = [cta_chrome]
-  } else if (isFirefox) {
-    ctasBrowser = [cta_firefox]
-  } else if (isEdge) {
-    ctasBrowser = [cta_edge]
-  } else {
-    ctasBrowser = [cta_chrome_browser, cta_firefox_browser]
-    ctasBrowserHeading = `${browserName} is not supported. Please download a browser that supports MetaMask.`
-  }
 
   const appExtensions = {
     browser: {
       image: download_extension,
       label: browserName,
-      heading: 'Install MetaMask for your browser',
-      ctas: ctasBrowser,
-      ctaHeading: ctasBrowserHeading,
+      title: 'Install MetaMask for your browser',
+      ctaChrome: cta_chrome,
+      ctaFirefox: cta_firefox,
+      ctaEdge: cta_edge,
+      ctaChromeBrowser: cta_chrome_browser,
+      ctaFirefoxBrowser: cta_firefox_browser,
     },
     ios: {
       image: download_ios,
       label: 'iOS',
-      heading: 'Install MetaMask for iPhone',
+      title: 'Install MetaMask for iPhone',
       ctaText: 'Install MetaMask for iPhone',
       ctas: [cta_ios],
     },
     android: {
       image: download_android,
       label: 'Android',
-      heading: 'Install MetaMask for Android',
+      title: 'Install MetaMask for Android',
       ctas: [cta_android],
     },
   }
-  console.log('asdas', props)
   return (
     <Layout>
       {seo && <Seo moduleConfig={{ ...seo, pagePath: location.pathname }} />}

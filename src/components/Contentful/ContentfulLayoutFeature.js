@@ -58,7 +58,7 @@ export default ContentfulLayoutFeature
 
 ContentfulLayoutFeature.propTypes = {
   moduleConfig: PropTypes.shape({
-    eyebrow: PropTypes.object,
+    eyebrow: PropTypes.string,
     headline: PropTypes.string,
     description: PropTypes.object,
     ctaLink: PropTypes.string,

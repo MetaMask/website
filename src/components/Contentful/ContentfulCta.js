@@ -12,7 +12,6 @@ const ContentfulCta = props => {
       newTab,
       buttonDisplay,
       ctaAlignment,
-      hasModuleContainer,
       displayText,
       typeLayout = '',
       isHideArrow = true,
@@ -20,25 +19,17 @@ const ContentfulCta = props => {
     },
   } = props
 
-  const El = !hasModuleContainer
-    ? ({ children, ...props }) => (
-        <ContentWrapper {...props}>{children}</ContentWrapper>
-      )
-    : React.Fragment
-
   return (
-    <El>
-      <CTA
-        link={ctaLink}
-        text={displayText || ctaText}
-        newTab={newTab}
-        button={buttonDisplay}
-        align={ctaAlignment}
-        color={color}
-        typeLayout={typeLayout}
-        isHideArrow={isHideArrow}
-      />
-    </El>
+    <CTA
+      link={ctaLink}
+      text={displayText || ctaText}
+      newTab={newTab}
+      button={buttonDisplay}
+      align={ctaAlignment}
+      color={color}
+      typeLayout={typeLayout}
+      isHideArrow={isHideArrow}
+    />
   )
 }
 

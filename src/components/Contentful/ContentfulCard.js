@@ -23,16 +23,18 @@ ContentfulCard.propTypes = {
 }
 
 const renderCard = props => {
-  const { description, title, image, link, newTab } = props
+  const { description, title, image, link, newTab, backgroundColor, showArrowIcon } = props
+  const { childMarkdownRemark: { html } = {} } = description || {}
 
   return (
     <Card
-      body={''}
-      richText={description}
+      description={html}
       title={title}
       image={image}
       link={link}
       newTab={newTab}
+      backgroundColor={backgroundColor}
+      showArrowIcon={showArrowIcon}
     />
   )
 }

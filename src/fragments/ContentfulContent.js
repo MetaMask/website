@@ -198,7 +198,7 @@ export const ContentfulCardFields = graphql`
     }
     link
     newTab
-    shadow
+    backgroundColor
     showArrowIcon
   }
 `
@@ -329,6 +329,24 @@ export const ContentfulModuleContainerFields = graphql`
       }
       ... on ContentfulCard {
         ...ContentfulCardFields
+      }
+      ... on ContentfulRichText {
+        ...ContentfulRichTextFields
+      }
+      ... on ContentfulCta {
+        ...ContentfulCtaFields
+      }
+      ... on ContentfulModuleContainer {
+        contentful_id
+        internal {
+          type
+        }
+        columns
+        modules {
+          ... on ContentfulCard {
+            ...ContentfulCardFields
+          }
+        }
       }
     }
   }

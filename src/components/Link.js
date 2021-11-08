@@ -35,5 +35,5 @@ export default DefaultLink
 DefaultLink.propTypes = {
   activeStyle: PropTypes.object,
   styleOverride: PropTypes.string,
-  to: PropTypes.string.isRequired,
+  to: PropTypes.string,
 }

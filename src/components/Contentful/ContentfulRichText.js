@@ -1,37 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-import ContentWrapper from '../ContentWrapper'
 import RichText from '../RichText'
 
 const ContentfulRichText = props => {
   const {
-    moduleConfig: { title, body, htmlBody, displayTitle, hasModuleContainer },
+    moduleConfig: { title, body, htmlBody, displayTitle },
   } = props
 
-  const El = !hasModuleContainer
-    ? ({ children, ...props }) => (
-        <ContentWrapper
-          styleOverride={`@media(min-width: 992px) {margin: 5rem auto;}`}
-          {...props}
-        >
-          {children}
-        </ContentWrapper>
-      )
-    : React.Fragment
-
-  const { content: { bodyConfig } = {} } = body || {}
   const { childMarkdownRemark: { htmlConfig } = {} } = htmlBody || {}
+  const bodyConfig = body && body.internal ? JSON.parse(body.internal.content).content : ''
 
   return (
-    <El>
-      <RichText
-        title={title}
-        content={bodyConfig}
-        html={htmlConfig}
-        displayTitle={displayTitle}
-      />
-    </El>
+    <RichText
+      title={title}
+      content={bodyConfig}
+      html={htmlConfig}
+      displayTitle={displayTitle}
+    />
   )
 }
 

@@ -15,6 +15,7 @@ const ContentfulModuleContainer = props => {
       splitModules,
       displayTitle,
       modules = [],
+      gridModules = true,
     },
   } = props
 
@@ -29,37 +30,47 @@ const ContentfulModuleContainer = props => {
       : []
   const isFaq = faqList && faqList.length
   return (
-    <Wrapper isFaq={isFaq}>
-      {title ? (
-        <Title
-          isFaq={isFaq}
-          className={classnames({
-            hidden: !displayTitle,
-          })}
-        >
-          {title}
-        </Title>
-      ) : null}
-      <div
-        className={classnames({
-          'txt-center': contentAlignment === 'center',
-        })}
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
-      {isFaq ? <FaqList list={faqList} /> : null}
-      {modulesOther.length ? (
-        <Modules
-          columns={columns}
-          contentAlignment={contentAlignment}
-          splitModules={splitModules}
-        >
-          {modulesOther.map(m =>
-            contentfulModuleToComponent({
-              ...m,
-            })
-          )}
-        </Modules>
-      ) : null}
+    <Wrapper isFaq={isFaq} className="contentfulModuleContainerWrapper">
+      <Inner splitModules={splitModules}>
+        {title || html ? (
+          <Content splitModules={splitModules}>
+            {title ? (
+              <Title
+                isFaq={isFaq}
+                className={classnames({
+                  hidden: !displayTitle,
+                })}
+              >
+                {title}
+              </Title>
+            ) : null}
+            {html ? (
+              <div
+                className={classnames({
+                  'txt-center': contentAlignment === 'center',
+                })}
+                dangerouslySetInnerHTML={{ __html: html }}
+              />
+            ) : null}
+          </Content>
+        ) : null}
+        <ModulesWrapper splitModules={splitModules}>
+          {isFaq ? <FaqList list={faqList} /> : null}
+          {modulesOther.length ? (
+            <Modules
+              columns={columns}
+              contentAlignment={contentAlignment}
+              gridModules={gridModules}
+            >
+              {modulesOther.map(m =>
+                contentfulModuleToComponent({
+                  ...m,
+                })
+              )}
+            </Modules>
+          ) : null}
+        </ModulesWrapper>
+      </Inner>
     </Wrapper>
   )
 }
@@ -79,6 +90,13 @@ ContentfulModuleContainer.propTypes = {
 const Wrapper = styled.div`
   display: block;
 
+  &:not(last-child) {
+    margin-bottom: 64px;
+  }
+  .contentfulModuleContainerWrapper {
+    margin-bottom: 0 !important;
+  }
+
   ${({ isFaq, theme }) =>
     isFaq
       ? `
@@ -92,11 +110,58 @@ const Wrapper = styled.div`
   `
       : ``}
 `
+const Inner = styled.div`
+  display: block;
+  ${({ splitModules, theme }) =>
+    splitModules
+      ? `
+    display: flex;
+
+    @media (max-width: ${theme.device.tabletMediaMax}) {
+      flex-direction: column;
+    }
+    
+    @media (max-width: ${theme.device.mobileMediaMax}) {
+      text-align: center;
+    }
+  `
+      : ``}
+`
+const ModulesWrapper = styled.div`
+  display: block;
+  ${({ splitModules, theme }) =>
+    splitModules
+      ? `
+    flex: 1;
+    min-with: 0;
+    @media (max-width: ${theme.device.mobileMediaMax}) {
+      flex: none;
+      width: 100%;
+    }
+    `
+      : ``}
+`
+
+const Content = styled.div`
+  display: block;
+  ${({ splitModules, theme }) =>
+    splitModules
+      ? `
+    width: 33%;
+    padding-right: 16px;
+    @media (max-width: ${theme.device.tabletMediaMax}) {
+      padding: 0;
+      width: 100%;
+    }
+  `
+      : ``}
+`
 
 const Title = styled.h2`
   margin-bottom: 1rem;
   ${({ isFaq, theme }) =>
-    isFaq ? `
+    isFaq
+      ? `
       margin-bottom: 20px;
       @media (max-width: ${theme.device.tabletMediaMax}) {
         font-size: 2rem;
@@ -106,13 +171,13 @@ const Title = styled.h2`
         text-align: center;
       }
     `
-    : ``}
+      : ``}
 `
 const Modules = styled.div`
   display: flex;
   flex-flow: wrap;
-  ${({ columns, theme }) =>
-    columns
+  ${({ gridModules, columns, theme }) =>
+    columns && gridModules
       ? `
       margin: -8px !important;
       @media (max-width: ${theme.device.mobileMediaMax}){
@@ -128,5 +193,23 @@ const Modules = styled.div`
     }
   }
   `
-      : ``}
+      : ''}
+  /* custom when 1 column */
+  ${({ gridModules, columns, theme }) =>
+    [1, 2].includes(columns) && gridModules
+      ? `
+    > * {
+    @media (max-width: ${theme.device.mobileMediaMax}){
+      width: 100% !important;
+    }
+  }
+  `
+      : ''}
+
+  ${({ contentAlignment }) =>
+    contentAlignment === 'center'
+      ? `
+    justify-content: center;
+  `
+      : ''}
 `
