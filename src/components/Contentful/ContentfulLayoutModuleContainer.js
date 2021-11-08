@@ -66,9 +66,6 @@ const ContentfulModuleContainer = props => {
             ) : null}
           </ContentInfo>
           <Modules
-            className={classnames({
-              'txt-center': contentAlignCenter,
-            })}
             contentAlignCenter={contentAlignCenter}
           >
             {modules && modules.length

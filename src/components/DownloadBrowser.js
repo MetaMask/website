@@ -12,18 +12,19 @@ const DownloadBrowser = props => {
   return (
     <Container className={'bg-gray'} sectionPadding={'88px'}>
       <ContentWrapper>
-        <Heading>
-          Supported Browsers
-        </Heading>
+        <Heading>Supported Browsers</Heading>
         {browsers && browsers.length ? (
           <BrowserWrapper>
             <BrowserList>
-              {browsers.map(browser => (
-                <BrowserItem>
-                  <Image image={browser.image} />
-                  <BrowserName>{browser.label}</BrowserName>
-                </BrowserItem>
-              ))}
+              {browsers.map(browser => {
+                const { cta, image, label } = browser
+                return (
+                  <BrowserItem to={cta.ctaLink} newTab={cta.newTab}>
+                    <Image image={image} />
+                    <BrowserName>{label}</BrowserName>
+                  </BrowserItem>
+                )
+              })}
             </BrowserList>
           </BrowserWrapper>
         ) : null}
@@ -53,7 +54,7 @@ const BrowserList = styled.div`
   & > * {
     width: 25%;
     padding: 20px;
-    @media (max-width: ${({theme}) => theme.device.mobileMediaMax}){
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
       width: 100%;
     }
   }
@@ -67,7 +68,6 @@ const BrowserItem = styled(Link)`
   text-align: center;
   color: #333;
 
-  
   img {
     width: 50px;
     height: 50px;
@@ -83,4 +83,4 @@ const Heading = styled.h2`
   font-size: 35px;
   font-weight: 700;
   text-align: center;
-`;
+`

@@ -2,9 +2,39 @@ import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import Image from '../Image'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
+import { browserName } from 'react-device-detect'
 
 const TabContentDownload = props => {
-  const { image, title, ctas, ctaHeading } = props
+  const {
+    image,
+    title,
+    ctas,
+    ctaHeading,
+    ctaChrome,
+    ctaFirefox,
+    cta_edge,
+    ctaChromeBrowser,
+    ctaFirefoxBrowser,
+    id,
+  } = props
+  let ctasDownload = ctas,
+    ctasHeading = ctaHeading
+  if (id === 'browser') {
+    const isChrome = browserName === 'Chrome' || browserName === 'Brave'
+    const isFirefox = browserName === 'Firefox'
+    const isEdge = browserName === 'Edge'
+
+    if (isChrome) {
+      ctasDownload = [ctaChrome]
+    } else if (isFirefox) {
+      ctasDownload = [ctaFirefox]
+    } else if (isEdge) {
+      ctasDownload = [cta_edge]
+    } else {
+      ctasDownload = [ctaChromeBrowser, ctaFirefoxBrowser]
+      ctasHeading = `${browserName} is not supported. Please download a browser that supports MetaMask.`
+    }
+  }
   return (
     <>
       {title ? <Heading>{title}</Heading> : null}
@@ -14,14 +44,10 @@ const TabContentDownload = props => {
         </ImageWrapper>
       ) : null}
       <DownLoadWrapper>
-      {ctaHeading ? (
-        <HeadingCta>
-          {ctaHeading}
-        </HeadingCta>
-      ) : null}
+        {ctasHeading ? <HeadingCta>{ctasHeading}</HeadingCta> : null}
         <Buttons>
-          {ctas && ctas.length
-            ? ctas.map(cta => contentfulModuleToComponent(cta))
+          {ctasDownload && ctasDownload.length
+            ? ctasDownload.map(cta => contentfulModuleToComponent(cta))
             : null}
         </Buttons>
       </DownLoadWrapper>

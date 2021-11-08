@@ -171,13 +171,13 @@ const HeroContainerComponent = props => {
 export default withTheme(HeroContainerComponent)
 
 HeroContainerComponent.propTypes = {
-  backgroundImage: PropTypes.object,
+  backgroundImage: PropTypes.string,
   eyebrowLogo: PropTypes.object,
   eyebrowMobileLogo: PropTypes.object,
-  sideImage: PropTypes.object,
+  sideImage: PropTypes.string,
   hubSpotForm: PropTypes.object,
   headline: PropTypes.string,
-  description: PropTypes.object,
+  description: PropTypes.string,
   ctaText: PropTypes.string,
   ctaLink: PropTypes.string,
   contentAlignment: PropTypes.string,

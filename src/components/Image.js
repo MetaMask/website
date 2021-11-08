@@ -5,7 +5,7 @@ const Image = props => {
   const { image, classname, src } = props
   const { title, description } = image || {}
   const urlImg = src ? src : parseContentfulAssetUrl(image)
-
+  if (!urlImg) return null
   return (
     <img
       src={urlImg}
