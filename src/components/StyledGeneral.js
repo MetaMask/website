@@ -61,6 +61,10 @@ export const ModalInner = styled.div`
   position: relative;
   max-width: 90vw;
 
+  .popupTitle {
+    padding-right: 40px;
+  }
+
   ${({width}) => width ? `
     width: ${width};
   `:''}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ReactHubspotForm from 'react-hubspot-form'
 import classnames from 'classnames'
 import styled, { withTheme } from 'styled-components'
+import Loading from './Loading'
 
 const HubspotForm = props => {
   const { portalId, formId, campaignId, title, displayTitle, width } = props
@@ -11,7 +12,7 @@ const HubspotForm = props => {
     <Wrapper width={width}>
       {title ? (
         <Title
-          className={classnames({
+          className={classnames('popupTitle', {
             hidden: !displayTitle,
           })}
         >
@@ -23,6 +24,7 @@ const HubspotForm = props => {
           portalId={portalId}
           formId={formId}
           sfdcCampaignId={campaignId}
+          loading={<Loading />}
         />
       </Form>
     </Wrapper>
@@ -46,8 +48,9 @@ const Title = styled.h2`
 
 const Wrapper = styled.div`
   display: block;
+  max-width: 100%;
 
-  ${({width}) => width ? `width: ${width}` : ''}
+  ${({width}) => width ? `width: ${width}` : 'min-width: 300px'}
 `
 
 const Form = styled.div`

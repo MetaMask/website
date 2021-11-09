@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
-import Image from '../Image'
-import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
+import Image from './Image'
+import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { browserName } from 'react-device-detect'
 
 const TabContentDownload = props => {
@@ -59,6 +59,7 @@ export default withTheme(TabContentDownload)
 
 const Heading = styled.h1`
   font-size: 35px;
+  line-height: 40px;
   font-weight: 700;
   text-align: center;
   padding: 20px 0;

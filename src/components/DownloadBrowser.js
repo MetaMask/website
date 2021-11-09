@@ -36,11 +36,22 @@ const DownloadBrowser = props => {
 export default withTheme(DownloadBrowser)
 
 DownloadBrowser.propTypes = {
-  appExtensions: PropTypes.object,
+  browsers: PropTypes.arrayOf(
+    PropTypes.shape({
+      cta: PropTypes.string,
+      image: PropTypes.string,
+      label: PropTypes.string,
+    })
+  ).isRequired,
 }
 
 const Container = styled(Section)`
   display: block;
+
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    padding-top: 88px !important;
+    padding-bottom: 88px !important;
+  }
 `
 const BrowserWrapper = styled.div`
   display: block;
@@ -81,6 +92,7 @@ const BrowserName = styled.div`
 const Heading = styled.h2`
   margin-bottom: 32px;
   font-size: 35px;
+  line-height: 40px;
   font-weight: 700;
   text-align: center;
 `

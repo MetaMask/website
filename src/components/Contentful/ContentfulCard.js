@@ -4,26 +4,16 @@ import Card from '../Card'
 
 const ContentfulCard = props => {
   const {
-    moduleConfig: { hasModuleContainer, ...cardDisplayData },
+    moduleConfig: {
+      description,
+      title,
+      image,
+      link,
+      newTab,
+      backgroundColor,
+      showArrowIcon,
+    },
   } = props
-
-  return renderCard({ ...cardDisplayData })
-}
-
-export default ContentfulCard
-
-ContentfulCard.propTypes = {
-  moduleConfig: PropTypes.shape({
-    description: PropTypes.object,
-    link: PropTypes.string,
-    title: PropTypes.string,
-    image: PropTypes.object,
-    newTab: PropTypes.bool,
-  }),
-}
-
-const renderCard = props => {
-  const { description, title, image, link, newTab, backgroundColor, showArrowIcon } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
 
   return (
@@ -37,4 +27,18 @@ const renderCard = props => {
       showArrowIcon={showArrowIcon}
     />
   )
+}
+
+export default ContentfulCard
+
+ContentfulCard.propTypes = {
+  moduleConfig: PropTypes.shape({
+    description: PropTypes.object,
+    link: PropTypes.string,
+    title: PropTypes.string,
+    image: PropTypes.object,
+    newTab: PropTypes.bool,
+    backgroundColor: PropTypes.string,
+    showArrowIcon: PropTypes.bool,
+  }),
 }
