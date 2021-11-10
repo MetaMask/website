@@ -35,6 +35,7 @@ const HeroContainerComponent = props => {
   }
   const location = useLocation()
   const isHome = location.pathname === '/'
+  const isAbout = location.pathname === '/about/'
   let hubspotWrapper
   if (hubSpotForm) {
     hubspotWrapper = ctaText ? (
@@ -82,6 +83,7 @@ const HeroContainerComponent = props => {
             isStyleCenterSimple={isStyleCenterSimple}
             contentAlignment={contentAlignment}
             bgSrc={!isStyleHubspot ? sideImage : ''}
+            isAbout={isAbout}
           >
             <HeroImageTextContainer
               isStyleHubspot={isStyleHubspot}
@@ -230,6 +232,18 @@ const HeroContentContainer = styled.div`
     background-size: contain;
     background-repeat: no-repeat;
     background-attachment: scroll;
+  `
+      : ''}
+  
+  ${({ isAbout }) =>
+    isAbout
+      ? `
+    background-position: 100% 0%;
+    background-size: 50%;
+    ${HeroImageTextContainer} {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
   `
       : ''}
 
