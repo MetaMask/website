@@ -1,14 +1,13 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
-import TabContentItem from './TabContentItem';
-
+import TabContentItem from './TabContentItem'
 
 const TabContent = props => {
-  const {items, activeId} = props;
+  const { items, activeId } = props
   return (
     <Content>
-      {items.map((item) => (
+      {items.map(item => (
         <TabContentItem {...item} activeId={activeId} />
       ))}
     </Content>
@@ -16,7 +15,6 @@ const TabContent = props => {
 }
 
 export default withTheme(TabContent)
-
 
 TabContent.propTypes = {
   items: PropTypes.array,
@@ -26,4 +24,4 @@ TabContent.propTypes = {
 const Content = styled.div`
   display: block;
   margin-top: 20px;
-`;
+`

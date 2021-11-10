@@ -65,9 +65,12 @@ export const ModalInner = styled.div`
     padding-right: 40px;
   }
 
-  ${({width}) => width ? `
+  ${({ width }) =>
+    width
+      ? `
     width: ${width};
-  `:''}
+  `
+      : ''}
   
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
     max-height: 85vh;

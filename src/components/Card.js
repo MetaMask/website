@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 import Image from './Image'
-import classnames from 'classnames';
+import classnames from 'classnames'
 import ArrowIcon from '../images/icons/icon-arrow-right.svg'
 
 /**
@@ -12,7 +12,15 @@ import ArrowIcon from '../images/icons/icon-arrow-right.svg'
  */
 
 const StyledCard = props => {
-  const { description, image, link, title, newTab, backgroundColor, showArrowIcon } = props
+  const {
+    description,
+    image,
+    link,
+    title,
+    newTab,
+    backgroundColor,
+    showArrowIcon,
+  } = props
 
   return (
     <Card>
@@ -30,19 +38,21 @@ const StyledCard = props => {
           </ImageWrapper>
         ) : null}
         <Inner showArrowIcon={showArrowIcon}>
-        <InnerContent showArrowIcon={showArrowIcon} >
-          {title ? <Title showArrowIcon={showArrowIcon}>{title}</Title> : null}
-          {description ? (
-            <Description>
-              <div dangerouslySetInnerHTML={{ __html: description }}></div>
-            </Description>
+          <InnerContent showArrowIcon={showArrowIcon}>
+            {title ? (
+              <Title showArrowIcon={showArrowIcon}>{title}</Title>
+            ) : null}
+            {description ? (
+              <Description>
+                <div dangerouslySetInnerHTML={{ __html: description }}></div>
+              </Description>
+            ) : null}
+          </InnerContent>
+          {showArrowIcon ? (
+            <ArrowItem>
+              <ArrowIcon />
+            </ArrowItem>
           ) : null}
-        </InnerContent>
-        {showArrowIcon ? (
-          <ArrowItem>
-            <ArrowIcon />
-          </ArrowItem>
-        ) : null}
         </Inner>
       </CardInner>
     </Card>
@@ -91,18 +101,24 @@ const ImageSrc = styled(Image)`
 
 const Inner = styled.div`
   display: block;
-  ${({showArrowIcon}) => showArrowIcon ? `
+  ${({ showArrowIcon }) =>
+    showArrowIcon
+      ? `
     display: flex;
     align-items: center;
-  `:''}
+  `
+      : ''}
 `
 const Title = styled.div`
   font-weight: 700;
 
-  ${({showArrowIcon}) => showArrowIcon ? `
+  ${({ showArrowIcon }) =>
+    showArrowIcon
+      ? `
     font-size: 24px;
     line-height: 1.25;
-  `:''}
+  `
+      : ''}
 `
 
 const Description = styled.div`
@@ -117,12 +133,15 @@ const ArrowItem = styled.div`
       fill: #333;
     }
   }
-`;
+`
 
 const InnerContent = styled.div`
-  ${({showArrowIcon}) => showArrowIcon ? `
+  ${({ showArrowIcon }) =>
+    showArrowIcon
+      ? `
     flex: 1;
     min-width: 0;
     text-align: left;
-  `:''}
-`;
+  `
+      : ''}
+`

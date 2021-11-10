@@ -12,7 +12,7 @@ const ContentfulLayoutHero = props => {
       description,
       headline,
       modules,
-      sideImage,
+      sideImage = {},
       eyebrowLogo,
       eyebrowMobileLogo,
       hideHeadline,
@@ -21,6 +21,7 @@ const ContentfulLayoutHero = props => {
       hubSpotForm,
       contentAlignment,
       backgroundColor,
+      headlineBorderBottom,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -37,13 +38,14 @@ const ContentfulLayoutHero = props => {
       ctaText={ctaText}
       ctaLink={ctaLink}
       modules={modules}
-      sideImage={sideImageUrl}
+      sideImage={sideImageUrl || ''}
       hideHeadline={hideHeadline}
       showLearnMore={showLearnMore}
       showFavIcon={showFavIcon}
       hubSpotForm={hubSpotForm}
       contentAlignment={contentAlignment}
       backgroundColor={backgroundColor}
+      headlineBorderBottom={headlineBorderBottom}
     />
   )
 }
@@ -63,5 +65,6 @@ ContentfulLayoutHero.propTypes = {
     description: PropTypes.object,
     headline: PropTypes.string,
     hideHeadline: PropTypes.bool,
+    headlineBorderBottom: PropTypes.bool,
   }),
 }

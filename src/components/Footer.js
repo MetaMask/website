@@ -127,7 +127,7 @@ const MenuItemHeading = styled.h5`
 const MenuItem = styled.div`
   display: block;
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-    padding: 0 10px 20px 10px!important;
+    padding: 0 10px 20px 10px !important;
     width: 100% !important;
   }
 `

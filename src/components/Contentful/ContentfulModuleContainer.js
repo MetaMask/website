@@ -16,6 +16,8 @@ const ContentfulModuleContainer = props => {
       displayTitle,
       modules = [],
       gridModules = true,
+      gridModulesGap = '8px',
+      isLiquiditySection,
     },
   } = props
 
@@ -61,6 +63,8 @@ const ContentfulModuleContainer = props => {
               columns={columns}
               contentAlignment={contentAlignment}
               gridModules={gridModules}
+              gridModulesGap={isLiquiditySection ? '24px' : gridModulesGap}
+              isLiquiditySection={isLiquiditySection}
             >
               {modulesOther.map(m =>
                 contentfulModuleToComponent({
@@ -176,20 +180,40 @@ const Title = styled.h2`
 const Modules = styled.div`
   display: flex;
   flex-flow: wrap;
-  ${({ gridModules, columns, theme }) =>
+  ${({ isLiquiditySection }) =>
+    isLiquiditySection
+      ? `
+    align-items: center;
+    #liquidity-left {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      img {
+        max-width: 316px;
+      }
+      p {
+        max-width: 190px;
+      }
+    }
+  `
+      : ''}
+
+  ${({ gridModules, gridModulesGap, columns, theme }) =>
     columns && gridModules
       ? `
-      margin: -8px !important;
+      margin: -${gridModulesGap} !important;
       @media (max-width: ${theme.device.mobileMediaMax}){
-        padding: 5px !important;
+        padding: -${gridModulesGap / 2} !important;
       }
 
     > * {
     width: calc(100%/${columns});
-    padding: 8px !important;
+    padding: ${gridModulesGap} !important;
     @media (max-width: ${theme.device.mobileMediaMax}){
       width: 50%;
-      padding: 5px !important;
+      padding: ${gridModulesGap / 2} !important;
     }
   }
   `
@@ -210,6 +234,9 @@ const Modules = styled.div`
     contentAlignment === 'center'
       ? `
     justify-content: center;
+    .ctaModuleContainer {
+      justify-content: center;
+    }
   `
       : ''}
 `

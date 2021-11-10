@@ -4,12 +4,7 @@ import Faq from '../Faq'
 
 const ContentfulFaq = props => {
   const {
-    moduleConfig: {
-      question,
-      answer,
-      contentful_id,
-      backgroundColor,
-    },
+    moduleConfig: { question, answer, contentful_id, backgroundColor },
   } = props
   const { childMarkdownRemark: { html } = {} } = answer || {}
   return (

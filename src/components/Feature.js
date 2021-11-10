@@ -60,7 +60,9 @@ const FeatureComponent = props => {
             newTab={newTab}
             button={true}
             buttonColor={
-              backgroundColor === 'white' ? 'primary' : 'white-outline'
+              ['white', 'gray'].includes(backgroundColor)
+                ? 'primary'
+                : 'white-outline'
             }
           />
         </CTAWrapper>
@@ -238,7 +240,7 @@ const FeatureWrapper = styled.div`
     text-align: center;
   }
   ${({ contentAlignLR }) =>
-  contentAlignLR === 'left'
+    contentAlignLR === 'left'
       ? `
     flex-direction: row-reverse;
   `
