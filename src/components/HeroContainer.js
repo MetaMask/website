@@ -25,6 +25,7 @@ const HeroContainerComponent = props => {
     ctaLink,
     contentAlignment,
     backgroundColor,
+    headlineBorderBottom,
   } = props
   const [showPopup, setShowPopup] = React.useState(false)
   const togglePopup = () => {
@@ -46,7 +47,7 @@ const HeroContainerComponent = props => {
       >
         {contentfulModuleToComponent({
           ...hubSpotForm,
-          width: '100%'
+          width: '100%',
         })}
       </Popup>
     ) : (
@@ -59,6 +60,12 @@ const HeroContainerComponent = props => {
   }
   const isStyleHubspot = hubSpotForm && !ctaText
   const isStyleCenterSimple = contentAlignment === 'center' && !sideImage
+  let heroTitleFontsize = ''
+  if (isStyleHubspot) {
+    heroTitleFontsize = '16px'
+  } else if (contentAlignment === 'center' || headlineBorderBottom) {
+    heroTitleFontsize = '30px'
+  }
 
   return (
     <>
@@ -72,6 +79,7 @@ const HeroContainerComponent = props => {
         </Section>
       ) : null}
       <HeroContainer
+        headlineBorderBottom={headlineBorderBottom}
         isStyleCenterSimple={isStyleCenterSimple}
         image={backgroundImage}
         className={classnames({
@@ -88,6 +96,7 @@ const HeroContainerComponent = props => {
             <HeroImageTextContainer
               isStyleHubspot={isStyleHubspot}
               isHome={isHome}
+              headlineBorderBottom={headlineBorderBottom}
             >
               {eyebrowLogo ? (
                 <EyebrowWrapper
@@ -113,14 +122,9 @@ const HeroContainerComponent = props => {
               ) : null}
               {headline && (
                 <HeroTitle
+                  headlineBorderBottom={headlineBorderBottom}
                   hideHeadline={hideHeadline}
-                  fontSize={
-                    isStyleHubspot
-                      ? '16px'
-                      : contentAlignment === 'center'
-                      ? '30px'
-                      : ''
-                  }
+                  fontSize={heroTitleFontsize}
                 >
                   {' '}
                   {headline}{' '}
@@ -210,6 +214,17 @@ const HeroContainer = styled(Section)`
       }
     `
       : ''}
+
+  ${({ headlineBorderBottom }) =>
+    headlineBorderBottom
+      ? `
+    padding-top: 0;
+    & + div {
+      padding-top: 0 !important;
+    }
+  `
+      : ''}
+
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
     padding-top: 0 !important;
   }
@@ -295,6 +310,13 @@ const HeroImageTextContainer = styled.div`
   min-width: 0;
   `
       : ''}
+
+  ${({ headlineBorderBottom, theme }) =>
+    headlineBorderBottom
+      ? `
+  width: 100%;
+  `
+      : ''}
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
 
     margin-top: -5px;
@@ -325,6 +347,15 @@ const HeroTitle = styled.h1`
     fontSize
       ? `
       font-size: ${fontSize} !important;
+  `
+      : ''}
+
+  ${({ headlineBorderBottom }) =>
+    headlineBorderBottom
+      ? `
+      padding-bottom: 28px;
+      border-bottom: 1px solid #a8a8a8;
+      text-align: left;
   `
       : ''}
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {

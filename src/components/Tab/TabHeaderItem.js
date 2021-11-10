@@ -1,11 +1,12 @@
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
 
-
 const DownloadContainer = props => {
-  const {setActiveId,activeId, label, id} = props;
+  const { setActiveId, activeId, label, id } = props
   return (
-    <Item active={activeId === id} onClick={() => setActiveId(id)}>{label}</Item>
+    <Item active={activeId === id} onClick={() => setActiveId(id)}>
+      {label}
+    </Item>
   )
 }
 
@@ -18,8 +19,8 @@ const Item = styled.div`
   justify-content: center;
   height: 42px;
   padding: 8px 24px;
-  color: ${({theme}) => theme.darkBlue};
-  border: 1px solid ${({theme}) => theme.darkBlue};
+  color: ${({ theme }) => theme.darkBlue};
+  border: 1px solid ${({ theme }) => theme.darkBlue};
   &:not(:first-child) {
     border-left: 0;
   }
@@ -34,8 +35,11 @@ const Item = styled.div`
     border-bottom-right-radius: 24px;
   }
 
-  ${({active, theme}) => active ? `
+  ${({ active, theme }) =>
+    active
+      ? `
   background-color: ${theme.darkBlue};
   color: #fff;
-  ` : ''}
-`;
+  `
+      : ''}
+`

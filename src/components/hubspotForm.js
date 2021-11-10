@@ -50,7 +50,7 @@ const Wrapper = styled.div`
   display: block;
   max-width: 100%;
 
-  ${({width}) => width ? `width: ${width}` : 'min-width: 300px'}
+  ${({ width }) => (width ? `width: ${width}` : 'min-width: 300px')}
 `
 
 const Form = styled.div`

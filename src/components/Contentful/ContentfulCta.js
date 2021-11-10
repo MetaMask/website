@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import CTA from '../CTA'
-import ContentWrapper from '../ContentWrapper'
 
 const ContentfulCta = props => {
   const {
@@ -15,7 +13,7 @@ const ContentfulCta = props => {
       displayText,
       typeLayout = '',
       isHideArrow = true,
-      color = 'black',
+      color = '#2196f3',
     },
   } = props
 

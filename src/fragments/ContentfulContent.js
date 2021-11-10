@@ -303,7 +303,6 @@ export const ContentfulRichTextFields = graphql`
     displayTitle
   }
 `
-
 export const ContentfulModuleContainerFields = graphql`
   fragment ContentfulModuleContainerFields on ContentfulModuleContainer {
     contentful_id
@@ -320,6 +319,7 @@ export const ContentfulModuleContainerFields = graphql`
     contentAlignment
     splitModules
     displayTitle
+    isLiquiditySection
     modules {
       ... on ContentfulLogo {
         ...ContentfulLogoFields
@@ -341,10 +341,58 @@ export const ContentfulModuleContainerFields = graphql`
         internal {
           type
         }
+        description {
+          childMarkdownRemark {
+            html
+          }
+        }
         columns
+        title
+        contentAlignment
+        splitModules
+        displayTitle
         modules {
           ... on ContentfulCard {
             ...ContentfulCardFields
+          }
+          ... on ContentfulCta {
+            ...ContentfulCtaFields
+          }
+          ... on ContentfulRichText {
+            ...ContentfulRichTextFields
+          }
+          ... on ContentfulLogo {
+            ...ContentfulLogoFields
+          }
+          ... on ContentfulModuleContainer {
+            contentful_id
+            internal {
+              type
+            }
+            description {
+              childMarkdownRemark {
+                html
+              }
+            }
+            columns
+            title
+            contentAlignment
+            splitModules
+            displayTitle
+            modules {
+              ... on ContentfulCard {
+                ...ContentfulCardFields
+              }
+              ... on ContentfulCta {
+                ...ContentfulCtaFields
+              }
+              ... on ContentfulRichText {
+                ...ContentfulRichTextFields
+              }
+              ... on ContentfulLogo {
+                ...ContentfulLogoFields
+              }
+            }
           }
         }
       }

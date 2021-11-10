@@ -26,7 +26,7 @@ const LoadingWrapper = styled.div`
   align-items: center;
   justify-content: center;
   padding: 16px;
-`;
+`
 const LoadingIcon = styled.div`
   display: block;
   width: 64px;

@@ -19,8 +19,9 @@ const CTA = props => {
     buttonSize,
     buttonColor,
     customClick,
+    buttonDisplay,
   } = props
-
+  const isButton = buttonDisplay || button
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
   const icon = { ...defaultIconConfig, fill: color, ...iconConfig }
   const handleCustomClick = e => {
@@ -28,7 +29,7 @@ const CTA = props => {
     customClick()
   }
 
-  if (button) {
+  if (isButton) {
     return (
       <Button
         size={buttonSize}
@@ -42,7 +43,7 @@ const CTA = props => {
   }
 
   return (
-    <CTAContainer align={align}>
+    <CTAContainer className="ctaModuleContainer" align={align}>
       <ContentWrapper
         to={link}
         newTab={newTab}
@@ -86,7 +87,6 @@ const ContentWrapper = styled(Link)`
     typeLayout === ''
       ? `
       color: ${color};
-      padding: 22px;
     &:hover {
       opacity: 0.6;
     }

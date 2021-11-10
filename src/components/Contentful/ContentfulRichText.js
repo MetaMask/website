@@ -8,7 +8,8 @@ const ContentfulRichText = props => {
   } = props
 
   const { childMarkdownRemark: { htmlConfig } = {} } = htmlBody || {}
-  const bodyConfig = body && body.internal ? JSON.parse(body.internal.content).content : ''
+  const bodyConfig =
+    body && body.internal ? JSON.parse(body.internal.content).content : ''
 
   return (
     <RichText

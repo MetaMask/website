@@ -5,9 +5,7 @@ import styled from 'styled-components'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import classnames from 'classnames'
 import { SectionTitle, Section } from '../StyledGeneral'
-import Context from '../Context/ContextLayoutModuleContainer';
-
-
+import Context from '../Context/ContextLayoutModuleContainer'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -65,9 +63,7 @@ const ContentfulModuleContainer = props => {
               />
             ) : null}
           </ContentInfo>
-          <Modules
-            contentAlignCenter={contentAlignCenter}
-          >
+          <Modules contentAlignCenter={contentAlignCenter}>
             {modules && modules.length
               ? modules.map(m =>
                   contentfulModuleToComponent({
