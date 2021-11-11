@@ -12,7 +12,7 @@ const RichText = props => {
       {content && (
         <RawHTML content={content} fontWeightManual={fontWeightManual} />
       )}
-      {html && <div dangerouslySetInnerHTML={{ __html: html }} />}
+      {html && <HTML dangerouslySetInnerHTML={{ __html: html }} />}
     </RichTextWrapper>
   )
 }
@@ -29,3 +29,8 @@ const RichTextTitle = styled.h2`
     margin-bottom: 2rem;
   }
 `
+const HTML = styled.div`
+  > p:last-child {
+    margin-bottom: 0;
+  }
+`;

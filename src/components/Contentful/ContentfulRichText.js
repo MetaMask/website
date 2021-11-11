@@ -7,7 +7,7 @@ const ContentfulRichText = props => {
     moduleConfig: { title, body, htmlBody, displayTitle },
   } = props
 
-  const { childMarkdownRemark: { htmlConfig } = {} } = htmlBody || {}
+  const { childMarkdownRemark: { html } = {} } = htmlBody || {}
   const bodyConfig =
     body && body.internal ? JSON.parse(body.internal.content).content : ''
 
@@ -15,7 +15,7 @@ const ContentfulRichText = props => {
     <RichText
       title={title}
       content={bodyConfig}
-      html={htmlConfig}
+      html={html}
       displayTitle={displayTitle}
     />
   )

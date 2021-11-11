@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import classnames from 'classnames'
 import { SectionTitle } from '../StyledGeneral'
 
 const ContentfulEmbed = props => {
@@ -14,15 +13,7 @@ const ContentfulEmbed = props => {
   } = props
   return (
     <div>
-      {title ? (
-        <Title
-          className={classnames({
-            hidden: !displayTitle,
-          })}
-        >
-          {title}
-        </Title>
-      ) : null}
+      {title && displayTitle ? <Title>{title}</Title> : null}
       <EmbedHtml dangerouslySetInnerHTML={{ __html: embed }} />
     </div>
   )

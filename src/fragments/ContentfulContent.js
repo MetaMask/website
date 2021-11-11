@@ -47,6 +47,7 @@ export const ContentfulLayoutHeroFields = graphql`
     eyebrowMobileLogo {
       ...ContentfulLogoFields
     }
+    sideImageFlex
     sideImage {
       title
       description
