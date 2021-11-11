@@ -20,10 +20,11 @@ const StyledCard = props => {
     newTab,
     backgroundColor,
     showArrowIcon,
+    imageMargin,
   } = props
 
   return (
-    <Card>
+    <Card showArrowIcon={showArrowIcon}>
       <CardInner
         to={link}
         newTab={newTab}
@@ -33,7 +34,7 @@ const StyledCard = props => {
         })}
       >
         {image ? (
-          <ImageWrapper>
+          <ImageWrapper imageMargin={imageMargin}>
             <ImageSrc image={image} />
           </ImageWrapper>
         ) : null}
@@ -67,10 +68,15 @@ StyledCard.propTypes = {
   link: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
+  imageMargin: PropTypes.bool,
 }
 
 const Card = styled.div`
   display: block;
+
+  ${({showArrowIcon}) => showArrowIcon ? `
+    margin-bottom: 16px;
+  `:''}
 `
 
 const CardInner = styled.div`
@@ -93,6 +99,8 @@ const ImageWrapper = styled.div`
   img {
     height: 100%;
   }
+
+  ${({imageMargin}) => imageMargin ? 'margin-left: -15px' : ''}
 `
 
 const ImageSrc = styled(Image)`

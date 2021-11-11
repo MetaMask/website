@@ -146,6 +146,7 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
         html
       }
     }
+    marginBottom
     ctaText
     ctaLink
     hubSpotForm {
@@ -175,6 +176,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     sectionPadding
     noPaddingBottom
     sectionPadding
+    modulesMargin
   }
 `
 
@@ -192,6 +194,7 @@ export const ContentfulCardFields = graphql`
         url
       }
     }
+    imageMargin
     description {
       childMarkdownRemark {
         html

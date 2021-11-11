@@ -4,10 +4,17 @@ import RawHTML from './RawHTML'
 import { kebabCase } from 'lodash'
 
 const RichText = props => {
-  const { title, content, html, displayTitle = true, fontWeightManual } = props
+  const {
+    moduleId,
+    title,
+    content,
+    html,
+    displayTitle = true,
+    fontWeightManual,
+  } = props
 
   return (
-    <RichTextWrapper id={kebabCase(title || '')}>
+    <RichTextWrapper id={moduleId || kebabCase(title || '')}>
       {displayTitle && <RichTextTitle> {title} </RichTextTitle>}
       {content && (
         <RawHTML content={content} fontWeightManual={fontWeightManual} />
@@ -33,4 +40,4 @@ const HTML = styled.div`
   > p:last-child {
     margin-bottom: 0;
   }
-`;
+`

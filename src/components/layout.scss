@@ -873,6 +873,32 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
   }
 }
 
+@media (max-width: 767px) {
+  .bg-mobile-white {
+    background-color: #fff;
+  }
+  
+  .bg-mobile-gray {
+    background-color: #f7f9fb;
+  }
+  
+  .bg-mobile-darkGray {
+    background-color: #6A737D;
+    color: #fff;
+    h1,h2,h3,h4,h5,h6 {
+      color: #fff;
+    }
+  }
+  
+  .bg-mobile-dark {
+    background-color: #24292E;
+    color: #fff;
+    h1,h2,h3,h4,h5,h6 {
+      color: #fff;
+    }
+  }
+}
+
 .hidden-desktop {
   @media (min-width: 480px) {
     display: none !important;

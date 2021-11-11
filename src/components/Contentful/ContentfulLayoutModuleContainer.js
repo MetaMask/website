@@ -20,6 +20,7 @@ const ContentfulModuleContainer = props => {
       noPaddingBottom,
       modules,
       sectionPadding,
+      modulesMargin,
     },
   } = props
 
@@ -43,39 +44,39 @@ const ContentfulModuleContainer = props => {
         })}
       >
         <ContentWrapper>
-          <ContentInfo paddingTop={paddingTop}>
-            {headline ? (
-              <Title
-                className={classnames({
-                  hidden: !displayHeadline,
-                  'txt-center': headlineAlignCenter,
-                })}
-              >
-                {headline}
-              </Title>
-            ) : null}
-            {html ? (
-              <SubInfo
-                className={classnames({
-                  'txt-center': contentAlignCenter,
-                })}
-                dangerouslySetInnerHTML={{ __html: html }}
-              />
-            ) : null}
-          </ContentInfo>
-          <Modules contentAlignCenter={contentAlignCenter}>
-            {modules && modules.length
-              ? modules.map(m =>
-                  contentfulModuleToComponent({
-                    ...m,
-                    hasModuleContainer: true,
-                    color: ['dark'].includes(backgroundColor)
-                      ? 'white'
-                      : 'black',
-                  })
-                )
-              : null}
-          </Modules>
+          {headline || html ? (
+            <ContentInfo paddingTop={paddingTop}>
+              {headline ? (
+                <Title
+                  className={classnames({
+                    hidden: !displayHeadline,
+                    'txt-center': headlineAlignCenter,
+                  })}
+                >
+                  {headline}
+                </Title>
+              ) : null}
+              {html ? (
+                <SubInfo
+                  className={classnames({
+                    'txt-center': contentAlignCenter,
+                  })}
+                  dangerouslySetInnerHTML={{ __html: html }}
+                />
+              ) : null}
+            </ContentInfo>
+          ) : null}
+          {modules && modules.length ? (
+            <Modules contentAlignCenter={contentAlignCenter} modulesMargin={modulesMargin}>
+              {modules.map(m =>
+                contentfulModuleToComponent({
+                  ...m,
+                  hasModuleContainer: true,
+                  color: ['dark'].includes(backgroundColor) ? 'white' : 'black',
+                })
+              )}
+            </Modules>
+          ) : null}
         </ContentWrapper>
       </Section>
     </Context.Provider>
@@ -110,6 +111,18 @@ const Modules = styled.div`
     align-items: center;
   `
       : ``}
+      
+  > * {
+    &:not(:last-child) {
+      margin-bottom: ${({modulesMargin}) => modulesMargin || '40px'};
+    }
+  }
+
+  > .ctaModuleContainer {
+    padding: 22px;
+    margin-bottom: 0;
+  }
+  
 `
 const ContentInfo = styled.div`
   margin-bottom: 1rem;

@@ -32,6 +32,18 @@ const PageLayout = props => {
     renderNotification(navigationState.notification)
   }
 
+  React.useEffect(() => {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault()
+
+        document.getElementById(this.getAttribute('href').replace('#','')).scrollIntoView({
+          behavior: 'smooth',
+        })
+      })
+    })
+  }, [])
+
   return (
     <Layout theme={theme} {...rest}>
       <Notifications />

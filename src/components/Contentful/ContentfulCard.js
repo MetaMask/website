@@ -12,6 +12,7 @@ const ContentfulCard = props => {
       newTab,
       backgroundColor,
       showArrowIcon,
+      imageMargin,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -25,6 +26,7 @@ const ContentfulCard = props => {
       newTab={newTab}
       backgroundColor={backgroundColor}
       showArrowIcon={showArrowIcon}
+      imageMargin={imageMargin}
     />
   )
 }
@@ -40,5 +42,6 @@ ContentfulCard.propTypes = {
     newTab: PropTypes.bool,
     backgroundColor: PropTypes.string,
     showArrowIcon: PropTypes.bool,
+    imageMargin: PropTypes.bool,
   }),
 }

@@ -18,6 +18,7 @@ const FullWidthCta = props => {
     backgroundColor,
     headline,
     hubSpotForm,
+    marginBottom,
   } = props
 
   const [showPopup, setShowPopup] = React.useState(false)
@@ -32,7 +33,7 @@ const FullWidthCta = props => {
       <ContentWrapper>
         <FeatureWrapper showLogoAnimation={showLogoAnimation}>
           {showLogoAnimation ? <LogoAnimation /> : null}
-          <FeatureInner backgroundColor={backgroundColor}>
+          <FeatureInner marginBottom={marginBottom} backgroundColor={backgroundColor}>
             {headline ? (
               <Headline
                 backgroundColor={backgroundColor}
@@ -135,6 +136,8 @@ const FeatureInner = styled.div`
       : `
   color: ${theme.black};
   `}
+
+  ${({marginBottom}) => marginBottom ? `margin-bottom: ${marginBottom}` : ''}
 `
 const CTAWrapper = styled.div`
   margin-top: 32px;

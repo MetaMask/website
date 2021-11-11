@@ -9,10 +9,11 @@ const ContentfulEmbed = props => {
       embed: { embed },
       title,
       displayTitle,
+      moduleId,
     },
   } = props
   return (
-    <div>
+    <div id={moduleId}>
       {title && displayTitle ? <Title>{title}</Title> : null}
       <EmbedHtml dangerouslySetInnerHTML={{ __html: embed }} />
     </div>
@@ -28,6 +29,7 @@ ContentfulEmbed.propTypes = {
     embed: PropTypes.shape({
       embed: PropTypes.string.isRequired,
     }).isRequired,
+    moduleId: PropTypes.string,
   }),
 }
 
