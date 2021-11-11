@@ -282,6 +282,7 @@ export const ContentfulLogoFields = graphql`
     link
     newTab
     displayTitle
+    widthLogo
   }
 `
 
