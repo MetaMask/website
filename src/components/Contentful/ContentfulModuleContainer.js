@@ -36,12 +36,9 @@ const ContentfulModuleContainer = props => {
       <Inner splitModules={splitModules}>
         {title || html ? (
           <Content splitModules={splitModules}>
-            {title ? (
+            {title && displayTitle ? (
               <Title
                 isFaq={isFaq}
-                className={classnames({
-                  hidden: !displayTitle,
-                })}
               >
                 {title}
               </Title>
@@ -94,9 +91,7 @@ ContentfulModuleContainer.propTypes = {
 const Wrapper = styled.div`
   display: block;
 
-  &:not(last-child) {
-    margin-bottom: 64px;
-  }
+  /* remove margin when nested child in child */
   .contentfulModuleContainerWrapper {
     margin-bottom: 0 !important;
   }
@@ -193,9 +188,7 @@ const Modules = styled.div`
       img {
         max-width: 316px;
       }
-      p {
-        max-width: 190px;
-      }
+      
     }
   `
       : ''}

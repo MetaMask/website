@@ -5,6 +5,9 @@ import { Link } from 'gatsby'
 
 const DefaultLink = props => {
   const { activeStyle, newTab, children, styleOverride, to, ...rest } = props
+  if (!to) {
+    return <div {...rest}>{children}</div>
+  }
 
   // checks if relative url "about/" or "/about/"
   // otherwise treats as external link

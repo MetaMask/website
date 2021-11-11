@@ -73,7 +73,7 @@ const FeatureComponent = props => {
     <>
       {image ? (
         <ImageSrc
-          classname={classnames({
+          className={classnames({
             'hidden-mobile': imageMobile,
           })}
           image={image}
@@ -83,7 +83,7 @@ const FeatureComponent = props => {
       ) : null}
       {imageMobile ? (
         <ImageSrc
-          classname={'hidden-desktop'}
+          className={'hidden-desktop'}
           image={imageMobile}
           widthImg={imageWidth}
           imageAlignment={imageAlignment}
@@ -257,6 +257,12 @@ const FeatureWrapper = styled.div`
       ? `
     align-items: center;
     justify-content: center;
+  `
+      : ''}
+  
+  ${({ alignItemsCenter, isContentAlignVertical }) =>
+    alignItemsCenter && isContentAlignVertical
+      ? `
     text-align: center;
   `
       : ''}

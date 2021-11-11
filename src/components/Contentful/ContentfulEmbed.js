@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import classnames from 'classnames'
 import { SectionTitle } from '../StyledGeneral'
 
 const ContentfulEmbed = props => {
@@ -10,19 +9,12 @@ const ContentfulEmbed = props => {
       embed: { embed },
       title,
       displayTitle,
+      moduleId,
     },
   } = props
   return (
-    <div>
-      {title ? (
-        <Title
-          className={classnames({
-            hidden: !displayTitle,
-          })}
-        >
-          {title}
-        </Title>
-      ) : null}
+    <div id={moduleId}>
+      {title && displayTitle ? <Title>{title}</Title> : null}
       <EmbedHtml dangerouslySetInnerHTML={{ __html: embed }} />
     </div>
   )
@@ -37,6 +29,7 @@ ContentfulEmbed.propTypes = {
     embed: PropTypes.shape({
       embed: PropTypes.string.isRequired,
     }).isRequired,
+    moduleId: PropTypes.string,
   }),
 }
 

@@ -24,14 +24,6 @@ export const Section = styled.div`
   padding-top: 48px;
   padding-bottom: 48px;
 
-  ${({ backgroundColor, sectionPadding }) =>
-    backgroundColor && !sectionPadding
-      ? `
-    padding-top: 48px !important;
-    padding-bottom: 48px !important;
-  `
-      : ``}
-
   ${({ sectionPadding }) =>
     sectionPadding
       ? `
@@ -45,8 +37,16 @@ export const Section = styled.div`
     padding-bottom: 24px;
   }
 
+  ${({ backgroundColor, sectionPadding }) =>
+    backgroundColor && !sectionPadding
+      ? `
+    padding-top: 48px;
+    padding-bottom: 48px;
+  `
+      : ``}
+
   &.noPaddingBottom {
-    padding-bottom: 0;
+    padding-bottom: 0 !important;
   }
 `
 

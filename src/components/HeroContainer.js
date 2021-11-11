@@ -8,6 +8,7 @@ import CTA from './CTA'
 import Popup from './Popup'
 import { Section } from './StyledGeneral'
 import classnames from 'classnames'
+import Image from './Image';
 
 const HeroContainerComponent = props => {
   const {
@@ -16,6 +17,7 @@ const HeroContainerComponent = props => {
     hideHeadline,
     description,
     sideImage,
+    sideImageUrl,
     showLearnMore,
     eyebrowLogo,
     eyebrowMobileLogo,
@@ -26,6 +28,8 @@ const HeroContainerComponent = props => {
     contentAlignment,
     backgroundColor,
     headlineBorderBottom,
+    sideImageFlex,
+    backgroundColorMobile,
   } = props
   const [showPopup, setShowPopup] = React.useState(false)
   const togglePopup = () => {
@@ -59,7 +63,7 @@ const HeroContainerComponent = props => {
     )
   }
   const isStyleHubspot = hubSpotForm && !ctaText
-  const isStyleCenterSimple = contentAlignment === 'center' && !sideImage
+  const isStyleCenterSimple = contentAlignment === 'center' && !sideImageUrl
   let heroTitleFontsize = ''
   if (isStyleHubspot) {
     heroTitleFontsize = '16px'
@@ -79,24 +83,30 @@ const HeroContainerComponent = props => {
         </Section>
       ) : null}
       <HeroContainer
+        sectionPadding={sideImageFlex ? '16px' : ''}
         headlineBorderBottom={headlineBorderBottom}
         isStyleCenterSimple={isStyleCenterSimple}
         image={backgroundImage}
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor,
+          [`bg-mobile-${backgroundColorMobile}`]: backgroundColorMobile,
         })}
       >
         <ContentWrapper>
           <HeroContentContainer
             isStyleCenterSimple={isStyleCenterSimple}
             contentAlignment={contentAlignment}
-            bgSrc={!isStyleHubspot ? sideImage : ''}
+            bgSrc={!isStyleHubspot && !sideImageFlex ? sideImageUrl : ''}
             isAbout={isAbout}
+            reverse={contentAlignment === 'right'}
+            center={sideImageFlex}
           >
             <HeroImageTextContainer
               isStyleHubspot={isStyleHubspot}
               isHome={isHome}
               headlineBorderBottom={headlineBorderBottom}
+              className='heroMobileOverlayContent'
+              center={!sideImageFlex && !isHome}
             >
               {eyebrowLogo ? (
                 <EyebrowWrapper
@@ -149,9 +159,9 @@ const HeroContainerComponent = props => {
               {hubspotWrapper ? hubspotWrapper : null}
             </HeroImageTextContainer>
             {sideImage ? (
-              <HeroSideImage isStyleHubspot={isStyleHubspot}>
-                {isStyleHubspot ? (
-                  <img src={sideImage} alt="hero hubspot" />
+              <HeroSideImage sideImageFlex={sideImageFlex} isStyleHubspot={isStyleHubspot}>
+                {isStyleHubspot || sideImageFlex ? (
+                  <Image image={sideImage} />
                 ) : null}
               </HeroSideImage>
             ) : null}
@@ -180,7 +190,8 @@ HeroContainerComponent.propTypes = {
   backgroundImage: PropTypes.string,
   eyebrowLogo: PropTypes.object,
   eyebrowMobileLogo: PropTypes.object,
-  sideImage: PropTypes.string,
+  sideImageUrl: PropTypes.string,
+  sideImage: PropTypes.object,
   hubSpotForm: PropTypes.object,
   headline: PropTypes.string,
   description: PropTypes.string,
@@ -239,6 +250,14 @@ const HeroContentContainer = styled.div`
     padding: 10px;
   }
 
+  ${({center}) => center ? `
+    align-items: center;
+
+    img {
+      margin: 0 auto;
+    }
+  `:''}
+
   ${({ bgSrc }) =>
     bgSrc
       ? `
@@ -285,9 +304,20 @@ const HeroContentContainer = styled.div`
     background-attachment: scroll;
     padding-bottom: 0;
     & > * {
-    width: 100%;
+      width: 100%;
+    }
   }
-  }
+
+  ${({ reverse, theme }) =>
+    reverse
+      ? `
+    flex-direction: row-reverse;
+    background-position: 0% 0%;
+    @media (max-width: ${theme.device.tabletMediaMax}){
+      flex-direction: column;
+    }
+  `
+      : ''}
 `
 
 const HeroImageTextContainer = styled.div`
@@ -298,6 +328,17 @@ const HeroImageTextContainer = styled.div`
       ? `
   @media (min-width: ${theme.device.miniDesktop}){
     margin-top: 50px;
+  }
+  `
+      : ''}
+
+  ${({ center, theme }) =>
+  center
+      ? `
+  @media (min-width: ${theme.device.miniDesktop}){
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   `
       : ''}
@@ -321,11 +362,9 @@ const HeroImageTextContainer = styled.div`
 
     margin-top: -5px;
     padding-top: 0px;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, 0)), color-stop(11%, #fff));
-    background-image: linear-gradient(
-  180deg
-  , hsla(0, 0%, 100%, 0), #fff 11%);
     text-align: center;
+
+    
   }
 
 `
@@ -375,6 +414,13 @@ const HeroDescription = styled.div`
 const HeroSideImage = styled.div`
   display: block;
   height: 400px;
+
+  ${({sideImageFlex}) => sideImageFlex ? `
+    display: flex;
+    height: auto !important;
+    align-items: center;
+    justify-content: center;
+  ` : ''}
 
   ${({ isStyleHubspot }) =>
     isStyleHubspot

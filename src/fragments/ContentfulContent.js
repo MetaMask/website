@@ -47,6 +47,7 @@ export const ContentfulLayoutHeroFields = graphql`
     eyebrowMobileLogo {
       ...ContentfulLogoFields
     }
+    sideImageFlex
     sideImage {
       title
       description
@@ -57,7 +58,6 @@ export const ContentfulLayoutHeroFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
-    sideImageAlignment
     ctaText
     ctaLink
     hubSpotForm {
@@ -145,6 +145,7 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
         html
       }
     }
+    marginBottom
     ctaText
     ctaLink
     hubSpotForm {
@@ -174,6 +175,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     sectionPadding
     noPaddingBottom
     sectionPadding
+    modulesMargin
   }
 `
 
@@ -191,6 +193,7 @@ export const ContentfulCardFields = graphql`
         url
       }
     }
+    imageMargin
     description {
       childMarkdownRemark {
         html
@@ -290,11 +293,6 @@ export const ContentfulRichTextFields = graphql`
     }
     moduleId
     title
-    body {
-      internal {
-        content
-      }
-    }
     htmlBody {
       childMarkdownRemark {
         html

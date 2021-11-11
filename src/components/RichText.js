@@ -1,18 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
-import RawHTML from './RawHTML'
 import { kebabCase } from 'lodash'
 
 const RichText = props => {
-  const { title, content, html, displayTitle = true, fontWeightManual } = props
+  const {
+    moduleId,
+    title,
+    html,
+    displayTitle = true,
+  } = props
 
   return (
-    <RichTextWrapper id={kebabCase(title || '')}>
+    <RichTextWrapper id={moduleId || kebabCase(title || '')}>
       {displayTitle && <RichTextTitle> {title} </RichTextTitle>}
-      {content && (
-        <RawHTML content={content} fontWeightManual={fontWeightManual} />
-      )}
-      {html && <div dangerouslySetInnerHTML={{ __html: html }} />}
+      {html && <HTML className='richText' dangerouslySetInnerHTML={{ __html: html }} />}
     </RichTextWrapper>
   )
 }
@@ -27,5 +28,10 @@ const RichTextTitle = styled.h2`
   margin-bottom: 1rem;
   @media (min-width: ${({ theme }) => theme.device.desktop}) {
     margin-bottom: 2rem;
+  }
+`
+const HTML = styled.div`
+  > p:last-child {
+    margin-bottom: 0;
   }
 `

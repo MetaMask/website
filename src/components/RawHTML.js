@@ -10,6 +10,7 @@ export default props => {
     nodeType: 'document',
     content,
   }
+  console.log('props',props)
   const renderOptions = renderOptionsParse({ fontWeightManual })
 
   return documentToReactComponents(document, { ...renderOptions, ...options })
@@ -70,16 +71,15 @@ const Bold = styled.span`
 const P = styled.p`
   font-weight: ${({ theme }) => theme.font.weight.regular};
   font-size: ${({ theme }) => theme.font.size.md}rem;
-  line-height: 1.5;
+  line-height: 1.375;
+  color: #000;
 `
 
 const H1 = styled.h1`
-  font-size: ${({ theme }) => theme.font.size.x5}rem;
   font-weight: ${({ fontWeightManual, theme }) =>
     !fontWeightManual ? theme.font.weight.bold : 400};
-  @media (max-width: ${({ theme }) => theme.device.mobile}) {
-    font-size: 2.5rem;
-  }
+  margin-bottom: 10px;
+  margin-top: 30px;
   /* work for font-weight manual, admin will control fw of H tag */
   ${Bold} {
     font-weight: ${({ theme }) => theme.font.weight.bold};
@@ -87,12 +87,10 @@ const H1 = styled.h1`
 `
 
 const H2 = styled.h2`
-  font-size: ${({ theme }) => theme.font.size.x4}rem;
+  margin-bottom: 10px;
+  margin-top: 30px;
   font-weight: ${({ fontWeightManual, theme }) =>
     !fontWeightManual ? theme.font.weight.bold : 400};
-  @media (max-width: ${({ theme }) => theme.device.mobile}) {
-    font-size: 2rem;
-  }
   /* work for font-weight manual, admin will control fw of H tag */
   ${Bold} {
     font-weight: ${({ theme }) => theme.font.weight.bold};
@@ -100,40 +98,37 @@ const H2 = styled.h2`
 `
 
 const H3 = styled.h3`
-  font-size: ${({ theme }) => theme.font.size.xxxl}rem;
+  margin-bottom: 10px;
+  margin-top: 30px;
   font-weight: ${({ fontWeightManual, theme }) =>
-    !fontWeightManual ? theme.font.weight.semiBold : 400};
-  @media (max-width: ${({ theme }) => theme.device.mobile}) {
-    font-size: 1.75rem;
-  }
+    !fontWeightManual ? theme.font.weight.bold : 400};
+  
   /* work for font-weight manual, admin will control fw of H tag */
   ${Bold} {
-    font-weight: ${({ theme }) => theme.font.weight.semiBold};
+    font-weight: ${({ theme }) => theme.font.weight.bold};
   }
 `
 
 const H4 = styled.h4`
-  font-size: ${({ theme }) => theme.font.size.xxl}rem;
+  margin-bottom: 10px;
+  margin-top: 30px;
   font-weight: ${({ fontWeightManual, theme }) =>
-    !fontWeightManual ? theme.font.weight.semiBold : 400};
-  @media (max-width: ${({ theme }) => theme.device.mobile}) {
-    font-size: 1.5rem;
-  }
+    !fontWeightManual ? theme.font.weight.bold : 400};
+  
   /* work for font-weight manual, admin will control fw of H tag */
   ${Bold} {
-    font-weight: ${({ theme }) => theme.font.weight.semiBold};
+    font-weight: ${({ theme }) => theme.font.weight.bold};
   }
 `
 
 const H5 = styled.h5`
-  font-size: ${({ theme }) => theme.font.size.xl}rem;
+  margin-bottom: 10px;
+  margin-top: 30px;
   font-weight: ${({ fontWeightManual, theme }) =>
-    !fontWeightManual ? theme.font.weight.semiBold : 400};
-  @media (max-width: ${({ theme }) => theme.device.mobile}) {
-    font-size: 1.25rem;
-  }
+    !fontWeightManual ? theme.font.weight.bold : 400};
+  
   /* work for font-weight manual, admin will control fw of H tag */
   ${Bold} {
-    font-weight: ${({ theme }) => theme.font.weight.semiBold};
+    font-weight: ${({ theme }) => theme.font.weight.bold};
   }
 `

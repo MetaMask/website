@@ -10,11 +10,9 @@ const HubspotForm = props => {
 
   return (
     <Wrapper width={width}>
-      {title ? (
+      {title && displayTitle ? (
         <Title
-          className={classnames('popupTitle', {
-            hidden: !displayTitle,
-          })}
+          className={classnames('popupTitle')}
         >
           {title}
         </Title>

@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Image from './Image'
 import classnames from 'classnames'
 import ArrowIcon from '../images/icons/icon-arrow-right.svg'
+import Link from './Link';
 
 /**
  * @name Card
@@ -20,10 +21,11 @@ const StyledCard = props => {
     newTab,
     backgroundColor,
     showArrowIcon,
+    imageMargin,
   } = props
 
   return (
-    <Card>
+    <Card showArrowIcon={showArrowIcon}>
       <CardInner
         to={link}
         newTab={newTab}
@@ -33,7 +35,7 @@ const StyledCard = props => {
         })}
       >
         {image ? (
-          <ImageWrapper>
+          <ImageWrapper imageMargin={imageMargin}>
             <ImageSrc image={image} />
           </ImageWrapper>
         ) : null}
@@ -67,14 +69,20 @@ StyledCard.propTypes = {
   link: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
+  imageMargin: PropTypes.bool,
 }
 
 const Card = styled.div`
   display: block;
+
+  ${({showArrowIcon}) => showArrowIcon ? `
+    margin-bottom: 16px;
+  `:''}
 `
 
-const CardInner = styled.div`
+const CardInner = styled(Link)`
   display: block;
+  color: ${({theme}) => theme.textColor};
   ${({ backgroundColor }) =>
     backgroundColor
       ? `
@@ -82,6 +90,11 @@ const CardInner = styled.div`
     height: 100%;
     padding: 24px;
     box-shadow: 0 10px 30px 0 rgba(0,0,0,0.09);
+    transition: box-shadow 200ms ease;
+
+    &:hover {
+      box-shadow: 0 10px 30px 0 rgba(0,0,0,0.2);
+    }
   `
       : ''}
 `
@@ -93,6 +106,8 @@ const ImageWrapper = styled.div`
   img {
     height: 100%;
   }
+
+  ${({imageMargin}) => imageMargin ? 'margin-left: -15px' : ''}
 `
 
 const ImageSrc = styled(Image)`
@@ -123,9 +138,14 @@ const Title = styled.div`
 
 const Description = styled.div`
   display: block;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
 `
 const ArrowItem = styled.div`
   height: 35px;
+  margin-left: 16px;
   svg {
     height: 100%;
     width: auto;

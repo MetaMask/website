@@ -12,6 +12,7 @@ const ContentfulLayoutFullWidthCta = props => {
       backgroundColor,
       description,
       hubSpotForm,
+      marginBottom='',
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -24,6 +25,7 @@ const ContentfulLayoutFullWidthCta = props => {
       backgroundColor={backgroundColor}
       headline={headline}
       hubSpotForm={hubSpotForm}
+      marginBottom={marginBottom}
     />
   )
 }
@@ -38,5 +40,6 @@ ContentfulLayoutFullWidthCta.propTypes = {
     ctaText: PropTypes.string,
     backgroundColor: PropTypes.string,
     showLogoAnimation: PropTypes.bool,
+    marginBottom: PropTypes.string,
   }),
 }
