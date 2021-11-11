@@ -293,11 +293,6 @@ export const ContentfulRichTextFields = graphql`
     }
     moduleId
     title
-    body {
-      internal {
-        content
-      }
-    }
     htmlBody {
       childMarkdownRemark {
         html
