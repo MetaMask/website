@@ -58,7 +58,6 @@ export const ContentfulLayoutHeroFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
-    sideImageAlignment
     ctaText
     ctaLink
     hubSpotForm {
