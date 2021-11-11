@@ -10,7 +10,6 @@ export default props => {
     nodeType: 'document',
     content,
   }
-  console.log('props',props)
   const renderOptions = renderOptionsParse({ fontWeightManual })
 
   return documentToReactComponents(document, { ...renderOptions, ...options })
