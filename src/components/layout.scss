@@ -377,7 +377,6 @@ p {
   padding-right: 0;
   padding-top: 0;
   margin-bottom: 1.5rem;
-
 }
 @media (max-width: 479px) {
   p {
@@ -849,6 +848,16 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
   text-align: center;
 }
 
+.heroMobileOverlayContent {
+  @media (max-width: 767px){
+    background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0), #fff 11%);
+
+    .bg-gray & {
+      background-image: linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 7%);
+    }
+  }
+}
+
 .bg-white {
   background-color: #fff;
 }
@@ -908,5 +917,20 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
 .hidden-mobile {
   @media (max-width: 479px) {
     display: none !important;
+  }
+}
+
+figcaption {
+  margin-top: 7px;
+  color: rgba(51, 51, 51, 0.56);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.richText {
+  h1,h2,h3,h4,h5,h6 {
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 10px;
   }
 }

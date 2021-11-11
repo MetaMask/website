@@ -38,6 +38,7 @@ const FullWidthCta = props => {
               <Headline
                 backgroundColor={backgroundColor}
                 showLogoAnimation={showLogoAnimation}
+                hasDescription={!!description}
               >
                 {headline}
               </Headline>
@@ -123,7 +124,10 @@ const Headline = styled(SectionTitle)`
   `}
 
   ${({ showLogoAnimation }) =>
-    !showLogoAnimation ? 'font-size: 32px !important;' : 'padding-top: 0;'}
+    showLogoAnimation ? 'padding-top: 0;' : ''}
+
+  ${({ hasDescription }) =>
+  hasDescription ? 'font-size: 32px !important;' : ''}
 `
 const FeatureInner = styled.div`
   display: block;

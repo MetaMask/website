@@ -1,4 +1,5 @@
 const theme = {
+  textColor: '#333',
   darkerBlue: '#1565c0',
   darkBlue: '#037dd6',
   lightBlue: '#2196f3',

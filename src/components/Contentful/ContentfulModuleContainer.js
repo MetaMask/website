@@ -188,9 +188,7 @@ const Modules = styled.div`
       img {
         max-width: 316px;
       }
-      p {
-        max-width: 190px;
-      }
+      
     }
   `
       : ''}

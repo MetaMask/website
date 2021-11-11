@@ -10,6 +10,7 @@ export default props => {
     nodeType: 'document',
     content,
   }
+  console.log('props',props)
   const renderOptions = renderOptionsParse({ fontWeightManual })
 
   return documentToReactComponents(document, { ...renderOptions, ...options })
@@ -100,11 +101,11 @@ const H3 = styled.h3`
   margin-bottom: 10px;
   margin-top: 30px;
   font-weight: ${({ fontWeightManual, theme }) =>
-    !fontWeightManual ? theme.font.weight.semiBold : 400};
+    !fontWeightManual ? theme.font.weight.bold : 400};
   
   /* work for font-weight manual, admin will control fw of H tag */
   ${Bold} {
-    font-weight: ${({ theme }) => theme.font.weight.semiBold};
+    font-weight: ${({ theme }) => theme.font.weight.bold};
   }
 `
 
@@ -112,11 +113,11 @@ const H4 = styled.h4`
   margin-bottom: 10px;
   margin-top: 30px;
   font-weight: ${({ fontWeightManual, theme }) =>
-    !fontWeightManual ? theme.font.weight.semiBold : 400};
+    !fontWeightManual ? theme.font.weight.bold : 400};
   
   /* work for font-weight manual, admin will control fw of H tag */
   ${Bold} {
-    font-weight: ${({ theme }) => theme.font.weight.semiBold};
+    font-weight: ${({ theme }) => theme.font.weight.bold};
   }
 `
 
@@ -124,10 +125,10 @@ const H5 = styled.h5`
   margin-bottom: 10px;
   margin-top: 30px;
   font-weight: ${({ fontWeightManual, theme }) =>
-    !fontWeightManual ? theme.font.weight.semiBold : 400};
+    !fontWeightManual ? theme.font.weight.bold : 400};
   
   /* work for font-weight manual, admin will control fw of H tag */
   ${Bold} {
-    font-weight: ${({ theme }) => theme.font.weight.semiBold};
+    font-weight: ${({ theme }) => theme.font.weight.bold};
   }
 `

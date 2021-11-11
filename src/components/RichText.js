@@ -1,25 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
-import RawHTML from './RawHTML'
 import { kebabCase } from 'lodash'
 
 const RichText = props => {
   const {
     moduleId,
     title,
-    content,
     html,
     displayTitle = true,
-    fontWeightManual,
   } = props
 
   return (
     <RichTextWrapper id={moduleId || kebabCase(title || '')}>
       {displayTitle && <RichTextTitle> {title} </RichTextTitle>}
-      {content && (
-        <RawHTML content={content} fontWeightManual={fontWeightManual} />
-      )}
-      {html && <HTML dangerouslySetInnerHTML={{ __html: html }} />}
+      {html && <HTML className='richText' dangerouslySetInnerHTML={{ __html: html }} />}
     </RichTextWrapper>
   )
 }

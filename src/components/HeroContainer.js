@@ -83,6 +83,7 @@ const HeroContainerComponent = props => {
         </Section>
       ) : null}
       <HeroContainer
+        sectionPadding={sideImageFlex ? '16px' : ''}
         headlineBorderBottom={headlineBorderBottom}
         isStyleCenterSimple={isStyleCenterSimple}
         image={backgroundImage}
@@ -104,6 +105,8 @@ const HeroContainerComponent = props => {
               isStyleHubspot={isStyleHubspot}
               isHome={isHome}
               headlineBorderBottom={headlineBorderBottom}
+              className='heroMobileOverlayContent'
+              center={!sideImageFlex && !isHome}
             >
               {eyebrowLogo ? (
                 <EyebrowWrapper
@@ -329,6 +332,17 @@ const HeroImageTextContainer = styled.div`
   `
       : ''}
 
+  ${({ center, theme }) =>
+  center
+      ? `
+  @media (min-width: ${theme.device.miniDesktop}){
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  `
+      : ''}
+
   ${({ isStyleHubspot, theme }) =>
     isStyleHubspot
       ? `
@@ -348,11 +362,9 @@ const HeroImageTextContainer = styled.div`
 
     margin-top: -5px;
     padding-top: 0px;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, 0)), color-stop(11%, #fff));
-    background-image: linear-gradient(
-  180deg
-  , hsla(0, 0%, 100%, 0), #fff 11%);
     text-align: center;
+
+    
   }
 
 `
