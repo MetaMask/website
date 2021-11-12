@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
-const LogoImage = ({ alt, src, width}) => {
+const LogoImage = ({ alt, src, width }) => {
   return (
     <StyledPartnerImageContainer>
       <StyledPartnerImage src={src} alt={alt} width={width} />

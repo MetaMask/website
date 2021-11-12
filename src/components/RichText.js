@@ -3,17 +3,14 @@ import styled from 'styled-components'
 import { kebabCase } from 'lodash'
 
 const RichText = props => {
-  const {
-    moduleId,
-    title,
-    html,
-    displayTitle = true,
-  } = props
+  const { moduleId, title, html, displayTitle = true } = props
 
   return (
     <RichTextWrapper id={moduleId || kebabCase(title || '')}>
       {displayTitle && <RichTextTitle> {title} </RichTextTitle>}
-      {html && <HTML className='richText' dangerouslySetInnerHTML={{ __html: html }} />}
+      {html && (
+        <HTML className="richText" dangerouslySetInnerHTML={{ __html: html }} />
+      )}
     </RichTextWrapper>
   )
 }

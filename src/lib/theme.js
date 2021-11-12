@@ -10,48 +10,9 @@ const theme = {
   dark: '#24292E',
   orange: '#f6851b',
   cookiesBg: '#151C24',
-  colors: {
-    /* Orange */
-    'orange-4': '#c43e00',
-    'orange-5': '#e65100',
-    'orange-7': '#9f0000',
-    /* Red */
-    'red-0': '#f44336',
-    'red-3': '#d50000',
-    'red-4': '#d50000',
-    'red-6': '#ba000d',
-    /* Purple */
-    'purple-0': '#d05ce3',
-    'purple-2': '#7953d2',
-    'purple-3': '#9c27b0',
-    'purple-4': '#8e24aa',
-    'purple-7': '#6a0080',
-    /* Indigo */
-    'indigo-0': '#5f5fc4',
-    'indigo-1': '#757de8',
-    'indigo-3': '#320b86',
-    'indigo-7': '#497BF8',
-    /* Blue */
-    'blue-0': '#039be5',
-    'blue-3': '#2196f3',
-    'blue-5': '#151C24',
-    'blue-7': '#0d47a1',
-    /* Blue Gray */
-    'blue-gray-3': '#78909c',
-    /* Cyan */
-    'cyan-7': '#00838f',
-    /* Teal */
-    'teal-0': '#1B04A8',
-    'teal-3': '#00897b',
-    'teal-7': '#005b4f',
-    'teal-8': '#00867d',
-    /* Green */
-    'green-0': '#0DCE5B',
-    'green-3': '#43a047',
-    'green-4': '#00c853',
-    'green-6': '#087f23',
-    'green-7': '#00600f',
-  },
+  darkerPurple: '#8A42AD',
+  darkPurple: '#9F6FF0',
+  lightPurple: '#A495FF',
   wrapper: {
     margin: '0 auto',
     maxWidth: '100%',
@@ -119,6 +80,36 @@ const theme = {
   },
   spacingLRMobile: '16px',
   footerBg: '#e9ebee',
+}
+
+export const defaultTheme = {
+  ...theme,
+  primaryColor: theme.darkBlue,
+  button: {
+    primary: {
+      bg: theme.darkBlue,
+      gradient: theme.darkBlue,
+      bgHover: theme.darkerBlue,
+      gradientHover: theme.darkerBlue,
+    },
+  },
+  linkColor: theme.lightBlue,
+  theme: 'default',
+}
+
+export const purpleTheme = {
+  ...theme,
+  primaryColor: theme.darkPurple,
+  button: {
+    primary: {
+      bg: theme.darkPurple,
+      gradient: 'linear-gradient(180deg, #8A42AD 0%, #6762EB 100%)',
+      bgHover: theme.darkerPurple,
+      gradientHover: theme.darkerPurple,
+    },
+  },
+  linkColor: theme.lightPurple,
+  theme: 'purple',
 }
 
 export default theme

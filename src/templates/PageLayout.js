@@ -1,10 +1,8 @@
 import React from 'react'
-
 import Layout from '../components/layout'
-
 import { ToastContainer as Notifications, toast } from 'react-toastify'
-
 import 'react-toastify/dist/ReactToastify.css'
+import { defaultTheme, purpleTheme } from '../lib/theme'
 
 /**
  * @name PageLayout
@@ -12,7 +10,8 @@ import 'react-toastify/dist/ReactToastify.css'
  * @description -
  */
 const PageLayout = props => {
-  const { location, children, theme, ...rest } = props
+  const { location, children, themeColor, ...rest } = props
+  const pageTheme = themeColor === 'purple' ? purpleTheme : defaultTheme
   const renderNotification = (state = {}) => {
     if (state.error) {
       const { type, description } = state.error
@@ -33,19 +32,26 @@ const PageLayout = props => {
   }
 
   React.useEffect(() => {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault()
-
-        document.getElementById(this.getAttribute('href').replace('#','')).scrollIntoView({
-          behavior: 'smooth',
+    if (document) {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault()
+          const hash = this.getAttribute('href')
+          const ele = document.getElementById(hash.replace('#', ''))
+          const y = ele.getBoundingClientRect().top + window.pageYOffset - 100
+          window.scrollTo({ top: y, behavior: 'smooth' })
+          window.history.pushState(
+            '',
+            '',
+            `${location.pathname.replace(/\/?$/, '/')}${hash}`
+          )
         })
       })
-    })
+    }
   }, [])
 
   return (
-    <Layout theme={theme} {...rest}>
+    <Layout theme={pageTheme} {...rest}>
       <Notifications />
       {children}
     </Layout>

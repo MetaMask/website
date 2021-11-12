@@ -58,8 +58,9 @@ export const ContentfulLayoutHeroFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
-    ctaText
-    ctaLink
+    cta {
+      ...ContentfulCtaFields
+    }
     hubSpotForm {
       ...ContentfulHubSpotFormFields
     }
@@ -123,12 +124,12 @@ export const ContentfulLayoutFeatureFields = graphql`
     headlineMarginTop0
     withContent
     eyebrow
-    ctaText
-    ctaLink
-    newTab
     animation
     backgroundColor
     sectionPadding
+    cta {
+      ...ContentfulCtaFields
+    }
   }
 `
 
@@ -146,8 +147,9 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
       }
     }
     marginBottom
-    ctaText
-    ctaLink
+    cta {
+      ...ContentfulCtaFields
+    }
     hubSpotForm {
       ...ContentfulHubSpotFormFields
     }
@@ -212,6 +214,7 @@ export const ContentfulCtaFields = graphql`
     internal {
       type
     }
+    fontSize
     ctaLink
     displayText
     newTab

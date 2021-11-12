@@ -289,6 +289,17 @@ const HamburgerButton = styled.div`
 const ButtonsWrapper = styled.div`
   display: block;
 
+  .button {
+    height: 40px !important;
+    ${({ theme }) => `
+    background: ${theme.darkBlue} !important;
+    @media (min-width: ${theme.device.miniDesktop}){
+      &:hover {
+        background: ${theme.darkerBlue} !important;
+      }
+    }
+    `}
+  }
   a {
     padding: 8px 32px !important;
   }

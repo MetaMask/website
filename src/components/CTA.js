@@ -20,6 +20,7 @@ const CTA = props => {
     buttonColor,
     customClick,
     buttonDisplay,
+    fontSize,
   } = props
   const isButton = buttonDisplay || button
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
@@ -38,6 +39,7 @@ const CTA = props => {
         newTab={newTab}
         color={buttonColor}
         customClick={customClick ? handleCustomClick : null}
+        fontSize={fontSize}
       />
     )
   }

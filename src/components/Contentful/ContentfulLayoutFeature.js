@@ -5,8 +5,6 @@ import Feature from '../Feature'
 const ContentfulLayoutFeature = props => {
   const {
     moduleConfig: {
-      ctaLink,
-      ctaText,
       headline,
       description,
       image,
@@ -24,6 +22,7 @@ const ContentfulLayoutFeature = props => {
       backgroundColor,
       headlineMarginTop0,
       sectionPadding,
+      cta,
     },
   } = props
 
@@ -36,8 +35,6 @@ const ContentfulLayoutFeature = props => {
       eyebrow={eyebrow}
       description={html}
       headline={headline}
-      ctaLink={ctaLink}
-      ctaText={ctaText}
       image={image}
       alignItemsCenter={alignItemsCenter}
       contentAlignment={contentAlignment}
@@ -50,6 +47,7 @@ const ContentfulLayoutFeature = props => {
       backgroundColor={backgroundColor}
       headlineMarginTop0={headlineMarginTop0}
       sectionPadding={sectionPadding}
+      cta={cta}
     />
   )
 }
@@ -61,7 +59,6 @@ ContentfulLayoutFeature.propTypes = {
     eyebrow: PropTypes.string,
     headline: PropTypes.string,
     description: PropTypes.object,
-    ctaLink: PropTypes.string,
-    ctaText: PropTypes.string,
+    cta: PropTypes.object,
   }),
 }

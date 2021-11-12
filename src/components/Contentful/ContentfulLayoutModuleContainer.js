@@ -67,7 +67,10 @@ const ContentfulModuleContainer = props => {
             </ContentInfo>
           ) : null}
           {modules && modules.length ? (
-            <Modules contentAlignCenter={contentAlignCenter} modulesMargin={modulesMargin}>
+            <Modules
+              contentAlignCenter={contentAlignCenter}
+              modulesMargin={modulesMargin}
+            >
               {modules.map(m =>
                 contentfulModuleToComponent({
                   ...m,
@@ -111,10 +114,10 @@ const Modules = styled.div`
     align-items: center;
   `
       : ``}
-      
+
   > * {
     &:not(:last-child) {
-      margin-bottom: ${({modulesMargin}) => modulesMargin || '40px'};
+      margin-bottom: ${({ modulesMargin }) => modulesMargin || '40px'};
     }
   }
 
@@ -122,7 +125,6 @@ const Modules = styled.div`
     padding: 22px;
     margin-bottom: 0;
   }
-  
 `
 const ContentInfo = styled.div`
   margin-bottom: 1rem;

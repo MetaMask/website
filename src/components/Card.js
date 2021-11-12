@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Image from './Image'
 import classnames from 'classnames'
 import ArrowIcon from '../images/icons/icon-arrow-right.svg'
-import Link from './Link';
+import Link from './Link'
 
 /**
  * @name Card
@@ -75,14 +75,17 @@ StyledCard.propTypes = {
 const Card = styled.div`
   display: block;
 
-  ${({showArrowIcon}) => showArrowIcon ? `
+  ${({ showArrowIcon }) =>
+    showArrowIcon
+      ? `
     margin-bottom: 16px;
-  `:''}
+  `
+      : ''}
 `
 
 const CardInner = styled(Link)`
   display: block;
-  color: ${({theme}) => theme.textColor};
+  color: ${({ theme }) => theme.textColor};
   ${({ backgroundColor }) =>
     backgroundColor
       ? `
@@ -107,7 +110,7 @@ const ImageWrapper = styled.div`
     height: 100%;
   }
 
-  ${({imageMargin}) => imageMargin ? 'margin-left: -15px' : ''}
+  ${({ imageMargin }) => (imageMargin ? 'margin-left: -15px' : '')}
 `
 
 const ImageSrc = styled(Image)`

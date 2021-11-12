@@ -8,7 +8,8 @@ import CTA from './CTA'
 import Popup from './Popup'
 import { Section } from './StyledGeneral'
 import classnames from 'classnames'
-import Image from './Image';
+import Image from './Image'
+import isEmpty from 'lodash/isEmpty'
 
 const HeroContainerComponent = props => {
   const {
@@ -19,17 +20,18 @@ const HeroContainerComponent = props => {
     sideImage,
     sideImageUrl,
     showLearnMore,
+    eyebrow,
     eyebrowLogo,
     eyebrowMobileLogo,
     showFavIcon,
     hubSpotForm,
-    ctaText,
-    ctaLink,
+    cta,
     contentAlignment,
     backgroundColor,
     headlineBorderBottom,
     sideImageFlex,
     backgroundColorMobile,
+    isFaq,
   } = props
   const [showPopup, setShowPopup] = React.useState(false)
   const togglePopup = () => {
@@ -39,11 +41,14 @@ const HeroContainerComponent = props => {
     setShowPopup(false)
   }
   const location = useLocation()
-  const isHome = location.pathname === '/'
-  const isAbout = location.pathname === '/about/'
+  const pathname = location.pathname.replace(/\/?$/, '/')
+  const isHome = pathname === '/'
+  const isAbout = pathname === '/about/'
+  const isCustody = pathname === '/institutions/custody/'
+  const isInstitutions = pathname === '/institutions/'
   let hubspotWrapper
   if (hubSpotForm) {
-    hubspotWrapper = ctaText ? (
+    hubspotWrapper = !isEmpty(cta) ? (
       <Popup
         width={hubSpotForm.width}
         showPopup={showPopup}
@@ -62,7 +67,7 @@ const HeroContainerComponent = props => {
       </HubSpotDefault>
     )
   }
-  const isStyleHubspot = hubSpotForm && !ctaText
+  const isStyleHubspot = hubSpotForm && isEmpty(cta)
   const isStyleCenterSimple = contentAlignment === 'center' && !sideImageUrl
   let heroTitleFontsize = ''
   if (isStyleHubspot) {
@@ -70,7 +75,12 @@ const HeroContainerComponent = props => {
   } else if (contentAlignment === 'center' || headlineBorderBottom) {
     heroTitleFontsize = '30px'
   }
-
+  let sectionPaddingCustom
+  if (isFaq) {
+    sectionPaddingCustom = '0px'
+  } else if (sideImageFlex) {
+    sectionPaddingCustom = '16px'
+  }
   return (
     <>
       {showFavIcon ? (
@@ -83,10 +93,11 @@ const HeroContainerComponent = props => {
         </Section>
       ) : null}
       <HeroContainer
-        sectionPadding={sideImageFlex ? '16px' : ''}
+        sectionPadding={sectionPaddingCustom || ''}
         headlineBorderBottom={headlineBorderBottom}
         isStyleCenterSimple={isStyleCenterSimple}
         image={backgroundImage}
+        backgroundColor={backgroundColor}
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor,
           [`bg-mobile-${backgroundColorMobile}`]: backgroundColorMobile,
@@ -100,18 +111,21 @@ const HeroContainerComponent = props => {
             isAbout={isAbout}
             reverse={contentAlignment === 'right'}
             center={sideImageFlex}
+            isCustody={isCustody}
+            isInstitutions={isInstitutions}
           >
             <HeroImageTextContainer
               isStyleHubspot={isStyleHubspot}
               isHome={isHome}
               headlineBorderBottom={headlineBorderBottom}
-              className='heroMobileOverlayContent'
+              className="heroMobileOverlayContent"
               center={!sideImageFlex && !isHome}
             >
               {eyebrowLogo ? (
                 <EyebrowWrapper
-                  className={'hidden-mobile'}
+                  className={classnames({ 'hidden-mobile': eyebrowMobileLogo })}
                   hideHeadline={hideHeadline}
+                  isFaq={isFaq}
                 >
                   {contentfulModuleToComponent({
                     ...eyebrowLogo,
@@ -123,6 +137,7 @@ const HeroContainerComponent = props => {
                 <EyebrowWrapper
                   className={'hidden-desktop'}
                   hideHeadline={hideHeadline}
+                  isFaq={isFaq}
                 >
                   {contentfulModuleToComponent({
                     ...eyebrowMobileLogo,
@@ -130,6 +145,7 @@ const HeroContainerComponent = props => {
                   })}
                 </EyebrowWrapper>
               ) : null}
+              {eyebrow ? <EyebrowText>{eyebrow}</EyebrowText> : null}
               {headline && (
                 <HeroTitle
                   headlineBorderBottom={headlineBorderBottom}
@@ -141,25 +157,27 @@ const HeroContainerComponent = props => {
                 </HeroTitle>
               )}
               {description && (
-                <HeroDescription>
+                <HeroDescription isFaq={isFaq}>
                   <div dangerouslySetInnerHTML={{ __html: description }} />
                 </HeroDescription>
               )}
-              {ctaText ? (
+              {!isEmpty(cta) ? (
                 <HeroCTA>
-                  <CTA
-                    text={ctaText}
-                    link={ctaLink}
-                    button={true}
-                    buttonSize="hero"
-                    customClick={hubSpotForm ? () => togglePopup() : null}
-                  />
+                  {contentfulModuleToComponent({
+                    ...cta,
+                    buttonSize: 'hero',
+                    customClick: hubSpotForm ? () => togglePopup() : null,
+                    ctaLink: hubSpotForm ? '' : cta.ctaLink,
+                  })}
                 </HeroCTA>
               ) : null}
               {hubspotWrapper ? hubspotWrapper : null}
             </HeroImageTextContainer>
             {sideImage ? (
-              <HeroSideImage sideImageFlex={sideImageFlex} isStyleHubspot={isStyleHubspot}>
+              <HeroSideImage
+                sideImageFlex={sideImageFlex}
+                isStyleHubspot={isStyleHubspot}
+              >
                 {isStyleHubspot || sideImageFlex ? (
                   <Image image={sideImage} />
                 ) : null}
@@ -209,7 +227,6 @@ const HeroContainer = styled(Section)`
   flex-direction: column;
   justify-content: center;
   min-width: 100%;
-  background-color: ${({ theme }) => theme.primaryColor};
   ${({ image }) =>
     image
       ? ` background-image: url(${image});
@@ -250,13 +267,16 @@ const HeroContentContainer = styled.div`
     padding: 10px;
   }
 
-  ${({center}) => center ? `
+  ${({ center }) =>
+    center
+      ? `
     align-items: center;
 
     img {
       margin: 0 auto;
     }
-  `:''}
+  `
+      : ''}
 
   ${({ bgSrc }) =>
     bgSrc
@@ -306,7 +326,31 @@ const HeroContentContainer = styled.div`
     & > * {
       width: 100%;
     }
+
+    ${({ isInstitutions }) =>
+      isInstitutions
+        ? `
+      background-position: 50% 0%;
+      background-size: 250px;
+      ${EyebrowWrapper} {
+        padding-top: 42px;
+      }
+    `
+        : ''}
   }
+
+  ${({ isCustody, theme }) =>
+    isCustody
+      ? `
+    background-position: 100% 50%;
+    background-size: auto 400px;
+    @media (max-width: ${theme.device.tabletMediaMax}){
+      margin-top: 39px;
+      background-position: 50% 0%;
+      background-size: 382px;
+    }
+  `
+      : ''}
 
   ${({ reverse, theme }) =>
     reverse
@@ -333,7 +377,7 @@ const HeroImageTextContainer = styled.div`
       : ''}
 
   ${({ center, theme }) =>
-  center
+    center
       ? `
   @media (min-width: ${theme.device.miniDesktop}){
     display: flex;
@@ -409,18 +453,28 @@ const HeroTitle = styled.h1`
 const HeroDescription = styled.div`
   display: block;
   margin-bottom: 24px;
+
+  ${({ isFaq }) =>
+    isFaq
+      ? `
+    color: #727272;
+  `
+      : ''}
 `
 
 const HeroSideImage = styled.div`
   display: block;
   height: 400px;
 
-  ${({sideImageFlex}) => sideImageFlex ? `
+  ${({ sideImageFlex }) =>
+    sideImageFlex
+      ? `
     display: flex;
     height: auto !important;
     align-items: center;
     justify-content: center;
-  ` : ''}
+  `
+      : ''}
 
   ${({ isStyleHubspot }) =>
     isStyleHubspot
@@ -441,6 +495,12 @@ const HeroSideImage = styled.div`
 
 const HeroCTA = styled.div`
   display: block;
+
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    .button {
+      width: 100%;
+    }
+  }
 `
 const LearnMoreWrapper = styled.div`
   display: block;
@@ -469,6 +529,24 @@ const EyebrowWrapper = styled.div`
 
   img {
     height: 80px;
+
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      height: auto;
+      width: 60%;
+      margin: 0 auto;
+    }
+
+    ${({ isFaq, theme }) =>
+      isFaq
+        ? `
+    height: 56px;
+    @media (max-width: ${theme.device.mobileMediaMax}) {
+      height: auto;
+      width: 20%;
+      margin: 0 auto;
+    }
+    `
+        : ''}
   }
 `
 const FavIconWrapper = styled.div`
@@ -482,4 +560,11 @@ const FavIcon = styled.img`
 `
 const HubSpotDefault = styled.div`
   display: block;
+`
+const EyebrowText = styled.div`
+  font-size: 18px;
+  line-height: 140.62%;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.primaryColor};
 `

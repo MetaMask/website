@@ -13,7 +13,10 @@ const ContentfulCta = props => {
       displayText,
       typeLayout = '',
       isHideArrow = true,
-      color = '#2196f3',
+      color = 'primary',
+      buttonSize,
+      customClick,
+      fontSize,
     },
   } = props
 
@@ -27,6 +30,9 @@ const ContentfulCta = props => {
       color={color}
       typeLayout={typeLayout}
       isHideArrow={isHideArrow}
+      buttonSize={buttonSize}
+      customClick={customClick}
+      fontSize={fontSize}
     />
   )
 }

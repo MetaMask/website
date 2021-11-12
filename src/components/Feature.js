@@ -7,12 +7,11 @@ import ScrollAnimation from 'react-animate-on-scroll'
 import classnames from 'classnames'
 import { Section } from './StyledGeneral'
 import ImageItem from './Image'
+import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 
 const FeatureComponent = props => {
   const {
-    ctaLink,
-    ctaText,
-    newTab,
+    cta,
     headline,
     hideHeadline,
     description,
@@ -40,7 +39,7 @@ const FeatureComponent = props => {
       {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
       {headline ? (
         <Headline
-          hasCta={ctaText}
+          hasCta={cta}
           hideHeadline={hideHeadline}
           headlineMarginTop0={headlineMarginTop0}
         >
@@ -52,19 +51,14 @@ const FeatureComponent = props => {
           <div dangerouslySetInnerHTML={{ __html: description }} />
         </Description>
       ) : null}
-      {ctaText ? (
+      {cta ? (
         <CTAWrapper>
-          <CTA
-            link={ctaLink}
-            text={ctaText}
-            newTab={newTab}
-            button={true}
-            buttonColor={
-              ['white', 'gray'].includes(backgroundColor)
-                ? 'primary'
-                : 'white-outline'
-            }
-          />
+          {contentfulModuleToComponent({
+            ...cta,
+            color: ['white', 'gray'].includes(backgroundColor)
+              ? cta.color
+              : 'white-outline',
+          })}
         </CTAWrapper>
       ) : null}
     </>

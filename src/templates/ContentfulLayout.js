@@ -28,7 +28,7 @@ const ContentfulLayout = props => {
       hubspotForms: HF,
       fullWidthCtas: FWC,
     },
-    pageContext: { modules, pathBuild },
+    pageContext: { modules, pathBuild, themeColor, isFaqLayout },
     path,
     ...rest
   } = props
@@ -59,9 +59,11 @@ const ContentfulLayout = props => {
   const allModules = [header, ...orderedPageModules, footer]
   console.log(allModules)
   return (
-    <Layout {...rest}>
+    <Layout {...rest} themeColor={themeColor}>
       {seo && contentfulModuleToComponent({ ...seo, pagePath: pathBuild })}
-      {allModules.map(contentfulModuleToComponent)}
+      {allModules.map(module =>
+        contentfulModuleToComponent({ ...module, isFaq: isFaqLayout })
+      )}
     </Layout>
   )
 }
