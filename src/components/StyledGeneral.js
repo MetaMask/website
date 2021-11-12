@@ -19,10 +19,10 @@ export const SectionTitle = styled.h2`
 `
 
 export const Section = styled.div`
-  position: relative;
   display: block;
   padding-top: 48px;
   padding-bottom: 48px;
+  position: relative;
 
   ${({ sectionPadding }) =>
     sectionPadding

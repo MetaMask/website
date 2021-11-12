@@ -41,5 +41,4 @@ DownloadContainer.propTypes = {
 }
 
 const Container = styled(Section)`
-  display: block;
 `
