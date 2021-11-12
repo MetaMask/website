@@ -214,6 +214,7 @@ export const ContentfulCtaFields = graphql`
     internal {
       type
     }
+    fontSize
     ctaLink
     displayText
     newTab

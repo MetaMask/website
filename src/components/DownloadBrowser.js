@@ -38,8 +38,8 @@ export default withTheme(DownloadBrowser)
 DownloadBrowser.propTypes = {
   browsers: PropTypes.arrayOf(
     PropTypes.shape({
-      cta: PropTypes.string,
-      image: PropTypes.string,
+      cta: PropTypes.object,
+      image: PropTypes.object,
       label: PropTypes.string,
     })
   ).isRequired,

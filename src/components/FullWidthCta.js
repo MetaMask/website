@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
-import CTA from './CTA'
 import Loadable from '@loadable/component'
 import Popup from './Popup'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
@@ -11,8 +10,7 @@ import { Section, SectionTitle } from './StyledGeneral'
 const LogoAnimation = Loadable(() => import('./LogoAnimation'))
 const FullWidthCta = props => {
   const {
-    ctaText,
-    ctaLink,
+    cta,
     description,
     showLogoAnimation,
     backgroundColor,
@@ -33,7 +31,10 @@ const FullWidthCta = props => {
       <ContentWrapper>
         <FeatureWrapper showLogoAnimation={showLogoAnimation}>
           {showLogoAnimation ? <LogoAnimation /> : null}
-          <FeatureInner marginBottom={marginBottom} backgroundColor={backgroundColor}>
+          <FeatureInner
+            marginBottom={marginBottom}
+            backgroundColor={backgroundColor}
+          >
             {headline ? (
               <Headline
                 backgroundColor={backgroundColor}
@@ -48,15 +49,13 @@ const FullWidthCta = props => {
                 <div dangerouslySetInnerHTML={{ __html: description }} />
               </Description>
             ) : null}
-            {ctaText ? (
+            {cta ? (
               <CTAWrapper>
-                <CTA
-                  link={hubSpotForm ? '' : ctaLink}
-                  text={ctaText}
-                  button={true}
-                  buttonSize={'large'}
-                  customClick={hubSpotForm ? () => togglePopup() : null}
-                />
+                {contentfulModuleToComponent({
+                  ...cta,
+                  link: hubSpotForm ? '' : cta.ctaLink,
+                  customClick: hubSpotForm ? () => togglePopup() : null,
+                })}
               </CTAWrapper>
             ) : null}
             {hubSpotForm ? (
@@ -123,11 +122,10 @@ const Headline = styled(SectionTitle)`
   color: ${theme.black};
   `}
 
-  ${({ showLogoAnimation }) =>
-    showLogoAnimation ? 'padding-top: 0;' : ''}
+  ${({ showLogoAnimation }) => (showLogoAnimation ? 'padding-top: 0;' : '')}
 
   ${({ hasDescription }) =>
-  hasDescription ? 'font-size: 32px !important;' : ''}
+    hasDescription ? 'font-size: 32px !important;' : ''}
 `
 const FeatureInner = styled.div`
   display: block;
@@ -141,7 +139,8 @@ const FeatureInner = styled.div`
   color: ${theme.black};
   `}
 
-  ${({marginBottom}) => marginBottom ? `margin-bottom: ${marginBottom}` : ''}
+  ${({ marginBottom }) =>
+    marginBottom ? `margin-bottom: ${marginBottom}` : ''}
 `
 const CTAWrapper = styled.div`
   margin-top: 32px;

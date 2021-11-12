@@ -101,7 +101,7 @@ const H3 = styled.h3`
   margin-top: 30px;
   font-weight: ${({ fontWeightManual, theme }) =>
     !fontWeightManual ? theme.font.weight.bold : 400};
-  
+
   /* work for font-weight manual, admin will control fw of H tag */
   ${Bold} {
     font-weight: ${({ theme }) => theme.font.weight.bold};
@@ -113,7 +113,7 @@ const H4 = styled.h4`
   margin-top: 30px;
   font-weight: ${({ fontWeightManual, theme }) =>
     !fontWeightManual ? theme.font.weight.bold : 400};
-  
+
   /* work for font-weight manual, admin will control fw of H tag */
   ${Bold} {
     font-weight: ${({ theme }) => theme.font.weight.bold};
@@ -125,7 +125,7 @@ const H5 = styled.h5`
   margin-top: 30px;
   font-weight: ${({ fontWeightManual, theme }) =>
     !fontWeightManual ? theme.font.weight.bold : 400};
-  
+
   /* work for font-weight manual, admin will control fw of H tag */
   ${Bold} {
     font-weight: ${({ theme }) => theme.font.weight.bold};

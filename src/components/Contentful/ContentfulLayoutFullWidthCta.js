@@ -5,27 +5,25 @@ import FullwidthCta from '../FullWidthCta'
 const ContentfulLayoutFullWidthCta = props => {
   const {
     moduleConfig: {
-      ctaLink,
-      ctaText,
       headline,
       showLogoAnimation,
       backgroundColor,
       description,
       hubSpotForm,
-      marginBottom='',
+      marginBottom = '',
+      cta,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
   return (
     <FullwidthCta
-      ctaText={ctaText}
-      ctaLink={ctaLink}
       description={html}
       showLogoAnimation={showLogoAnimation}
       backgroundColor={backgroundColor}
       headline={headline}
       hubSpotForm={hubSpotForm}
       marginBottom={marginBottom}
+      cta={cta}
     />
   )
 }
@@ -41,5 +39,6 @@ ContentfulLayoutFullWidthCta.propTypes = {
     backgroundColor: PropTypes.string,
     showLogoAnimation: PropTypes.bool,
     marginBottom: PropTypes.string,
+    cta: PropTypes.object,
   }),
 }

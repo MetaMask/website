@@ -22,7 +22,7 @@ export default ContentfulFaq
 ContentfulFaq.propTypes = {
   moduleConfig: PropTypes.shape({
     question: PropTypes.string,
-    answer: PropTypes.string,
+    answer: PropTypes.object,
     contentful_id: PropTypes.string,
     backgroundColor: PropTypes.string,
   }),

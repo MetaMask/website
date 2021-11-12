@@ -4,7 +4,16 @@ import styled from 'styled-components'
 import Link from './Link'
 
 const Button = props => {
-  const { link, text, newTab, color = 'primary', size, customClick } = props
+  const {
+    link,
+    text,
+    newTab,
+    color = 'primary',
+    size,
+    customClick,
+    gradient = false,
+    fontSize,
+  } = props
 
   return (
     <ButtonWrapper
@@ -13,6 +22,9 @@ const Button = props => {
       color={color}
       size={size}
       onClick={customClick}
+      gradient={gradient}
+      className={'button'}
+      fontSize={fontSize}
     >
       {text}
     </ButtonWrapper>
@@ -29,32 +41,30 @@ Button.propTypes = {
 }
 
 const ButtonWrapper = styled(Link)`
-  background: ${({ theme }) => theme.darkBlue};
-  color: #fff;
-  height: 40px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 20px;
-  border-radius: 999px;
-  font-size: 16px;
-  line-height: 22px;
-  ${({ size }) =>
-    size === 'large'
+  ${({ gradient, color, forceColor, theme }) =>
+    color && theme['button'] && theme['button'][color] && !forceColor
       ? `
-  padding: 16px 24px;
-  height: 52px;
-  font-size: 16px;
+  background: ${
+    gradient ? theme['button'][color].gradient : theme['button'][color].bg
+  };
+  @media (min-width: ${theme.device.miniDesktop}){
+    &:hover {
+      background: ${
+        gradient
+          ? theme['button'][color].gradientHover
+          : theme['button'][color].bgHover
+      };
+    }
+  }
   `
-      : ''}
-  ${({ size }) =>
-    size === 'hero'
-      ? `
-  padding: 12px 20px;
-  height: 56px;
-  font-size: 20px;
-  `
-      : ''}
+      : `
+      background: ${theme.button.primary.bg};
+      @media (min-width: ${theme.device.miniDesktop}){
+        &:hover {
+          background: ${theme.button.primary.bgHover};
+        }
+  }`}
+
   ${({ color, theme }) =>
     color === 'white-outline'
       ? `
@@ -71,14 +81,22 @@ const ButtonWrapper = styled(Link)`
   `
       : ''}
 
-  ${({ color, theme }) =>
-    color === 'primary'
+  cursor: pointer;
+  transition: all 300ms ease;
+  color: #fff;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 16px;
+  line-height: 1.3;
+
+  ${({ fontSize }) =>
+    fontSize
       ? `
-      @media (min-width: ${theme.device.miniDesktop}){
-    &:hover {
-      background: ${theme.darkerBlue};
-    }
-  }
+    font-size: ${fontSize};
   `
       : ''}
 `

@@ -37,11 +37,7 @@ const ContentfulModuleContainer = props => {
         {title || html ? (
           <Content splitModules={splitModules}>
             {title && displayTitle ? (
-              <Title
-                isFaq={isFaq}
-              >
-                {title}
-              </Title>
+              <Title isFaq={isFaq}>{title}</Title>
             ) : null}
             {html ? (
               <div
