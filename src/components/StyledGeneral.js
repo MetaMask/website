@@ -32,11 +32,6 @@ export const Section = styled.div`
   `
       : ``}
 
-  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
-    padding-top: 24px;
-    padding-bottom: 24px;
-  }
-
   ${({ backgroundColor, sectionPadding }) =>
     backgroundColor && !sectionPadding
       ? `

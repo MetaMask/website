@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
-import CTA from './CTA'
 import ScrollAnimation from 'react-animate-on-scroll'
 import classnames from 'classnames'
 import { Section } from './StyledGeneral'
@@ -300,7 +299,6 @@ const CTAWrapper = styled.div`
   }
 `
 const Eyebrow = styled.div`
-  margin-bottom: 0px;
   color: #f6851b;
   font-weight: 700;
   letter-spacing: 5px;

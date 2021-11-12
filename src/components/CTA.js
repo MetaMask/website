@@ -89,7 +89,7 @@ const ContentWrapper = styled(Link)`
       ? `
       color: ${color};
     &:hover {
-      opacity: 0.6;
+      color: ${theme.darkBlue};
     }
   `
       : ``}

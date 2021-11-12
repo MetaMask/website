@@ -71,6 +71,7 @@ const ButtonWrapper = styled(Link)`
   background: transparent !important;
   color: #fff;
   border: 2px solid #fff;
+  height: 40px !important;
   transition: background-color 300ms ease, border 300ms ease, color 300ms ease;
   @media (min-width: ${theme.device.miniDesktop}){
     &:hover {
