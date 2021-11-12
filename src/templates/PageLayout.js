@@ -48,7 +48,7 @@ const PageLayout = props => {
         })
       })
     }
-  }, [location.pathname])
+  }, [])
 
   return (
     <Layout theme={pageTheme} {...rest}>
