@@ -46,8 +46,6 @@ DownloadBrowser.propTypes = {
 }
 
 const Container = styled(Section)`
-  display: block;
-
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     padding-top: 88px !important;
     padding-bottom: 88px !important;
