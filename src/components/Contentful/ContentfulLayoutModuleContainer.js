@@ -37,19 +37,17 @@ const ContentfulModuleContainer = props => {
     <Context.Provider value={valueContext}>
       <Section
         sectionPadding={sectionPadding}
-        backgroundColor={backgroundColor}
         className={classnames({
           noPaddingBottom: noPaddingBottom,
           [`bg-${backgroundColor}`]: backgroundColor,
         })}
       >
         <ContentWrapper>
-          {headline || html ? (
+          {(headline && displayHeadline) || html ? (
             <ContentInfo paddingTop={paddingTop}>
-              {headline ? (
+              {headline && displayHeadline ? (
                 <Title
                   className={classnames({
-                    hidden: !displayHeadline,
                     'txt-center': headlineAlignCenter,
                   })}
                 >

@@ -33,7 +33,7 @@ export const Section = styled.div`
       : ``}
 
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
-    padding-top: 48;
+    padding-top: 48px;
     padding-bottom: 48px;
   }
 
