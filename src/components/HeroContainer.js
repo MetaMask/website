@@ -96,7 +96,6 @@ const HeroContainerComponent = props => {
         headlineBorderBottom={headlineBorderBottom}
         isStyleCenterSimple={isStyleCenterSimple}
         image={backgroundImage}
-        backgroundColor={backgroundColor}
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor,
           [`bg-mobile-${backgroundColorMobile}`]: backgroundColorMobile,
@@ -136,6 +135,7 @@ const HeroContainerComponent = props => {
                 <EyebrowWrapper
                   className={'hidden-desktop'}
                   hideHeadline={hideHeadline}
+                  isMobile={true}
                   isFaq={isFaq}
                 >
                   {contentfulModuleToComponent({
@@ -253,8 +253,16 @@ const HeroContainer = styled(Section)`
       : ''}
 
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
-    padding-top: 0 !important;
+    padding-top: 0;
   }
+
+  ${({ sectionPadding }) =>
+    sectionPadding
+    ? `
+      padding-bottom: ${sectionPadding} !important;
+  `
+    : ``}
+  
 `
 
 const HeroContentContainer = styled.div`
@@ -378,7 +386,7 @@ const HeroImageTextContainer = styled.div`
   ${({ center, theme }) =>
     center
       ? `
-  @media (min-width: ${theme.device.miniDesktop}){
+  @media (min-width: ${theme.device.tablet}){
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -386,7 +394,7 @@ const HeroImageTextContainer = styled.div`
   `
       : ''}
 
-  ${({ isStyleHubspot, theme }) =>
+  ${({ isStyleHubspot }) =>
     isStyleHubspot
       ? `
   width: auto;
@@ -402,12 +410,9 @@ const HeroImageTextContainer = styled.div`
   `
       : ''}
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
-
     margin-top: -5px;
     padding-top: 0px;
     text-align: center;
-
-    
   }
 
 `
@@ -519,33 +524,34 @@ const Icon = styled.span`
 `
 const EyebrowWrapper = styled.div`
   display: block;
-  ${({ hideHeadline }) =>
-    hideHeadline
-      ? `
+
+  ${ ({ hideHeadline }) =>
+          hideHeadline
+                  ? `
     margin-bottom: 8px;
   `
-      : ``}
-
+                  : `` }
   img {
     height: 80px;
 
-    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
-      height: auto;
-      width: 60%;
-      margin: 0 auto;
-    }
-
-    ${({ isFaq, theme }) =>
-      isFaq
+    ${ ({ isMobile, isFaq, theme }) =>
+      isMobile || isFaq
         ? `
-    height: 56px;
-    @media (max-width: ${theme.device.mobileMediaMax}) {
-      height: auto;
-      width: 20%;
-      margin: 0 auto;
-    }
-    `
-        : ''}
+        height: auto;
+        margin-bottom: 10px;
+      `
+      : `
+        @media (max-width: ${ theme.device.tabletMediaMax }) {
+          height: auto;
+          margin: 0 auto 16px;
+          width: 80%;
+        }
+      ` }
+    ${ ({ isFaq }) =>
+      isFaq
+       ? `
+      margin-bottom: 0;
+    ` : '' }
   }
 `
 const FavIconWrapper = styled.div`

@@ -87,7 +87,6 @@ const FeatureComponent = props => {
   return (
     <FeatureContainer
       sectionPadding={sectionPadding}
-      backgroundColor={backgroundColor}
       className={classnames({
         [`bg-${backgroundColor}`]: backgroundColor,
       })}

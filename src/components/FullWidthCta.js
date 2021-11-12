@@ -133,14 +133,18 @@ const FeatureInner = styled.div`
   ${({ backgroundColor, theme }) =>
     backgroundColor === 'dark'
       ? `
-  color: ${theme.white};
+    color: ${theme.white};
   `
       : `
-  color: ${theme.black};
+    color: ${theme.black};
   `}
 
   ${({ marginBottom }) =>
     marginBottom ? `margin-bottom: ${marginBottom}` : ''}
+
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
+    margin-bottom: 0;
+  }
 `
 const CTAWrapper = styled.div`
   margin-top: 32px;
