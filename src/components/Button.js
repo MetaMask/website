@@ -68,7 +68,7 @@ const ButtonWrapper = styled(Link)`
   ${({ color, theme }) =>
     color === 'white-outline'
       ? `
-  background: transparent;
+  background: transparent !important;
   color: #fff;
   border: 2px solid #fff;
   transition: background-color 300ms ease, border 300ms ease, color 300ms ease;
