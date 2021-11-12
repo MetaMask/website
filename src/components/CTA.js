@@ -17,7 +17,6 @@ const CTA = props => {
     isHideArrow = true,
     typeLayout = '',
     buttonSize,
-    buttonColor,
     customClick,
     buttonDisplay,
     fontSize,
@@ -37,7 +36,7 @@ const CTA = props => {
         link={link}
         text={text}
         newTab={newTab}
-        color={buttonColor}
+        color={color}
         customClick={customClick ? handleCustomClick : null}
         fontSize={fontSize}
       />
