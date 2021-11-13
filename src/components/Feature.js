@@ -157,8 +157,7 @@ FeatureComponent.propTypes = {
   modules: PropTypes.arrayOf(PropTypes.object.isRequired),
 }
 
-const FeatureContainer = styled(Section)`
-`
+const FeatureContainer = styled(Section)``
 const Image = styled.div`
   display: block;
   width: 100%;

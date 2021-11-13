@@ -40,5 +40,4 @@ DownloadContainer.propTypes = {
   appExtensions: PropTypes.object,
 }
 
-const Container = styled(Section)`
-`
+const Container = styled(Section)``
