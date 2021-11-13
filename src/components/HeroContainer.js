@@ -136,7 +136,7 @@ const HeroContainerComponent = props => {
                 <EyebrowWrapper
                   className={'hidden-desktop'}
                   hideHeadline={hideHeadline}
-                  isMobile={true}
+                  isMobileLogo={true}
                   isFaq={isFaq}
                 >
                   {contentfulModuleToComponent({
@@ -258,18 +258,18 @@ const HeroContainer = styled(Section)`
   }
 
   ${({ showFavIcon }) =>
-          showFavIcon
-                  ? `
+    showFavIcon
+      ? `
       padding-top: 0;
   `
-                  : ``}
+      : ``}
 
   ${({ sectionPadding }) =>
     sectionPadding
-    ? `
+      ? `
       padding-bottom: ${sectionPadding} !important;
   `
-    : ``}
+      : ``}
   
 `
 
@@ -533,40 +533,40 @@ const Icon = styled.span`
 const EyebrowWrapper = styled.div`
   display: block;
 
-  ${ ({ hideHeadline }) =>
-          hideHeadline
-                  ? `
+  ${({ hideHeadline }) =>
+    hideHeadline
+      ? `
     margin-bottom: 8px;
   `
-                  : `` }
+      : ``}
   img {
     height: 80px;
 
-    ${ ({ isMobile, isFaq, theme }) =>
-      isMobile || isFaq
+    ${({ isMobileLogo, isFaq, theme }) =>
+      isMobileLogo || isFaq
         ? `
         height: auto;
         margin-bottom: 10px;
       `
-      : `
-        @media (max-width: ${ theme.device.tabletMediaMax }) {
+        : `
+        @media (max-width: ${theme.device.tabletMediaMax}) {
           height: auto;
           margin: 0 auto 16px;
           width: 80%;
         }
-      ` }
-    ${ ({ isFaq }) =>
+      `}
+    ${({ isFaq }) =>
       isFaq
-       ? `
-      margin-bottom: 0;
-    ` : '' }
+        ? `
+        margin-bottom: 0;
+    `
+        : ''}
   }
 `
 
 const FavIconContainer = styled(Section)`
   padding-top: 0 !important;
   padding-bottom: 0 !important;
-  
 `
 
 const FavIconWrapper = styled.div`
