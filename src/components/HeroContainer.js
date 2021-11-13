@@ -83,18 +83,19 @@ const HeroContainerComponent = props => {
   return (
     <>
       {showFavIcon ? (
-        <Section>
+        <FavIconContainer>
           <ContentWrapper>
             <FavIconWrapper>
               <FavIcon src={'/images/metamask-logo.png'} alt="logo" />
             </FavIconWrapper>
           </ContentWrapper>
-        </Section>
+        </FavIconContainer>
       ) : null}
       <HeroContainer
         sectionPadding={sectionPaddingCustom || ''}
         headlineBorderBottom={headlineBorderBottom}
         isStyleCenterSimple={isStyleCenterSimple}
+        showFavIcon={showFavIcon}
         image={backgroundImage}
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor,
@@ -255,6 +256,13 @@ const HeroContainer = styled(Section)`
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
     padding-top: 0;
   }
+
+  ${({ showFavIcon }) =>
+          showFavIcon
+                  ? `
+      padding-top: 0;
+  `
+                  : ``}
 
   ${({ sectionPadding }) =>
     sectionPadding
@@ -554,10 +562,17 @@ const EyebrowWrapper = styled.div`
     ` : '' }
   }
 `
+
+const FavIconContainer = styled(Section)`
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  
+`
+
 const FavIconWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding: 16px 0 0 0;
+  padding: 16px 0 8px 0;
 `
 
 const FavIcon = styled.img`
