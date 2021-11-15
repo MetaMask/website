@@ -29,9 +29,9 @@ const FullWidthCta = props => {
   return (
     <Container backgroundColor={backgroundColor}>
       <ContentWrapper>
-        <FeatureWrapper showLogoAnimation={showLogoAnimation}>
+        <FullWidthCtaWrapper showLogoAnimation={showLogoAnimation}>
           {showLogoAnimation ? <LogoAnimation /> : null}
-          <FeatureInner
+          <FullWidthCtaInner
             marginBottom={marginBottom}
             backgroundColor={backgroundColor}
           >
@@ -65,8 +65,8 @@ const FullWidthCta = props => {
                 })}
               </Popup>
             ) : null}
-          </FeatureInner>
-        </FeatureWrapper>
+          </FullWidthCtaInner>
+        </FullWidthCtaWrapper>
       </ContentWrapper>
     </Container>
   )
@@ -92,7 +92,7 @@ const Container = styled(Section)`
   `}
 `
 
-const FeatureWrapper = styled.div`
+const FullWidthCtaWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -124,7 +124,8 @@ const Headline = styled(SectionTitle)`
   ${({ hasDescription }) =>
     hasDescription ? 'font-size: 32px !important;' : ''}
 `
-const FeatureInner = styled.div`
+
+const FullWidthCtaInner = styled.div`
   display: block;
   color: #fff;
   ${({ backgroundColor, theme }) =>
@@ -135,9 +136,13 @@ const FeatureInner = styled.div`
       : `
     color: ${theme.black};
   `}
-
+  
   ${({ marginBottom }) =>
-    marginBottom ? `margin-bottom: ${marginBottom}` : ''}
+    marginBottom
+      ? `
+    margin-bottom: ${marginBottom};
+  `
+      : ''}
 
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
     margin-bottom: 0;
