@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import gdprConsentScript from './lib/services/gdpr-banner'
 import accessiBeScript from './lib/services/accessibe'
+import livePerson from './lib/services/live-person'
 
 export default class HTML extends React.Component {
   render() {
@@ -24,6 +25,9 @@ export default class HTML extends React.Component {
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
           {this.props.postBodyComponents}
+          {process.env.NODE_ENV === 'production' && (
+            <script dangerouslySetInnerHTML={{ __html: livePerson }} />
+          )}
           <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=UA-37075177-6"
