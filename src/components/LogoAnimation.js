@@ -3,7 +3,7 @@ const LogoAnimation = props => {
   React.useEffect(() => {
     // This runs the script logo
     if (typeof window !== 'undefined' && window.document) {
-      var ModelViewer = require('metamask-logo')
+      var ModelViewer = require('@metamask/logo')
       var viewer = ModelViewer({
         pxNotRatio: true,
         width: 230,
