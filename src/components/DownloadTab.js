@@ -83,6 +83,7 @@ const DownLoadWrapper = styled.div`
 
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     margin: 0 -20px;
+    text-align: center;
   }
 `
 
