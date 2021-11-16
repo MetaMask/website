@@ -166,14 +166,22 @@ const Image = styled.div`
   display: block;
   width: 100%;
 `
+const SideImage = styled.div`
+  display: block;
+  flex: 1;
+  min-width: 0;
+`
 const ImageSrc = styled(ImageItem)`
   display: block;
   margin: 0 auto;
   max-width: 100%;
-  ${({ widthImg }) =>
+  ${({ widthImg, theme }) =>
     widthImg
       ? `
     width: ${widthImg};
+    @media (max-width: ${theme.device.mobileMediaMax}){
+      width: 100%;
+    }
   `
       : ''}
   ${({ imageAlignment }) =>
@@ -239,6 +247,9 @@ const FeatureWrapper = styled.div`
     margin: 0;
     align-items: center;
     text-align: center;
+    ${SideImage} {
+      margin-bottom: 32px;
+    }
   }
   ${({ contentAlignLR, theme }) =>
     contentAlignLR === 'left'
@@ -283,12 +294,6 @@ const FeatureWrapper = styled.div`
   }
 `
 
-const SideImage = styled.div`
-  display: block;
-  flex: 1;
-  min-width: 0;
-`
-
 const FeatureInner = styled.div`
   display: block;
   ${({ contentPaddingTop }) =>
@@ -312,6 +317,12 @@ const CTAWrapper = styled.div`
   margin-top: 20px;
   a {
     min-width: 160px;
+  }
+
+  @media (max-width: ${({theme}) => theme.device.mobileMediaMax}){
+    .button {
+      width: 100%;
+    }
   }
 `
 const Eyebrow = styled.div`

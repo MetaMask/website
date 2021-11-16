@@ -123,6 +123,11 @@ const Modules = styled.div`
     padding: 22px;
     margin-bottom: 0;
   }
+  @media (max-width: ${({theme}) => theme.device.mobileMediaMax}){
+    .button {
+      width: 100%;
+    }
+  }
 `
 const ContentInfo = styled.div`
   margin-bottom: 1rem;
