@@ -41,6 +41,7 @@ export const ContentfulLayoutHeroFields = graphql`
         html
       }
     }
+    eyebrow
     eyebrowLogo {
       ...ContentfulLogoFields
     }
@@ -140,6 +141,7 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
       type
     }
     showLogoAnimation
+    logoType
     headline
     description {
       childMarkdownRemark {
@@ -219,6 +221,7 @@ export const ContentfulCtaFields = graphql`
     displayText
     newTab
     buttonDisplay
+    buttonGradient
   }
 `
 
@@ -318,6 +321,7 @@ export const ContentfulModuleContainerFields = graphql`
       }
     }
     columns
+    columnsOnMobile
     contentAlignment
     splitModules
     displayTitle

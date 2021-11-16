@@ -19,7 +19,7 @@ const DownloadBrowser = props => {
               {browsers.map(browser => {
                 const { cta, image, label } = browser
                 return (
-                  <BrowserItem to={cta.ctaLink} newTab={cta.newTab}>
+                  <BrowserItem key={label} to={cta.ctaLink} newTab={cta.newTab}>
                     <Image image={image} />
                     <BrowserName>{label}</BrowserName>
                   </BrowserItem>
@@ -60,11 +60,16 @@ const BrowserList = styled.div`
   flex-flow: wrap;
   margin: -20px;
 
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    margin: -12px;
+    }
+
   & > * {
     width: 25%;
     padding: 20px;
     @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
       width: 100%;
+      padding: 12px;
     }
   }
 `
@@ -93,4 +98,8 @@ const Heading = styled.h2`
   line-height: 40px;
   font-weight: 700;
   text-align: center;
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
 `

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { graphql } from 'gatsby'
-import { browserName } from 'react-device-detect'
+import { browserName, isMobile } from 'react-device-detect'
 import {
   ContentfulSeo as Seo,
   ContentfulLayoutHeader as Header,
@@ -60,7 +60,7 @@ const DownloadPage = props => {
   const appExtensions = {
     browser: {
       image: download_extension,
-      label: browserName,
+      label: isMobile ? "Chrome" : browserName,
       title: 'Install MetaMask for your browser',
       ctaChrome: cta_chrome,
       ctaFirefox: cta_firefox,

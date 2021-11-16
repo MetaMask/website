@@ -25,7 +25,7 @@ const StyledCard = props => {
   } = props
 
   return (
-    <Card showArrowIcon={showArrowIcon}>
+    <Card className='moduleCardWrapper' showArrowIcon={showArrowIcon}>
       <CardInner
         to={link}
         newTab={newTab}
@@ -108,6 +108,10 @@ const ImageWrapper = styled.div`
 
   img {
     height: 100%;
+
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      margin: 0 auto;
+    }
   }
 
   ${({ imageMargin }) => (imageMargin ? 'margin-left: -15px' : '')}

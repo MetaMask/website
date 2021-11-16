@@ -1718,6 +1718,14 @@
   resolved "https://registry.yarnpkg.com/@mdx-js/util/-/util-2.0.0-next.8.tgz#66ecc27b78e07a3ea2eb1a8fc5a99dfa0ba96690"
   integrity sha512-T0BcXmNzEunFkuxrO8BFw44htvTPuAoKbLvTG41otyZBDV1Rs+JMddcUuaP5vXpTWtgD3grhcrPEwyx88RUumQ==
 
+"@metamask/logo@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@metamask/logo/-/logo-3.1.0.tgz#6b7b9b90b6d846583558de855511d34796735855"
+  integrity sha512-W0FBwIaG1pC4Vk/ZdUJYv7PDjnAbQJro3yhEXN7WXEdz8kyVcxFb6dj0Dpe6ytaveYiqIL6+iDDWMevzU2MpVw==
+  dependencies:
+    gl-mat4 "1.1.4"
+    gl-vec3 "1.0.3"
+
 "@mikaelkristiansson/domready@^1.0.10":
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/@mikaelkristiansson/domready/-/domready-1.0.10.tgz#f6d69866c0857664e70690d7a0bfedb72143adb5"
@@ -11216,14 +11224,6 @@ merge2@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.3.0.tgz#5b366ee83b2f1582c48f87e47cf1a9352103ca81"
   integrity sha512-2j4DAdlBOkiSZIsaXk4mTE3sRS02yBHAtfy127xRV3bQUFqXkjHCHLW6Scv7DwNRbIWNHH8zpnz9zMaKXIdvYw==
-
-metamask-logo@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/metamask-logo/-/metamask-logo-2.5.0.tgz#b745c07991cf14fa0858f2407da5e8544f699fd1"
-  integrity sha512-cOWjT0EnAtaOx7y+UDaguYuELG4YmDJ6+EfWqVBonlSuWJ31uZIvyZJ/Hh6lLRjVEKxXiQYKjIwL5h2lB7Ru2g==
-  dependencies:
-    gl-mat4 "1.1.4"
-    gl-vec3 "1.0.3"
 
 methods@^1.1.1, methods@~1.1.2:
   version "1.1.2"

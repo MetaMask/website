@@ -11,8 +11,8 @@ const Button = props => {
     color = 'primary',
     size,
     customClick,
-    gradient = false,
     fontSize,
+    buttonGradient = false,
   } = props
 
   return (
@@ -22,7 +22,7 @@ const Button = props => {
       color={color}
       size={size}
       onClick={customClick}
-      gradient={gradient}
+      gradient={buttonGradient}
       className={'button'}
       fontSize={fontSize}
     >
@@ -38,6 +38,7 @@ Button.propTypes = {
   text: PropTypes.string,
   newTab: PropTypes.bool,
   color: PropTypes.string,
+  buttonGradient: PropTypes.bool,
 }
 
 const ButtonWrapper = styled(Link)`
@@ -83,6 +84,7 @@ const ButtonWrapper = styled(Link)`
       : ''}
 
   cursor: pointer;
+  text-align: center;
   transition: all 300ms ease;
   color: #fff;
   height: 52px;

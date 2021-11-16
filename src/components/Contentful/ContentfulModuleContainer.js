@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import classnames from 'classnames'
 import FaqList from '../FaqList'
+import { kebabCase } from 'lodash'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -11,6 +12,7 @@ const ContentfulModuleContainer = props => {
       title,
       description,
       columns,
+      columnsOnMobile,
       contentAlignment,
       splitModules,
       displayTitle,
@@ -32,7 +34,11 @@ const ContentfulModuleContainer = props => {
       : []
   const isFaq = faqList && faqList.length
   return (
-    <Wrapper isFaq={isFaq} className="contentfulModuleContainerWrapper">
+    <Wrapper
+      isFaq={isFaq}
+      className="contentfulModuleContainerWrapper"
+      id={kebabCase(title || '')}
+    >
       <Inner splitModules={splitModules}>
         {title || html ? (
           <Content splitModules={splitModules}>
@@ -54,10 +60,12 @@ const ContentfulModuleContainer = props => {
           {modulesOther.length ? (
             <Modules
               columns={columns}
+              columnsOnMobile={columnsOnMobile}
               contentAlignment={contentAlignment}
               gridModules={gridModules}
               gridModulesGap={isLiquiditySection ? '24px' : gridModulesGap}
               isLiquiditySection={isLiquiditySection}
+              className={'moduleContainerListModules'}
             >
               {modulesOther.map(m =>
                 contentfulModuleToComponent({
@@ -81,6 +89,7 @@ ContentfulModuleContainer.propTypes = {
     columns: PropTypes.number,
     contentAlignment: PropTypes.string,
     splitModules: PropTypes.bool,
+    columnsOnMobile: PropTypes.number,
   }),
 }
 
@@ -116,11 +125,13 @@ const Inner = styled.div`
       flex-direction: column;
     }
     
-    @media (max-width: ${theme.device.mobileMediaMax}) {
-      text-align: center;
-    }
+    
   `
       : ``}
+
+  @media (max-width: ${({theme }) =>theme.device.mobileMediaMax}) {
+    text-align: center;
+  }
 `
 const ModulesWrapper = styled.div`
   display: block;
@@ -189,20 +200,16 @@ const Modules = styled.div`
   `
       : ''}
 
-  ${({ gridModules, gridModulesGap, columns, theme }) =>
+  ${({ gridModules, gridModulesGap, columns, columnsOnMobile, theme }) =>
     columns && gridModules
       ? `
       margin: -${gridModulesGap} !important;
-      @media (max-width: ${theme.device.mobileMediaMax}){
-        padding: -${gridModulesGap / 2} !important;
-      }
 
     > * {
     width: calc(100%/${columns});
     padding: ${gridModulesGap} !important;
     @media (max-width: ${theme.device.mobileMediaMax}){
-      width: 50%;
-      padding: ${gridModulesGap / 2} !important;
+      width: ${columnsOnMobile ? `calc(100%/${columnsOnMobile})` : '50%'};
     }
   }
   `

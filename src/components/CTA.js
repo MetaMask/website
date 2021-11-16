@@ -20,6 +20,7 @@ const CTA = props => {
     customClick,
     buttonDisplay,
     fontSize,
+    buttonGradient,
   } = props
   const isButton = buttonDisplay || button
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
@@ -39,6 +40,7 @@ const CTA = props => {
         color={color}
         customClick={customClick ? handleCustomClick : null}
         fontSize={fontSize}
+        buttonGradient={buttonGradient}
       />
     )
   }
