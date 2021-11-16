@@ -389,6 +389,7 @@ const HeroContentContainer = styled.div`
 
       ${EyebrowWrapper} {
         img {
+          height: 24px;
           margin: 0 auto;
         }
       }
