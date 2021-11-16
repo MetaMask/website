@@ -80,10 +80,10 @@ const DownLoadWrapper = styled.div`
   background-color: #fff;
   box-shadow: 1px 1px 8px 1px #dbdbdb;
   position: relative;
+  text-align: center;
 
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     margin: 0 -20px;
-    text-align: center;
   }
 `
 
