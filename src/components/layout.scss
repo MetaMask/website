@@ -828,6 +828,11 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
 .btn-primary {
   background: #037dd6;
 }
+.fullwidth-mobile {
+  @media (max-width: 479px){
+    width: 100%;
+  }
+}
 @media (min-width: 1025px){
   .btn-primary:hover {
     background: #1565c0;

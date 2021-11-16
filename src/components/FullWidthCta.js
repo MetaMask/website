@@ -158,6 +158,12 @@ const CTAWrapper = styled.div`
       }
   `
       : ``}
+
+  @media (max-width: ${({theme}) => theme.device.mobileMediaMax}){
+    .button {
+      width: 100%;
+    }
+  }
 `
 
 const Description = styled.div`
