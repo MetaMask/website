@@ -378,6 +378,14 @@ const HeroContentContainer = styled.div`
       ? `
     background-position: 100% 50%;
     background-size: auto 400px;
+    
+    ${EyebrowWrapper} {
+      img {
+        width: 224px;
+        height: auto;
+      }
+    }
+    
     @media (max-width: ${theme.device.tabletMediaMax}){
       margin-top: 39px;
       background-position: 50% 0%;
@@ -389,7 +397,6 @@ const HeroContentContainer = styled.div`
 
       ${EyebrowWrapper} {
         img {
-          height: 24px;
           margin: 0 auto;
         }
       }
