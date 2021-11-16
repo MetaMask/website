@@ -387,6 +387,11 @@ const HeroContentContainer = styled.div`
       background-position: 50% 0%;
       background-size: 250px;
 
+      ${EyebrowWrapper} {
+        img {
+          margin: 0 auto;
+        }
+      }
       ${HeroTitle} {
         padding-top: 10px;
       }
