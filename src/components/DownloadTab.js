@@ -89,6 +89,11 @@ const DownLoadWrapper = styled.div`
 const Buttons = styled.div`
   display: flex;
 
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    display: block;
+    text-align: center;
+  }
+
   & > * {
     margin: 0 20px;
     height: auto !important;
@@ -101,6 +106,15 @@ const Buttons = styled.div`
     @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
       margin: 0 60px;
     }
+
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      margin: 10px;
+    }
+
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      width: 100%;
+    }
+    
   }
 `
 const HeadingCta = styled.div`
