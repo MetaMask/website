@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import Image from './Image'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
-import { browserName } from 'react-device-detect'
+import { browserName, isMobile } from 'react-device-detect'
 
 const TabContentDownload = props => {
   const {
@@ -24,7 +24,7 @@ const TabContentDownload = props => {
     const isFirefox = browserName === 'Firefox'
     const isEdge = browserName === 'Edge'
 
-    if (isChrome) {
+    if (isChrome || isMobile) {
       ctasDownload = [ctaChrome]
     } else if (isFirefox) {
       ctasDownload = [ctaFirefox]
@@ -80,6 +80,10 @@ const DownLoadWrapper = styled.div`
   background-color: #fff;
   box-shadow: 1px 1px 8px 1px #dbdbdb;
   position: relative;
+
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    margin: 0 -20px;
+  }
 `
 
 const Buttons = styled.div`
@@ -87,13 +91,15 @@ const Buttons = styled.div`
 
   & > * {
     margin: 0 20px;
+    height: auto !important;
+    padding: 12px 20px !important;
+
+    &:last-child:first-child {
+      margin: 0 !important;
+    }
 
     @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
       margin: 0 60px;
-      a {
-        font-size: 20px !important;
-        height: 46px !important;
-      }
     }
   }
 `

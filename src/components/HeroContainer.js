@@ -45,6 +45,7 @@ const HeroContainerComponent = props => {
   const isAbout = pathname === '/about/'
   const isCustody = pathname === '/institutions/custody/'
   const isInstitutions = pathname === '/institutions/'
+  const isFlask = pathname === '/flask/'
   let hubspotWrapper
   if (hubSpotForm) {
     hubspotWrapper = !isEmpty(cta) ? (
@@ -106,7 +107,7 @@ const HeroContainerComponent = props => {
           <HeroContentContainer
             isStyleCenterSimple={isStyleCenterSimple}
             contentAlignment={contentAlignment}
-            bgSrc={!isStyleHubspot && !sideImageFlex ? sideImageUrl : ''}
+            bgSrc={!isStyleHubspot && !sideImageFlex && !isFlask ? sideImageUrl : ''}
             isAbout={isAbout}
             reverse={contentAlignment === 'right'}
             center={sideImageFlex}
@@ -151,6 +152,7 @@ const HeroContainerComponent = props => {
                   headlineBorderBottom={headlineBorderBottom}
                   hideHeadline={hideHeadline}
                   fontSize={heroTitleFontsize}
+                  isFlask={isFlask}
                 >
                   {' '}
                   {headline}{' '}
@@ -161,7 +163,7 @@ const HeroContainerComponent = props => {
                   <div dangerouslySetInnerHTML={{ __html: description }} />
                 </HeroDescription>
               )}
-              {!isEmpty(cta) ? (
+              {!isEmpty(cta) && !isFlask ? (
                 <HeroCTA>
                   {contentfulModuleToComponent({
                     ...cta,
@@ -177,11 +179,22 @@ const HeroContainerComponent = props => {
               <HeroSideImage
                 sideImageFlex={sideImageFlex}
                 isStyleHubspot={isStyleHubspot}
+                isFlask={isFlask}
               >
-                {isStyleHubspot || sideImageFlex ? (
+                {isStyleHubspot || sideImageFlex || isFlask ? (
                   <Image image={sideImage} />
                 ) : null}
               </HeroSideImage>
+            ) : null}
+            {!isEmpty(cta) && isFlask ? (
+              <HeroCTA isFlask={isFlask}>
+                {contentfulModuleToComponent({
+                  ...cta,
+                  buttonSize: 'hero',
+                  customClick: hubSpotForm ? () => togglePopup() : null,
+                  ctaLink: hubSpotForm ? '' : cta.ctaLink,
+                })}
+              </HeroCTA>
             ) : null}
           </HeroContentContainer>
         </ContentWrapper>
@@ -319,8 +332,14 @@ const HeroContentContainer = styled.div`
   ${({ contentAlignment }) =>
     contentAlignment === 'center'
       ? `
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     text-align: center;
+
+    & > * {
+      width: 100%;
+    }
   `
       : ''}
 
@@ -363,6 +382,25 @@ const HeroContentContainer = styled.div`
       margin-top: 39px;
       background-position: 50% 0%;
       background-size: 382px;
+    }
+    @media (max-width: ${theme.device.mobileMediaMax}){
+      background-position: 50% 0%;
+      background-size: 250px;
+
+      ${EyebrowWrapper} {
+        img {
+          height: 24px;
+          margin: 0 auto;
+        }
+      }
+      ${HeroTitle} {
+        padding-top: 10px;
+      }
+
+      ${HeroImageTextContainer} {
+        padding-top: 42px;
+        background-image: linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%) !important;
+      }
     }
   `
       : ''}
@@ -411,7 +449,7 @@ const HeroImageTextContainer = styled.div`
   `
       : ''}
 
-  ${({ headlineBorderBottom, theme }) =>
+  ${({ headlineBorderBottom }) =>
     headlineBorderBottom
       ? `
   width: 100%;
@@ -431,6 +469,7 @@ const HeroTitle = styled.h1`
   line-height: 1.1;
   padding-top: 20px;
   padding-bottom: 20px;
+  
   ${({ hideHeadline }) =>
     hideHeadline
       ? `
@@ -444,6 +483,16 @@ const HeroTitle = styled.h1`
       font-size: ${fontSize} !important;
   `
       : ''}
+
+  ${({isFlask}) => isFlask ? `
+    font-size: 50px !important;
+    font-weight: bold;
+    line-height: 1.2;
+    width: 100%;
+    max-width: 665px;
+    margin-left: auto;
+    margin-right: auto;
+  `:''}
 
   ${({ headlineBorderBottom }) =>
     headlineBorderBottom
@@ -494,6 +543,15 @@ const HeroSideImage = styled.div`
     width: 58.33%;
   `
       : ''}
+
+  ${({ isFlask }) =>
+    isFlask
+      ? `
+    height: auto;
+    width: 100%;
+    max-width: 960px;
+  `
+      : ''}
   @media (min-width: ${({ theme }) => theme.device.desktop}) {
     padding: 0 !important;
   }
@@ -513,6 +571,14 @@ const HeroCTA = styled.div`
       width: 100%;
     }
   }
+
+  ${({isFlask}) => isFlask ? `
+  .button {
+    padding: 9px 24px !important;
+    max-width: 377px !important;
+    height: auto !important;
+  }
+  `:''}
 `
 const LearnMoreWrapper = styled.div`
   display: block;
@@ -586,5 +652,5 @@ const EyebrowText = styled.div`
   line-height: 140.62%;
   font-weight: bold;
   text-transform: uppercase;
-  color: ${({ theme }) => theme.primaryColor};
+  color: ${({ theme }) => theme.eyebrowHero};
 `

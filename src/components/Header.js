@@ -68,6 +68,7 @@ const StyledHeader = props => {
         </LogoContainer>
         <HamburgerButton
           onClick={handleHamburgerButton}
+          active={hamburgerActive}
           className="w-icon w-icon-nav-menu"
         ></HamburgerButton>
         <NavMain hamburgerActive={hamburgerActive} ref={menuRef}>
@@ -281,9 +282,17 @@ const HamburgerButton = styled.div`
   justify-content: center;
   font-size: 24px;
   cursor: pointer;
+  border-radius: 10px;
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     display: inline-flex;
   }
+
+  ${({ active }) =>
+    active
+      ? `
+    background: #dbdbdb;
+  `
+      : ''}
 `
 
 const ButtonsWrapper = styled.div`

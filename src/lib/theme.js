@@ -94,6 +94,7 @@ export const defaultTheme = {
     },
   },
   linkColor: theme.lightBlue,
+  eyebrowHero: theme.darkBlue,
   theme: 'default',
 }
 
@@ -105,10 +106,11 @@ export const purpleTheme = {
       bg: theme.darkPurple,
       gradient: 'linear-gradient(180deg, #8A42AD 0%, #6762EB 100%)',
       bgHover: theme.darkerPurple,
-      gradientHover: theme.darkerPurple,
+      gradientHover: 'linear-gradient(180deg, #6762EB 0%, #6762EB 100%)',
     },
   },
   linkColor: theme.lightPurple,
+  eyebrowHero: theme.lightPurple,
   theme: 'purple',
 }
 

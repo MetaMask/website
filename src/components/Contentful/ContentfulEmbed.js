@@ -13,10 +13,10 @@ const ContentfulEmbed = props => {
     },
   } = props
   return (
-    <div id={moduleId}>
+    <Wrapper id={moduleId}>
       {title && displayTitle ? <Title>{title}</Title> : null}
       <EmbedHtml dangerouslySetInnerHTML={{ __html: embed }} />
-    </div>
+    </Wrapper>
   )
 }
 
@@ -33,12 +33,18 @@ ContentfulEmbed.propTypes = {
   }),
 }
 
+const Wrapper = styled.div`
+  display: block;
+  width: 100%;
+`
+
 const Title = styled(SectionTitle)`
   text-align: center;
   margin-bottom: 32px;
 `
 
 const EmbedHtml = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   position: relative;

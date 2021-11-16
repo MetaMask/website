@@ -939,3 +939,15 @@ figcaption {
     margin-bottom: 10px;
   }
 }
+
+#liquidity-logos .moduleContainerListModules {
+  & > * {
+    width: 33.33% !important;
+  }
+}
+
+#how-it-works-de-fi-investments-with-meta-mask-institutional {
+  .moduleCardWrapper:not(:last-child) {
+    margin-bottom: 8px;
+  }
+}

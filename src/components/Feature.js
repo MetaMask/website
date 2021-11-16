@@ -35,9 +35,10 @@ const FeatureComponent = props => {
 
   const innerContent = (
     <>
-      {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
+      {eyebrow ? <Eyebrow className="hidden-mobile">{eyebrow}</Eyebrow> : null}
       {headline ? (
         <Headline
+          hasEyebrow={eyebrow}
           hasCta={cta}
           hideHeadline={hideHeadline}
           headlineMarginTop0={headlineMarginTop0}
@@ -99,6 +100,9 @@ const FeatureComponent = props => {
           imageWidth={imageWidth}
           backgroundColor={backgroundColor}
         >
+          {eyebrow ? (
+            <Eyebrow className="hidden-desktop">{eyebrow}</Eyebrow>
+          ) : null}
           {image || imageMobile ? (
             <SideImage>
               <Image>
@@ -211,6 +215,13 @@ const Headline = styled.h2`
       text-align: center;
     }`
       : 'padding-bottom: 14px;'}
+
+  ${({hasEyebrow, theme}) => hasEyebrow ? `
+  @media (max-width: ${theme.device.tabletMediaMax}) {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  `:''}
 `
 
 const Description = styled.div`
@@ -229,17 +240,25 @@ const FeatureWrapper = styled.div`
     align-items: center;
     text-align: center;
   }
-  ${({ contentAlignLR }) =>
+  ${({ contentAlignLR, theme }) =>
     contentAlignLR === 'left'
       ? `
-    flex-direction: row-reverse;
+      @media (min-width: ${theme.device.tablet}) {
+        flex-direction: row-reverse;
+      }
   `
       : ''}
 
   ${({ isContentAlignVertical }) =>
     isContentAlignVertical
       ? `
-      flex-direction: column-reverse !important;
+      flex-direction: column !important;
+      ${SideImage} {
+        order: 3;
+      }
+      ${FeatureInner} {
+        order: 2;
+      }
   `
       : ''}
   ${({ alignItemsCenter }) =>

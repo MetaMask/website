@@ -17,6 +17,7 @@ const ContentfulCta = props => {
       buttonSize,
       customClick,
       fontSize,
+      buttonGradient,
     },
   } = props
 
@@ -33,6 +34,7 @@ const ContentfulCta = props => {
       buttonSize={buttonSize}
       customClick={customClick}
       fontSize={fontSize}
+      buttonGradient={buttonGradient}
     />
   )
 }
