@@ -30,6 +30,7 @@ const StyledPartnerImage = styled.img`
       ? `
     width: ${width};
     margin: 0 auto;
+    height: auto !important;
   `
       : ''}
 `
