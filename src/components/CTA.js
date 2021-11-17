@@ -48,7 +48,7 @@ const CTA = props => {
         if (isAndroid) {
           setKeyBrowser('android')
         } else if (isIOS) {
-          setKeyBrowser('iphone')
+          setKeyBrowser('ios')
         } else {
           setKeyBrowser('chrome')
         }
