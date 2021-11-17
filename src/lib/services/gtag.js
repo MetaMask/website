@@ -1,11 +1,12 @@
 export default `
+// Google Analytics
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'UA-37075177-6', {'anonymize_ip': true});
 
-// Custom gtag events
-if (typeof gtag !== 'undefined') {
+// Add Events
+if (gtag) {
   var downloadButtonsNav = document.getElementsByClassName("downloadButtonNav");
   if(downloadButtonsNav.length) {
     downloadButtonsNav.onclick = function(){
