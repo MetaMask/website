@@ -28,7 +28,10 @@ export default class HTML extends React.Component {
           {process.env.NODE_ENV === 'production' && (
             <script dangerouslySetInnerHTML={{ __html: livePerson }} />
           )}
-          <script src="https://www.googletagmanager.com/gtag/js?id=UA-37075177-6" />
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-37075177-6"
+          />
           {process.env.NODE_ENV === 'production' && (
             <script dangerouslySetInnerHTML={{ __html: gdprConsentScript }} />
           )}

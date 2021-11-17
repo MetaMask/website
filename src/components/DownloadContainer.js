@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import {isAndroid, isIOS, isMobile} from 'react-device-detect'
+import { isAndroid, isIOS, isMobile } from 'react-device-detect'
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import { Section } from './StyledGeneral'
@@ -10,13 +10,13 @@ const TabWrapper = React.lazy(() => import('./Tab/TabWrapper'))
 const TabContentDownload = React.lazy(() => import('./DownloadTab'))
 
 const DownloadContainer = props => {
-  const [device, setDevice] = React.useState('');
+  const [device, setDevice] = React.useState('')
   const { appExtensions } = props
   React.useEffect(() => {
-    if (isMobile){
-      if(isAndroid) {
+    if (isMobile) {
+      if (isAndroid) {
         setDevice('android')
-      }else if (isIOS) {
+      } else if (isIOS) {
         setDevice('ios')
       } else {
         setDevice('browser')

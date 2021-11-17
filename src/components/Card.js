@@ -25,7 +25,7 @@ const StyledCard = props => {
   } = props
 
   return (
-    <Card className='moduleCardWrapper' showArrowIcon={showArrowIcon}>
+    <Card className="moduleCardWrapper" showArrowIcon={showArrowIcon}>
       <CardInner
         to={link}
         newTab={newTab}

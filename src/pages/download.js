@@ -60,7 +60,7 @@ const DownloadPage = props => {
   const appExtensions = {
     browser: {
       image: download_extension,
-      label: isMobile ? "Chrome" : browserName,
+      label: isMobile ? 'Chrome' : browserName,
       title: 'Install MetaMask for your browser',
       ctaChrome: cta_chrome,
       ctaFirefox: cta_firefox,

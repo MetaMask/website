@@ -115,7 +115,6 @@ const Buttons = styled.div`
     @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
       width: 100%;
     }
-    
   }
 `
 const HeadingCta = styled.div`

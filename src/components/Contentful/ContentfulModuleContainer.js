@@ -129,7 +129,7 @@ const Inner = styled.div`
   `
       : ``}
 
-  @media (max-width: ${({theme }) =>theme.device.mobileMediaMax}) {
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     text-align: center;
   }
 `

@@ -1,17 +1,17 @@
 import React from 'react'
 const LogoAnimation = props => {
-  const {logoType} = props;
+  const { logoType } = props
   React.useEffect(() => {
     // This runs the script logo
     if (typeof window !== 'undefined' && window.document) {
       var ModelViewer = require('@metamask/logo')
-      let meshJson;
-      switch(logoType) {
+      let meshJson
+      switch (logoType) {
         case 'flask':
-          meshJson = require('./flask.json');
-          break;
+          meshJson = require('./flask.json')
+          break
         default:
-          // code block
+        // code block
       }
       var viewer = ModelViewer({
         pxNotRatio: true,
