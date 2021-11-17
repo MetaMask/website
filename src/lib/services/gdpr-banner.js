@@ -91,7 +91,7 @@ if(window.getGDPRCookie() === undefined) {
 }
 
 // Custom gtag events
-if (gtag) {
+if (typeof gtag !== 'undefined') {
   var downloadButtonsNav = document.getElementsByClassName("downloadButtonNav");
   if(downloadButtonsNav.length) {
     downloadButtonsNav.onclick = function(){
