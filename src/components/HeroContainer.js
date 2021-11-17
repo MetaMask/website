@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import styled, { withTheme } from 'styled-components'
+import styled, { withTheme, keyframes, css } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import { useLocation } from '@reach/router'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
@@ -234,6 +234,17 @@ HeroContainerComponent.propTypes = {
   showFavIcon: PropTypes.bool,
 }
 
+const float = keyframes`
+ 0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+`
 const HeroContainer = styled(Section)`
   display: flex;
   position: relative;
@@ -551,14 +562,16 @@ const HeroSideImage = styled.div`
   `
       : ''}
 
-  ${({ isFlask }) =>
+  ${({ isFlask, theme }) =>
     isFlask
       ? `
     height: auto;
     width: 100%;
     max-width: 960px;
+    
   `
       : ''}
+  animation: ${({ isFlask }) => isFlask ? css`${float} 6s ease-in-out infinite` : 'none'};
   @media (min-width: ${({ theme }) => theme.device.desktop}) {
     padding: 0 !important;
   }
@@ -578,14 +591,6 @@ const HeroCTA = styled.div`
       width: 100%;
     }
   }
-
-  ${({isFlask}) => isFlask ? `
-  .button {
-    padding: 9px 24px !important;
-    max-width: 377px !important;
-    height: auto !important;
-  }
-  `:''}
 `
 const LearnMoreWrapper = styled.div`
   display: block;

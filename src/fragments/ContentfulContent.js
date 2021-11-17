@@ -156,6 +156,7 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
       ...ContentfulHubSpotFormFields
     }
     backgroundColor
+    sectionPadding
   }
 `
 
