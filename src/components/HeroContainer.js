@@ -109,6 +109,7 @@ const HeroContainerComponent = props => {
             center={sideImageFlex}
             isCustody={isCustody}
             isInstitutions={isInstitutions}
+            isFlask={isFlask}
           >
             <HeroImageTextContainer
               isStyleHubspot={isStyleHubspot}
@@ -363,6 +364,18 @@ const HeroContentContainer = styled.div`
     background-size: 90%;
     background-attachment: scroll;
     padding-bottom: 0;
+    ${({isFlask}) => isFlask ? `
+      flex-direction: column;
+
+      ${HeroSideImage} {
+        height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      ${HeroTitle} {
+        padding-bottom: 0 !important;
+      }
+    `:''}
     & > * {
       width: 100%;
     }
@@ -566,8 +579,8 @@ const HeroSideImage = styled.div`
     
   `
       : ''}
-  animation: ${({ isFlask }) => isFlask ? css`${float} 6s ease-in-out infinite` : 'none'};
   @media (min-width: ${({ theme }) => theme.device.desktop}) {
+    animation: ${({ isFlask }) => isFlask ? css`${float} 6s ease-in-out infinite` : 'none'};
     padding: 0 !important;
   }
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
