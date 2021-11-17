@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import Arrow from './ArrowIcon'
 import Link from './Link'
 import Button from './Button'
-import { kebabCase } from 'lodash'
 
 const CTA = props => {
   const {

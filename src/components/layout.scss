@@ -785,6 +785,19 @@ input[type="submit"].hs-button {
   font-size: 14px!important;;
 }
 
+.fz-28-res {
+  font-size: 28px !important;
+  line-height: 45px !important;
+  @media (max-width: 479px){
+    font-size: 18px !important;
+    line-height: 26px !important;
+  }
+}
+
+.fz-32 {
+  font-size: 32px!important;;
+}
+
 .br-round {
   border-radius: 999px !important;
 }
