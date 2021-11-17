@@ -38,7 +38,7 @@ const CTA = props => {
   }
   let text = textDefault,
     link = linkDefault
-  if (isDownloadBrowser && keyBrowser) {
+  if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
     text = textDefault.replace('$browser', downloadBrowsers[keyBrowser].text)
     link = downloadBrowsers[keyBrowser].link
   }
@@ -48,7 +48,7 @@ const CTA = props => {
         if (isAndroid) {
           setKeyBrowser('android')
         } else if (isIOS) {
-          setKeyBrowser('ios')
+          setKeyBrowser('iphone')
         } else {
           setKeyBrowser('chrome')
         }
