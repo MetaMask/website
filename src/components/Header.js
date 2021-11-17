@@ -299,6 +299,7 @@ const ButtonsWrapper = styled.div`
   display: block;
 
   .button {
+    min-height: 40px !important;
     height: 40px !important;
     ${({ theme }) => `
     background: ${theme.darkBlue} !important;
