@@ -53,7 +53,7 @@ const CTA = props => {
           setKeyBrowser('chrome')
         }
       } else {
-        const lowerBrowser = lowerCase(browserName);
+        const lowerBrowser = lowerCase(browserName)
         if (downloadBrowsers[lowerBrowser]) {
           setKeyBrowser(lowerBrowser)
         } else {

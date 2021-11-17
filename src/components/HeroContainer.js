@@ -103,7 +103,9 @@ const HeroContainerComponent = props => {
           <HeroContentContainer
             isStyleCenterSimple={isStyleCenterSimple}
             contentAlignment={contentAlignment}
-            bgSrc={!isStyleHubspot && !sideImageFlex && !isFlask ? sideImageUrl : ''}
+            bgSrc={
+              !isStyleHubspot && !sideImageFlex && !isFlask ? sideImageUrl : ''
+            }
             isAbout={isAbout}
             reverse={contentAlignment === 'right'}
             center={sideImageFlex}
@@ -365,7 +367,9 @@ const HeroContentContainer = styled.div`
     background-size: 90%;
     background-attachment: scroll;
     padding-bottom: 0;
-    ${({isFlask}) => isFlask ? `
+    ${({ isFlask }) =>
+      isFlask
+        ? `
       flex-direction: column;
 
       ${HeroSideImage} {
@@ -376,7 +380,8 @@ const HeroContentContainer = styled.div`
       ${HeroTitle} {
         padding-bottom: 0 !important;
       }
-    `:''}
+    `
+        : ''}
     & > * {
       width: 100%;
     }
@@ -511,13 +516,18 @@ const HeroTitle = styled.h1`
   `
       : ''}
 
-  ${({isFaq}) => isFaq ? `
+  ${({ isFaq }) =>
+    isFaq
+      ? `
     max-width: 400px;
     margin-left: auto;
     margin-right: auto;
-  `:''}
+  `
+      : ''}
   
-  ${({isFlask}) => isFlask ? `
+  ${({ isFlask }) =>
+    isFlask
+      ? `
     font-size: 50px !important;
     font-weight: bold;
     line-height: 1.2;
@@ -525,7 +535,8 @@ const HeroTitle = styled.h1`
     max-width: 665px;
     margin-left: auto;
     margin-right: auto;
-  `:''}
+  `
+      : ''}
 
   ${({ headlineBorderBottom }) =>
     headlineBorderBottom
@@ -587,7 +598,12 @@ const HeroSideImage = styled.div`
   `
       : ''}
   @media (min-width: ${({ theme }) => theme.device.desktop}) {
-    animation: ${({ isFlask }) => isFlask ? css`${float} 6s ease-in-out infinite` : 'none'};
+    animation: ${({ isFlask }) =>
+      isFlask
+        ? css`
+            ${float} 6s ease-in-out infinite
+          `
+        : 'none'};
     padding: 0 !important;
   }
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {

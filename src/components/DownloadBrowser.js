@@ -62,7 +62,7 @@ const BrowserList = styled.div`
 
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     margin: -12px;
-    }
+  }
 
   & > * {
     width: 25%;

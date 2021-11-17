@@ -72,7 +72,7 @@ const PageLayout = props => {
   React.useEffect(() => {
     if (document) {
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        if(anchor.getAttribute('href').length === 1){
+        if (anchor.getAttribute('href').length === 1) {
           return
         }
         anchor.addEventListener('click', function(e) {

@@ -225,12 +225,15 @@ const Headline = styled.h2`
     }`
       : 'padding-bottom: 14px;'}
 
-  ${({hasEyebrow, theme}) => hasEyebrow ? `
+  ${({ hasEyebrow, theme }) =>
+    hasEyebrow
+      ? `
   @media (max-width: ${theme.device.tabletMediaMax}) {
     margin-top: 0;
     padding-top: 0;
   }
-  `:''}
+  `
+      : ''}
 `
 
 const Description = styled.div`
@@ -320,7 +323,7 @@ const CTAWrapper = styled.div`
     min-width: 160px;
   }
 
-  @media (max-width: ${({theme}) => theme.device.mobileMediaMax}){
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     .button {
       width: 100%;
     }

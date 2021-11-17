@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import gdprConsentScript from './lib/services/gdpr-banner'
+import gtagScript from './lib/services/gtag'
 import accessiBeScript from './lib/services/accessibe'
-import livePerson from './lib/services/live-person'
+import livePersonScript from './lib/services/live-person'
 
 export default class HTML extends React.Component {
   render() {
@@ -25,12 +25,15 @@ export default class HTML extends React.Component {
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
           {this.props.postBodyComponents}
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-37075177-6"
+          />
           {process.env.NODE_ENV === 'production' && (
-            <script dangerouslySetInnerHTML={{ __html: livePerson }} />
+            <script dangerouslySetInnerHTML={{ __html: gtagScript }} />
           )}
-          <script src="https://www.googletagmanager.com/gtag/js?id=UA-37075177-6" />
           {process.env.NODE_ENV === 'production' && (
-            <script dangerouslySetInnerHTML={{ __html: gdprConsentScript }} />
+            <script dangerouslySetInnerHTML={{ __html: livePersonScript }} />
           )}
           {process.env.NODE_ENV === 'production' && (
             <script dangerouslySetInnerHTML={{ __html: accessiBeScript }} />
