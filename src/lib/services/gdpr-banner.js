@@ -90,4 +90,47 @@ if(window.getGDPRCookie() === undefined) {
   window.addEventListener("load", window.removeGDPRBanner);
 }
 
+// Custom gtag events
+if (gtag) {
+  var downloadButtonsNav = document.getElementsByClassName("downloadButtonNav");
+  if(downloadButtonsNav.length) {
+    downloadButtonsNav.onclick = function(){
+      gtag('event', 'Click', {
+          'event_category': 'Download',
+          'event_label': 'Nav Bar Button'
+      });
+    }
+  }
+  
+  var downloadButtons = document.getElementsByClassName("downloadButtonPage");
+  if(downloadButtons.length) {
+    downloadButtons.onclick = function(){
+      gtag('event', 'Click', {
+        'event_category': 'Download',
+        'event_label': 'Store Link Button'
+      });
+    }
+  }
+  
+  var downloadButtonsPageHome = document.getElementsByClassName("downloadButtonPageHome");
+  if(downloadButtonsPageHome.length) {
+    downloadButtonsPageHome.onclick = function(){
+      gtag('event', 'Click', {
+        'event_category': 'Download',
+        'event_label': 'Home Page Buttons'
+      });
+    }
+  } 
+  
+  var downloadButtonsPageSwaps = document.getElementsByClassName("downloadButtonPageSwaps");
+  if(downloadButtonsPageSwaps.length) {
+    downloadButtonsPageSwaps.onclick = function(){
+      gtag('event', 'Click', {
+        'event_category': 'Download',
+        'event_label': 'Swaps Page Buttons'
+      });
+    }
+  } 
+}
+
 `

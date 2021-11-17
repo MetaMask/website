@@ -37,8 +37,6 @@ const DownloadContainer = props => {
     ),
   }))
 
- 
-
   return (
     <Container>
       <ContentWrapper>

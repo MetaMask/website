@@ -156,6 +156,7 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
       ...ContentfulHubSpotFormFields
     }
     backgroundColor
+    sectionPadding
   }
 `
 
@@ -216,12 +217,18 @@ export const ContentfulCtaFields = graphql`
     internal {
       type
     }
+    className
     fontSize
     ctaLink
     displayText
     newTab
     buttonDisplay
     buttonGradient
+    downloadBrowsers {
+      internal {
+        content
+      }
+    }
   }
 `
 

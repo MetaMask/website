@@ -18,6 +18,7 @@ const ContentfulCta = props => {
       customClick,
       fontSize,
       buttonGradient,
+      className,
     },
   } = props
 
@@ -35,6 +36,7 @@ const ContentfulCta = props => {
       customClick={customClick}
       fontSize={fontSize}
       buttonGradient={buttonGradient}
+      className={className}
     />
   )
 }
@@ -43,6 +45,7 @@ export default ContentfulCta
 
 ContentfulCta.propTypes = {
   moduleConfig: PropTypes.shape({
+    className: PropTypes.string,
     ctaAlignment: PropTypes.string,
     ctaLink: PropTypes.string,
     newTab: PropTypes.bool,

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 import Link from './Link'
+import classnames from 'classnames'
 
 const Button = props => {
   const {
@@ -13,6 +14,7 @@ const Button = props => {
     customClick,
     fontSize,
     buttonGradient = false,
+    className,
   } = props
 
   return (
@@ -23,7 +25,7 @@ const Button = props => {
       size={size}
       onClick={customClick}
       gradient={buttonGradient}
-      className={'button'}
+      className={classnames(className, 'button')}
       fontSize={fontSize}
     >
       {text}
@@ -38,6 +40,7 @@ Button.propTypes = {
   text: PropTypes.string,
   newTab: PropTypes.bool,
   color: PropTypes.string,
+  className: PropTypes.string,
   buttonGradient: PropTypes.bool,
 }
 
