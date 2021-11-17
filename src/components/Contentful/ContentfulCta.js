@@ -19,9 +19,13 @@ const ContentfulCta = props => {
       fontSize,
       buttonGradient,
       className,
+      downloadBrowsers,
     },
   } = props
-
+  const extractBrowsers = item =>
+    item ? JSON.parse(item.internal.content) : null
+  const arrayBrowsers = downloadBrowsers ? downloadBrowsers.map(extractBrowsers) : []
+  const browsers = arrayBrowsers.reduce((obj, cur) => ({...obj, [cur.name]: cur}), {})
   return (
     <CTA
       link={ctaLink}
@@ -37,6 +41,7 @@ const ContentfulCta = props => {
       fontSize={fontSize}
       buttonGradient={buttonGradient}
       className={className}
+      downloadBrowsers={browsers}
     />
   )
 }

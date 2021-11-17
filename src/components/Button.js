@@ -75,7 +75,7 @@ const ButtonWrapper = styled(Link)`
   background: transparent !important;
   color: #fff;
   border: 2px solid #fff;
-  height: 40px !important;
+  min-height: 40px !important;
   transition: background-color 300ms ease, border 300ms ease, color 300ms ease;
   @media (min-width: ${theme.device.miniDesktop}){
     &:hover {
@@ -90,7 +90,7 @@ const ButtonWrapper = styled(Link)`
   text-align: center;
   transition: all 300ms ease;
   color: #fff;
-  height: 52px;
+  min-height: 52px;
   display: inline-flex;
   align-items: center;
   justify-content: center;

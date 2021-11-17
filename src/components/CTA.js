@@ -1,14 +1,17 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import styled from 'styled-components'
 import Arrow from './ArrowIcon'
-import Link from './Link'
 import Button from './Button'
+import isEmpty from 'lodash/isEmpty'
+import lowerCase from 'lodash/lowerCase'
+import { isAndroid, isIOS, isMobile, browserName } from 'react-device-detect'
+import Link from './Link'
+import styled from 'styled-components'
 
 const CTA = props => {
   const {
-    link,
-    text,
+    link: linkDefault,
+    text: textDefault,
     align = 'left',
     newTab,
     iconConfig,
@@ -22,14 +25,43 @@ const CTA = props => {
     fontSize,
     buttonGradient,
     className,
+    downloadBrowsers,
   } = props
+  const [keyBrowser, setKeyBrowser] = React.useState('')
   const isButton = buttonDisplay || button
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
   const icon = { ...defaultIconConfig, fill: color, ...iconConfig }
+  const isDownloadBrowser = !isEmpty(downloadBrowsers)
   const handleCustomClick = e => {
     e.preventDefault()
     customClick()
   }
+  let text = textDefault,
+    link = linkDefault
+  if (isDownloadBrowser && keyBrowser) {
+    text = textDefault.replace('$browser', downloadBrowsers[keyBrowser].text)
+    link = downloadBrowsers[keyBrowser].link
+  }
+  React.useEffect(() => {
+    if (isDownloadBrowser) {
+      if (isMobile) {
+        if (isAndroid) {
+          setKeyBrowser('android')
+        } else if (isIOS) {
+          setKeyBrowser('ios')
+        } else {
+          setKeyBrowser('chrome')
+        }
+      } else {
+        const lowerBrowser = lowerCase(browserName);
+        if (downloadBrowsers[lowerBrowser]) {
+          setKeyBrowser(lowerBrowser)
+        } else {
+          setKeyBrowser('chrome')
+        }
+      }
+    }
+  }, [downloadBrowsers, isDownloadBrowser])
 
   if (isButton) {
     return (
@@ -37,7 +69,7 @@ const CTA = props => {
         size={buttonSize}
         link={link}
         text={text}
-        newTab={newTab}
+        newTab={newTab || isDownloadBrowser}
         color={color}
         customClick={customClick ? handleCustomClick : null}
         fontSize={fontSize}
@@ -51,7 +83,7 @@ const CTA = props => {
     <CTAContainer className="ctaModuleContainer" align={align}>
       <ContentWrapper
         to={link}
-        newTab={newTab}
+        newTab={newTab || isDownloadBrowser}
         color={color}
         typeLayout={typeLayout}
         className={className}
