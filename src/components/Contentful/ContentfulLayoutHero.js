@@ -24,6 +24,7 @@ const ContentfulLayoutHero = props => {
       backgroundColor,
       headlineBorderBottom,
       isFaq,
+      sectionPadding,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -32,6 +33,7 @@ const ContentfulLayoutHero = props => {
   const backgroundColorMobile = sideImageFlex ? 'white' : ''
   return (
     <Hero
+      sectionPadding={sectionPadding}
       isFaq={isFaq}
       headline={headline}
       description={html}
@@ -74,5 +76,6 @@ ContentfulLayoutHero.propTypes = {
     headlineBorderBottom: PropTypes.bool,
     sideImageFlex: PropTypes.bool,
     eyebrow: PropTypes.string,
+    sectionPadding: PropTypes.string,
   }),
 }
