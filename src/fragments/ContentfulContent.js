@@ -71,6 +71,7 @@ export const ContentfulLayoutHeroFields = graphql`
     headlineBorderBottom
     hideHeadline
     showFavIcon
+    sectionPadding
     backgroundImage {
       title
       description

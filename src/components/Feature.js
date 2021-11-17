@@ -159,6 +159,7 @@ FeatureComponent.propTypes = {
   headline: PropTypes.string,
   description: PropTypes.string,
   modules: PropTypes.arrayOf(PropTypes.object.isRequired),
+  sectionPadding: PropTypes.string,
 }
 
 const FeatureContainer = styled(Section)``

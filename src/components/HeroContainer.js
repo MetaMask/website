@@ -31,6 +31,7 @@ const HeroContainerComponent = props => {
     sideImageFlex,
     backgroundColorMobile,
     isFaq,
+    sectionPadding,
   } = props
   const [showPopup, setShowPopup] = React.useState(false)
   const togglePopup = () => {
@@ -75,12 +76,7 @@ const HeroContainerComponent = props => {
   } else if (contentAlignment === 'center' || headlineBorderBottom) {
     heroTitleFontsize = '30px'
   }
-  let sectionPaddingCustom
-  if (isFaq) {
-    sectionPaddingCustom = '0px'
-  } else if (sideImageFlex) {
-    sectionPaddingCustom = '16px'
-  }
+
   return (
     <>
       {showFavIcon ? (
@@ -93,7 +89,7 @@ const HeroContainerComponent = props => {
         </FavIconContainer>
       ) : null}
       <HeroContainer
-        sectionPadding={sectionPaddingCustom || ''}
+        sectionPadding={sectionPadding || ''}
         headlineBorderBottom={headlineBorderBottom}
         isStyleCenterSimple={isStyleCenterSimple}
         showFavIcon={showFavIcon}
@@ -226,12 +222,11 @@ HeroContainerComponent.propTypes = {
   hubSpotForm: PropTypes.object,
   headline: PropTypes.string,
   description: PropTypes.string,
-  ctaText: PropTypes.string,
-  ctaLink: PropTypes.string,
   contentAlignment: PropTypes.string,
   hideHeadline: PropTypes.bool,
   showLearnMore: PropTypes.bool,
   showFavIcon: PropTypes.bool,
+  sectionPadding: PropTypes.string,
 }
 
 const float = keyframes`
