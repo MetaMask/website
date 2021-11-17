@@ -149,6 +149,7 @@ const HeroContainerComponent = props => {
                   headlineBorderBottom={headlineBorderBottom}
                   hideHeadline={hideHeadline}
                   fontSize={heroTitleFontsize}
+                  isFaq={isFaq}
                   isFlask={isFlask}
                 >
                   {' '}
@@ -510,6 +511,12 @@ const HeroTitle = styled.h1`
   `
       : ''}
 
+  ${({isFaq}) => isFaq ? `
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  `:''}
+  
   ${({isFlask}) => isFlask ? `
     font-size: 50px !important;
     font-weight: bold;
