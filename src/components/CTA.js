@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Arrow from './ArrowIcon'
 import Link from './Link'
 import Button from './Button'
+import { kebabCase } from 'lodash'
 
 const CTA = props => {
   const {
@@ -21,6 +22,7 @@ const CTA = props => {
     buttonDisplay,
     fontSize,
     buttonGradient,
+    className,
   } = props
   const isButton = buttonDisplay || button
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
@@ -41,6 +43,7 @@ const CTA = props => {
         customClick={customClick ? handleCustomClick : null}
         fontSize={fontSize}
         buttonGradient={buttonGradient}
+        className={className}
       />
     )
   }
@@ -52,6 +55,7 @@ const CTA = props => {
         newTab={newTab}
         color={color}
         typeLayout={typeLayout}
+        className={className}
         onClick={customClick ? handleCustomClick : null}
       >
         {text} {!isHideArrow ? <Arrow {...icon} /> : null}

@@ -12,6 +12,8 @@ const ContentfulLayoutFullWidthCta = props => {
       hubSpotForm,
       marginBottom = '',
       cta,
+      logoType,
+      sectionPadding,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -24,6 +26,8 @@ const ContentfulLayoutFullWidthCta = props => {
       hubSpotForm={hubSpotForm}
       marginBottom={marginBottom}
       cta={cta}
+      logoType={logoType}
+      sectionPadding={sectionPadding}
     />
   )
 }
@@ -40,5 +44,6 @@ ContentfulLayoutFullWidthCta.propTypes = {
     showLogoAnimation: PropTypes.bool,
     marginBottom: PropTypes.string,
     cta: PropTypes.object,
+    sectionPadding: PropTypes.string,
   }),
 }

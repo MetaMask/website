@@ -7,7 +7,8 @@ import Popup from './Popup'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { Section, SectionTitle } from './StyledGeneral'
 
-const LogoAnimation = Loadable(() => import('./LogoAnimation'))
+const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
+
 const FullWidthCta = props => {
   const {
     cta,
@@ -17,6 +18,8 @@ const FullWidthCta = props => {
     headline,
     hubSpotForm,
     marginBottom,
+    logoType,
+    sectionPadding,
   } = props
 
   const [showPopup, setShowPopup] = React.useState(false)
@@ -27,10 +30,13 @@ const FullWidthCta = props => {
     setShowPopup(false)
   }
   return (
-    <Container backgroundColor={backgroundColor}>
+    <Container
+      sectionPadding={sectionPadding}
+      backgroundColor={backgroundColor}
+    >
       <ContentWrapper>
         <FullWidthCtaWrapper showLogoAnimation={showLogoAnimation}>
-          {showLogoAnimation ? <LogoAnimation /> : null}
+          {showLogoAnimation ? <LogoAnimation logoType={logoType} /> : null}
           <FullWidthCtaInner
             marginBottom={marginBottom}
             backgroundColor={backgroundColor}
@@ -79,6 +85,7 @@ FullWidthCta.propTypes = {
   headline: PropTypes.string,
   description: PropTypes.string,
   modules: PropTypes.arrayOf(PropTypes.object.isRequired),
+  sectionPadding: PropTypes.string,
 }
 
 const Container = styled(Section)`
@@ -159,7 +166,7 @@ const CTAWrapper = styled.div`
   `
       : ``}
 
-  @media (max-width: ${({theme}) => theme.device.mobileMediaMax}){
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}){
     .button {
       width: 100%;
     }

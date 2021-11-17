@@ -106,7 +106,7 @@ export const purpleTheme = {
       bg: theme.darkPurple,
       gradient: 'linear-gradient(180deg, #8A42AD 0%, #6762EB 100%)',
       bgHover: theme.darkerPurple,
-      gradientHover: 'linear-gradient(180deg, #6762EB 0%, #6762EB 100%)',
+      gradientHover: 'linear-gradient(180deg, #8A42AD 0%, #6762EB 100%)',
     },
   },
   linkColor: theme.lightPurple,
