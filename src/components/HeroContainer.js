@@ -415,24 +415,23 @@ const HeroContentContainer = styled.div`
       margin-top: 39px;
       background-position: 50% 0%;
       background-size: 382px;
-    }
-    @media (max-width: ${theme.device.mobileMediaMax}){
-      background-position: 50% 0%;
-      background-size: 250px;
-
       ${EyebrowWrapper} {
         img {
           margin: 0 auto;
         }
       }
+      
       ${HeroTitle} {
         padding-top: 10px;
       }
-
+      
       ${HeroImageTextContainer} {
         padding-top: 42px;
         background-image: linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%) !important;
       }
+    }
+    @media (max-width: ${theme.device.mobileMediaMax}){
+      background-size: 250px;
     }
   `
       : ''}

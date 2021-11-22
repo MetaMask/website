@@ -208,6 +208,12 @@ const Modules = styled.div`
     > * {
     width: calc(100%/${columns});
     padding: ${gridModulesGap} !important;
+    @media (max-width: ${theme.device.miniDesktopMediaMax}){
+      ${columnsOnMobile && columns > 3 ? `width: 33.333%` : ''};
+    }
+    @media (max-width: ${theme.device.tabletMediaMax}){
+      ${columnsOnMobile && columns > 2 ? `width: 50%` : ''};
+    }
     @media (max-width: ${theme.device.mobileMediaMax}){
       width: ${columnsOnMobile ? `calc(100%/${columnsOnMobile})` : '50%'};
     }
