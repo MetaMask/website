@@ -165,12 +165,17 @@ const NavMain = styled.nav`
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     opacity: 0;
     visibility: hidden;
-    position: absolute;
-    top: 100%;
     left: 0;
     right: 0;
     background: #fff;
     padding: 12px;
+    position: fixed;
+    top: 0;
+    bottom: auto;
+    margin-top: 88px;
+    max-height: calc(100% - 88px);
+    overflow-x: hidden;
+    overflow-y: auto;
     ${({ hamburgerActive }) =>
       hamburgerActive
         ? `
