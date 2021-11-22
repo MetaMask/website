@@ -180,7 +180,7 @@ const ImageSrc = styled(ImageItem)`
     widthImg
       ? `
     width: ${widthImg};
-    @media (max-width: ${theme.device.mobileMediaMax}){
+    @media (max-width: ${theme.device.tabletMediaMax}){
       width: 100%;
     }
   `
