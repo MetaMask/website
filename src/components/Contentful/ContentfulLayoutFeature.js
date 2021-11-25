@@ -22,6 +22,7 @@ const ContentfulLayoutFeature = props => {
       backgroundColor,
       headlineMarginTop0,
       sectionPadding,
+      noPaddingBottom,
       cta,
     },
   } = props
@@ -47,6 +48,7 @@ const ContentfulLayoutFeature = props => {
       backgroundColor={backgroundColor}
       headlineMarginTop0={headlineMarginTop0}
       sectionPadding={sectionPadding}
+      noPaddingBottom={noPaddingBottom}
       cta={cta}
     />
   )
@@ -60,5 +62,6 @@ ContentfulLayoutFeature.propTypes = {
     headline: PropTypes.string,
     description: PropTypes.object,
     cta: PropTypes.object,
+    noPaddingBottom: PropTypes.bool,
   }),
 }

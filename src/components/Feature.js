@@ -25,6 +25,7 @@ const FeatureComponent = props => {
     backgroundColor,
     headlineMarginTop0,
     sectionPadding,
+    noPaddingBottom,
     imageMobile,
     eyebrow,
   } = props
@@ -86,9 +87,10 @@ const FeatureComponent = props => {
     </>
   )
   return (
-    <FeatureContainer
+    <Container
       sectionPadding={sectionPadding}
       className={classnames({
+        noPaddingBottom: noPaddingBottom,
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
     >
@@ -148,7 +150,7 @@ const FeatureComponent = props => {
           </FeatureInner>
         </FeatureWrapper>
       </ContentWrapper>
-    </FeatureContainer>
+    </Container>
   )
 }
 
@@ -160,9 +162,10 @@ FeatureComponent.propTypes = {
   description: PropTypes.string,
   modules: PropTypes.arrayOf(PropTypes.object.isRequired),
   sectionPadding: PropTypes.string,
+  noPaddingBottom: PropTypes.bool,
 }
 
-const FeatureContainer = styled(Section)``
+const Container = styled(Section)``
 const Image = styled.div`
   display: block;
   width: 100%;
