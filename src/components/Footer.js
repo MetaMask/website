@@ -33,10 +33,10 @@ const StyledFooter = props => {
             </Link>
           </LogoContainer>
           <ColumnWrapper columns={4}>
-            {menus.map(menu => {
+            {menus.map((menu, index) => {
               const { title, modules } = menu
               return (
-                <MenuItem>
+                <MenuItem key={index}>
                   <MenuItemHeading>{title}</MenuItemHeading>
                   <MenuItemContent>
                     {modules && modules.length

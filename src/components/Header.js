@@ -78,6 +78,7 @@ const StyledHeader = props => {
               const active = menuActive === index
               return (
                 <NavMenu
+                  key={index}
                   active={active}
                   onMouseEnter={() => handleMenuMouseEnter(index)}
                   onMouseLeave={() => handleMenuMouseLeave(index)}

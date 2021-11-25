@@ -6,7 +6,15 @@ const Image = props => {
   const { title, description } = image || {}
   const urlImg = src ? src : parseContentfulAssetUrl(image)
   if (!urlImg) return null
-  return <img src={urlImg} alt={description || title} {...rest} />
+  return (
+    <img
+      loading={'lazy'}
+      decoding="async"
+      src={urlImg}
+      alt={description || title}
+      {...rest}
+    />
+  )
 }
 
 export default Image
