@@ -129,6 +129,7 @@ export const ContentfulLayoutFeatureFields = graphql`
     animation
     backgroundColor
     sectionPadding
+    noPaddingBottom
     cta {
       ...ContentfulCtaFields
     }
@@ -180,7 +181,6 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     paddingTop
     sectionPadding
     noPaddingBottom
-    sectionPadding
     modulesMargin
   }
 `

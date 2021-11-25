@@ -35,7 +35,7 @@ const ContentfulModuleContainer = props => {
 
   return (
     <Context.Provider value={valueContext}>
-      <Section
+      <Container
         sectionPadding={sectionPadding}
         className={classnames({
           noPaddingBottom: noPaddingBottom,
@@ -79,7 +79,7 @@ const ContentfulModuleContainer = props => {
             </Modules>
           ) : null}
         </ContentWrapper>
-      </Section>
+      </Container>
     </Context.Provider>
   )
 }
@@ -98,6 +98,8 @@ ContentfulModuleContainer.propTypes = {
     noPaddingBottom: PropTypes.bool,
   }),
 }
+
+const Container = styled(Section)``
 
 const Title = styled(SectionTitle)`
   padding-bottom: 20px;
