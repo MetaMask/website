@@ -32,4 +32,4 @@ const scrollTo = (element, duration) => {
   scrollToC(e, e.scrollTop, element, duration)
 }
 
-export default scrollTo;
+export default scrollTo
