@@ -1,4 +1,6 @@
-import { find, kebabCase, last } from 'lodash'
+import find from 'lodash/find'
+import kebabCase from 'lodash/kebabCase'
+import last from 'lodash/last'
 
 export const prettifyURL = url =>
   // strips protocol, www., and trailing slashes returing all domains names

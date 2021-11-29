@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import styled, { withTheme, keyframes, css } from 'styled-components'
+import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import { useLocation } from '@reach/router'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
@@ -233,17 +233,6 @@ HeroContainerComponent.propTypes = {
   sectionPadding: PropTypes.string,
 }
 
-const float = keyframes`
- 0% {
-		transform: translatey(0px);
-	}
-	50% {
-		transform: translatey(-20px);
-	}
-	100% {
-		transform: translatey(0px);
-	}
-`
 const HeroContainer = styled(Section)`
   display: flex;
   position: relative;
@@ -597,12 +586,6 @@ const HeroSideImage = styled.div`
   `
       : ''}
   @media (min-width: ${({ theme }) => theme.device.desktop}) {
-    animation: ${({ isFlask }) =>
-      isFlask
-        ? css`
-            ${float} 6s ease-in-out infinite
-          `
-        : 'none'};
     padding: 0 !important;
   }
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {

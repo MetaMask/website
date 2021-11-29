@@ -3,7 +3,7 @@ import Layout from '../components/layout'
 import { ToastContainer as Notifications, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { defaultTheme, purpleTheme } from '../lib/theme'
-import scrollTo from '../lib/utils/scrollToElement';
+import scrollTo from '../lib/utils/scrollToElement'
 
 /**
  * @name PageLayout
@@ -34,7 +34,6 @@ const PageLayout = props => {
 
   React.useEffect(() => {
     if (document) {
-      
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (anchor.getAttribute('href').length === 1) {
           return
@@ -44,7 +43,12 @@ const PageLayout = props => {
           const hash = this.getAttribute('href')
           const ele = document.getElementById(hash.replace('#', ''))
           const vpTop = ele.getBoundingClientRect().top
-          const y = vpTop + window.pageYOffset - 100
+          const windowY =
+            window.pageYOffset ||
+            document.documentElement.scrollTop ||
+            document.body.scrollTop ||
+            0
+          const y = vpTop + windowY - 100
           const speed = Math.min(Math.max(parseInt(vpTop), 500), 2500)
           scrollTo(y, speed)
           window.history.pushState(

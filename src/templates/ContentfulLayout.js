@@ -1,7 +1,8 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
-import { flatMapDeep, isArray } from 'lodash'
+import flatMapDeep from 'lodash/flatMapDeep'
+import isArray from 'lodash/isArray'
 import Layout from './PageLayout'
 
 /**
