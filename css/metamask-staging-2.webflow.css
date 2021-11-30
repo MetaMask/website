@@ -5193,7 +5193,7 @@ figcaption {
 }
 
 .image-36 {
-  max-width: 93%;
+  max-width: 74%;
   padding-top: 30px;
   padding-bottom: 30px;
 }
@@ -5391,6 +5391,11 @@ figcaption {
 
 .html-embed-flask {
   display: inline-block;
+}
+
+.image-25-copy-copy {
+  width: 80%;
+  margin-top: 5px;
 }
 
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
@@ -5944,6 +5949,10 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
   .flask-video-section.section-institutions-v2 {
     padding-right: 24px;
     padding-left: 24px;
+  }
+
+  .image-25-copy-copy {
+    margin-top: 29px;
   }
 }
 
@@ -6659,6 +6668,10 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
 
   .image-37 {
     max-width: 90%;
+  }
+
+  .image-25-copy-copy {
+    width: 100%;
   }
 }
 
@@ -7975,6 +7988,10 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
     border-style: none;
     border-color: #fff;
     background-color: transparent;
+  }
+
+  .image-25-copy-copy {
+    margin-bottom: -15px;
   }
 }
 
