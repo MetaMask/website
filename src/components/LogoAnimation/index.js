@@ -24,7 +24,7 @@ const LogoAnimation = props => {
       var container = document.getElementById('logo-container')
       container.appendChild(viewer.container)
     }
-  }, [])
+  }, [logoType])
   return <div id="logo-container"></div>
 }
 

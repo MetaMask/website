@@ -3,6 +3,7 @@ import Layout from '../components/layout'
 import { ToastContainer as Notifications, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { defaultTheme, purpleTheme } from '../lib/theme'
+import scrollTo from '../lib/utils/scrollToElement'
 
 /**
  * @name PageLayout
@@ -22,7 +23,6 @@ const PageLayout = props => {
           .join(' ')
           .toUpperCase()} -
         ${decodeURIComponent(description)}`
-
       toast.error(errorMessage)
     }
   }
@@ -30,43 +30,6 @@ const PageLayout = props => {
   const navigationState = (location && location.state) || {}
   if (navigationState.notification) {
     renderNotification(navigationState.notification)
-  }
-
-  // Element to move, time in ms to animate
-  const scrollTo = (element, duration) => {
-    var e = document.documentElement
-    if (e.scrollTop === 0) {
-      var t = e.scrollTop
-      ++e.scrollTop
-      e = t + 1 === e.scrollTop-- ? e : document.body
-    }
-    scrollToC(e, e.scrollTop, element, duration)
-  }
-
-  // Element to move, element or px from, element or px to, time in ms to animate
-  const scrollToC = (element, from, to, duration) => {
-    if (duration <= 0) return
-    if (typeof from === 'object') from = from.offsetTop
-    if (typeof to === 'object') to = to.offsetTop
-
-    scrollToX(element, from, to, 0, 1 / duration, 20, easeOutCuaic)
-  }
-
-  const scrollToX = (element, xFrom, xTo, t01, speed, step, motion) => {
-    if (t01 < 0 || t01 > 1 || speed <= 0) {
-      element.scrollTop = xTo
-      return
-    }
-    element.scrollTop = xFrom - (xFrom - xTo) * motion(t01)
-    t01 += speed * step
-    setTimeout(function() {
-      scrollToX(element, xFrom, xTo, t01, speed, step, motion)
-    }, step)
-  }
-
-  const easeOutCuaic = t => {
-    t--
-    return t * t * t + 1
   }
 
   React.useEffect(() => {
@@ -79,8 +42,15 @@ const PageLayout = props => {
           e.preventDefault()
           const hash = this.getAttribute('href')
           const ele = document.getElementById(hash.replace('#', ''))
-          const y = ele.getBoundingClientRect().top + window.pageYOffset - 100
-          scrollTo(y, 1500)
+          const vpTop = ele.getBoundingClientRect().top
+          const windowY =
+            window.pageYOffset ||
+            document.documentElement.scrollTop ||
+            document.body.scrollTop ||
+            0
+          const y = vpTop + windowY - 100
+          const speed = Math.min(Math.max(parseInt(vpTop), 500), 2500)
+          scrollTo(y, speed)
           window.history.pushState(
             '',
             '',
@@ -89,7 +59,7 @@ const PageLayout = props => {
         })
       })
     }
-  }, [pathname, scrollTo])
+  }, [pathname])
 
   return (
     <Layout theme={pageTheme} {...rest}>

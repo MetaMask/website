@@ -1,10 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { kebabCase } from 'lodash'
+import kebabCase from 'lodash/kebabCase'
 
 const RichText = props => {
   const { moduleId, title, html, displayTitle = true } = props
-
   return (
     <RichTextWrapper id={moduleId || kebabCase(title || '')}>
       {displayTitle && <RichTextTitle> {title} </RichTextTitle>}

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import classnames from 'classnames'
 import FaqList from '../FaqList'
-import { kebabCase } from 'lodash'
+import kebabCase from 'lodash/kebabCase'
 
 const ContentfulModuleContainer = props => {
   const {

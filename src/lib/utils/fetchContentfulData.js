@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { mapValues, flatMapDeep } from 'lodash'
+import mapValues from 'lodash/mapValues'
+import flatMapDeep from 'lodash/flatMapDeep'
 
 import {
   CONTENTFUL_SPACE_ID,
