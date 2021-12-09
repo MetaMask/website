@@ -19,7 +19,7 @@ if (env.errors) {
     siteMetadata: {
       title: 'MetaMask',
       description: `MetaMask is a ConsenSys Formation.`,
-      siteUrl: 'https://metamask.io',
+      siteUrl: activeEnv === 'development' ? 'https://metamask.consensys.net' : 'https://metamask.io',
     },
     plugins: [
       `gatsby-plugin-sass`,
