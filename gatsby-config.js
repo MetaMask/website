@@ -98,10 +98,11 @@ if (env.errors) {
             })
 
             let pages = []
+            const siteUrl = activeEnv === 'development' ? 'https://metamask.consensys.net' : site.siteMetadata.siteUrl
             allSitePage.edges.map(edge => {
               if (privatePages.indexOf(edge.node.path) === -1) {
                 pages.push({
-                  url: site.siteMetadata.siteUrl + edge.node.path,
+                  url: siteUrl + edge.node.path,
                   changefreq: `daily`,
                   priority: edge.node.path === '' ? 1 : 0.8,
                 })
@@ -125,7 +126,10 @@ if (env.errors) {
             : {
                 host: 'https://metamask.consensys.net',
                 sitemap: 'https://metamask.consensys.net/sitemap.xml',
-                policy: [{ userAgent: '*', disallow: '/' }],
+                policy: [
+                  { userAgent: '*', disallow: '/' },
+                  { userAgent: 'AccessibleWebBot', allow: '/' }
+                ],
               },
       },
       // this (optional) plugin enables Progressive Web App + Offline functionality
