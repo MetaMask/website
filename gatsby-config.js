@@ -128,7 +128,6 @@ if (env.errors) {
                 sitemap: 'https://metamask.consensys.net/sitemap.xml',
                 policy: [
                   { userAgent: '*', disallow: '/' },
-                  { userAgent: 'AccessibleWebBot', allow: '/' }
                 ],
               },
       },
