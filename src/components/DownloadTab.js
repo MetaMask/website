@@ -57,7 +57,7 @@ const TabContentDownload = props => {
 
 export default withTheme(TabContentDownload)
 
-const Heading = styled.h1`
+const Heading = styled.h2`
   font-size: 35px;
   line-height: 40px;
   font-weight: 700;

@@ -46,7 +46,9 @@ const ReturnHomeButton = styled(Link)`
   cursor: pointer;
 `
 
-const NotFoundTitle = styled.h2`
+const NotFoundTitle = styled.h1`
+  font-size: 24px;
+  line-height: 36px;
   margin-top: 20px;
   margin-bottom: 14px;
 `
