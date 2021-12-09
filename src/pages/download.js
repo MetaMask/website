@@ -87,6 +87,7 @@ const DownloadPage = props => {
       {seo && <Seo moduleConfig={{ ...seo, pagePath: location.pathname }} />}
       <Header moduleConfig={header} />
       <Container>
+        <DownloadTitle>Install MetaMask</DownloadTitle>
         <DownloadContainer appExtensions={appExtensions} />
         <DownloadBrowser browsers={browsers} />
       </Container>
@@ -231,6 +232,10 @@ export const DownloadPageQuery = graphql`
 
 const Container = styled.div`
   display: block;
+`
+
+const DownloadTitle = styled.h1`
+  display: none;
 `
 
 export default DownloadPage
