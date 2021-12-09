@@ -34,6 +34,7 @@ if (env.errors) {
         options: {
           spaceId: process.env.GATSBY_CONTENTFUL_SPACE_ID,
           accessToken: process.env.GATSBY_CONTENTFUL_API_KEY,
+          environment: process.env.GATSBY_CONTENTFUL_ENVIRONMENT,
           downloadLocal: process.env.GATSBY_CONTENTFUL_DOWNLOAD_LOCAL,
           host: process.env.GATSBY_CONTENTFUL_HOST,
         },
@@ -128,7 +129,6 @@ if (env.errors) {
                 sitemap: 'https://metamask.consensys.net/sitemap.xml',
                 policy: [
                   { userAgent: '*', disallow: '/' },
-                  { userAgent: 'AccessibleWebBot', allow: '/' }
                 ],
               },
       },
