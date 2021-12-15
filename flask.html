@@ -24,16 +24,6 @@
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-37075177-6"></script>
   <script type="text/javascript">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-37075177-6', {'anonymize_ip': true});</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bowser/1.9.4/bowser.min.js" integrity="sha384-2wrSrTEHqvdtiVAZygJZuYUeKryvoEf1n4xaniOxF7VWWtiZOMGiVx6hTop4W7Nz" crossorigin="anonymous"></script>
-  <script>
-document.getElementById("downloadButtonPageSwaps").onclick = function(){
-	if (gtag) {
-		gtag('event', 'Click', {
-		'event_category': 'Download',
-		'event_label': 'Swaps Page Buttons'
-	});
-	}
-}
-</script>
 </head>
 <body class="body-2 swaps">
   <div data-collapse="medium" data-animation="default" data-duration="200" data-easing="ease-in-out" data-easing2="ease-in-out" id="downloadButtonNav" role="banner" class="navigation-bar dark w-nav">
@@ -207,30 +197,33 @@ document.getElementById("downloadButtonPageSwaps").onclick = function(){
   <script src="js/webflow.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
   <script>
-document.getElementById("downloadButtonNav").onclick = function(){
-	if (gtag) {
-		gtag('event', 'Click', {
-		'event_category': 'Download',
-		'event_label': 'Nav Bar Button'
-	});
-	}
-}
-document.getElementById("downloadButtonPageFlaskTop").onclick = function(){
-	if (gtag) {
-		gtag('event', 'Click', {
-		'event_category': 'Download',
-		'event_label': 'Flask Store Link Button Top'
-	});
-	}
-}
-document.getElementById("downloadButtonPageFlaskBottom").onclick = function(){
-	if (gtag) {
-		gtag('event', 'Click', {
-		'event_category': 'Download',
-		'event_label': 'Flask Store Link Button Bottom'
-	});
-	}
-}
+    window.onload = function(){ 
+      document.getElementById("downloadButtonNav").onclick = function(){
+        if (gtag) {
+          gtag('event', 'Click', {
+          'event_category': 'Download',
+          'event_label': 'Nav Bar Button'
+        });
+        }
+      }
+      document.getElementById("downloadButtonPageFlaskTop").onclick = function(){
+        if (gtag) {
+          gtag('event', 'Click', {
+          'event_category': 'Download',
+          'event_label': 'Flask Store Link Button Top'
+        });
+        }
+      }
+      document.getElementById("downloadButtonPageFlaskBottom").onclick = function(){
+        if (gtag) {
+          gtag('event', 'Click', {
+          'event_category': 'Download',
+          'event_label': 'Flask Store Link Button Bottom'
+        });
+        }
+      }
+};
+
 if (bowser) {
     let downloadLink = document.querySelector('[data-download-link-for="browser"]');
     if (downloadLink && bowser.name) {
