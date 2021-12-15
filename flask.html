@@ -99,7 +99,7 @@ document.getElementById("downloadButtonPageSwaps").onclick = function(){
         </div>
         <div class="flask-hero-image"><img src="images/hero-flask-v2.png" loading="lazy" sizes="(max-width: 479px) 100vw, (max-width: 767px) 88vw, (max-width: 991px) 677.03125px, 690.046875px" srcset="images/hero-flask-v2-p-500.png 500w, images/hero-flask-v2.png 742w" alt="" class="image-36"></div>
         <div class="flask-cta">
-          <a id="downloadButtonPage" data-download-link-for="browser" rel="noreferer, noopener" href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" target="_blank" class="purple-button-flask large-button w-button">Install MetaMask Flask for Chrome</a>
+          <a id="downloadButtonPageTop" data-download-link-for="browser" rel="noreferer, noopener" href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" target="_blank" class="purple-button-flask large-button w-button">Install MetaMask Flask for Chrome</a>
         </div>
       </div>
     </div>
@@ -158,7 +158,7 @@ document.getElementById("downloadButtonPageSwaps").onclick = function(){
       </div>
       <div class="cta-flask">
         <h2 class="heading-14 flask">To get started with Snaps Download MetaMask Flask</h2>
-        <a id="downloadButtonPage" data-download-link-for2="browser" rel="noreferer, noopener" href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" target="_blank" class="purple-button-flask large-button w-button">Install MetaMask Flask for Chrome</a>
+        <a id="downloadButtonPageFlaskBottom" data-download-link-for2="browser" rel="noreferer, noopener" href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" target="_blank" class="purple-button-flask large-button w-button">Install MetaMask Flask for Chrome</a>
       </div>
     </div>
   </div>
@@ -241,6 +241,22 @@ if (bowser) {
       ;
     }
   }
+  document.getElementById("downloadButtonPageFlaskTop").onclick = function(){
+	if (gtag) {
+		gtag('event', 'Click', {
+		'event_category': 'Download',
+		'event_label': 'Flask Store Link Button Top'
+	});
+	}
+}
+document.getElementById("downloadButtonPageFlaskBottom").onclick = function(){
+	if (gtag) {
+		gtag('event', 'Click', {
+		'event_category': 'Download',
+		'event_label': 'Flask Store Link Button Bottom'
+	});
+	}
+}
 </script>
   <style> .cta svg{margin-left:auto; margin-right:auto; display:block} </style>
 </body>
