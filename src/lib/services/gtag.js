@@ -17,25 +17,45 @@ if (gtag) {
     }
   }
   
-  var downloadButtonPageHome = document.getElementsByClassName("downloadButtonPageHome");
-  if(downloadButtonPageHome.length) {
-    downloadButtonPageHome.onclick = function(){
+  var downloadHomeButtonTop = document.getElementsByClassName("downloadHomeButtonTop");
+  if(downloadHomeButtonTop.length) {
+    downloadHomeButtonTop.onclick = function(){
       gtag('event', 'Click', {
         'event_category': 'Download',
-        'event_label': 'Home Page Button'
+        'event_label': 'Home Page Button Top'
       });
     }
   } 
   
-  var downloadButtonPageSwaps = document.getElementsByClassName("downloadButtonPageSwaps");
-  if(downloadButtonPageSwaps.length) {
-    downloadButtonPageSwaps.onclick = function(){
+  var downloadHomeButtonBottom = document.getElementsByClassName("downloadHomeButtonBottom");
+  if(downloadHomeButtonBottom.length) {
+    downloadHomeButtonBottom.onclick = function(){
       gtag('event', 'Click', {
         'event_category': 'Download',
-        'event_label': 'Swaps Page Button'
+        'event_label': 'Home Page Button Bottom'
       });
     }
   } 
+  
+  var downloadSwapsButtonTop = document.getElementsByClassName("downloadSwapsButtonTop");
+  if(downloadSwapsButtonTop.length) {
+    downloadSwapsButtonTop.onclick = function(){
+      gtag('event', 'Click', {
+        'event_category': 'Download',
+        'event_label': 'Swaps Page Button Top'
+      });
+    }
+  } 
+  
+  var downloadSwapsButtonBottom = document.getElementsByClassName("downloadSwapsButtonBottom");
+  if(downloadSwapsButtonBottom.length) {
+    downloadSwapsButtonBottom.onclick = function(){
+      gtag('event', 'Click', {
+        'event_category': 'Download',
+        'event_label': 'Swaps Page Button Bottom'
+      });
+    }
+  }
   
   var downloadChromeButton = document.getElementsByClassName("downloadChromeButton");
   if(downloadChromeButton.length) {
