@@ -154,8 +154,7 @@ const HeroContainerComponent = props => {
                   isFaq={isFaq}
                   isFlask={isFlask}
                 >
-                  {' '}
-                  {headline}{' '}
+                  <div dangerouslySetInnerHTML={{ __html: headline }} />
                 </HeroTitle>
               )}
               {description && (
