@@ -27,7 +27,7 @@ const CTA = props => {
     className,
     downloadBrowsers,
   } = props
-  const [keyBrowser, setKeyBrowser] = React.useState('')
+  const [keyBrowser, setKeyBrowser] = React.useState('chrome')
   const isButton = buttonDisplay || button
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
   const icon = { ...defaultIconConfig, fill: color, ...iconConfig }
