@@ -45,9 +45,9 @@ const CTA = props => {
   React.useEffect(() => {
     if (isDownloadBrowser) {
       if (isMobile) {
-        if (isAndroid) {
+        if (isAndroid && downloadBrowsers['android']) {
           setKeyBrowser('android')
-        } else if (isIOS) {
+        } else if (isIOS && downloadBrowsers['ios']) {
           setKeyBrowser('ios')
         } else {
           setKeyBrowser('chrome')
