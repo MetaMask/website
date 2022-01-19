@@ -10,7 +10,6 @@ const theme = {
   dark: '#24292E',
   orange: '#f6851b',
   cookiesBg: '#151C24',
-  gradientFAQ: 'linear-gradient(90deg, #f5841f, #2c56dd)',
   darkerPurple: '#8A42AD',
   darkPurple: '#9F6FF0',
   lightPurple: '#A495FF',
@@ -96,6 +95,7 @@ export const defaultTheme = {
   },
   linkColor: theme.lightBlue,
   eyebrowHero: theme.darkBlue,
+  gradientFAQ: 'linear-gradient(90deg, #f5841f, #2c56dd)',
   theme: 'default',
 }
 
@@ -110,7 +110,7 @@ export const purpleTheme = {
       gradientHover: 'linear-gradient(180deg, #8A42AD 0%, #6762EB 100%)',
     },
   },
-  linkColor: theme.lightPurple,
+  linkColor: theme.darkPurple,
   eyebrowHero: theme.lightPurple,
   gradientFAQ: 'linear-gradient(90deg, #8A42AD 0%, #6762EB 100%)',
   theme: 'purple',
