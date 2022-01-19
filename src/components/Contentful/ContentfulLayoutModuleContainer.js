@@ -73,6 +73,7 @@ const ContentfulModuleContainer = props => {
                 contentfulModuleToComponent({
                   ...m,
                   hasModuleContainer: true,
+                  containerBgColor: backgroundColor,
                   color: ['dark'].includes(backgroundColor) ? 'white' : 'black',
                 })
               )}

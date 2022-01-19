@@ -4,7 +4,13 @@ import Faq from '../Faq'
 
 const ContentfulFaq = props => {
   const {
-    moduleConfig: { question, answer, contentful_id, backgroundColor },
+    moduleConfig: {
+      question,
+      answer,
+      contentful_id,
+      backgroundColor,
+      containerBgColor,
+    },
   } = props
   const { childMarkdownRemark: { html } = {} } = answer || {}
   return (
@@ -13,6 +19,7 @@ const ContentfulFaq = props => {
       question={question}
       id={contentful_id}
       backgroundColor={backgroundColor}
+      containerBgColor={containerBgColor}
     ></Faq>
   )
 }
@@ -25,5 +32,6 @@ ContentfulFaq.propTypes = {
     answer: PropTypes.object,
     contentful_id: PropTypes.string,
     backgroundColor: PropTypes.string,
+    containerBgColor: PropTypes.string,
   }),
 }
