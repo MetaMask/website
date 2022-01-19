@@ -69,6 +69,7 @@ const QuestionItem = styled.div`
   border-radius: 4px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   min-height: 80px;
+  text-align: left;
 
   ${({ backgroundColor, theme }) =>
     backgroundColor === 'gradient'
@@ -99,6 +100,7 @@ const AnswerItemInner = styled.div`
   display: block;
   padding: 30px 30px 6px 30px;
   background: #f4f6f8;
+  text-align: left;
 
   ${({ containerBgColor }) =>
     containerBgColor === 'gray' ? `background: #ffffff;` : ''}
