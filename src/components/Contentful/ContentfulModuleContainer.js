@@ -20,6 +20,7 @@ const ContentfulModuleContainer = props => {
       gridModules = true,
       gridModulesGap = '8px',
       isLiquiditySection,
+      containerBgColor,
     },
   } = props
 
@@ -56,7 +57,9 @@ const ContentfulModuleContainer = props => {
           </Content>
         ) : null}
         <ModulesWrapper splitModules={splitModules}>
-          {isFaq ? <FaqList list={faqList} /> : null}
+          {isFaq ? (
+            <FaqList list={faqList} containerBgColor={containerBgColor} />
+          ) : null}
           {modulesOther.length ? (
             <Modules
               columns={columns}

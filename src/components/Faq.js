@@ -7,7 +7,7 @@ import Context from './Context/ContextLayoutModuleContainer'
 
 const Faq = props => {
   const { faq: faqContextValue } = React.useContext(Context)
-  const { question, answer, id, backgroundColor } = props
+  const { question, answer, id, backgroundColor, containerBgColor } = props
   const { idFaqActive: activeId, setIdFaqActive: setActiveId } = faqContextValue
   const isActive = activeId === id
 
@@ -27,7 +27,7 @@ const Faq = props => {
             duration={500}
             height={isActive ? 'auto' : '0'} // see props documentation below
           >
-            <AnswerItemInner>
+            <AnswerItemInner containerBgColor={containerBgColor}>
               <div dangerouslySetInnerHTML={{ __html: answer }} />
             </AnswerItemInner>
           </AnimateHeight>
@@ -70,9 +70,10 @@ const QuestionItem = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   min-height: 80px;
 
-  ${({ backgroundColor }) =>
+  ${({ backgroundColor, theme }) =>
     backgroundColor === 'gradient'
-      ? 'background-image: linear-gradient(90deg, #f5841f, #2c56dd);font-weight: 400;'
+      ? `background-image: ${theme.gradientFAQ};
+         font-weight: 400;`
       : ''}
 
   ${({ active }) =>
@@ -98,6 +99,19 @@ const AnswerItemInner = styled.div`
   display: block;
   padding: 30px 30px 6px 30px;
   background: #f4f6f8;
+
+  ${({ containerBgColor }) =>
+    containerBgColor === 'gray' ? `background: #ffffff;` : ''}
+
+  ${({ containerBgColor }) =>
+    containerBgColor === 'dark' || containerBgColor === 'darkGray'
+      ? `background: #4c4c4c;`
+      : ''}
+  
+  
+  a {
+    color: ${({ theme }) => theme.linkColor};
+  }
 `
 const IconClose = styled.div`
   min-width: 24px;
