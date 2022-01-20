@@ -20,6 +20,8 @@ const ContentfulCta = props => {
       buttonGradient,
       className,
       downloadBrowsers,
+      eventCategory,
+      eventLabel,
     },
   } = props
   const extractBrowsers = item =>
@@ -47,6 +49,8 @@ const ContentfulCta = props => {
       buttonGradient={buttonGradient}
       className={className}
       downloadBrowsers={browsers}
+      eventCategory={eventCategory}
+      eventLabel={eventLabel}
     />
   )
 }
@@ -63,5 +67,7 @@ ContentfulCta.propTypes = {
     isButton: PropTypes.bool,
     typeLayout: PropTypes.string,
     isHideArrow: PropTypes.bool,
+    eventCategory: PropTypes.string,
+    eventLabel: PropTypes.string,
   }),
 }

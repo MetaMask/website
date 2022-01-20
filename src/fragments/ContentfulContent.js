@@ -225,6 +225,8 @@ export const ContentfulCtaFields = graphql`
     newTab
     buttonDisplay
     buttonGradient
+    eventLabel
+    eventCategory
     downloadBrowsers {
       internal {
         content

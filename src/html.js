@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import gtagScript from './lib/services/gtag'
 import accessiBeScript from './lib/services/accessibe'
 import livePersonScript from './lib/services/live-person'
 
@@ -25,13 +24,6 @@ export default class HTML extends React.Component {
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
           {this.props.postBodyComponents}
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=UA-37075177-6"
-          />
-          {process.env.NODE_ENV === 'production' && (
-            <script dangerouslySetInnerHTML={{ __html: gtagScript }} />
-          )}
           {process.env.NODE_ENV === 'production' && (
             <script dangerouslySetInnerHTML={{ __html: livePersonScript }} />
           )}
