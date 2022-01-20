@@ -15,6 +15,7 @@ export default class HTML extends React.Component {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
+          <script dangerouslySetInnerHTML={{ __html: redirect }} />
           {this.props.headComponents}
         </head>
         <body {...this.props.bodyAttributes}>
@@ -25,7 +26,6 @@ export default class HTML extends React.Component {
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
           {this.props.postBodyComponents}
-          <script dangerouslySetInnerHTML={{ __html: redirect }} />
           {process.env.NODE_ENV === 'production' && (
             <script dangerouslySetInnerHTML={{ __html: livePersonScript }} />
           )}
