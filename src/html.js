@@ -15,8 +15,8 @@ export default class HTML extends React.Component {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
-          <script dangerouslySetInnerHTML={{ __html: redirect }} />
           {this.props.headComponents}
+          <script dangerouslySetInnerHTML={{ __html: redirect }} />
         </head>
         <body {...this.props.bodyAttributes}>
           {this.props.preBodyComponents}
