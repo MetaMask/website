@@ -35,8 +35,8 @@ const CTA = props => {
   const icon = { ...defaultIconConfig, fill: color, ...iconConfig }
   const isDownloadBrowser = !isEmpty(downloadBrowsers)
   const handleCustomClick = e => {
-    e.preventDefault()
     if(customClick){
+      e.preventDefault()
       customClick()
     }
     if(eventCategory && eventLabel) {
