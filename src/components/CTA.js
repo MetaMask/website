@@ -120,7 +120,7 @@ const CTAContainer = styled.div`
 const ContentWrapper = styled(Link)`
   transition: all 0.15s ease;
   text-decoration: none;
- 
+
   ${({ typeLayout, color, theme }) =>
     typeLayout === ''
       ? `

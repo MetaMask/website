@@ -42,7 +42,7 @@ if (gtag) {
     downloadSwapsButtonTop.onclick = function(){
       gtag('event', 'Click', {
         'event_category': 'Download',
-        'event_label': 'Swaps Page Button Top'
+        'event_label': 'Swaps Link Button Top'
       });
     }
   } 
@@ -52,7 +52,7 @@ if (gtag) {
     downloadSwapsButtonBottom.onclick = function(){
       gtag('event', 'Click', {
         'event_category': 'Download',
-        'event_label': 'Swaps Page Button Bottom'
+        'event_label': 'Swaps Link Button Bottom'
       });
     }
   }
