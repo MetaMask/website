@@ -218,13 +218,14 @@ export const ContentfulCtaFields = graphql`
     internal {
       type
     }
-    className
     fontSize
     ctaLink
     displayText
     newTab
     buttonDisplay
     buttonGradient
+    eventLabel
+    eventCategory
     downloadBrowsers {
       internal {
         content
