@@ -25,7 +25,6 @@ const CTA = props => {
     buttonDisplay,
     fontSize,
     buttonGradient,
-    className,
     downloadBrowsers,
     eventCategory,
     eventLabel,
@@ -86,7 +85,6 @@ const CTA = props => {
         customClick={handleCustomClick}
         fontSize={fontSize}
         buttonGradient={buttonGradient}
-        className={className}
         eventCategory={eventCategory}
         eventLabel={eventLabel}
       />
@@ -100,7 +98,6 @@ const CTA = props => {
         newTab={newTab || isDownloadBrowser}
         color={color}
         typeLayout={typeLayout}
-        className={className}
         onClick={handleCustomClick}
       >
         {text} {!isHideArrow ? <Arrow {...icon} /> : null}

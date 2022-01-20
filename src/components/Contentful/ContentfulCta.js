@@ -18,7 +18,6 @@ const ContentfulCta = props => {
       customClick,
       fontSize,
       buttonGradient,
-      className,
       downloadBrowsers,
       eventCategory,
       eventLabel,
@@ -47,7 +46,6 @@ const ContentfulCta = props => {
       customClick={customClick}
       fontSize={fontSize}
       buttonGradient={buttonGradient}
-      className={className}
       downloadBrowsers={browsers}
       eventCategory={eventCategory}
       eventLabel={eventLabel}
@@ -59,7 +57,6 @@ export default ContentfulCta
 
 ContentfulCta.propTypes = {
   moduleConfig: PropTypes.shape({
-    className: PropTypes.string,
     ctaAlignment: PropTypes.string,
     ctaLink: PropTypes.string,
     newTab: PropTypes.bool,

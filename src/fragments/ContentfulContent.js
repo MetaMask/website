@@ -218,7 +218,6 @@ export const ContentfulCtaFields = graphql`
     internal {
       type
     }
-    className
     fontSize
     ctaLink
     displayText
