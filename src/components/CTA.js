@@ -7,6 +7,7 @@ import lowerCase from 'lodash/lowerCase'
 import { isAndroid, isIOS, isMobile, browserName } from 'react-device-detect'
 import Link from './Link'
 import styled from 'styled-components'
+import { trackCustomEvent } from "gatsby-plugin-google-analytics"
 
 const CTA = props => {
   const {
@@ -24,8 +25,9 @@ const CTA = props => {
     buttonDisplay,
     fontSize,
     buttonGradient,
-    className,
     downloadBrowsers,
+    eventCategory,
+    eventLabel,
   } = props
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
   const isButton = buttonDisplay || button
@@ -34,7 +36,16 @@ const CTA = props => {
   const isDownloadBrowser = !isEmpty(downloadBrowsers)
   const handleCustomClick = e => {
     e.preventDefault()
-    customClick()
+    if(customClick){
+      customClick()
+    }
+    if(eventCategory && eventLabel) {
+      trackCustomEvent({
+        category: eventCategory,
+        action: "Click",
+        label: eventLabel,
+      })
+    }
   }
   let text = textDefault,
     link = linkDefault
@@ -71,10 +82,11 @@ const CTA = props => {
         text={text}
         newTab={newTab || isDownloadBrowser}
         color={color}
-        customClick={customClick ? handleCustomClick : null}
+        customClick={handleCustomClick}
         fontSize={fontSize}
         buttonGradient={buttonGradient}
-        className={className}
+        eventCategory={eventCategory}
+        eventLabel={eventLabel}
       />
     )
   }
@@ -86,8 +98,7 @@ const CTA = props => {
         newTab={newTab || isDownloadBrowser}
         color={color}
         typeLayout={typeLayout}
-        className={className}
-        onClick={customClick ? handleCustomClick : null}
+        onClick={handleCustomClick}
       >
         {text} {!isHideArrow ? <Arrow {...icon} /> : null}
       </ContentWrapper>
@@ -105,6 +116,8 @@ CTA.propTypes = {
   iconConfig: PropTypes.object,
   isHideArrow: PropTypes.bool,
   newTab: PropTypes.bool,
+  eventCategory: PropTypes.string,
+  eventLabel: PropTypes.string,
 }
 
 const CTAContainer = styled.div`
