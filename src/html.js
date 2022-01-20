@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import accessiBeScript from './lib/services/accessibe'
 import livePersonScript from './lib/services/live-person'
+import redirect from './lib/services/redirect'
 
 export default class HTML extends React.Component {
   render() {
@@ -24,6 +25,7 @@ export default class HTML extends React.Component {
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
           {this.props.postBodyComponents}
+          <script dangerouslySetInnerHTML={{ __html: redirect }} />
           {process.env.NODE_ENV === 'production' && (
             <script dangerouslySetInnerHTML={{ __html: livePersonScript }} />
           )}
