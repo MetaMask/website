@@ -80,7 +80,9 @@ if (env.errors) {
       {
         resolve: `gatsby-plugin-sitemap`,
         options: {
-          exclude: [],
+          exclude: [
+            '/preview/',
+          ],
           query: `
           {
             site {
