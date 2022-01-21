@@ -7,6 +7,7 @@
   "scripts": {
     "develop": "gatsby develop",
     "build": "gatsby build",
+    "build:dev": "ACTIVE_ENV=development gatsby build",
     "deploy": "yarn build && touch public/.nojekyll && touch public/CNAME && echo \"metamask.io\" >> public/CNAME",
     "serve": "gatsby serve --port 8000",
     "clean": "rm -rf node_modules; rm -rf .cache; rm -rf public; yarn install;",
