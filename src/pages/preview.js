@@ -26,7 +26,6 @@ class PreviewPage extends React.PureComponent {
     if(location && location.search && qs.parse(location.search).module_id ) {
       const id = qs.parse(location.search).module_id;
       const moduleConfig = await fetchContentfulModule(id);
-      console.log(moduleConfig);
       return this.setState({
         loading: false,
         moduleConfig
