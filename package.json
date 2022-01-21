@@ -11,7 +11,7 @@
     "deploy": "yarn build && touch public/.nojekyll && touch public/CNAME && echo \"metamask.io\" >> public/CNAME",
     "serve": "gatsby serve --port 8000",
     "clean": "rm -rf node_modules; rm -rf .cache; rm -rf public; yarn install;",
-    "start": "yarn develop",
+    "start": "ACTIVE_ENV=preview gatsby develop",
     "format": "prettier --write \"src/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint:css": "stylelint './src/**/*.js'"
