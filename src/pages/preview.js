@@ -57,6 +57,9 @@ class PreviewPage extends React.PureComponent {
     if(moduleConfigUpdate.hasOwnProperty('answer')) {
       moduleConfigUpdate.answer = {childMarkdownRemark: {html: moduleConfig.answer}};
     }
+    if(moduleConfigUpdate.hasOwnProperty('embed')) {
+      moduleConfigUpdate.embed = {embed: moduleConfig.embed};
+    }
     console.log(moduleConfigUpdate);
     return (
       <Layout>
