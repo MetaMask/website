@@ -4,6 +4,7 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import flatMapDeep from 'lodash/flatMapDeep'
 import isArray from 'lodash/isArray'
 import Layout from './PageLayout'
+import Context from '../Context/ContextPage'
 
 /**
  * @name ContentfulLayout
@@ -34,6 +35,14 @@ const ContentfulLayout = props => {
     ...rest
   } = props
 
+  const [idFaqActive, setIdFaqActive] = React.useState('')
+  const valueContext = {
+    faq: {
+      idFaqActive,
+      setIdFaqActive,
+    },
+  }
+
   // takes all modules single content type for a page and returns all instances
   const getNodes = mods => {
     if (!mods) return
@@ -58,13 +67,16 @@ const ContentfulLayout = props => {
   }, Array(modules.length - 1)) // prepopulate array so we can insert last elements if they appear first
 
   const allModules = [header, ...orderedPageModules, footer]
+  
   return (
-    <Layout {...rest} themeColor={themeColor}>
-      {seo && contentfulModuleToComponent({ ...seo, pagePath: pathBuild })}
-      {allModules.map(module =>
-        contentfulModuleToComponent({ ...module, isFaq: isFaqLayout })
-      )}
-    </Layout>
+    <Context.Provider value={valueContext}>
+      <Layout {...rest} themeColor={themeColor}>
+        {seo && contentfulModuleToComponent({ ...seo, pagePath: pathBuild })}
+        {allModules.map(module =>
+          contentfulModuleToComponent({ ...module, isFaq: isFaqLayout })
+        )}
+      </Layout>
+    </Context.Provider>
   )
 }
 

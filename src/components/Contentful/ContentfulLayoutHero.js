@@ -25,6 +25,7 @@ const ContentfulLayoutHero = props => {
       headlineBorderBottom,
       isFaq,
       sectionPadding,
+      previewMode,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -36,7 +37,7 @@ const ContentfulLayoutHero = props => {
       sectionPadding={sectionPadding}
       isFaq={isFaq}
       headline={headline}
-      description={html}
+      description={previewMode ? description : html}
       eyebrow={eyebrow}
       eyebrowLogo={eyebrowLogo}
       eyebrowMobileLogo={eyebrowMobileLogo}
@@ -70,7 +71,10 @@ ContentfulLayoutHero.propTypes = {
     ctaText: PropTypes.string,
     backgroundColor: PropTypes.string,
     layout: PropTypes.string,
-    description: PropTypes.object,
+    description: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.string,
+    ]),
     headline: PropTypes.string,
     hideHeadline: PropTypes.bool,
     headlineBorderBottom: PropTypes.bool,

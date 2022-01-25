@@ -89,10 +89,9 @@ const handleModuleResponse = response => {
   const internal = {
     type: `Contentful${type.charAt(0).toUpperCase() + type.slice(1)}`,
   }
-
   const nestedModules = getNestedModules(moduleConfig)
   const allModuleRequests = resolveModuleRequests(nestedModules)
-
+  
   return Promise.all(allModuleRequests)
     .then(result => {
       const resolvedModules = result.reduce((acc, key, i) => {

@@ -4,6 +4,7 @@ import { ToastContainer as Notifications, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { defaultTheme, purpleTheme } from '../lib/theme'
 import scrollTo from '../lib/utils/scrollToElement'
+import Context from '../Context/ContextPage'
 
 /**
  * @name PageLayout
@@ -14,6 +15,13 @@ const PageLayout = props => {
   const { location, children, themeColor, ...rest } = props
   const { pathname } = location || {}
   const pageTheme = themeColor === 'purple' ? purpleTheme : defaultTheme
+  const [idFaqActive, setIdFaqActive] = React.useState('')
+  const valueContext = {
+    faq: {
+      idFaqActive,
+      setIdFaqActive,
+    },
+  }
   const renderNotification = (state = {}) => {
     if (state.error) {
       const { type, description } = state.error
@@ -62,10 +70,12 @@ const PageLayout = props => {
   }, [pathname])
 
   return (
-    <Layout theme={pageTheme} {...rest}>
-      <Notifications />
-      {children}
-    </Layout>
+    <Context.Provider value={valueContext}>
+      <Layout theme={pageTheme} {...rest}>
+        <Notifications />
+        {children}
+      </Layout>
+    </Context.Provider>
   )
 }
 

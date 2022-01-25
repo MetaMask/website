@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import classnames from 'classnames'
 import { SectionTitle, Section } from '../StyledGeneral'
-import Context from '../Context/ContextLayoutModuleContainer'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -25,63 +24,54 @@ const ContentfulModuleContainer = props => {
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
-  const [idFaqActive, setIdFaqActive] = React.useState('')
-  const valueContext = {
-    faq: {
-      idFaqActive,
-      setIdFaqActive,
-    },
-  }
 
   return (
-    <Context.Provider value={valueContext}>
-      <Container
-        sectionPadding={sectionPadding}
-        className={classnames({
-          noPaddingBottom: noPaddingBottom,
-          [`bg-${backgroundColor}`]: backgroundColor,
-        })}
-      >
-        <ContentWrapper>
-          {(headline && displayHeadline) || html ? (
-            <ContentInfo paddingTop={paddingTop}>
-              {headline && displayHeadline ? (
-                <Title
-                  className={classnames({
-                    'txt-center': headlineAlignCenter,
-                  })}
-                >
-                  {headline}
-                </Title>
-              ) : null}
-              {html ? (
-                <SubInfo
-                  className={classnames({
-                    'txt-center': contentAlignCenter,
-                  })}
-                  dangerouslySetInnerHTML={{ __html: html }}
-                />
-              ) : null}
-            </ContentInfo>
-          ) : null}
-          {modules && modules.length ? (
-            <Modules
-              contentAlignCenter={contentAlignCenter}
-              modulesMargin={modulesMargin}
-            >
-              {modules.map(m =>
-                contentfulModuleToComponent({
-                  ...m,
-                  hasModuleContainer: true,
-                  containerBgColor: backgroundColor,
-                  color: ['dark'].includes(backgroundColor) ? 'white' : 'black',
-                })
-              )}
-            </Modules>
-          ) : null}
-        </ContentWrapper>
-      </Container>
-    </Context.Provider>
+    <Container
+      sectionPadding={sectionPadding}
+      className={classnames({
+        noPaddingBottom: noPaddingBottom,
+        [`bg-${backgroundColor}`]: backgroundColor,
+      })}
+    >
+      <ContentWrapper>
+        {(headline && displayHeadline) || html ? (
+          <ContentInfo paddingTop={paddingTop}>
+            {headline && displayHeadline ? (
+              <Title
+                className={classnames({
+                  'txt-center': headlineAlignCenter,
+                })}
+              >
+                {headline}
+              </Title>
+            ) : null}
+            {html ? (
+              <SubInfo
+                className={classnames({
+                  'txt-center': contentAlignCenter,
+                })}
+                dangerouslySetInnerHTML={{ __html: html }}
+              />
+            ) : null}
+          </ContentInfo>
+        ) : null}
+        {modules && modules.length ? (
+          <Modules
+            contentAlignCenter={contentAlignCenter}
+            modulesMargin={modulesMargin}
+          >
+            {modules.map(m =>
+              contentfulModuleToComponent({
+                ...m,
+                hasModuleContainer: true,
+                containerBgColor: backgroundColor,
+                color: ['dark'].includes(backgroundColor) ? 'white' : 'black',
+              })
+            )}
+          </Modules>
+        ) : null}
+      </ContentWrapper>
+    </Container>
   )
 }
 

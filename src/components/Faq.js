@@ -3,12 +3,12 @@ import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import PlusIcon from '../images/icons/icon-plus.svg'
 import AnimateHeight from 'react-animate-height'
-import Context from './Context/ContextLayoutModuleContainer'
+import Context from '../Context/ContextPage'
 
 const Faq = props => {
   const { faq: faqContextValue } = React.useContext(Context)
   const { question, answer, id, backgroundColor, containerBgColor } = props
-  const { idFaqActive: activeId, setIdFaqActive: setActiveId } = faqContextValue
+  const { idFaqActive: activeId, setIdFaqActive: setActiveId } = faqContextValue || {}
   const isActive = activeId === id
 
   return (

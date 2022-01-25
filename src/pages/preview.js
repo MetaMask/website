@@ -2,10 +2,10 @@ import React from 'react';
 import qs from 'query-string';
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent';
 import { fetchContentfulModule } from '../lib/utils/fetchContentfulData';
-
 import ContentWrapper from '../components/ContentWrapper';
 import Hero from '../components/HeroContainer';
 import Layout  from '../templates/PageLayout';
+import styled from 'styled-components'
 
 class PreviewPage extends React.PureComponent {
   constructor(props) {
@@ -50,34 +50,35 @@ class PreviewPage extends React.PureComponent {
       contentful_id,
       internal
     } = moduleConfig;
-    let moduleConfigUpdate = moduleConfig;
-    if(moduleConfigUpdate.hasOwnProperty('htmlBody')) {
-      moduleConfigUpdate.htmlBody = {childMarkdownRemark: {html: moduleConfig.htmlBody}};
-    }
-    if(moduleConfigUpdate.hasOwnProperty('answer')) {
-      moduleConfigUpdate.answer = {childMarkdownRemark: {html: moduleConfig.answer}};
-    }
-    if(moduleConfigUpdate.hasOwnProperty('embed')) {
-      moduleConfigUpdate.embed = {embed: moduleConfig.embed};
-    }
-    console.log(moduleConfigUpdate);
+    let moduleConfigUpdate = {
+      ...moduleConfig,
+      previewMode: true,
+    };
+    
     return (
       <Layout>
-        <Hero
-          headline="MetaMask Module Preview Page"
-          description={loading ?
-            `...Loading` :
-            `Previewing component ${internal && internal.type}`}
-        />
-        <ContentWrapper>
+        {internal && internal.type !== 'ContentfulLayout' ? (
+          <Hero
+            headline="MetaMask Module Preview Page"
+            description={loading ?
+              `...Loading` :
+              `Previewing component ${internal && internal.type}`}
+          />
+        ) : null}
+        <PreviewWrapper customPreview={internal && internal.type !== 'ContentfulLayout'}>
           {contentful_id && internal.type &&
           contentfulModuleToComponent(moduleConfigUpdate)}
-        </ContentWrapper>
+        </PreviewWrapper>
         {error && <h4> Failed to load component: {error.message}</h4>}
       </Layout>
 
     );
   }
 }
+
+const PreviewWrapper = styled(ContentWrapper)`
+  ${({ customPreview }) =>
+    customPreview ? `padding-bottom: 48px;` : ''}
+`;
 
 export default PreviewPage;

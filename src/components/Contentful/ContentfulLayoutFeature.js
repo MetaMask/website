@@ -24,6 +24,7 @@ const ContentfulLayoutFeature = props => {
       sectionPadding,
       noPaddingBottom,
       cta,
+      previewMode,
     },
   } = props
 
@@ -34,7 +35,7 @@ const ContentfulLayoutFeature = props => {
       imageMobile={imageMobile}
       imageLink={imageLink}
       eyebrow={eyebrow}
-      description={html}
+      description={previewMode ? description : html}
       headline={headline}
       image={image}
       alignItemsCenter={alignItemsCenter}
@@ -60,7 +61,10 @@ ContentfulLayoutFeature.propTypes = {
   moduleConfig: PropTypes.shape({
     eyebrow: PropTypes.string,
     headline: PropTypes.string,
-    description: PropTypes.object,
+    description: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.string,
+    ]),
     cta: PropTypes.object,
     noPaddingBottom: PropTypes.bool,
   }),

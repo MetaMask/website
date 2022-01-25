@@ -10,12 +10,13 @@ const ContentfulEmbed = props => {
       title,
       displayTitle,
       moduleId,
+      previewMode
     },
   } = props
   return (
     <Wrapper id={moduleId}>
       {title && displayTitle ? <Title>{title}</Title> : null}
-      <EmbedHtml dangerouslySetInnerHTML={{ __html: embed }} />
+      <EmbedHtml dangerouslySetInnerHTML={{ __html: previewMode ? props.moduleConfig.embed : embed }} />
     </Wrapper>
   )
 }
@@ -26,9 +27,12 @@ ContentfulEmbed.propTypes = {
   moduleConfig: PropTypes.shape({
     displayTitle: PropTypes.bool,
     title: PropTypes.string,
-    embed: PropTypes.shape({
-      embed: PropTypes.string.isRequired,
-    }).isRequired,
+    embed: PropTypes.oneOfType([
+      PropTypes.shape({
+        embed: PropTypes.string.isRequired,
+      }),
+      PropTypes.string,
+    ]),
     moduleId: PropTypes.string,
   }),
 }
