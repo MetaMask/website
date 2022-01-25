@@ -50,19 +50,25 @@ class PreviewPage extends React.PureComponent {
       contentful_id,
       internal
     } = moduleConfig;
+    let moduleConfigUpdate = moduleConfig;
+    if(moduleConfigUpdate.hasOwnProperty('htmlBody')) {
+      moduleConfigUpdate.htmlBody = {childMarkdownRemark: {html: moduleConfig.htmlBody}};
+    }
+    if(moduleConfigUpdate.hasOwnProperty('answer')) {
+      moduleConfigUpdate.answer = {childMarkdownRemark: {html: moduleConfig.answer}};
+    }
+    console.log(moduleConfigUpdate);
     return (
       <Layout>
         <Hero
           headline="MetaMask Module Preview Page"
+          description={loading ?
+            `...Loading` :
+            `Previewing component ${internal && internal.type}`}
         />
         <ContentWrapper>
-          <h4>
-            {loading ?
-              `...LOADING` :
-              `Previewing component ${internal && internal.type}`}
-          </h4>
           {contentful_id && internal.type &&
-          contentfulModuleToComponent(moduleConfig)}
+          contentfulModuleToComponent(moduleConfigUpdate)}
         </ContentWrapper>
         {error && <h4> Failed to load component: {error.message}</h4>}
       </Layout>
