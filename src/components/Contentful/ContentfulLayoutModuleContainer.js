@@ -20,11 +20,12 @@ const ContentfulModuleContainer = props => {
       modules,
       sectionPadding,
       modulesMargin,
+      previewMode,
     },
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
-
+  const htmlData = previewMode ? description : html;
   return (
     <Container
       sectionPadding={sectionPadding}
@@ -34,7 +35,7 @@ const ContentfulModuleContainer = props => {
       })}
     >
       <ContentWrapper>
-        {(headline && displayHeadline) || html ? (
+        {(headline && displayHeadline) || htmlData ? (
           <ContentInfo paddingTop={paddingTop}>
             {headline && displayHeadline ? (
               <Title
@@ -45,12 +46,12 @@ const ContentfulModuleContainer = props => {
                 {headline}
               </Title>
             ) : null}
-            {html ? (
+            {htmlData ? (
               <SubInfo
                 className={classnames({
                   'txt-center': contentAlignCenter,
                 })}
-                dangerouslySetInnerHTML={{ __html: html }}
+                dangerouslySetInnerHTML={{ __html: htmlData }}
               />
             ) : null}
           </ContentInfo>
@@ -80,7 +81,10 @@ export default ContentfulModuleContainer
 ContentfulModuleContainer.propTypes = {
   moduleConfig: PropTypes.shape({
     title: PropTypes.string,
-    description: PropTypes.object,
+    description: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.string,
+    ]),
     paddingTop: PropTypes.string,
     backgroundColor: PropTypes.string,
     headlineAlignCenter: PropTypes.bool,

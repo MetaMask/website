@@ -98,9 +98,13 @@ const AnswerItem = styled.div`
 const AnswerItemInner = styled.div`
   border-radius: 0 0 4px 4px;
   display: block;
-  padding: 30px 30px 6px 30px;
+  padding: 30px;
   background: #f4f6f8;
   text-align: left;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
 
   ${({ containerBgColor }) =>
     containerBgColor === 'gray' ? `background: #ffffff;` : ''}
