@@ -21,10 +21,12 @@ const ContentfulModuleContainer = props => {
       gridModulesGap = '8px',
       isLiquiditySection,
       containerBgColor,
+      previewMode,
     },
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
+  const htmlData = previewMode ? description : html;
   const faqList =
     modules && modules.length
       ? modules.filter(modules => modules.__typename === 'ContentfulFaq')
@@ -41,17 +43,17 @@ const ContentfulModuleContainer = props => {
       id={kebabCase(title || '')}
     >
       <Inner splitModules={splitModules}>
-        {title || html ? (
+        {title || htmlData ? (
           <Content splitModules={splitModules}>
             {title && displayTitle ? (
               <Title isFaq={isFaq}>{title}</Title>
             ) : null}
-            {html ? (
+            {htmlData ? (
               <div
                 className={classnames({
                   'txt-center': contentAlignment === 'center',
                 })}
-                dangerouslySetInnerHTML={{ __html: html }}
+                dangerouslySetInnerHTML={{ __html: htmlData }}
               />
             ) : null}
           </Content>
