@@ -64,6 +64,7 @@ const ContentfulModuleContainer = props => {
             {modules.map(m =>
               contentfulModuleToComponent({
                 ...m,
+                previewMode,
                 hasModuleContainer: true,
                 containerBgColor: backgroundColor,
                 color: ['dark'].includes(backgroundColor) ? 'white' : 'black',

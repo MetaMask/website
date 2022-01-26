@@ -75,6 +75,7 @@ const ContentfulModuleContainer = props => {
               {modulesOther.map(m =>
                 contentfulModuleToComponent({
                   ...m,
+                  previewMode,
                 })
               )}
             </Modules>
