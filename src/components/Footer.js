@@ -10,12 +10,8 @@ const StyledFooter = props => {
   const {
     menus,
     copyright,
-    logo: {
-      title,
-      logo: {
-        file: { url: srcLogo },
-      },
-    },
+    logoTitle,
+    logoUrl,
   } = props
 
   return (
@@ -28,7 +24,7 @@ const StyledFooter = props => {
           <LogoContainer>
             <Link to="/">
               <LogoWrapper>
-                <Logo src={srcLogo} alt={title} />
+                <Logo src={logoUrl} alt={logoTitle} />
               </LogoWrapper>
             </Link>
           </LogoContainer>

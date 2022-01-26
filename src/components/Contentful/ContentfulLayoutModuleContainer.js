@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import classnames from 'classnames'
 import { SectionTitle, Section } from '../StyledGeneral'
-import Context from '../Context/ContextLayoutModuleContainer'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -21,67 +20,60 @@ const ContentfulModuleContainer = props => {
       modules,
       sectionPadding,
       modulesMargin,
+      previewMode,
     },
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
-  const [idFaqActive, setIdFaqActive] = React.useState('')
-  const valueContext = {
-    faq: {
-      idFaqActive,
-      setIdFaqActive,
-    },
-  }
-
+  const htmlData = previewMode ? description : html;
   return (
-    <Context.Provider value={valueContext}>
-      <Container
-        sectionPadding={sectionPadding}
-        className={classnames({
-          noPaddingBottom: noPaddingBottom,
-          [`bg-${backgroundColor}`]: backgroundColor,
-        })}
-      >
-        <ContentWrapper>
-          {(headline && displayHeadline) || html ? (
-            <ContentInfo paddingTop={paddingTop}>
-              {headline && displayHeadline ? (
-                <Title
-                  className={classnames({
-                    'txt-center': headlineAlignCenter,
-                  })}
-                >
-                  {headline}
-                </Title>
-              ) : null}
-              {html ? (
-                <SubInfo
-                  className={classnames({
-                    'txt-center': contentAlignCenter,
-                  })}
-                  dangerouslySetInnerHTML={{ __html: html }}
-                />
-              ) : null}
-            </ContentInfo>
-          ) : null}
-          {modules && modules.length ? (
-            <Modules
-              contentAlignCenter={contentAlignCenter}
-              modulesMargin={modulesMargin}
-            >
-              {modules.map(m =>
-                contentfulModuleToComponent({
-                  ...m,
-                  hasModuleContainer: true,
-                  containerBgColor: backgroundColor,
-                  color: ['dark'].includes(backgroundColor) ? 'white' : 'black',
-                })
-              )}
-            </Modules>
-          ) : null}
-        </ContentWrapper>
-      </Container>
-    </Context.Provider>
+    <Container
+      sectionPadding={sectionPadding}
+      className={classnames({
+        noPaddingBottom: noPaddingBottom,
+        [`bg-${backgroundColor}`]: backgroundColor,
+      })}
+    >
+      <ContentWrapper>
+        {(headline && displayHeadline) || htmlData ? (
+          <ContentInfo paddingTop={paddingTop}>
+            {headline && displayHeadline ? (
+              <Title
+                className={classnames({
+                  'txt-center': headlineAlignCenter,
+                })}
+              >
+                {headline}
+              </Title>
+            ) : null}
+            {htmlData ? (
+              <SubInfo
+                className={classnames({
+                  'txt-center': contentAlignCenter,
+                })}
+                dangerouslySetInnerHTML={{ __html: htmlData }}
+              />
+            ) : null}
+          </ContentInfo>
+        ) : null}
+        {modules && modules.length ? (
+          <Modules
+            contentAlignCenter={contentAlignCenter}
+            modulesMargin={modulesMargin}
+          >
+            {modules.map(m =>
+              contentfulModuleToComponent({
+                ...m,
+                previewMode,
+                hasModuleContainer: true,
+                containerBgColor: backgroundColor,
+                color: ['dark'].includes(backgroundColor) ? 'white' : 'black',
+              })
+            )}
+          </Modules>
+        ) : null}
+      </ContentWrapper>
+    </Container>
   )
 }
 
@@ -90,7 +82,10 @@ export default ContentfulModuleContainer
 ContentfulModuleContainer.propTypes = {
   moduleConfig: PropTypes.shape({
     title: PropTypes.string,
-    description: PropTypes.object,
+    description: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.string,
+    ]),
     paddingTop: PropTypes.string,
     backgroundColor: PropTypes.string,
     headlineAlignCenter: PropTypes.bool,
