@@ -28,7 +28,6 @@
     "gatsby-cli": "^2.7.57",
     "gatsby-image": "^2.2.25",
     "gatsby-plugin-google-analytics": "^4.6.0",
-    "gatsby-plugin-google-gtag": "^4.6.0",
     "gatsby-plugin-manifest": "^2.2.21",
     "gatsby-plugin-offline": "^3.0.13",
     "gatsby-plugin-preact": "^4.7.0",
