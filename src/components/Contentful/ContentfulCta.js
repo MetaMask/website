@@ -23,8 +23,9 @@ const ContentfulCta = props => {
       eventLabel,
     },
   } = props
+  // check work with preview
   const extractBrowsers = item =>
-    item ? JSON.parse(item.internal.content) : null
+  item?.internal?.content ? JSON.parse(item.internal.content) : item
   const arrayBrowsers = downloadBrowsers
     ? downloadBrowsers.map(extractBrowsers)
     : []

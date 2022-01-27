@@ -14,12 +14,13 @@ const ContentfulLayoutFullWidthCta = props => {
       cta,
       logoType,
       sectionPadding,
+      previewMode,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
   return (
     <FullwidthCta
-      description={html}
+      description={previewMode ? description : html}
       showLogoAnimation={showLogoAnimation}
       backgroundColor={backgroundColor}
       headline={headline}
@@ -36,7 +37,10 @@ export default ContentfulLayoutFullWidthCta
 
 ContentfulLayoutFullWidthCta.propTypes = {
   moduleConfig: PropTypes.shape({
-    description: PropTypes.object,
+    description: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.string,
+    ]),
     headline: PropTypes.string,
     ctaLink: PropTypes.string,
     ctaText: PropTypes.string,

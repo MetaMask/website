@@ -1,6 +1,6 @@
 import axios from 'axios'
 import mapValues from 'lodash/mapValues'
-import flatMapDeep from 'lodash/flatMapDeep'
+import flatMap from 'lodash/flatMap'
 
 import {
   CONTENTFUL_SPACE_ID,
@@ -89,10 +89,9 @@ const handleModuleResponse = response => {
   const internal = {
     type: `Contentful${type.charAt(0).toUpperCase() + type.slice(1)}`,
   }
-
   const nestedModules = getNestedModules(moduleConfig)
   const allModuleRequests = resolveModuleRequests(nestedModules)
-
+  
   return Promise.all(allModuleRequests)
     .then(result => {
       const resolvedModules = result.reduce((acc, key, i) => {
@@ -167,10 +166,15 @@ const getNestedModules = moduleConfig => {
 }
 
 const resolveModuleRequests = modules => {
-  return flatMapDeep(modules, (mod, key) => {
+  return flatMap(modules, (mod, key) => {
     // Check if module is a Promise API request to get more module data
     // return to array to await all module data before rendering
     // https://stackoverflow.com/questions/27746304/how-do-i-tell-if-an-object-is-a-promise/38339199#38339199
+    if (Array.isArray(mod)){
+      const promiseList = mod.map(e => e.mod);
+      return [key, Promise.all(promiseList)]
+      
+    }
     return Promise.resolve(mod) === mod ? [key, mod] : null
   }).filter(mod => !!mod)
 }
