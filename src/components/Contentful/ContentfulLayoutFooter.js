@@ -5,10 +5,10 @@ import Footer from '../Footer'
 
 const ContentfulLayoutFooter = props => {
   const {
-    moduleConfig: { logo, menuItems, copyright },
+    moduleConfig: { logo, menuItems, copyright, previewMode },
   } = props
-
-  return <Footer logo={logo} menus={menuItems} copyright={copyright} />
+  const logoUrl = previewMode ? logo.logo.assetUrl : logo.logo.file.url;
+  return <Footer logo={logo} logoTitle={logo.title} logoUrl={logoUrl} menus={menuItems} copyright={copyright} />
 }
 
 export default ContentfulLayoutFooter

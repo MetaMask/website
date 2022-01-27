@@ -13,13 +13,14 @@ const ContentfulCard = props => {
       backgroundColor,
       showArrowIcon,
       imageMargin,
+      previewMode,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
 
   return (
     <Card
-      description={html}
+      description={previewMode ? description : html}
       title={title}
       image={image}
       link={link}
@@ -35,7 +36,10 @@ export default ContentfulCard
 
 ContentfulCard.propTypes = {
   moduleConfig: PropTypes.shape({
-    description: PropTypes.object,
+    description: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.string,
+    ]),
     link: PropTypes.string,
     title: PropTypes.string,
     image: PropTypes.object,

@@ -10,12 +10,13 @@ const ContentfulFaq = props => {
       contentful_id,
       backgroundColor,
       containerBgColor,
+      previewMode,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = answer || {}
   return (
     <Faq
-      answer={html}
+      answer={previewMode ? answer : html}
       question={question}
       id={contentful_id}
       backgroundColor={backgroundColor}
@@ -29,7 +30,10 @@ export default ContentfulFaq
 ContentfulFaq.propTypes = {
   moduleConfig: PropTypes.shape({
     question: PropTypes.string,
-    answer: PropTypes.object,
+    answer: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.string,
+    ]),
     contentful_id: PropTypes.string,
     backgroundColor: PropTypes.string,
     containerBgColor: PropTypes.string,
