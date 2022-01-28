@@ -53,7 +53,7 @@ const DownloadPage = props => {
     {
       image: browser_edge,
       cta: cta_edge,
-      label: 'edge',
+      label: 'Edge',
     },
   ]
 
