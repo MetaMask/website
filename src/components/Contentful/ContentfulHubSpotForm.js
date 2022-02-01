@@ -10,7 +10,7 @@ const ContentfulHubSpotForm = props => {
     <HubspotForm
       portalId={portalId}
       formId={formId}
-      sfdcCampaignId={campaignId}
+      campaignId={campaignId}
       title={title}
       displayTitle={displayTitle}
       width={width}
