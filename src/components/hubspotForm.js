@@ -6,7 +6,7 @@ import styled, { withTheme } from 'styled-components'
 import Loading from './Loading'
 
 const HubspotForm = props => {
-  const { portalId, formId, sfdcCampaignId, title, displayTitle, width } = props
+  const { portalId, formId, campaignId, title, displayTitle, width } = props
 
   return (
     <Wrapper width={width}>
@@ -17,7 +17,7 @@ const HubspotForm = props => {
         <ReactHubspotForm
           portalId={portalId}
           formId={formId}
-          sfdcCampaignId={sfdcCampaignId}
+          sfdcCampaignId={campaignId}
           loading={<Loading />}
         />
       </Form>
@@ -28,7 +28,7 @@ const HubspotForm = props => {
 HubspotForm.propTypes = {
   portalId: PropTypes.string.isRequired,
   formId: PropTypes.string.isRequired,
-  sfdcCampaignId: PropTypes.string,
+  campaignId: PropTypes.string,
   title: PropTypes.string,
   displayTitle: PropTypes.bool,
 }
