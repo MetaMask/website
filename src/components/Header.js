@@ -307,14 +307,6 @@ const ButtonsWrapper = styled.div`
   .button {
     min-height: 40px !important;
     height: 40px !important;
-    ${({ theme }) => `
-    background: ${theme.darkBlue} !important;
-    @media (min-width: ${theme.device.miniDesktop}){
-      &:hover {
-        background: ${theme.darkerBlue} !important;
-      }
-    }
-    `}
   }
   a {
     padding: 8px 32px !important;
