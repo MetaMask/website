@@ -44,8 +44,8 @@ Button.propTypes = {
 }
 
 const ButtonWrapper = styled(Link)`
-  ${({ gradient, color, forceColor, theme }) =>
-    color && theme['button'] && theme['button'][color] && !forceColor
+  ${({ gradient, color, theme }) =>
+    color && theme['button'] && theme['button'][color]
       ? `
   background: ${
     gradient ? theme['button'][color].gradient : theme['button'][color].bg

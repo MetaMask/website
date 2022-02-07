@@ -12,7 +12,7 @@ const TabContentDownload = props => {
     ctaHeading,
     ctaChrome,
     ctaFirefox,
-    cta_edge,
+    ctaEdge,
     ctaChromeBrowser,
     ctaFirefoxBrowser,
     id,
@@ -29,7 +29,7 @@ const TabContentDownload = props => {
     } else if (isFirefox) {
       ctasDownload = [ctaFirefox]
     } else if (isEdge) {
-      ctasDownload = [cta_edge]
+      ctasDownload = [ctaEdge]
     } else {
       ctasDownload = [ctaChromeBrowser, ctaFirefoxBrowser]
       ctasHeading = `${browserName} is not supported. Please download a browser that supports MetaMask.`
