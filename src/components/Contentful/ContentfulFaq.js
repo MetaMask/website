@@ -30,10 +30,7 @@ export default ContentfulFaq
 ContentfulFaq.propTypes = {
   moduleConfig: PropTypes.shape({
     question: PropTypes.string,
-    answer: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.string,
-    ]),
+    answer: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     contentful_id: PropTypes.string,
     backgroundColor: PropTypes.string,
     containerBgColor: PropTypes.string,

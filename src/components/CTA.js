@@ -7,7 +7,7 @@ import lowerCase from 'lodash/lowerCase'
 import { isAndroid, isIOS, isMobile, browserName } from 'react-device-detect'
 import Link from './Link'
 import styled from 'styled-components'
-import { trackCustomEvent } from "gatsby-plugin-google-analytics"
+import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
 
 const CTA = props => {
   const {
@@ -35,14 +35,14 @@ const CTA = props => {
   const icon = { ...defaultIconConfig, fill: color, ...iconConfig }
   const isDownloadBrowser = !isEmpty(downloadBrowsers)
   const handleCustomClick = e => {
-    if(customClick){
+    if (customClick) {
       e.preventDefault()
       customClick()
     }
-    if(eventCategory && eventLabel) {
+    if (eventCategory && eventLabel) {
       trackCustomEvent({
         category: eventCategory,
-        action: "Click",
+        action: 'Click',
         label: eventLabel,
       })
     }

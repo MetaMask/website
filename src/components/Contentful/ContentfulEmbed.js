@@ -10,13 +10,17 @@ const ContentfulEmbed = props => {
       title,
       displayTitle,
       moduleId,
-      previewMode
+      previewMode,
     },
   } = props
   return (
     <Wrapper id={moduleId}>
       {title && displayTitle ? <Title>{title}</Title> : null}
-      <EmbedHtml dangerouslySetInnerHTML={{ __html: previewMode ? props.moduleConfig.embed : embed }} />
+      <EmbedHtml
+        dangerouslySetInnerHTML={{
+          __html: previewMode ? props.moduleConfig.embed : embed,
+        }}
+      />
     </Wrapper>
   )
 }

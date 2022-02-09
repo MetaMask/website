@@ -36,10 +36,7 @@ export default ContentfulCard
 
 ContentfulCard.propTypes = {
   moduleConfig: PropTypes.shape({
-    description: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.string,
-    ]),
+    description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     link: PropTypes.string,
     title: PropTypes.string,
     image: PropTypes.object,

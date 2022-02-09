@@ -71,10 +71,7 @@ ContentfulLayoutHero.propTypes = {
     ctaText: PropTypes.string,
     backgroundColor: PropTypes.string,
     layout: PropTypes.string,
-    description: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.string,
-    ]),
+    description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     headline: PropTypes.string,
     hideHeadline: PropTypes.bool,
     headlineBorderBottom: PropTypes.bool,
