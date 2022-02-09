@@ -26,7 +26,7 @@ const ContentfulModuleContainer = props => {
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
-  const htmlData = previewMode ? description : html;
+  const htmlData = previewMode ? description : html
   const faqList =
     modules && modules.length
       ? modules.filter(modules => modules.__typename === 'ContentfulFaq')

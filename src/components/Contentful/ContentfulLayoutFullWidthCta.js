@@ -37,10 +37,7 @@ export default ContentfulLayoutFullWidthCta
 
 ContentfulLayoutFullWidthCta.propTypes = {
   moduleConfig: PropTypes.shape({
-    description: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.string,
-    ]),
+    description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     headline: PropTypes.string,
     ctaLink: PropTypes.string,
     ctaText: PropTypes.string,

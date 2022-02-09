@@ -19,14 +19,32 @@ if (env.errors) {
     siteMetadata: {
       title: 'MetaMask',
       description: `MetaMask is a ConsenSys Formation.`,
-      siteUrl: activeEnv === 'development' ? 'https://metamask.consensys.net' : 'https://metamask.io',
+      siteUrl:
+        activeEnv === 'development'
+          ? 'https://metamask.consensys.net'
+          : 'https://metamask.io',
     },
     plugins: [
+      {
+        resolve: 'gatsby-plugin-google-tagmanager',
+        options: {
+          id: process.env.GATSBY_GTM_ID,
+
+          // Defaults to false meaning GTM will only be loaded in production.
+          includeInDevelopment: false,
+
+          // Defaults to null
+          defaultDataLayer: { platform: 'gatsby' },
+
+          // Defaults to false
+          enableWebVitalsTracking: true,
+        },
+      },
       {
         resolve: `gatsby-plugin-google-analytics`,
         options: {
           // The property ID; the tracking code won't be generated without it
-          trackingId: "UA-37075177-6",
+          trackingId: process.env.GATSBY_GA_ID,
           // Defines where to place the tracking script - `true` in the head and `false` in the body
           head: false,
           // Setting this parameter is optional
@@ -110,7 +128,10 @@ if (env.errors) {
             })
 
             let pages = []
-            const siteUrl = activeEnv === 'development' ? 'https://metamask.consensys.net' : site.siteMetadata.siteUrl
+            const siteUrl =
+              activeEnv === 'development'
+                ? 'https://metamask.consensys.net'
+                : site.siteMetadata.siteUrl
             allSitePage.edges.map(edge => {
               if (privatePages.indexOf(edge.node.path) === -1) {
                 pages.push({
@@ -138,9 +159,7 @@ if (env.errors) {
             : {
                 host: 'https://metamask.consensys.net',
                 sitemap: 'https://metamask.consensys.net/sitemap.xml',
-                policy: [
-                  { userAgent: '*', disallow: '/' },
-                ],
+                policy: [{ userAgent: '*', disallow: '/' }],
               },
       },
       // this (optional) plugin enables Progressive Web App + Offline functionality

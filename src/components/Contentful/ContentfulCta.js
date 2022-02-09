@@ -25,7 +25,7 @@ const ContentfulCta = props => {
   } = props
   // check work with preview
   const extractBrowsers = item =>
-  item?.internal?.content ? JSON.parse(item.internal.content) : item
+    item?.internal?.content ? JSON.parse(item.internal.content) : item
   const arrayBrowsers = downloadBrowsers
     ? downloadBrowsers.map(extractBrowsers)
     : []
