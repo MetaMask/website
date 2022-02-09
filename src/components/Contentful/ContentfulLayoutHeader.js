@@ -7,8 +7,8 @@ const ContentfulLayoutHeader = props => {
   const {
     moduleConfig: { logo, menuItems, downloadButton, previewMode },
   } = props
-  if(previewMode){
-    logo.logo = {...logo?.logo,file:{url: logo?.logo?.assetUrl}}
+  if (previewMode) {
+    logo.logo = { ...logo?.logo, file: { url: logo?.logo?.assetUrl } }
   }
 
   return (

@@ -25,7 +25,7 @@ const ContentfulModuleContainer = props => {
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
-  const htmlData = previewMode ? description : html;
+  const htmlData = previewMode ? description : html
   return (
     <Container
       sectionPadding={sectionPadding}
@@ -82,10 +82,7 @@ export default ContentfulModuleContainer
 ContentfulModuleContainer.propTypes = {
   moduleConfig: PropTypes.shape({
     title: PropTypes.string,
-    description: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.string,
-    ]),
+    description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     paddingTop: PropTypes.string,
     backgroundColor: PropTypes.string,
     headlineAlignCenter: PropTypes.bool,

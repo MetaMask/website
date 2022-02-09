@@ -7,12 +7,7 @@ import Wrapper from './ContentWrapper'
 import ColumnWrapper from './ColumnWrapper'
 
 const StyledFooter = props => {
-  const {
-    menus,
-    copyright,
-    logoTitle,
-    logoUrl,
-  } = props
+  const { menus, copyright, logoTitle, logoUrl } = props
 
   return (
     <FooterContainer>

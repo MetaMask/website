@@ -61,10 +61,7 @@ ContentfulLayoutFeature.propTypes = {
   moduleConfig: PropTypes.shape({
     eyebrow: PropTypes.string,
     headline: PropTypes.string,
-    description: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.string,
-    ]),
+    description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     cta: PropTypes.object,
     noPaddingBottom: PropTypes.bool,
   }),

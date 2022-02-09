@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import accessiBeScript from './lib/services/accessibe'
-import gtagScript from './lib/services/gtag'
 import livePersonScript from './lib/services/live-person'
 import redirect from './lib/services/redirect'
 
@@ -18,13 +17,6 @@ export default class HTML extends React.Component {
           />
           {this.props.headComponents}
           <script dangerouslySetInnerHTML={{ __html: redirect }} />
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=UA-37075177-6"
-          />
-          {process.env.NODE_ENV === 'production' && (
-            <script dangerouslySetInnerHTML={{ __html: gtagScript }} />
-          )}
           {process.env.NODE_ENV === 'production' && (
             <script dangerouslySetInnerHTML={{ __html: livePersonScript }} />
           )}
