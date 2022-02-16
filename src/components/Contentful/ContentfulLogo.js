@@ -15,8 +15,9 @@ const ContentfulLogo = props => {
       previewMode,
     },
   } = props
-  const { title: titleFile, description: descriptionFile, file, assetUrl } = logo || {}
-  const url = previewMode ? assetUrl : file.url;
+  const { title: titleFile, description: descriptionFile, file, assetUrl } =
+    logo || {}
+  const url = previewMode ? assetUrl : file.url
   return (
     <Wrapper
       link={link}
