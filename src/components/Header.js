@@ -15,6 +15,7 @@ const StyledHeader = props => {
     },
     menus,
     downloadButton,
+    popupAnnouncement,
   } = props
   const isDesktop = useMediaQuery({
     query: '(min-width: 1025px)',
@@ -58,6 +59,11 @@ const StyledHeader = props => {
   }
   return (
     <HeaderElement>
+      <Announcement>
+        {contentfulModuleToComponent({
+          ...popupAnnouncement,
+        })}
+      </Announcement>
       <HeaderContainer>
         <LogoContainer>
           <Link to="/">
@@ -142,6 +148,13 @@ const HeaderElement = styled.header`
   top: 0;
   z-index: 999;
 `
+const Announcement = styled.div`
+  margin: -24px -20px 16px -20px;
+
+  &:empty {
+    display: none;
+  }
+`;
 
 const HeaderContainer = styled.div`
   display: flex;
