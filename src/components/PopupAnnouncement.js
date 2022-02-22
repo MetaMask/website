@@ -100,7 +100,6 @@ const Content = styled.div`
   display: flex;
   flex-flow: wrap;
   justify-content: center;
-  text-transform: uppercase;
   color: #FFFFFF;
   text-align: center;
 `
@@ -116,7 +115,7 @@ const ClickArea = styled(Link)`
 `;
 
 const Title = styled.div`
-  font-size: 11px;
+  font-size: 14px;
   line-height: 150%;
   margin-right: 4px;
 `
@@ -124,7 +123,7 @@ const Title = styled.div`
 const Cta = styled.div`
   display: inline-flex;
   align-items: center;
-  font-size: 11px;
+  font-size: 14px;
   line-height: 120%;
   color: #FFFFFF;
   font-weight: 700;
