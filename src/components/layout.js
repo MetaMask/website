@@ -6,9 +6,6 @@ import { ThemeProvider } from 'styled-components'
 import globalTheme from '../lib/theme'
 import './layout.scss'
 import './animate.css'
-import '../fonts/Graphik-Extralight-Web.woff'
-import '../fonts/Graphik-Semibold-Web.woff'
-import '../fonts/Graphik-Regular-Web.woff'
 
 const Layout = props => {
   const { children, theme = {} } = props
