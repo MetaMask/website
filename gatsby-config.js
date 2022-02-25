@@ -83,6 +83,13 @@ if (env.errors) {
         },
       },
       {
+        resolve: `gatsby-plugin-linkedin-insight`,
+        options: {
+          partnerId: `451393`,
+          includeInDevelopment: true
+        }
+      },
+      {
         resolve: `gatsby-plugin-sitemap`,
         options: {
           query: `
