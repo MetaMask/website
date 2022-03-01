@@ -32,11 +32,11 @@ const PageLayout = props => {
     const darkModeSystem =
       window.matchMedia &&
       window.matchMedia('(prefers-color-scheme: dark)').matches
-    const darkModeLocalStorage = getLocalStorage('darkMode') === '1'
+    const darkModeLocalStorage = getLocalStorage('darkMode')
     if (darkModeLocalStorage === null) {
       setIsDarkMode(darkModeSystem)
     } else {
-      setIsDarkMode(darkModeLocalStorage)
+      setIsDarkMode(darkModeLocalStorage === '1')
     }
     window
       .matchMedia('(prefers-color-scheme: dark)')
