@@ -158,22 +158,22 @@ const ContentWrapper = styled(Link)`
     background-color: transparent;
     font-weight: 400;
     height: auto;
-    color: #222;
+    color: ${theme.text.menu};
     &:hover {
       background-color: #e6eaee;
-      color: ${theme.darkBlue};
+      color: ${theme.text.menuHover};
     }
   `
       : ``}
   ${({ typeLayout, theme }) =>
     typeLayout === 'footer'
       ? `
-    color: rgba(0, 0, 0, 0.74);
+    color: ${theme.text.menuFooter};
     font-size: 12px;
     line-height: 30px;
     font-weight: 400;
     &:hover {
-      color: ${theme.lightBlue};
+      color: ${theme.text.menuFooterHover};
     }
     @media (max-width: ${theme.device.mobileMediaMax}) {
       font-size: 16px;

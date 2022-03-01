@@ -7,7 +7,7 @@ import Wrapper from './ContentWrapper'
 import ColumnWrapper from './ColumnWrapper'
 
 const StyledFooter = props => {
-  const { menus, copyright, logoTitle, logoUrl } = props
+  const { menus, copyright, logoTitle, logoUrl, logoSvg } = props
 
   return (
     <FooterContainer>
@@ -19,7 +19,16 @@ const StyledFooter = props => {
           <LogoContainer>
             <Link to="/">
               <LogoWrapper>
-                <Logo src={logoUrl} alt={logoTitle} />
+                {logoSvg?.content ? (
+                  <div
+                    className="logoMetamaskSvg"
+                    dangerouslySetInnerHTML={{
+                      __html: logoSvg?.content,
+                    }}
+                  />
+                ) : (
+                  <Logo src={logoUrl} alt={logoTitle} />
+                )}
               </LogoWrapper>
             </Link>
           </LogoContainer>
@@ -109,7 +118,7 @@ const PolicyCopy = styled.div`
   margin: 20px 0 0 0;
 `
 const MenuItemHeading = styled.h5`
-  color: ${({ theme }) => theme.orange};
+  color: ${({ theme }) => theme.orange} !important;
   text-transform: uppercase;
   line-height: 40px;
   margin-bottom: 4px;

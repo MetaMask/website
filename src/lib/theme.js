@@ -5,6 +5,7 @@ const theme = {
   lightBlue: '#2196f3',
   white: '#FFFFFF',
   black: '#000000',
+  darker: '#121212',
   gray: '#F7F9FB',
   darkGray: '#6A737D',
   dark: '#24292E',
@@ -96,6 +97,46 @@ export const defaultTheme = {
   linkColor: theme.lightBlue,
   eyebrowHero: theme.darkBlue,
   gradientFAQ: 'linear-gradient(90deg, #f5841f, #2c56dd)',
+  background:{
+    white: theme.white,
+  },
+  text: {
+    default: theme.black,
+    subInfo: '#333',
+    menu: '#222',
+    menuHover: theme.darkBlue,
+    menuFooter: 'rgba(0, 0, 0, 0.74)',
+    menuFooterHover: theme.lightBlue,
+  },
+  theme: 'default',
+}
+
+export const defaultDarkTheme = {
+  ...theme,
+  primaryColor: theme.darkBlue,
+  button: {
+    primary: {
+      bg: theme.darkBlue,
+      gradient: theme.darkBlue,
+      bgHover: theme.darkerBlue,
+      gradientHover: theme.darkerBlue,
+    },
+  },
+  linkColor: theme.lightBlue,
+  eyebrowHero: theme.darkBlue,
+  background:{
+    white: theme.darker,
+  },
+  text: {
+    default: theme.white,
+    subInfo: 'rgba(255,255,255,0.6)',
+    menu: theme.white,
+    menuHover: theme.darkBlue,
+    menuFooter: theme.white,
+    menuFooterHover: theme.lightBlue,
+  },
+  footerBg: theme.darker,
+  gradientFAQ: 'linear-gradient(90deg, #f5841f, #2c56dd)',
   theme: 'default',
 }
 
@@ -112,6 +153,46 @@ export const purpleTheme = {
   },
   linkColor: theme.darkPurple,
   eyebrowHero: theme.lightPurple,
+  background:{
+    white: theme.white,
+  },
+  text: {
+    default: theme.black,
+    subInfo: '#333',
+    menu: '#222',
+    menuHover: theme.darkBlue,
+    menuFooter: 'rgba(0, 0, 0, 0.74)',
+    menuFooterHover: theme.lightBlue,
+  },
+  gradientFAQ: 'linear-gradient(90deg, #8A42AD 0%, #6762EB 100%)',
+  theme: 'purple',
+}
+
+export const purpleDarkTheme = {
+  ...theme,
+  primaryColor: theme.darkPurple,
+  button: {
+    primary: {
+      bg: theme.darkPurple,
+      gradient: 'linear-gradient(180deg, #8A42AD 0%, #6762EB 100%)',
+      bgHover: theme.darkerPurple,
+      gradientHover: 'linear-gradient(180deg, #8A42AD 0%, #6762EB 100%)',
+    },
+  },
+  linkColor: theme.darkPurple,
+  eyebrowHero: theme.lightPurple,
+  background:{
+    white: theme.darker,
+  },
+  text: {
+    default: theme.white,
+    subInfo: 'rgba(255,255,255,0.6)',
+    menu: theme.white,
+    menuHover: theme.darkBlue,
+    menuFooter: theme.white,
+    menuFooterHover: theme.lightBlue,
+  },
+  footerBg: theme.darker,
   gradientFAQ: 'linear-gradient(90deg, #8A42AD 0%, #6762EB 100%)',
   theme: 'purple',
 }
