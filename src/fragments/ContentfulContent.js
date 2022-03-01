@@ -290,6 +290,13 @@ export const ContentfulLogoFields = graphql`
     logo {
       title
       description
+      svg {
+        content # SVG content optimized with SVGO
+        originalContent # Original SVG content
+        dataURI # Optimized SVG as compact dataURI
+        absolutePath #
+        relativePath #
+      }
       file {
         url
       }

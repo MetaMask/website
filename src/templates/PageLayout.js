@@ -2,9 +2,16 @@ import React from 'react'
 import Layout from '../components/layout'
 import { ToastContainer as Notifications, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { defaultTheme, purpleTheme } from '../lib/theme'
+import {
+  defaultTheme,
+  purpleTheme,
+  purpleDarkTheme,
+  defaultDarkTheme,
+} from '../lib/theme'
 import scrollTo from '../lib/utils/scrollToElement'
 import Context from '../Context/ContextPage'
+import Helmet from 'react-helmet'
+import { getLocalStorage } from '../lib/utils/localStorage'
 
 /**
  * @name PageLayout
@@ -14,12 +21,47 @@ import Context from '../Context/ContextPage'
 const PageLayout = props => {
   const { location, children, themeColor, ...rest } = props
   const { pathname } = location || {}
-  const pageTheme = themeColor === 'purple' ? purpleTheme : defaultTheme
   const [idFaqActive, setIdFaqActive] = React.useState('')
+  const [isDarkMode, setIsDarkMode] = React.useState(false)
+  const systemChangeDarkMode = event => {
+    const isDarkSystem = event.matches
+    setIsDarkMode(isDarkSystem)
+  }
+  React.useEffect(() => {
+    if (!window) return
+    const darkModeSystem =
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    const darkModeLocalStorage = getLocalStorage('darkMode') === '1'
+    if (darkModeLocalStorage === null) {
+      setIsDarkMode(darkModeSystem)
+    } else {
+      setIsDarkMode(darkModeLocalStorage)
+    }
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', systemChangeDarkMode)
+    return () =>
+      window
+        .matchMedia('(prefers-color-scheme: dark)')
+        .removeEventListener('change', systemChangeDarkMode)
+  }, [])
+  const pageTheme =
+    themeColor === 'purple'
+      ? isDarkMode
+        ? purpleDarkTheme
+        : purpleTheme
+      : isDarkMode
+      ? defaultDarkTheme
+      : defaultTheme
   const valueContext = {
     faq: {
       idFaqActive,
       setIdFaqActive,
+    },
+    darkMode: {
+      isDarkMode,
+      setIsDarkMode,
     },
   }
   const renderNotification = (state = {}) => {
@@ -72,6 +114,9 @@ const PageLayout = props => {
   return (
     <Context.Provider value={valueContext}>
       <Layout theme={pageTheme} {...rest}>
+        <Helmet>
+          <body className={isDarkMode ? 'dark-mode' : 'light-mode'} />
+        </Helmet>
         <Notifications />
         {children}
       </Layout>

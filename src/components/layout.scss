@@ -994,3 +994,30 @@ figcaption {
     margin-bottom: 8px;
   }
 }
+.logoMetamaskSvg {
+  width: 100%;
+}
+body.dark-mode {
+  background: #121212;
+  color: rgba(255,255,255,0.6);
+  h1,h2,h3,h4,h5,h6 {
+    color: #fff;
+  }
+  .bg-white,
+  .bg-default {
+    background-color: #121212;
+  }
+  .paragraph {
+    color: rgba(255,255,255,0.6);
+  }
+  .bg-gray {
+    background: #24292E;
+  }
+  .logoMetamaskSvg {
+    svg {
+      path:nth-child(1) {
+        fill: #fff;
+      }
+    }
+  }
+}
