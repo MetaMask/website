@@ -997,6 +997,9 @@ figcaption {
 .logoMetamaskSvg {
   width: 100%;
 }
+body {
+  transition: background 300ms ease;
+}
 body.dark-mode {
   background: #121212;
   color: rgba(255,255,255,0.6);
@@ -1020,4 +1023,5 @@ body.dark-mode {
       }
     }
   }
+  
 }

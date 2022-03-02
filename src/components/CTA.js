@@ -160,7 +160,7 @@ const ContentWrapper = styled(Link)`
     height: auto;
     color: ${theme.text.menu};
     &:hover {
-      background-color: #e6eaee;
+      background-color: ${theme.text.menuBgHover};
       color: ${theme.text.menuHover};
     }
   `
