@@ -100,7 +100,7 @@ const AnswerItemInner = styled.div`
   border-radius: 0 0 4px 4px;
   display: block;
   padding: 30px;
-  background: #f4f6f8;
+  background: ${({ theme }) => theme.background.faqAnswer};
   text-align: left;
 
   p:last-child {

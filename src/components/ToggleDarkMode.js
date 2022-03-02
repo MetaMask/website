@@ -25,7 +25,7 @@ const ToggleDarkMode = props => {
 export default withTheme(ToggleDarkMode)
 
 ToggleDarkMode.propTypes = {
-  checked: PropTypes.bool.isRequired,
+  checked: PropTypes.bool,
 }
 
 const Wrapper = styled.label`

@@ -10,8 +10,7 @@ import {
 } from '../lib/theme'
 import scrollTo from '../lib/utils/scrollToElement'
 import Context from '../Context/ContextPage'
-import Helmet from 'react-helmet'
-import { getLocalStorage } from '../lib/utils/localStorage'
+import ContextClientSide from '../Context/ContextClientSide'
 
 /**
  * @name PageLayout
@@ -22,30 +21,8 @@ const PageLayout = props => {
   const { location, children, themeColor, ...rest } = props
   const { pathname } = location || {}
   const [idFaqActive, setIdFaqActive] = React.useState('')
-  const [isDarkMode, setIsDarkMode] = React.useState(false)
-  const systemChangeDarkMode = event => {
-    const isDarkSystem = event.matches
-    setIsDarkMode(isDarkSystem)
-  }
-  React.useEffect(() => {
-    if (!window) return
-    const darkModeSystem =
-      window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-    const darkModeLocalStorage = getLocalStorage('darkMode')
-    if (darkModeLocalStorage === null) {
-      setIsDarkMode(darkModeSystem)
-    } else {
-      setIsDarkMode(darkModeLocalStorage === '1')
-    }
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', systemChangeDarkMode)
-    return () =>
-      window
-        .matchMedia('(prefers-color-scheme: dark)')
-        .removeEventListener('change', systemChangeDarkMode)
-  }, [])
+  const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
+  const { isDarkMode } = darkModeContextValue || {}
   const pageTheme =
     themeColor === 'purple'
       ? isDarkMode
@@ -58,10 +35,6 @@ const PageLayout = props => {
     faq: {
       idFaqActive,
       setIdFaqActive,
-    },
-    darkMode: {
-      isDarkMode,
-      setIsDarkMode,
     },
   }
   const renderNotification = (state = {}) => {
@@ -114,9 +87,6 @@ const PageLayout = props => {
   return (
     <Context.Provider value={valueContext}>
       <Layout theme={pageTheme} {...rest}>
-        <Helmet>
-          <body className={isDarkMode ? 'dark-mode' : 'light-mode'} />
-        </Helmet>
         <Notifications />
         {children}
       </Layout>

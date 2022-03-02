@@ -80,7 +80,7 @@ const BrowserItem = styled(Link)`
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  color: #333;
+  color: ${({ theme }) => theme.text.body};
 
   img {
     width: 50px;

@@ -5,7 +5,7 @@ import Link from './Link'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { useMediaQuery } from 'react-responsive'
 import ToggleDarkMode from './ToggleDarkMode'
-import Context from '../Context/ContextPage'
+import ContextClientSide from '../Context/ContextClientSide'
 import { setLocalStorage } from '../lib/utils/localStorage'
 
 const StyledHeader = props => {
@@ -25,7 +25,7 @@ const StyledHeader = props => {
   })
   const [menuActive, setMenuActive] = React.useState('')
   const [hamburgerActive, setHamburgerActive] = React.useState(false)
-  const { darkMode: darkModeContextValue } = React.useContext(Context)
+  const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const menuRef = React.useRef()
   const { isDarkMode, setIsDarkMode } = darkModeContextValue || {}
 
@@ -127,7 +127,7 @@ const StyledHeader = props => {
                 isHeaderMenu: true,
               })}
             </ButtonsWrapper>
-            <DarkModeWrapper>
+            <DarkModeWrapper loading={isDarkMode === null}>
               <ToggleDarkMode
                 onChange={onChangeDarkMode}
                 checked={isDarkMode}
@@ -345,8 +345,15 @@ const ButtonsWrapper = styled.div`
     }
   }
 `
+
 const DarkModeWrapper = styled.div`
   display: inline-flex;
   align-items: center;
   margin-left: 32px;
+  opacity: 0;
+
+  .client-ready & {
+    opacity: 1;
+  }
+  
 `
