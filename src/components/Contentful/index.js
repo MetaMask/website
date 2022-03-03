@@ -13,6 +13,7 @@ import ContentfulLogo from './ContentfulLogo'
 import ContentfulModuleContainer from './ContentfulModuleContainer'
 import ContentfulRichText from './ContentfulRichText'
 import ContentfulSeo from './ContentfulSeo'
+import ContentfulPopupAnnouncement from './ContentfulPopupAnnouncement'
 
 export {
   ContentfulLayoutHeader,
@@ -30,4 +31,5 @@ export {
   ContentfulModuleContainer,
   ContentfulRichText,
   ContentfulSeo,
+  ContentfulPopupAnnouncement,
 }

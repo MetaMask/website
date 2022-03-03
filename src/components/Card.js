@@ -108,6 +108,7 @@ const ImageWrapper = styled.div`
 
   img {
     height: 100%;
+    width: auto;
 
     @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
       margin: 0 auto;

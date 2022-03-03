@@ -23,7 +23,6 @@ export const Section = styled.div`
   padding-top: 48px;
   padding-bottom: 48px;
   position: relative;
-  transition: all 300ms ease;
 
   ${({ sectionPadding }) =>
     sectionPadding

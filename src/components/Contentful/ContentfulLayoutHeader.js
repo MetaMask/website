@@ -5,14 +5,14 @@ import Header from '../Header'
 
 const ContentfulLayoutHeader = props => {
   const {
-    moduleConfig: { logo, menuItems, downloadButton, previewMode },
+    moduleConfig: { logo, menuItems, downloadButton, previewMode, popupAnnouncement },
   } = props
   if (previewMode) {
     logo.logo = { ...logo?.logo, file: { url: logo?.logo?.assetUrl } }
   }
 
   return (
-    <Header logo={logo} menus={menuItems} downloadButton={downloadButton} />
+    <Header logo={logo} menus={menuItems} downloadButton={downloadButton} popupAnnouncement={popupAnnouncement} />
   )
 }
 
@@ -36,5 +36,6 @@ ContentfulLayoutHeader.propTypes = {
       })
     ),
     downloadButton: PropTypes.object,
+    announcement: PropTypes.object,
   }),
 }

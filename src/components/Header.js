@@ -14,11 +14,11 @@ const StyledHeader = props => {
       title,
       logo: {
         file: { url: srcLogo },
-        svg: svgLogo,
       },
     },
     menus,
     downloadButton,
+    popupAnnouncement,
   } = props
   const isDesktop = useMediaQuery({
     query: '(min-width: 1025px)',
@@ -68,20 +68,16 @@ const StyledHeader = props => {
   }
   return (
     <HeaderElement>
+      <Announcement>
+        {contentfulModuleToComponent({
+          ...popupAnnouncement,
+        })}
+      </Announcement>
       <HeaderContainer>
         <LogoContainer>
           <Link to="/">
             <LogoWrapper>
-              {svgLogo?.content ? (
-                <div
-                  className="logoMetamaskSvg"
-                  dangerouslySetInnerHTML={{
-                    __html: svgLogo?.content,
-                  }}
-                />
-              ) : (
-                <Logo src={srcLogo} alt={title} />
-              )}
+              <Logo src={srcLogo} alt={title} />
             </LogoWrapper>
           </Link>
         </LogoContainer>
@@ -170,6 +166,13 @@ const HeaderElement = styled.header`
   z-index: 999;
   transition: background 300ms ease;
 `
+const Announcement = styled.div`
+  margin: -24px -20px 16px -20px;
+
+  &:empty {
+    display: none;
+  }
+`;
 
 const HeaderContainer = styled.div`
   display: flex;
