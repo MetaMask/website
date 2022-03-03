@@ -9,6 +9,7 @@ const theme = {
   gray: '#F7F9FB',
   darkGray: '#6A737D',
   dark: '#24292E',
+  darkLight: '#393E46',
   orange: '#f6851b',
   cookiesBg: '#151C24',
   darkerPurple: '#8A42AD',
@@ -153,7 +154,7 @@ export const defaultDarkTheme = {
     menuFooter: theme.white,
     menuFooterHover: theme.lightBlue,
   },
-  footerBg: theme.dark,
+  footerBg: '#3C444B',
   gradientFAQ: 'linear-gradient(90deg, #f5841f, #2c56dd)',
   theme: 'default',
 }
@@ -228,7 +229,7 @@ export const purpleDarkTheme = {
     menuFooter: theme.white,
     menuFooterHover: theme.lightBlue,
   },
-  footerBg: theme.dark,
+  footerBg: '#3C444B',
   gradientFAQ: 'linear-gradient(90deg, #8A42AD 0%, #6762EB 100%)',
   theme: 'purple',
 }
