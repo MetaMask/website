@@ -9,6 +9,7 @@ import { Section } from './StyledGeneral'
 import classnames from 'classnames'
 import Image from './Image'
 import isEmpty from 'lodash/isEmpty'
+import ContextClientSide from '../Context/ContextClientSide'
 
 const HeroContainerComponent = props => {
   const {
@@ -22,6 +23,8 @@ const HeroContainerComponent = props => {
     eyebrow,
     eyebrowLogo,
     eyebrowMobileLogo,
+    eyebrowLogoDarkMode,
+    eyebrowMobileLogoDarkMode,
     showFavIcon,
     hubSpotForm,
     cta,
@@ -33,6 +36,8 @@ const HeroContainerComponent = props => {
     isFaq,
     sectionPadding,
   } = props
+  const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
+  const { isDarkMode } = darkModeContextValue || {}
   const [showPopup, setShowPopup] = React.useState(false)
   const togglePopup = () => {
     setShowPopup(!showPopup)
@@ -126,10 +131,17 @@ const HeroContainerComponent = props => {
                   hideHeadline={hideHeadline}
                   isFaq={isFaq}
                 >
-                  {contentfulModuleToComponent({
-                    ...eyebrowLogo,
-                    cleanStyle: true,
-                  })}
+                  {contentfulModuleToComponent(
+                    eyebrowLogoDarkMode && isDarkMode
+                      ? {
+                          ...eyebrowLogoDarkMode,
+                          cleanStyle: true,
+                        }
+                      : {
+                          ...eyebrowLogo,
+                          cleanStyle: true,
+                        }
+                  )}
                 </EyebrowWrapper>
               ) : null}
               {eyebrowMobileLogo ? (
@@ -139,10 +151,17 @@ const HeroContainerComponent = props => {
                   isMobileLogo={true}
                   isFaq={isFaq}
                 >
-                  {contentfulModuleToComponent({
-                    ...eyebrowMobileLogo,
-                    cleanStyle: true,
-                  })}
+                  {contentfulModuleToComponent(
+                    eyebrowMobileLogoDarkMode && isDarkMode
+                      ? {
+                          ...eyebrowMobileLogoDarkMode,
+                          cleanStyle: true,
+                        }
+                      : {
+                          ...eyebrowMobileLogo,
+                          cleanStyle: true,
+                        }
+                  )}
                 </EyebrowWrapper>
               ) : null}
               {eyebrow ? <EyebrowText>{eyebrow}</EyebrowText> : null}
