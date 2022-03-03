@@ -153,7 +153,7 @@ export const defaultDarkTheme = {
     menuFooter: theme.white,
     menuFooterHover: theme.lightBlue,
   },
-  footerBg: theme.darker,
+  footerBg: theme.dark,
   gradientFAQ: 'linear-gradient(90deg, #f5841f, #2c56dd)',
   theme: 'default',
 }
@@ -228,7 +228,7 @@ export const purpleDarkTheme = {
     menuFooter: theme.white,
     menuFooterHover: theme.lightBlue,
   },
-  footerBg: theme.darker,
+  footerBg: theme.dark,
   gradientFAQ: 'linear-gradient(90deg, #8A42AD 0%, #6762EB 100%)',
   theme: 'purple',
 }
