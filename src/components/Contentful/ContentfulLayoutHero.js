@@ -16,6 +16,8 @@ const ContentfulLayoutHero = props => {
       eyebrow,
       eyebrowLogo,
       eyebrowMobileLogo,
+      eyebrowLogoDarkMode,
+      eyebrowMobileLogoDarkMode,
       hideHeadline,
       showLearnMore,
       showFavIcon,
@@ -41,6 +43,8 @@ const ContentfulLayoutHero = props => {
       eyebrow={eyebrow}
       eyebrowLogo={eyebrowLogo}
       eyebrowMobileLogo={eyebrowMobileLogo}
+      eyebrowLogoDarkMode={eyebrowLogoDarkMode}
+      eyebrowMobileLogoDarkMode={eyebrowMobileLogoDarkMode}
       backgroundImage={bgUrl || ''}
       modules={modules}
       sideImageUrl={sideImageUrl || ''}
