@@ -196,7 +196,7 @@ const NavMain = styled.nav`
     visibility: hidden;
     left: 0;
     right: 0;
-    background: #fff;
+    background: ${({ theme }) => theme.background.white};
     padding: 12px;
     position: fixed;
     top: 0;
@@ -317,14 +317,15 @@ const HamburgerButton = styled.div`
   font-size: 24px;
   cursor: pointer;
   border-radius: 10px;
+  color: ${({ theme }) => theme.text.default};
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     display: inline-flex;
   }
 
-  ${({ active }) =>
+  ${({ active, theme }) =>
     active
       ? `
-    background: #dbdbdb;
+    background: ${theme.background.navBtnHover};
   `
       : ''}
 `
@@ -354,6 +355,12 @@ const DarkModeWrapper = styled.div`
 
   .client-ready & {
     opacity: 1;
+  }
+
+  @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+    margin-top: 16px;
+    margin-left: 0;
+    justify-content: center;
   }
   
 `
