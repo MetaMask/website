@@ -14,6 +14,7 @@ const StyledHeader = props => {
       title,
       logo: {
         file: { url: srcLogo },
+        svg: svgLogo,
       },
     },
     menus,
@@ -77,7 +78,16 @@ const StyledHeader = props => {
         <LogoContainer>
           <Link to="/">
             <LogoWrapper>
-              <Logo src={srcLogo} alt={title} />
+              {svgLogo?.content ? (
+                <div
+                  className="logoMetamaskSvg"
+                  dangerouslySetInnerHTML={{
+                    __html: svgLogo?.content,
+                  }}
+                />
+              ) : (
+                <Logo src={srcLogo} alt={title} />
+              )}
             </LogoWrapper>
           </Link>
         </LogoContainer>
@@ -172,7 +182,7 @@ const Announcement = styled.div`
   &:empty {
     display: none;
   }
-`;
+`
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -365,5 +375,4 @@ const DarkModeWrapper = styled.div`
     margin-left: 0;
     justify-content: center;
   }
-  
 `
