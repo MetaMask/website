@@ -137,7 +137,7 @@ export const defaultDarkTheme = {
   background:{
     white: theme.darker,
     faqAnswer: theme.dark,
-    faqAnswerCustom1: theme.dark,
+    faqAnswerCustom1: theme.darker,
     faqAnswerCustom2: theme.dark,
     downloadCta: theme.dark,
     downloadCtaShadow: theme.dark,
@@ -211,7 +211,7 @@ export const purpleDarkTheme = {
   background:{
     white: theme.darker,
     faqAnswer: theme.dark,
-    faqAnswerCustom1: theme.dark,
+    faqAnswerCustom1: theme.darker,
     faqAnswerCustom2: theme.dark,
     downloadCta: theme.dark,
     downloadCtaShadow: theme.dark,
