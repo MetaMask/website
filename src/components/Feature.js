@@ -179,6 +179,8 @@ const ImageSrc = styled(ImageItem)`
   display: block;
   margin: 0 auto;
   max-width: 100%;
+  width: auto;
+  height: auto;
   ${({ widthImg, theme }) =>
     widthImg
       ? `

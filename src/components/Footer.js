@@ -7,7 +7,7 @@ import Wrapper from './ContentWrapper'
 import ColumnWrapper from './ColumnWrapper'
 
 const StyledFooter = props => {
-  const { menus, copyright, logoTitle, logoUrl, logoSvg } = props
+  const { menus, copyright, logoTitle, logoUrl } = props
 
   return (
     <FooterContainer>
@@ -19,16 +19,7 @@ const StyledFooter = props => {
           <LogoContainer>
             <Link to="/">
               <LogoWrapper>
-                {logoSvg?.content ? (
-                  <div
-                    className="logoMetamaskSvg"
-                    dangerouslySetInnerHTML={{
-                      __html: logoSvg?.content,
-                    }}
-                  />
-                ) : (
-                  <Logo src={logoUrl} alt={logoTitle} />
-                )}
+                <Logo src={logoUrl} alt={logoTitle} />
               </LogoWrapper>
             </Link>
           </LogoContainer>

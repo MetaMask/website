@@ -256,6 +256,8 @@ img {
   padding-right: 0;
   padding-top: 0;
   margin-bottom: 0;
+  width: auto;
+  height: auto;
 }
 h1,h2,h3,h4,h5,h6 {
   color: #333333;
@@ -630,7 +632,7 @@ pre tt:after {
   font-family: 'Graphik Web';
   font-weight: 100;
   font-style: normal;
-  src: url('../fonts/Graphik-Thin-Web.woff') format('woff');
+  src: url('/fonts/Graphik-Thin-Web.woff') format('woff');
   font-display: swap;
 }
 
@@ -639,7 +641,7 @@ pre tt:after {
   font-family: 'Graphik Web';
   font-weight: 200;
   font-style: normal;
-  src: url('../fonts/Graphik-Extralight-Web.woff') format('woff');
+  src: url('/fonts/Graphik-Extralight-Web.woff') format('woff');
   font-display: swap;
 }
 
@@ -648,7 +650,7 @@ pre tt:after {
   font-family: 'Graphik Web';
   font-weight: 300;
   font-style: normal;
-  src: url('../fonts/Graphik-Light.woff') format('woff');
+  src: url('/fonts/Graphik-Light.woff') format('woff');
   font-display: swap;
 }
 
@@ -657,7 +659,7 @@ pre tt:after {
   font-family: 'Graphik Web';
   font-weight: 400;
   font-style: normal;
-  src: url('../fonts/Graphik-Regular-Web.woff') format('woff');
+  src: url('/fonts/Graphik-Regular-Web.woff') format('woff');
   font-display: swap;
 }
 
@@ -666,7 +668,7 @@ pre tt:after {
   font-family: 'Graphik Web';
   font-weight: 500;
   font-style: normal;
-  src: url('../fonts/Graphik-Medium-Web.woff') format('woff');
+  src: url('/fonts/Graphik-Medium-Web.woff') format('woff');
   font-display: swap;
 }
 
@@ -675,7 +677,7 @@ pre tt:after {
   font-family: 'Graphik Web';
   font-weight: 600;
   font-style: normal;
-  src: url('../fonts/Graphik-Semibold-Web.woff') format('woff');
+  src: url('/fonts/Graphik-Semibold-Web.woff') format('woff');
   font-display: swap;
 }
 
@@ -684,14 +686,14 @@ pre tt:after {
   font-family: 'Graphik Web';
   font-weight: 700;
   font-style: normal;
-  src: url('../fonts/Graphik-Bold-Web.woff') format('woff');
+  src: url('/fonts/Graphik-Bold-Web.woff') format('woff');
   font-display: swap;
 }
 
 /* Regular */
 @font-face {
   font-family: 'Euclid Circular B';
-  src: url('../fonts/EuclidCircularB-Regular-WebXL.woff2') format('woff2'), url('../fonts/EuclidCircularB-Regular-WebXL.woff') format('woff');
+  src: url('/fonts/EuclidCircularB-Regular-WebXL.woff2') format('woff2'), url('/fonts/EuclidCircularB-Regular-WebXL.woff') format('woff');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -700,7 +702,7 @@ pre tt:after {
 /* Bold */
 @font-face {
   font-family: 'Euclid Circular B';
-  src: url('../fonts/EuclidCircularB-Bold-WebXL.woff2') format('woff2'), url('../fonts/EuclidCircularB-Bold-WebXL.woff') format('woff');
+  src: url('/fonts/EuclidCircularB-Bold-WebXL.woff2') format('woff2'), url('/fonts/EuclidCircularB-Bold-WebXL.woff') format('woff');
   font-weight: 700;
   font-style: normal;
   font-display: swap;

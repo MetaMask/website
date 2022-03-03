@@ -12,6 +12,9 @@ export const ContentfulLayoutHeaderFields = graphql`
     downloadButton {
       ...ContentfulCtaFields
     }
+    popupAnnouncement {
+      ...ContentfulPopupAnnouncementFields
+    }
   }
 `
 
@@ -445,5 +448,18 @@ export const ContentfulSeoFields = graphql`
         ...GatsbyContentfulFixed_withWebp
       }
     }
+  }
+`
+
+export const ContentfulPopupAnnouncementFields = graphql`
+  fragment ContentfulPopupAnnouncementFields on ContentfulPopupAnnouncement {
+    contentful_id
+    internal {
+      type
+    }
+    title
+    ctaText
+    ctaLink
+    backgroundColor
   }
 `
