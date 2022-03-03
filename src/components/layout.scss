@@ -920,11 +920,13 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
 }
 
 @media (max-width: 767px) {
-  .bg-mobile-white {
-    background-color: #fff;
-    .heroMobileOverlayContent
-    {
-      background: #fff;
+  body:not(.dark-mode) {
+    .bg-mobile-white {
+      background-color: #fff;
+      .heroMobileOverlayContent
+      {
+        background: #fff;
+      }
     }
   }
 
@@ -1015,6 +1017,9 @@ body.dark-mode {
   }
   .bg-gray {
     background: #24292E;
+  }
+  .bg-dark {
+    background: #121212;
   }
   .logoMetamaskSvg {
     svg {

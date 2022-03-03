@@ -416,7 +416,8 @@ const HeroContentContainer = styled.div`
       
       ${HeroImageTextContainer} {
         padding-top: 42px;
-        background-image: linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%) !important;
+        background-image: ${theme.background.isCustodyOverlayHero} !important;
+
       }
     }
     @media (max-width: ${theme.device.mobileMediaMax}){

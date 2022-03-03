@@ -107,12 +107,12 @@ const AnswerItemInner = styled.div`
     margin-bottom: 0;
   }
 
-  ${({ containerBgColor }) =>
-    containerBgColor === 'gray' ? `background: #ffffff;` : ''}
+  ${({ containerBgColor, theme }) =>
+    containerBgColor === 'gray' ? `background: ${theme.background.faqAnswerCustom1};` : ''}
 
-  ${({ containerBgColor }) =>
+  ${({ containerBgColor, theme }) =>
     containerBgColor === 'dark' || containerBgColor === 'darkGray'
-      ? `background: #4c4c4c;`
+      ? `background: ${theme.background.faqAnswerCustom2};`
       : ''}
   
   
