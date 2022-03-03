@@ -45,6 +45,7 @@
     "gatsby-transformer-remark": "^2.16.1",
     "gatsby-transformer-sharp": "^2.2.21",
     "lodash": "^4.17.11",
+    "node-html-parser": "^5.2.0",
     "path": "^0.12.7",
     "preact": "^10.5.12",
     "preact-render-to-string": "^5.1.12",
