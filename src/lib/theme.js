@@ -102,6 +102,7 @@ export const defaultTheme = {
     faqAnswer: '#f4f6f8',
     downloadCta: theme.white,
     downloadCtaShadow: '#dbdbdb',
+    navBtnHover: '#dbdbdb',
   },
   text: {
     default: theme.black,
@@ -134,6 +135,7 @@ export const defaultDarkTheme = {
     faqAnswer: theme.dark,
     downloadCta: theme.dark,
     downloadCtaShadow: theme.dark,
+    navBtnHover: theme.dark,
   },
   text: {
     default: theme.white,
@@ -168,6 +170,7 @@ export const purpleTheme = {
     faqAnswer: '#f4f6f8',
     downloadCta: theme.white,
     downloadCtaShadow: '#dbdbdb',
+    navBtnHover: '#dbdbdb',
   },
   text: {
     default: theme.black,
@@ -201,6 +204,7 @@ export const purpleDarkTheme = {
     faqAnswer: theme.dark,
     downloadCta: theme.dark,
     downloadCtaShadow: theme.dark,
+    navBtnHover: theme.dark,
   },
   text: {
     default: theme.white,
