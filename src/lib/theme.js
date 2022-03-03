@@ -100,9 +100,12 @@ export const defaultTheme = {
   background:{
     white: theme.white,
     faqAnswer: '#f4f6f8',
+    faqAnswerCustom1: theme.white,
+    faqAnswerCustom2: '#4c4c4c',
     downloadCta: theme.white,
     downloadCtaShadow: '#dbdbdb',
     navBtnHover: '#dbdbdb',
+    isCustodyOverlayHero: 'linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%)',
   },
   text: {
     default: theme.black,
@@ -126,6 +129,7 @@ export const defaultDarkTheme = {
       gradient: theme.darkBlue,
       bgHover: theme.darkerBlue,
       gradientHover: theme.darkerBlue,
+      isCustodyOverlayHero: 'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
     },
   },
   linkColor: theme.lightBlue,
@@ -133,6 +137,8 @@ export const defaultDarkTheme = {
   background:{
     white: theme.darker,
     faqAnswer: theme.dark,
+    faqAnswerCustom1: theme.dark,
+    faqAnswerCustom2: theme.dark,
     downloadCta: theme.dark,
     downloadCtaShadow: theme.dark,
     navBtnHover: theme.dark,
@@ -168,9 +174,12 @@ export const purpleTheme = {
   background:{
     white: theme.white,
     faqAnswer: '#f4f6f8',
+    faqAnswerCustom1: theme.white,
+    faqAnswerCustom2: '#4c4c4c',
     downloadCta: theme.white,
     downloadCtaShadow: '#dbdbdb',
     navBtnHover: '#dbdbdb',
+    isCustodyOverlayHero: 'linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%)',
   },
   text: {
     default: theme.black,
@@ -202,9 +211,12 @@ export const purpleDarkTheme = {
   background:{
     white: theme.darker,
     faqAnswer: theme.dark,
+    faqAnswerCustom1: theme.dark,
+    faqAnswerCustom2: theme.dark,
     downloadCta: theme.dark,
     downloadCtaShadow: theme.dark,
     navBtnHover: theme.dark,
+    isCustodyOverlayHero: 'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
   },
   text: {
     default: theme.white,
