@@ -109,7 +109,7 @@ const PolicyCopy = styled.div`
   margin: 20px 0 0 0;
 `
 const MenuItemHeading = styled.h5`
-  color: ${({ theme }) => theme.orange};
+  color: ${({ theme }) => theme.orange} !important;
   text-transform: uppercase;
   line-height: 40px;
   margin-bottom: 4px;

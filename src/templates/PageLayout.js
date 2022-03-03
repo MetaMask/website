@@ -2,9 +2,15 @@ import React from 'react'
 import Layout from '../components/layout'
 import { ToastContainer as Notifications, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { defaultTheme, purpleTheme } from '../lib/theme'
+import {
+  defaultTheme,
+  purpleTheme,
+  purpleDarkTheme,
+  defaultDarkTheme,
+} from '../lib/theme'
 import scrollTo from '../lib/utils/scrollToElement'
 import Context from '../Context/ContextPage'
+import ContextClientSide from '../Context/ContextClientSide'
 
 /**
  * @name PageLayout
@@ -14,8 +20,17 @@ import Context from '../Context/ContextPage'
 const PageLayout = props => {
   const { location, children, themeColor, ...rest } = props
   const { pathname } = location || {}
-  const pageTheme = themeColor === 'purple' ? purpleTheme : defaultTheme
   const [idFaqActive, setIdFaqActive] = React.useState('')
+  const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
+  const { isDarkMode } = darkModeContextValue || {}
+  const pageTheme =
+    themeColor === 'purple'
+      ? isDarkMode
+        ? purpleDarkTheme
+        : purpleTheme
+      : isDarkMode
+      ? defaultDarkTheme
+      : defaultTheme
   const valueContext = {
     faq: {
       idFaqActive,

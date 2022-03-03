@@ -4,6 +4,9 @@ import styled, { withTheme } from 'styled-components'
 import Link from './Link'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { useMediaQuery } from 'react-responsive'
+import ToggleDarkMode from './ToggleDarkMode'
+import ContextClientSide from '../Context/ContextClientSide'
+import { setLocalStorage } from '../lib/utils/localStorage'
 
 const StyledHeader = props => {
   const {
@@ -22,7 +25,9 @@ const StyledHeader = props => {
   })
   const [menuActive, setMenuActive] = React.useState('')
   const [hamburgerActive, setHamburgerActive] = React.useState(false)
+  const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const menuRef = React.useRef()
+  const { isDarkMode, setIsDarkMode } = darkModeContextValue || {}
 
   React.useEffect(() => {
     const handleOuterClick = e => {
@@ -56,6 +61,10 @@ const StyledHeader = props => {
   }
   const handleHamburgerButton = () => {
     setHamburgerActive(!hamburgerActive)
+  }
+  const onChangeDarkMode = e => {
+    setLocalStorage('darkMode', e.target.checked ? '1' : '0')
+    setIsDarkMode(e.target.checked)
   }
   return (
     <HeaderElement>
@@ -114,6 +123,14 @@ const StyledHeader = props => {
                 isHeaderMenu: true,
               })}
             </ButtonsWrapper>
+            <DarkModeWrapper loading={isDarkMode === null}>
+              <ToggleDarkMode
+                onChange={onChangeDarkMode}
+                checked={isDarkMode}
+                name="darkMode"
+                value="dark"
+              />
+            </DarkModeWrapper>
           </NavMainInner>
         </NavMain>
       </HeaderContainer>
@@ -134,7 +151,7 @@ StyledHeader.propTypes = {
 }
 
 const HeaderElement = styled.header`
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.background.white};
   bottom: 20px;
   display: block;
   left: 0;
@@ -147,6 +164,7 @@ const HeaderElement = styled.header`
   right: 0;
   top: 0;
   z-index: 999;
+  transition: background 300ms ease;
 `
 const Announcement = styled.div`
   margin: -24px -20px 16px -20px;
@@ -181,7 +199,7 @@ const NavMain = styled.nav`
     visibility: hidden;
     left: 0;
     right: 0;
-    background: #fff;
+    background: ${({ theme }) => theme.background.white};
     padding: 12px;
     position: fixed;
     top: 0;
@@ -231,7 +249,7 @@ const NavMenu = styled.div`
 `
 
 const NavMenuChild = styled.div`
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.background.white};
   border-radius: 8px;
   box-shadow: 0 0 13px 0 rgb(0 0 0 / 28%);
   display: flex;
@@ -277,10 +295,10 @@ const NavMenuMain = styled.div`
   align-items: center;
   height: 40px;
   padding: 0 20px;
-  color: #222;
+  color: ${({ theme }) => theme.text.menu};
   cursor: pointer;
   &:hover {
-    color: ${({ theme }) => theme.darkBlue};
+    color: ${({ theme }) => theme.text.menuHover};
   }
 
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
@@ -302,14 +320,15 @@ const HamburgerButton = styled.div`
   font-size: 24px;
   cursor: pointer;
   border-radius: 10px;
+  color: ${({ theme }) => theme.text.default};
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     display: inline-flex;
   }
 
-  ${({ active }) =>
+  ${({ active, theme }) =>
     active
       ? `
-    background: #dbdbdb;
+    background: ${theme.background.navBtnHover};
   `
       : ''}
 `
@@ -329,4 +348,22 @@ const ButtonsWrapper = styled.div`
       width: 100%;
     }
   }
+`
+
+const DarkModeWrapper = styled.div`
+  display: inline-flex;
+  align-items: center;
+  margin-left: 32px;
+  opacity: 0;
+
+  .client-ready & {
+    opacity: 1;
+  }
+
+  @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+    margin-top: 16px;
+    margin-left: 0;
+    justify-content: center;
+  }
+  
 `

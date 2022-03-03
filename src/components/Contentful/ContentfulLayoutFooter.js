@@ -13,6 +13,7 @@ const ContentfulLayoutFooter = props => {
       logo={logo}
       logoTitle={logo.title}
       logoUrl={logoUrl}
+      logoSvg={logo.logo.svg}
       menus={menuItems}
       copyright={copyright}
     />

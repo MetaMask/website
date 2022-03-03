@@ -100,19 +100,19 @@ const AnswerItemInner = styled.div`
   border-radius: 0 0 4px 4px;
   display: block;
   padding: 30px;
-  background: #f4f6f8;
+  background: ${({ theme }) => theme.background.faqAnswer};
   text-align: left;
 
   p:last-child {
     margin-bottom: 0;
   }
 
-  ${({ containerBgColor }) =>
-    containerBgColor === 'gray' ? `background: #ffffff;` : ''}
+  ${({ containerBgColor, theme }) =>
+    containerBgColor === 'gray' ? `background: ${theme.background.faqAnswerCustom1};` : ''}
 
-  ${({ containerBgColor }) =>
+  ${({ containerBgColor, theme }) =>
     containerBgColor === 'dark' || containerBgColor === 'darkGray'
-      ? `background: #4c4c4c;`
+      ? `background: ${theme.background.faqAnswerCustom2};`
       : ''}
   
   
