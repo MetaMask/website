@@ -933,3 +933,13 @@ figcaption {
     margin-bottom: 8px;
   }
 }
+
+@media (max-width: 480px) {
+  .custom-mobile-one-row-wrapper{
+    flex-direction: column !important;width: 100% !important;max-width: 100% !important;
+  }
+  .custom-mobile-one-row {
+    width: 100% !important;
+    flex: none !important;padding: 0 !important;margin: 8px 0 !important
+  }
+}
