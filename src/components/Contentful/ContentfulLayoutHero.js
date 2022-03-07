@@ -12,6 +12,7 @@ const ContentfulLayoutHero = props => {
       headline,
       modules,
       sideImage = {},
+      sideImageDarkMode = {},
       sideImageFlex = false,
       eyebrow,
       eyebrowLogo,
@@ -33,6 +34,7 @@ const ContentfulLayoutHero = props => {
   const { childMarkdownRemark: { html } = {} } = description || {}
   const bgUrl = parseContentfulAssetUrl(backgroundImage)
   const sideImageUrl = parseContentfulAssetUrl(sideImage)
+  const sideImageDarkModeUrl = parseContentfulAssetUrl(sideImageDarkMode)
   const backgroundColorMobile = sideImageFlex ? 'white' : ''
   return (
     <Hero
@@ -48,6 +50,7 @@ const ContentfulLayoutHero = props => {
       backgroundImage={bgUrl || ''}
       modules={modules}
       sideImageUrl={sideImageUrl || ''}
+      sideImageDarkModeUrl={sideImageDarkModeUrl || ''}
       sideImage={sideImage}
       hideHeadline={hideHeadline}
       showLearnMore={showLearnMore}
