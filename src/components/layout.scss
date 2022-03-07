@@ -1031,6 +1031,10 @@ body.dark-mode {
     }
   }
 
+  .btn-primary {
+    background: #1098fc;
+  }
+
   @media (max-width: 767px){
     .heroMobileOverlayContent {
       background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0), #121212 11%);

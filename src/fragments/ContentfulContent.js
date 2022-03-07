@@ -68,6 +68,16 @@ export const ContentfulLayoutHeroFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
+    sideImageDarkMode {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 1200, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
     cta {
       ...ContentfulCtaFields
     }
