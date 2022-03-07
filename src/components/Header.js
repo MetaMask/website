@@ -354,6 +354,7 @@ const ButtonsWrapper = styled.div`
     padding: 8px 32px !important;
   }
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+    margin-top: 12px;
     a {
       width: 100%;
     }
