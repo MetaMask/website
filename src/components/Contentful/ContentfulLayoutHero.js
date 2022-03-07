@@ -52,6 +52,7 @@ const ContentfulLayoutHero = props => {
       sideImageUrl={sideImageUrl || ''}
       sideImageDarkModeUrl={sideImageDarkModeUrl || ''}
       sideImage={sideImage}
+      sideImageDarkMode={sideImageDarkMode}
       hideHeadline={hideHeadline}
       showLearnMore={showLearnMore}
       showFavIcon={showFavIcon}

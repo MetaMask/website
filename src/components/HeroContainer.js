@@ -18,6 +18,7 @@ const HeroContainerComponent = props => {
     hideHeadline,
     description,
     sideImage,
+    sideImageDarkMode,
     sideImageUrl,
     sideImageDarkModeUrl,
     showLearnMore,
@@ -202,7 +203,7 @@ const HeroContainerComponent = props => {
                 isFlask={isFlask}
               >
                 {isStyleHubspot || sideImageFlex || isFlask ? (
-                  <Image image={sideImage} />
+                  <Image image={isDarkMode && !isEmpty(sideImageDarkMode) ? sideImageDarkMode : sideImage} />
                 ) : null}
               </HeroSideImage>
             ) : null}
