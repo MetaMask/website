@@ -19,6 +19,7 @@ const HeroContainerComponent = props => {
     description,
     sideImage,
     sideImageUrl,
+    sideImageDarkModeUrl,
     showLearnMore,
     eyebrow,
     eyebrowLogo,
@@ -109,7 +110,7 @@ const HeroContainerComponent = props => {
             isStyleCenterSimple={isStyleCenterSimple}
             contentAlignment={contentAlignment}
             bgSrc={
-              !isStyleHubspot && !sideImageFlex && !isFlask ? sideImageUrl : ''
+              !isStyleHubspot && !sideImageFlex && !isFlask ? ((isDarkMode && sideImageDarkModeUrl) ? sideImageDarkModeUrl : sideImageUrl) : ''
             }
             isAbout={isAbout}
             reverse={contentAlignment === 'right'}

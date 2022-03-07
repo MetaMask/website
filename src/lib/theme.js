@@ -15,6 +15,9 @@ const theme = {
   darkerPurple: '#8A42AD',
   darkPurple: '#9F6FF0',
   lightPurple: '#A495FF',
+  blue: {
+    400: '#1098fc',
+  },
   wrapper: {
     margin: '0 auto',
     maxWidth: '100%',
@@ -127,10 +130,10 @@ export const defaultDarkTheme = {
   primaryColor: theme.darkBlue,
   button: {
     primary: {
-      bg: theme.darkBlue,
-      gradient: theme.darkBlue,
-      bgHover: theme.darkerBlue,
-      gradientHover: theme.darkerBlue,
+      bg: theme.blue[400],
+      gradient: theme.blue[400],
+      bgHover: theme.darkBlue,
+      gradientHover: theme.darkBlue,
       isCustodyOverlayHero: 'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
     },
   },
