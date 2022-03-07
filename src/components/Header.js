@@ -261,7 +261,7 @@ const NavMenu = styled.div`
 const NavMenuChild = styled.div`
   background-color: ${({ theme }) => theme.background.white};
   border-radius: 8px;
-  box-shadow: 0 0 13px 0 rgb(0 0 0 / 28%);
+  box-shadow: 0 0 13px 0 ${({ theme }) => theme.shadowSubMenu};
   display: flex;
   flex-direction: column;
   left: 0;
