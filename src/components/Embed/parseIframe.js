@@ -18,7 +18,7 @@ export default function parseYoutubeIframe(html) {
       const title = iframe.getAttribute('title')
       iframe.setAttribute(
         'srcdoc',
-        `<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;width: 100%;height: 100%;display: inline-flex;align-items: center;justify-content: center;background: rgba(0,0,0,0.5);transition: background 300ms ease;}span:hover{background: rgba(0,0,0,0.3)!important;}</style><a href=${url}?autoplay=1><img src=https://img.youtube.com/vi/${idYoutube}/maxresdefault.jpg alt='${title}'><span>▶</span></a>`
+        `<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;width: 100%;height: 100%;display: inline-flex;align-items: center;justify-content: center;background: rgba(0,0,0,0.5);transition: background 300ms ease;}span:hover{background: rgba(0,0,0,0.3)!important;}</style><a href=${url}?autoplay=1><img src=https://i.ytimg.com/vi_webp/${idYoutube}/maxresdefault.webp alt='${title}'><span>▶</span></a>`
       )
     })
     htmlParse = parseHtml.toString()
