@@ -1,22 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import parseIframe from './parseIframe';
+import parseIframe from './parseIframe'
 
 const EmbedHtml = props => {
-  const {
-    html
-  } = props
-  let htmlParse = html;
+  const { html } = props
+  let htmlParse = html
   if (htmlParse.includes('<iframe')) {
-    htmlParse = parseIframe(htmlParse);
+    htmlParse = parseIframe(htmlParse)
   }
 
   return (
     <EmbedHtmlWrapper
-        dangerouslySetInnerHTML={{
-          __html: htmlParse,
-        }}
+      dangerouslySetInnerHTML={{
+        __html: htmlParse,
+      }}
     />
   )
 }

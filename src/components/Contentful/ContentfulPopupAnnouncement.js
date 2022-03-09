@@ -1,18 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import PopupAnnouncement from '../PopupAnnouncement';
+import PopupAnnouncement from '../PopupAnnouncement'
 
 const ContentfulPopupAnnouncement = props => {
   const {
-    moduleConfig: {
-      title,
-      ctaText,
-      ctaLink,
-      backgroundColor
-    },
+    moduleConfig: { title, ctaText, ctaLink, backgroundColor },
   } = props
   return (
-    <PopupAnnouncement title={title} ctaText={ctaText} ctaLink={ctaLink} backgroundColor={backgroundColor} />
+    <PopupAnnouncement
+      title={title}
+      ctaText={ctaText}
+      ctaLink={ctaLink}
+      backgroundColor={backgroundColor}
+    />
   )
 }
 
@@ -23,6 +23,6 @@ ContentfulPopupAnnouncement.propTypes = {
     title: PropTypes.string,
     ctaText: PropTypes.string,
     ctaLink: PropTypes.string,
-    backgroundColor: PropTypes.string
+    backgroundColor: PropTypes.string,
   }),
 }

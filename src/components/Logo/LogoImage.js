@@ -5,7 +5,14 @@ import styled from 'styled-components'
 const LogoImage = ({ alt, src, width, height }) => {
   return (
     <StyledPartnerImageContainer>
-      <StyledPartnerImage src={src} alt={alt} widthCustom={width} width={width || 400} height={height || 400} loading='lazy' />
+      <StyledPartnerImage
+        src={src}
+        alt={alt}
+        widthCustom={width}
+        width={width || 400}
+        height={height || 400}
+        loading="lazy"
+      />
     </StyledPartnerImageContainer>
   )
 }
