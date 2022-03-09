@@ -25,9 +25,6 @@ export default class HTML extends React.Component {
           {process.env.NODE_ENV === 'production' && (
             <script dangerouslySetInnerHTML={{ __html: gtagScript }} />
           )}
-          {process.env.NODE_ENV === 'production' && (
-            <script dangerouslySetInnerHTML={{ __html: livePersonScript }} />
-          )}
           <link
             rel="preload"
             href="/fonts/EuclidCircularB-Regular-WebXL.woff2"
@@ -49,6 +46,9 @@ export default class HTML extends React.Component {
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
           {this.props.postBodyComponents}
+          {process.env.NODE_ENV === 'production' && (
+            <script dangerouslySetInnerHTML={{ __html: livePersonScript }} />
+          )}
           {process.env.NODE_ENV === 'production' && (
             <script dangerouslySetInnerHTML={{ __html: accessiBeScript }} />
           )}
