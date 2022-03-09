@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { SectionTitle } from '../StyledGeneral'
-import Embed from '../Embed';
+import Embed from '../Embed'
 
 const ContentfulEmbed = props => {
   const {

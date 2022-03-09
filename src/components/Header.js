@@ -154,7 +154,7 @@ const Announcement = styled.div`
   &:empty {
     display: none;
   }
-`;
+`
 
 const HeaderContainer = styled.div`
   display: flex;

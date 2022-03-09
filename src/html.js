@@ -28,8 +28,18 @@ export default class HTML extends React.Component {
           {process.env.NODE_ENV === 'production' && (
             <script dangerouslySetInnerHTML={{ __html: livePersonScript }} />
           )}
-          <link rel="preload" href="/fonts/EuclidCircularB-Regular-WebXL.woff2" as="font" crossOrigin="anonymous" />
-          <link rel="preload" href="/fonts/EuclidCircularB-Bold-WebXL.woff2" as="font" crossOrigin="anonymous" />
+          <link
+            rel="preload"
+            href="/fonts/EuclidCircularB-Regular-WebXL.woff2"
+            as="font"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/EuclidCircularB-Bold-WebXL.woff2"
+            as="font"
+            crossOrigin="anonymous"
+          />
         </head>
         <body {...this.props.bodyAttributes}>
           {this.props.preBodyComponents}
