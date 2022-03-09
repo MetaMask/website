@@ -111,7 +111,11 @@ const HeroContainerComponent = props => {
             isStyleCenterSimple={isStyleCenterSimple}
             contentAlignment={contentAlignment}
             bgSrc={
-              !isStyleHubspot && !sideImageFlex && !isFlask ? ((isDarkMode && sideImageDarkModeUrl) ? sideImageDarkModeUrl : sideImageUrl) : ''
+              !isStyleHubspot && !sideImageFlex && !isFlask
+                ? isDarkMode && sideImageDarkModeUrl
+                  ? sideImageDarkModeUrl
+                  : sideImageUrl
+                : ''
             }
             isAbout={isAbout}
             reverse={contentAlignment === 'right'}
@@ -203,7 +207,13 @@ const HeroContainerComponent = props => {
                 isFlask={isFlask}
               >
                 {isStyleHubspot || sideImageFlex || isFlask ? (
-                  <Image image={isDarkMode && !isEmpty(sideImageDarkMode) ? sideImageDarkMode : sideImage} />
+                  <Image
+                    image={
+                      isDarkMode && !isEmpty(sideImageDarkMode)
+                        ? sideImageDarkMode
+                        : sideImage
+                    }
+                  />
                 ) : null}
               </HeroSideImage>
             ) : null}

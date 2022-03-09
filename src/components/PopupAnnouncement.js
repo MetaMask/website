@@ -5,14 +5,9 @@ import ArrowIcon from '../images/icons/icon-arrow-right.svg'
 import Link from './Link'
 
 const PopupAnnouncement = props => {
-  const {
-    title,
-    ctaText,
-    ctaLink,
-    backgroundColor
-  } = props
+  const { title, ctaText, ctaLink, backgroundColor } = props
 
-  const [isHidden, setIsHidden] = React.useState(false);
+  const [isHidden, setIsHidden] = React.useState(false)
 
   const onClosePopup = () => {
     setIsHidden(true)
@@ -20,40 +15,24 @@ const PopupAnnouncement = props => {
   if (isHidden) {
     return null
   }
-  
+
   return (
     <Wrapper backgroundColor={backgroundColor}>
       <WrapperInner>
         <WrapperInnerLink>
-          {ctaLink && (
-            <ClickArea
-              to={ctaLink}
-              newTab
-            >
-            </ClickArea>
-          )}
+          {ctaLink && <ClickArea to={ctaLink} newTab></ClickArea>}
 
           <Content>
-            {title && (
-              <Title>
-                {title}
-              </Title>
-            )}
+            {title && <Title>{title}</Title>}
             {ctaText && (
               <Cta>
-                <CtaTitle>
-                  {ctaText}
-                </CtaTitle>
+                <CtaTitle>{ctaText}</CtaTitle>
                 <ArrowIcon />
               </Cta>
             )}
           </Content>
         </WrapperInnerLink>
-        <CloseBtn
-          type="button"
-          onClick={onClosePopup}
-          aria-label="close"
-        >
+        <CloseBtn type="button" onClick={onClosePopup} aria-label="close">
           <span className="w-icon w-icon-close"></span>
         </CloseBtn>
       </WrapperInner>
@@ -67,22 +46,20 @@ PopupAnnouncement.propTypes = {
   title: PropTypes.string,
   ctaText: PropTypes.string,
   ctaLink: PropTypes.string,
-  backgroundColor: PropTypes.string
+  backgroundColor: PropTypes.string,
 }
 
 const Wrapper = styled.div`
   display: block;
   ${({ backgroundColor }) =>
-    backgroundColor
-      ? ` background: ${backgroundColor};`
-      : ''}
+    backgroundColor ? ` background: ${backgroundColor};` : ''}
 `
 
 const WrapperInner = styled.div`
   display: flex;
   position: relative;
   width: 100%;
-`;
+`
 
 const WrapperInnerLink = styled.div`
   align-items: center;
@@ -93,14 +70,14 @@ const WrapperInnerLink = styled.div`
   min-width: 0;
   padding: 8px;
   position: relative;
-`;
+`
 
 const Content = styled.div`
   align-items: center;
   display: flex;
   flex-flow: wrap;
   justify-content: center;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
 `
 
@@ -112,7 +89,7 @@ const ClickArea = styled(Link)`
   right: 0;
   top: 0;
   z-index: 2;
-`;
+`
 
 const Title = styled.div`
   font-size: 14px;
@@ -125,7 +102,7 @@ const Cta = styled.div`
   align-items: center;
   font-size: 14px;
   line-height: 120%;
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: 700;
 
   svg {

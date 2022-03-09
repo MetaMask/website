@@ -102,7 +102,7 @@ export const defaultTheme = {
   linkColor: theme.lightBlue,
   eyebrowHero: theme.darkBlue,
   gradientFAQ: 'linear-gradient(90deg, #f5841f, #2c56dd)',
-  background:{
+  background: {
     white: theme.white,
     faqAnswer: '#f4f6f8',
     faqAnswerCustom1: theme.white,
@@ -110,7 +110,8 @@ export const defaultTheme = {
     downloadCta: theme.white,
     downloadCtaShadow: '#dbdbdb',
     navBtnHover: '#dbdbdb',
-    isCustodyOverlayHero: 'linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%)',
+    isCustodyOverlayHero:
+      'linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%)',
   },
   text: {
     default: theme.black,
@@ -134,12 +135,13 @@ export const defaultDarkTheme = {
       gradient: theme.blue[400],
       bgHover: theme.darkBlue,
       gradientHover: theme.darkBlue,
-      isCustodyOverlayHero: 'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
+      isCustodyOverlayHero:
+        'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
     },
   },
   linkColor: theme.lightBlue,
   eyebrowHero: theme.darkBlue,
-  background:{
+  background: {
     white: theme.darker,
     faqAnswer: theme.dark,
     faqAnswerCustom1: theme.darker,
@@ -177,7 +179,7 @@ export const purpleTheme = {
   },
   linkColor: theme.darkPurple,
   eyebrowHero: theme.lightPurple,
-  background:{
+  background: {
     white: theme.white,
     faqAnswer: '#f4f6f8',
     faqAnswerCustom1: theme.white,
@@ -185,7 +187,8 @@ export const purpleTheme = {
     downloadCta: theme.white,
     downloadCtaShadow: '#dbdbdb',
     navBtnHover: '#dbdbdb',
-    isCustodyOverlayHero: 'linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%)',
+    isCustodyOverlayHero:
+      'linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%)',
   },
   text: {
     default: theme.black,
@@ -214,7 +217,7 @@ export const purpleDarkTheme = {
   },
   linkColor: theme.darkPurple,
   eyebrowHero: theme.lightPurple,
-  background:{
+  background: {
     white: theme.darker,
     faqAnswer: theme.dark,
     faqAnswerCustom1: theme.darker,
@@ -222,7 +225,8 @@ export const purpleDarkTheme = {
     downloadCta: theme.dark,
     downloadCtaShadow: theme.dark,
     navBtnHover: theme.dark,
-    isCustodyOverlayHero: 'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
+    isCustodyOverlayHero:
+      'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
   },
   text: {
     default: theme.white,

@@ -78,7 +78,8 @@ const DownLoadWrapper = styled.div`
   flex-direction: column;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.background.downloadCta};
-  box-shadow: 1px 1px 8px 1px ${({ theme }) => theme.background.downloadCtaShadow};
+  box-shadow: 1px 1px 8px 1px
+    ${({ theme }) => theme.background.downloadCtaShadow};
   position: relative;
   text-align: center;
 

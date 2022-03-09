@@ -1,31 +1,31 @@
-export const getLocalStorage = (name) => {
-  let localStorage;
+export const getLocalStorage = name => {
+  let localStorage
   try {
     // eslint-disable-next-line prefer-destructuring
-    localStorage = window.localStorage;
+    localStorage = window.localStorage
   } catch (e) {
-    localStorage = null;
+    localStorage = null
   }
 
   if (null !== localStorage) {
-    const data = localStorage.getItem(name);
+    const data = localStorage.getItem(name)
     return data
   }
-  return null;
-};
+  return null
+}
 
 export const setLocalStorage = (name, value) => {
-  let localStorage;
+  let localStorage
   try {
     // eslint-disable-next-line prefer-destructuring
-    localStorage = window.localStorage;
+    localStorage = window.localStorage
   } catch (e) {
-    localStorage = null;
+    localStorage = null
   }
 
   if (null !== localStorage) {
-    localStorage.setItem(name, value);
+    localStorage.setItem(name, value)
   }
 
-  return;
-};
+  return
+}
