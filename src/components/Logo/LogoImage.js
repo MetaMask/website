@@ -2,10 +2,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
-const LogoImage = ({ alt, src, width }) => {
+const LogoImage = ({ alt, src, width, height }) => {
   return (
     <StyledPartnerImageContainer>
-      <StyledPartnerImage src={src} alt={alt} width={width} loading='lazy' />
+      <StyledPartnerImage src={src} alt={alt} widthCustom={width} width={width || 400} height={height || 400} loading='lazy' />
     </StyledPartnerImageContainer>
   )
 }
@@ -25,10 +25,10 @@ const StyledPartnerImage = styled.img`
   height: auto;
   object-fit: contain;
 
-  ${({ width }) =>
-    width
+  ${({ widthCustom }) =>
+    widthCustom
       ? `
-    width: ${width};
+    width: ${widthCustom};
     margin: 0 auto;
     height: auto !important;
   `
