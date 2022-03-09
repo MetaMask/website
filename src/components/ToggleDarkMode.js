@@ -88,4 +88,4 @@ const Icon = styled.span`
       : `
       right: 6px;
       `}
-`;
+`

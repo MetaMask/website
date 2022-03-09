@@ -108,7 +108,9 @@ const AnswerItemInner = styled.div`
   }
 
   ${({ containerBgColor, theme }) =>
-    containerBgColor === 'gray' ? `background: ${theme.background.faqAnswerCustom1};` : ''}
+    containerBgColor === 'gray'
+      ? `background: ${theme.background.faqAnswerCustom1};`
+      : ''}
 
   ${({ containerBgColor, theme }) =>
     containerBgColor === 'dark' || containerBgColor === 'darkGray'

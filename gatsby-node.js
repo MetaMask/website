@@ -57,8 +57,8 @@ exports.createPages = ({ graphql, actions }) => {
             themeColor,
             isFaqLayout,
           } = p.node
-          const { contentful_id: footerId = '' } = footer || {};
-          const { contentful_id: headerId = '' } = header || {};
+          const { contentful_id: footerId = '' } = footer || {}
+          const { contentful_id: headerId = '' } = header || {}
           const moduleIds = modules.map(m => m.contentful_id)
           const seoId = seo ? seo.contentful_id : ''
 

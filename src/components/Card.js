@@ -158,7 +158,7 @@ const ArrowItem = styled.div`
     height: 100%;
     width: auto;
     path {
-      fill: ${({theme}) => theme.text.title};
+      fill: ${({ theme }) => theme.text.title};
     }
   }
 `
