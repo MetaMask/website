@@ -12,7 +12,8 @@ const Image = props => {
       decoding="async"
       src={urlImg}
       alt={description || title}
-      width="640" height="360"
+      width="640"
+      height="360"
       {...rest}
     />
   )
