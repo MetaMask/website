@@ -35,14 +35,15 @@ const ContentfulLayout = props => {
     path,
     ...rest
   } = props
+
   let partnerId = '451393'
   let conversionId = ''
   if (path.includes('/institutions')) {
     partnerId = '4249353'
     conversionId = '7714137'
   }
-  let linkedInPartnerId = '_linkedin_partner_id = "' + partnerId + '";'
-  let linkedInEventPixel =
+  const linkedInPartnerId = '_linkedin_partner_id = "' + partnerId + '";'
+  const linkedInEventPixel =
     '<img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=' +
     partnerId +
     (conversionId ? '&conversionId=' + conversionId : '') +
