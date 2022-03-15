@@ -4,6 +4,7 @@ import accessiBeScript from './lib/services/accessibe'
 import linkedInTrackingScript from './lib/services/lintrk'
 import livePersonScript from './lib/services/live-person'
 import redirect from './lib/services/redirect'
+import { useLocation } from '@reach/router'
 
 export default class HTML extends React.Component {
   render() {
@@ -18,8 +19,10 @@ export default class HTML extends React.Component {
 
     let partnerId = '451393'
     let conversionId = ''
-    // check MMI pages (TODO path include '/institutions/'
-    if (true) {
+    const location = useLocation()
+    const pathname = location.pathname
+    const isInstitutions = pathname.includes('/institutions')
+    if (isInstitutions) {
       partnerId = '4249353'
       conversionId = '7714137'
     }
