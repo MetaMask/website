@@ -5,6 +5,7 @@ import flatMapDeep from 'lodash/flatMapDeep'
 import isArray from 'lodash/isArray'
 import Layout from './PageLayout'
 import Context from '../Context/ContextPage'
+import linkedInTrackingScript from '../lib/services/lintrk'
 
 /**
  * @name ContentfulLayout
@@ -34,6 +35,18 @@ const ContentfulLayout = props => {
     path,
     ...rest
   } = props
+  let partnerId = '451393'
+  let conversionId = ''
+  if (path.includes('/institutions')) {
+    partnerId = '4249353'
+    conversionId = '7714137'
+  }
+  let linkedInPartnerId = '_linkedin_partner_id = "' + partnerId + '";'
+  let linkedInEventPixel =
+    '<img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=' +
+    partnerId +
+    (conversionId ? '&conversionId=' + conversionId : '') +
+    '&fmt=gif"/>'
 
   const [idFaqActive, setIdFaqActive] = React.useState('')
   const valueContext = {
@@ -75,6 +88,13 @@ const ContentfulLayout = props => {
         {allModules.map(module =>
           contentfulModuleToComponent({ ...module, isFaq: isFaqLayout })
         )}
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: linkedInPartnerId + linkedInTrackingScript,
+          }}
+        />
+        <noscript dangerouslySetInnerHTML={{ __html: linkedInEventPixel }} />
       </Layout>
     </Context.Provider>
   )
