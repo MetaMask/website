@@ -6,6 +6,7 @@ import isArray from 'lodash/isArray'
 import Layout from './PageLayout'
 import Context from '../Context/ContextPage'
 import linkedInTrackingScript from '../lib/services/lintrk'
+import { useLocation } from '@reach/router'
 
 /**
  * @name ContentfulLayout
@@ -35,9 +36,11 @@ const ContentfulLayout = props => {
     path,
     ...rest
   } = props
+  const location = useLocation()
+  const pathname = location.pathname
   let partnerId = '451393'
   let conversionId = ''
-  if (path.includes('/institutions')) {
+  if (pathname.includes('/institutions')) {
     partnerId = '4249353'
     conversionId = '7714137'
   }
