@@ -1,13 +1,37 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import accessiBeScript from './lib/services/accessibe'
+import linkedInTrackingScript from './lib/services/lintrk'
 import livePersonScript from './lib/services/live-person'
 import redirect from './lib/services/redirect'
 
 export default class HTML extends React.Component {
   render() {
+    const {
+      htmlAttributes,
+      headComponents,
+      bodyAttributes,
+      preBodyComponents,
+      body,
+      postBodyComponents,
+    } = this.props
+
+    let partnerId = '451393'
+    let conversionId = ''
+    // check MMI pages (TODO path include '/institutions/'
+    if (true) {
+      partnerId = '4249353'
+      conversionId = '7714137'
+    }
+    let linkedInPartnerId = '_linkedin_partner_id = "' + partnerId + '";'
+    let linkedInEventPixel =
+      '<img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=' +
+      partnerId +
+      (conversionId ? '&conversionId=' + conversionId : '') +
+      '&fmt=gif"/>'
+
     return (
-      <html {...this.props.htmlAttributes}>
+      <html {...htmlAttributes}>
         <head>
           <meta charSet="utf-8" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
@@ -15,8 +39,11 @@ export default class HTML extends React.Component {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
-          {this.props.headComponents}
-          <script dangerouslySetInnerHTML={{ __html: redirect }} />
+          {headComponents}
+          <script
+            type="text/javascript"
+            dangerouslySetInnerHTML={{ __html: redirect }}
+          />
           <link
             rel="preload"
             href="/fonts/EuclidCircularB-Regular-WebXL.woff2"
@@ -30,20 +57,32 @@ export default class HTML extends React.Component {
             crossOrigin="anonymous"
           />
         </head>
-        <body {...this.props.bodyAttributes}>
-          {this.props.preBodyComponents}
+        <body {...bodyAttributes}>
+          {preBodyComponents}
           <div
             key={`body`}
             id="___gatsby"
-            dangerouslySetInnerHTML={{ __html: this.props.body }}
+            dangerouslySetInnerHTML={{ __html: body }}
           />
-          {this.props.postBodyComponents}
+          {postBodyComponents}
+          <script
+            type="text/javascript"
+            dangerouslySetInnerHTML={{
+              __html: linkedInPartnerId + linkedInTrackingScript,
+            }}
+          />
+          <noscript dangerouslySetInnerHTML={{ __html: linkedInEventPixel }} />
           {process.env.NODE_ENV === 'production' && (
-            <script dangerouslySetInnerHTML={{ __html: livePersonScript }} />
-          )}
-          {process.env.NODE_ENV === 'production' && (
-            <script dangerouslySetInnerHTML={{ __html: accessiBeScript }} />
-          )}
+              <script
+                type="text/javascript"
+                dangerouslySetInnerHTML={{ __html: livePersonScript }}
+              />
+            ) && (
+              <script
+                type="text/javascript"
+                dangerouslySetInnerHTML={{ __html: accessiBeScript }}
+              />
+            )}
         </body>
       </html>
     )
