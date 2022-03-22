@@ -59,6 +59,14 @@ const HTML = props => {
               type="text/javascript"
               dangerouslySetInnerHTML={{ __html: accessiBeScript }}
             />
+          ) && (
+            <script
+              type="text/javascript"
+              id="hs-script-loader"
+              async
+              defer
+              src="//js.hs-scripts.com/4795067.js"
+            />
           )}
       </body>
     </html>
