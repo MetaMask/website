@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Wrapper, Image } from '../Logo'
+import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
 
 const ContentfulLogo = props => {
   const {
@@ -12,12 +13,10 @@ const ContentfulLogo = props => {
       hasModuleContainer,
       cleanStyle,
       widthLogo,
-      previewMode,
     },
   } = props
-  const { title: titleFile, description: descriptionFile, file, assetUrl } =
-    logo || {}
-  const url = previewMode ? assetUrl : file.url
+  const { title: titleFile, description: descriptionFile } = logo || {}
+  const url = parseContentfulAssetUrl(logo)
   return (
     <Wrapper
       link={link}

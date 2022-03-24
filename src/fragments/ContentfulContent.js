@@ -64,7 +64,7 @@ export const ContentfulLayoutHeroFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1200, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 960, quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -122,7 +122,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1200, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 960, quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -132,7 +132,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 768, quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -216,6 +216,9 @@ export const ContentfulCardFields = graphql`
       description
       file {
         url
+      }
+      fluid(maxWidth: 960, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
       }
     }
     imageMargin
@@ -318,6 +321,9 @@ export const ContentfulLogoFields = graphql`
       }
       file {
         url
+      }
+      fluid(maxWidth: 480, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
       }
     }
     link

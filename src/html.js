@@ -1,62 +1,79 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import accessiBeScript from './lib/services/accessibe'
-import gtagScript from './lib/services/gtag'
 import livePersonScript from './lib/services/live-person'
 import redirect from './lib/services/redirect'
 
-export default class HTML extends React.Component {
-  render() {
-    return (
-      <html {...this.props.htmlAttributes}>
-        <head>
-          <meta charSet="utf-8" />
-          <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-          />
-          {this.props.headComponents}
-          <script dangerouslySetInnerHTML={{ __html: redirect }} />
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=UA-37075177-6"
-          />
-          {process.env.NODE_ENV === 'production' && (
-            <script dangerouslySetInnerHTML={{ __html: gtagScript }} />
+const HTML = props => {
+  const {
+    htmlAttributes,
+    headComponents,
+    bodyAttributes,
+    preBodyComponents,
+    body,
+    postBodyComponents,
+  } = props
+
+  return (
+    <html {...htmlAttributes}>
+      <head>
+        <meta charSet="utf-8" />
+        <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        {headComponents}
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{ __html: redirect }}
+        />
+        <link
+          rel="preload"
+          href="/fonts/EuclidCircularB-Regular-WebXL.woff2"
+          as="font"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/EuclidCircularB-Bold-WebXL.woff2"
+          as="font"
+          crossOrigin="anonymous"
+        />
+      </head>
+      <body {...bodyAttributes}>
+        {preBodyComponents}
+        <div
+          key={`body`}
+          id="___gatsby"
+          dangerouslySetInnerHTML={{ __html: body }}
+        />
+        {postBodyComponents}
+        {process.env.NODE_ENV === 'production' && (
+            <script
+              type="text/javascript"
+              dangerouslySetInnerHTML={{ __html: livePersonScript }}
+            />
+          ) && (
+            <script
+              type="text/javascript"
+              dangerouslySetInnerHTML={{ __html: accessiBeScript }}
+            />
+          ) && (
+            <script
+              type="text/javascript"
+              id="hs-script-loader"
+              async
+              defer
+              src="//js.hs-scripts.com/4795067.js"
+            />
           )}
-          {process.env.NODE_ENV === 'production' && (
-            <script dangerouslySetInnerHTML={{ __html: livePersonScript }} />
-          )}
-          <link
-            rel="preload"
-            href="/fonts/EuclidCircularB-Regular-WebXL.woff2"
-            as="font"
-            crossorigin="anonymous"
-          />
-          <link
-            rel="preload"
-            href="/fonts/EuclidCircularB-Bold-WebXL.woff2"
-            as="font"
-            crossorigin="anonymous"
-          />
-        </head>
-        <body {...this.props.bodyAttributes}>
-          {this.props.preBodyComponents}
-          <div
-            key={`body`}
-            id="___gatsby"
-            dangerouslySetInnerHTML={{ __html: this.props.body }}
-          />
-          {this.props.postBodyComponents}
-          {process.env.NODE_ENV === 'production' && (
-            <script dangerouslySetInnerHTML={{ __html: accessiBeScript }} />
-          )}
-        </body>
-      </html>
-    )
-  }
+      </body>
+    </html>
+  )
 }
+
+export default HTML
 
 HTML.propTypes = {
   htmlAttributes: PropTypes.object,
