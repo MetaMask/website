@@ -95,7 +95,7 @@ const Container = styled(Section)`
   background: ${theme.dark};
   `
       : `
-  background: ${theme.white};
+  background: ${({ theme }) => theme.background.white};
   `}
 `
 
@@ -134,14 +134,13 @@ const Headline = styled(SectionTitle)`
 
 const FullWidthCtaInner = styled.div`
   display: block;
-  color: #fff;
   ${({ backgroundColor, theme }) =>
     backgroundColor === 'dark'
       ? `
     color: ${theme.white};
   `
       : `
-    color: ${theme.black};
+    color: ${theme.text.default};
   `}
   
   ${({ marginBottom }) =>

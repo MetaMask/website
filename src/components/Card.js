@@ -85,7 +85,7 @@ const Card = styled.div`
 
 const CardInner = styled(Link)`
   display: block;
-  color: ${({ theme }) => theme.textColor};
+  color: ${({ theme }) => theme.text.body};
   ${({ backgroundColor }) =>
     backgroundColor
       ? `
@@ -134,7 +134,7 @@ const Inner = styled.div`
 `
 const Title = styled.div`
   font-weight: 700;
-
+  color: ${({ theme }) => theme.text.title};
   ${({ showArrowIcon }) =>
     showArrowIcon
       ? `
@@ -158,7 +158,7 @@ const ArrowItem = styled.div`
     height: 100%;
     width: auto;
     path {
-      fill: #333;
+      fill: ${({ theme }) => theme.text.title};
     }
   }
 `

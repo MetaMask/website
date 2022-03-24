@@ -9,6 +9,7 @@ import { Section } from './StyledGeneral'
 import classnames from 'classnames'
 import Image from './Image'
 import isEmpty from 'lodash/isEmpty'
+import ContextClientSide from '../Context/ContextClientSide'
 
 const HeroContainerComponent = props => {
   const {
@@ -17,11 +18,15 @@ const HeroContainerComponent = props => {
     hideHeadline,
     description,
     sideImage,
+    sideImageDarkMode,
     sideImageUrl,
+    sideImageDarkModeUrl,
     showLearnMore,
     eyebrow,
     eyebrowLogo,
     eyebrowMobileLogo,
+    eyebrowLogoDarkMode,
+    eyebrowMobileLogoDarkMode,
     showFavIcon,
     hubSpotForm,
     cta,
@@ -33,6 +38,8 @@ const HeroContainerComponent = props => {
     isFaq,
     sectionPadding,
   } = props
+  const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
+  const { isDarkMode } = darkModeContextValue || {}
   const [showPopup, setShowPopup] = React.useState(false)
   const togglePopup = () => {
     setShowPopup(!showPopup)
@@ -104,7 +111,11 @@ const HeroContainerComponent = props => {
             isStyleCenterSimple={isStyleCenterSimple}
             contentAlignment={contentAlignment}
             bgSrc={
-              !isStyleHubspot && !sideImageFlex && !isFlask ? sideImageUrl : ''
+              !isStyleHubspot && !sideImageFlex && !isFlask
+                ? isDarkMode && sideImageDarkModeUrl
+                  ? sideImageDarkModeUrl
+                  : sideImageUrl
+                : ''
             }
             isAbout={isAbout}
             reverse={contentAlignment === 'right'}
@@ -126,10 +137,17 @@ const HeroContainerComponent = props => {
                   hideHeadline={hideHeadline}
                   isFaq={isFaq}
                 >
-                  {contentfulModuleToComponent({
-                    ...eyebrowLogo,
-                    cleanStyle: true,
-                  })}
+                  {contentfulModuleToComponent(
+                    eyebrowLogoDarkMode && isDarkMode
+                      ? {
+                          ...eyebrowLogoDarkMode,
+                          cleanStyle: true,
+                        }
+                      : {
+                          ...eyebrowLogo,
+                          cleanStyle: true,
+                        }
+                  )}
                 </EyebrowWrapper>
               ) : null}
               {eyebrowMobileLogo ? (
@@ -139,10 +157,17 @@ const HeroContainerComponent = props => {
                   isMobileLogo={true}
                   isFaq={isFaq}
                 >
-                  {contentfulModuleToComponent({
-                    ...eyebrowMobileLogo,
-                    cleanStyle: true,
-                  })}
+                  {contentfulModuleToComponent(
+                    eyebrowMobileLogoDarkMode && isDarkMode
+                      ? {
+                          ...eyebrowMobileLogoDarkMode,
+                          cleanStyle: true,
+                        }
+                      : {
+                          ...eyebrowMobileLogo,
+                          cleanStyle: true,
+                        }
+                  )}
                 </EyebrowWrapper>
               ) : null}
               {eyebrow ? <EyebrowText>{eyebrow}</EyebrowText> : null}
@@ -182,7 +207,13 @@ const HeroContainerComponent = props => {
                 isFlask={isFlask}
               >
                 {isStyleHubspot || sideImageFlex || isFlask ? (
-                  <Image image={sideImage} />
+                  <Image
+                    image={
+                      isDarkMode && !isEmpty(sideImageDarkMode)
+                        ? sideImageDarkMode
+                        : sideImage
+                    }
+                  />
                 ) : null}
               </HeroSideImage>
             ) : null}
@@ -416,7 +447,8 @@ const HeroContentContainer = styled.div`
       
       ${HeroImageTextContainer} {
         padding-top: 42px;
-        background-image: linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%) !important;
+        background-image: ${theme.background.isCustodyOverlayHero} !important;
+
       }
     }
     @media (max-width: ${theme.device.mobileMediaMax}){

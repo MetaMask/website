@@ -45,6 +45,7 @@ if (env.errors) {
       'gatsby-transformer-sharp',
       'gatsby-transformer-remark',
       'gatsby-plugin-root-import',
+      'gatsby-transformer-inline-svg',
       {
         resolve: `gatsby-source-contentful`,
         options: {

@@ -51,6 +51,12 @@ export const ContentfulLayoutHeroFields = graphql`
     eyebrowMobileLogo {
       ...ContentfulLogoFields
     }
+    eyebrowLogoDarkMode {
+      ...ContentfulLogoFields
+    }
+    eyebrowMobileLogoDarkMode {
+      ...ContentfulLogoFields
+    }
     sideImageFlex
     sideImage {
       title
@@ -59,6 +65,16 @@ export const ContentfulLayoutHeroFields = graphql`
         url
       }
       fluid(maxWidth: 960, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
+    sideImageDarkMode {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 1200, quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -296,6 +312,13 @@ export const ContentfulLogoFields = graphql`
     logo {
       title
       description
+      svg {
+        content # SVG content optimized with SVGO
+        originalContent # Original SVG content
+        dataURI # Optimized SVG as compact dataURI
+        absolutePath #
+        relativePath #
+      }
       file {
         url
       }

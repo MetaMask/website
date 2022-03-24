@@ -12,10 +12,13 @@ const ContentfulLayoutHero = props => {
       headline,
       modules,
       sideImage = {},
+      sideImageDarkMode = {},
       sideImageFlex = false,
       eyebrow,
       eyebrowLogo,
       eyebrowMobileLogo,
+      eyebrowLogoDarkMode,
+      eyebrowMobileLogoDarkMode,
       hideHeadline,
       showLearnMore,
       showFavIcon,
@@ -31,6 +34,7 @@ const ContentfulLayoutHero = props => {
   const { childMarkdownRemark: { html } = {} } = description || {}
   const bgUrl = parseContentfulAssetUrl(backgroundImage)
   const sideImageUrl = parseContentfulAssetUrl(sideImage)
+  const sideImageDarkModeUrl = parseContentfulAssetUrl(sideImageDarkMode)
   const backgroundColorMobile = sideImageFlex ? 'white' : ''
   return (
     <Hero
@@ -41,10 +45,14 @@ const ContentfulLayoutHero = props => {
       eyebrow={eyebrow}
       eyebrowLogo={eyebrowLogo}
       eyebrowMobileLogo={eyebrowMobileLogo}
+      eyebrowLogoDarkMode={eyebrowLogoDarkMode}
+      eyebrowMobileLogoDarkMode={eyebrowMobileLogoDarkMode}
       backgroundImage={bgUrl || ''}
       modules={modules}
       sideImageUrl={sideImageUrl || ''}
+      sideImageDarkModeUrl={sideImageDarkModeUrl || ''}
       sideImage={sideImage}
+      sideImageDarkMode={sideImageDarkMode}
       hideHeadline={hideHeadline}
       showLearnMore={showLearnMore}
       showFavIcon={showFavIcon}

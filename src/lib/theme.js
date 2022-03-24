@@ -5,14 +5,19 @@ const theme = {
   lightBlue: '#2196f3',
   white: '#FFFFFF',
   black: '#000000',
+  darker: '#121212',
   gray: '#F7F9FB',
   darkGray: '#6A737D',
   dark: '#24292E',
+  darkLight: '#393E46',
   orange: '#f6851b',
   cookiesBg: '#151C24',
   darkerPurple: '#8A42AD',
   darkPurple: '#9F6FF0',
   lightPurple: '#A495FF',
+  blue: {
+    400: '#1098fc',
+  },
   wrapper: {
     margin: '0 auto',
     maxWidth: '100%',
@@ -80,6 +85,7 @@ const theme = {
   },
   spacingLRMobile: '16px',
   footerBg: '#e9ebee',
+  shadowSubMenu: 'rgba(0, 0, 0, 0.28)',
 }
 
 export const defaultTheme = {
@@ -95,6 +101,67 @@ export const defaultTheme = {
   },
   linkColor: theme.lightBlue,
   eyebrowHero: theme.darkBlue,
+  gradientFAQ: 'linear-gradient(90deg, #f5841f, #2c56dd)',
+  background: {
+    white: theme.white,
+    faqAnswer: '#f4f6f8',
+    faqAnswerCustom1: theme.white,
+    faqAnswerCustom2: '#4c4c4c',
+    downloadCta: theme.white,
+    downloadCtaShadow: '#dbdbdb',
+    navBtnHover: '#dbdbdb',
+    isCustodyOverlayHero:
+      'linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%)',
+  },
+  text: {
+    default: theme.black,
+    title: theme.darker,
+    body: '#333',
+    menu: '#222',
+    menuHover: theme.darkBlue,
+    menuBgHover: '#e6eaee',
+    menuFooter: 'rgba(0, 0, 0, 0.74)',
+    menuFooterHover: theme.lightBlue,
+  },
+  theme: 'default',
+}
+
+export const defaultDarkTheme = {
+  ...theme,
+  primaryColor: theme.darkBlue,
+  button: {
+    primary: {
+      bg: theme.blue[400],
+      gradient: theme.blue[400],
+      bgHover: theme.darkBlue,
+      gradientHover: theme.darkBlue,
+      isCustodyOverlayHero:
+        'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
+    },
+  },
+  linkColor: theme.lightBlue,
+  eyebrowHero: theme.darkBlue,
+  background: {
+    white: theme.darker,
+    faqAnswer: theme.dark,
+    faqAnswerCustom1: theme.darker,
+    faqAnswerCustom2: theme.dark,
+    downloadCta: theme.dark,
+    downloadCtaShadow: theme.dark,
+    navBtnHover: theme.dark,
+  },
+  text: {
+    default: theme.white,
+    title: theme.white,
+    body: 'rgba(255,255,255,0.6)',
+    menu: theme.white,
+    menuHover: theme.darkBlue,
+    menuBgHover: theme.dark,
+    menuFooter: theme.white,
+    menuFooterHover: theme.lightBlue,
+  },
+  footerBg: '#3C444B',
+  shadowSubMenu: 'rgba(255, 255, 255, 0.15)',
   gradientFAQ: 'linear-gradient(90deg, #f5841f, #2c56dd)',
   theme: 'default',
 }
@@ -112,6 +179,67 @@ export const purpleTheme = {
   },
   linkColor: theme.darkPurple,
   eyebrowHero: theme.lightPurple,
+  background: {
+    white: theme.white,
+    faqAnswer: '#f4f6f8',
+    faqAnswerCustom1: theme.white,
+    faqAnswerCustom2: '#4c4c4c',
+    downloadCta: theme.white,
+    downloadCtaShadow: '#dbdbdb',
+    navBtnHover: '#dbdbdb',
+    isCustodyOverlayHero:
+      'linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%)',
+  },
+  text: {
+    default: theme.black,
+    title: theme.darker,
+    body: '#333',
+    menu: '#222',
+    menuHover: theme.darkBlue,
+    menuBgHover: '#e6eaee',
+    menuFooter: 'rgba(0, 0, 0, 0.74)',
+    menuFooterHover: theme.lightBlue,
+  },
+  gradientFAQ: 'linear-gradient(90deg, #8A42AD 0%, #6762EB 100%)',
+  theme: 'purple',
+}
+
+export const purpleDarkTheme = {
+  ...theme,
+  primaryColor: theme.darkPurple,
+  button: {
+    primary: {
+      bg: theme.darkPurple,
+      gradient: 'linear-gradient(180deg, #8A42AD 0%, #6762EB 100%)',
+      bgHover: theme.darkerPurple,
+      gradientHover: 'linear-gradient(180deg, #8A42AD 0%, #6762EB 100%)',
+    },
+  },
+  linkColor: theme.darkPurple,
+  eyebrowHero: theme.lightPurple,
+  background: {
+    white: theme.darker,
+    faqAnswer: theme.dark,
+    faqAnswerCustom1: theme.darker,
+    faqAnswerCustom2: theme.dark,
+    downloadCta: theme.dark,
+    downloadCtaShadow: theme.dark,
+    navBtnHover: theme.dark,
+    isCustodyOverlayHero:
+      'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
+  },
+  text: {
+    default: theme.white,
+    title: theme.white,
+    body: 'rgba(255,255,255,0.6)',
+    menu: theme.white,
+    menuHover: theme.darkBlue,
+    menuBgHover: theme.dark,
+    menuFooter: theme.white,
+    menuFooterHover: theme.lightBlue,
+  },
+  footerBg: '#3C444B',
+  shadowSubMenu: 'rgba(255, 255, 255, 0.15)',
   gradientFAQ: 'linear-gradient(90deg, #8A42AD 0%, #6762EB 100%)',
   theme: 'purple',
 }
