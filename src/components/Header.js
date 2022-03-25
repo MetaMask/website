@@ -28,7 +28,9 @@ const StyledHeader = props => {
   const [hamburgerActive, setHamburgerActive] = React.useState(false)
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const menuRef = React.useRef()
+  const headerRef = React.useRef();
   const { isDarkMode, setIsDarkMode } = darkModeContextValue || {}
+  const [topMenuMobile, setTopMenuMobile] = React.useState('88px');
 
   React.useEffect(() => {
     const handleOuterClick = e => {
@@ -61,6 +63,10 @@ const StyledHeader = props => {
     }
   }
   const handleHamburgerButton = () => {
+    if(headerRef && popupAnnouncement) {
+      const h = headerRef?.current.getBoundingClientRect().height;
+      setTopMenuMobile(`${h}px`);
+    }
     setHamburgerActive(!hamburgerActive)
   }
   const onChangeDarkMode = e => {
@@ -68,8 +74,8 @@ const StyledHeader = props => {
     setIsDarkMode(e.target.checked)
   }
   return (
-    <HeaderElement>
-      <Announcement>
+    <HeaderElement ref={headerRef}>
+      <Announcement >
         {contentfulModuleToComponent({
           ...popupAnnouncement,
         })}
@@ -96,7 +102,7 @@ const StyledHeader = props => {
           active={hamburgerActive}
           className="w-icon w-icon-nav-menu"
         ></HamburgerButton>
-        <NavMain hamburgerActive={hamburgerActive} ref={menuRef}>
+        <NavMain hamburgerActive={hamburgerActive} ref={menuRef} topMenuMobile={topMenuMobile}>
           <NavMainInner>
             {menus.map((menu, index) => {
               const { title, modules } = menu
@@ -214,8 +220,8 @@ const NavMain = styled.nav`
     position: fixed;
     top: 0;
     bottom: auto;
-    margin-top: 88px;
-    max-height: calc(100% - 88px);
+    margin-top: ${({ topMenuMobile }) => topMenuMobile};
+    max-height: ${({ topMenuMobile }) => `calc(100% - ${topMenuMobile})`};
     overflow-x: hidden;
     overflow-y: auto;
     ${({ hamburgerActive }) =>
