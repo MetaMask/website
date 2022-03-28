@@ -18,7 +18,7 @@ import ContextClientSide from '../Context/ContextClientSide'
  * @description -
  */
 const PageLayout = props => {
-  const { location, children, themeColor, ...rest } = props
+  const { location, children, themeColor, h2FontSize, ...rest } = props
   const { pathname } = location || {}
   const [idFaqActive, setIdFaqActive] = React.useState('')
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
@@ -86,7 +86,7 @@ const PageLayout = props => {
 
   return (
     <Context.Provider value={valueContext}>
-      <Layout theme={pageTheme} {...rest}>
+      <Layout theme={pageTheme} h2FontSize={h2FontSize} {...rest}>
         <Notifications />
         {children}
       </Layout>

@@ -112,6 +112,7 @@ export const defaultTheme = {
     navBtnHover: '#dbdbdb',
     isCustodyOverlayHero:
       'linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%)',
+    logoBlue: 'rgba(3, 125, 214, 0.03)',
   },
   text: {
     default: theme.black,
@@ -122,6 +123,7 @@ export const defaultTheme = {
     menuBgHover: '#e6eaee',
     menuFooter: 'rgba(0, 0, 0, 0.74)',
     menuFooterHover: theme.lightBlue,
+    dark: theme.dark,
   },
   theme: 'default',
 }
@@ -135,8 +137,6 @@ export const defaultDarkTheme = {
       gradient: theme.blue[400],
       bgHover: theme.darkBlue,
       gradientHover: theme.darkBlue,
-      isCustodyOverlayHero:
-        'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
     },
   },
   linkColor: theme.lightBlue,
@@ -149,6 +149,9 @@ export const defaultDarkTheme = {
     downloadCta: theme.dark,
     downloadCtaShadow: theme.dark,
     navBtnHover: theme.dark,
+    isCustodyOverlayHero:
+        'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
+    logoBlue: 'rgba(3, 125, 214, 0.03)',
   },
   text: {
     default: theme.white,
@@ -159,6 +162,7 @@ export const defaultDarkTheme = {
     menuBgHover: theme.dark,
     menuFooter: theme.white,
     menuFooterHover: theme.lightBlue,
+    dark: theme.white,
   },
   footerBg: '#3C444B',
   shadowSubMenu: 'rgba(255, 255, 255, 0.15)',
@@ -189,6 +193,7 @@ export const purpleTheme = {
     navBtnHover: '#dbdbdb',
     isCustodyOverlayHero:
       'linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%)',
+    logoBlue: 'rgba(3, 125, 214, 0.03)',
   },
   text: {
     default: theme.black,
@@ -199,6 +204,7 @@ export const purpleTheme = {
     menuBgHover: '#e6eaee',
     menuFooter: 'rgba(0, 0, 0, 0.74)',
     menuFooterHover: theme.lightBlue,
+    dark: theme.dark,
   },
   gradientFAQ: 'linear-gradient(90deg, #8A42AD 0%, #6762EB 100%)',
   theme: 'purple',
@@ -227,6 +233,7 @@ export const purpleDarkTheme = {
     navBtnHover: theme.dark,
     isCustodyOverlayHero:
       'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
+    logoBlue: 'rgba(3, 125, 214, 0.03)',
   },
   text: {
     default: theme.white,
@@ -237,6 +244,7 @@ export const purpleDarkTheme = {
     menuBgHover: theme.dark,
     menuFooter: theme.white,
     menuFooterHover: theme.lightBlue,
+    dark: theme.white,
   },
   footerBg: '#3C444B',
   shadowSubMenu: 'rgba(255, 255, 255, 0.15)',

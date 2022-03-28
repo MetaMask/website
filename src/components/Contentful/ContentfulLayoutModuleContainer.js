@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import classnames from 'classnames'
 import { SectionTitle, Section } from '../StyledGeneral'
+import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -12,6 +13,7 @@ const ContentfulModuleContainer = props => {
       headline,
       description,
       backgroundColor,
+      backgroundImage,
       paddingTop,
       displayHeadline,
       headlineAlignCenter,
@@ -25,10 +27,12 @@ const ContentfulModuleContainer = props => {
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
+  const bgUrl = parseContentfulAssetUrl(backgroundImage)
   const htmlData = previewMode ? description : html
   return (
     <Container
       sectionPadding={sectionPadding}
+      bgUrl={bgUrl}
       className={classnames({
         noPaddingBottom: noPaddingBottom,
         [`bg-${backgroundColor}`]: backgroundColor,
@@ -92,7 +96,15 @@ ContentfulModuleContainer.propTypes = {
   }),
 }
 
-const Container = styled(Section)``
+const Container = styled(Section)`
+  ${({ bgUrl }) =>
+    bgUrl
+      ? ` background-image: url(${bgUrl});
+    background-size: cover;
+    z-index: 3;
+   `
+      : ''}
+`
 
 const Title = styled(SectionTitle)`
   padding-bottom: 20px;

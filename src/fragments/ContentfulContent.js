@@ -149,6 +149,11 @@ export const ContentfulLayoutFeatureFields = graphql`
     backgroundColor
     sectionPadding
     noPaddingBottom
+    featureItems {
+      ... on ContentfulCard {
+        ...ContentfulCardFields
+      }
+    }
     cta {
       ...ContentfulCtaFields
     }
@@ -201,6 +206,16 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     sectionPadding
     noPaddingBottom
     modulesMargin
+    backgroundImage {
+      title
+      description
+      file {
+        url
+      }
+      fluid(quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
   }
 `
 
@@ -228,9 +243,12 @@ export const ContentfulCardFields = graphql`
       }
     }
     link
+    linkText
     newTab
     backgroundColor
     showArrowIcon
+    layoutType
+    layoutSize
   }
 `
 
@@ -330,6 +348,7 @@ export const ContentfulLogoFields = graphql`
     newTab
     displayTitle
     widthLogo
+    backgroundColor
   }
 `
 

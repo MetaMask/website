@@ -13,6 +13,7 @@ const ContentfulLogo = props => {
       hasModuleContainer,
       cleanStyle,
       widthLogo,
+      backgroundColor,
     },
   } = props
   const { title: titleFile, description: descriptionFile } = logo || {}
@@ -23,6 +24,7 @@ const ContentfulLogo = props => {
       opensNewTab={linkOpensNewTab}
       child={hasModuleContainer}
       cleanStyle={cleanStyle}
+      backgroundColor={backgroundColor}
     >
       {url ? (
         <Image
