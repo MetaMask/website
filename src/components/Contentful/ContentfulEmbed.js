@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { SectionTitle } from '../StyledGeneral'
+import Embed from '../Embed'
 
 const ContentfulEmbed = props => {
   const {
@@ -13,14 +14,11 @@ const ContentfulEmbed = props => {
       previewMode,
     },
   } = props
+
   return (
     <Wrapper id={moduleId}>
       {title && displayTitle ? <Title>{title}</Title> : null}
-      <EmbedHtml
-        dangerouslySetInnerHTML={{
-          __html: previewMode ? props.moduleConfig.embed : embed,
-        }}
-      />
+      <Embed html={previewMode ? props.moduleConfig.embed : embed} />
     </Wrapper>
   )
 }
@@ -49,35 +47,4 @@ const Wrapper = styled.div`
 const Title = styled(SectionTitle)`
   text-align: center;
   margin-bottom: 32px;
-`
-
-const EmbedHtml = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  z-index: 2;
-  border-radius: 12px;
-  overflow: hidden;
-  iframe {
-    border-radius: 12px;
-  }
-  @media (max-width: ${({ theme }) => theme.device.desktopMediaMax}) {
-    &:before {
-      content: '';
-      display: block;
-      padding-bottom: 56.25%;
-    }
-
-    iframe {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
-      margin: 0 !important;
-    }
-  }
 `

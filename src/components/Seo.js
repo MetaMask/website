@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql, StaticQuery } from 'gatsby'
 import Helmet from 'react-helmet'
+import { useLocation } from '@reach/router'
 
 /**
  * @name - SEO
@@ -20,6 +21,9 @@ const SEO = props => {
     pagePath,
   } = props
 
+  const location = useLocation()
+  const pathname = location.pathname
+
   return (
     <StaticQuery
       query={siteSeoQuery}
@@ -35,7 +39,6 @@ const SEO = props => {
           desc: description || defaultDescription,
           canonicalUrl: `${siteUrl}${pagePath}`,
         }
-
         const getMetaTags = (name, value) =>
           name && value
             ? [
@@ -57,6 +60,12 @@ const SEO = props => {
           ...getMetaTags('title', seo.title),
           ...getMetaTags('description', seo.desc),
           ...getMetaTags('image', urlImageMetaClean),
+          pathname !== pagePath
+            ? {
+                'http-equiv': 'refresh',
+                content: `0;URL='${siteUrl}${pagePath}'`,
+              }
+            : {},
           ...(metaTags || []),
         ]
 

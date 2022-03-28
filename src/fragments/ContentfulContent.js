@@ -64,7 +64,7 @@ export const ContentfulLayoutHeroFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1200, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 960, quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -122,7 +122,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1200, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 960, quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -132,7 +132,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 768, quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -149,6 +149,11 @@ export const ContentfulLayoutFeatureFields = graphql`
     backgroundColor
     sectionPadding
     noPaddingBottom
+    featureItems {
+      ... on ContentfulCard {
+        ...ContentfulCardFields
+      }
+    }
     cta {
       ...ContentfulCtaFields
     }
@@ -201,6 +206,16 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     sectionPadding
     noPaddingBottom
     modulesMargin
+    backgroundImage {
+      title
+      description
+      file {
+        url
+      }
+      fluid(quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
   }
 `
 
@@ -217,6 +232,9 @@ export const ContentfulCardFields = graphql`
       file {
         url
       }
+      fluid(maxWidth: 960, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
     }
     imageMargin
     description {
@@ -225,9 +243,12 @@ export const ContentfulCardFields = graphql`
       }
     }
     link
+    linkText
     newTab
     backgroundColor
     showArrowIcon
+    layoutType
+    layoutSize
   }
 `
 
@@ -319,11 +340,15 @@ export const ContentfulLogoFields = graphql`
       file {
         url
       }
+      fluid(maxWidth: 480, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
     }
     link
     newTab
     displayTitle
     widthLogo
+    backgroundColor
   }
 `
 

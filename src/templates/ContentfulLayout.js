@@ -5,6 +5,8 @@ import flatMapDeep from 'lodash/flatMapDeep'
 import isArray from 'lodash/isArray'
 import Layout from './PageLayout'
 import Context from '../Context/ContextPage'
+import linkedInTrackingScript from '../lib/services/lintrk'
+import { useLocation } from '@reach/router'
 
 /**
  * @name ContentfulLayout
@@ -30,10 +32,25 @@ const ContentfulLayout = props => {
       hubspotForms: HF,
       fullWidthCtas: FWC,
     },
-    pageContext: { modules, pathBuild, themeColor, isFaqLayout },
+    pageContext: { modules, pathBuild, themeColor, isFaqLayout, h2FontSize },
     path,
     ...rest
   } = props
+
+  const location = useLocation()
+  const pathname = location.pathname
+  let partnerId = '451393'
+  let conversionId = ''
+  if (pathname.includes('/institutions')) {
+    partnerId = '4249353'
+    conversionId = '7714137'
+  }
+  const linkedInPartnerId = '_linkedin_partner_id = "' + partnerId + '";'
+  const linkedInEventPixel =
+    '<img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=' +
+    partnerId +
+    (conversionId ? '&conversionId=' + conversionId : '') +
+    '&fmt=gif"/>'
 
   const [idFaqActive, setIdFaqActive] = React.useState('')
   const valueContext = {
@@ -70,11 +87,18 @@ const ContentfulLayout = props => {
 
   return (
     <Context.Provider value={valueContext}>
-      <Layout {...rest} themeColor={themeColor}>
+      <Layout {...rest} themeColor={themeColor} h2FontSize={h2FontSize}>
         {seo && contentfulModuleToComponent({ ...seo, pagePath: pathBuild })}
         {allModules.map(module =>
           contentfulModuleToComponent({ ...module, isFaq: isFaqLayout })
         )}
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: linkedInPartnerId + linkedInTrackingScript,
+          }}
+        />
+        <noscript dangerouslySetInnerHTML={{ __html: linkedInEventPixel }} />
       </Layout>
     </Context.Provider>
   )

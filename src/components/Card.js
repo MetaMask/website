@@ -5,6 +5,9 @@ import Image from './Image'
 import classnames from 'classnames'
 import ArrowIcon from '../images/icons/icon-arrow-right.svg'
 import Link from './Link'
+import CardFeature from './Card/CardFeature'
+import CardFeatureHorizontal from './Card/CardFeatureHorizontal'
+import CardHorizontal from './Card/CardHorizontal'
 
 /**
  * @name Card
@@ -19,13 +22,29 @@ const StyledCard = props => {
     link,
     title,
     newTab,
-    backgroundColor,
     showArrowIcon,
+    backgroundColor,
     imageMargin,
+    layoutType,
+    layoutSize,
   } = props
+  switch (layoutType) {
+    case 'feature':
+      // code block
+      return <CardFeature {...props} />
+    case 'horizontal-feature':
+      // code block
+      return <CardFeatureHorizontal {...props} />
+    case 'horizontal':
+      // code block
+      return <CardHorizontal {...props} />
+    default:
+    // code block
+  }
+  const isCtaType = layoutType === 'cta' || showArrowIcon
 
   return (
-    <Card className="moduleCardWrapper" showArrowIcon={showArrowIcon}>
+    <Card className="moduleCardWrapper" isCtaType={isCtaType}>
       <CardInner
         to={link}
         newTab={newTab}
@@ -39,18 +58,16 @@ const StyledCard = props => {
             <ImageSrc image={image} />
           </ImageWrapper>
         ) : null}
-        <Inner showArrowIcon={showArrowIcon}>
-          <InnerContent showArrowIcon={showArrowIcon}>
-            {title ? (
-              <Title showArrowIcon={showArrowIcon}>{title}</Title>
-            ) : null}
+        <Inner isCtaType={isCtaType}>
+          <InnerContent isCtaType={isCtaType}>
+            {title ? <Title isCtaType={isCtaType}>{title}</Title> : null}
             {description ? (
               <Description>
                 <div dangerouslySetInnerHTML={{ __html: description }}></div>
               </Description>
             ) : null}
           </InnerContent>
-          {showArrowIcon ? (
+          {isCtaType ? (
             <ArrowItem>
               <ArrowIcon />
             </ArrowItem>
@@ -75,8 +92,8 @@ StyledCard.propTypes = {
 const Card = styled.div`
   display: block;
 
-  ${({ showArrowIcon }) =>
-    showArrowIcon
+  ${({ isCtaType }) =>
+    isCtaType
       ? `
     margin-bottom: 16px;
   `
@@ -124,8 +141,8 @@ const ImageSrc = styled(Image)`
 
 const Inner = styled.div`
   display: block;
-  ${({ showArrowIcon }) =>
-    showArrowIcon
+  ${({ isCtaType }) =>
+    isCtaType
       ? `
     display: flex;
     align-items: center;
@@ -135,8 +152,8 @@ const Inner = styled.div`
 const Title = styled.div`
   font-weight: 700;
   color: ${({ theme }) => theme.text.title};
-  ${({ showArrowIcon }) =>
-    showArrowIcon
+  ${({ isCtaType }) =>
+    isCtaType
       ? `
     font-size: 24px;
     line-height: 1.25;
@@ -164,8 +181,8 @@ const ArrowItem = styled.div`
 `
 
 const InnerContent = styled.div`
-  ${({ showArrowIcon }) =>
-    showArrowIcon
+  ${({ isCtaType }) =>
+    isCtaType
       ? `
     flex: 1;
     min-width: 0;
