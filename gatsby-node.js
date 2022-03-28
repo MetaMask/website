@@ -35,6 +35,7 @@ exports.createPages = ({ graphql, actions }) => {
             }
             themeColor
             isFaqLayout
+            h2FontSize
           }
         }
       }
@@ -56,6 +57,7 @@ exports.createPages = ({ graphql, actions }) => {
             header,
             themeColor,
             isFaqLayout,
+            h2FontSize,
           } = p.node
           const { contentful_id: footerId = '' } = footer || {}
           const { contentful_id: headerId = '' } = header || {}
@@ -74,6 +76,7 @@ exports.createPages = ({ graphql, actions }) => {
               themeColor,
               pathBuild: slug,
               isFaqLayout,
+              h2FontSize,
             },
           })
         })
