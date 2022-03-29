@@ -155,7 +155,7 @@ export const defaultDarkTheme = {
     navBtnHover: theme.dark,
     isCustodyOverlayHero:
         'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
-    logoBlue: 'rgba(3, 125, 214, 0.03)',
+    logoBlue: 'rgb(36, 41, 46)',
     tabModuleOuter: theme.dark,
     cardFeatureInner: 'rgb(36, 41, 46)',
   },
@@ -243,7 +243,7 @@ export const purpleDarkTheme = {
     navBtnHover: theme.dark,
     isCustodyOverlayHero:
       'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
-    logoBlue: 'rgba(3, 125, 214, 0.03)',
+    logoBlue: 'rgb(36, 41, 46)',
     tabModuleOuter: theme.dark,
     cardFeatureInner: 'rgb(36, 41, 46)',
   },
