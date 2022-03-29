@@ -113,6 +113,7 @@ export const defaultTheme = {
     isCustodyOverlayHero:
       'linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%)',
     logoBlue: 'rgba(3, 125, 214, 0.03)',
+    tabModuleOuter: '#F2F4F6',
   },
   text: {
     default: theme.black,
@@ -152,6 +153,7 @@ export const defaultDarkTheme = {
     isCustodyOverlayHero:
         'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
     logoBlue: 'rgba(3, 125, 214, 0.03)',
+    tabModuleOuter: theme.dark,
   },
   text: {
     default: theme.white,
@@ -194,6 +196,7 @@ export const purpleTheme = {
     isCustodyOverlayHero:
       'linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%)',
     logoBlue: 'rgba(3, 125, 214, 0.03)',
+    tabModuleOuter: '#F2F4F6',
   },
   text: {
     default: theme.black,
@@ -234,6 +237,7 @@ export const purpleDarkTheme = {
     isCustodyOverlayHero:
       'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
     logoBlue: 'rgba(3, 125, 214, 0.03)',
+    tabModuleOuter: theme.dark,
   },
   text: {
     default: theme.white,

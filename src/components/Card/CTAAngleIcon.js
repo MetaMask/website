@@ -32,5 +32,12 @@ const CTA = styled.div`
   svg {
     margin-left: 16px;
   }
+
+  ${({ theme }) =>
+  `
+  @media (max-width: ${theme.device.mobileMediaMax}){
+    font-size: 14px;
+  }
+  `}
   ${({ styleOverride }) => styleOverride}
 `
