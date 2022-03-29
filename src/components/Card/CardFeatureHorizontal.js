@@ -93,6 +93,7 @@ const CardInner = styled(Link)`
 
 const ImageWrapper = styled.div`
   width: 484px;
+  max-width: 50%;
 
   img {
     object-fit: cover;
@@ -102,6 +103,7 @@ const ImageWrapper = styled.div`
   `
   @media (max-width: ${theme.device.mobileMediaMax}){
     width: 100%;
+    max-width: 100%;
   }
   `}
 `
