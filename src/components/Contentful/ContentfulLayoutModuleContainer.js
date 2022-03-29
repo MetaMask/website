@@ -32,7 +32,6 @@ const ContentfulModuleContainer = props => {
   const { childMarkdownRemark: { html } = {} } = description || {}
   const bgUrl = parseContentfulAssetUrl(backgroundImage)
   const htmlData = previewMode ? description : html
-  console.log(modules)
   const tabs =
     isTab && modules && modules.length
       ? modules.map(item => ({
