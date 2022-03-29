@@ -24,7 +24,9 @@ const Container = styled.div`
   &.overlap-bg-32 {
     transform: translateY(32px);
     margin-bottom: 64px;
-    margin-top: -32px;
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      margin-top: -32px;
+    }
   }
   ${({ styleOverride }) => styleOverride}
 `
