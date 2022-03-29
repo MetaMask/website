@@ -24,6 +24,7 @@ const Container = styled.div`
   &.overlap-bg-32 {
     transform: translateY(32px);
     margin-bottom: 64px;
+    margin-top: -32px;
   }
   ${({ styleOverride }) => styleOverride}
 `
