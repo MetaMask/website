@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-computed-key */
 import React from 'react'
 import ContextClientSide from '../../Context/ContextClientSide'
 import { getLocalStorage } from '../../lib/utils/localStorage'

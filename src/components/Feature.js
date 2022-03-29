@@ -357,5 +357,8 @@ const FeatureItems = styled.div`
   margin-top: 72px;
 `
 const FeatureItem = styled.div`
-  margin-bottom: 48px;
+  &:not(:last-child){
+
+    margin-bottom: 48px;
+  }
 `

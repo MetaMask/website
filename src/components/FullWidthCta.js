@@ -6,6 +6,7 @@ import Loadable from '@loadable/component'
 import Popup from './Popup'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { Section, SectionTitle } from './StyledGeneral'
+import classnames from 'classnames'
 
 const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
 
@@ -32,7 +33,9 @@ const FullWidthCta = props => {
   return (
     <Container
       sectionPadding={sectionPadding}
-      backgroundColor={backgroundColor}
+      className={classnames({
+        [`bg-${backgroundColor}`]: backgroundColor,
+      })}
     >
       <ContentWrapper>
         <FullWidthCtaWrapper showLogoAnimation={showLogoAnimation}>
@@ -89,14 +92,7 @@ FullWidthCta.propTypes = {
 }
 
 const Container = styled(Section)`
-  ${({ backgroundColor, theme }) =>
-    backgroundColor === 'dark'
-      ? `
-  background: ${theme.dark};
-  `
-      : `
-  background: ${({ theme }) => theme.background.white};
-  `}
+  display: block;
 `
 
 const FullWidthCtaWrapper = styled.div`

@@ -193,7 +193,7 @@ const Announcement = styled.div`
 const HeaderContainer = styled.div`
   display: flex;
   margin: 0 auto;
-  max-width: 940px;
+  max-width: 992px;
   width: 100%;
   align-items: center;
   justify-content: space-between;
