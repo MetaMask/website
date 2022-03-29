@@ -15,6 +15,7 @@ const ContentfulModuleContainer = props => {
       description,
       backgroundColor,
       backgroundImage,
+      backgroundSize,
       paddingTop,
       displayHeadline,
       headlineAlignCenter,
@@ -38,11 +39,11 @@ const ContentfulModuleContainer = props => {
           label: item.title,
           id: item.contentful_id,
           content: (
-            <div>
+            <TabContent>
               {contentfulModuleToComponent({
                 ...item,
               })}
-            </div>
+            </TabContent>
           ),
         }))
       : null
@@ -50,6 +51,7 @@ const ContentfulModuleContainer = props => {
     <Container
       sectionPadding={sectionPadding}
       bgUrl={bgUrl}
+      backgroundSize={backgroundSize}
       className={classnames({
         noPaddingBottom: noPaddingBottom,
         [`bg-${backgroundColor}`]: backgroundColor,
@@ -117,10 +119,12 @@ ContentfulModuleContainer.propTypes = {
 }
 
 const Container = styled(Section)`
-  ${({ bgUrl }) =>
+  ${({ bgUrl, backgroundSize }) =>
     bgUrl
       ? ` background-image: url(${bgUrl});
-    background-size: cover;
+    background-size: ${backgroundSize || 'cover'};
+    background-repeat: no-repeat;
+    background-position: center top;
     z-index: 3;
    `
       : ''}
@@ -170,4 +174,11 @@ const ContentInfo = styled.div`
 `
 const SubInfo = styled.div`
   display: block;
+`
+const TabContent = styled.div`
+  padding: 0 48px;
+
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    padding-top: 0 24px;
+  }
 `

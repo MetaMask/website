@@ -208,6 +208,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     modulesMargin
     isTab
     customClass
+    backgroundSize
     backgroundImage {
       title
       description

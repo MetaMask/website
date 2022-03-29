@@ -518,7 +518,7 @@ const HeroImageTextContainer = styled.div`
 const HeroTitle = styled.h1`
   font-weight: ${({ theme }) => theme.font.weight.bold};
   font-size: ${({ theme }) => theme.font.size.xxxl}rem;
-  line-height: 1.1;
+  line-height: 1.2;
   padding-top: 20px;
   padding-bottom: 20px;
   
