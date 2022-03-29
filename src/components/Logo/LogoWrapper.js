@@ -44,6 +44,7 @@ const Background = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 12px;
 
   ${({ backgroundColor, theme }) =>
     backgroundColor === 'blue'

@@ -112,6 +112,13 @@ const ImageWrapper = styled.div`
     height: 80px;
   `
       : null}
+
+  ${({ layoutSize, theme }) =>
+  `
+  @media (max-width: ${theme.device.mobileMediaMax}){
+    height: ${layoutSize === 'small' ? '80px' : '96px'};
+  }
+  `}
 `
 
 const ImageSrc = styled(Image)`
@@ -139,6 +146,13 @@ const Title = styled.div`
       font-size: 18px;
   `
       : null}
+
+  ${({ layoutSize, theme }) =>
+  `
+  @media (max-width: ${theme.device.mobileMediaMax}){
+    font-size: ${layoutSize === 'small' ? '16px' : '20px'};
+  }
+  `}
 `
 
 const Description = styled.div`

@@ -2,9 +2,9 @@ import React from 'react'
 import styled, { withTheme } from 'styled-components'
 
 const DownloadContainer = props => {
-  const { setActiveId, activeId, label, id } = props
+  const { setActiveId, activeId, label, id, typeLayout } = props
   return (
-    <Item active={activeId === id} onClick={() => setActiveId(id)}>
+    <Item typeLayout={typeLayout} active={activeId === id} onClick={() => setActiveId(id)}>
       {label}
     </Item>
   )
@@ -38,8 +38,19 @@ const Item = styled.div`
   ${({ active, theme }) =>
     active
       ? `
-  background-color: ${theme.darkBlue};
+  background-color: ${theme.primaryColor};
   color: #fff;
   `
       : ''}
+
+  ${({typeLayout, active, theme}) => typeLayout === 'module' ? `
+    border-radius: 999px !important;
+    height: 40px;
+    border: none !important;
+    background-color: ${active ? theme.primaryColor : 'transparent'};
+    color: ${active ? theme.white : theme.text.dark};
+    @media (min-width: ${theme.device.miniDesktop}){
+      min-width: 200px;
+    }
+  ` : null}
 `

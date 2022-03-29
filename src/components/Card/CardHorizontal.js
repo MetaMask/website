@@ -74,11 +74,28 @@ const Card = styled.div``
 const CardInner = styled(Link)`
   display: flex;
   color: ${({ theme }) => theme.text.dark};
+
+  ${({ theme }) =>
+  `
+  @media (max-width: ${theme.device.mobileMediaMax}){
+    flex-direction: column;
+    align-items: center;
+  }
+  `}
 `
 
 const ImageWrapper = styled.div`
   width: 80px;
   margin-right: 32px;
+
+  ${({ theme }) =>
+  `
+  @media (max-width: ${theme.device.mobileMediaMax}){
+    width: 56px;
+    margin-right: 0;
+    margin-bottom: 16px;
+  }
+  `}
 
   img {
     object-fit: contain;
@@ -101,6 +118,13 @@ const Title = styled.div`
   font-size: 24px;
   line-height: 1.2;
   margin-bottom: 8px;
+
+  ${({ theme }) =>
+  `
+  @media (max-width: ${theme.device.mobileMediaMax}){
+    font-size: 20px;
+  }
+  `}
 `
 
 const Description = styled.div`

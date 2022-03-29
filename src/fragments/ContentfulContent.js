@@ -206,6 +206,8 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     sectionPadding
     noPaddingBottom
     modulesMargin
+    isTab
+    customClass
     backgroundImage {
       title
       description
@@ -249,6 +251,7 @@ export const ContentfulCardFields = graphql`
     showArrowIcon
     layoutType
     layoutSize
+    contentAlignment
   }
 `
 

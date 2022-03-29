@@ -23,6 +23,7 @@ const StyledCard = props => {
     imageMargin,
     layoutSize,
     linkText,
+    contentAlignment,
   } = props
 
   return (
@@ -34,6 +35,7 @@ const StyledCard = props => {
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor,
         })}
+        contentAlignment={contentAlignment}
       >
         {image ? (
           <ImageWrapper imageMargin={imageMargin} layoutSize={layoutSize}>
@@ -77,6 +79,16 @@ const CardInner = styled(Link)`
   border-radius: 12px;
   background-color: ${({ theme }) => theme.background.white};
   color: ${({ theme }) => theme.text.dark};
+  ${({contentAlignment}) => contentAlignment === 'right' ? `
+  flex-direction: row-reverse;
+  `: null}
+
+  ${({ theme }) =>
+  `
+  @media (max-width: ${theme.device.mobileMediaMax}){
+    flex-direction: column;
+  }
+  `}
 `
 
 const ImageWrapper = styled.div`
@@ -85,6 +97,13 @@ const ImageWrapper = styled.div`
   img {
     object-fit: cover;
   }
+
+  ${({ theme }) =>
+  `
+  @media (max-width: ${theme.device.mobileMediaMax}){
+    width: 100%;
+  }
+  `}
 `
 
 const ImageSrc = styled(Image)`
@@ -98,12 +117,26 @@ const Inner = styled.div`
   flex: 1;
   width: 100%;
   padding: 44px 32px;
+
+  ${({ theme }) =>
+  `
+  @media (max-width: ${theme.device.mobileMediaMax}){
+    padding: 16px;
+  }
+  `}
 `
 const Title = styled.div`
   font-weight: 700;
   font-size: 32px;
   line-height: 1.4;
   margin-bottom: 24px;
+
+  ${({ theme }) =>
+  `
+  @media (max-width: ${theme.device.mobileMediaMax}){
+    font-size: 24px;
+  }
+  `}
 `
 
 const Description = styled.div`
@@ -111,6 +144,10 @@ const Description = styled.div`
 
   p:last-child {
     margin-bottom: 0;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 16px;
   }
 `
 const CTAWrapper = styled.div`

@@ -26,7 +26,6 @@ const StyledCard = props => {
     backgroundColor,
     imageMargin,
     layoutType,
-    layoutSize,
   } = props
   switch (layoutType) {
     case 'feature':

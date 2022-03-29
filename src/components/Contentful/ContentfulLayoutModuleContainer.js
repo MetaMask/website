@@ -6,6 +6,7 @@ import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import classnames from 'classnames'
 import { SectionTitle, Section } from '../StyledGeneral'
 import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
+import TabWrapper from '../Tab/TabWrapper'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -23,12 +24,28 @@ const ContentfulModuleContainer = props => {
       sectionPadding,
       modulesMargin,
       previewMode,
+      isTab,
+      customClass,
     },
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
   const bgUrl = parseContentfulAssetUrl(backgroundImage)
   const htmlData = previewMode ? description : html
+  const tabs =
+    isTab && modules && modules.length
+      ? modules.map(item => ({
+          label: item.title,
+          id: item.contentful_id,
+          content: (
+            <div>
+              {contentfulModuleToComponent({
+                ...item,
+              })}
+            </div>
+          ),
+        }))
+      : null
   return (
     <Container
       sectionPadding={sectionPadding}
@@ -38,7 +55,7 @@ const ContentfulModuleContainer = props => {
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
     >
-      <ContentWrapper>
+      <ContentWrapper customClass={customClass}>
         {(headline && displayHeadline) || htmlData ? (
           <ContentInfo paddingTop={paddingTop}>
             {headline && displayHeadline ? (
@@ -60,7 +77,10 @@ const ContentfulModuleContainer = props => {
             ) : null}
           </ContentInfo>
         ) : null}
-        {modules && modules.length ? (
+        {isTab && modules && modules.length ? (
+          <TabWrapper tabs={tabs} typeLayout={'module'} activeTabDefault={modules[0].contentful_id}></TabWrapper>
+        ) : null}
+        {! isTab && modules && modules.length ? (
           <Modules
             contentAlignCenter={contentAlignCenter}
             modulesMargin={modulesMargin}
