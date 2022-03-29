@@ -176,9 +176,7 @@ const SubInfo = styled.div`
   display: block;
 `
 const TabContent = styled.div`
-  padding: 0 48px;
-
-  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-    padding-top: 0 24px;
+  @media (min-width: ${({ theme }) => theme.device.tablet}) {
+    padding: 0 48px;
   }
 `
