@@ -86,6 +86,8 @@ const theme = {
   spacingLRMobile: '16px',
   footerBg: '#e9ebee',
   shadowSubMenu: 'rgba(0, 0, 0, 0.28)',
+  shadowCard: 'rgba(0, 0, 0, 0.1)',
+  shadowCardGray: 'rgba(15, 15, 15, 0.1)',
 }
 
 export const defaultTheme = {
@@ -169,6 +171,8 @@ export const defaultDarkTheme = {
   footerBg: '#3C444B',
   shadowSubMenu: 'rgba(255, 255, 255, 0.15)',
   gradientFAQ: 'linear-gradient(90deg, #f5841f, #2c56dd)',
+  shadowCard: 'rgba(255, 255, 255, 0.1)',
+  shadowCardGray: 'rgba(255, 255, 255, 0.1)',
   theme: 'default',
 }
 
@@ -253,6 +257,8 @@ export const purpleDarkTheme = {
   footerBg: '#3C444B',
   shadowSubMenu: 'rgba(255, 255, 255, 0.15)',
   gradientFAQ: 'linear-gradient(90deg, #8A42AD 0%, #6762EB 100%)',
+  shadowCard: 'rgba(255, 255, 255, 0.1)',
+  shadowCardGray: 'rgba(255, 255, 255, 0.1)',
   theme: 'purple',
 }
 

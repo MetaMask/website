@@ -78,15 +78,15 @@ const CardInner = styled(Link)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 64px 64px -8px rgba(15, 15, 15, 0.1);
+  box-shadow: 0px 64px 64px -8px ${({theme}) => theme.shadowCardGray};
   border-radius: 12px;
   height: 100%;
   color: ${({ theme }) => theme.text.dark};
-  ${({ layoutSize }) =>
+  ${({ layoutSize,theme }) =>
     layoutSize === 'small'
       ? `
       padding: 16px 16px 24px 16px;
-      box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 4px 24px ${theme.shadowCard};
   `
       : null}
 `
