@@ -116,6 +116,7 @@ export const defaultTheme = {
       'linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%)',
     logoBlue: 'rgba(3, 125, 214, 0.03)',
     tabModuleOuter: '#F2F4F6',
+    cardFeatureInner: 'rgba(3, 125, 214, 0.03)',
   },
   text: {
     default: theme.black,
@@ -156,6 +157,7 @@ export const defaultDarkTheme = {
         'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
     logoBlue: 'rgba(3, 125, 214, 0.03)',
     tabModuleOuter: theme.dark,
+    cardFeatureInner: 'rgb(36, 41, 46)',
   },
   text: {
     default: theme.white,
@@ -201,6 +203,7 @@ export const purpleTheme = {
       'linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%)',
     logoBlue: 'rgba(3, 125, 214, 0.03)',
     tabModuleOuter: '#F2F4F6',
+    cardFeatureInner: 'rgba(3, 125, 214, 0.03)',
   },
   text: {
     default: theme.black,
@@ -242,6 +245,7 @@ export const purpleDarkTheme = {
       'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
     logoBlue: 'rgba(3, 125, 214, 0.03)',
     tabModuleOuter: theme.dark,
+    cardFeatureInner: 'rgb(36, 41, 46)',
   },
   text: {
     default: theme.white,
