@@ -129,7 +129,7 @@ const ImageSrc = styled(Image)`
 const Inner = styled.div`
   display: flex;
   flex-direction: column;
-  background: rgba(3, 125, 214, 0.03);
+  background: ${({theme}) => theme.background.cardFeatureInner};
   border-radius: 12px;
   min-height: 0;
   flex: 1;
