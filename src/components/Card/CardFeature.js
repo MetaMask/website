@@ -73,7 +73,7 @@ StyledCard.propTypes = {
 const Card = styled.div``
 
 const CardInner = styled(Link)`
-  padding: 16px;
+  padding: 16px 16px 24px 16px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -85,7 +85,6 @@ const CardInner = styled(Link)`
   ${({ layoutSize,theme }) =>
     layoutSize === 'small'
       ? `
-      padding: 16px 16px 24px 16px;
       box-shadow: 0px 4px 24px ${theme.shadowCard};
   `
       : null}
