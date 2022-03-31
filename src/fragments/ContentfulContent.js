@@ -348,6 +348,23 @@ export const ContentfulLogoFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
+    logoDarkMode {
+      title
+      description
+      svg {
+        content # SVG content optimized with SVGO
+        originalContent # Original SVG content
+        dataURI # Optimized SVG as compact dataURI
+        absolutePath #
+        relativePath #
+      }
+      file {
+        url
+      }
+      fluid(maxWidth: 480, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
     link
     newTab
     displayTitle
