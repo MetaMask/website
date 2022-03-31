@@ -249,7 +249,6 @@ export const ContentfulCardFields = graphql`
     linkText
     newTab
     backgroundColor
-    showArrowIcon
     layoutType
     layoutSize
     contentAlignment
