@@ -7,6 +7,7 @@ const ContentfulLogo = props => {
   const {
     moduleConfig: {
       logo,
+      logoDarkMode,
       link,
       linkOpensNewTab,
       title,
@@ -18,6 +19,7 @@ const ContentfulLogo = props => {
   } = props
   const { title: titleFile, description: descriptionFile } = logo || {}
   const url = parseContentfulAssetUrl(logo)
+  const urlDarkMode = parseContentfulAssetUrl(logoDarkMode)
   return (
     <Wrapper
       link={link}
@@ -31,6 +33,7 @@ const ContentfulLogo = props => {
           src={url}
           alt={descriptionFile || titleFile || title}
           width={widthLogo}
+          srcDarkMode={urlDarkMode}
         />
       ) : null}
     </Wrapper>
