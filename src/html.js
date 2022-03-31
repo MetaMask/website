@@ -17,9 +17,18 @@ export default class HTML extends React.Component {
           />
           {this.props.headComponents}
           <script dangerouslySetInnerHTML={{ __html: redirect }} />
-          {process.env.NODE_ENV === 'production' && (
-            <script dangerouslySetInnerHTML={{ __html: livePersonScript }} />
-          )}
+          <link
+            rel="preload"
+            href="/fonts/EuclidCircularB-Regular-WebXL.woff2"
+            as="font"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/EuclidCircularB-Bold-WebXL.woff2"
+            as="font"
+            crossOrigin="anonymous"
+          />
         </head>
         <body {...this.props.bodyAttributes}>
           {this.props.preBodyComponents}
@@ -30,8 +39,16 @@ export default class HTML extends React.Component {
           />
           {this.props.postBodyComponents}
           {process.env.NODE_ENV === 'production' && (
-            <script dangerouslySetInnerHTML={{ __html: accessiBeScript }} />
-          )}
+            <script
+              type="text/javascript"
+              dangerouslySetInnerHTML={{ __html: livePersonScript }}
+            />
+          ) && (
+            <script
+              type="text/javascript"
+              dangerouslySetInnerHTML={{ __html: accessiBeScript }}
+            />
+          ) }
         </body>
       </html>
     )
