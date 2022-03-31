@@ -32,7 +32,7 @@ const ContentfulLayout = props => {
       hubspotForms: HF,
       fullWidthCtas: FWC,
     },
-    pageContext: { modules, pathBuild, themeColor, isFaqLayout },
+    pageContext: { modules, pathBuild, themeColor, isFaqLayout, h2FontSize },
     path,
     ...rest
   } = props
@@ -87,7 +87,7 @@ const ContentfulLayout = props => {
 
   return (
     <Context.Provider value={valueContext}>
-      <Layout {...rest} themeColor={themeColor}>
+      <Layout {...rest} themeColor={themeColor} h2FontSize={h2FontSize}>
         {seo && contentfulModuleToComponent({ ...seo, pagePath: pathBuild })}
         {allModules.map(module =>
           contentfulModuleToComponent({ ...module, isFaq: isFaqLayout })

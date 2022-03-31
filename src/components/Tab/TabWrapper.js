@@ -5,7 +5,7 @@ import TabHeader from './TabHeader'
 import TabContent from './TabContent'
 
 const TabWrapper = props => {
-  const { tabs, activeTabDefault, centerAlign = true } = props
+  const { tabs, activeTabDefault, centerAlign = true, typeLayout } = props
   const [activeId, setActiveId] = React.useState(activeTabDefault)
   return (
     <Wrapper>
@@ -14,8 +14,9 @@ const TabWrapper = props => {
         activeId={activeId}
         setActiveId={setActiveId}
         centerAlign={centerAlign}
+        typeLayout={typeLayout}
       />
-      <TabContent items={tabs} activeId={activeId} centerAlign={centerAlign} />
+      <TabContent items={tabs} activeId={activeId} centerAlign={centerAlign} typeLayout={typeLayout} />
     </Wrapper>
   )
 }

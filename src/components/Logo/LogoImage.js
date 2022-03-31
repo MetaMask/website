@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
+import ContextClientSide from '../../Context/ContextClientSide'
 
-const LogoImage = ({ alt, src, width, height }) => {
+const LogoImage = ({ alt, src, width, height, srcDarkMode }) => {
+  const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
+  const { isDarkMode } = darkModeContextValue || {}
   return (
     <StyledPartnerImageContainer>
       <StyledPartnerImage
-        src={src}
+        src={isDarkMode && srcDarkMode ? srcDarkMode : src}
         alt={alt}
         widthCustom={width}
         width={width || 400}

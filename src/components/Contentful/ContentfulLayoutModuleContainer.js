@@ -5,6 +5,8 @@ import styled from 'styled-components'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import classnames from 'classnames'
 import { SectionTitle, Section } from '../StyledGeneral'
+import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
+import TabWrapper from '../Tab/TabWrapper'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -12,6 +14,8 @@ const ContentfulModuleContainer = props => {
       headline,
       description,
       backgroundColor,
+      backgroundImage,
+      backgroundSize,
       paddingTop,
       displayHeadline,
       headlineAlignCenter,
@@ -21,20 +25,39 @@ const ContentfulModuleContainer = props => {
       sectionPadding,
       modulesMargin,
       previewMode,
+      isTab,
+      customClass,
     },
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
+  const bgUrl = parseContentfulAssetUrl(backgroundImage)
   const htmlData = previewMode ? description : html
+  const tabs =
+    isTab && modules && modules.length
+      ? modules.map(item => ({
+          label: item.title,
+          id: item.contentful_id,
+          content: (
+            <TabContent>
+              {contentfulModuleToComponent({
+                ...item,
+              })}
+            </TabContent>
+          ),
+        }))
+      : null
   return (
     <Container
       sectionPadding={sectionPadding}
+      bgUrl={bgUrl}
+      backgroundSize={backgroundSize}
       className={classnames({
         noPaddingBottom: noPaddingBottom,
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
     >
-      <ContentWrapper>
+      <ContentWrapper customClass={customClass}>
         {(headline && displayHeadline) || htmlData ? (
           <ContentInfo paddingTop={paddingTop}>
             {headline && displayHeadline ? (
@@ -56,7 +79,10 @@ const ContentfulModuleContainer = props => {
             ) : null}
           </ContentInfo>
         ) : null}
-        {modules && modules.length ? (
+        {isTab && modules && modules.length ? (
+          <TabWrapper tabs={tabs} typeLayout={'module'} activeTabDefault={modules[0].contentful_id}></TabWrapper>
+        ) : null}
+        {! isTab && modules && modules.length ? (
           <Modules
             contentAlignCenter={contentAlignCenter}
             modulesMargin={modulesMargin}
@@ -92,7 +118,17 @@ ContentfulModuleContainer.propTypes = {
   }),
 }
 
-const Container = styled(Section)``
+const Container = styled(Section)`
+  ${({ bgUrl, backgroundSize }) =>
+    bgUrl
+      ? ` background-image: url(${bgUrl});
+    background-size: ${backgroundSize || 'cover'};
+    background-repeat: no-repeat;
+    background-position: center top;
+    z-index: 3;
+   `
+      : ''}
+`
 
 const Title = styled(SectionTitle)`
   padding-bottom: 20px;
@@ -138,4 +174,9 @@ const ContentInfo = styled.div`
 `
 const SubInfo = styled.div`
   display: block;
+`
+const TabContent = styled.div`
+  @media (min-width: ${({ theme }) => theme.device.tablet}) {
+    padding: 0 48px;
+  }
 `

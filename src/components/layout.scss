@@ -836,6 +836,15 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
 .bg-white,
 .bg-default {
   background-color: #fff;
+  @media (max-width: 767px) {
+    & + .bg-default {
+      padding-top: 0 !important;
+    }
+  }
+}
+
+.bg-neutrals {
+  background: #FCFCFD;
 }
 
 .bg-gray {
@@ -951,6 +960,9 @@ body.dark-mode {
   .bg-white,
   .bg-default {
     background-color: #121212;
+  }
+  .bg-neutrals {
+    background: #121212;
   }
   .paragraph {
     color: rgba(255,255,255,0.6);

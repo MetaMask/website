@@ -11,23 +11,26 @@ const ContentfulCard = props => {
       link,
       newTab,
       backgroundColor,
-      showArrowIcon,
       imageMargin,
       previewMode,
+      layoutType,
+      layoutSize
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
 
   return (
     <Card
+      {...props.moduleConfig}
       description={previewMode ? description : html}
       title={title}
       image={image}
       link={link}
       newTab={newTab}
       backgroundColor={backgroundColor}
-      showArrowIcon={showArrowIcon}
       imageMargin={imageMargin}
+      layoutType={layoutType}
+      layoutSize={layoutSize}
     />
   )
 }
@@ -42,7 +45,8 @@ ContentfulCard.propTypes = {
     image: PropTypes.object,
     newTab: PropTypes.bool,
     backgroundColor: PropTypes.string,
-    showArrowIcon: PropTypes.bool,
     imageMargin: PropTypes.bool,
+    layoutType: PropTypes.string,
+    layoutSize: PropTypes.string,
   }),
 }

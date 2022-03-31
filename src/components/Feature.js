@@ -28,6 +28,7 @@ const FeatureComponent = props => {
     noPaddingBottom,
     imageMobile,
     eyebrow,
+    featureItems,
   } = props
   const contentAlignLR = ['left', 'right'].includes(contentAlignment)
     ? contentAlignment
@@ -51,6 +52,17 @@ const FeatureComponent = props => {
         <Description>
           <div dangerouslySetInnerHTML={{ __html: description }} />
         </Description>
+      ) : null}
+      {featureItems && featureItems.length ? (
+        <FeatureItems>
+          {featureItems.map(m => (
+            <FeatureItem>
+              {contentfulModuleToComponent({
+                ...m,
+              })}
+            </FeatureItem>
+          ))}
+        </FeatureItems>
       ) : null}
       {cta ? (
         <CTAWrapper>
@@ -339,4 +351,14 @@ const Eyebrow = styled.div`
   font-weight: 700;
   letter-spacing: 5px;
   margin-bottom: 16px;
+`
+const FeatureItems = styled.div`
+  display: block;
+  margin-top: 72px;
+`
+const FeatureItem = styled.div`
+  &:not(:last-child){
+
+    margin-bottom: 48px;
+  }
 `
