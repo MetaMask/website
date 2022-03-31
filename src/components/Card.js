@@ -22,7 +22,6 @@ const StyledCard = props => {
     link,
     title,
     newTab,
-    showArrowIcon,
     backgroundColor,
     imageMargin,
     layoutType,
@@ -40,7 +39,7 @@ const StyledCard = props => {
     default:
     // code block
   }
-  const isCtaType = layoutType === 'cta' || showArrowIcon
+  const isCtaType = layoutType === 'cta'
 
   return (
     <Card className="moduleCardWrapper" isCtaType={isCtaType}>
