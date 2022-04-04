@@ -126,7 +126,27 @@ export const ContentfulLayoutFeatureFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
+    imageDarkMode {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 960, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
     imageMobile {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 768, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
+    imageMobileDarkMode {
       title
       description
       file {
@@ -230,6 +250,16 @@ export const ContentfulCardFields = graphql`
     }
     title
     image {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 960, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
+    imageDarkMode {
       title
       description
       file {

@@ -8,6 +8,7 @@ const ContentfulCard = props => {
       description,
       title,
       image,
+      imageDarkMode,
       link,
       newTab,
       backgroundColor,
@@ -25,6 +26,7 @@ const ContentfulCard = props => {
       description={previewMode ? description : html}
       title={title}
       image={image}
+      imageDarkMode={imageDarkMode}
       link={link}
       newTab={newTab}
       backgroundColor={backgroundColor}

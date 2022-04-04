@@ -49,8 +49,16 @@ const Item = styled.div`
     border: none !important;
     background-color: ${active ? theme.primaryColor : 'transparent'};
     color: ${active ? theme.white : theme.text.dark};
-    @media (min-width: ${theme.device.miniDesktop}){
-      min-width: 200px;
+    min-width: 200px;
+    white-space: nowrap;
+    
+    @media (max-width: ${theme.device.tabletMediaMax}){
+      padding: 8px 16px;
+    }
+    @media (max-width: ${theme.device.mobileMediaMax}){
+      padding: 8px 12px;
+      min-width: 150px;
+      font-size: 14px;
     }
   ` : null}
 `
