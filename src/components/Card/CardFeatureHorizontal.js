@@ -16,6 +16,7 @@ const StyledCard = props => {
   const {
     description,
     image,
+    imageDarkMode,
     link,
     title,
     newTab,
@@ -24,6 +25,7 @@ const StyledCard = props => {
     layoutSize,
     linkText,
     contentAlignment,
+    isDarkMode,
   } = props
 
   return (
@@ -39,7 +41,7 @@ const StyledCard = props => {
       >
         {image ? (
           <ImageWrapper imageMargin={imageMargin} layoutSize={layoutSize}>
-            <ImageSrc image={image} />
+            <ImageSrc image={isDarkMode && imageDarkMode ? imageDarkMode : image} />
           </ImageWrapper>
         ) : null}
         <Inner>
@@ -77,6 +79,7 @@ const CardInner = styled(Link)`
   display: flex;
   box-shadow: 0px 4px 24px rgba(216, 216, 216, 0.4);
   border-radius: 12px;
+  overflow: hidden;
   background-color: ${({ theme }) => theme.background.white};
   color: ${({ theme }) => theme.text.dark};
   ${({contentAlignment}) => contentAlignment === 'right' ? `

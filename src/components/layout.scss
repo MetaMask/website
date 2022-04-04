@@ -953,7 +953,7 @@ body {
 }
 body.dark-mode {
   background: #121212;
-  color: rgba(255,255,255,0.6);
+  color: #fff;
   h1,h2,h3,h4,h5,h6,strong,b {
     color: #fff;
   }
@@ -965,7 +965,7 @@ body.dark-mode {
     background: #121212;
   }
   .paragraph {
-    color: rgba(255,255,255,0.6);
+    color: #fff;
   }
   .bg-gray {
     background: #24292E;

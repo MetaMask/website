@@ -8,6 +8,7 @@ import Link from './Link'
 import CardFeature from './Card/CardFeature'
 import CardFeatureHorizontal from './Card/CardFeatureHorizontal'
 import CardHorizontal from './Card/CardHorizontal'
+import ContextClientSide from '../Context/ContextClientSide'
 
 /**
  * @name Card
@@ -19,6 +20,7 @@ const StyledCard = props => {
   const {
     description,
     image,
+    imageDarkMode,
     link,
     title,
     newTab,
@@ -26,16 +28,18 @@ const StyledCard = props => {
     imageMargin,
     layoutType,
   } = props
+  const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
+  const { isDarkMode } = darkModeContextValue || {}
   switch (layoutType) {
     case 'feature':
       // code block
-      return <CardFeature {...props} />
+      return <CardFeature {...props} isDarkMode={isDarkMode} />
     case 'horizontal-feature':
       // code block
-      return <CardFeatureHorizontal {...props} />
+      return <CardFeatureHorizontal {...props} isDarkMode={isDarkMode} />
     case 'horizontal':
       // code block
-      return <CardHorizontal {...props} />
+      return <CardHorizontal {...props} isDarkMode={isDarkMode} />
     default:
     // code block
   }
@@ -53,7 +57,7 @@ const StyledCard = props => {
       >
         {image ? (
           <ImageWrapper imageMargin={imageMargin}>
-            <ImageSrc image={image} />
+            <ImageSrc image={isDarkMode && imageDarkMode ? imageDarkMode : image} />
           </ImageWrapper>
         ) : null}
         <Inner isCtaType={isCtaType}>

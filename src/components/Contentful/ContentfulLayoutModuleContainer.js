@@ -57,6 +57,11 @@ const ContentfulModuleContainer = props => {
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
     >
+      {bgUrl ? (
+        <BackgroundSection backgroundSize={backgroundSize}>
+          <img src={bgUrl} alt="" />
+        </BackgroundSection>
+      ) : null}
       <ContentWrapper customClass={customClass}>
         {(headline && displayHeadline) || htmlData ? (
           <ContentInfo paddingTop={paddingTop}>
@@ -118,13 +123,41 @@ ContentfulModuleContainer.propTypes = {
   }),
 }
 
+const BackgroundSection = styled.div`
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+
+  img {
+    width: 100%;
+  }
+  ${({ backgroundSize }) =>
+    backgroundSize === 'contain'
+      ? ` 
+      img {
+        width: 100%;
+        height: auto;
+      }
+   `
+      : `
+      bottom: 0;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      `}
+`;
 const Container = styled(Section)`
-  ${({ bgUrl, backgroundSize }) =>
+  position: relative;
+  ${({ bgUrl }) =>
     bgUrl
-      ? ` background-image: url(${bgUrl});
-    background-size: ${backgroundSize || 'cover'};
-    background-repeat: no-repeat;
-    background-position: center top;
+      ? ` 
     z-index: 3;
    `
       : ''}
