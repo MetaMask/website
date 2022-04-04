@@ -7,6 +7,7 @@ import classnames from 'classnames'
 import { Section } from './StyledGeneral'
 import ImageItem from './Image'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
+import ContextClientSide from '../Context/ContextClientSide'
 
 const FeatureComponent = props => {
   const {
@@ -29,7 +30,11 @@ const FeatureComponent = props => {
     imageMobile,
     eyebrow,
     featureItems,
+    imageDarkMode,
+    imageMobileDarkMode
   } = props
+  const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
+  const { isDarkMode } = darkModeContextValue || {}
   const contentAlignLR = ['left', 'right'].includes(contentAlignment)
     ? contentAlignment
     : ''
@@ -83,7 +88,7 @@ const FeatureComponent = props => {
           className={classnames({
             'hidden-mobile': imageMobile,
           })}
-          image={image}
+          image={isDarkMode && imageDarkMode ? imageDarkMode : image}
           widthImg={imageWidth}
           imageAlignment={imageAlignment}
         />
@@ -91,7 +96,7 @@ const FeatureComponent = props => {
       {imageMobile ? (
         <ImageSrc
           className={'hidden-desktop'}
-          image={imageMobile}
+          image={isDarkMode && imageMobileDarkMode ? imageMobileDarkMode : imageMobile}
           widthImg={imageWidth}
           imageAlignment={imageAlignment}
         />

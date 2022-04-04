@@ -9,6 +9,8 @@ const ContentfulLayoutFeature = props => {
       description,
       image,
       imageMobile,
+      imageDarkMode,
+      imageMobileDarkMode,
       imageLink,
       alignItemsCenter,
       contentAlignment,
@@ -39,6 +41,8 @@ const ContentfulLayoutFeature = props => {
       description={previewMode ? description : html}
       headline={headline}
       image={image}
+      imageDarkMode={imageDarkMode}
+      imageMobileDarkMode={imageMobileDarkMode}
       alignItemsCenter={alignItemsCenter}
       contentAlignment={contentAlignment}
       contentPaddingTop={contentPaddingTop}

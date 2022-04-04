@@ -16,6 +16,7 @@ const StyledCard = props => {
   const {
     description,
     image,
+    imageDarkMode,
     link,
     title,
     newTab,
@@ -23,6 +24,7 @@ const StyledCard = props => {
     imageMargin,
     layoutSize,
     linkText,
+    isDarkMode,
   } = props
 
   return (
@@ -38,7 +40,7 @@ const StyledCard = props => {
       >
         {image ? (
           <ImageWrapper imageMargin={imageMargin} layoutSize={layoutSize}>
-            <ImageSrc image={image} />
+            <ImageSrc image={isDarkMode && imageDarkMode ? imageDarkMode : image} />
           </ImageWrapper>
         ) : null}
         <Inner>
