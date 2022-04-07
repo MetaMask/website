@@ -31,7 +31,7 @@ const FeatureComponent = props => {
     eyebrow,
     featureItems,
     imageDarkMode,
-    imageMobileDarkMode
+    imageMobileDarkMode,
   } = props
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
@@ -69,11 +69,11 @@ const FeatureComponent = props => {
           ))}
         </FeatureItems>
       ) : null}
-      {cta ? (
+      {cta && !isContentAlignVertical ? (
         <CTAWrapper>
           {contentfulModuleToComponent({
             ...cta,
-            color: ['white', 'gray'].includes(backgroundColor)
+            color: ['white', 'gray', 'default'].includes(backgroundColor)
               ? cta.color
               : 'white-outline',
           })}
@@ -96,7 +96,11 @@ const FeatureComponent = props => {
       {imageMobile ? (
         <ImageSrc
           className={'hidden-desktop'}
-          image={isDarkMode && imageMobileDarkMode ? imageMobileDarkMode : imageMobile}
+          image={
+            isDarkMode && imageMobileDarkMode
+              ? imageMobileDarkMode
+              : imageMobile
+          }
           widthImg={imageWidth}
           imageAlignment={imageAlignment}
         />
@@ -165,6 +169,16 @@ const FeatureComponent = props => {
               <div>{innerContent}</div>
             )}
           </FeatureInner>
+          {cta && isContentAlignVertical ? (
+            <CTAWrapper>
+              {contentfulModuleToComponent({
+                ...cta,
+                color: ['white', 'gray', 'default'].includes(backgroundColor)
+                  ? cta.color
+                  : 'white-outline',
+              })}
+            </CTAWrapper>
+          ) : null}
         </FeatureWrapper>
       </ContentWrapper>
     </Container>
@@ -290,6 +304,10 @@ const FeatureWrapper = styled.div`
     isContentAlignVertical
       ? `
       flex-direction: column !important;
+      ${CTAWrapper} {
+        order: 4;
+        margin-top: 0;
+      }
       ${SideImage} {
         order: 3;
       }
@@ -362,8 +380,7 @@ const FeatureItems = styled.div`
   margin-top: 72px;
 `
 const FeatureItem = styled.div`
-  &:not(:last-child){
-
+  &:not(:last-child) {
     margin-bottom: 48px;
   }
 `

@@ -4,7 +4,7 @@ import ContentWrapper from '../ContentWrapper'
 import styled from 'styled-components'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import classnames from 'classnames'
-import { SectionTitle, Section } from '../StyledGeneral'
+import { SectionTitle, Section, EyebrowStyle } from '../StyledGeneral'
 import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
 import TabWrapper from '../Tab/TabWrapper'
 
@@ -27,6 +27,7 @@ const ContentfulModuleContainer = props => {
       previewMode,
       isTab,
       customClass,
+      eyebrow,
     },
   } = props
 
@@ -63,8 +64,13 @@ const ContentfulModuleContainer = props => {
         </BackgroundSection>
       ) : null}
       <ContentWrapper customClass={customClass}>
-        {(headline && displayHeadline) || htmlData ? (
+        {(headline && displayHeadline) || htmlData || eyebrow ? (
           <ContentInfo paddingTop={paddingTop}>
+            {eyebrow ? (
+              <EyebrowStyle>
+                {eyebrow}
+              </EyebrowStyle>
+            ) : null}
             {headline && displayHeadline ? (
               <Title
                 className={classnames({

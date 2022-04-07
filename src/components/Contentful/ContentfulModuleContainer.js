@@ -5,11 +5,13 @@ import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import classnames from 'classnames'
 import FaqList from '../FaqList'
 import kebabCase from 'lodash/kebabCase'
+import { EyebrowStyle } from '../StyledGeneral'
 
 const ContentfulModuleContainer = props => {
   const {
     moduleConfig: {
       title,
+      eyebrow,
       description,
       columns,
       columnsOnMobile,
@@ -22,9 +24,10 @@ const ContentfulModuleContainer = props => {
       isLiquiditySection,
       containerBgColor,
       previewMode,
+      columnType,
     },
   } = props
-
+  
   const { childMarkdownRemark: { html } = {} } = description || {}
   const htmlData = previewMode ? description : html
   const faqList =
@@ -43,8 +46,13 @@ const ContentfulModuleContainer = props => {
       id={kebabCase(title || '')}
     >
       <Inner splitModules={splitModules}>
-        {title || htmlData ? (
+        {title || htmlData || eyebrow ? (
           <Content splitModules={splitModules}>
+            {eyebrow ? (
+              <EyebrowStyle>
+                {eyebrow}
+              </EyebrowStyle>
+            ) : null}
             {title && displayTitle ? (
               <Title isFaq={isFaq}>{title}</Title>
             ) : null}
@@ -64,6 +72,7 @@ const ContentfulModuleContainer = props => {
           ) : null}
           {modulesOther.length ? (
             <Modules
+              columnType={columnType}
               columns={columns}
               columnsOnMobile={columnsOnMobile}
               contentAlignment={contentAlignment}
@@ -247,4 +256,17 @@ const Modules = styled.div`
     }
   `
       : ''}
+
+  ${({columnType, columns}) => columnType === 'pinterest' ? `
+    column-count: ${columns};
+    column-gap: 14px;
+    display: block !important;
+    margin: 0 !important;
+    & > *{
+      display: inline-block;
+      width: 100% !important;
+      padding: 0 !important;
+      margin: 0 0 14px 0 !important;
+    }
+  ` : ``}
 `

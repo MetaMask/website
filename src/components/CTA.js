@@ -8,6 +8,8 @@ import { isAndroid, isIOS, isMobile, browserName } from 'react-device-detect'
 import Link from './Link'
 import styled from 'styled-components'
 import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
+import Popup from './Popup'
+import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 
 const CTA = props => {
   const {
@@ -28,13 +30,22 @@ const CTA = props => {
     downloadBrowsers,
     eventCategory,
     eventLabel,
+    hubSpotForm,
   } = props
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
   const isButton = buttonDisplay || button
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
   const icon = { ...defaultIconConfig, fill: color, ...iconConfig }
   const isDownloadBrowser = !isEmpty(downloadBrowsers)
+  const [showPopup, setShowPopup] = React.useState(false)
+  const onClosePopup = () => {
+    setShowPopup(false)
+  }
   const handleCustomClick = e => {
+    if(hubSpotForm) {
+      setShowPopup(true)
+      return;
+    }
     if (customClick) {
       e.preventDefault()
       customClick()
@@ -73,9 +84,21 @@ const CTA = props => {
       }
     }
   }, [downloadBrowsers, isDownloadBrowser])
-
+  let ele = (
+    <CTAContainer className="ctaModuleContainer" align={align}>
+      <ContentWrapper
+        to={link}
+        newTab={newTab || isDownloadBrowser}
+        color={color}
+        typeLayout={typeLayout}
+        onClick={handleCustomClick}
+      >
+        {text} {!isHideArrow ? <Arrow {...icon} /> : null}
+      </ContentWrapper>
+    </CTAContainer>
+  )
   if (isButton) {
-    return (
+    ele = (
       <Button
         size={buttonSize}
         link={link}
@@ -92,17 +115,16 @@ const CTA = props => {
   }
 
   return (
-    <CTAContainer className="ctaModuleContainer" align={align}>
-      <ContentWrapper
-        to={link}
-        newTab={newTab || isDownloadBrowser}
-        color={color}
-        typeLayout={typeLayout}
-        onClick={handleCustomClick}
-      >
-        {text} {!isHideArrow ? <Arrow {...icon} /> : null}
-      </ContentWrapper>
-    </CTAContainer>
+    <>
+      {ele}
+      {hubSpotForm ? (
+        <Popup showPopup={showPopup} onClosePopup={onClosePopup}>
+          {contentfulModuleToComponent({
+            ...hubSpotForm,
+          })}
+        </Popup>
+      ) : null}
+    </>
   )
 }
 

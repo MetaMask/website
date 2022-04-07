@@ -111,12 +111,24 @@ const CardInner = styled(Link)`
     border-radius: 10px;
     height: 100%;
     padding: 24px;
+  `
+      : ''}
+
+  ${({ backgroundColor }) =>
+    backgroundColor === 'white'
+      ? `
     box-shadow: 0 10px 30px 0 rgba(0,0,0,0.09);
     transition: box-shadow 200ms ease;
 
     &:hover {
       box-shadow: 0 10px 30px 0 rgba(0,0,0,0.2);
     }
+  `
+      : ''}
+  ${({ backgroundColor }) =>
+    backgroundColor === 'gray'
+      ? `
+    padding: 20px;
   `
       : ''}
 `

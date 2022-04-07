@@ -86,6 +86,7 @@ a {
   text-decoration: none;
   color: #2196f3;
 }
+
 a:active,
 a:hover {
   outline-width: 0;
@@ -741,6 +742,14 @@ input[type="submit"].hs-button {
   @media (max-width: 479px){
     font-size: 18px !important;
     line-height: 26px !important;
+  }
+}
+.fz-18-res {
+  font-size: 18px !important;
+  line-height: 26px !important;
+  @media (max-width: 479px){
+    font-size: 14px !important;
+    line-height: 18px !important;
   }
 }
 
