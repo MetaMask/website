@@ -32,6 +32,8 @@ const FeatureComponent = props => {
     featureItems,
     imageDarkMode,
     imageMobileDarkMode,
+    imageShadow,
+    imageLink,
   } = props
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
@@ -91,6 +93,7 @@ const FeatureComponent = props => {
           image={isDarkMode && imageDarkMode ? imageDarkMode : image}
           widthImg={imageWidth}
           imageAlignment={imageAlignment}
+          link={imageLink}
         />
       ) : null}
       {imageMobile ? (
@@ -103,6 +106,7 @@ const FeatureComponent = props => {
           }
           widthImg={imageWidth}
           imageAlignment={imageAlignment}
+          link={imageLink}
         />
       ) : null}
     </>
@@ -122,6 +126,7 @@ const FeatureComponent = props => {
           alignItemsCenter={alignItemsCenter}
           imageWidth={imageWidth}
           backgroundColor={backgroundColor}
+          imageShadow={imageShadow}
         >
           {eyebrow ? (
             <Eyebrow className="hidden-desktop">{eyebrow}</Eyebrow>
@@ -291,6 +296,15 @@ const FeatureWrapper = styled.div`
       margin-bottom: 32px;
     }
   }
+
+  ${({ imageShadow }) =>
+    imageShadow
+      ? `
+      img {
+        filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.1));
+      }
+  `
+      : ''}
   ${({ contentAlignLR, theme }) =>
     contentAlignLR === 'left'
       ? `
@@ -306,7 +320,7 @@ const FeatureWrapper = styled.div`
       flex-direction: column !important;
       ${CTAWrapper} {
         order: 4;
-        margin-top: 0;
+        margin-top: 20px;
       }
       ${SideImage} {
         order: 3;

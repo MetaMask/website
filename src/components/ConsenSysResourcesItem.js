@@ -1,19 +1,22 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
+import Link from './Link'
 
 const ConsenSysResources = props => {
-  const { title, image, date, showDate } = props
+  const { title, image, date, showDate, link } = props
 
   return (
     <Item>
-      <Image>
-        <img src={image} alt="" />
-      </Image>
-      <Inner>
-        {showDate && date ? <Date>{date}</Date> : null}
-        {title ? <Title>{title}</Title> : null}
-      </Inner>
+      <InnerLink to={link} newTab>
+        <Image>
+          <img src={image} alt="" />
+        </Image>
+        <Inner>
+          {showDate && date ? <Date>{date}</Date> : null}
+          {title ? <Title>{title}</Title> : null}
+        </Inner>
+      </InnerLink>
     </Item>
   )
 }
@@ -26,6 +29,10 @@ ConsenSysResources.propTypes = {
   ctaLink: PropTypes.string,
   backgroundColor: PropTypes.string,
 }
+
+const InnerLink = styled(Link)`
+  display: block;
+`
 
 const Item = styled.div`
   display: block;
