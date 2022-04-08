@@ -105,12 +105,18 @@ const Card = styled.div`
 const CardInner = styled(Link)`
   display: block;
   color: ${({ theme }) => theme.text.body};
-  ${({ backgroundColor }) =>
+  ${({ backgroundColor, theme }) =>
     backgroundColor
       ? `
     border-radius: 10px;
     height: 100%;
     padding: 24px;
+
+    @media (max-width: ${theme.device.tabletMediaMax}){
+      .columnTypetag & {
+        padding: 12px;
+      }
+    }
   `
       : ''}
 

@@ -31,6 +31,7 @@ const CTA = props => {
     eventCategory,
     eventLabel,
     hubSpotForm,
+    buttonSecondary,
   } = props
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
   const isButton = buttonDisplay || button
@@ -104,7 +105,7 @@ const CTA = props => {
         link={link}
         text={text}
         newTab={newTab || isDownloadBrowser}
-        color={color}
+        color={buttonSecondary ? 'secondary' : color}
         customClick={handleCustomClick}
         fontSize={fontSize}
         buttonGradient={buttonGradient}

@@ -27,7 +27,7 @@ const ContentfulModuleContainer = props => {
       columnType,
     },
   } = props
-  
+
   const { childMarkdownRemark: { html } = {} } = description || {}
   const htmlData = previewMode ? description : html
   const faqList =
@@ -48,11 +48,7 @@ const ContentfulModuleContainer = props => {
       <Inner splitModules={splitModules}>
         {title || htmlData || eyebrow ? (
           <Content splitModules={splitModules}>
-            {eyebrow ? (
-              <EyebrowStyle>
-                {eyebrow}
-              </EyebrowStyle>
-            ) : null}
+            {eyebrow ? <EyebrowStyle>{eyebrow}</EyebrowStyle> : null}
             {title && displayTitle ? (
               <Title isFaq={isFaq}>{title}</Title>
             ) : null}
@@ -79,7 +75,9 @@ const ContentfulModuleContainer = props => {
               gridModules={gridModules}
               gridModulesGap={isLiquiditySection ? '24px' : gridModulesGap}
               isLiquiditySection={isLiquiditySection}
-              className={'moduleContainerListModules'}
+              className={classnames('moduleContainerListModules', {
+                [`columnType${columnType}`]: columnType,
+              })}
             >
               {modulesOther.map(m =>
                 contentfulModuleToComponent({
@@ -257,7 +255,9 @@ const Modules = styled.div`
   `
       : ''}
 
-  ${({columnType, columns}) => columnType === 'pinterest' ? `
+  ${({ columnType, columns }) =>
+    columnType === 'pinterest'
+      ? `
     column-count: ${columns};
     column-gap: 14px;
     display: block !important;
@@ -268,5 +268,21 @@ const Modules = styled.div`
       padding: 0 !important;
       margin: 0 0 14px 0 !important;
     }
-  ` : ``}
+  `
+      : ``}
+
+  ${({ columnType }) =>
+    columnType === 'tag'
+      ? `
+    display: flex;
+    flex-flow: wrap;
+    margin: -10px !important;
+    & > *{
+      display: inline-flex;
+      width: auto !important;
+      padding: 10px !important;
+      
+    }
+  `
+      : ``}
 `

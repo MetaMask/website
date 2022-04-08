@@ -1,50 +1,72 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
-import fetchConsensysData from '../lib/utils/fetchConsensysData'
 import SimpleCta from './SimpleCta'
-import ConsenSysResourcesItem from './ConsenSysResourcesItem';
-
+import ConsenSysResourcesItem from './ConsenSysResourcesItem'
+import consensysData from '../lib/api/consensys/getData'
+import Loading from './Loading'
 const ConsenSysResources = props => {
   const { numberOfItem, categoryId, linkText, link, showDate } = props
   const [items, setItems] = React.useState([])
-  const getData = async () => {
-    const data = await fetchConsensysData('/posts', {
-      categories: categoryId,
-      per_page: numberOfItem,
-      _fields: 'title,date,link,_links.wp:featuredmedia',
-      _embed: 'wp:featuredmedia',
-    })
-    if (data && data.length) {
-      const optionsDate = { year: 'numeric', month: 'short' }
-      const parseData = data.map(e => {
-        const eTitle = e?.title?.rendered || ''
-        const eDate = e?.date ? new Date(e.date) : null
-        const eDateString = eDate
-          ? eDate.toLocaleDateString(undefined, optionsDate)
-          : null
-        const eImage = e?._embedded['wp:featuredmedia'][0].source_url
-        return {
-          title: eTitle,
-          date: eDateString,
-          image: eImage,
+  const [loading, setLoading] = React.useState(true)
+
+  React.useEffect(() => {
+    consensysData
+      .getBlog({
+        categories: categoryId,
+        per_page: numberOfItem,
+        _fields: 'title,date,link,_links.wp:featuredmedia',
+        _embed: 'wp:featuredmedia',
+      })
+      .then(response => {
+        try {
+          if (response && response.length) {
+            const optionsDate = { year: 'numeric', month: 'short' }
+            const parseData = response.map(e => {
+              const eTitle = e?.title?.rendered || ''
+              const eDate = e?.date ? new Date(e.date) : null
+              const eDateString = eDate
+                ? eDate.toLocaleDateString(undefined, optionsDate)
+                : null
+              const eImageObj =
+                e?._embedded['wp:featuredmedia'][0]?.media_details?.sizes
+              const eImageFull = e?._embedded['wp:featuredmedia'][0].source_url
+              const eImageList = eImageObj ? Object.values(eImageObj) : false
+              const eImage =
+                eImageList && eImageList.length
+                  ? eImageList.at(-2)?.source_url
+                  : eImageFull
+              return {
+                title: eTitle,
+                date: eDateString,
+                image: eImage,
+              }
+            })
+            setItems(parseData)
+            setLoading(false)
+          }
+        } catch (error) {
+          setLoading(false)
         }
       })
-      setItems(parseData)
-    }
-  }
-  React.useEffect(() => {
-    getData()
   }, [])
   return (
     <Wrapper>
-      {items && items.length ? (
-        <Listing>
-          {items.map(item => (
-            <ConsenSysResourcesItem {...item} showDate={showDate} />
-          ))}
-        </Listing>
-      ) : null}
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          {items && items.length ? (
+            <Listing>
+              {items.map(item => (
+                <ConsenSysResourcesItem {...item} showDate={showDate} />
+              ))}
+            </Listing>
+          ) : (
+            <div>No data</div>
+          )}
+        </>
+      )}
       {linkText && link ? (
         <CtaWrapper>
           <SimpleCta text={linkText} link={link} color="#2c56dd" />
@@ -77,6 +99,10 @@ const Listing = styled.div`
   & > * {
     width: 33.33%;
     padding: 10px;
+
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      width: 100%;
+    }
   }
 `
 

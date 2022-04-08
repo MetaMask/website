@@ -29,6 +29,7 @@ const ContentfulLayoutHero = props => {
       isFaq,
       sectionPadding,
       previewMode,
+      customClass,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -63,6 +64,7 @@ const ContentfulLayoutHero = props => {
       sideImageFlex={sideImageFlex}
       backgroundColorMobile={backgroundColorMobile}
       cta={cta}
+      customClass={customClass}
     />
   )
 }

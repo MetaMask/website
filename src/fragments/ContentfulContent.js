@@ -101,6 +101,7 @@ export const ContentfulLayoutHeroFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
+    customClass
   }
 `
 
@@ -226,6 +227,16 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     modulesMargin
     isTab
     customClass
+    sideImage {
+      title
+      description
+      file {
+        url
+      }
+      fluid(quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
     backgroundSize
     backgroundImage {
       title
@@ -295,6 +306,7 @@ export const ContentfulCtaFields = graphql`
     newTab
     buttonDisplay
     buttonGradient
+    buttonSecondary
     eventLabel
     eventCategory
     hubSpotForm {
