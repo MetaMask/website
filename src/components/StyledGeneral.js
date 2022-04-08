@@ -86,3 +86,11 @@ export const IconCloseModal = styled.span`
   right: 30px;
   cursor: pointer;
 `
+
+export const EyebrowStyle = styled.div`
+  color: #f6851b;
+  font-weight: 700;
+  letter-spacing: 5px;
+  margin-bottom: 16px;
+  font-size: 16px;
+`

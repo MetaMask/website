@@ -37,6 +37,7 @@ const HeroContainerComponent = props => {
     backgroundColorMobile,
     isFaq,
     sectionPadding,
+    customClass,
   } = props
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
@@ -106,7 +107,7 @@ const HeroContainerComponent = props => {
           [`bg-mobile-${backgroundColorMobile}`]: backgroundColorMobile,
         })}
       >
-        <ContentWrapper>
+        <ContentWrapper customClass={customClass}>
           <HeroContentContainer
             isStyleCenterSimple={isStyleCenterSimple}
             contentAlignment={contentAlignment}
@@ -617,6 +618,11 @@ const HeroSideImage = styled.div`
     
   `
       : ''}
+  .sideImageOverflow & {
+    @media (min-width: ${({ theme }) => theme.device.desktop}) {
+      min-width: 60%;
+    }
+  }
   @media (min-width: ${({ theme }) => theme.device.desktop}) {
     padding: 0 !important;
   }

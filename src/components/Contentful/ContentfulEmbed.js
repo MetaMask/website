@@ -12,11 +12,11 @@ const ContentfulEmbed = props => {
       displayTitle,
       moduleId,
       previewMode,
+      layoutType,
     },
   } = props
-
   return (
-    <Wrapper id={moduleId}>
+    <Wrapper id={moduleId} layoutType={layoutType}>
       {title && displayTitle ? <Title>{title}</Title> : null}
       <Embed html={previewMode ? props.moduleConfig.embed : embed} />
     </Wrapper>
@@ -42,6 +42,20 @@ ContentfulEmbed.propTypes = {
 const Wrapper = styled.div`
   display: block;
   width: 100%;
+
+  ${({ layoutType,theme }) =>
+  layoutType === 'horizontal'
+      ? `
+      @media (min-width: ${theme.device.miniDesktop}){
+        display: flex;
+        align-items: center;
+        & > * {
+          flex: 1;
+          min-width: 0;
+        }
+      }
+  `
+      : ``}
 `
 
 const Title = styled(SectionTitle)`

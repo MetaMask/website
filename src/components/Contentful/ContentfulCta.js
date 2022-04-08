@@ -21,6 +21,8 @@ const ContentfulCta = props => {
       downloadBrowsers,
       eventCategory,
       eventLabel,
+      hubSpotForm,
+      buttonSecondary,
     },
   } = props
   // check work with preview
@@ -50,6 +52,8 @@ const ContentfulCta = props => {
       downloadBrowsers={browsers}
       eventCategory={eventCategory}
       eventLabel={eventLabel}
+      hubSpotForm={hubSpotForm}
+      buttonSecondary={buttonSecondary}
     />
   )
 }
@@ -67,5 +71,7 @@ ContentfulCta.propTypes = {
     isHideArrow: PropTypes.bool,
     eventCategory: PropTypes.string,
     eventLabel: PropTypes.string,
+    hubSpotForm: PropTypes.object,
+    buttonSecondary: PropTypes.bool,
   }),
 }
