@@ -164,7 +164,8 @@ const SideImage = styled.div`
   @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
     width: 33.33%;
     .sideImageOverflow & {
-      width: 500px;
+      min-width: 500px;
+      width: 50%;
       ${({ sectionPadding }) =>
         sectionPadding
           ? ` 
@@ -216,7 +217,8 @@ const Container = styled(Section)`
 `
 
 const Title = styled(SectionTitle)`
-  padding-bottom: 20px;
+  display: block;
+  margin-bottom: 20px;
 `
 const Modules = styled.div`
   display: block;
@@ -246,7 +248,11 @@ const Modules = styled.div`
   }
 `
 const ContentInfo = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: 40px;
+
+  & > *:last-child {
+    margin-bottom: 0 !important;
+  }
   ${({ paddingTop }) =>
     paddingTop
       ? `

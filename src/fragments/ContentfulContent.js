@@ -157,6 +157,7 @@ export const ContentfulLayoutFeatureFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
+    imageShadow
     imageWidth
     imageAlignment
     imageLink

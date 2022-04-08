@@ -9,12 +9,12 @@ export const FooterTitle = styled.div`
   text-transform: uppercase;
 `
 export const SectionTitle = styled.h2`
-  padding-top: 40px;
+  margin-top: 40px;
 
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     font-size: 40px;
     line-height: 46px;
-    padding-top: 0;
+    margin-top: 0;
   }
 `
 
