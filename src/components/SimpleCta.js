@@ -5,10 +5,10 @@ import ArrowIcon from '../images/icons/icon-arrow-right.svg'
 import Link from './Link'
 
 const SimpleCta = props => {
-  const { text, link, color } = props
+  const { text, link, color, newTab } = props
 
   return (
-    <Cta to={link} color={color}>
+    <Cta to={link} color={color} newTab={newTab}>
       <CtaTitle>{text}</CtaTitle>
       <ArrowIcon />
     </Cta>

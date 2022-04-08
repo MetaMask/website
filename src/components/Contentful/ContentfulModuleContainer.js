@@ -213,8 +213,8 @@ const Modules = styled.div`
   `
       : ''}
 
-  ${({ gridModules, gridModulesGap, columns, columnsOnMobile, theme }) =>
-    columns && gridModules
+  ${({ gridModules, columnType, gridModulesGap, columns, columnsOnMobile, theme }) =>
+    columns && gridModules && columnType !== 'tag'
       ? `
       margin: -${gridModulesGap} !important;
 
@@ -276,11 +276,11 @@ const Modules = styled.div`
       ? `
     display: flex;
     flex-flow: wrap;
-    margin: -10px !important;
     & > *{
       display: inline-flex;
       width: auto !important;
-      padding: 10px !important;
+      margin-right: 20px;
+      margin-bottom: 20px;
       
     }
   `

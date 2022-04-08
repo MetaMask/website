@@ -14,7 +14,6 @@ const Button = props => {
     customClick,
     fontSize,
     buttonGradient = false,
-    buttonSecondary,
   } = props
 
   return (
@@ -115,10 +114,6 @@ const ButtonWrapper = styled(Link)`
   border-radius: 999px;
   font-size: 16px;
   line-height: 1.3;
-
-  &:not(:last-child) {
-    margin-right: 8px;
-  }
 
   ${({ fontSize }) =>
     fontSize

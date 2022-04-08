@@ -28,6 +28,7 @@ const ContentfulLayoutFeature = props => {
       cta,
       previewMode,
       featureItems,
+      imageShadow,
     },
   } = props
 
@@ -57,6 +58,7 @@ const ContentfulLayoutFeature = props => {
       noPaddingBottom={noPaddingBottom}
       cta={cta}
       featureItems={featureItems}
+      imageShadow={imageShadow}
     />
   )
 }
@@ -70,5 +72,6 @@ ContentfulLayoutFeature.propTypes = {
     description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     cta: PropTypes.object,
     noPaddingBottom: PropTypes.bool,
+    imageShadow: PropTypes.bool,
   }),
 }

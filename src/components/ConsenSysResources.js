@@ -25,6 +25,7 @@ const ConsenSysResources = props => {
             const parseData = response.map(e => {
               const eTitle = e?.title?.rendered || ''
               const eDate = e?.date ? new Date(e.date) : null
+              const eLink = e?.link || '';
               const eDateString = eDate
                 ? eDate.toLocaleDateString(undefined, optionsDate)
                 : null
@@ -40,6 +41,7 @@ const ConsenSysResources = props => {
                 title: eTitle,
                 date: eDateString,
                 image: eImage,
+                link: eLink,
               }
             })
             setItems(parseData)
@@ -49,7 +51,7 @@ const ConsenSysResources = props => {
           setLoading(false)
         }
       })
-  }, [])
+  }, [categoryId, numberOfItem])
   return (
     <Wrapper>
       {loading ? (
@@ -69,7 +71,7 @@ const ConsenSysResources = props => {
       )}
       {linkText && link ? (
         <CtaWrapper>
-          <SimpleCta text={linkText} link={link} color="#2c56dd" />
+          <SimpleCta newTab text={linkText} link={link} color="#2c56dd" />
         </CtaWrapper>
       ) : null}
     </Wrapper>
