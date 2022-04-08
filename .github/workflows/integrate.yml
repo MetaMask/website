@@ -38,8 +38,8 @@ jobs:
           echo GATSBY_CONTENTFUL_SPACE_ID =${{ secrets.GATSBY_CONTENTFUL_SPACE_ID }} >> gatsby.development.env
           echo GATSBY_GA_ID =${{ secrets.GATSBY_GA_ID }} >> gatsby.development.env
           echo GATSBY_GTM_ID =${{ secrets.GATSBY_GTM_ID }} >> gatsby.development.env
-          echo GATSBY_CONSENSYS_HOST =${{ secrets.GATSBY_CONSENSYS_HOST }} >> gatsby.production.env
-          
+          echo GATSBY_CONSENSYS_HOST =${{ secrets.GATSBY_CONSENSYS_HOST }} >> gatsby.development.env
+
       - name: Read .nvmrc
         run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
         id: nvm
