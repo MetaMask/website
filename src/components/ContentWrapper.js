@@ -28,6 +28,12 @@ const Container = styled.div`
       margin-top: -32px;
     }
   }
+  &.sideImageOverflow {
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
   ${({ styleOverride }) => styleOverride}
 `
 
@@ -38,5 +44,15 @@ const ContainerInner = styled.div`
   width: 100%;
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     max-width: 728px;
+  }
+
+  .sideImageOverflow & {
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      max-width: 100% !important;
+      padding-left: calc((100vw - 992px)/2);
+      @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+        padding-left: calc((100vw - 728px)/2);
+      }
+    }
   }
 `

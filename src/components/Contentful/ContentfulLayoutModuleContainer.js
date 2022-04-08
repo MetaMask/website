@@ -4,7 +4,7 @@ import ContentWrapper from '../ContentWrapper'
 import styled from 'styled-components'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import classnames from 'classnames'
-import { SectionTitle, Section } from '../StyledGeneral'
+import { SectionTitle, Section, EyebrowStyle } from '../StyledGeneral'
 import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
 import TabWrapper from '../Tab/TabWrapper'
 
@@ -27,11 +27,14 @@ const ContentfulModuleContainer = props => {
       previewMode,
       isTab,
       customClass,
+      eyebrow,
+      sideImage,
     },
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
   const bgUrl = parseContentfulAssetUrl(backgroundImage)
+  const sideImageUrl = parseContentfulAssetUrl(sideImage)
   const htmlData = previewMode ? description : html
   const tabs =
     isTab && modules && modules.length
@@ -63,46 +66,60 @@ const ContentfulModuleContainer = props => {
         </BackgroundSection>
       ) : null}
       <ContentWrapper customClass={customClass}>
-        {(headline && displayHeadline) || htmlData ? (
-          <ContentInfo paddingTop={paddingTop}>
-            {headline && displayHeadline ? (
-              <Title
-                className={classnames({
-                  'txt-center': headlineAlignCenter,
-                })}
+        <Inner hasSideImage={!! sideImageUrl}>
+          <MainContent>
+            {(headline && displayHeadline) || htmlData || eyebrow ? (
+              <ContentInfo paddingTop={paddingTop}>
+                {eyebrow ? <EyebrowStyle>{eyebrow}</EyebrowStyle> : null}
+                {headline && displayHeadline ? (
+                  <Title
+                    className={classnames({
+                      'txt-center': headlineAlignCenter,
+                    })}
+                  >
+                    {headline}
+                  </Title>
+                ) : null}
+                {htmlData ? (
+                  <SubInfo
+                    className={classnames({
+                      'txt-center': contentAlignCenter,
+                    })}
+                    dangerouslySetInnerHTML={{ __html: htmlData }}
+                  />
+                ) : null}
+              </ContentInfo>
+            ) : null}
+            {isTab && modules && modules.length ? (
+              <TabWrapper
+                tabs={tabs}
+                typeLayout={'module'}
+                activeTabDefault={modules[0].contentful_id}
+              ></TabWrapper>
+            ) : null}
+            {!isTab && modules && modules.length ? (
+              <Modules
+                contentAlignCenter={contentAlignCenter}
+                modulesMargin={modulesMargin}
               >
-                {headline}
-              </Title>
+                {modules.map(m =>
+                  contentfulModuleToComponent({
+                    ...m,
+                    previewMode,
+                    hasModuleContainer: true,
+                    containerBgColor: backgroundColor,
+                    color: ['dark'].includes(backgroundColor) ? 'white' : 'black',
+                  })
+                )}
+              </Modules>
             ) : null}
-            {htmlData ? (
-              <SubInfo
-                className={classnames({
-                  'txt-center': contentAlignCenter,
-                })}
-                dangerouslySetInnerHTML={{ __html: htmlData }}
-              />
-            ) : null}
-          </ContentInfo>
-        ) : null}
-        {isTab && modules && modules.length ? (
-          <TabWrapper tabs={tabs} typeLayout={'module'} activeTabDefault={modules[0].contentful_id}></TabWrapper>
-        ) : null}
-        {! isTab && modules && modules.length ? (
-          <Modules
-            contentAlignCenter={contentAlignCenter}
-            modulesMargin={modulesMargin}
-          >
-            {modules.map(m =>
-              contentfulModuleToComponent({
-                ...m,
-                previewMode,
-                hasModuleContainer: true,
-                containerBgColor: backgroundColor,
-                color: ['dark'].includes(backgroundColor) ? 'white' : 'black',
-              })
-            )}
-          </Modules>
-        ) : null}
+          </MainContent>
+          {sideImageUrl ? (
+            <SideImage sectionPadding={sectionPadding}>
+              <img src={sideImageUrl} alt="" />
+            </SideImage>
+          ) : null}
+        </Inner>
       </ContentWrapper>
     </Container>
   )
@@ -122,6 +139,41 @@ ContentfulModuleContainer.propTypes = {
     noPaddingBottom: PropTypes.bool,
   }),
 }
+
+const MainContent = styled.div`
+  display: block;
+`
+const Inner = styled.div`
+  display: block;
+  ${({ hasSideImage, theme }) =>
+    hasSideImage
+      ? ` 
+      @media (min-width: ${theme.device.miniDesktop}) {
+        display: flex;
+
+        ${MainContent} {
+          flex: 1;
+          min-width: 0;
+        }
+      }
+     `
+      : ``}
+`
+const SideImage = styled.div`
+  display: block;
+  @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+    width: 33.33%;
+    .sideImageOverflow & {
+      width: 500px;
+      ${({ sectionPadding }) =>
+        sectionPadding
+          ? ` 
+          margin-top: calc(0px - (${sectionPadding} + 40px));
+       `
+          : ``}
+    }
+  }
+`
 
 const BackgroundSection = styled.div`
   display: block;
@@ -152,7 +204,7 @@ const BackgroundSection = styled.div`
         object-fit: cover;
       }
       `}
-`;
+`
 const Container = styled(Section)`
   position: relative;
   ${({ bgUrl }) =>

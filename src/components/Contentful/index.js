@@ -14,6 +14,7 @@ import ContentfulModuleContainer from './ContentfulModuleContainer'
 import ContentfulRichText from './ContentfulRichText'
 import ContentfulSeo from './ContentfulSeo'
 import ContentfulPopupAnnouncement from './ContentfulPopupAnnouncement'
+import ContentfulConsenSysResources from './ContentfulConsenSysResources'
 
 export {
   ContentfulLayoutHeader,
@@ -32,4 +33,5 @@ export {
   ContentfulRichText,
   ContentfulSeo,
   ContentfulPopupAnnouncement,
+  ContentfulConsenSysResources,
 }
