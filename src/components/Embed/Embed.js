@@ -34,12 +34,13 @@ const EmbedHtml = props => {
         })
       }
     }
-  }, [])
+  }, [playOnPopup, iframePopupData.length])
 
   return (
     <>
       <EmbedHtmlWrapper
         ref={contentRef}
+        playOnPopup={playOnPopup}
         dangerouslySetInnerHTML={{
           __html: htmlParse,
         }}
@@ -91,24 +92,28 @@ const EmbedHtmlWrapper = styled.div`
   iframe {
     border-radius: 12px;
   }
-  @media (max-width: ${({ theme }) => theme.device.desktopMediaMax}) {
-    &:before {
-      content: '';
-      display: block;
-      padding-bottom: 56.25%;
-    }
+  ${({playOnPopup, theme}) => playOnPopup ? `
+    border-radius: 12px 12px 0 0;
+  ` : `
+    @media (max-width: ${theme.device.desktopMediaMax}) {
+      &:before {
+        content: '';
+        display: block;
+        padding-bottom: 56.25%;
+      }
 
-    iframe {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
-      margin: 0 !important;
+      iframe {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0 !important;
+      }
     }
-  }
+  `}
 `
 const EmbedHtmlPopup = styled.div`
   width: 100%;
