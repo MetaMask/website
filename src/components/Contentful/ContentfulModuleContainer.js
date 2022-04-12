@@ -20,14 +20,14 @@ const ContentfulModuleContainer = props => {
       displayTitle,
       modules = [],
       gridModules = true,
-      gridModulesGap = '8px',
+      gridModulesGap: gridModulesGapDefault,
       isLiquiditySection,
       containerBgColor,
       previewMode,
       columnType,
     },
   } = props
-
+  const gridModulesGap = gridModulesGapDefault || '8px';
   const { childMarkdownRemark: { html } = {} } = description || {}
   const htmlData = previewMode ? description : html
   const faqList =

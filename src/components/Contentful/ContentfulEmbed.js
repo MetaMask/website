@@ -13,12 +13,13 @@ const ContentfulEmbed = props => {
       moduleId,
       previewMode,
       layoutType,
+      playOnPopup,
     },
   } = props
   return (
     <Wrapper id={moduleId} layoutType={layoutType}>
       {title && displayTitle ? <Title>{title}</Title> : null}
-      <Embed html={previewMode ? props.moduleConfig.embed : embed} />
+      <Embed playOnPopup={playOnPopup} html={previewMode ? props.moduleConfig.embed : embed} />
     </Wrapper>
   )
 }
@@ -36,6 +37,7 @@ ContentfulEmbed.propTypes = {
       PropTypes.string,
     ]),
     moduleId: PropTypes.string,
+    playOnPopup: PropTypes.bool,
   }),
 }
 

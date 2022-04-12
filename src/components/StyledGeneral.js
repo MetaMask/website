@@ -71,6 +71,11 @@ export const ModalInner = styled.div`
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
     max-height: 85vh;
   }
+
+  iframe {
+    width: 100%;
+    height: auto;
+  }
 `
 
 export const IconCloseModal = styled.span`
