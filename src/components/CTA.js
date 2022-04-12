@@ -8,6 +8,8 @@ import { isAndroid, isIOS, isMobile, browserName } from 'react-device-detect'
 import Link from './Link'
 import styled from 'styled-components'
 import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
+import Popup from './Popup'
+import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 
 const CTA = props => {
   const {
@@ -28,13 +30,23 @@ const CTA = props => {
     downloadBrowsers,
     eventCategory,
     eventLabel,
+    hubSpotForm,
+    buttonSecondary,
   } = props
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
   const isButton = buttonDisplay || button
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
   const icon = { ...defaultIconConfig, fill: color, ...iconConfig }
   const isDownloadBrowser = !isEmpty(downloadBrowsers)
+  const [showPopup, setShowPopup] = React.useState(false)
+  const onClosePopup = () => {
+    setShowPopup(false)
+  }
   const handleCustomClick = e => {
+    if(hubSpotForm) {
+      setShowPopup(true)
+      return;
+    }
     if (customClick) {
       e.preventDefault()
       customClick()
@@ -73,25 +85,7 @@ const CTA = props => {
       }
     }
   }, [downloadBrowsers, isDownloadBrowser])
-
-  if (isButton) {
-    return (
-      <Button
-        size={buttonSize}
-        link={link}
-        text={text}
-        newTab={newTab || isDownloadBrowser}
-        color={color}
-        customClick={handleCustomClick}
-        fontSize={fontSize}
-        buttonGradient={buttonGradient}
-        eventCategory={eventCategory}
-        eventLabel={eventLabel}
-      />
-    )
-  }
-
-  return (
+  let ele = (
     <CTAContainer className="ctaModuleContainer" align={align}>
       <ContentWrapper
         to={link}
@@ -103,6 +97,35 @@ const CTA = props => {
         {text} {!isHideArrow ? <Arrow {...icon} /> : null}
       </ContentWrapper>
     </CTAContainer>
+  )
+  if (isButton) {
+    ele = (
+      <Button
+        size={buttonSize}
+        link={link}
+        text={text}
+        newTab={newTab || isDownloadBrowser}
+        color={buttonSecondary ? 'secondary' : color}
+        customClick={handleCustomClick}
+        fontSize={fontSize}
+        buttonGradient={buttonGradient}
+        eventCategory={eventCategory}
+        eventLabel={eventLabel}
+      />
+    )
+  }
+
+  return (
+    <>
+      {ele}
+      {hubSpotForm ? (
+        <Popup showPopup={showPopup} onClosePopup={onClosePopup}>
+          {contentfulModuleToComponent({
+            ...hubSpotForm,
+          })}
+        </Popup>
+      ) : null}
+    </>
   )
 }
 

@@ -37,6 +37,7 @@ const HeroContainerComponent = props => {
     backgroundColorMobile,
     isFaq,
     sectionPadding,
+    customClass,
   } = props
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
@@ -54,6 +55,7 @@ const HeroContainerComponent = props => {
   const isCustody = pathname === '/institutions/custody/'
   const isInstitutions = pathname === '/institutions/'
   const isFlask = pathname === '/flask/'
+  const isPortfolio = pathname === '/institutions/portfolio/'
   let hubspotWrapper
   if (hubSpotForm) {
     hubspotWrapper = !isEmpty(cta) ? (
@@ -106,7 +108,7 @@ const HeroContainerComponent = props => {
           [`bg-mobile-${backgroundColorMobile}`]: backgroundColorMobile,
         })}
       >
-        <ContentWrapper>
+        <ContentWrapper customClass={customClass}>
           <HeroContentContainer
             isStyleCenterSimple={isStyleCenterSimple}
             contentAlignment={contentAlignment}
@@ -123,6 +125,7 @@ const HeroContainerComponent = props => {
             isCustody={isCustody}
             isInstitutions={isInstitutions}
             isFlask={isFlask}
+            isPortfolio={isPortfolio}
           >
             <HeroImageTextContainer
               isStyleHubspot={isStyleHubspot}
@@ -417,7 +420,17 @@ const HeroContentContainer = styled.div`
     `
         : ''}
   }
-
+  ${({ isPortfolio, theme }) =>
+  isPortfolio ? `
+  ${EyebrowWrapper} {
+      img {
+        height: 40px;
+        width: auto;
+        margin: 0 !important;
+      }
+    }
+  ` : ``
+  }
   ${({ isCustody, theme }) =>
     isCustody
       ? `
@@ -617,6 +630,11 @@ const HeroSideImage = styled.div`
     
   `
       : ''}
+  .sideImageOverflow & {
+    @media (min-width: ${({ theme }) => theme.device.desktop}) {
+      min-width: 60%;
+    }
+  }
   @media (min-width: ${({ theme }) => theme.device.desktop}) {
     padding: 0 !important;
   }

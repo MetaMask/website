@@ -82,7 +82,7 @@ const CardInner = styled(Link)`
   overflow: hidden;
   background-color: ${({ theme }) => theme.background.white};
   color: ${({ theme }) => theme.text.dark};
-  ${({contentAlignment}) => contentAlignment === 'right' ? `
+  ${({contentAlignment}) => contentAlignment === 'left' ? `
   flex-direction: row-reverse;
   `: null}
 

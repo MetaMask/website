@@ -9,12 +9,12 @@ export const FooterTitle = styled.div`
   text-transform: uppercase;
 `
 export const SectionTitle = styled.h2`
-  padding-top: 40px;
+  margin-top: 40px;
 
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     font-size: 40px;
     line-height: 46px;
-    padding-top: 0;
+    margin-top: 0;
   }
 `
 
@@ -71,6 +71,11 @@ export const ModalInner = styled.div`
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
     max-height: 85vh;
   }
+
+  iframe {
+    width: 100%;
+    height: auto;
+  }
 `
 
 export const IconCloseModal = styled.span`
@@ -85,4 +90,12 @@ export const IconCloseModal = styled.span`
   top: 30px;
   right: 30px;
   cursor: pointer;
+`
+
+export const EyebrowStyle = styled.div`
+  color: #f6851b;
+  font-weight: 700;
+  letter-spacing: 5px;
+  margin-bottom: 16px;
+  font-size: 16px;
 `

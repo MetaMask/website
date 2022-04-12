@@ -31,7 +31,9 @@ const FeatureComponent = props => {
     eyebrow,
     featureItems,
     imageDarkMode,
-    imageMobileDarkMode
+    imageMobileDarkMode,
+    imageShadow,
+    imageLink,
   } = props
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
@@ -69,11 +71,11 @@ const FeatureComponent = props => {
           ))}
         </FeatureItems>
       ) : null}
-      {cta ? (
+      {cta && !isContentAlignVertical ? (
         <CTAWrapper>
           {contentfulModuleToComponent({
             ...cta,
-            color: ['white', 'gray'].includes(backgroundColor)
+            color: ['white', 'gray', 'default'].includes(backgroundColor)
               ? cta.color
               : 'white-outline',
           })}
@@ -91,14 +93,20 @@ const FeatureComponent = props => {
           image={isDarkMode && imageDarkMode ? imageDarkMode : image}
           widthImg={imageWidth}
           imageAlignment={imageAlignment}
+          link={imageLink}
         />
       ) : null}
       {imageMobile ? (
         <ImageSrc
           className={'hidden-desktop'}
-          image={isDarkMode && imageMobileDarkMode ? imageMobileDarkMode : imageMobile}
+          image={
+            isDarkMode && imageMobileDarkMode
+              ? imageMobileDarkMode
+              : imageMobile
+          }
           widthImg={imageWidth}
           imageAlignment={imageAlignment}
+          link={imageLink}
         />
       ) : null}
     </>
@@ -118,6 +126,7 @@ const FeatureComponent = props => {
           alignItemsCenter={alignItemsCenter}
           imageWidth={imageWidth}
           backgroundColor={backgroundColor}
+          imageShadow={imageShadow}
         >
           {eyebrow ? (
             <Eyebrow className="hidden-desktop">{eyebrow}</Eyebrow>
@@ -165,6 +174,16 @@ const FeatureComponent = props => {
               <div>{innerContent}</div>
             )}
           </FeatureInner>
+          {cta && isContentAlignVertical ? (
+            <CTAWrapper>
+              {contentfulModuleToComponent({
+                ...cta,
+                color: ['white', 'gray', 'default'].includes(backgroundColor)
+                  ? cta.color
+                  : 'white-outline',
+              })}
+            </CTAWrapper>
+          ) : null}
         </FeatureWrapper>
       </ContentWrapper>
     </Container>
@@ -277,6 +296,15 @@ const FeatureWrapper = styled.div`
       margin-bottom: 32px;
     }
   }
+
+  ${({ imageShadow }) =>
+    imageShadow
+      ? `
+      img {
+        filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.1));
+      }
+  `
+      : ''}
   ${({ contentAlignLR, theme }) =>
     contentAlignLR === 'left'
       ? `
@@ -290,6 +318,10 @@ const FeatureWrapper = styled.div`
     isContentAlignVertical
       ? `
       flex-direction: column !important;
+      ${CTAWrapper} {
+        order: 4;
+        margin-top: 20px;
+      }
       ${SideImage} {
         order: 3;
       }
@@ -362,8 +394,7 @@ const FeatureItems = styled.div`
   margin-top: 72px;
 `
 const FeatureItem = styled.div`
-  &:not(:last-child){
-
+  &:not(:last-child) {
     margin-bottom: 48px;
   }
 `

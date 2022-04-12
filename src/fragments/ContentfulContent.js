@@ -64,7 +64,7 @@ export const ContentfulLayoutHeroFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 960, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -101,6 +101,7 @@ export const ContentfulLayoutHeroFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
+    customClass
   }
 `
 
@@ -122,7 +123,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 960, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -132,7 +133,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 960, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -156,6 +157,7 @@ export const ContentfulLayoutFeatureFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
+    imageShadow
     imageWidth
     imageAlignment
     imageLink
@@ -198,9 +200,6 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
     cta {
       ...ContentfulCtaFields
     }
-    hubSpotForm {
-      ...ContentfulHubSpotFormFields
-    }
     backgroundColor
     sectionPadding
   }
@@ -212,6 +211,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
       type
     }
     contentful_id
+    eyebrow
     headline
     description {
       childMarkdownRemark {
@@ -228,6 +228,16 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     modulesMargin
     isTab
     customClass
+    sideImage {
+      title
+      description
+      file {
+        url
+      }
+      fluid(quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
     backgroundSize
     backgroundImage {
       title
@@ -255,7 +265,7 @@ export const ContentfulCardFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 960, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -265,7 +275,7 @@ export const ContentfulCardFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 960, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -297,8 +307,12 @@ export const ContentfulCtaFields = graphql`
     newTab
     buttonDisplay
     buttonGradient
+    buttonSecondary
     eventLabel
     eventCategory
+    hubSpotForm {
+      ...ContentfulHubSpotFormFields
+    }
     downloadBrowsers {
       internal {
         content
@@ -334,6 +348,8 @@ export const ContentfulEmbedFields = graphql`
     }
     title
     displayTitle
+    layoutType
+    playOnPopup
   }
 `
 
@@ -431,14 +447,19 @@ export const ContentfulModuleContainerFields = graphql`
       }
     }
     columns
+    columnType
     columnsOnMobile
     contentAlignment
     splitModules
     displayTitle
     isLiquiditySection
+    gridModulesGap
     modules {
       ... on ContentfulLogo {
         ...ContentfulLogoFields
+      }
+      ... on ContentfulConsenSysResources {
+        ...ContentfulConsenSysResourcesFields
       }
       ... on ContentfulFaq {
         ...ContentfulFaqFields
@@ -552,5 +573,20 @@ export const ContentfulPopupAnnouncementFields = graphql`
     ctaText
     ctaLink
     backgroundColor
+  }
+`
+
+export const ContentfulConsenSysResourcesFields = graphql`
+  fragment ContentfulConsenSysResourcesFields on ContentfulConsenSysResources {
+    contentful_id
+    internal {
+      type
+    }
+    title
+    categoryId
+    numberOfItem
+    linkText
+    link
+    showDate
   }
 `

@@ -3,7 +3,6 @@ import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import Loadable from '@loadable/component'
-import Popup from './Popup'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { Section, SectionTitle } from './StyledGeneral'
 import classnames from 'classnames'
@@ -17,19 +16,11 @@ const FullWidthCta = props => {
     showLogoAnimation,
     backgroundColor,
     headline,
-    hubSpotForm,
     marginBottom,
     logoType,
     sectionPadding,
   } = props
 
-  const [showPopup, setShowPopup] = React.useState(false)
-  const togglePopup = () => {
-    setShowPopup(!showPopup)
-  }
-  const onClosePopup = () => {
-    setShowPopup(false)
-  }
   return (
     <Container
       sectionPadding={sectionPadding}
@@ -62,17 +53,9 @@ const FullWidthCta = props => {
               <CTAWrapper>
                 {contentfulModuleToComponent({
                   ...cta,
-                  link: hubSpotForm ? '' : cta.ctaLink,
-                  customClick: hubSpotForm ? () => togglePopup() : null,
+                  link: cta.ctaLink,
                 })}
               </CTAWrapper>
-            ) : null}
-            {hubSpotForm ? (
-              <Popup showPopup={showPopup} onClosePopup={onClosePopup}>
-                {contentfulModuleToComponent({
-                  ...hubSpotForm,
-                })}
-              </Popup>
             ) : null}
           </FullWidthCtaInner>
         </FullWidthCtaWrapper>

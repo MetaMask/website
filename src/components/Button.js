@@ -44,12 +44,14 @@ Button.propTypes = {
 }
 
 const ButtonWrapper = styled(Link)`
+  color: #fff;
   ${({ gradient, color, theme }) =>
     color && theme['button'] && theme['button'][color]
       ? `
   background: ${
     gradient ? theme['button'][color].gradient : theme['button'][color].bg
   };
+  color: ${theme['button'][color].text};
   @media (min-width: ${theme.device.miniDesktop}){
     &:hover {
       background: ${
@@ -85,10 +87,25 @@ const ButtonWrapper = styled(Link)`
   `
       : ''}
 
+  ${({ color, theme }) =>
+    color === 'secondary'
+      ? `
+  background: transparent !important;
+  color: ${theme.darkBlue};
+  border: 2px solid ${theme.darkBlue};
+  min-height: 40px !important;
+  @media (min-width: ${theme.device.miniDesktop}){
+    &:hover {
+      border-color: ${theme.darkerBlue};
+      color: ${theme.darkerBlue};
+    }
+  }
+  `
+      : ''}
+
   cursor: pointer;
   text-align: center;
   transition: all 300ms ease;
-  color: #fff;
   min-height: 52px;
   display: inline-flex;
   align-items: center;

@@ -34,7 +34,7 @@ const StyledCard = props => {
         newTab={newTab}
         backgroundColor={backgroundColor}
         layoutSize={layoutSize}
-        className={classnames({
+        className={classnames('card-feature', {
           [`bg-${backgroundColor}`]: backgroundColor,
         })}
       >
@@ -95,7 +95,7 @@ const CardInner = styled(Link)`
 const ImageWrapper = styled.div`
   height: 140px;
   margin-bottom: 24px;
-  box-shadow: 0px 7.1px 42.6px rgba(216, 216, 216, 0.4);
+  box-shadow: 0px 7.1px 42.6px ${({theme}) => theme.shadowCardFeatureLogo};
   border-radius: 100%;
   margin-top: 40px;
 
