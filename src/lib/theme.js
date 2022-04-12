@@ -88,6 +88,7 @@ const theme = {
   shadowSubMenu: 'rgba(0, 0, 0, 0.28)',
   shadowCard: 'rgba(0, 0, 0, 0.1)',
   shadowCardGray: 'rgba(15, 15, 15, 0.1)',
+  shadowCardFeatureLogo: 'rgba(216, 216, 216, 0.4)',
 }
 
 export const defaultTheme = {
@@ -159,7 +160,7 @@ export const defaultDarkTheme = {
         'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
     logoBlue: 'rgb(36, 41, 46)',
     tabModuleOuter: theme.dark,
-    cardFeatureInner: 'rgb(36, 41, 46)',
+    cardFeatureInner: '#212a30',
   },
   text: {
     default: theme.white,
@@ -177,6 +178,7 @@ export const defaultDarkTheme = {
   gradientFAQ: 'linear-gradient(90deg, #f5841f, #2c56dd)',
   shadowCard: 'rgba(255, 255, 255, 0.1)',
   shadowCardGray: 'rgba(255, 255, 255, 0.1)',
+  shadowCardFeatureLogo: 'rgba(0, 0, 0, 0.8)',
   theme: 'default',
 }
 
@@ -249,7 +251,7 @@ export const purpleDarkTheme = {
       'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
     logoBlue: 'rgb(36, 41, 46)',
     tabModuleOuter: theme.dark,
-    cardFeatureInner: 'rgb(36, 41, 46)',
+    cardFeatureInner: '#212a30',
   },
   text: {
     default: theme.white,
@@ -267,6 +269,7 @@ export const purpleDarkTheme = {
   gradientFAQ: 'linear-gradient(90deg, #8A42AD 0%, #6762EB 100%)',
   shadowCard: 'rgba(255, 255, 255, 0.1)',
   shadowCardGray: 'rgba(255, 255, 255, 0.1)',
+  shadowCardFeatureLogo: 'rgba(0, 0, 0, 0.8)',
   theme: 'purple',
 }
 
