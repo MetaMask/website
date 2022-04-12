@@ -169,7 +169,7 @@ const SideImage = styled.div`
     width: 33.33%;
     .sideImageOverflow & {
       min-width: 500px;
-      width: 50%;
+      width: 48%;
       margin-left: 40px;
       ${({ sectionPadding }) =>
         sectionPadding

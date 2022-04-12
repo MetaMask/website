@@ -1024,6 +1024,22 @@ body.dark-mode {
 .embed-popup-target {
   cursor: pointer;
   position: relative;
+  width: 100%;
+
+  &:before {
+    content: "";
+    display: block;
+    padding-bottom: 37.2%;
+  }
+
+  img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
   &:hover {
     .embed-popup-target-overlay {
@@ -1044,6 +1060,7 @@ body.dark-mode {
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  z-index: 2;
 
   .embed-popup-target-icon {
     width: 60px;
