@@ -1025,6 +1025,7 @@ body.dark-mode {
   cursor: pointer;
   position: relative;
   width: 100%;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
 
   &:before {
     content: "";
@@ -1054,7 +1055,7 @@ body.dark-mode {
   right: 0;
   top: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.1);
   transition: background 300ms ease;
   display: flex;
   align-items: center;
