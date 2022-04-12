@@ -291,7 +291,7 @@ h3 {
   padding: 0;
   font-size: 24px;
   line-height: 33px;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 h4 {
@@ -970,9 +970,13 @@ body.dark-mode {
   .bg-white,
   .bg-default {
     background-color: #121212;
+
+    &.card-feature {
+      background: #23272a;
+    }
   }
   .bg-neutrals {
-    background: #121212;
+    background: #23272a;
   }
   .paragraph {
     color: #fff;
@@ -1014,5 +1018,40 @@ body.dark-mode {
   .custom-mobile-one-row {
     width: 100% !important;
     flex: none !important;padding: 0 !important;margin: 8px 0 !important
+  }
+}
+
+.embed-popup-target {
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    .embed-popup-target-overlay {
+      background: rgba(0,0,0,0.3)
+    }
+  }
+}
+
+.embed-popup-target-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  transition: background 300ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+
+  .embed-popup-target-icon {
+    width: 60px;
+    height: 60px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #037DD6;
+    border-radius: 100%;
   }
 }

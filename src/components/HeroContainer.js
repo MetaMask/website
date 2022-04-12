@@ -55,6 +55,7 @@ const HeroContainerComponent = props => {
   const isCustody = pathname === '/institutions/custody/'
   const isInstitutions = pathname === '/institutions/'
   const isFlask = pathname === '/flask/'
+  const isPortfolio = pathname === '/institutions/portfolio/'
   let hubspotWrapper
   if (hubSpotForm) {
     hubspotWrapper = !isEmpty(cta) ? (
@@ -124,6 +125,7 @@ const HeroContainerComponent = props => {
             isCustody={isCustody}
             isInstitutions={isInstitutions}
             isFlask={isFlask}
+            isPortfolio={isPortfolio}
           >
             <HeroImageTextContainer
               isStyleHubspot={isStyleHubspot}
@@ -418,7 +420,17 @@ const HeroContentContainer = styled.div`
     `
         : ''}
   }
-
+  ${({ isPortfolio, theme }) =>
+  isPortfolio ? `
+  ${EyebrowWrapper} {
+      img {
+        height: 40px;
+        width: auto;
+        margin: 0 !important;
+      }
+    }
+  ` : ``
+  }
   ${({ isCustody, theme }) =>
     isCustody
       ? `

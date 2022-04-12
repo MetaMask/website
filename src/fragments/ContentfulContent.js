@@ -349,6 +349,7 @@ export const ContentfulEmbedFields = graphql`
     title
     displayTitle
     layoutType
+    playOnPopup
   }
 `
 
@@ -452,6 +453,7 @@ export const ContentfulModuleContainerFields = graphql`
     splitModules
     displayTitle
     isLiquiditySection
+    gridModulesGap
     modules {
       ... on ContentfulLogo {
         ...ContentfulLogoFields
