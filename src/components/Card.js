@@ -105,6 +105,9 @@ const Card = styled.div`
 const CardInner = styled(Link)`
   display: block;
   color: ${({ theme }) => theme.text.body};
+  .columnTypetag & {
+    padding: 15px 24px;
+  }
   ${({ backgroundColor, theme }) =>
     backgroundColor
       ? `

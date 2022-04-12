@@ -11,7 +11,7 @@ const EmbedHtml = props => {
   let htmlParse = html
   let iframePopupData
   if (htmlParse.includes('<iframe')) {
-    const { htmlString, iframeList } = parseIframe(htmlParse, true)
+    const { htmlString, iframeList } = parseIframe(htmlParse, playOnPopup)
     htmlParse = htmlString
     iframePopupData = iframeList
   }
