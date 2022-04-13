@@ -34,7 +34,7 @@ const StyledCard = props => {
         newTab={newTab}
         backgroundColor={backgroundColor}
         layoutSize={layoutSize}
-        className={classnames('card-feature', {
+        className={classnames('custom-card-bg', {
           [`bg-${backgroundColor}`]: backgroundColor,
         })}
       >

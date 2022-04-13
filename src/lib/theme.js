@@ -136,7 +136,7 @@ export const defaultTheme = {
 
 export const defaultDarkTheme = {
   ...theme,
-  primaryColor: theme.darkBlue,
+  primaryColor: theme.blue[400],
   button: {
     primary: {
       bg: theme.blue[400],
@@ -176,7 +176,7 @@ export const defaultDarkTheme = {
   footerBg: '#3C444B',
   shadowSubMenu: 'rgba(255, 255, 255, 0.15)',
   gradientFAQ: 'linear-gradient(90deg, #f5841f, #2c56dd)',
-  shadowCard: 'rgba(255, 255, 255, 0.1)',
+  shadowCard: 'rgba(0, 0, 0, 0.4)',
   shadowCardGray: 'rgba(255, 255, 255, 0.1)',
   shadowCardFeatureLogo: 'rgba(0, 0, 0, 0.8)',
   theme: 'default',
@@ -267,7 +267,7 @@ export const purpleDarkTheme = {
   footerBg: '#3C444B',
   shadowSubMenu: 'rgba(255, 255, 255, 0.15)',
   gradientFAQ: 'linear-gradient(90deg, #8A42AD 0%, #6762EB 100%)',
-  shadowCard: 'rgba(255, 255, 255, 0.1)',
+  shadowCard: 'rgba(0, 0, 0, 0.4)',
   shadowCardGray: 'rgba(255, 255, 255, 0.1)',
   shadowCardFeatureLogo: 'rgba(0, 0, 0, 0.8)',
   theme: 'purple',
