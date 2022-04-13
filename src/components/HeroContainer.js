@@ -133,6 +133,7 @@ const HeroContainerComponent = props => {
               headlineBorderBottom={headlineBorderBottom}
               className="heroMobileOverlayContent"
               center={!sideImageFlex && !isHome}
+              sideImageFlex={sideImageFlex}
             >
               {eyebrowLogo ? (
                 <EyebrowWrapper
@@ -323,6 +324,7 @@ const HeroContentContainer = styled.div`
   display: flex;
   margin: -10px;
   margin-top: 10px;
+  
   & > * {
     width: 50%;
     padding: 10px;
@@ -480,11 +482,20 @@ const HeroContentContainer = styled.div`
     }
   `
       : ''}
+  
 `
 
 const HeroImageTextContainer = styled.div`
   display: block;
   position: relative;
+
+  ${({ sideImageFlex }) =>
+  sideImageFlex
+      ? `
+  flex: 1;
+  min-width: 0;
+  `
+      : ''}
   ${({ isHome, theme }) =>
     isHome
       ? `
@@ -637,6 +648,19 @@ const HeroSideImage = styled.div`
     }
     @media (min-width: ${({ theme }) => theme.device.desktop}) {
       min-width: 62%;
+    }
+  }
+
+  .sideImageFlex45 & {
+    
+    @media (min-width: ${({ theme }) => theme.device.desktop}) {
+      width: 45%;
+    }
+  }
+  .sideImageFlex40 & {
+    
+    @media (min-width: ${({ theme }) => theme.device.desktop}) {
+      width: 40%;
     }
   }
   @media (min-width: ${({ theme }) => theme.device.desktop}) {

@@ -346,6 +346,16 @@ export const ContentfulEmbedFields = graphql`
     embed {
       embed
     }
+    thumbnail {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
     title
     displayTitle
     layoutType

@@ -5,13 +5,14 @@ import parseIframe from './parseIframe'
 import Popup from '../Popup'
 
 const EmbedHtml = props => {
-  const { html, playOnPopup } = props
+  const { html, playOnPopup, thumbnailUrl } = props
+  // image filed is only for iframe image
   const [popupId, setPopupId] = React.useState('')
   const contentRef = React.useRef(null)
   let htmlParse = html
   let iframePopupData
   if (htmlParse.includes('<iframe')) {
-    const { htmlString, iframeList } = parseIframe(htmlParse, playOnPopup)
+    const { htmlString, iframeList } = parseIframe(htmlParse, playOnPopup, thumbnailUrl)
     htmlParse = htmlString
     iframePopupData = iframeList
   }
