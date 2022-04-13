@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { SectionTitle } from '../StyledGeneral'
 import Embed from '../Embed'
+import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
 
 const ContentfulEmbed = props => {
   const {
@@ -14,12 +15,14 @@ const ContentfulEmbed = props => {
       previewMode,
       layoutType,
       playOnPopup,
+      thumbnail,
     },
   } = props
+  const thumbnailUrl = parseContentfulAssetUrl(thumbnail)
   return (
     <Wrapper id={moduleId} layoutType={layoutType}>
       {title && displayTitle ? <Title>{title}</Title> : null}
-      <Embed playOnPopup={playOnPopup} html={previewMode ? props.moduleConfig.embed : embed} />
+      <Embed playOnPopup={playOnPopup} html={previewMode ? props.moduleConfig.embed : embed} thumbnailUrl={thumbnailUrl} />
     </Wrapper>
   )
 }
@@ -41,16 +44,25 @@ ContentfulEmbed.propTypes = {
   }),
 }
 
+
+const Title = styled(SectionTitle)`
+  text-align: center;
+  margin-bottom: 32px;
+`
+
 const Wrapper = styled.div`
   display: block;
   width: 100%;
-
+  
   ${({ layoutType,theme }) =>
   layoutType === 'horizontal'
       ? `
       @media (min-width: ${theme.device.miniDesktop}){
         display: flex;
         align-items: center;
+        ${Title} {
+          margin-right: 40px;
+        }
         & > * {
           flex: 1;
           min-width: 0;
@@ -60,7 +72,3 @@ const Wrapper = styled.div`
       : ``}
 `
 
-const Title = styled(SectionTitle)`
-  text-align: center;
-  margin-bottom: 32px;
-`
