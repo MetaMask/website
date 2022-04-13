@@ -631,8 +631,12 @@ const HeroSideImage = styled.div`
   `
       : ''}
   .sideImageOverflow & {
+    img {
+      filter: drop-shadow(-15px 15px 24px rgba(0, 0, 0, 0.05)) drop-shadow(-3px 3px 10px rgba(0, 0, 0, 0.07));
+      border-radius: 5px;
+    }
     @media (min-width: ${({ theme }) => theme.device.desktop}) {
-      min-width: 60%;
+      min-width: 62%;
     }
   }
   @media (min-width: ${({ theme }) => theme.device.desktop}) {
