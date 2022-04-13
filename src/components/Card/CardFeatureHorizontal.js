@@ -34,8 +34,9 @@ const StyledCard = props => {
         to={link}
         newTab={newTab}
         backgroundColor={backgroundColor}
-        className={classnames({
+        className={classnames('custom-card-bg', {
           [`bg-${backgroundColor}`]: backgroundColor,
+          [`bg-default`]: ! backgroundColor,
         })}
         contentAlignment={contentAlignment}
       >
@@ -77,10 +78,9 @@ const Card = styled.div``
 
 const CardInner = styled(Link)`
   display: flex;
-  box-shadow: 0px 4px 24px rgba(216, 216, 216, 0.4);
+  box-shadow: 0px 4px 24px ${({theme}) => theme.shadowCard};
   border-radius: 12px;
   overflow: hidden;
-  background-color: ${({ theme }) => theme.background.white};
   color: ${({ theme }) => theme.text.dark};
   ${({contentAlignment}) => contentAlignment === 'left' ? `
   flex-direction: row-reverse;
