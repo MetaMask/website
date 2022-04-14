@@ -12,6 +12,7 @@ const ContentfulLayoutHeader = props => {
       previewMode,
       popupAnnouncement,
     },
+    hideDownloadBtn,
   } = props
   if (previewMode) {
     logo.logo = { ...logo?.logo, file: { url: logo?.logo?.assetUrl } }
@@ -21,7 +22,7 @@ const ContentfulLayoutHeader = props => {
     <Header
       logo={logo}
       menus={menuItems}
-      downloadButton={downloadButton}
+      downloadButton={hideDownloadBtn ? null : downloadButton}
       popupAnnouncement={popupAnnouncement}
     />
   )

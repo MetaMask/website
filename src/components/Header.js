@@ -28,9 +28,9 @@ const StyledHeader = props => {
   const [hamburgerActive, setHamburgerActive] = React.useState(false)
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const menuRef = React.useRef()
-  const headerRef = React.useRef();
+  const headerRef = React.useRef()
   const { isDarkMode, setIsDarkMode } = darkModeContextValue || {}
-  const [topMenuMobile, setTopMenuMobile] = React.useState('88px');
+  const [topMenuMobile, setTopMenuMobile] = React.useState('88px')
 
   React.useEffect(() => {
     const handleOuterClick = e => {
@@ -63,9 +63,9 @@ const StyledHeader = props => {
     }
   }
   const handleHamburgerButton = () => {
-    if(headerRef && popupAnnouncement) {
-      const h = headerRef?.current.getBoundingClientRect().height;
-      setTopMenuMobile(`${h}px`);
+    if (headerRef && popupAnnouncement) {
+      const h = headerRef?.current.getBoundingClientRect().height
+      setTopMenuMobile(`${h}px`)
     }
     setHamburgerActive(!hamburgerActive)
   }
@@ -75,7 +75,7 @@ const StyledHeader = props => {
   }
   return (
     <HeaderElement ref={headerRef}>
-      <Announcement >
+      <Announcement>
         {contentfulModuleToComponent({
           ...popupAnnouncement,
         })}
@@ -102,7 +102,11 @@ const StyledHeader = props => {
           active={hamburgerActive}
           className="w-icon w-icon-nav-menu"
         ></HamburgerButton>
-        <NavMain hamburgerActive={hamburgerActive} ref={menuRef} topMenuMobile={topMenuMobile}>
+        <NavMain
+          hamburgerActive={hamburgerActive}
+          ref={menuRef}
+          topMenuMobile={topMenuMobile}
+        >
           <NavMainInner>
             {menus.map((menu, index) => {
               const { title, modules } = menu
@@ -132,14 +136,16 @@ const StyledHeader = props => {
                 </NavMenu>
               )
             })}
-            <ButtonsWrapper>
-              {contentfulModuleToComponent({
-                ...downloadButton,
-                hasModuleContainer: true,
-                isHeaderMenu: true,
-              })}
-            </ButtonsWrapper>
-            <DarkModeWrapper loading={isDarkMode === null}>
+            {downloadButton ? (
+              <ButtonsWrapper>
+                {contentfulModuleToComponent({
+                  ...downloadButton,
+                  hasModuleContainer: true,
+                  isHeaderMenu: true,
+                })}
+              </ButtonsWrapper>
+            ) : null}
+            <DarkModeWrapper hasDownloadBtn={downloadButton} loading={isDarkMode === null}>
               <ToggleDarkMode
                 onChange={onChangeDarkMode}
                 checked={isDarkMode}
@@ -370,8 +376,13 @@ const ButtonsWrapper = styled.div`
 const DarkModeWrapper = styled.div`
   display: inline-flex;
   align-items: center;
-  margin-left: 32px;
   opacity: 0;
+
+  ${({hasDownloadBtn}) => hasDownloadBtn ? `
+    margin-left: 32px;
+  ` : `
+    margin-left: 16px;
+  `}
 
   .client-ready & {
     opacity: 1;
