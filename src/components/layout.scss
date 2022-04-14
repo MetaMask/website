@@ -754,6 +754,14 @@ input[type="submit"].hs-button {
   }
 }
 
+.fz-48-res {
+  font-size: 48px !important;
+  line-height: 1.2 !important;
+  @media (max-width: 479px){
+    font-size: 32px !important;
+  }
+}
+
 .fz-32 {
   font-size: 32px!important;
 }
