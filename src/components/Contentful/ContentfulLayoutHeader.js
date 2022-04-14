@@ -22,7 +22,8 @@ const ContentfulLayoutHeader = props => {
     <Header
       logo={logo}
       menus={menuItems}
-      downloadButton={hideDownloadBtn ? null : downloadButton}
+      downloadButton={downloadButton}
+      hideDownloadBtn={hideDownloadBtn}
       popupAnnouncement={popupAnnouncement}
     />
   )
