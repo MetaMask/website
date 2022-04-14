@@ -20,6 +20,7 @@ const StyledHeader = props => {
     menus,
     downloadButton,
     popupAnnouncement,
+    hideDownloadBtn,
   } = props
   const isDesktop = useMediaQuery({
     query: '(min-width: 1025px)',
@@ -137,7 +138,7 @@ const StyledHeader = props => {
               )
             })}
             {downloadButton ? (
-              <ButtonsWrapper>
+              <ButtonsWrapper hideDownloadBtn={hideDownloadBtn}>
                 {contentfulModuleToComponent({
                   ...downloadButton,
                   hasModuleContainer: true,
@@ -145,7 +146,7 @@ const StyledHeader = props => {
                 })}
               </ButtonsWrapper>
             ) : null}
-            <DarkModeWrapper hasDownloadBtn={downloadButton} loading={isDarkMode === null}>
+            <DarkModeWrapper loading={isDarkMode === null}>
               <ToggleDarkMode
                 onChange={onChangeDarkMode}
                 checked={isDarkMode}
@@ -371,18 +372,18 @@ const ButtonsWrapper = styled.div`
       width: 100%;
     }
   }
+
+  ${({hideDownloadBtn}) => hideDownloadBtn ? `
+    opacity: 0;
+    visibility: hidden;
+  ` : ``}
 `
 
 const DarkModeWrapper = styled.div`
   display: inline-flex;
   align-items: center;
+  margin-left: 32px;
   opacity: 0;
-
-  ${({hasDownloadBtn}) => hasDownloadBtn ? `
-    margin-left: 32px;
-  ` : `
-    margin-left: 16px;
-  `}
 
   .client-ready & {
     opacity: 1;
