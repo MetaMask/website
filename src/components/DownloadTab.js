@@ -29,10 +29,11 @@ const TabContentDownload = props => {
     } else if (isFirefox) {
       ctasDownload = [ctaFirefox]
     } else if (isEdge) {
+      ctasHeading = 'We are aware that Edge is particularly slow at approving updates to MetaMask. For the latest version, we recommend using Firefox or Chrome.'
       ctasDownload = [ctaEdge]
     } else {
-      ctasDownload = [ctaChromeBrowser, ctaFirefoxBrowser]
       ctasHeading = `${browserName} is not supported. Please download a browser that supports MetaMask.`
+      ctasDownload = [ctaChromeBrowser, ctaFirefoxBrowser]
     }
   }
   return (
@@ -88,6 +89,14 @@ const DownLoadWrapper = styled.div`
   }
 `
 
+const HeadingCta = styled.div`
+  font-family: 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-size: 24px;
+  margin-bottom: 40px;
+  line-height: 1.3;
+  max-width: 880px;
+`
+
 const Buttons = styled.div`
   display: flex;
 
@@ -117,10 +126,4 @@ const Buttons = styled.div`
       width: 100%;
     }
   }
-`
-const HeadingCta = styled.div`
-  font-family: 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif;
-  font-size: 24px;
-  margin-bottom: 40px;
-  line-height: 1.3;
 `
