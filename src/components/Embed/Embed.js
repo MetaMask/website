@@ -12,7 +12,11 @@ const EmbedHtml = props => {
   let htmlParse = html
   let iframePopupData
   if (htmlParse.includes('<iframe')) {
-    const { htmlString, iframeList } = parseIframe(htmlParse, playOnPopup, thumbnailUrl)
+    const { htmlString, iframeList } = parseIframe(
+      htmlParse,
+      playOnPopup,
+      thumbnailUrl
+    )
     htmlParse = htmlString
     iframePopupData = iframeList
   }
@@ -93,9 +97,12 @@ const EmbedHtmlWrapper = styled.div`
   iframe {
     border-radius: 12px;
   }
-  ${({playOnPopup, theme}) => playOnPopup ? `
+  ${({ playOnPopup, theme }) =>
+    playOnPopup
+      ? `
     border-radius: 12px 12px 0 0;
-  ` : `
+  `
+      : `
     @media (max-width: ${theme.device.desktopMediaMax}) {
       &:before {
         content: '';

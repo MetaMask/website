@@ -157,7 +157,7 @@ export const defaultDarkTheme = {
     downloadCtaShadow: theme.dark,
     navBtnHover: theme.dark,
     isCustodyOverlayHero:
-        'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
+      'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
     logoBlue: 'rgb(36, 41, 46)',
     tabModuleOuter: theme.dark,
     cardFeatureInner: '#212a30',

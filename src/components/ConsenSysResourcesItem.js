@@ -69,7 +69,7 @@ const Title = styled.div`
   font-weight: 700;
   font-size: 18px;
   line-height: 1.4;
-  color: ${({theme}) => theme.text.title}
+  color: ${({ theme }) => theme.text.title};
 `
 
 const Date = styled.div`
@@ -77,6 +77,6 @@ const Date = styled.div`
   font-size: 13px;
   line-height: 14px;
   text-transform: uppercase;
-  color: #2C56DD;
+  color: #2c56dd;
   margin-bottom: 12px;
 `

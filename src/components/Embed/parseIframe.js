@@ -17,7 +17,8 @@ export default function parseYoutubeIframe(html, playOnPopup, imageIframe) {
       const url = iframe.getAttribute('src')?.replace(/\/$/, '')
       const idYoutube = youtube_parser(url)
       const title = iframe.getAttribute('title')
-      const iframeBg = imageIframe || `https://i.ytimg.com/vi_webp/${idYoutube}/sddefault.webp`
+      const iframeBg =
+        imageIframe || `https://i.ytimg.com/vi_webp/${idYoutube}/sddefault.webp`
       if (playOnPopup) {
         iframeList.push(iframe)
         const itemPopup = `<div data-id="${index}" class="embed-popup-target"><span class="embed-popup-target-overlay"><span class="embed-popup-target-icon"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="28" viewBox="0 0 23 28" fill="none">

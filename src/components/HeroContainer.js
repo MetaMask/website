@@ -423,7 +423,8 @@ const HeroContentContainer = styled.div`
         : ''}
   }
   ${({ isPortfolio, theme }) =>
-  isPortfolio ? `
+    isPortfolio
+      ? `
   ${EyebrowWrapper} {
       img {
         height: 40px;
@@ -431,8 +432,8 @@ const HeroContentContainer = styled.div`
         margin: 0 !important;
       }
     }
-  ` : ``
-  }
+  `
+      : ``}
   ${({ isCustody, theme }) =>
     isCustody
       ? `
@@ -490,7 +491,7 @@ const HeroImageTextContainer = styled.div`
   position: relative;
 
   ${({ sideImageFlex }) =>
-  sideImageFlex
+    sideImageFlex
       ? `
   flex: 1;
   min-width: 0;

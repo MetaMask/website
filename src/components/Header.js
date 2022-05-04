@@ -373,10 +373,13 @@ const ButtonsWrapper = styled.div`
     }
   }
 
-  ${({hideDownloadBtn}) => hideDownloadBtn ? `
+  ${({ hideDownloadBtn }) =>
+    hideDownloadBtn
+      ? `
     opacity: 0;
     visibility: hidden;
-  ` : ``}
+  `
+      : ``}
 `
 
 const DarkModeWrapper = styled.div`

@@ -1,8 +1,6 @@
 import axios from 'axios'
 import queryString from 'query-string'
-import {
-  CONSENSYS_HOST,
-} from '../../config';
+import { CONSENSYS_HOST } from '../../config'
 
 const axiosClient = axios.create({
   baseURL: CONSENSYS_HOST,

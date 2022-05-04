@@ -29,17 +29,16 @@ const Cta = styled(Link)`
   font-size: 13px;
   line-height: 14px;
   text-transform: uppercase;
-  color : ${({color, theme}) => color || theme.primaryColor};
+  color: ${({ color, theme }) => color || theme.primaryColor};
 
   svg {
     width: 20px;
     margin-left: 8px;
 
     path {
-      fill : ${({color, theme}) => color || theme.primaryColor};
+      fill: ${({ color, theme }) => color || theme.primaryColor};
     }
   }
-  
 `
 
 const CtaTitle = styled.span`

@@ -66,7 +66,7 @@ const ContentfulModuleContainer = props => {
         </BackgroundSection>
       ) : null}
       <ContentWrapper customClass={customClass}>
-        <Inner hasSideImage={!! sideImageUrl}>
+        <Inner hasSideImage={!!sideImageUrl}>
           <MainContent>
             {(headline && displayHeadline) || htmlData || eyebrow ? (
               <ContentInfo paddingTop={paddingTop}>
@@ -108,7 +108,9 @@ const ContentfulModuleContainer = props => {
                     previewMode,
                     hasModuleContainer: true,
                     containerBgColor: backgroundColor,
-                    color: ['dark'].includes(backgroundColor) ? 'white' : 'black',
+                    color: ['dark'].includes(backgroundColor)
+                      ? 'white'
+                      : 'black',
                   })
                 )}
               </Modules>
@@ -162,7 +164,8 @@ const Inner = styled.div`
 const SideImage = styled.div`
   display: block;
   img {
-    filter: drop-shadow(-15px 15px 24px rgba(0, 0, 0, 0.05)) drop-shadow(-3px 3px 10px rgba(0, 0, 0, 0.07));
+    filter: drop-shadow(-15px 15px 24px rgba(0, 0, 0, 0.05))
+      drop-shadow(-3px 3px 10px rgba(0, 0, 0, 0.07));
     border-radius: 5px;
   }
   @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
