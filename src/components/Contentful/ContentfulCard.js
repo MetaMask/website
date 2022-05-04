@@ -15,7 +15,7 @@ const ContentfulCard = props => {
       imageMargin,
       previewMode,
       layoutType,
-      layoutSize
+      layoutSize,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}

@@ -57,7 +57,9 @@ const StyledCard = props => {
       >
         {image ? (
           <ImageWrapper imageMargin={imageMargin}>
-            <ImageSrc image={isDarkMode && imageDarkMode ? imageDarkMode : image} />
+            <ImageSrc
+              image={isDarkMode && imageDarkMode ? imageDarkMode : image}
+            />
           </ImageWrapper>
         ) : null}
         <Inner isCtaType={isCtaType}>

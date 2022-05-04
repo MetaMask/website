@@ -40,7 +40,9 @@ const StyledCard = props => {
       >
         {image ? (
           <ImageWrapper imageMargin={imageMargin} layoutSize={layoutSize}>
-            <ImageSrc image={isDarkMode && imageDarkMode ? imageDarkMode : image} />
+            <ImageSrc
+              image={isDarkMode && imageDarkMode ? imageDarkMode : image}
+            />
           </ImageWrapper>
         ) : null}
         <Inner>
@@ -80,11 +82,11 @@ const CardInner = styled(Link)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 64px 64px -8px ${({theme}) => theme.shadowCardGray};
+  box-shadow: 0px 64px 64px -8px ${({ theme }) => theme.shadowCardGray};
   border-radius: 12px;
   height: 100%;
   color: ${({ theme }) => theme.text.dark};
-  ${({ layoutSize,theme }) =>
+  ${({ layoutSize, theme }) =>
     layoutSize === 'small'
       ? `
       box-shadow: 0px 4px 24px ${theme.shadowCard};
@@ -95,7 +97,7 @@ const CardInner = styled(Link)`
 const ImageWrapper = styled.div`
   height: 140px;
   margin-bottom: 24px;
-  box-shadow: 0px 7.1px 42.6px ${({theme}) => theme.shadowCardFeatureLogo};
+  box-shadow: 0px 7.1px 42.6px ${({ theme }) => theme.shadowCardFeatureLogo};
   border-radius: 100%;
   margin-top: 40px;
 
@@ -116,7 +118,7 @@ const ImageWrapper = styled.div`
       : null}
 
   ${({ layoutSize, theme }) =>
-  `
+    `
   @media (max-width: ${theme.device.mobileMediaMax}){
     height: ${layoutSize === 'small' ? '80px' : '96px'};
   }
@@ -130,7 +132,7 @@ const ImageSrc = styled(Image)`
 const Inner = styled.div`
   display: flex;
   flex-direction: column;
-  background: ${({theme}) => theme.background.cardFeatureInner};
+  background: ${({ theme }) => theme.background.cardFeatureInner};
   border-radius: 12px;
   min-height: 0;
   flex: 1;
@@ -150,7 +152,7 @@ const Title = styled.div`
       : null}
 
   ${({ layoutSize, theme }) =>
-  `
+    `
   @media (max-width: ${theme.device.mobileMediaMax}){
     font-size: ${layoutSize === 'small' ? '16px' : '20px'};
   }

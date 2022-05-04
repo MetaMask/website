@@ -22,7 +22,11 @@ const ContentfulEmbed = props => {
   return (
     <Wrapper id={moduleId} layoutType={layoutType}>
       {title && displayTitle ? <Title>{title}</Title> : null}
-      <Embed playOnPopup={playOnPopup} html={previewMode ? props.moduleConfig.embed : embed} thumbnailUrl={thumbnailUrl} />
+      <Embed
+        playOnPopup={playOnPopup}
+        html={previewMode ? props.moduleConfig.embed : embed}
+        thumbnailUrl={thumbnailUrl}
+      />
     </Wrapper>
   )
 }
@@ -44,7 +48,6 @@ ContentfulEmbed.propTypes = {
   }),
 }
 
-
 const Title = styled(SectionTitle)`
   text-align: center;
   margin-bottom: 32px;
@@ -53,9 +56,9 @@ const Title = styled(SectionTitle)`
 const Wrapper = styled.div`
   display: block;
   width: 100%;
-  
-  ${({ layoutType,theme }) =>
-  layoutType === 'horizontal'
+
+  ${({ layoutType, theme }) =>
+    layoutType === 'horizontal'
       ? `
       @media (min-width: ${theme.device.miniDesktop}){
         display: flex;
@@ -71,4 +74,3 @@ const Wrapper = styled.div`
   `
       : ``}
 `
-

@@ -7,7 +7,7 @@ const LogoImage = ({ alt, src, width, height, srcDarkMode }) => {
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
   return (
-    <StyledPartnerImageContainer>
+    <StyledPartnerImageContainer className={'LogoImageWrapper'}>
       <StyledPartnerImage
         src={isDarkMode && srcDarkMode ? srcDarkMode : src}
         alt={alt}

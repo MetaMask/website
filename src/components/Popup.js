@@ -5,7 +5,13 @@ import { ModalInner, IconCloseModal } from './StyledGeneral'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 
 const Popup = props => {
-  const { showPopup, onClosePopup, children, width, hideCloseIcon = false } = props
+  const {
+    showPopup,
+    onClosePopup,
+    children,
+    width,
+    hideCloseIcon = false,
+  } = props
   React.useEffect(() => {
     const body = document.querySelector('body')
     if (showPopup) {

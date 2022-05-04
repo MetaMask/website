@@ -27,7 +27,7 @@ const ContentfulModuleContainer = props => {
       columnType,
     },
   } = props
-  const gridModulesGap = gridModulesGapDefault || '8px';
+  const gridModulesGap = gridModulesGapDefault || '8px'
   const { childMarkdownRemark: { html } = {} } = description || {}
   const htmlData = previewMode ? description : html
   const faqList =
@@ -73,7 +73,7 @@ const ContentfulModuleContainer = props => {
               columnsOnMobile={columnsOnMobile}
               contentAlignment={contentAlignment}
               gridModules={gridModules}
-              gridModulesGap={isLiquiditySection ? '24px' : gridModulesGap}
+              gridModulesGap={isLiquiditySection ? '16px' : gridModulesGap}
               isLiquiditySection={isLiquiditySection}
               className={classnames('moduleContainerListModules', {
                 [`columnType${columnType}`]: columnType,
@@ -210,10 +210,21 @@ const Modules = styled.div`
       }
       
     }
+    .LogoImageWrapper {
+      justify-content: center;
+      align-items: center;
+    }
   `
       : ''}
 
-  ${({ gridModules, columnType, gridModulesGap, columns, columnsOnMobile, theme }) =>
+  ${({
+    gridModules,
+    columnType,
+    gridModulesGap,
+    columns,
+    columnsOnMobile,
+    theme,
+  }) =>
     columns && gridModules && columnType !== 'tag'
       ? `
       margin: -${gridModulesGap} !important;
