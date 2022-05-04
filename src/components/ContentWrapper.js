@@ -49,9 +49,9 @@ const ContainerInner = styled.div`
   .sideImageOverflow & {
     @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
       max-width: 100% !important;
-      padding-left: calc((100vw - 992px)/2);
+      padding-left: calc((100vw - 992px) / 2);
       @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
-        padding-left: calc((100vw - 728px)/2);
+        padding-left: calc((100vw - 728px) / 2);
       }
     }
   }

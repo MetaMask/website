@@ -26,7 +26,7 @@ const Content = styled.div`
   margin-top: 20px;
 
   ${({ typeLayout }) =>
-  typeLayout === 'module'
+    typeLayout === 'module'
       ? `
     margin-top: 72px;
   `

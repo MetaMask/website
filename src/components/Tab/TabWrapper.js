@@ -16,7 +16,12 @@ const TabWrapper = props => {
         centerAlign={centerAlign}
         typeLayout={typeLayout}
       />
-      <TabContent items={tabs} activeId={activeId} centerAlign={centerAlign} typeLayout={typeLayout} />
+      <TabContent
+        items={tabs}
+        activeId={activeId}
+        centerAlign={centerAlign}
+        typeLayout={typeLayout}
+      />
     </Wrapper>
   )
 }

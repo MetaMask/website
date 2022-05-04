@@ -43,9 +43,9 @@ const CTA = props => {
     setShowPopup(false)
   }
   const handleCustomClick = e => {
-    if(hubSpotForm) {
+    if (hubSpotForm) {
       setShowPopup(true)
-      return;
+      return
     }
     if (customClick) {
       e.preventDefault()

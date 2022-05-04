@@ -39,7 +39,9 @@ const StyledCard = props => {
       >
         {image ? (
           <ImageWrapper imageMargin={imageMargin} layoutSize={layoutSize}>
-            <ImageSrc image={isDarkMode && imageDarkMode ? imageDarkMode : image} />
+            <ImageSrc
+              image={isDarkMode && imageDarkMode ? imageDarkMode : image}
+            />
           </ImageWrapper>
         ) : null}
         <Inner>
@@ -78,7 +80,7 @@ const CardInner = styled(Link)`
   color: ${({ theme }) => theme.text.dark};
 
   ${({ theme }) =>
-  `
+    `
   @media (max-width: ${theme.device.mobileMediaMax}){
     flex-direction: column;
     align-items: center;
@@ -91,7 +93,7 @@ const ImageWrapper = styled.div`
   margin-right: 32px;
 
   ${({ theme }) =>
-  `
+    `
   @media (max-width: ${theme.device.mobileMediaMax}){
     width: 56px;
     margin-right: 0;
@@ -122,7 +124,7 @@ const Title = styled.div`
   margin-bottom: 8px;
 
   ${({ theme }) =>
-  `
+    `
   @media (max-width: ${theme.device.mobileMediaMax}){
     font-size: 20px;
   }

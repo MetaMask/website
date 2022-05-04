@@ -34,7 +34,7 @@ const CTA = styled.div`
   }
 
   ${({ theme }) =>
-  `
+    `
   @media (max-width: ${theme.device.mobileMediaMax}){
     font-size: 14px;
   }

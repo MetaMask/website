@@ -36,13 +36,15 @@ const StyledCard = props => {
         backgroundColor={backgroundColor}
         className={classnames('custom-card-bg', {
           [`bg-${backgroundColor}`]: backgroundColor,
-          [`bg-default`]: ! backgroundColor,
+          [`bg-default`]: !backgroundColor,
         })}
         contentAlignment={contentAlignment}
       >
         {image ? (
           <ImageWrapper imageMargin={imageMargin} layoutSize={layoutSize}>
-            <ImageSrc image={isDarkMode && imageDarkMode ? imageDarkMode : image} />
+            <ImageSrc
+              image={isDarkMode && imageDarkMode ? imageDarkMode : image}
+            />
           </ImageWrapper>
         ) : null}
         <Inner>
@@ -78,16 +80,19 @@ const Card = styled.div``
 
 const CardInner = styled(Link)`
   display: flex;
-  box-shadow: 0px 4px 24px ${({theme}) => theme.shadowCard};
+  box-shadow: 0px 4px 24px ${({ theme }) => theme.shadowCard};
   border-radius: 12px;
   overflow: hidden;
   color: ${({ theme }) => theme.text.dark};
-  ${({contentAlignment}) => contentAlignment === 'left' ? `
+  ${({ contentAlignment }) =>
+    contentAlignment === 'left'
+      ? `
   flex-direction: row-reverse;
-  `: null}
+  `
+      : null}
 
   ${({ theme }) =>
-  `
+    `
   @media (max-width: ${theme.device.mobileMediaMax}){
     flex-direction: column;
   }
@@ -103,7 +108,7 @@ const ImageWrapper = styled.div`
   }
 
   ${({ theme }) =>
-  `
+    `
   @media (max-width: ${theme.device.mobileMediaMax}){
     width: 100%;
     max-width: 100%;
@@ -124,7 +129,7 @@ const Inner = styled.div`
   padding: 44px 32px;
 
   ${({ theme }) =>
-  `
+    `
   @media (max-width: ${theme.device.mobileMediaMax}){
     padding: 16px;
   }
@@ -137,7 +142,7 @@ const Title = styled.div`
   margin-bottom: 24px;
 
   ${({ theme }) =>
-  `
+    `
   @media (max-width: ${theme.device.mobileMediaMax}){
     font-size: 24px;
   }
