@@ -4,7 +4,11 @@ import styled, { withTheme } from 'styled-components'
 const DownloadContainer = props => {
   const { setActiveId, activeId, label, id, typeLayout } = props
   return (
-    <Item typeLayout={typeLayout} active={activeId === id} onClick={() => setActiveId(id)}>
+    <Item
+      typeLayout={typeLayout}
+      active={activeId === id}
+      onClick={() => setActiveId(id)}
+    >
       {label}
     </Item>
   )
@@ -43,7 +47,9 @@ const Item = styled.div`
   `
       : ''}
 
-  ${({typeLayout, active, theme}) => typeLayout === 'module' ? `
+  ${({ typeLayout, active, theme }) =>
+    typeLayout === 'module'
+      ? `
     border-radius: 999px !important;
     height: 40px;
     border: none !important;
@@ -60,5 +66,6 @@ const Item = styled.div`
       min-width: 150px;
       font-size: 14px;
     }
-  ` : null}
+  `
+      : null}
 `

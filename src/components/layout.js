@@ -58,7 +58,7 @@ export default Layout
 
 const Wrapper = styled.div`
   ${({ h2FontSize, theme }) =>
-  h2FontSize
+    h2FontSize
       ? `
   h2 {
     @media (min-width: ${theme.device.miniDesktop}){

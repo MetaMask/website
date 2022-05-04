@@ -488,16 +488,20 @@ export const ContentfulModuleContainerFields = graphql`
         internal {
           type
         }
+        title
         description {
           childMarkdownRemark {
             html
           }
         }
         columns
-        title
+        columnType
+        columnsOnMobile
         contentAlignment
         splitModules
         displayTitle
+        isLiquiditySection
+        gridModulesGap
         modules {
           ... on ContentfulCard {
             ...ContentfulCardFields
@@ -516,16 +520,20 @@ export const ContentfulModuleContainerFields = graphql`
             internal {
               type
             }
+            title
             description {
               childMarkdownRemark {
                 html
               }
             }
             columns
-            title
+            columnType
+            columnsOnMobile
             contentAlignment
             splitModules
             displayTitle
+            isLiquiditySection
+            gridModulesGap
             modules {
               ... on ContentfulCard {
                 ...ContentfulCardFields

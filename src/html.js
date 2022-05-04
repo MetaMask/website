@@ -39,16 +39,16 @@ export default class HTML extends React.Component {
           />
           {this.props.postBodyComponents}
           {process.env.NODE_ENV === 'production' && (
-            <script
-              type="text/javascript"
-              dangerouslySetInnerHTML={{ __html: livePersonScript }}
-            />
-          ) && (
-            <script
-              type="text/javascript"
-              dangerouslySetInnerHTML={{ __html: accessiBeScript }}
-            />
-          ) }
+              <script
+                type="text/javascript"
+                dangerouslySetInnerHTML={{ __html: livePersonScript }}
+              />
+            ) && (
+              <script
+                type="text/javascript"
+                dangerouslySetInnerHTML={{ __html: accessiBeScript }}
+              />
+            )}
         </body>
       </html>
     )

@@ -38,14 +38,13 @@ const Header = styled.div`
     justify-content: center;
   `
       : ''}
-      
 `
 const HeaderInner = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  ${({ typeLayout,theme }) =>
-  typeLayout === 'module'
+  ${({ typeLayout, theme }) =>
+    typeLayout === 'module'
       ? `
     padding: 5px 8px;
     background: ${theme.background.tabModuleOuter};

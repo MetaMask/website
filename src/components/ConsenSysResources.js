@@ -25,7 +25,7 @@ const ConsenSysResources = props => {
             const parseData = response.map(e => {
               const eTitle = e?.title?.rendered || ''
               const eDate = e?.date ? new Date(e.date) : null
-              const eLink = e?.link || '';
+              const eLink = e?.link || ''
               const eDateString = eDate
                 ? eDate.toLocaleDateString(undefined, optionsDate)
                 : null
