@@ -35,7 +35,7 @@ const ConsenSysResources = props => {
               const eImageList = eImageObj ? Object.values(eImageObj) : false
               const eImage =
                 eImageList && eImageList.length
-                  ? eImageList.at(-2)?.source_url
+                  ? eImageList[eImageList.length - 2]?.source_url
                   : eImageFull
               return {
                 title: eTitle,
