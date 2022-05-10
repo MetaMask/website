@@ -18,7 +18,7 @@ Built With:
 1.  **Start it up**
 
     ```sh
-    git clone https://github.com/ConsenSys/metamask-website.git
+    git clone git@github.com:MetaMask/website.git
     yarn
     yarn develop
     ```
