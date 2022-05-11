@@ -29,6 +29,7 @@ const ContentfulLayoutFeature = props => {
       previewMode,
       featureItems,
       imageShadow,
+      hideImageOnMobile,
     },
   } = props
 
@@ -59,6 +60,7 @@ const ContentfulLayoutFeature = props => {
       cta={cta}
       featureItems={featureItems}
       imageShadow={imageShadow}
+      hideImageOnMobile={hideImageOnMobile}
     />
   )
 }

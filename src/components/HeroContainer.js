@@ -115,7 +115,7 @@ const HeroContainerComponent = props => {
       >
         {isThankYou && backgroundImage ? (
           <BackgroundImageContain>
-            <img src={backgroundImage} />
+            <img alt={headline} src={backgroundImage} />
           </BackgroundImageContain>
         ) : null}
         <ContentWrapper customClass={customClass}>
