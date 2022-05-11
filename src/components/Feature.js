@@ -128,8 +128,8 @@ const FeatureComponent = props => {
           imageWidth={imageWidth}
           backgroundColor={backgroundColor}
           imageShadow={imageShadow}
-          noPaddingBottom={noPaddingBottom}
           hideImageOnMobile={hideImageOnMobile}
+          sectionPadding={sectionPadding}
         >
           {eyebrow ? (
             <Eyebrow className="hidden-desktop">{eyebrow}</Eyebrow>
