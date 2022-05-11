@@ -495,7 +495,7 @@ const HeroContentContainer = styled.div`
   ${({ isThankYou, theme }) =>
     isThankYou
       ? `
-    max-width: 480px;
+    max-width: 500px;
     margin: 0 auto!important;
     
      @media (min-width: ${theme.device.mobile}){
