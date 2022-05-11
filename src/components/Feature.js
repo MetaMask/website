@@ -33,6 +33,7 @@ const FeatureComponent = props => {
     imageDarkMode,
     imageMobileDarkMode,
     imageShadow,
+    hideImageOnMobile,
     imageLink,
   } = props
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
@@ -127,6 +128,8 @@ const FeatureComponent = props => {
           imageWidth={imageWidth}
           backgroundColor={backgroundColor}
           imageShadow={imageShadow}
+          hideImageOnMobile={hideImageOnMobile}
+          sectionPadding={sectionPadding}
         >
           {eyebrow ? (
             <Eyebrow className="hidden-desktop">{eyebrow}</Eyebrow>
@@ -297,6 +300,17 @@ const FeatureWrapper = styled.div`
     }
   }
 
+  ${({ hideImageOnMobile, theme }) =>
+    hideImageOnMobile
+      ? `
+      @media (max-width: ${theme.device.tabletMediaMax}) {
+        ${SideImage} {
+          display: none;
+        }
+      }
+  `
+      : ''}
+  
   ${({ imageShadow }) =>
     imageShadow
       ? `
@@ -350,6 +364,14 @@ const FeatureWrapper = styled.div`
       padding: 0 10px;
     }
   }
+${({ sectionPadding }) =>
+  sectionPadding === '0px'
+    ? `
+                & > * {
+    padding-bottom: 0px;
+    }
+                `
+    : ''}
 `
 
 const FeatureInner = styled.div`
