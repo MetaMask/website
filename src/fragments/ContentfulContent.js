@@ -158,6 +158,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       }
     }
     imageShadow
+    hideImageOnMobile
     imageWidth
     imageAlignment
     imageLink
