@@ -52,10 +52,11 @@ const HeroContainerComponent = props => {
   const pathname = location.pathname.replace(/\/?$/, '/')
   const isHome = pathname === '/'
   const isAbout = pathname === '/about/'
-  const isCustody = pathname === '/institutions/custody/'
-  const isInstitutions = pathname === '/institutions/'
   const isFlask = pathname === '/flask/'
+  const isInstitutions = pathname === '/institutions/'
   const isPortfolio = pathname === '/institutions/portfolio/'
+  const isCustody = pathname === '/institutions/custody/'
+  const isThankYou = pathname === '/institutions/thank-you/'
   let hubspotWrapper
   if (hubSpotForm) {
     hubspotWrapper = !isEmpty(cta) ? (
@@ -82,7 +83,10 @@ const HeroContainerComponent = props => {
   let heroTitleFontsize = ''
   if (isStyleHubspot) {
     heroTitleFontsize = '16px'
-  } else if (contentAlignment === 'center' || headlineBorderBottom) {
+  } else if (
+    (contentAlignment === 'center' || headlineBorderBottom) &&
+    !isThankYou
+  ) {
     heroTitleFontsize = '30px'
   }
 
@@ -98,16 +102,22 @@ const HeroContainerComponent = props => {
         </FavIconContainer>
       ) : null}
       <HeroContainer
+        isThankYou={isThankYou}
         sectionPadding={sectionPadding || ''}
         headlineBorderBottom={headlineBorderBottom}
         isStyleCenterSimple={isStyleCenterSimple}
         showFavIcon={showFavIcon}
-        image={backgroundImage}
+        image={!isThankYou && backgroundImage}
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor,
           [`bg-mobile-${backgroundColorMobile}`]: backgroundColorMobile,
         })}
       >
+        {isThankYou && backgroundImage ? (
+          <BackgroundImageContain>
+            <img src={backgroundImage} />
+          </BackgroundImageContain>
+        ) : null}
         <ContentWrapper customClass={customClass}>
           <HeroContentContainer
             isStyleCenterSimple={isStyleCenterSimple}
@@ -126,12 +136,15 @@ const HeroContainerComponent = props => {
             isInstitutions={isInstitutions}
             isFlask={isFlask}
             isPortfolio={isPortfolio}
+            isThankYou={isThankYou}
           >
             <HeroImageTextContainer
               isStyleHubspot={isStyleHubspot}
               isHome={isHome}
               headlineBorderBottom={headlineBorderBottom}
-              className="heroMobileOverlayContent"
+              className={classnames({
+                heroMobileOverlayContent: !backgroundImage,
+              })}
               center={!sideImageFlex && !isHome}
               sideImageFlex={sideImageFlex}
             >
@@ -274,6 +287,12 @@ const HeroContainer = styled(Section)`
   flex-direction: column;
   justify-content: center;
   min-width: 100%;
+  ${({ isThankYou }) =>
+    isThankYou
+      ? `
+  z-index: 5;
+  `
+      : ``}
   ${({ image }) =>
     image
       ? ` background-image: url(${image});
@@ -470,6 +489,23 @@ const HeroContentContainer = styled.div`
     @media (max-width: ${theme.device.mobileMediaMax}){
       background-size: 250px;
     }
+  `
+      : ''}
+
+  ${({ isThankYou, theme }) =>
+    isThankYou
+      ? `
+    max-width: 480px;
+    margin: 0 auto!important;
+    
+     @media (min-width: ${theme.device.mobile}){
+      ${EyebrowWrapper} {
+        img {
+          width: 376px;
+          height: auto;
+          margin: 0 auto;
+        }
+      }
   `
       : ''}
 
@@ -757,4 +793,19 @@ const EyebrowText = styled.div`
   font-weight: bold;
   text-transform: uppercase;
   color: ${({ theme }) => theme.eyebrowHero};
+`
+const BackgroundImageContain = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
 `
