@@ -97,7 +97,7 @@ export const ContentfulLayoutHeroFields = graphql`
       file {
         url
       }
-      fluid(quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -245,7 +245,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
       file {
         url
       }
-      fluid(quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
