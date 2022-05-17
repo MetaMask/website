@@ -181,6 +181,11 @@ const SideImage = styled.div`
        `
           : ``}
     }
+    .sideImageOverflowRight & {
+      min-width: 500px;
+      width: 48%;
+      margin-left: 40px;
+    }
   }
 `
 

@@ -172,7 +172,11 @@ export const ContentfulLayoutFeatureFields = graphql`
     backgroundColor
     sectionPadding
     noPaddingBottom
+    customClass
     featureItems {
+      ... on ContentfulLogo {
+        ...ContentfulLogoFields
+      }
       ... on ContentfulCard {
         ...ContentfulCardFields
       }
