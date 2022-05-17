@@ -4,7 +4,6 @@ import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import { useLocation } from '@reach/router'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
-import Popup from './Popup'
 import { Section } from './StyledGeneral'
 import classnames from 'classnames'
 import Image from './Image'
@@ -29,7 +28,7 @@ const HeroContainerComponent = props => {
     eyebrowMobileLogoDarkMode,
     showFavIcon,
     hubSpotForm,
-    cta,
+    ctas,
     contentAlignment,
     backgroundColor,
     headlineBorderBottom,
@@ -41,13 +40,6 @@ const HeroContainerComponent = props => {
   } = props
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
-  const [showPopup, setShowPopup] = React.useState(false)
-  const togglePopup = () => {
-    setShowPopup(!showPopup)
-  }
-  const onClosePopup = () => {
-    setShowPopup(false)
-  }
   const location = useLocation()
   const pathname = location.pathname.replace(/\/?$/, '/')
   const isHome = pathname === '/'
@@ -59,18 +51,7 @@ const HeroContainerComponent = props => {
   const isThankYou = pathname === '/institutions/thank-you/'
   let hubspotWrapper
   if (hubSpotForm) {
-    hubspotWrapper = !isEmpty(cta) ? (
-      <Popup
-        width={hubSpotForm.width}
-        showPopup={showPopup}
-        onClosePopup={onClosePopup}
-      >
-        {contentfulModuleToComponent({
-          ...hubSpotForm,
-          width: '100%',
-        })}
-      </Popup>
-    ) : (
+    hubspotWrapper = (
       <HubSpotDefault>
         {contentfulModuleToComponent({
           ...hubSpotForm,
@@ -78,7 +59,7 @@ const HeroContainerComponent = props => {
       </HubSpotDefault>
     )
   }
-  const isStyleHubspot = hubSpotForm && isEmpty(cta)
+  const isStyleHubspot = hubSpotForm
   const isStyleCenterSimple = contentAlignment === 'center' && !sideImageUrl
   let heroTitleFontsize = ''
   if (isStyleHubspot) {
@@ -205,14 +186,14 @@ const HeroContainerComponent = props => {
                   <div dangerouslySetInnerHTML={{ __html: description }} />
                 </HeroDescription>
               )}
-              {!isEmpty(cta) && !isFlask ? (
+              {!isEmpty(ctas) && !isFlask ? (
                 <HeroCTA>
-                  {contentfulModuleToComponent({
-                    ...cta,
-                    buttonSize: 'hero',
-                    customClick: hubSpotForm ? () => togglePopup() : null,
-                    ctaLink: hubSpotForm ? '' : cta.ctaLink,
-                  })}
+                  {ctas.map(cta =>
+                    contentfulModuleToComponent({
+                      ...cta,
+                      buttonSize: 'hero',
+                    })
+                  )}
                 </HeroCTA>
               ) : null}
               {hubspotWrapper ? hubspotWrapper : null}
@@ -234,14 +215,14 @@ const HeroContainerComponent = props => {
                 ) : null}
               </HeroSideImage>
             ) : null}
-            {!isEmpty(cta) && isFlask ? (
+            {!isEmpty(ctas) && isFlask ? (
               <HeroCTA isFlask={isFlask}>
-                {contentfulModuleToComponent({
-                  ...cta,
-                  buttonSize: 'hero',
-                  customClick: hubSpotForm ? () => togglePopup() : null,
-                  ctaLink: hubSpotForm ? '' : cta.ctaLink,
-                })}
+                {ctas.map(cta =>
+                  contentfulModuleToComponent({
+                    ...cta,
+                    buttonSize: 'hero',
+                  })
+                )}
               </HeroCTA>
             ) : null}
           </HeroContentContainer>
@@ -712,11 +693,17 @@ const HeroSideImage = styled.div`
 `
 
 const HeroCTA = styled.div`
-  display: block;
+  display: flex;
+  flex-flow: wrap;
+
+  .button {
+    margin-right: 16px;
+  }
 
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     .button {
       width: 100%;
+      margin: 0 0 16px 0;
     }
   }
 `

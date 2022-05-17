@@ -7,7 +7,7 @@ const ContentfulLayoutHero = props => {
   const {
     moduleConfig: {
       backgroundImage,
-      cta,
+      ctas,
       description,
       headline,
       modules,
@@ -63,7 +63,7 @@ const ContentfulLayoutHero = props => {
       headlineBorderBottom={headlineBorderBottom}
       sideImageFlex={sideImageFlex}
       backgroundColorMobile={backgroundColorMobile}
-      cta={cta}
+      ctas={ctas}
       customClass={customClass}
     />
   )
