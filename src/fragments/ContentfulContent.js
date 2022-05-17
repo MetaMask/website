@@ -78,7 +78,7 @@ export const ContentfulLayoutHeroFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
-    cta {
+    ctas {
       ...ContentfulCtaFields
     }
     hubSpotForm {
@@ -172,7 +172,11 @@ export const ContentfulLayoutFeatureFields = graphql`
     backgroundColor
     sectionPadding
     noPaddingBottom
+    customClass
     featureItems {
+      ... on ContentfulLogo {
+        ...ContentfulLogoFields
+      }
       ... on ContentfulCard {
         ...ContentfulCardFields
       }
@@ -198,7 +202,7 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
       }
     }
     marginBottom
-    cta {
+    ctas {
       ...ContentfulCtaFields
     }
     backgroundColor
