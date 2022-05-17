@@ -46,7 +46,7 @@ const HeroContainerComponent = props => {
   const isAbout = pathname === '/about/'
   const isFlask = pathname === '/flask/'
   const isInstitutions = pathname === '/institutions/'
-  const isPortfolio = pathname === '/institutions/portfolio/'
+  const isInstitutionalChild = pathname === '/institutions/portfolio/' || pathname === '/institutions/compliance/'
   const isCustody = pathname === '/institutions/custody/'
   const isThankYou = pathname === '/institutions/thank-you/'
   let hubspotWrapper
@@ -116,7 +116,7 @@ const HeroContainerComponent = props => {
             isCustody={isCustody}
             isInstitutions={isInstitutions}
             isFlask={isFlask}
-            isPortfolio={isPortfolio}
+            isInstitutionalChild={isInstitutionalChild}
             isThankYou={isThankYou}
           >
             <HeroImageTextContainer
@@ -422,8 +422,8 @@ const HeroContentContainer = styled.div`
     `
         : ''}
   }
-  ${({ isPortfolio, theme }) =>
-    isPortfolio
+  ${({ isInstitutionalChild, theme }) =>
+    isInstitutionalChild
       ? `
   ${EyebrowWrapper} {
       img {
