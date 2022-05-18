@@ -697,7 +697,7 @@ const HeroCTA = styled.div`
   flex-flow: wrap;
 
   .button {
-    margin-right: 16px;
+    margin: 0 16px 16px 0;
   }
 
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
