@@ -1189,3 +1189,44 @@ body.dark-mode {
     
   }
 }
+
+.text-gradient {
+  background: linear-gradient(44.91deg, #F5841F 26.41%, #2C56DD 76.65%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.show-toolip {
+  cursor: pointer;
+  position: relative;
+  .tooltip {
+    display: none;
+    background: #FFFFFF;
+    border: 1px solid #EFEFEF;
+    box-shadow: -15px 15px 24px rgba(0, 0, 0, 0.05), -3px 3px 10px rgba(0, 0, 0, 0.07);
+    border-radius: 5px;
+    padding: 16px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 152.16%;
+    color: #333333;
+    width: 290px;
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+
+    .dark-mode & {
+      background: #121212;
+      color: #fff;
+      border: 1px solid #23272a;
+    }
+  }
+  &:hover {
+    .tooltip {
+      display: block !important;
+    }
+  }
+}
