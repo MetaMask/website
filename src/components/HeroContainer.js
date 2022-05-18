@@ -702,6 +702,10 @@ const HeroCTA = styled.div`
 
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     justify-content: center;
+    
+    .button {
+      margin: 0 8px 16px;
+    }
   }
 
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
