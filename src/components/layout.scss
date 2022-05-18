@@ -1217,6 +1217,7 @@ body.dark-mode {
     left: 50%;
     bottom: 100%;
     transform: translateX(-50%);
+    text-align: left;
 
     .dark-mode & {
       background: #121212;
