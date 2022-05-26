@@ -372,6 +372,14 @@ const HeroContentContainer = styled.div`
     justify-content: center;
     text-align: center;
 
+    ${HeroCTA} {
+      justify-content: center;
+
+      .button {
+        margin: 0 8px 16px;
+      }
+    }
+
     & > * {
       width: 100%;
     }
