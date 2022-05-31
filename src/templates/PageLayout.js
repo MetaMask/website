@@ -84,7 +84,7 @@ const PageLayout = props => {
         })
       })
       // Detect Web3 Wallet
-      if(typeof window.ethereum !== 'undefined') {
+      if (typeof window.ethereum !== 'undefined') {
         trackCustomEvent({
           category: 'Web3 Wallet Detected',
           action: 'window.ethereum present',

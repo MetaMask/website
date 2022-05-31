@@ -52,10 +52,10 @@ const FullWidthCta = props => {
             {ctas ? (
               <CTAWrapper>
                 {ctas.map(cta =>
-                    contentfulModuleToComponent({
-                      ...cta,
-                    })
-                  )}
+                  contentfulModuleToComponent({
+                    ...cta,
+                  })
+                )}
               </CTAWrapper>
             ) : null}
           </FullWidthCtaInner>

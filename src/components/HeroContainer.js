@@ -46,7 +46,9 @@ const HeroContainerComponent = props => {
   const isAbout = pathname === '/about/'
   const isFlask = pathname === '/flask/'
   const isInstitutions = pathname === '/institutions/'
-  const isInstitutionalChild = pathname === '/institutions/portfolio/' || pathname === '/institutions/compliance/'
+  const isInstitutionalChild =
+    pathname === '/institutions/portfolio/' ||
+    pathname === '/institutions/compliance/'
   const isCustody = pathname === '/institutions/custody/'
   const isThankYou = pathname === '/institutions/thank-you/'
   let hubspotWrapper
@@ -710,7 +712,7 @@ const HeroCTA = styled.div`
 
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     justify-content: center;
-    
+
     .button {
       margin: 0 8px 16px;
     }
