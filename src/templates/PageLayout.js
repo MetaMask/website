@@ -31,8 +31,8 @@ const PageLayout = props => {
         ? purpleDarkTheme
         : purpleTheme
       : isDarkMode
-        ? defaultDarkTheme
-        : defaultTheme
+      ? defaultDarkTheme
+      : defaultTheme
   const valueContext = {
     faq: {
       idFaqActive,
@@ -44,9 +44,9 @@ const PageLayout = props => {
       const { type, description } = state.error
       const errorMessage = `
         ${type
-      .split('_')
-      .join(' ')
-      .toUpperCase()} -
+          .split('_')
+          .join(' ')
+          .toUpperCase()} -
         ${decodeURIComponent(description)}`
       toast.error(errorMessage)
     }
@@ -84,7 +84,7 @@ const PageLayout = props => {
         })
       })
       // Detect Web3 Wallet
-      if(typeof window.ethereum !== 'undefined') {
+      if (typeof window.ethereum !== 'undefined') {
         trackCustomEvent({
           category: 'Web3 Wallet Detected',
           action: 'window.ethereum present',
