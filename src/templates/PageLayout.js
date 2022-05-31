@@ -11,6 +11,8 @@ import {
 import scrollTo from '../lib/utils/scrollToElement'
 import Context from '../Context/ContextPage'
 import ContextClientSide from '../Context/ContextClientSide'
+import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
+import { browserName } from 'react-device-detect'
 
 /**
  * @name PageLayout
@@ -81,6 +83,15 @@ const PageLayout = props => {
           )
         })
       })
+      // Detect Web3 Wallet
+      if(typeof window.ethereum !== 'undefined') {
+        console.log(browserName)
+        trackCustomEvent({
+          category: 'Web3 Wallet Detected',
+          action: 'window.ethereum present',
+          label: browserName || 'Chrome',
+        })
+      }
     }
   }, [pathname])
 
