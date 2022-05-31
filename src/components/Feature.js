@@ -35,6 +35,7 @@ const FeatureComponent = props => {
     imageShadow,
     hideImageOnMobile,
     imageLink,
+    customClass,
   } = props
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
@@ -42,7 +43,6 @@ const FeatureComponent = props => {
     ? contentAlignment
     : ''
   const isContentAlignVertical = contentAlignment === 'vertical'
-
   const innerContent = (
     <>
       {eyebrow ? <Eyebrow className="hidden-mobile">{eyebrow}</Eyebrow> : null}
@@ -99,7 +99,7 @@ const FeatureComponent = props => {
       ) : null}
       {imageMobile ? (
         <ImageSrc
-          className={'hidden-desktop'}
+          className={classnames('hidden-desktop')}
           image={
             isDarkMode && imageMobileDarkMode
               ? imageMobileDarkMode
@@ -120,7 +120,7 @@ const FeatureComponent = props => {
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
     >
-      <ContentWrapper>
+      <ContentWrapper customClass={customClass}>
         <FeatureWrapper
           contentAlignLR={contentAlignLR}
           isContentAlignVertical={isContentAlignVertical}

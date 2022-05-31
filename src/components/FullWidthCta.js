@@ -11,7 +11,7 @@ const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
 
 const FullWidthCta = props => {
   const {
-    cta,
+    ctas,
     description,
     showLogoAnimation,
     backgroundColor,
@@ -49,12 +49,13 @@ const FullWidthCta = props => {
                 <div dangerouslySetInnerHTML={{ __html: description }} />
               </Description>
             ) : null}
-            {cta ? (
+            {ctas ? (
               <CTAWrapper>
-                {contentfulModuleToComponent({
-                  ...cta,
-                  link: cta.ctaLink,
-                })}
+                {ctas.map(cta =>
+                    contentfulModuleToComponent({
+                      ...cta,
+                    })
+                  )}
               </CTAWrapper>
             ) : null}
           </FullWidthCtaInner>
@@ -134,7 +135,21 @@ const FullWidthCtaInner = styled.div`
   }
 `
 const CTAWrapper = styled.div`
+  display: flex;
+  flex-flow: wrap;
   margin-top: 32px;
+
+  .button {
+    margin: 0 16px 16px 0;
+  }
+
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    justify-content: center;
+    .button {
+      margin: 0 8px 16px;
+    }
+  }
+
   ${({ showLogoAnimation, theme }) =>
     showLogoAnimation
       ? `
@@ -147,6 +162,7 @@ const CTAWrapper = styled.div`
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}){
     .button {
       width: 100%;
+      margin: 0 0 16px 0;
     }
   }
 `
