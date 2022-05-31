@@ -11,6 +11,8 @@ import {
 import scrollTo from '../lib/utils/scrollToElement'
 import Context from '../Context/ContextPage'
 import ContextClientSide from '../Context/ContextClientSide'
+import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
+import { browserName } from 'react-device-detect'
 
 /**
  * @name PageLayout
@@ -29,8 +31,8 @@ const PageLayout = props => {
         ? purpleDarkTheme
         : purpleTheme
       : isDarkMode
-      ? defaultDarkTheme
-      : defaultTheme
+        ? defaultDarkTheme
+        : defaultTheme
   const valueContext = {
     faq: {
       idFaqActive,
@@ -42,9 +44,9 @@ const PageLayout = props => {
       const { type, description } = state.error
       const errorMessage = `
         ${type
-          .split('_')
-          .join(' ')
-          .toUpperCase()} -
+      .split('_')
+      .join(' ')
+      .toUpperCase()} -
         ${decodeURIComponent(description)}`
       toast.error(errorMessage)
     }
@@ -81,6 +83,14 @@ const PageLayout = props => {
           )
         })
       })
+      // Detect Web3 Wallet
+      if(typeof window.ethereum !== 'undefined') {
+        trackCustomEvent({
+          category: 'Web3 Wallet Detected',
+          action: 'window.ethereum present',
+          label: browserName || 'Chrome',
+        })
+      }
     }
   }, [pathname])
 
