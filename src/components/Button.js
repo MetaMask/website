@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Link from './Link'
 import classnames from 'classnames'
-
+import Image from './Image'
 const Button = props => {
   const {
     link,
@@ -15,6 +15,8 @@ const Button = props => {
     fontSize,
     className,
     buttonGradient = false,
+    iconUrl,
+    iconPosition,
   } = props
 
   return (
@@ -28,7 +30,19 @@ const Button = props => {
       className={classnames('button', className)}
       fontSize={fontSize}
     >
-      {text}
+      {iconPosition === 'start' && iconUrl ? (
+        <Icon>
+          <Image src={iconUrl} />
+        </Icon>
+      ) : null}
+      <span>
+        {text}
+      </span>
+      {iconPosition === 'end' && iconUrl ? (
+        <Icon>
+          <Image src={iconUrl} />
+        </Icon>
+      ) : null}
     </ButtonWrapper>
   )
 }
@@ -44,6 +58,19 @@ Button.propTypes = {
   buttonGradient: PropTypes.bool,
 }
 
+const Icon = styled.span`
+  display: inline-flex;
+  &:first-child {
+    margin-right: 8px;
+  }
+  &:last-child {
+    margin-left: 8px;
+  }
+  img {
+    width: 24px;
+    height: 24px;
+  }
+`;
 const ButtonWrapper = styled(Link)`
   color: #fff;
   ${({ gradient, color, theme }) =>

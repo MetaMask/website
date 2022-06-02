@@ -18,6 +18,7 @@ const theme = {
   blue: {
     400: '#1098fc',
   },
+  danger: "#D73A49",
   wrapper: {
     margin: '0 auto',
     maxWidth: '100%',
