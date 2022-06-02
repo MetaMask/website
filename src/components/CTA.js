@@ -128,9 +128,11 @@ const CTA = props => {
     )
   }
 
-  if(isDownloadBrowser && className === 'safari') {
+  if(isDownloadBrowser && keyBrowser === 'safari') {
     ele = (
       <BrowserWrapper>
+        {downloadBrowsers[keyBrowser].text}
+        {downloadBrowsers[keyBrowser].description}
         <BrowserList>
           {Object.keys(downloadBrowsers).map(key => {
             const { link, icon, text } = downloadBrowsers[key]
