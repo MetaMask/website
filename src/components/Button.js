@@ -13,6 +13,7 @@ const Button = props => {
     size,
     customClick,
     fontSize,
+    className,
     buttonGradient = false,
   } = props
 
@@ -24,7 +25,7 @@ const Button = props => {
       size={size}
       onClick={customClick}
       gradient={buttonGradient}
-      className={classnames('button')}
+      className={classnames('button', className)}
       fontSize={fontSize}
     >
       {text}
