@@ -42,7 +42,8 @@ const CTA = props => {
   const [showPopup, setShowPopup] = React.useState(false)
   let text = textDefault,
     link = linkDefault,
-    label = eventLabel
+    label = eventLabel,
+    iconBrowser = '';
   if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
     label = eventLabel.replace('$browser', downloadBrowsers[keyBrowser].text)
     text = textDefault.replace('$browser', downloadBrowsers[keyBrowser].text)
@@ -50,6 +51,7 @@ const CTA = props => {
       text = downloadBrowsers[keyBrowser].text
     }
     link = downloadBrowsers[keyBrowser].link
+    iconBrowser = downloadBrowsers[keyBrowser].icon
   }
   const onClosePopup = () => {
     setShowPopup(false)
@@ -122,6 +124,8 @@ const CTA = props => {
         buttonGradient={buttonGradient}
         eventCategory={eventCategory}
         eventLabel={eventLabel}
+        iconUrl={iconBrowser}
+        iconPosition={['ios', 'android'].includes(keyBrowser) ? 'start' : 'end'}
       />
     )
   }
@@ -129,15 +133,21 @@ const CTA = props => {
   if(isDownloadBrowser && keyBrowser === 'safari') {
     ele = (
       <BrowserWrapper>
-        {downloadBrowsers[keyBrowser].text}
-        {downloadBrowsers[keyBrowser].description}
+        <BrowserInfo>
+          <BrowserInfoTitle>
+            {downloadBrowsers[keyBrowser].text}
+          </BrowserInfoTitle>
+          <BrowserInfoDesc>
+            {downloadBrowsers[keyBrowser].description}
+          </BrowserInfoDesc>
+        </BrowserInfo>
         <BrowserList>
           {Object.keys(downloadBrowsers).map(key => {
             const { link, icon, text } = downloadBrowsers[key]
             if(['chrome', 'firefox', 'brave', 'edge'].includes(key)) {
               return (
                 <BrowserItem key={ text } to={ link } newTab>
-                  <Image image={ icon } />
+                  <Image src={ icon } />
                   <BrowserName>{ text }</BrowserName>
                 </BrowserItem>
               )
@@ -247,6 +257,26 @@ const alignMapping = align => {
 
 const BrowserWrapper = styled.div`
   display: block;
+  padding: 24px;
+  background: rgba(215, 58, 73, 0.1);
+  border-radius: 12px;
+`
+
+const BrowserInfo = styled.div`
+  color: ${({ theme }) => theme.danger};
+  margin-bottom: 16px;
+`
+
+const BrowserInfoTitle = styled.div`
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  margin-bottom: 8px;
+`
+
+const BrowserInfoDesc = styled.div`
+  font-size: 16px;
+  line-height: 24px;
 `
 
 const BrowserList = styled.div`
@@ -285,4 +315,5 @@ const BrowserItem = styled(Link)`
 const BrowserName = styled.div`
   display: block;
   margin-top: 16px;
+  color: ${({ theme }) => theme.text.body};
 `
