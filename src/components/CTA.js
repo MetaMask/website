@@ -39,6 +39,7 @@ const CTA = props => {
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
   const icon = { ...defaultIconConfig, fill: color, ...iconConfig }
   const isDownloadBrowser = !isEmpty(downloadBrowsers)
+  const [delayShow, setDelayShow] = React.useState(isDownloadBrowser)
   const [showPopup, setShowPopup] = React.useState(false)
   let text = textDefault,
     link = linkDefault,
@@ -95,6 +96,7 @@ const CTA = props => {
           setKeyBrowser('chrome')
         }
       }
+      setDelayShow(false)
     }
   }, [downloadBrowsers, isDownloadBrowser])
   let ele = (
@@ -124,8 +126,9 @@ const CTA = props => {
         buttonGradient={buttonGradient}
         eventCategory={eventCategory}
         eventLabel={eventLabel}
-        iconUrl={iconBrowser}
+        iconUrl={!delayShow ? iconBrowser : ''}
         iconPosition={['ios', 'android'].includes(keyBrowser) ? 'start' : 'end'}
+        hide={delayShow}
       />
     )
   }

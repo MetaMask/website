@@ -17,6 +17,7 @@ const Button = props => {
     buttonGradient = false,
     iconUrl,
     iconPosition,
+    hide,
   } = props
 
   return (
@@ -29,6 +30,7 @@ const Button = props => {
       gradient={buttonGradient}
       className={classnames('button', className)}
       fontSize={fontSize}
+      hide={hide}
     >
       {iconPosition === 'start' && iconUrl ? (
         <Icon>
@@ -73,6 +75,7 @@ const Icon = styled.span`
 `;
 const ButtonWrapper = styled(Link)`
   color: #fff;
+  opacity: ${({hide}) => hide ? 0 : 1};
   ${({ gradient, color, theme }) =>
     color && theme['button'] && theme['button'][color]
       ? `
