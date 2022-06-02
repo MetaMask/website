@@ -42,7 +42,6 @@ const CTA = props => {
   const [showPopup, setShowPopup] = React.useState(false)
   let text = textDefault,
     link = linkDefault,
-    className = '',
     label = eventLabel
   if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
     label = eventLabel.replace('$browser', downloadBrowsers[keyBrowser].text)
@@ -50,7 +49,6 @@ const CTA = props => {
     if(['ios', 'android', 'metamask'].includes(keyBrowser)) {
       text = downloadBrowsers[keyBrowser].text
     }
-    className = `${keyBrowser}`
     link = downloadBrowsers[keyBrowser].link
   }
   const onClosePopup = () => {
@@ -116,7 +114,7 @@ const CTA = props => {
         size={buttonSize}
         link={link}
         text={text}
-        className={className}
+        className={keyBrowser}
         newTab={newTab || isDownloadBrowser}
         color={buttonSecondary ? 'secondary' : color}
         customClick={handleCustomClick}
