@@ -10,6 +10,7 @@ import styled from 'styled-components'
 import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
 import Popup from './Popup'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
+import Image from './Image'
 
 const CTA = props => {
   const {
@@ -39,6 +40,19 @@ const CTA = props => {
   const icon = { ...defaultIconConfig, fill: color, ...iconConfig }
   const isDownloadBrowser = !isEmpty(downloadBrowsers)
   const [showPopup, setShowPopup] = React.useState(false)
+  let text = textDefault,
+    link = linkDefault,
+    className = '',
+    label = eventLabel
+  if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
+    label = eventLabel.replace('$browser', downloadBrowsers[keyBrowser].text)
+    text = textDefault.replace('$browser', downloadBrowsers[keyBrowser].text)
+    if(['ios', 'android', 'metamask'].includes(keyBrowser)) {
+      text = downloadBrowsers[keyBrowser].text
+    }
+    className = `${keyBrowser}`
+    link = downloadBrowsers[keyBrowser].link
+  }
   const onClosePopup = () => {
     setShowPopup(false)
   }
@@ -55,19 +69,17 @@ const CTA = props => {
       trackCustomEvent({
         category: eventCategory,
         action: 'Click',
-        label: eventLabel,
+        label: label,
       })
     }
   }
-  let text = textDefault,
-    link = linkDefault
-  if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
-    text = textDefault.replace('$browser', downloadBrowsers[keyBrowser].text)
-    link = downloadBrowsers[keyBrowser].link
-  }
   React.useEffect(() => {
     if (isDownloadBrowser) {
-      if (isMobile) {
+      // Detect Web3 Wallet
+      if (typeof window.ethereum !== 'undefined') {
+        setKeyBrowser('metamask')
+      }
+      else if (isMobile) {
         if (isAndroid && downloadBrowsers['android']) {
           setKeyBrowser('android')
         } else if (isIOS && downloadBrowsers['ios']) {
@@ -104,6 +116,7 @@ const CTA = props => {
         size={buttonSize}
         link={link}
         text={text}
+        className={className}
         newTab={newTab || isDownloadBrowser}
         color={buttonSecondary ? 'secondary' : color}
         customClick={handleCustomClick}
@@ -112,6 +125,26 @@ const CTA = props => {
         eventCategory={eventCategory}
         eventLabel={eventLabel}
       />
+    )
+  }
+
+  if(isDownloadBrowser && className === 'safari') {
+    ele = (
+      <BrowserWrapper>
+        <BrowserList>
+          {Object.keys(downloadBrowsers).map(key => {
+            const { link, icon, text } = downloadBrowsers[key]
+            if(['chrome', 'firefox', 'brave', 'edge'].includes(key)) {
+              return (
+                <BrowserItem key={ text } to={ link } newTab>
+                  <Image image={ icon } />
+                  <BrowserName>{ text }</BrowserName>
+                </BrowserItem>
+              )
+            }
+          })}
+        </BrowserList>
+      </BrowserWrapper>
     )
   }
 
@@ -211,3 +244,45 @@ const alignMapping = align => {
   if (align === 'middle' || align === 'center') return 'center'
   return 'flex-start'
 }
+
+const BrowserWrapper = styled.div`
+  display: block;
+`
+
+const BrowserList = styled.div`
+  display: flex;
+  flex-flow: wrap;
+  margin: -20px;
+
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    margin: -12px;
+  }
+
+  & > * {
+    width: 25%;
+    padding: 20px;
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      width: 100%;
+      padding: 12px;
+    }
+  }
+`
+
+const BrowserItem = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  color: ${({ theme }) => theme.text.body};
+
+  img {
+    width: 50px;
+    height: 50px;
+  }
+`
+
+const BrowserName = styled.div`
+  display: block;
+  margin-top: 16px;
+`
