@@ -67,8 +67,8 @@ const Icon = styled.span`
     margin-left: 8px;
   }
   img {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
   }
 `;
 const ButtonWrapper = styled(Link)`
