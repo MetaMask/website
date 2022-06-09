@@ -37,9 +37,7 @@ const Button = props => {
           <Image src={iconUrl} />
         </Icon>
       ) : null}
-      <span>
-        {text}
-      </span>
+      <span>{text}</span>
       {iconPosition === 'end' && iconUrl ? (
         <Icon>
           <Image src={iconUrl} />
@@ -72,10 +70,10 @@ const Icon = styled.span`
     width: 32px;
     height: 32px;
   }
-`;
+`
 const ButtonWrapper = styled(Link)`
   color: #fff;
-  opacity: ${({hide}) => hide ? 0 : 1};
+  opacity: ${({ hide }) => (hide ? 0 : 1)};
   ${({ gradient, color, theme }) =>
     color && theme['button'] && theme['button'][color]
       ? `

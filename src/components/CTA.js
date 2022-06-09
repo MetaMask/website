@@ -44,14 +44,18 @@ const CTA = props => {
   let text = textDefault,
     link = linkDefault,
     label = eventLabel,
-    iconBrowser = '';
+    lowerBrowserName = lowerCase(browserName),
+    iconBrowser = ''
   if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
     label = eventLabel.replace('$browser', downloadBrowsers[keyBrowser].text)
     text = textDefault.replace('$browser', downloadBrowsers[keyBrowser].text)
-    if(['ios', 'android', 'metamask'].includes(keyBrowser)) {
+    if (['ios', 'android', 'metamask'].includes(keyBrowser)) {
       text = downloadBrowsers[keyBrowser].text
     }
-    link = downloadBrowsers[keyBrowser].link
+    link = downloadBrowsers[keyBrowser]?.link
+    if (keyBrowser === 'metamask') {
+      link = downloadBrowsers[keyBrowser]?.links[lowerBrowserName]
+    }
     iconBrowser = downloadBrowsers[keyBrowser].icon
   }
   const onClosePopup = () => {
@@ -79,8 +83,7 @@ const CTA = props => {
       // Detect Web3 Wallet
       if (typeof window.ethereum !== 'undefined') {
         setKeyBrowser('metamask')
-      }
-      else if (isMobile) {
+      } else if (isMobile) {
         if (isAndroid && downloadBrowsers['android']) {
           setKeyBrowser('android')
         } else if (isIOS && downloadBrowsers['ios']) {
@@ -89,16 +92,15 @@ const CTA = props => {
           setKeyBrowser('chrome')
         }
       } else {
-        const lowerBrowser = lowerCase(browserName)
-        if (downloadBrowsers[lowerBrowser]) {
-          setKeyBrowser(lowerBrowser)
+        if (downloadBrowsers[lowerBrowserName]) {
+          setKeyBrowser(lowerBrowserName)
         } else {
           setKeyBrowser('chrome')
         }
       }
       setDelayShow(false)
     }
-  }, [downloadBrowsers, isDownloadBrowser])
+  }, [downloadBrowsers, isDownloadBrowser, lowerBrowserName])
   let ele = (
     <CTAContainer className="ctaModuleContainer" align={align}>
       <ContentWrapper
@@ -133,7 +135,7 @@ const CTA = props => {
     )
   }
 
-  if(isDownloadBrowser && keyBrowser === 'safari') {
+  if (isDownloadBrowser && keyBrowser === 'safari') {
     ele = (
       <BrowserWrapper>
         <BrowserInfo>
@@ -147,11 +149,11 @@ const CTA = props => {
         <BrowserList>
           {Object.keys(downloadBrowsers).map(key => {
             const { link, icon, text } = downloadBrowsers[key]
-            if(['chrome', 'firefox', 'brave', 'edge'].includes(key)) {
+            if (['chrome', 'firefox', 'brave', 'edge'].includes(key)) {
               return (
-                <BrowserItem key={ text } to={ link } newTab>
-                  <Image src={ icon } />
-                  <BrowserName>{ text }</BrowserName>
+                <BrowserItem key={text} to={link} newTab>
+                  <Image src={icon} />
+                  <BrowserName>{text}</BrowserName>
                 </BrowserItem>
               )
             }
