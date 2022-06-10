@@ -80,9 +80,12 @@ const CTA = props => {
   }
   React.useEffect(() => {
     if (isDownloadBrowser) {
+      let hideButton = false
       // Detect Web3 Wallet
       if (typeof window.ethereum !== 'undefined') {
         setKeyBrowser('metamask')
+        // Temporarily hide the button when have installed the MetaMask extension.
+        hideButton = true
       } else if (isMobile) {
         if (isAndroid && downloadBrowsers['android']) {
           setKeyBrowser('android')
@@ -98,7 +101,7 @@ const CTA = props => {
           setKeyBrowser('chrome')
         }
       }
-      setDelayShow(false)
+      setDelayShow(hideButton)
     }
   }, [downloadBrowsers, isDownloadBrowser, lowerBrowserName])
   let ele = (
@@ -193,12 +196,12 @@ CTA.propTypes = {
 
 const CTAContainer = styled.div`
   ${({ align }) =>
-    align
-      ? `
+          align
+                  ? `
     display: flex;
     justify-content: ${alignMapping(align)}
   `
-      : ''}
+                  : ''}
 `
 
 const ContentWrapper = styled(Link)`
@@ -206,17 +209,17 @@ const ContentWrapper = styled(Link)`
   text-decoration: none;
 
   ${({ typeLayout, color, theme }) =>
-    typeLayout === ''
-      ? `
+          typeLayout === ''
+                  ? `
       color: ${color};
     &:hover {
       color: ${theme.darkBlue};
     }
   `
-      : ``}
+                  : ``}
   ${({ typeLayout, theme }) =>
-    typeLayout === 'header'
-      ? `
+          typeLayout === 'header'
+                  ? `
     font-size: 16px;
     line-height: 22px;
     height: 56px;
@@ -235,10 +238,10 @@ const ContentWrapper = styled(Link)`
       color: ${theme.text.menuHover};
     }
   `
-      : ``}
+                  : ``}
   ${({ typeLayout, theme }) =>
-    typeLayout === 'footer'
-      ? `
+          typeLayout === 'footer'
+                  ? `
     color: ${theme.text.menuFooter};
     font-size: 12px;
     line-height: 30px;
@@ -251,7 +254,7 @@ const ContentWrapper = styled(Link)`
       line-height: 44px;
     }
   `
-      : ``}
+                  : ``}
 `
 
 const alignMapping = align => {
