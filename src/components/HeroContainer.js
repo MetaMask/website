@@ -73,6 +73,27 @@ const HeroContainerComponent = props => {
     heroTitleFontsize = '30px'
   }
 
+  const scrollRef = React.useRef(null);
+  const [scrolled, setScrolled] = React.useState(false);
+  const onScroll = () => {
+    const windowY = window.pageYOffset ||
+    document.documentElement.scrollTop ||
+    document.body.scrollTop || 0;
+    if (0 < windowY) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('scroll', onScroll);
+
+    return () => {
+      window.addEventListener('scroll', onScroll);
+    };
+  }, []);
+
   return (
     <>
       {showFavIcon ? (
@@ -85,6 +106,7 @@ const HeroContainerComponent = props => {
         </FavIconContainer>
       ) : null}
       <HeroContainer
+        scrolled={scrolled}
         isThankYou={isThankYou}
         sectionPadding={sectionPadding || ''}
         headlineBorderBottom={headlineBorderBottom}
@@ -95,6 +117,7 @@ const HeroContainerComponent = props => {
           [`bg-${backgroundColor}`]: backgroundColor,
           [`bg-mobile-${backgroundColorMobile}`]: backgroundColorMobile,
           [`custom-${customClass}`]: customClass,
+          [`scrolled`]: scrolled,
         })}
       >
         {isThankYou && backgroundImage ? (
@@ -179,6 +202,7 @@ const HeroContainerComponent = props => {
                   fontSize={heroTitleFontsize}
                   isFaq={isFaq}
                   isFlask={isFlask}
+                  ref={scrollRef}
                 >
                   {' '}
                   {headline}{' '}
@@ -271,6 +295,13 @@ const HeroContainer = styled(Section)`
   flex-direction: column;
   justify-content: center;
   min-width: 100%;
+  transition: all 0.5s ease;
+  &.scrolled.custom-isMetaMaskHero {
+    position: fixed;
+    transition: all 0.5s ease;
+    padding: 8px 0 !important;
+  }
+
   ${({ isThankYou }) =>
     isThankYou
       ? `
@@ -512,12 +543,21 @@ const HeroContentContainer = styled.div`
   `
       : ''}
   
+  .scrolled.custom-isMetaMaskHero &{
+    padding-top: 0 !important;
+  }
 `
 
 const HeroImageTextContainer = styled.div`
   display: block;
   position: relative;
-
+  transition: all 0.3s ease;
+  .scrolled.custom-isMetaMaskHero &{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
   ${({ sideImageFlex }) =>
     sideImageFlex
       ? `
@@ -574,6 +614,10 @@ const HeroTitle = styled.h1`
   line-height: 1.2;
   padding-top: 20px;
   padding-bottom: 20px;
+
+  .isMetaMaskHero & {
+    font-size: 40px !important;
+  }
   
   ${({ hideHeadline }) =>
     hideHeadline
@@ -619,6 +663,7 @@ const HeroTitle = styled.h1`
       text-align: left;
   `
       : ''}
+
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     font-size: 46px;
   }
@@ -631,7 +676,20 @@ const HeroTitle = styled.h1`
 const HeroDescription = styled.div`
   display: block;
   margin-bottom: 24px;
-
+  .isMetaMaskHero & {
+    font-size: 20px;
+    color: #535A61;
+    a{color: #535A61;}
+    p{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .scrolled.custom-isMetaMaskHero &{
+    p{margin-bottom: 0;}
+    margin-bottom: 0;
+  }
   ${({ isFaq }) =>
     isFaq
       ? `

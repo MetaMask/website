@@ -48,8 +48,14 @@ const ContainerInner = styled.div`
   margin-right: auto;
   max-width: 992px;
   width: 100%;
+  .scrolled.custom-isMetaMaskHero &{
+    max-width: calc(992px + 200px);
+  }
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     max-width: 728px;
+    .scrolled.custom-isMetaMaskHero &{
+      max-width: calc(728px + 200px);
+    }
   }
 
   .sideImageOverflow &,
