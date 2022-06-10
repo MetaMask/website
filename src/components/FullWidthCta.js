@@ -122,7 +122,7 @@ const FullWidthCtaInner = styled.div`
       : `
     color: ${theme.text.default};
   `}
-  
+
   ${({ marginBottom }) =>
     marginBottom
       ? `
@@ -131,23 +131,17 @@ const FullWidthCtaInner = styled.div`
       : ''}
 
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
-    margin-bottom: 0;
-  }
+  margin-bottom: 0;
+}
 `
 const CTAWrapper = styled.div`
   display: flex;
   flex-flow: wrap;
   margin-top: 32px;
 
+  justify-content: center;
   .button {
-    margin: 0 16px 16px 0;
-  }
-
-  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-    justify-content: center;
-    .button {
-      margin: 0 8px 16px;
-    }
+    margin: 0 8px 16px;
   }
 
   ${({ showLogoAnimation, theme }) =>
@@ -160,11 +154,11 @@ const CTAWrapper = styled.div`
       : ``}
 
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}){
-    .button {
-      width: 100%;
-      margin: 0 0 16px 0;
-    }
+  .button {
+    width: 100%;
+    margin: 0 0 16px 0;
   }
+}
 `
 
 const Description = styled.div`
