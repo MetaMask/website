@@ -80,9 +80,14 @@ const CTA = props => {
   }
   React.useEffect(() => {
     if (isDownloadBrowser) {
+      let hideButton = false
       // Detect Web3 Wallet
       if (typeof window.ethereum !== 'undefined') {
         setKeyBrowser('metamask')
+        if (downloadBrowsers['metamask']) {
+          // Temporarily hide the button when have installed the MetaMask extension.
+          hideButton = true
+        }
       } else if (isMobile) {
         if (isAndroid && downloadBrowsers['android']) {
           setKeyBrowser('android')
@@ -98,7 +103,7 @@ const CTA = props => {
           setKeyBrowser('chrome')
         }
       }
-      setDelayShow(false)
+      setDelayShow(hideButton)
     }
   }, [downloadBrowsers, isDownloadBrowser, lowerBrowserName])
   let ele = (
