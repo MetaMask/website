@@ -139,15 +139,9 @@ const CTAWrapper = styled.div`
   flex-flow: wrap;
   margin-top: 32px;
 
+  justify-content: center;
   .button {
-    margin: 0 16px 16px 0;
-  }
-
-  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-    justify-content: center;
-    .button {
-      margin: 0 8px 16px;
-    }
+    margin: 0 8px 16px;
   }
 
   ${({ showLogoAnimation, theme }) =>
