@@ -94,6 +94,7 @@ const HeroContainerComponent = props => {
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor,
           [`bg-mobile-${backgroundColorMobile}`]: backgroundColorMobile,
+          [`custom-${customClass}`]: customClass,
         })}
       >
         {isThankYou && backgroundImage ? (
