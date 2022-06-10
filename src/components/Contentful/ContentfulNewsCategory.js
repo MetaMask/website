@@ -8,13 +8,11 @@ function ContentfulNewsCategory(props) {
     moduleConfig: { contentful_id, numberOfItem },
   } = props
 
-  console.log(contentful_id)
   const data = useStaticQuery(graphql`
     query CategoryQuery {
       stories: allContentfulNews(
         sort: { order: DESC, fields: publishDate }
         filter: {
-          categories: { elemMatch: { contentful_id: { in: "3tE0tpmPMGsXezpOhKyWGO" } } }
           isPrivate: { eq: false }
         }
       ) {
@@ -22,7 +20,8 @@ function ContentfulNewsCategory(props) {
           title
           subtitle
           categories {
-            name
+            name,
+            contentful_id
           }
           image {
             title
@@ -40,12 +39,22 @@ function ContentfulNewsCategory(props) {
     }
   `)
 
-  let stories = data.stories.nodes || []
-  if (stories && numberOfItem) {
-    stories = stories.slice(0, numberOfItem)
+  const stories = data.stories?.nodes || []
+  let checkedStories = [];
+  stories.map((news) => {
+    const containsCat = news.categories.filter(obj => {
+      return obj.contentful_id === contentful_id;
+    });
+    if (containsCat) {
+      checkedStories.push(news);
+    }
+  });
+
+  if (checkedStories && numberOfItem) {
+    checkedStories = checkedStories.slice(0, numberOfItem)
   }
 
-  return <NewsList stories={stories} />
+  return <NewsList stories={checkedStories} />
 }
 
 export default ContentfulNewsCategory
