@@ -257,6 +257,21 @@ export const ContentfulLayoutModuleContainerFields = graphql`
   }
 `
 
+export const ContentfulConsenSysResourcesFields = graphql`
+  fragment ContentfulConsenSysResourcesFields on ContentfulConsenSysResources {
+    contentful_id
+    internal {
+      type
+    }
+    title
+    categoryId
+    numberOfItem
+    linkText
+    link
+    showDate
+  }
+`
+
 export const ContentfulCardFields = graphql`
   fragment ContentfulCardFields on ContentfulCard {
     contentful_id
@@ -433,22 +448,6 @@ export const ContentfulLogoFields = graphql`
   }
 `
 
-export const ContentfulRichTextFields = graphql`
-  fragment ContentfulRichTextFields on ContentfulRichText {
-    contentful_id
-    internal {
-      type
-    }
-    moduleId
-    title
-    htmlBody {
-      childMarkdownRemark {
-        html
-      }
-    }
-    displayTitle
-  }
-`
 export const ContentfulModuleContainerFields = graphql`
   fragment ContentfulModuleContainerFields on ContentfulModuleContainer {
     contentful_id
@@ -461,6 +460,7 @@ export const ContentfulModuleContainerFields = graphql`
         html
       }
     }
+    numberOfItem
     columns
     columnType
     columnsOnMobile
@@ -487,6 +487,9 @@ export const ContentfulModuleContainerFields = graphql`
       }
       ... on ContentfulCta {
         ...ContentfulCtaFields
+      }
+      ... on ContentfulNewsCategory {
+        ...ContentfulNewsCategoryFields
       }
       ... on ContentfulModuleContainer {
         contentful_id
@@ -560,6 +563,117 @@ export const ContentfulModuleContainerFields = graphql`
   }
 `
 
+export const ContentfulNewsFields = graphql`
+  fragment ContentfulNewsFields on ContentfulNews {
+    contentful_id
+    internal {
+      type
+    }
+    title
+    subtitle
+    image {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
+    author {
+      ...ContentfulNewsAuthorFields
+    }
+    publishDate
+    content {
+      childMarkdownRemark {
+        html
+      }
+    }
+    categories {
+      ...ContentfulNewsCategoryFields
+    }
+    isPrivate
+  }
+`
+
+export const ContentfulNewsAuthorFields = graphql`
+  fragment ContentfulNewsAuthorFields on ContentfulNewsAuthor {
+    contentful_id
+    internal {
+      type
+    }
+    name
+    image {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 80, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
+    imageDarkMode {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 80, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
+    link
+  }
+`
+
+export const ContentfulNewsCategoryFields = graphql`
+  fragment ContentfulNewsCategoryFields on ContentfulNewsCategory {
+    contentful_id
+    internal {
+      type
+    }
+    name
+    parent {
+      ... on ContentfulNewsCategory {
+        contentful_id
+        name
+      }
+    }
+  }
+`
+
+export const ContentfulPopupAnnouncementFields = graphql`
+  fragment ContentfulPopupAnnouncementFields on ContentfulPopupAnnouncement {
+    contentful_id
+    internal {
+      type
+    }
+    title
+    ctaText
+    ctaLink
+    backgroundColor
+  }
+`
+
+export const ContentfulRichTextFields = graphql`
+  fragment ContentfulRichTextFields on ContentfulRichText {
+    contentful_id
+    internal {
+      type
+    }
+    moduleId
+    title
+    htmlBody {
+      childMarkdownRemark {
+        html
+      }
+    }
+    displayTitle
+  }
+`
+
 export const ContentfulSeoFields = graphql`
   fragment ContentfulSeoFields on ContentfulSeo {
     contentful_id
@@ -583,33 +697,5 @@ export const ContentfulSeoFields = graphql`
         ...GatsbyContentfulFixed_withWebp
       }
     }
-  }
-`
-
-export const ContentfulPopupAnnouncementFields = graphql`
-  fragment ContentfulPopupAnnouncementFields on ContentfulPopupAnnouncement {
-    contentful_id
-    internal {
-      type
-    }
-    title
-    ctaText
-    ctaLink
-    backgroundColor
-  }
-`
-
-export const ContentfulConsenSysResourcesFields = graphql`
-  fragment ContentfulConsenSysResourcesFields on ContentfulConsenSysResources {
-    contentful_id
-    internal {
-      type
-    }
-    title
-    categoryId
-    numberOfItem
-    linkText
-    link
-    showDate
   }
 `
