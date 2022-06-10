@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Link from './Link'
 import classnames from 'classnames'
-
+import Image from './Image'
 const Button = props => {
   const {
     link,
@@ -13,7 +13,11 @@ const Button = props => {
     size,
     customClick,
     fontSize,
+    className,
     buttonGradient = false,
+    iconUrl,
+    iconPosition,
+    hide,
   } = props
 
   return (
@@ -24,10 +28,21 @@ const Button = props => {
       size={size}
       onClick={customClick}
       gradient={buttonGradient}
-      className={classnames('button')}
+      className={classnames('button', className)}
       fontSize={fontSize}
+      hide={hide}
     >
-      {text}
+      {iconPosition === 'start' && iconUrl ? (
+        <Icon>
+          <Image src={iconUrl} />
+        </Icon>
+      ) : null}
+      <span>{text}</span>
+      {iconPosition === 'end' && iconUrl ? (
+        <Icon>
+          <Image src={iconUrl} />
+        </Icon>
+      ) : null}
     </ButtonWrapper>
   )
 }
@@ -43,8 +58,22 @@ Button.propTypes = {
   buttonGradient: PropTypes.bool,
 }
 
+const Icon = styled.span`
+  display: inline-flex;
+  &:first-child {
+    margin-right: 8px;
+  }
+  &:last-child {
+    margin-left: 8px;
+  }
+  img {
+    width: 32px;
+    height: 32px;
+  }
+`
 const ButtonWrapper = styled(Link)`
   color: #fff;
+  opacity: ${({ hide }) => (hide ? 0 : 1)};
   ${({ gradient, color, theme }) =>
     color && theme['button'] && theme['button'][color]
       ? `

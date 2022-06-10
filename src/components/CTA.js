@@ -10,6 +10,7 @@ import styled from 'styled-components'
 import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
 import Popup from './Popup'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
+import Image from './Image'
 
 const CTA = props => {
   const {
@@ -38,7 +39,25 @@ const CTA = props => {
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
   const icon = { ...defaultIconConfig, fill: color, ...iconConfig }
   const isDownloadBrowser = !isEmpty(downloadBrowsers)
+  const [delayShow, setDelayShow] = React.useState(isDownloadBrowser)
   const [showPopup, setShowPopup] = React.useState(false)
+  let text = textDefault,
+    link = linkDefault,
+    label = eventLabel,
+    lowerBrowserName = lowerCase(browserName),
+    iconBrowser = ''
+  if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
+    label = eventLabel.replace('$browser', downloadBrowsers[keyBrowser].text)
+    text = textDefault.replace('$browser', downloadBrowsers[keyBrowser].text)
+    if (['ios', 'android', 'metamask'].includes(keyBrowser)) {
+      text = downloadBrowsers[keyBrowser].text
+    }
+    link = downloadBrowsers[keyBrowser]?.link
+    if (keyBrowser === 'metamask') {
+      link = downloadBrowsers[keyBrowser]?.links[lowerBrowserName]
+    }
+    iconBrowser = downloadBrowsers[keyBrowser].icon
+  }
   const onClosePopup = () => {
     setShowPopup(false)
   }
@@ -55,19 +74,16 @@ const CTA = props => {
       trackCustomEvent({
         category: eventCategory,
         action: 'Click',
-        label: eventLabel,
+        label: label,
       })
     }
   }
-  let text = textDefault,
-    link = linkDefault
-  if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
-    text = textDefault.replace('$browser', downloadBrowsers[keyBrowser].text)
-    link = downloadBrowsers[keyBrowser].link
-  }
   React.useEffect(() => {
     if (isDownloadBrowser) {
-      if (isMobile) {
+      // Detect Web3 Wallet
+      if (typeof window.ethereum !== 'undefined') {
+        setKeyBrowser('metamask')
+      } else if (isMobile) {
         if (isAndroid && downloadBrowsers['android']) {
           setKeyBrowser('android')
         } else if (isIOS && downloadBrowsers['ios']) {
@@ -76,15 +92,15 @@ const CTA = props => {
           setKeyBrowser('chrome')
         }
       } else {
-        const lowerBrowser = lowerCase(browserName)
-        if (downloadBrowsers[lowerBrowser]) {
-          setKeyBrowser(lowerBrowser)
+        if (downloadBrowsers[lowerBrowserName]) {
+          setKeyBrowser(lowerBrowserName)
         } else {
           setKeyBrowser('chrome')
         }
       }
+      setDelayShow(false)
     }
-  }, [downloadBrowsers, isDownloadBrowser])
+  }, [downloadBrowsers, isDownloadBrowser, lowerBrowserName])
   let ele = (
     <CTAContainer className="ctaModuleContainer" align={align}>
       <ContentWrapper
@@ -104,6 +120,7 @@ const CTA = props => {
         size={buttonSize}
         link={link}
         text={text}
+        className={keyBrowser}
         newTab={newTab || isDownloadBrowser}
         color={buttonSecondary ? 'secondary' : color}
         customClick={handleCustomClick}
@@ -111,7 +128,38 @@ const CTA = props => {
         buttonGradient={buttonGradient}
         eventCategory={eventCategory}
         eventLabel={eventLabel}
+        iconUrl={!delayShow ? iconBrowser : ''}
+        iconPosition={['ios', 'android'].includes(keyBrowser) ? 'start' : 'end'}
+        hide={delayShow}
       />
+    )
+  }
+
+  if (isDownloadBrowser && keyBrowser === 'safari') {
+    ele = (
+      <BrowserWrapper>
+        <BrowserInfo>
+          <BrowserInfoTitle>
+            {downloadBrowsers[keyBrowser].text}
+          </BrowserInfoTitle>
+          <BrowserInfoDesc>
+            {downloadBrowsers[keyBrowser].description}
+          </BrowserInfoDesc>
+        </BrowserInfo>
+        <BrowserList>
+          {Object.keys(downloadBrowsers).map(key => {
+            const { link, icon, text } = downloadBrowsers[key]
+            if (['chrome', 'firefox', 'brave', 'edge'].includes(key)) {
+              return (
+                <BrowserItem key={text} to={link} newTab>
+                  <Image src={icon} />
+                  <BrowserName>{text}</BrowserName>
+                </BrowserItem>
+              )
+            }
+          })}
+        </BrowserList>
+      </BrowserWrapper>
     )
   }
 
@@ -211,3 +259,66 @@ const alignMapping = align => {
   if (align === 'middle' || align === 'center') return 'center'
   return 'flex-start'
 }
+
+const BrowserWrapper = styled.div`
+  display: block;
+  padding: 24px;
+  background: rgba(215, 58, 73, 0.1);
+  border-radius: 12px;
+`
+
+const BrowserInfo = styled.div`
+  color: ${({ theme }) => theme.danger};
+  margin-bottom: 16px;
+`
+
+const BrowserInfoTitle = styled.div`
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  margin-bottom: 8px;
+`
+
+const BrowserInfoDesc = styled.div`
+  font-size: 16px;
+  line-height: 24px;
+`
+
+const BrowserList = styled.div`
+  display: flex;
+  flex-flow: wrap;
+  margin: -20px;
+
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    margin: -12px;
+  }
+
+  & > * {
+    width: 25%;
+    padding: 20px;
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      width: 100%;
+      padding: 12px;
+    }
+  }
+`
+
+const BrowserItem = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  color: ${({ theme }) => theme.text.body};
+
+  img {
+    width: 50px;
+    height: 50px;
+  }
+`
+
+const BrowserName = styled.div`
+  display: block;
+  margin-top: 16px;
+  color: ${({ theme }) => theme.text.body};
+`
