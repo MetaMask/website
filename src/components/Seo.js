@@ -47,8 +47,7 @@ const SEO = props => {
                 { name: `twitter:${name}`, content: value },
               ]
             : []
-        const urlImageMeta =
-          image && image?.fixed?.src ? image?.fixed?.src.split('?')[0] : ''
+        const urlImageMeta = image && image?.file?.url
         const urlImageMetaClean =
           urlImageMeta &&
           typeof urlImageMeta === 'string' &&

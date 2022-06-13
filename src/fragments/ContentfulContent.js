@@ -736,8 +736,8 @@ export const ContentfulSeoFields = graphql`
       }
     }
     featuredImage {
-      fixed(width: 1000, height: 600, quality: 100, toFormat: WEBP) {
-        ...GatsbyContentfulFixed_withWebp
+      file {
+        url
       }
     }
   }
