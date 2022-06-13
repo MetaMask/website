@@ -99,13 +99,11 @@ NewsLayout.propTypes = {
     }),
   }).isRequired,
   pageContext: PropTypes.shape({
-    category: PropTypes.string.isRequired,
     news_content_id: PropTypes.string.isRequired,
     pathBuild: PropTypes.string,
   }).isRequired,
 }
 
-// get related news based on category passed in
 export const NewsLayoutQuery = graphql`
   query($news_content_id: String!) {
     header: contentfulLayoutHeader(
