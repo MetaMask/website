@@ -31,7 +31,7 @@ if (env.errors) {
           // The property ID; the tracking code won't be generated without it
           trackingId: process.env.GATSBY_GA_ID,
           // Defines where to place the tracking script - `true` in the head and `false` in the body
-          head: false,
+          head: true,
           // Setting this parameter is optional
           anonymize: true,
           // Avoids sending pageview hits from custom paths
