@@ -296,8 +296,15 @@ const HeroContainer = styled(Section)`
   justify-content: center;
   min-width: 100%;
   transition: all 0.5s ease;
-  &.scrolled.custom-isMetaMaskHero {
+  &.custom-newsHero + div{
+    padding-top: 96px !important; 
+  }
+  &.scrolled.custom-newsHero {
+    +div{
+     padding-top: 216px !important; 
+    }
     position: fixed;
+    z-index: 2;
     transition: all 0.5s ease;
     padding: 8px 0 !important;
   }
@@ -434,6 +441,7 @@ const HeroContentContainer = styled.div`
     background-size: 90%;
     background-attachment: scroll;
     padding-bottom: 0;
+    transition: all 0.3s ease;
     ${({ isFlask }) =>
       isFlask
         ? `
@@ -543,7 +551,8 @@ const HeroContentContainer = styled.div`
   `
       : ''}
   
-  .scrolled.custom-isMetaMaskHero &{
+  .scrolled.custom-newsHero &{
+    transition: all 0.3s ease;
     padding-top: 0 !important;
   }
 `
@@ -551,12 +560,12 @@ const HeroContentContainer = styled.div`
 const HeroImageTextContainer = styled.div`
   display: block;
   position: relative;
-  transition: all 0.3s ease;
-  .scrolled.custom-isMetaMaskHero &{
+  transition: all 0.5s ease;
+  .scrolled.custom-newsHero &{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
   }
   ${({ sideImageFlex }) =>
     sideImageFlex
@@ -615,7 +624,7 @@ const HeroTitle = styled.h1`
   padding-top: 20px;
   padding-bottom: 20px;
 
-  .isMetaMaskHero & {
+  .newsHero & {
     font-size: 40px !important;
   }
   
@@ -676,7 +685,7 @@ const HeroTitle = styled.h1`
 const HeroDescription = styled.div`
   display: block;
   margin-bottom: 24px;
-  .isMetaMaskHero & {
+  .newsHero & {
     font-size: 20px;
     color: #535A61;
     a{color: #535A61;}
@@ -686,7 +695,7 @@ const HeroDescription = styled.div`
       align-items: center;
     }
   }
-  .scrolled.custom-isMetaMaskHero &{
+  .scrolled.custom-newsHero &{
     p{margin-bottom: 0;}
     margin-bottom: 0;
   }
