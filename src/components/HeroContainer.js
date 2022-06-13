@@ -73,26 +73,28 @@ const HeroContainerComponent = props => {
     heroTitleFontsize = '30px'
   }
 
-  const scrollRef = React.useRef(null);
-  const [scrolled, setScrolled] = React.useState(false);
+  const scrollRef = React.useRef(null)
+  const [scrolled, setScrolled] = React.useState(false)
   const onScroll = () => {
-    const windowY = window.pageYOffset ||
-    document.documentElement.scrollTop ||
-    document.body.scrollTop || 0;
+    const windowY =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0
     if (0 < windowY) {
-      setScrolled(true);
+      setScrolled(true)
     } else {
-      setScrolled(false);
+      setScrolled(false)
     }
-  };
+  }
 
   React.useEffect(() => {
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll)
 
     return () => {
-      window.addEventListener('scroll', onScroll);
-    };
-  }, []);
+      window.addEventListener('scroll', onScroll)
+    }
+  }, [])
 
   return (
     <>
@@ -687,16 +689,20 @@ const HeroDescription = styled.div`
   margin-bottom: 24px;
   .newsHero & {
     font-size: 20px;
-    color: #535A61;
-    a{color: #535A61;}
-    p{
+    color: #535a61;
+    a {
+      color: #535a61;
+    }
+    p {
       display: flex;
       justify-content: center;
       align-items: center;
     }
   }
-  .scrolled.custom-newsHero &{
-    p{margin-bottom: 0;}
+  .scrolled.custom-newsHero & {
+    p {
+      margin-bottom: 0;
+    }
     margin-bottom: 0;
   }
   ${({ isFaq }) =>

@@ -12,15 +12,13 @@ function ContentfulNewsCategory(props) {
     query CategoryQuery {
       stories: allContentfulNews(
         sort: { order: DESC, fields: publishDate }
-        filter: {
-          isPrivate: { eq: false }
-        }
+        filter: { isPrivate: { eq: false } }
       ) {
         nodes {
           title
           subtitle
           categories {
-            name,
+            name
             contentful_id
           }
           image {
@@ -39,22 +37,13 @@ function ContentfulNewsCategory(props) {
     }
   `)
 
-  const stories = data.stories?.nodes || []
-  let checkedStories = [];
-  stories.map((news) => {
-    const containsCat = news.categories.filter(obj => {
-      return obj.contentful_id === contentful_id;
-    });
-    if (containsCat) {
-      checkedStories.push(news);
-    }
-  });
+  let stories = data.stories?.nodes || []
 
-  if (checkedStories && numberOfItem) {
-    checkedStories = checkedStories.slice(0, numberOfItem)
+  if (stories && numberOfItem) {
+    stories = stories.slice(0, numberOfItem)
   }
 
-  return <NewsList stories={checkedStories} />
+  return <NewsList stories={stories} />
 }
 
 export default ContentfulNewsCategory
