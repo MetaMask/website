@@ -9,6 +9,18 @@ export const ContentfulLayoutHeaderFields = graphql`
     logo {
       ...ContentfulLogoFields
     }
+    menuItems {
+      ... on ContentfulModuleContainer {
+        columns
+        title
+        displayTitle
+        modules {
+          ... on ContentfulCta {
+            ...ContentfulCtaFields
+          }
+        }
+      }
+    }
     downloadButton {
       ...ContentfulCtaFields
     }
@@ -26,6 +38,18 @@ export const ContentfulLayoutFooterFields = graphql`
     }
     logo {
       ...ContentfulLogoFields
+    }
+    menuItems {
+      ... on ContentfulModuleContainer {
+        columns
+        title
+        displayTitle
+        modules {
+          ... on ContentfulCta {
+            ...ContentfulCtaFields
+          }
+        }
+      }
     }
     copyright
   }
@@ -221,6 +245,23 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     description {
       childMarkdownRemark {
         html
+      }
+    }
+    modules {
+      ... on ContentfulRichText {
+        ...ContentfulRichTextFields
+      }
+      ... on ContentfulCta {
+        ...ContentfulCtaFields
+      }
+      ... on ContentfulEmbed {
+        ...ContentfulEmbedFields
+      }
+      ... on ContentfulModuleContainer {
+        ...ContentfulModuleContainerFields
+      }
+      ... on ContentfulHubSpotForm {
+        ...ContentfulHubSpotFormFields
       }
     }
     backgroundColor
@@ -591,7 +632,9 @@ export const ContentfulNewsFields = graphql`
       }
     }
     categories {
-      ...ContentfulNewsCategoryFields
+      ... on ContentfulNewsCategory {
+        ...ContentfulNewsCategoryFields
+      }
     }
     isPrivate
   }

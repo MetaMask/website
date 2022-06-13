@@ -4,7 +4,7 @@ import Author from '../Author'
 
 const ContentfulNewsAuthor = props => {
   const {
-    moduleConfig: { name, image, imageDarkMode, link },
+    moduleConfig: { name, image, imageDarkMode, link, publishDate },
   } = props
 
   return (
@@ -13,6 +13,7 @@ const ContentfulNewsAuthor = props => {
       image={image}
       imageDarkMode={imageDarkMode}
       link={link}
+      date={publishDate}
     />
   )
 }
@@ -23,6 +24,7 @@ ContentfulNewsAuthor.propTypes = {
   moduleConfig: PropTypes.shape({
     link: PropTypes.string,
     name: PropTypes.string,
+    publishDate: PropTypes.string,
     image: PropTypes.object,
     imageDarkMode: PropTypes.object,
   }),

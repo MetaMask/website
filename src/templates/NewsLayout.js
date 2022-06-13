@@ -4,7 +4,6 @@ import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Layout from './PageLayout'
-import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
 import { Section } from '../components/StyledGeneral'
 import Image from '../components/Image'
 
@@ -32,7 +31,7 @@ function NewsLayout(props) {
     internal: { type: 'ContentfulSeo' },
     pageTitle: title,
     pageDescription: subtitle,
-    featuredImage: parseContentfulAssetUrl(image),
+    featuredImage: image,
     pagePath: pathBuild,
     pageType: 'news',
   }
