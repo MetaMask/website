@@ -38,6 +38,7 @@ function ContentfulNewsCategory(props) {
   `)
 
   let stories = data.stories?.nodes || []
+  // TODO: Filter based on Category
 
   if (stories && numberOfItem) {
     stories = stories.slice(0, numberOfItem)
