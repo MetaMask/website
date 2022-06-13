@@ -33,12 +33,14 @@ const PageLayout = props => {
       : isDarkMode
       ? defaultDarkTheme
       : defaultTheme
+
   const valueContext = {
     faq: {
       idFaqActive,
       setIdFaqActive,
     },
   }
+  const [dimensionScript, setDimensionScript] = React.useState('')
   const renderNotification = (state = {}) => {
     if (state.error) {
       const { type, description } = state.error
@@ -83,13 +85,12 @@ const PageLayout = props => {
           )
         })
       })
+
       // Detect Web3 Wallet
       if (typeof window.ethereum !== 'undefined') {
-        trackCustomEvent({
-          category: 'Web3 Wallet Detected',
-          action: 'window.ethereum present',
-          label: browserName || 'Chrome',
-        })
+        setDimensionScript("if (typeof ga === 'function') {" +
+          "ga('set', 'dimension1', 'Web3 Wallet Detected');" +
+          "}")
       }
     }
   }, [pathname])
@@ -99,6 +100,14 @@ const PageLayout = props => {
       <Layout theme={pageTheme} h2FontSize={h2FontSize} {...rest}>
         <Notifications />
         {children}
+        {dimensionScript && (
+          <script
+            type="text/javascript"
+            dangerouslySetInnerHTML={{
+              __html: dimensionScript,
+            }}
+          />
+        )}
       </Layout>
     </Context.Provider>
   )
