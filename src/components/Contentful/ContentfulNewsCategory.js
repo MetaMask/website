@@ -45,10 +45,14 @@ function ContentfulNewsCategory(props) {
     )
   )
 
+  if (stories && numberOfItem) {
+    stories = stories.slice(0, numberOfItem)
+  }
+
   return (
     <PaginationWrapper
       data={stories}
-      numberOfItem={numberOfItem}
+      itemPerPage={4}
       listingComponent={NewsList}
     />
   )

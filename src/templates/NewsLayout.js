@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Layout from './PageLayout'
 import { Section } from '../components/StyledGeneral'
+import ContentWrapper from '../components/ContentWrapper'
 import Image from '../components/Image'
 
 function NewsLayout(props) {
@@ -14,18 +15,15 @@ function NewsLayout(props) {
       hero,
       cta,
       news: { title, subtitle, image, author, publishDate, content },
+      news_bg: {
+        file: { url: bgUrl },
+      },
       hubspot,
       latest,
       footer,
     },
     pageContext: { pathBuild },
   } = props
-
-  const contentConfig = {
-    internal: { type: 'ContentfulRichText' },
-    htmlBody: content,
-    displayTitle: false,
-  }
 
   const seoModuleConfig = {
     internal: { type: 'ContentfulSeo' },
@@ -36,6 +34,12 @@ function NewsLayout(props) {
     pageType: 'news',
   }
 
+  const contentConfig = {
+    internal: { type: 'ContentfulRichText' },
+    htmlBody: content,
+    displayTitle: false,
+  }
+
   return (
     <Layout {...props}>
       {contentfulModuleToComponent(seoModuleConfig)}
@@ -43,15 +47,17 @@ function NewsLayout(props) {
       <div className="news-page-content">
         {contentfulModuleToComponent(hero)}
         <NewsContainer>
-          {contentfulModuleToComponent(cta)}
-          <Title>{title}</Title>
-          <Subtitle>{subtitle}</Subtitle>
-          <Image image={image} />
-          {contentfulModuleToComponent({
-            ...author,
-            publishDate,
-          })}
-          <NewsContentWrapper>
+          <ContentWrapper>
+            {contentfulModuleToComponent(cta)}
+            <Title>{title}</Title>
+            <Subtitle>{subtitle}</Subtitle>
+            <Image image={image} />
+            {contentfulModuleToComponent({
+              ...author,
+              publishDate,
+            })}
+          </ContentWrapper>
+          <NewsContentWrapper bgUrl={bgUrl}>
             {contentfulModuleToComponent(contentConfig)}
             {contentfulModuleToComponent(hubspot)}
           </NewsContentWrapper>
@@ -68,9 +74,20 @@ const NewsContainer = styled(Section)`
 `
 
 const NewsContentWrapper = styled.div`
-  max-width: 784px;
-  margin: 0 auto;
-  padding: 0 20px;
+  ${({ bgUrl }) =>
+    bgUrl
+      ? ` background-image: url(${bgUrl});
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: bottom;
+   `
+      : ''}
+
+  & > * {
+    max-width: 784px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
 `
 
 const Title = styled.h2``
@@ -123,6 +140,12 @@ export const NewsLayoutQuery = graphql`
 
     news: contentfulNews(contentful_id: { eq: $news_content_id }) {
       ...ContentfulNewsFields
+    }
+
+    news_bg: contentfulAsset(contentful_id: { eq: "3hGSTCAVrdhSMmLJHSHOWT" }) {
+      file {
+        url
+      }
     }
 
     hubspot: contentfulHubSpotForm(
