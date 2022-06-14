@@ -394,7 +394,7 @@ const FeatureInner = styled.div`
   }
 `
 const CTAWrapper = styled.div`
-  margin-top: 20px;
+  margin-top: 40px;
   a {
     min-width: 160px;
   }
