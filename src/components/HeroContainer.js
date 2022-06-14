@@ -74,16 +74,20 @@ const HeroContainerComponent = props => {
   }
 
   const scrollRef = React.useRef(null)
+  const scrollHero = React.useRef(null)
   const [scrolled, setScrolled] = React.useState(false)
+  
   const onScroll = () => {
     const windowY =
       window.pageYOffset ||
       document.documentElement.scrollTop ||
       document.body.scrollTop ||
       0
-    if (0 < windowY) {
+    if (scrollRef.current.getBoundingClientRect().top <= scrollHero.current.offsetTop){
       setScrolled(true)
-    } else {
+    }
+
+    if (windowY <= 80){
       setScrolled(false)
     }
   }
@@ -108,13 +112,13 @@ const HeroContainerComponent = props => {
         </FavIconContainer>
       ) : null}
       <HeroContainer
-        scrolled={scrolled}
         isThankYou={isThankYou}
         sectionPadding={sectionPadding || ''}
         headlineBorderBottom={headlineBorderBottom}
         isStyleCenterSimple={isStyleCenterSimple}
         showFavIcon={showFavIcon}
         image={!isThankYou && backgroundImage}
+        ref={scrollHero}
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor,
           [`bg-mobile-${backgroundColorMobile}`]: backgroundColorMobile,
@@ -303,7 +307,7 @@ const HeroContainer = styled(Section)`
   }
   &.scrolled.custom-newsHero {
     + div{
-     padding-top: 216px !important; 
+     padding-top: 300px !important; 
     }
     position: fixed;
     z-index: 2;
@@ -345,6 +349,9 @@ const HeroContainer = styled(Section)`
 
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
     padding-top: 0;
+    &.custom-newsHero.bg-default:not(.noPaddingBottom) + div{
+      padding-top: 64px !important; 
+    }
   }
 
   ${({ showFavIcon }) =>
