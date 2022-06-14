@@ -1,14 +1,25 @@
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
-import { navigate } from '@reach/router';
+import { navigate } from '@reach/router'
 import lowerCase from 'lodash/lowerCase'
 const DownloadContainer = props => {
-  const { activeId, label, id, typeLayout, setActiveStateId, isTabParam } = props
+  const {
+    activeId,
+    label,
+    id,
+    typeLayout,
+    setActiveStateId,
+    isTabParam,
+  } = props
   return (
     <Item
       typeLayout={typeLayout}
       active={activeId === id}
-      onClick={isTabParam ? () => navigate(`?category=${encodeURIComponent(lowerCase(label))}`) : () => setActiveStateId(id) }
+      onClick={
+        isTabParam
+          ? () => navigate(`?category=${encodeURIComponent(lowerCase(label))}`)
+          : () => setActiveStateId(id)
+      }
     >
       {label}
     </Item>

@@ -4,7 +4,14 @@ import styled, { withTheme } from 'styled-components'
 import TabHeaderItem from './TabHeaderItem'
 
 const TabHeader = props => {
-  const { items, activeId, centerAlign, typeLayout, setActiveStateId, isTabParam } = props
+  const {
+    items,
+    activeId,
+    centerAlign,
+    typeLayout,
+    setActiveStateId,
+    isTabParam,
+  } = props
   return (
     <Header centerAlign={centerAlign} typeLayout={typeLayout}>
       <HeaderInner typeLayout={typeLayout}>

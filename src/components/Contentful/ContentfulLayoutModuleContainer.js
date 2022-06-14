@@ -137,6 +137,7 @@ ContentfulModuleContainer.propTypes = {
     description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     paddingTop: PropTypes.string,
     backgroundColor: PropTypes.string,
+    backgroundImage: PropTypes.object,
     headlineAlignCenter: PropTypes.bool,
     contentAlignCenter: PropTypes.bool,
     displayHeadline: PropTypes.bool,

@@ -19,13 +19,23 @@ const PaginationWrapper = props => {
   }
   return (
     <Wrapper>
-      {!isFirst ? <ArrowIcon onClick={() => handleClickPage(active - 1)} className="n-icon icon-arrow-left-thin" /> : null}
+      {!isFirst ? (
+        <ArrowIcon
+          onClick={() => handleClickPage(active - 1)}
+          className="n-icon icon-arrow-left-thin"
+        />
+      ) : null}
       {list.map(item => (
         <Item active={active === item} onClick={() => handleClickPage(item)}>
           {item}
         </Item>
       ))}
-      {!isLast ? <ArrowIcon onClick={() => handleClickPage(active + 1)} className="n-icon icon-arrow-right-thin" /> : null}
+      {!isLast ? (
+        <ArrowIcon
+          onClick={() => handleClickPage(active + 1)}
+          className="n-icon icon-arrow-right-thin"
+        />
+      ) : null}
     </Wrapper>
   )
 }
@@ -33,14 +43,15 @@ const PaginationWrapper = props => {
 export default PaginationWrapper
 
 const Item = styled.div`
-  color: ${({ active, theme }) => (active ? theme.primaryColor : theme.text.default)};
+  color: ${({ active, theme }) =>
+    active ? theme.primaryColor : theme.text.default};
   width: 40px;
   height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   margin: 0 12px;
-  cursor: pointer ;
+  cursor: pointer;
 `
 
 const Wrapper = styled.div`
@@ -50,8 +61,8 @@ const Wrapper = styled.div`
   justify-content: center;
 `
 const ArrowIcon = styled.span`
-font-size: 24px;
-cursor: pointer ;
+  font-size: 24px;
+  cursor: pointer;
   &:first-child {
     margin-right: 24px;
   }

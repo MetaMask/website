@@ -8,7 +8,7 @@ import queryString from 'query-string'
 const PaginationWrapper = props => {
   const { data, numberOfItem: numberOfItemDefault, listingComponent } = props
   let paramPage = 1,
-      params= {};
+    params = {}
   const location = useLocation()
   const { search } = location
   if (search) {

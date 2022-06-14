@@ -8,10 +8,16 @@ import queryString from 'query-string'
 import lowerCase from 'lodash/lowerCase'
 
 const TabWrapper = props => {
-  const { tabs, activeTabDefault, centerAlign = true, typeLayout, isTabParam } = props
+  const {
+    tabs,
+    activeTabDefault,
+    centerAlign = true,
+    typeLayout,
+    isTabParam,
+  } = props
   let activeId = activeTabDefault
   const location = useLocation()
-  const [activeStateId, setActiveStateId] = React.useState(activeTabDefault);
+  const [activeStateId, setActiveStateId] = React.useState(activeTabDefault)
   const { search } = location
   if (search && isTabParam) {
     const param = queryString.parse(search)
