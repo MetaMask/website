@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import Wrapper from './ContentWrapper'
 import Card from './Card'
 import { getNewsUrl } from '../lib/utils/news'
 
@@ -11,11 +10,11 @@ import { getNewsUrl } from '../lib/utils/news'
  * @prop -
  */
 function NewsList(props) {
-  const { stories } = props
+  const { data } = props
 
   return (
-    <Wrapper>
-      {stories.map(news => {
+    <>
+      {data.map(news => {
         const { title, subtitle, image } = news
         const newsUrl = getNewsUrl(news)
         return (
@@ -28,12 +27,12 @@ function NewsList(props) {
           />
         )
       })}
-    </Wrapper>
+    </>
   )
 }
 
 NewsList.propTypes = {
-  stories: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 }
 
 export default NewsList

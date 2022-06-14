@@ -36,6 +36,7 @@ const ContentfulModuleContainer = props => {
   const bgUrl = parseContentfulAssetUrl(backgroundImage)
   const sideImageUrl = parseContentfulAssetUrl(sideImage)
   const htmlData = previewMode ? description : html
+  const isCategoryTab = customClass === 'newsCategoriesTab' && isTab
   const tabs =
     isTab && modules && modules.length
       ? modules.map(item => ({
@@ -95,6 +96,7 @@ const ContentfulModuleContainer = props => {
                 tabs={tabs}
                 typeLayout={'module'}
                 activeTabDefault={modules[0].contentful_id}
+                isTabParam={isCategoryTab}
               ></TabWrapper>
             ) : null}
             {!isTab && modules && modules.length ? (

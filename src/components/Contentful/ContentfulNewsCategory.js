@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 import NewsList from '../NewsList'
+import PaginationWrapper from '../Pagination'
 
 function ContentfulNewsCategory(props) {
   const {
@@ -38,13 +39,19 @@ function ContentfulNewsCategory(props) {
   `)
 
   let stories = data.stories?.nodes || []
-  // TODO: Filter based on Category
+  stories = stories.filter(({ categories }) =>
+    categories.some(
+      ({ contentful_id: categoryId }) => categoryId === contentful_id
+    )
+  )
 
-  if (stories && numberOfItem) {
-    stories = stories.slice(0, numberOfItem)
-  }
-
-  return <NewsList stories={stories} />
+  return (
+    <PaginationWrapper
+      data={stories}
+      numberOfItem={numberOfItem}
+      listingComponent={NewsList}
+    />
+  )
 }
 
 export default ContentfulNewsCategory
