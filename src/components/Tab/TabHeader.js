@@ -57,6 +57,13 @@ const HeaderInner = styled.div`
     padding: 5px 8px;
     background: ${theme.background.tabModuleOuter};
     border-radius: 999px;
+
+    @media (max-width: ${theme.device.mobileMediaMax}){
+      width: 100%;
+      flex-direction: column;
+      border-radius: 8px;
+      padding: 8px;
+    }
   `
       : ''}
 `
