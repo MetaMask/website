@@ -625,11 +625,20 @@ const HeroTitle = styled.h1`
   line-height: 1.2;
   padding-top: 20px;
   padding-bottom: 20px;
+  body.dark-mode .custom-newsHero &{
+    color: ${({ theme }) => theme.textColor};
+  }
 
   .newsHero & {
     font-size: 40px !important;
   }
-  
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    .newsHero & {
+      font-size: 30px !important;
+      line-height: 32px;
+      padding-bottom: 8px;
+    }
+  }
   ${({ hideHeadline }) =>
     hideHeadline
       ? `

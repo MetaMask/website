@@ -69,13 +69,16 @@ const Item = styled.div`
     color: ${active ? theme.white : theme.text.dark};
     min-width: 200px;
     white-space: nowrap;
-    
+
+    @media (max-width: ${theme.device.miniDesktopMediaMax}){
+      min-width: 100px;
+    }
     @media (max-width: ${theme.device.tabletMediaMax}){
       padding: 8px 16px;
     }
     @media (max-width: ${theme.device.mobileMediaMax}){
       padding: 8px 12px;
-      min-width: 150px;
+      width: 100%;
       font-size: 14px;
     }
   `

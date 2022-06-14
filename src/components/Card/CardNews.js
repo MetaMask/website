@@ -86,12 +86,16 @@ const CardInner = styled(Link)`
 `
 
 const ImageWrapper = styled.div`
-  border-radius: 12px;
-  background: #F2F4F6;
   min-height: 176px;
   margin-bottom: 24px;
   padding: 10px 16px;
-
+  border-radius: 12px;
+  body.light-mode &{
+    background: #F2F4F6;
+  }
+  body.dark-mode &{
+    background: #F2F4F615;
+  }
   img {
     height: 100%;
     width: auto;
@@ -135,7 +139,7 @@ const Title = styled.div`
   font-weight: 700;
   font-size: 18px;
   margin-bottom: 12px;
-
+    
   ${({ layoutSize }) =>
     layoutSize === 'small'
       ? `
@@ -153,7 +157,6 @@ const Title = styled.div`
 
 const Description = styled.div`
   display: block;
-  color: #535A61;
   line-height: 24px;
   &:not(:last-child) {
     margin-bottom: 64px;
@@ -161,6 +164,9 @@ const Description = styled.div`
 
   p:last-child {
     margin-bottom: 0;
+  }
+  body.light-mode &{
+    color: #535A61;
   }
 `
 const CTAWrapper = styled.div`
