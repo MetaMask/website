@@ -84,10 +84,6 @@ const CTA = props => {
       // Detect Web3 Wallet
       if (typeof window.ethereum !== 'undefined') {
         setKeyBrowser('metamask')
-        if (downloadBrowsers['metamask']) {
-          // Temporarily hide the button when have installed the MetaMask extension.
-          hideButton = true
-        }
       } else if (isMobile) {
         if (isAndroid && downloadBrowsers['android']) {
           setKeyBrowser('android')
@@ -162,6 +158,7 @@ const CTA = props => {
                 </BrowserItem>
               )
             }
+            return null
           })}
         </BrowserList>
       </BrowserWrapper>

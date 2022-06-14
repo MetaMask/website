@@ -39,7 +39,7 @@ const Button = props => {
       ) : null}
       <span>{text}</span>
       {iconPosition === 'end' && iconUrl ? (
-        <Icon>
+        <Icon hasBg>
           <Image src={iconUrl} />
         </Icon>
       ) : null}
@@ -60,16 +60,32 @@ Button.propTypes = {
 
 const Icon = styled.span`
   display: inline-flex;
+
   &:first-child {
     margin-right: 8px;
   }
   &:last-child {
     margin-left: 8px;
   }
-  img {
-    width: 32px;
-    height: 32px;
-  }
+  ${({ hasBg }) =>
+    hasBg
+      ? `
+      background: #FFFFFF;
+      border-radius: 50%;
+      height: 32px;
+      width: 32px;
+      img {
+        width: 28px;
+        height: 28px;
+        margin: auto;
+      }
+    `
+      : `
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    `}
 `
 const ButtonWrapper = styled(Link)`
   color: #fff;
@@ -99,7 +115,7 @@ const ButtonWrapper = styled(Link)`
         }
   }`}
 
-  ${({ color, size, theme }) =>
+  ${({ color, theme }) =>
     color === 'white-outline'
       ? `
   background: transparent !important;
