@@ -285,5 +285,9 @@ const SubInfo = styled.div`
 const TabContent = styled.div`
   @media (min-width: ${({ theme }) => theme.device.tablet}) {
     padding: 0 48px;
+    
+    .newsCategoriesTab & {
+      padding: 0;
+    }
   }
 `

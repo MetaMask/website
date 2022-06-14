@@ -75,11 +75,10 @@ StyledCard.propTypes = {
 }
 
 const Card = styled.div`
-  margin-top: 32px;
+  margin-top: 16px;
 `
 
 const CardInner = styled(Link)`
-  padding: 24px 24px 32px;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -87,9 +86,10 @@ const CardInner = styled(Link)`
 `
 
 const ImageWrapper = styled.div`
-  height: 220px;
+  border-radius: 12px;
+  background: #F2F4F6;
+  min-height: 176px;
   margin-bottom: 24px;
-  border-radius: 100%;
   padding: 10px 16px;
 
   img {

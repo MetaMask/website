@@ -299,10 +299,10 @@ const HeroContainer = styled(Section)`
   min-width: 100%;
   transition: all 0.5s ease;
   &.custom-newsHero + div{
-    padding-top: 96px !important; 
+    padding-top: 64px !important; 
   }
   &.scrolled.custom-newsHero {
-    +div{
+    + div{
      padding-top: 216px !important; 
     }
     position: fixed;
