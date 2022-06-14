@@ -205,6 +205,7 @@ FeatureComponent.propTypes = {
 }
 
 const Container = styled(Section)``
+
 const Image = styled.div`
   display: block;
   width: 100%;
@@ -394,7 +395,7 @@ const FeatureInner = styled.div`
   }
 `
 const CTAWrapper = styled.div`
-  margin-top: 20px;
+  margin-top: 40px;
   a {
     min-width: 160px;
   }
