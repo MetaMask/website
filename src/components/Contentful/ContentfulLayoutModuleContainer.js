@@ -36,6 +36,7 @@ const ContentfulModuleContainer = props => {
   const bgUrl = parseContentfulAssetUrl(backgroundImage)
   const sideImageUrl = parseContentfulAssetUrl(sideImage)
   const htmlData = previewMode ? description : html
+  const isCategoryTab = customClass === 'newsCategoriesTab' && isTab
   const tabs =
     isTab && modules && modules.length
       ? modules.map(item => ({
@@ -95,6 +96,7 @@ const ContentfulModuleContainer = props => {
                 tabs={tabs}
                 typeLayout={'module'}
                 activeTabDefault={modules[0].contentful_id}
+                isTabParam={isCategoryTab}
               ></TabWrapper>
             ) : null}
             {!isTab && modules && modules.length ? (
@@ -135,6 +137,7 @@ ContentfulModuleContainer.propTypes = {
     description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     paddingTop: PropTypes.string,
     backgroundColor: PropTypes.string,
+    backgroundImage: PropTypes.object,
     headlineAlignCenter: PropTypes.bool,
     contentAlignCenter: PropTypes.bool,
     displayHeadline: PropTypes.bool,
@@ -282,5 +285,9 @@ const SubInfo = styled.div`
 const TabContent = styled.div`
   @media (min-width: ${({ theme }) => theme.device.tablet}) {
     padding: 0 48px;
+
+    .newsCategoriesTab & {
+      padding: 0;
+    }
   }
 `

@@ -205,7 +205,6 @@ FeatureComponent.propTypes = {
 }
 
 const Container = styled(Section)``
-
 const Image = styled.div`
   display: block;
   width: 100%;

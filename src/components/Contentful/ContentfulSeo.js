@@ -11,6 +11,7 @@ const ContentfulSeo = props => {
       metaTags,
       linkTags,
       featuredImage,
+      pageType = 'page',
       pagePath,
     },
   } = props
@@ -23,6 +24,7 @@ const ContentfulSeo = props => {
     <SEO
       title={pageTitle}
       description={pageDescription}
+      pageType={pageType}
       pagePath={pagePath}
       image={featuredImage}
       metaTags={ex_metaTags}

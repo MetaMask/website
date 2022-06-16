@@ -8,6 +8,7 @@ import Link from './Link'
 import CardFeature from './Card/CardFeature'
 import CardFeatureHorizontal from './Card/CardFeatureHorizontal'
 import CardHorizontal from './Card/CardHorizontal'
+import CardNews from './Card/CardNews'
 import ContextClientSide from '../Context/ContextClientSide'
 
 /**
@@ -40,6 +41,9 @@ const StyledCard = props => {
     case 'horizontal':
       // code block
       return <CardHorizontal {...props} isDarkMode={isDarkMode} />
+    case 'news':
+      // code block
+      return <CardNews {...props} isDarkMode={isDarkMode} />
     default:
     // code block
   }

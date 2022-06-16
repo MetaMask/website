@@ -3,7 +3,15 @@ import HubspotForm from '../hubspotForm'
 import React from 'react'
 const ContentfulHubSpotForm = props => {
   const {
-    moduleConfig: { portalId, formId, campaignId, title, displayTitle, width },
+    moduleConfig: {
+      portalId,
+      formId,
+      campaignId,
+      title,
+      displayTitle,
+      width,
+      customClass,
+    },
   } = props
 
   return (
@@ -14,6 +22,7 @@ const ContentfulHubSpotForm = props => {
       title={title}
       displayTitle={displayTitle}
       width={width}
+      customClass={customClass}
     />
   )
 }
@@ -28,5 +37,6 @@ ContentfulHubSpotForm.propTypes = {
     title: PropTypes.string,
     displayTitle: PropTypes.bool,
     width: PropTypes.string,
+    customClass: PropTypes.string,
   }),
 }

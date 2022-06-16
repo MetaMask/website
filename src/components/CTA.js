@@ -6,11 +6,13 @@ import isEmpty from 'lodash/isEmpty'
 import lowerCase from 'lodash/lowerCase'
 import { isAndroid, isIOS, isMobile, browserName } from 'react-device-detect'
 import Link from './Link'
+import SocialIcon from './SocialIcon'
 import styled from 'styled-components'
 import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
 import Popup from './Popup'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Image from './Image'
+import classnames from 'classnames'
 
 const CTA = props => {
   const {
@@ -33,6 +35,7 @@ const CTA = props => {
     eventLabel,
     hubSpotForm,
     buttonSecondary,
+    socialLink,
   } = props
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
   const isButton = buttonDisplay || button
@@ -103,7 +106,12 @@ const CTA = props => {
     }
   }, [downloadBrowsers, isDownloadBrowser, lowerBrowserName])
   let ele = (
-    <CTAContainer className="ctaModuleContainer" align={align}>
+    <CTAContainer
+      className={classnames('ctaModuleContainer', {
+        socialLink: socialLink,
+      })}
+      align={align}
+    >
       <ContentWrapper
         to={link}
         newTab={newTab || isDownloadBrowser}
@@ -111,7 +119,10 @@ const CTA = props => {
         typeLayout={typeLayout}
         onClick={handleCustomClick}
       >
-        {text} {!isHideArrow ? <Arrow {...icon} /> : null}
+        {socialLink ? <SocialIcon name={socialLink} /> : null}
+        <LinkTitle>
+          {text} {!isHideArrow || socialLink ? <Arrow {...icon} /> : null}{' '}
+        </LinkTitle>
       </ContentWrapper>
     </CTAContainer>
   )
@@ -191,34 +202,54 @@ CTA.propTypes = {
   newTab: PropTypes.bool,
   eventCategory: PropTypes.string,
   eventLabel: PropTypes.string,
+  socialLink: PropTypes.string,
 }
 
 const CTAContainer = styled.div`
   ${({ align }) =>
-    align
-      ? `
+          align
+                  ? `
     display: flex;
     justify-content: ${alignMapping(align)}
   `
-      : ''}
+                  : ''}
+  &.socialLink {
+    > a {
+      display: flex;
+      justify-items: center;
+      align-items: center;
+      color: ${({ theme }) => theme.text.default};
+    }
+  }
 `
-
+const LinkTitle = styled.span`
+  display: flex;
+  align-items: center;
+  svg {
+    width: 20px;
+    margin-left: 8px;
+    overflow: initial;
+    path {
+      fill: ${({ theme }) => theme.text.default};
+    }
+  }
+`
 const ContentWrapper = styled(Link)`
   transition: all 0.15s ease;
   text-decoration: none;
 
   ${({ typeLayout, color, theme }) =>
-    typeLayout === ''
-      ? `
+          typeLayout === ''
+                  ? `
       color: ${color};
     &:hover {
       color: ${theme.darkBlue};
     }
   `
-      : ``}
+                  : ``}
   ${({ typeLayout, theme }) =>
-    typeLayout === 'header'
-      ? `
+          typeLayout === 'header'
+                  ? `
     font-size: 16px;
     line-height: 22px;
     height: 56px;
@@ -237,10 +268,10 @@ const ContentWrapper = styled(Link)`
       color: ${theme.text.menuHover};
     }
   `
-      : ``}
+                  : ``}
   ${({ typeLayout, theme }) =>
-    typeLayout === 'footer'
-      ? `
+          typeLayout === 'footer'
+                  ? `
     color: ${theme.text.menuFooter};
     font-size: 12px;
     line-height: 30px;
@@ -253,7 +284,7 @@ const ContentWrapper = styled(Link)`
       line-height: 44px;
     }
   `
-      : ``}
+                  : ``}
 `
 
 const alignMapping = align => {
