@@ -5,6 +5,7 @@ import SimpleCta from './SimpleCta'
 import ConsenSysResourcesItem from './ConsenSysResourcesItem'
 import consensysData from '../lib/api/consensys/getData'
 import Loading from './Loading'
+
 const ConsenSysResources = props => {
   const { numberOfItem, categoryId, linkText, link, showDate } = props
   const [items, setItems] = React.useState([])
@@ -81,10 +82,11 @@ const ConsenSysResources = props => {
 export default withTheme(ConsenSysResources)
 
 ConsenSysResources.propTypes = {
-  title: PropTypes.string,
-  ctaText: PropTypes.string,
-  ctaLink: PropTypes.string,
-  backgroundColor: PropTypes.string,
+  categoryId: PropTypes.string,
+  numberOfItem: PropTypes.number,
+  linkText: PropTypes.string,
+  link: PropTypes.string,
+  showDate: PropTypes.bool,
 }
 
 const Wrapper = styled.div`
