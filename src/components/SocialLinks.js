@@ -16,10 +16,12 @@ const SocialLinks = (props) => {
     <Wrapper>
         <SocialLink to={link}>
             <SocialIcon type={name} />
-            <DisplayText>
-                {displayText}
-                <ArrowIcon />
-            </DisplayText>
+            {displayText ? (
+                <DisplayText>
+                    {displayText}
+                    <ArrowIcon />
+                </DisplayText>
+            ) : null}
         </SocialLink>
     </Wrapper>
   );
