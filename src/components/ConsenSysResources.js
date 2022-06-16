@@ -15,7 +15,7 @@ const ConsenSysResources = props => {
     consensysData
       .getBlog({
         categories: categoryId,
-        per_page: numberOfItem,
+        per_page: numberOfItem || 3,
         _fields: 'title,date,link,_links.wp:featuredmedia',
         _embed: 'wp:featuredmedia',
       })
