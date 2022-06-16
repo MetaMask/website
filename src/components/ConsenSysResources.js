@@ -14,7 +14,7 @@ const ConsenSysResources = props => {
   React.useEffect(() => {
     consensysData
       .getBlog({
-        categories: categoryId,
+        categories: categoryId || 0,
         per_page: numberOfItem || 3,
         _fields: 'title,date,link,_links.wp:featuredmedia',
         _embed: 'wp:featuredmedia',
