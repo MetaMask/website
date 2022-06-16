@@ -205,8 +205,33 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
     ctas {
       ...ContentfulCtaFields
     }
+    newsletter {
+      ...ContentfulNewsletterFields
+    }
     backgroundColor
     sectionPadding
+    socialLinks {
+      ...ContentfulSocialLinksFields
+    }
+  }
+`
+
+export const ContentfulNewsletterFields = graphql`
+  fragment ContentfulNewsletterFields on ContentfulNewsletter {
+    ctaText,
+    hubSpotForm {
+      ...ContentfulHubSpotFormFields
+    }
+    showPopup,
+  }
+`
+
+export const ContentfulSocialLinksFields = graphql`
+  fragment ContentfulSocialLinksFields on ContentfulSocialLinks {
+    name,
+    displayText,
+    link,
+    newTab,
   }
 `
 

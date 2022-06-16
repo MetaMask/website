@@ -31,6 +31,7 @@ const ContentfulLayout = props => {
       logos: L,
       hubspotForms: HF,
       fullWidthCtas: FWC,
+      socialLinks: SL,
     },
     pageContext: { modules, pathBuild, themeColor, isFaqLayout, h2FontSize },
     path,
@@ -69,7 +70,7 @@ const ContentfulLayout = props => {
 
   // extract all top-level page modules from GraphQL and return in a flat array for rendering
   const pageModules = flatMapDeep(
-    [H, F, RT, LMC, MC, C, CTA, FAQ, HTML, L, HF, FWC],
+    [H, F, RT, LMC, MC, C, CTA, FAQ, HTML, L, HF, FWC, SL],
     getNodes
   )
 
@@ -257,13 +258,23 @@ export const ContentfulQuery = graphql`
         }
       }
     }
-
+    
     hubspotForms: allContentfulHubSpotForm(
       filter: { contentful_id: { in: $modules } }
     ) {
       edges {
         node {
           ...ContentfulHubSpotFormFields
+        }
+      }
+    }
+
+    socialLinks: allContentfulSocialLinks(
+      filter: { contentful_id: { in: $modules } }
+    ) {
+      edges {
+        node {
+          ...ContentfulSocialLinksFields
         }
       }
     }

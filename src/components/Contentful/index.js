@@ -15,6 +15,8 @@ import ContentfulRichText from './ContentfulRichText'
 import ContentfulSeo from './ContentfulSeo'
 import ContentfulPopupAnnouncement from './ContentfulPopupAnnouncement'
 import ContentfulConsenSysResources from './ContentfulConsenSysResources'
+import ContentfulNewsletter from './ContentfulNewsletter'
+import ContentfulSocialLinks from './ContentfulSocialLinks'
 
 export {
   ContentfulLayoutHeader,
@@ -34,4 +36,6 @@ export {
   ContentfulSeo,
   ContentfulPopupAnnouncement,
   ContentfulConsenSysResources,
+  ContentfulNewsletter,
+  ContentfulSocialLinks,
 }

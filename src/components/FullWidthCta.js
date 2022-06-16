@@ -6,6 +6,7 @@ import Loadable from '@loadable/component'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { Section, SectionTitle } from './StyledGeneral'
 import classnames from 'classnames'
+import SocialLinks from './SocialLinks'
 
 const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
 
@@ -19,8 +20,9 @@ const FullWidthCta = props => {
     marginBottom,
     logoType,
     sectionPadding,
+    socialLinks,
+    newsletter,
   } = props
-
   return (
     <Container
       sectionPadding={sectionPadding}
@@ -57,6 +59,21 @@ const FullWidthCta = props => {
                   })
                 )}
               </CTAWrapper>
+            ) : null}
+            {newsletter ? (
+               <>
+                {contentfulModuleToComponent({
+                  ...newsletter.hubSpotForm,
+                  showPopup: newsletter.showPopup
+                })}
+              </>
+            ) : null}
+            {socialLinks ? (
+              <>
+                {socialLinks.map(item =>
+                  <SocialLinks name={item.name} displayText={item.displayText} link={item.link} newTab={item.newTab}/>
+                )}
+              </>
             ) : null}
           </FullWidthCtaInner>
         </FullWidthCtaWrapper>

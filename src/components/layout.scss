@@ -705,7 +705,6 @@ body {
   padding: 0 15px;
   width: 100%;
 }
-
 input.hs-input.error,
 div.field.error input,
 div.field.error textarea,
@@ -750,6 +749,40 @@ input[type="submit"].hs-button {
   outline: none;
 }
 
+.no-popup .legal-consent-container,
+.no-popup .hs-form-field label{
+  display: none;
+}
+.no-popup .hs-form-field input{
+  border-color: #CDD6E1;
+  border-radius: 50px;
+}
+.no-popup .hs-form-field input,
+.no-popup .hs-form-field input:focus-visible{
+  border-color: #CDD6E1;
+  outline: none;
+  border-radius: 50px;
+}
+.no-popup form{
+  position: relative;
+}
+.no-popup .hs-submit{
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 50px;
+}
+.no-popup .hs-submit input[type=submit].hs-button{
+  border-radius: 50px;
+  background: #037dd6;
+}
+.no-popup .hs-submit input[placeholder] {
+  color: #CDD6E1;
+}
+.no-popup .submitted-message{
+  margin-bottom: 1.45rem;
+}
 .paragraph {
   font-family: 'Euclid Circular B', sans-serif;
   color: #333;
