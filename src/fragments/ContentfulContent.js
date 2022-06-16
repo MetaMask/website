@@ -309,7 +309,6 @@ export const ContentfulConsenSysResourcesFields = graphql`
     internal {
       type
     }
-    title
     categoryId
     numberOfItem
     linkText
