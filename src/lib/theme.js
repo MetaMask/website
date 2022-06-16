@@ -122,9 +122,9 @@ export const defaultTheme = {
     cardFeatureInner: 'rgba(3, 125, 214, 0.03)',
   },
   text: {
-    default: theme.black,
+    default: theme.textColor,
     title: theme.darker,
-    body: '#333',
+    body: theme.textColor,
     menu: '#222',
     menuHover: theme.darkBlue,
     menuBgHover: '#e6eaee',
@@ -212,9 +212,9 @@ export const purpleTheme = {
     cardFeatureInner: 'rgba(3, 125, 214, 0.03)',
   },
   text: {
-    default: theme.black,
+    default: theme.textColor,
     title: theme.darker,
-    body: '#333',
+    body: theme.textColor,
     menu: '#222',
     menuHover: theme.darkBlue,
     menuBgHover: '#e6eaee',
