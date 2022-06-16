@@ -228,6 +228,7 @@ const LinkTitle = styled.span`
   svg {
     width: 20px;
     margin-left: 8px;
+    overflow: initial;
     path {
       fill: ${({ theme }) => theme.text.title};
     }
