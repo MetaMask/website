@@ -218,7 +218,7 @@ const CTAContainer = styled.div`
       display: flex;
       justify-items: center;
       align-items: center;
-      color: ${({ theme }) => theme.text.title};
+      color: ${({ theme }) => theme.text.default};
     }
   }
 `
@@ -230,7 +230,7 @@ const LinkTitle = styled.span`
     margin-left: 8px;
     overflow: initial;
     path {
-      fill: ${({ theme }) => theme.text.title};
+      fill: ${({ theme }) => theme.text.default};
     }
   }
 `
