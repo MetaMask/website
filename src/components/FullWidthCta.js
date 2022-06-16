@@ -58,6 +58,9 @@ const FullWidthCta = props => {
                 {ctas.map(cta =>
                   contentfulModuleToComponent({
                     ...cta,
+                    color: ['dark'].includes(backgroundColor)
+                      ? 'white'
+                      : 'black',
                   })
                 )}
               </CTAWrapper>
@@ -137,7 +140,6 @@ const FullWidthCtaInner = styled.div`
 const CTAWrapper = styled.div`
   display: flex;
   flex-flow: wrap;
-  margin-top: 32px;
 
   justify-content: center;
   .button {

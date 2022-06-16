@@ -1243,7 +1243,7 @@ body.dark-mode {
 
 .newsletterOnInstitutional {
   .legal-consent-container,
-  .hs-form-field label {
+  .hs-form-field label:not(.hs-error-msg) {
     display: none;
   }
   .hs-form-field input {
