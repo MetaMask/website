@@ -782,6 +782,18 @@ input[type="submit"].hs-button {
 }
 .no-popup .submitted-message{
   margin-bottom: 1.45rem;
+  display: inline-block;
+  position: relative;
+}
+.submitted-message:before{
+  background:url('/images/icon-check.svg');
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: calc(100% + 10px);
+  content: '';
 }
 .paragraph {
   font-family: 'Euclid Circular B', sans-serif;
