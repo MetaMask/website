@@ -2,9 +2,9 @@
   font-family: 'icomoon';
   src:  url('/fonts/icon/icomoon.eot?araoaz');
   src:  url('/fonts/icon/icomoon.eot?araoaz#iefix') format('embedded-opentype'),
-    url('/fonts/icon/icomoon.ttf?araoaz') format('truetype'),
-    url('/fonts/icon/icomoon.woff?araoaz') format('woff'),
-    url('/fonts/icon/icomoon.svg?araoaz#icomoon') format('svg');
+  url('/fonts/icon/icomoon.ttf?araoaz') format('truetype'),
+  url('/fonts/icon/icomoon.woff?araoaz') format('woff'),
+  url('/fonts/icon/icomoon.svg?araoaz#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -647,7 +647,7 @@ code {
   background-color: hsla(0, 0%, 0%, 0.04);
   border-radius: 3px;
   font-family: "SFMono-Regular", Consolas, "Roboto Mono", "Droid Sans Mono",
-    "Liberation Mono", Menlo, Courier, monospace;
+  "Liberation Mono", Menlo, Courier, monospace;
   padding: 0;
   padding-top: 0.2em;
   padding-bottom: 0.2em;
@@ -1274,7 +1274,6 @@ body.dark-mode {
     color: #cdd6e1;
   }
   .submitted-message {
-    margin-bottom: 1.45rem;
     display: inline-block;
     position: relative;
   }

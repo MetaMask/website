@@ -207,18 +207,18 @@ CTA.propTypes = {
 
 const CTAContainer = styled.div`
   ${({ align }) =>
-    align
-      ? `
+          align
+                  ? `
     display: flex;
     justify-content: ${alignMapping(align)}
   `
-      : ''}
+                  : ''}
   &.socialLink {
     > a {
       display: flex;
       justify-items: center;
       align-items: center;
-      color: ${({ theme }) => theme.text.title};
+      color: ${({ theme }) => theme.text.default};
     }
   }
 `
@@ -228,8 +228,9 @@ const LinkTitle = styled.span`
   svg {
     width: 20px;
     margin-left: 8px;
+    overflow: initial;
     path {
-      fill: ${({ theme }) => theme.text.title};
+      fill: ${({ theme }) => theme.text.default};
     }
   }
 `
@@ -238,17 +239,17 @@ const ContentWrapper = styled(Link)`
   text-decoration: none;
 
   ${({ typeLayout, color, theme }) =>
-    typeLayout === ''
-      ? `
+          typeLayout === ''
+                  ? `
       color: ${color};
     &:hover {
       color: ${theme.darkBlue};
     }
   `
-      : ``}
+                  : ``}
   ${({ typeLayout, theme }) =>
-    typeLayout === 'header'
-      ? `
+          typeLayout === 'header'
+                  ? `
     font-size: 16px;
     line-height: 22px;
     height: 56px;
@@ -267,10 +268,10 @@ const ContentWrapper = styled(Link)`
       color: ${theme.text.menuHover};
     }
   `
-      : ``}
+                  : ``}
   ${({ typeLayout, theme }) =>
-    typeLayout === 'footer'
-      ? `
+          typeLayout === 'footer'
+                  ? `
     color: ${theme.text.menuFooter};
     font-size: 12px;
     line-height: 30px;
@@ -283,7 +284,7 @@ const ContentWrapper = styled(Link)`
       line-height: 44px;
     }
   `
-      : ``}
+                  : ``}
 `
 
 const alignMapping = align => {
