@@ -13,6 +13,7 @@ const ContentfulModuleContainer = props => {
       title,
       eyebrow,
       description,
+      numberOfItem,
       columns,
       columnsOnMobile,
       contentAlignment,
@@ -82,6 +83,7 @@ const ContentfulModuleContainer = props => {
               {modulesOther.map(m =>
                 contentfulModuleToComponent({
                   ...m,
+                  numberOfItem,
                   previewMode,
                 })
               )}
@@ -99,6 +101,7 @@ ContentfulModuleContainer.propTypes = {
   moduleConfig: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.object,
+    numberOfItem: PropTypes.number,
     columns: PropTypes.number,
     contentAlignment: PropTypes.string,
     splitModules: PropTypes.bool,
@@ -163,6 +166,11 @@ const ModulesWrapper = styled.div`
 
 const Content = styled.div`
   display: block;
+
+  .newsCategoriesTab & {
+    margin-bottom: 32px;
+  }
+
   ${({ splitModules, theme }) =>
     splitModules
       ? `
@@ -208,7 +216,6 @@ const Modules = styled.div`
       img {
         max-width: 316px;
       }
-      
     }
     .LogoImageWrapper {
       justify-content: center;

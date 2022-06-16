@@ -6,11 +6,13 @@ import isEmpty from 'lodash/isEmpty'
 import lowerCase from 'lodash/lowerCase'
 import { isAndroid, isIOS, isMobile, browserName } from 'react-device-detect'
 import Link from './Link'
+import SocialIcon from './SocialIcon'
 import styled from 'styled-components'
 import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
 import Popup from './Popup'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Image from './Image'
+import classnames from 'classnames'
 
 const CTA = props => {
   const {
@@ -33,6 +35,7 @@ const CTA = props => {
     eventLabel,
     hubSpotForm,
     buttonSecondary,
+    socialLink,
   } = props
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
   const isButton = buttonDisplay || button
@@ -103,7 +106,12 @@ const CTA = props => {
     }
   }, [downloadBrowsers, isDownloadBrowser, lowerBrowserName])
   let ele = (
-    <CTAContainer className="ctaModuleContainer" align={align}>
+    <CTAContainer
+      className={classnames('ctaModuleContainer', {
+        socialLink: socialLink,
+      })}
+      align={align}
+    >
       <ContentWrapper
         to={link}
         newTab={newTab || isDownloadBrowser}
@@ -111,7 +119,8 @@ const CTA = props => {
         typeLayout={typeLayout}
         onClick={handleCustomClick}
       >
-        {text} {!isHideArrow ? <Arrow {...icon} /> : null}
+        {socialLink ? <SocialIcon name={socialLink} /> : null}
+        {text} {!isHideArrow || socialLink ? <Arrow {...icon} /> : null}
       </ContentWrapper>
     </CTAContainer>
   )
@@ -191,6 +200,7 @@ CTA.propTypes = {
   newTab: PropTypes.bool,
   eventCategory: PropTypes.string,
   eventLabel: PropTypes.string,
+  socialLink: PropTypes.string,
 }
 
 const CTAContainer = styled.div`

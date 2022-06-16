@@ -258,7 +258,7 @@ export const ContentfulQuery = graphql`
         }
       }
     }
-    
+
     hubspotForms: allContentfulHubSpotForm(
       filter: { contentful_id: { in: $modules } }
     ) {

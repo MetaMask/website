@@ -15,8 +15,6 @@ const ContentfulLayoutFullWidthCta = props => {
       logoType,
       sectionPadding,
       previewMode,
-      socialLinks,
-      newsletter,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -31,8 +29,6 @@ const ContentfulLayoutFullWidthCta = props => {
       ctas={ctas}
       logoType={logoType}
       sectionPadding={sectionPadding}
-      socialLinks={socialLinks}
-      newsletter={newsletter}
     />
   )
 }
@@ -43,14 +39,13 @@ ContentfulLayoutFullWidthCta.propTypes = {
   moduleConfig: PropTypes.shape({
     description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     headline: PropTypes.string,
+    hubSpotForm: PropTypes.object,
     ctaLink: PropTypes.string,
     ctaText: PropTypes.string,
     backgroundColor: PropTypes.string,
     showLogoAnimation: PropTypes.bool,
     marginBottom: PropTypes.string,
     ctas: PropTypes.array,
-    socialLinks: PropTypes.array,
     sectionPadding: PropTypes.string,
-    newsletter: PropTypes.object,
   }),
 }

@@ -73,6 +73,36 @@ const HeroContainerComponent = props => {
     heroTitleFontsize = '30px'
   }
 
+  const scrollRef = React.useRef(null)
+  const scrollHero = React.useRef(null)
+  const [scrolled, setScrolled] = React.useState(false)
+
+  const onScroll = () => {
+    const windowY =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0
+    if (
+      scrollRef.current.getBoundingClientRect().top <=
+      scrollHero.current.offsetTop
+    ) {
+      setScrolled(true)
+    }
+
+    if (windowY <= 80) {
+      setScrolled(false)
+    }
+  }
+
+  React.useEffect(() => {
+    window.addEventListener('scroll', onScroll)
+
+    return () => {
+      window.addEventListener('scroll', onScroll)
+    }
+  }, [])
+
   return (
     <>
       {showFavIcon ? (
@@ -91,9 +121,12 @@ const HeroContainerComponent = props => {
         isStyleCenterSimple={isStyleCenterSimple}
         showFavIcon={showFavIcon}
         image={!isThankYou && backgroundImage}
+        ref={scrollHero}
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor,
           [`bg-mobile-${backgroundColorMobile}`]: backgroundColorMobile,
+          [`custom-${customClass}`]: customClass,
+          [`scrolled`]: scrolled,
         })}
       >
         {isThankYou && backgroundImage ? (
@@ -178,6 +211,7 @@ const HeroContainerComponent = props => {
                   fontSize={heroTitleFontsize}
                   isFaq={isFaq}
                   isFlask={isFlask}
+                  ref={scrollRef}
                 >
                   {' '}
                   {headline}{' '}
@@ -270,6 +304,20 @@ const HeroContainer = styled(Section)`
   flex-direction: column;
   justify-content: center;
   min-width: 100%;
+  transition: all 0.5s ease;
+  &.custom-newsHero + div{
+    padding-top: 64px !important; 
+  }
+  &.scrolled.custom-newsHero {
+    + div{
+     padding-top: 300px !important; 
+    }
+    position: fixed;
+    z-index: 2;
+    transition: all 0.5s ease;
+    padding: 8px 0 !important;
+  }
+
   ${({ isThankYou }) =>
     isThankYou
       ? `
@@ -304,6 +352,9 @@ const HeroContainer = styled(Section)`
 
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
     padding-top: 0;
+    &.custom-newsHero.bg-default:not(.noPaddingBottom) + div{
+      padding-top: 64px !important; 
+    }
   }
 
   ${({ showFavIcon }) =>
@@ -376,11 +427,12 @@ const HeroContentContainer = styled.div`
 
     ${HeroCTA} {
       justify-content: center;
+
       .button {
         margin: 0 8px 16px;
       }
     }
-    
+
     & > * {
       width: 100%;
     }
@@ -401,6 +453,7 @@ const HeroContentContainer = styled.div`
     background-size: 90%;
     background-attachment: scroll;
     padding-bottom: 0;
+    transition: all 0.3s ease;
     ${({ isFlask }) =>
       isFlask
         ? `
@@ -510,12 +563,22 @@ const HeroContentContainer = styled.div`
   `
       : ''}
   
+  .scrolled.custom-newsHero &{
+    transition: all 0.3s ease;
+    padding-top: 0 !important;
+  }
 `
 
 const HeroImageTextContainer = styled.div`
   display: block;
   position: relative;
-
+  transition: all 0.5s ease;
+  .scrolled.custom-newsHero &{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.5s ease;
+  }
   ${({ sideImageFlex }) =>
     sideImageFlex
       ? `
@@ -572,7 +635,20 @@ const HeroTitle = styled.h1`
   line-height: 1.2;
   padding-top: 20px;
   padding-bottom: 20px;
-  
+  body.dark-mode .custom-newsHero &{
+    color: ${({ theme }) => theme.textColor};
+  }
+
+  .newsHero & {
+    font-size: 40px !important;
+  }
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    .newsHero & {
+      font-size: 30px !important;
+      line-height: 32px;
+      padding-bottom: 8px;
+    }
+  }
   ${({ hideHeadline }) =>
     hideHeadline
       ? `
@@ -617,6 +693,7 @@ const HeroTitle = styled.h1`
       text-align: left;
   `
       : ''}
+
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     font-size: 46px;
   }
@@ -629,7 +706,24 @@ const HeroTitle = styled.h1`
 const HeroDescription = styled.div`
   display: block;
   margin-bottom: 24px;
-
+  .newsHero & {
+    font-size: 20px;
+    color: #535a61;
+    a {
+      color: #535a61;
+    }
+    p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .scrolled.custom-newsHero & {
+    p {
+      margin-bottom: 0;
+    }
+    margin-bottom: 0;
+  }
   ${({ isFaq }) =>
     isFaq
       ? `

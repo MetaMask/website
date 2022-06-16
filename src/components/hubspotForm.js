@@ -6,9 +6,18 @@ import styled, { withTheme } from 'styled-components'
 import Loading from './Loading'
 
 const HubspotForm = props => {
-  const { portalId, formId, campaignId, title, displayTitle, width, showPopup} = props
+  const {
+    portalId,
+    formId,
+    campaignId,
+    title,
+    displayTitle,
+    width,
+    customClass,
+  } = props
+
   return (
-    <Wrapper width={width} className={classnames({ 'no-popup': !showPopup })}>
+    <Wrapper width={width} className={customClass}>
       {title && displayTitle ? (
         <Title className={classnames('popupTitle')}>{title}</Title>
       ) : null}
@@ -30,9 +39,6 @@ HubspotForm.propTypes = {
   campaignId: PropTypes.string,
   title: PropTypes.string,
   displayTitle: PropTypes.bool,
-  hubSpotForm: PropTypes.object,
-  showPopup: PropTypes.bool,
-  ctaText: PropTypes.string,
 }
 
 export default withTheme(HubspotForm)
