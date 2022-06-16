@@ -139,7 +139,7 @@ const Title = styled.div`
   font-weight: 700;
   font-size: 18px;
   margin-bottom: 12px;
-    
+
   ${({ layoutSize }) =>
     layoutSize === 'small'
       ? `
@@ -165,8 +165,8 @@ const Description = styled.div`
   p:last-child {
     margin-bottom: 0;
   }
-  body.light-mode &{
-    color: #535A61;
+  body.light-mode & {
+    color: #535a61;
   }
 `
 const CTAWrapper = styled.div`

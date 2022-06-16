@@ -226,8 +226,13 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
       }
     }
     marginBottom
+    hubSpotForm {
+      ...ContentfulHubSpotFormFields
+    }
     ctas {
-      ...ContentfulCtaFields
+      ... on ContentfulCta {
+        ...ContentfulCtaFields
+      }
     }
     backgroundColor
     sectionPadding
@@ -374,6 +379,7 @@ export const ContentfulCtaFields = graphql`
     hubSpotForm {
       ...ContentfulHubSpotFormFields
     }
+    socialLink
     downloadBrowsers {
       internal {
         content
@@ -394,6 +400,7 @@ export const ContentfulHubSpotFormFields = graphql`
     campaignId
     displayTitle
     width
+    customClass
   }
 `
 

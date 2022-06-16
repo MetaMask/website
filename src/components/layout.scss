@@ -1046,9 +1046,11 @@ figcaption {
 .logoMetamaskSvg {
   width: 100%;
 }
+
 body {
   transition: background 300ms ease;
 }
+
 body.dark-mode {
   background: #121212;
   color: #fff;
@@ -1193,7 +1195,7 @@ body.dark-mode {
       color: #fff;
       font-size: 10px;
     }
-    
+
   }
 }
 
@@ -1236,5 +1238,54 @@ body.dark-mode {
     .tooltip {
       display: block !important;
     }
+  }
+}
+
+.singleInputForm {
+  .legal-consent-container,
+  .hs-form-field label {
+    display: none;
+  }
+  .hs-form-field input {
+    border-color: #cdd6e1;
+    border-radius: 50px;
+  }
+  .hs-form-field input,
+  .hs-form-field input:focus-visible {
+    border-color: #cdd6e1;
+    outline: none;
+    border-radius: 50px;
+  }
+  form {
+    position: relative;
+  }
+  .hs-submit {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50px;
+  }
+  .hs-submit input[type='submit'].hs-button {
+    border-radius: 50px;
+    background: #037dd6;
+  }
+  .hs-submit input[placeholder] {
+    color: #cdd6e1;
+  }
+  .submitted-message {
+    margin-bottom: 1.45rem;
+    display: inline-block;
+    position: relative;
+  }
+  .submitted-message:before {
+    background: url('/images/icon-check.svg');
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: calc(100% + 10px);
+    content: '';
   }
 }

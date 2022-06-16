@@ -76,18 +76,21 @@ const HeroContainerComponent = props => {
   const scrollRef = React.useRef(null)
   const scrollHero = React.useRef(null)
   const [scrolled, setScrolled] = React.useState(false)
-  
+
   const onScroll = () => {
     const windowY =
       window.pageYOffset ||
       document.documentElement.scrollTop ||
       document.body.scrollTop ||
       0
-    if (scrollRef.current.getBoundingClientRect().top <= scrollHero.current.offsetTop){
+    if (
+      scrollRef.current.getBoundingClientRect().top <=
+      scrollHero.current.offsetTop
+    ) {
       setScrolled(true)
     }
 
-    if (windowY <= 80){
+    if (windowY <= 80) {
       setScrolled(false)
     }
   }

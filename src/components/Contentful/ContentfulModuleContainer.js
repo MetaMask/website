@@ -166,11 +166,11 @@ const ModulesWrapper = styled.div`
 
 const Content = styled.div`
   display: block;
-  
+
   .newsCategoriesTab & {
     margin-bottom: 32px;
   }
-  
+
   ${({ splitModules, theme }) =>
     splitModules
       ? `

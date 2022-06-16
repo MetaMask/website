@@ -23,6 +23,7 @@ const ContentfulCta = props => {
       eventLabel,
       hubSpotForm,
       buttonSecondary,
+      socialLink,
     },
   } = props
   // check work with preview
@@ -54,6 +55,7 @@ const ContentfulCta = props => {
       eventLabel={eventLabel}
       hubSpotForm={hubSpotForm}
       buttonSecondary={buttonSecondary}
+      socialLink={socialLink}
     />
   )
 }
@@ -66,6 +68,7 @@ ContentfulCta.propTypes = {
     ctaLink: PropTypes.string,
     newTab: PropTypes.bool,
     ctaText: PropTypes.string,
+    socialLink: PropTypes.string,
     isButton: PropTypes.bool,
     typeLayout: PropTypes.string,
     isHideArrow: PropTypes.bool,
