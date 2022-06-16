@@ -108,7 +108,7 @@ const CTA = props => {
   let ele = (
     <CTAContainer
       className={classnames('ctaModuleContainer', {
-        socialLink: socialLink,
+        'socialLink': socialLink,
       })}
       align={align}
     >
@@ -120,7 +120,7 @@ const CTA = props => {
         onClick={handleCustomClick}
       >
         {socialLink ? <SocialIcon name={socialLink} /> : null}
-        {text} {!isHideArrow || socialLink ? <Arrow {...icon} /> : null}
+        <SocialTitle> {text} {!isHideArrow || socialLink ? <Arrow /> : null } </SocialTitle>  
       </ContentWrapper>
     </CTAContainer>
   )
@@ -211,8 +211,26 @@ const CTAContainer = styled.div`
     justify-content: ${alignMapping(align)}
   `
       : ''}
+  &.socialLink {
+    >a{
+      display: flex;
+      justify-items: center;
+      align-items: center;
+      color: ${({ theme }) => theme.text.title};
+    }
+  }
 `
-
+const SocialTitle = styled.span`
+  display: flex;
+  align-items: center;
+  svg {
+    width: 20px;
+    margin-left: 8px;
+    path {
+      fill: ${({ theme }) => theme.text.title};
+    }
+  }
+`
 const ContentWrapper = styled(Link)`
   transition: all 0.15s ease;
   text-decoration: none;
