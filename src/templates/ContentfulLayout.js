@@ -31,7 +31,6 @@ const ContentfulLayout = props => {
       logos: L,
       hubspotForms: HF,
       fullWidthCtas: FWC,
-      socialLinks: SL,
     },
     pageContext: { modules, pathBuild, themeColor, isFaqLayout, h2FontSize },
     path,
@@ -70,7 +69,7 @@ const ContentfulLayout = props => {
 
   // extract all top-level page modules from GraphQL and return in a flat array for rendering
   const pageModules = flatMapDeep(
-    [H, F, RT, LMC, MC, C, CTA, FAQ, HTML, L, HF, FWC, SL],
+    [H, F, RT, LMC, MC, C, CTA, FAQ, HTML, L, HF, FWC],
     getNodes
   )
 
@@ -116,34 +115,10 @@ export const ContentfulQuery = graphql`
   ) {
     header: contentfulLayoutHeader(contentful_id: { eq: $headerId }) {
       ...ContentfulLayoutHeaderFields
-      menuItems {
-        ... on ContentfulModuleContainer {
-          columns
-          title
-          displayTitle
-          modules {
-            ... on ContentfulCta {
-              ...ContentfulCtaFields
-            }
-          }
-        }
-      }
     }
 
     footer: contentfulLayoutFooter(contentful_id: { eq: $footerId }) {
       ...ContentfulLayoutFooterFields
-      menuItems {
-        ... on ContentfulModuleContainer {
-          columns
-          title
-          displayTitle
-          modules {
-            ... on ContentfulCta {
-              ...ContentfulCtaFields
-            }
-          }
-        }
-      }
     }
 
     seo: contentfulSeo(contentful_id: { eq: $seoId }) {
@@ -166,23 +141,6 @@ export const ContentfulQuery = graphql`
       edges {
         node {
           ...ContentfulLayoutModuleContainerFields
-          modules {
-            ... on ContentfulRichText {
-              ...ContentfulRichTextFields
-            }
-            ... on ContentfulCta {
-              ...ContentfulCtaFields
-            }
-            ... on ContentfulEmbed {
-              ...ContentfulEmbedFields
-            }
-            ... on ContentfulModuleContainer {
-              ...ContentfulModuleContainerFields
-            }
-            ... on ContentfulHubSpotForm {
-              ...ContentfulHubSpotFormFields
-            }
-          }
         }
       }
     }
@@ -265,16 +223,6 @@ export const ContentfulQuery = graphql`
       edges {
         node {
           ...ContentfulHubSpotFormFields
-        }
-      }
-    }
-
-    socialLinks: allContentfulSocialLinks(
-      filter: { contentful_id: { in: $modules } }
-    ) {
-      edges {
-        node {
-          ...ContentfulSocialLinksFields
         }
       }
     }

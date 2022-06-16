@@ -102,18 +102,6 @@ export const DownloadPageQuery = graphql`
       contentful_id: { eq: "6I0knvqLf0DS5PB72DqUlM" }
     ) {
       ...ContentfulLayoutHeaderFields
-      menuItems {
-        ... on ContentfulModuleContainer {
-          columns
-          title
-          displayTitle
-          modules {
-            ... on ContentfulCta {
-              ...ContentfulCtaFields
-            }
-          }
-        }
-      }
     }
     cta_firefox_browser: contentfulCta(
       contentful_id: { eq: "417gM11RFHEzJJGiVptS0b" }
@@ -210,18 +198,6 @@ export const DownloadPageQuery = graphql`
       contentful_id: { eq: "75bFgEllkMxpVsY8wWlroX" }
     ) {
       ...ContentfulLayoutFooterFields
-      menuItems {
-        ... on ContentfulModuleContainer {
-          columns
-          title
-          displayTitle
-          modules {
-            ... on ContentfulCta {
-              ...ContentfulCtaFields
-            }
-          }
-        }
-      }
     }
 
     seo: contentfulSeo(contentful_id: { eq: "2d9sWm0RbmC5zSEsF8JkiS" }) {
