@@ -24,15 +24,11 @@ export const Section = styled.div`
   padding-bottom: 48px;
   position: relative;
 
-  ${({ sectionPadding, theme }) =>
+  ${({ sectionPadding }) =>
     sectionPadding
       ? `
     padding-top: ${sectionPadding};
     padding-bottom: ${sectionPadding};
-    @media (max-width: ${theme.device.tabletMediaMax}){
-      padding-top: 20px !important;
-      padding-bottom: 20px !important;
-    }
   `
       : ``}
 

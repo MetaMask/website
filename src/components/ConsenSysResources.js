@@ -104,6 +104,10 @@ const Listing = styled.div`
     width: 33.33%;
     padding: 10px;
 
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      width: 50%;
+    }
+
     @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
       width: 100%;
     }
