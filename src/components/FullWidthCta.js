@@ -142,7 +142,7 @@ const CTAWrapper = styled.div`
   flex-flow: wrap;
   margin-top: 32px;
   justify-content: center;
-
+  
   .button {
     margin: 0 8px 16px;
   }

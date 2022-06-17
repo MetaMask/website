@@ -52,13 +52,10 @@ const CTA = props => {
   if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
     label = eventLabel.replace('$browser', downloadBrowsers[keyBrowser].text)
     text = textDefault.replace('$browser', downloadBrowsers[keyBrowser].text)
-    if (['ios', 'android', 'metamask'].includes(keyBrowser)) {
+    if (['ios', 'android'].includes(keyBrowser)) {
       text = downloadBrowsers[keyBrowser].text
     }
     link = downloadBrowsers[keyBrowser]?.link
-    if (keyBrowser === 'metamask') {
-      link = downloadBrowsers[keyBrowser]?.links[lowerBrowserName]
-    }
     iconBrowser = downloadBrowsers[keyBrowser].icon
   }
   const onClosePopup = () => {
@@ -83,11 +80,7 @@ const CTA = props => {
   }
   React.useEffect(() => {
     if (isDownloadBrowser) {
-      let hideButton = false
-      // Detect Web3 Wallet
-      if (typeof window.ethereum !== 'undefined') {
-        setKeyBrowser('metamask')
-      } else if (isMobile) {
+      if (isMobile) {
         if (isAndroid && downloadBrowsers['android']) {
           setKeyBrowser('android')
         } else if (isIOS && downloadBrowsers['ios']) {
@@ -102,7 +95,7 @@ const CTA = props => {
           setKeyBrowser('chrome')
         }
       }
-      setDelayShow(hideButton)
+      setDelayShow(false)
     }
   }, [downloadBrowsers, isDownloadBrowser, lowerBrowserName])
   let ele = (
