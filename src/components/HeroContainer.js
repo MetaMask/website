@@ -48,7 +48,8 @@ const HeroContainerComponent = props => {
   const isInstitutions = pathname === '/institutions/'
   const isInstitutionalChild =
     pathname === '/institutions/portfolio/' ||
-    pathname === '/institutions/compliance/'
+    pathname === '/institutions/compliance/' ||
+    pathname === '/institutions/nft/'
   const isCustody = pathname === '/institutions/custody/'
   const isThankYou = pathname === '/institutions/thank-you/'
   let hubspotWrapper
@@ -487,11 +488,19 @@ const HeroContentContainer = styled.div`
   ${({ isInstitutionalChild, theme }) =>
     isInstitutionalChild
       ? `
-  ${EyebrowWrapper} {
+    ${EyebrowWrapper} {
       img {
         height: 40px;
         width: auto;
         margin: 0 !important;
+      }
+    }
+    
+    @media (max-width: ${theme.device.tabletMediaMax}){
+      ${EyebrowWrapper} {
+        img {
+          margin: 16px auto !important;
+        }
       }
     }
   `
