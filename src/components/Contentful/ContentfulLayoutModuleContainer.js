@@ -277,6 +277,11 @@ const ContentInfo = styled.div`
     padding-top: ${paddingTop};
   `
       : ''}
+
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    text-align: center;
+  }
+  
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     padding-top: 0;
   }

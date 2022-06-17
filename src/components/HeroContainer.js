@@ -476,7 +476,8 @@ const HeroContentContainer = styled.div`
 
     ${({ isInstitutions }) =>
       isInstitutions
-        ? `
+      ? `
+      flex-direction: column;
       background-position: 50% 0%;
       background-size: 250px;
       ${EyebrowWrapper} {

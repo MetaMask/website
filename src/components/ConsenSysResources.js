@@ -101,8 +101,8 @@ const Listing = styled.div`
   margin: -10px;
 
   & > * {
-    width: 33.33%;
     padding: 10px;
+    width: 33.33%;
 
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       width: 50%;
@@ -110,6 +110,7 @@ const Listing = styled.div`
 
     @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
       width: 100%;
+      padding: 24px 10px;
     }
   }
 `
