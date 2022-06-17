@@ -1174,6 +1174,12 @@ body.dark-mode {
     font-size: 18px;
     margin-bottom: 32px;
     text-align: left;
+
+    @media (max-width: 767px){
+      text-align: center;
+      justify-content: center;
+    }
+
     &:before {
       @include ico-content;
       content: "\eb17";
