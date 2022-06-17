@@ -166,12 +166,14 @@ const Inner = styled.div`
 `
 const SideImage = styled.div`
   display: block;
+  margin-top: 40px;
   img {
     filter: drop-shadow(-15px 15px 24px rgba(0, 0, 0, 0.05))
       drop-shadow(-3px 3px 10px rgba(0, 0, 0, 0.07));
     border-radius: 5px;
   }
   @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+    margin-top: 0;
     width: 33.33%;
     .sideImageOverflow & {
       min-width: 500px;
