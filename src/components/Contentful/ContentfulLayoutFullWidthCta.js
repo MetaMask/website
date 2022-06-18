@@ -39,6 +39,7 @@ ContentfulLayoutFullWidthCta.propTypes = {
   moduleConfig: PropTypes.shape({
     description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     headline: PropTypes.string,
+    hubSpotForm: PropTypes.object,
     ctaLink: PropTypes.string,
     ctaText: PropTypes.string,
     backgroundColor: PropTypes.string,

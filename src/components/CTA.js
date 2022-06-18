@@ -6,11 +6,13 @@ import isEmpty from 'lodash/isEmpty'
 import lowerCase from 'lodash/lowerCase'
 import { isAndroid, isIOS, isMobile, browserName } from 'react-device-detect'
 import Link from './Link'
+import SocialIcon from './SocialIcon'
 import styled from 'styled-components'
 import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
 import Popup from './Popup'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Image from './Image'
+import classnames from 'classnames'
 
 const CTA = props => {
   const {
@@ -33,6 +35,7 @@ const CTA = props => {
     eventLabel,
     hubSpotForm,
     buttonSecondary,
+    socialLink,
   } = props
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
   const isButton = buttonDisplay || button
@@ -49,13 +52,10 @@ const CTA = props => {
   if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
     label = eventLabel.replace('$browser', downloadBrowsers[keyBrowser].text)
     text = textDefault.replace('$browser', downloadBrowsers[keyBrowser].text)
-    if (['ios', 'android', 'metamask'].includes(keyBrowser)) {
+    if (['ios', 'android'].includes(keyBrowser)) {
       text = downloadBrowsers[keyBrowser].text
     }
     link = downloadBrowsers[keyBrowser]?.link
-    if (keyBrowser === 'metamask') {
-      link = downloadBrowsers[keyBrowser]?.links[lowerBrowserName]
-    }
     iconBrowser = downloadBrowsers[keyBrowser].icon
   }
   const onClosePopup = () => {
@@ -80,14 +80,8 @@ const CTA = props => {
   }
   React.useEffect(() => {
     if (isDownloadBrowser) {
-      let hideButton = false
-      // Detect Web3 Wallet
-      if (typeof window.ethereum !== 'undefined') {
-        setKeyBrowser('metamask')
-        if (downloadBrowsers['metamask']) {
-          // Temporarily hide the button when have installed the MetaMask extension.
-          hideButton = true
-        }
+      if (typeof navigator?.brave !== 'undefined') {
+        setKeyBrowser('brave')
       } else if (isMobile) {
         if (isAndroid && downloadBrowsers['android']) {
           setKeyBrowser('android')
@@ -103,11 +97,16 @@ const CTA = props => {
           setKeyBrowser('chrome')
         }
       }
-      setDelayShow(hideButton)
+      setDelayShow(false)
     }
   }, [downloadBrowsers, isDownloadBrowser, lowerBrowserName])
   let ele = (
-    <CTAContainer className="ctaModuleContainer" align={align}>
+    <CTAContainer
+      className={classnames('ctaModuleContainer', {
+        socialLink: socialLink,
+      })}
+      align={align}
+    >
       <ContentWrapper
         to={link}
         newTab={newTab || isDownloadBrowser}
@@ -115,7 +114,10 @@ const CTA = props => {
         typeLayout={typeLayout}
         onClick={handleCustomClick}
       >
-        {text} {!isHideArrow ? <Arrow {...icon} /> : null}
+        {socialLink ? <SocialIcon name={socialLink} /> : null}
+        <LinkTitle>
+          {text} {!isHideArrow || socialLink ? <Arrow {...icon} /> : null}{' '}
+        </LinkTitle>
       </ContentWrapper>
     </CTAContainer>
   )
@@ -162,6 +164,7 @@ const CTA = props => {
                 </BrowserItem>
               )
             }
+            return null
           })}
         </BrowserList>
       </BrowserWrapper>
@@ -194,6 +197,7 @@ CTA.propTypes = {
   newTab: PropTypes.bool,
   eventCategory: PropTypes.string,
   eventLabel: PropTypes.string,
+  socialLink: PropTypes.string,
 }
 
 const CTAContainer = styled.div`
@@ -204,8 +208,27 @@ const CTAContainer = styled.div`
     justify-content: ${alignMapping(align)}
   `
       : ''}
+  &.socialLink {
+    > a {
+      display: flex;
+      justify-items: center;
+      align-items: center;
+      color: ${({ theme }) => theme.text.default};
+    }
+  }
 `
-
+const LinkTitle = styled.span`
+  display: flex;
+  align-items: center;
+  svg {
+    width: 20px;
+    margin-left: 8px;
+    overflow: initial;
+    path {
+      fill: ${({ theme }) => theme.text.default};
+    }
+  }
+`
 const ContentWrapper = styled(Link)`
   transition: all 0.15s ease;
   text-decoration: none;

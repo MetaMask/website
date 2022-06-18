@@ -12,6 +12,7 @@ const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
 const FullWidthCta = props => {
   const {
     ctas,
+    hubSpotForm,
     description,
     showLogoAnimation,
     backgroundColor,
@@ -49,11 +50,17 @@ const FullWidthCta = props => {
                 <div dangerouslySetInnerHTML={{ __html: description }} />
               </Description>
             ) : null}
+            {hubSpotForm ? (
+              <>{contentfulModuleToComponent(hubSpotForm)}</>
+            ) : null}
             {ctas ? (
               <CTAWrapper>
                 {ctas.map(cta =>
                   contentfulModuleToComponent({
                     ...cta,
+                    color: ['dark'].includes(backgroundColor)
+                      ? 'white'
+                      : 'black',
                   })
                 )}
               </CTAWrapper>
@@ -68,10 +75,10 @@ const FullWidthCta = props => {
 export default withTheme(FullWidthCta)
 
 FullWidthCta.propTypes = {
-  image: PropTypes.object,
+  hubSpotForm: PropTypes.object,
   headline: PropTypes.string,
   description: PropTypes.string,
-  modules: PropTypes.arrayOf(PropTypes.object.isRequired),
+  ctas: PropTypes.arrayOf(PropTypes.object),
   sectionPadding: PropTypes.string,
 }
 
@@ -102,9 +109,7 @@ const Headline = styled(SectionTitle)`
       ? `
   color: ${theme.white};
   `
-      : `
-  color: ${theme.black};
-  `}
+      : ``}
 
   ${({ showLogoAnimation }) => (showLogoAnimation ? 'padding-top: 0;' : '')}
 
@@ -119,9 +124,7 @@ const FullWidthCtaInner = styled.div`
       ? `
     color: ${theme.white};
   `
-      : `
-    color: ${theme.text.default};
-  `}
+      : ``}
 
   ${({ marginBottom }) =>
     marginBottom
@@ -138,8 +141,8 @@ const CTAWrapper = styled.div`
   display: flex;
   flex-flow: wrap;
   margin-top: 32px;
-
   justify-content: center;
+  
   .button {
     margin: 0 8px 16px;
   }

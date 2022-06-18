@@ -36,6 +36,7 @@ const ContentfulModuleContainer = props => {
   const bgUrl = parseContentfulAssetUrl(backgroundImage)
   const sideImageUrl = parseContentfulAssetUrl(sideImage)
   const htmlData = previewMode ? description : html
+  const isCategoryTab = customClass === 'newsCategoriesTab' && isTab
   const tabs =
     isTab && modules && modules.length
       ? modules.map(item => ({
@@ -95,6 +96,7 @@ const ContentfulModuleContainer = props => {
                 tabs={tabs}
                 typeLayout={'module'}
                 activeTabDefault={modules[0].contentful_id}
+                isTabParam={isCategoryTab}
               ></TabWrapper>
             ) : null}
             {!isTab && modules && modules.length ? (
@@ -135,6 +137,7 @@ ContentfulModuleContainer.propTypes = {
     description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     paddingTop: PropTypes.string,
     backgroundColor: PropTypes.string,
+    backgroundImage: PropTypes.object,
     headlineAlignCenter: PropTypes.bool,
     contentAlignCenter: PropTypes.bool,
     displayHeadline: PropTypes.bool,
@@ -163,12 +166,14 @@ const Inner = styled.div`
 `
 const SideImage = styled.div`
   display: block;
+  margin-top: 40px;
   img {
     filter: drop-shadow(-15px 15px 24px rgba(0, 0, 0, 0.05))
       drop-shadow(-3px 3px 10px rgba(0, 0, 0, 0.07));
     border-radius: 5px;
   }
   @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+    margin-top: 0;
     width: 33.33%;
     .sideImageOverflow & {
       min-width: 500px;
@@ -272,6 +277,11 @@ const ContentInfo = styled.div`
     padding-top: ${paddingTop};
   `
       : ''}
+
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    text-align: center;
+  }
+  
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     padding-top: 0;
   }
@@ -282,5 +292,9 @@ const SubInfo = styled.div`
 const TabContent = styled.div`
   @media (min-width: ${({ theme }) => theme.device.tablet}) {
     padding: 0 48px;
+
+    .newsCategoriesTab & {
+      padding: 0;
+    }
   }
 `

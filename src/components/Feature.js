@@ -279,14 +279,15 @@ const Headline = styled.h2`
   `
       : ''}
 `
-
 const Description = styled.div`
   display: block;
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     text-align: center;
+    * {
+      max-width: initial !important;
+    }
   }
 `
-
 const FeatureWrapper = styled.div`
   display: flex;
   margin: -10px;
@@ -373,7 +374,6 @@ ${({ sectionPadding }) =>
                 `
     : ''}
 `
-
 const FeatureInner = styled.div`
   display: block;
   ${({ contentPaddingTop }) =>
@@ -394,7 +394,7 @@ const FeatureInner = styled.div`
   }
 `
 const CTAWrapper = styled.div`
-  margin-top: 20px;
+  margin-top: 40px;
   a {
     min-width: 160px;
   }
@@ -413,7 +413,11 @@ const Eyebrow = styled.div`
 `
 const FeatureItems = styled.div`
   display: block;
-  margin-top: 72px;
+  margin-top: 32px;
+  margin-right: 32px;
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    margin: 32px 0 auto auto;
+  }
 `
 const FeatureItem = styled.div`
   &:not(:last-child) {

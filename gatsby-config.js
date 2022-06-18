@@ -7,6 +7,7 @@ const envConfig = {
 const env = require('dotenv').config(envConfig)
 console.log('------- CURRENT ENVIRONMENT:', activeEnv.toUpperCase(), '-------')
 
+const { getNewsUrl } = require(`./src/lib/utils/news`);
 const low = require('lowlight')
 const { definer: solidityLangDef } = require('highlightjs-solidity')
 
@@ -107,12 +108,27 @@ if (env.errors) {
                 }
               }
             }
+            allContentfulNews(filter: {isPrivate: {eq: true}}) {
+              edges {
+                node {
+                  title
+                  categories {
+                    name
+                  }
+                }
+              }
+            }
           }`,
-          serialize: ({ site, allSitePage, allContentfulLayout }) => {
+          serialize: ({ site, allSitePage, allContentfulLayout, allContentfulNews }) => {
             let privatePages = ['/preview/']
             allContentfulLayout.edges.map(edge => {
               privatePages.push(edge.node.slug)
             })
+
+            allContentfulNews.edges.map((edge) => {
+              const newsUrl = getNewsUrl(edge.node);
+              privatePages.push(newsUrl);
+            });
 
             let pages = []
             const siteUrl =

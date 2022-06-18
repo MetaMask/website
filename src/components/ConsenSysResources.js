@@ -5,6 +5,7 @@ import SimpleCta from './SimpleCta'
 import ConsenSysResourcesItem from './ConsenSysResourcesItem'
 import consensysData from '../lib/api/consensys/getData'
 import Loading from './Loading'
+
 const ConsenSysResources = props => {
   const { numberOfItem, categoryId, linkText, link, showDate } = props
   const [items, setItems] = React.useState([])
@@ -13,8 +14,8 @@ const ConsenSysResources = props => {
   React.useEffect(() => {
     consensysData
       .getBlog({
-        categories: categoryId,
-        per_page: numberOfItem,
+        categories: categoryId || 0,
+        per_page: numberOfItem || 3,
         _fields: 'title,date,link,_links.wp:featuredmedia',
         _embed: 'wp:featuredmedia',
       })
@@ -81,10 +82,11 @@ const ConsenSysResources = props => {
 export default withTheme(ConsenSysResources)
 
 ConsenSysResources.propTypes = {
-  title: PropTypes.string,
-  ctaText: PropTypes.string,
-  ctaLink: PropTypes.string,
-  backgroundColor: PropTypes.string,
+  categoryId: PropTypes.string,
+  numberOfItem: PropTypes.number,
+  linkText: PropTypes.string,
+  link: PropTypes.string,
+  showDate: PropTypes.bool,
 }
 
 const Wrapper = styled.div`
@@ -99,11 +101,16 @@ const Listing = styled.div`
   margin: -10px;
 
   & > * {
-    width: 33.33%;
     padding: 10px;
+    width: 33.33%;
+
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      width: 50%;
+    }
 
     @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
       width: 100%;
+      padding: 24px 10px;
     }
   }
 `
