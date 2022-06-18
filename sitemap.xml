@@ -24,5 +24,9 @@
 <url> <loc>https://metamask.io/faqs/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/1559/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/about/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/releases/breaking-changes-to-the-meta-mask-provider-are-here-releases-developers/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/developers/breaking-changes-to-the-meta-mask-provider-are-here-developers/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/releases/breaking-changes-to-the-meta-mask-provider-are-here-releases/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/security/breaking-changes-to-the-meta-mask-provider-are-here-security/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/download/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 </urlset>
