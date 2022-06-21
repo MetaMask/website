@@ -86,9 +86,11 @@ const PageLayout = props => {
 
       // Detect Web3 Wallet
       if (typeof window.ethereum !== 'undefined') {
-        setDimensionScript("if (typeof ga === 'function') {" +
-          "ga('set', 'dimension1', 'Web3 Wallet Detected');" +
-          "}")
+        setDimensionScript(
+          "if (typeof ga === 'function') {" +
+            "ga('set', 'dimension1', 'Web3 Wallet Detected');" +
+            '}'
+        )
       }
     }
   }, [pathname])

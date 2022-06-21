@@ -476,7 +476,7 @@ const HeroContentContainer = styled.div`
 
     ${({ isInstitutions }) =>
       isInstitutions
-      ? `
+        ? `
       flex-direction: column;
       background-position: 50% 0%;
       background-size: 250px;
@@ -779,11 +779,15 @@ const HeroSideImage = styled.div`
       border-radius: 5px;
     }
     
-    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) and (max-width: ${({ theme }) => theme.device.twoKResolutionMax}) {
+    @media (min-width: ${({ theme }) =>
+      theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
+  theme.device.twoKResolutionMax}) {
       min-width: 62%;
     }
 
-    @media (max-width: ${({ theme }) => theme.device.tablet}) and (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+    @media (max-width: ${({ theme }) =>
+      theme.device.tablet}) and (max-width: ${({ theme }) =>
+  theme.device.miniDesktopMediaMax}) {
       min-width: 60%;
     } 
   }
@@ -926,4 +930,3 @@ const BackgroundImageContain = styled.div`
     width: 100%;
   }
 `
-

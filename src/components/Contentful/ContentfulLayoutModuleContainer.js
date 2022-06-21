@@ -182,10 +182,12 @@ const SideImage = styled.div`
   }
   width: 100%;
 
-  @media (min-width: ${({ theme }) => theme.device.miniDesktop}) and (max-width: ${({ theme }) => theme.device.twoKResolutionMax}) {
+  @media (min-width: ${({ theme }) =>
+      theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
+      theme.device.twoKResolutionMax}) {
     margin-top: 0;
     width: 33.33%;
-    
+
     .sideImageOverflow & {
       min-width: 500px;
       width: 48%;
@@ -197,7 +199,7 @@ const SideImage = styled.div`
        `
           : ``}
     }
-    
+
     .sideImageOverflowRight & {
       min-width: 500px;
       width: 48%;

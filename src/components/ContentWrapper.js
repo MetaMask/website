@@ -21,7 +21,7 @@ ContentWrapper.propTypes = {
 const Container = styled.div`
   padding-right: 20px;
   padding-left: 20px;
-  
+
   &.overlap-bg-32 {
     transform: translateY(32px);
     margin-bottom: 64px;
@@ -29,10 +29,12 @@ const Container = styled.div`
       margin-top: -32px;
     }
   }
-  
+
   &.sideImageOverflow,
-  &.sideImageOverflowRight{
-    @media (min-width: ${({ theme }) => theme.device.tablet}) and (max-width: ${({ theme }) => theme.device.twoKResolutionMax}) {
+  &.sideImageOverflowRight {
+    @media (min-width: ${({ theme }) =>
+        theme.device.tablet}) and (max-width: ${({ theme }) =>
+        theme.device.twoKResolutionMax}) {
       padding-left: 0;
       padding-right: 0;
     }
@@ -45,11 +47,11 @@ const ContainerInner = styled.div`
   margin-right: auto;
   max-width: 992px;
   width: 100%;
-  
+
   .scrolled.custom-newsHero & {
     max-width: calc(992px + 200px);
   }
-  
+
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     max-width: 728px;
     .scrolled.custom-newsHero & {
@@ -59,12 +61,16 @@ const ContainerInner = styled.div`
 
   .sideImageOverflow &,
   .sideImageOverflowRight & {
-    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) and (max-width: ${({ theme }) => theme.device.twoKResolutionMax}) {
+    @media (min-width: ${({ theme }) =>
+        theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
+        theme.device.twoKResolutionMax}) {
       max-width: 100% !important;
       padding-left: max(calc((100vw - 992px) / 2), 20px);
     }
 
-    @media (min-width: ${({ theme }) => theme.device.tablet}) and (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+    @media (min-width: ${({ theme }) =>
+        theme.device.tablet}) and (max-width: ${({ theme }) =>
+        theme.device.miniDesktopMediaMax}) {
       max-width: 100% !important;
       padding-left: max(calc((100vw - 728px) / 2), 20px);
     }
