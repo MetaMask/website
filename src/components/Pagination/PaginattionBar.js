@@ -63,6 +63,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  order: 1;
 `
 const ArrowIcon = styled.span`
   font-size: 24px;

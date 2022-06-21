@@ -30,7 +30,6 @@ const StyledHeader = props => {
   const [hamburgerActive, setHamburgerActive] = React.useState(false)
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const menuRef = React.useRef()
-  // const headerRef = React.useRef()
   const { header: headerREF } = React.useContext(Context)
   const {headerRef} = headerREF || {}
   const { isDarkMode, setIsDarkMode } = darkModeContextValue || {}
