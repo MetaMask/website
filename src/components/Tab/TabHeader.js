@@ -2,6 +2,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import TabHeaderItem from './TabHeaderItem'
+import { useLocation } from '@reach/router'
+import qs from 'query-string'
+import Context from '../../Context/ContextPage'
 
 const TabHeader = props => {
   const {
@@ -12,8 +15,28 @@ const TabHeader = props => {
     setActiveStateId,
     isTabParam,
   } = props
+  const { header: headerREF } = React.useContext(Context)
+  const {headerRef} = headerREF || {}
+  const { heroContainer: heroContainerREF } = React.useContext(Context)
+  const {heroContainerRef} = heroContainerREF || {}
+
+  const { pagination: paginationContextValue } = React.useContext(Context)
+  const {paginationPage} = paginationContextValue|| {}
+  const ref = React.useRef(null);
+  const location = useLocation();
+  const params = qs.parse(location.search);
+  React.useEffect(() => {
+    if(ref && ref.current && (params.category || params.page)) {
+      const y = headerRef.current.clientHeight + heroContainerRef.current.clientHeight - 60;
+      if (headerRef.current.clientHeight + heroContainerRef.current.clientHeight > 320){
+        window.scrollTo({top: 180, behavior: 'smooth'});
+      } else {
+        window.scrollTo({top: y, behavior: 'smooth'});
+      }
+    }
+  },[params.category, params.page, paginationPage]);
   return (
-    <Header centerAlign={centerAlign} typeLayout={typeLayout}>
+    <Header ref={ref} centerAlign={centerAlign} typeLayout={typeLayout}>
       <HeaderInner typeLayout={typeLayout}>
         {items.map(item => (
           <TabHeaderItem

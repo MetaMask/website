@@ -53,11 +53,16 @@ const ContentfulLayout = props => {
     '&fmt=gif"/>'
 
   const [idFaqActive, setIdFaqActive] = React.useState('')
+  const [paginationPage, setPaginationPage] = React.useState(1)
   const valueContext = {
     faq: {
       idFaqActive,
       setIdFaqActive,
     },
+    pagination: {
+      paginationPage,
+      setPaginationPage
+    }
   }
 
   // takes all modules single content type for a page and returns all instances

@@ -7,6 +7,7 @@ import { useMediaQuery } from 'react-responsive'
 import ToggleDarkMode from './ToggleDarkMode'
 import ContextClientSide from '../Context/ContextClientSide'
 import { setLocalStorage } from '../lib/utils/localStorage'
+import Context from '../Context/ContextPage'
 
 const StyledHeader = props => {
   const {
@@ -29,7 +30,9 @@ const StyledHeader = props => {
   const [hamburgerActive, setHamburgerActive] = React.useState(false)
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const menuRef = React.useRef()
-  const headerRef = React.useRef()
+  // const headerRef = React.useRef()
+  const { header: headerREF } = React.useContext(Context)
+  const {headerRef} = headerREF || {}
   const { isDarkMode, setIsDarkMode } = darkModeContextValue || {}
   const [topMenuMobile, setTopMenuMobile] = React.useState('88px')
 

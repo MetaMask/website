@@ -9,6 +9,7 @@ import classnames from 'classnames'
 import Image from './Image'
 import isEmpty from 'lodash/isEmpty'
 import ContextClientSide from '../Context/ContextClientSide'
+import Context from '../Context/ContextPage'
 
 const HeroContainerComponent = props => {
   const {
@@ -73,9 +74,10 @@ const HeroContainerComponent = props => {
   ) {
     heroTitleFontsize = '30px'
   }
+  const { heroContainer: heroContainerREF } = React.useContext(Context)
+  const {heroContainerRef} = heroContainerREF || {}
 
   const scrollRef = React.useRef(null)
-  const scrollHero = React.useRef(null)
   const [scrolled, setScrolled] = React.useState(false)
 
   const onScroll = () => {
@@ -86,7 +88,7 @@ const HeroContainerComponent = props => {
       0
     if (
       scrollRef.current.getBoundingClientRect().top <=
-      Number(scrollHero.current.offsetTop - 40)
+      Number(heroContainerRef.current.offsetTop - 40)
     ) {
       setScrolled(true)
     }
@@ -122,7 +124,7 @@ const HeroContainerComponent = props => {
         isStyleCenterSimple={isStyleCenterSimple}
         showFavIcon={showFavIcon}
         image={!isThankYou && backgroundImage}
-        ref={scrollHero}
+        ref={heroContainerRef}
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor,
           [`bg-mobile-${backgroundColorMobile}`]: backgroundColorMobile,
@@ -309,9 +311,10 @@ const HeroContainer = styled(Section)`
   &.custom-newsHero + div{
     padding-top: 64px !important;
   }
-  &.scrolled.custom-newsHero {
+  &.scrolled.custom-newsHero.bg-default,
+  &.scrolled.custom-newsHero.bg-default:not(.noPaddingBottom){
     + div{
-     padding-top: 320px !important; 
+     padding-top: 320px !important;
     }
     position: fixed;
     z-index: 2;

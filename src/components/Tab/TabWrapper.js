@@ -17,31 +17,34 @@ const TabWrapper = props => {
   } = props
   let activeId = activeTabDefault
   const location = useLocation()
-  const [activeStateId, setActiveStateId] = React.useState(activeTabDefault)
   const { search } = location
-  if (search && isTabParam) {
-    const param = queryString.parse(search)
-    const { category } = param
-    if (category) {
-      const tabActive = tabs.find(
-        ({ label }) => encodeURIComponent(lowerCase(label)) === category
-      )
-      activeId = tabActive?.id
+  const tabDefaultFromParam = React.useMemo(() => {
+    if (search && isTabParam) {
+      const param = queryString.parse(search)
+      const { category } = param
+      if (category) {
+        const tabActive = tabs.find(
+          ({ label }) => encodeURIComponent(lowerCase(label)) === category
+        )
+        return tabActive?.id
+      }
     }
-  }
+    return activeTabDefault
+  }, [])
+  const [activeStateId, setActiveStateId] = React.useState(isTabParam ? tabDefaultFromParam : activeTabDefault)
   return (
     <Wrapper>
       <TabHeader
         items={tabs}
-        activeId={isTabParam ? activeId : activeStateId}
-        setActiveStateId={isTabParam ? null : setActiveStateId}
+        activeId={activeStateId}
+        setActiveStateId={setActiveStateId}
         centerAlign={centerAlign}
         typeLayout={typeLayout}
         isTabParam={isTabParam}
       />
       <TabContent
         items={tabs}
-        activeId={isTabParam ? activeId : activeStateId}
+        activeId={activeStateId}
         centerAlign={centerAlign}
         typeLayout={typeLayout}
       />

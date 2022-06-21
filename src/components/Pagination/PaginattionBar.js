@@ -11,11 +11,15 @@ function range(end) {
 }
 
 const PaginationWrapper = props => {
-  const { active, isFirst, isLast, total, params: paramsDefault } = props
+  const { active, isFirst, isLast, total, setPageState } = props
   const list = range(total)
   const handleClickPage = i => {
+    if(setPageState){
+      setPageState(i);
+    }
+    const paramsDefault = queryString.parse(window.location.search);
     const params = { ...paramsDefault, page: i }
-    navigate(`?${queryString.stringify(params)}`)
+    window.history.pushState(window.location.search, '', `?${queryString.stringify(params)}`)
   }
   return (
     <Wrapper>
