@@ -51,7 +51,9 @@ const HeroContainerComponent = props => {
     pathname === '/institutions/compliance/' ||
     pathname === '/institutions/nft/'
   const isCustody = pathname === '/institutions/custody/'
-  const isThankYou = pathname === '/institutions/thank-you/'
+  const isThankYou =
+    pathname === '/institutions/thank-you/' ||
+    pathname === '/institutions/defi-web3-report-thank-you/'
   let hubspotWrapper
   if (hubSpotForm) {
     hubspotWrapper = (
