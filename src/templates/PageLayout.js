@@ -11,8 +11,6 @@ import {
 import scrollTo from '../lib/utils/scrollToElement'
 import Context from '../Context/ContextPage'
 import ContextClientSide from '../Context/ContextClientSide'
-import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
-import { browserName } from 'react-device-detect'
 
 /**
  * @name PageLayout
