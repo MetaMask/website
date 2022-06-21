@@ -83,6 +83,7 @@ const theme = {
     miniDesktopMediaMax: '991px',
     desktop: '1200px',
     desktopMediaMax: '1199px',
+    twoKResolutionMax: '2048px',
   },
   spacingLRMobile: '16px',
   footerBg: '#e9ebee',

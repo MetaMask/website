@@ -148,12 +148,19 @@ ContentfulModuleContainer.propTypes = {
 const MainContent = styled.div`
   display: block;
 `
+
 const Inner = styled.div`
   display: block;
   ${({ hasSideImage, theme }) =>
     hasSideImage
       ? ` 
-      @media (min-width: ${theme.device.miniDesktop}) {
+      max-width: 100%;
+      
+      @media (max-width: ${theme.device.miniDesktopMediaMax}){
+        max-width: 728px;
+      }
+      
+      @media (min-width: ${theme.device.miniDesktop}) and (max-width: ${theme.device.twoKResolutionMax})  {
         display: flex;
 
         ${MainContent} {
@@ -164,6 +171,7 @@ const Inner = styled.div`
      `
       : ``}
 `
+
 const SideImage = styled.div`
   display: block;
   margin-top: 40px;
@@ -172,9 +180,14 @@ const SideImage = styled.div`
       drop-shadow(-3px 3px 10px rgba(0, 0, 0, 0.07));
     border-radius: 5px;
   }
-  @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+  width: 100%;
+
+  @media (min-width: ${({ theme }) =>
+      theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
+      theme.device.twoKResolutionMax}) {
     margin-top: 0;
     width: 33.33%;
+
     .sideImageOverflow & {
       min-width: 500px;
       width: 48%;
@@ -186,6 +199,7 @@ const SideImage = styled.div`
        `
           : ``}
     }
+
     .sideImageOverflowRight & {
       min-width: 500px;
       width: 48%;
@@ -224,6 +238,7 @@ const BackgroundSection = styled.div`
       }
       `}
 `
+
 const Container = styled(Section)`
   position: relative;
   ${({ bgUrl }) =>
@@ -238,6 +253,7 @@ const Title = styled(SectionTitle)`
   display: block;
   margin-bottom: 20px;
 `
+
 const Modules = styled.div`
   display: block;
   ${({ contentAlignCenter }) =>
@@ -265,6 +281,7 @@ const Modules = styled.div`
     }
   }
 `
+
 const ContentInfo = styled.div`
   margin-bottom: 40px;
 
@@ -286,9 +303,11 @@ const ContentInfo = styled.div`
     padding-top: 0;
   }
 `
+
 const SubInfo = styled.div`
   display: block;
 `
+
 const TabContent = styled.div`
   @media (min-width: ${({ theme }) => theme.device.tablet}) {
     padding: 0 48px;
