@@ -476,7 +476,7 @@ const HeroContentContainer = styled.div`
 
     ${({ isInstitutions }) =>
       isInstitutions
-      ? `
+        ? `
       flex-direction: column;
       background-position: 50% 0%;
       background-size: 250px;
@@ -772,24 +772,32 @@ const HeroSideImage = styled.div`
     
   `
       : ''}
-  .sideImageOverflow & {
+  .sideImageOverflow &,
+  .sideImageOverflowRight & {
     img {
       filter: drop-shadow(-15px 15px 24px rgba(0, 0, 0, 0.05)) drop-shadow(-3px 3px 10px rgba(0, 0, 0, 0.07));
       border-radius: 5px;
     }
-    @media (min-width: ${({ theme }) => theme.device.desktop}) {
+    
+    @media (min-width: ${({ theme }) =>
+      theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
+  theme.device.twoKResolutionMax}) {
       min-width: 62%;
     }
-  }
 
+    @media (max-width: ${({ theme }) =>
+      theme.device.tablet}) and (max-width: ${({ theme }) =>
+  theme.device.miniDesktopMediaMax}) {
+      min-width: 60%;
+    } 
+  }
   .sideImageFlex45 & {
-    
     @media (min-width: ${({ theme }) => theme.device.desktop}) {
       width: 45%;
     }
   }
+  
   .sideImageFlex40 & {
-    
     @media (min-width: ${({ theme }) => theme.device.desktop}) {
       width: 40%;
     }
@@ -828,6 +836,7 @@ const HeroCTA = styled.div`
     }
   }
 `
+
 const LearnMoreWrapper = styled.div`
   display: block;
 `
@@ -844,6 +853,7 @@ const LearnMoreInner = styled.div`
 const Icon = styled.span`
   font-size: 20px;
 `
+
 const EyebrowWrapper = styled.div`
   display: block;
 
@@ -892,9 +902,11 @@ const FavIconWrapper = styled.div`
 const FavIcon = styled.img`
   width: 40px;
 `
+
 const HubSpotDefault = styled.div`
   display: block;
 `
+
 const EyebrowText = styled.div`
   font-size: 18px;
   line-height: 140.62%;
@@ -902,6 +914,7 @@ const EyebrowText = styled.div`
   text-transform: uppercase;
   color: ${({ theme }) => theme.eyebrowHero};
 `
+
 const BackgroundImageContain = styled.div`
   position: absolute;
   left: 0;
