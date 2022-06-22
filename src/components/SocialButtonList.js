@@ -4,12 +4,17 @@ import styled from 'styled-components'
 import SocialButtonItem from './SocialButtonItem'
 
 const SocialButtonList = () => {
-  const list = [{'name': 'coppy', 'text': 'Coppy link'}, {'name': 'twitter'}, {'name':'facebook'}, {'name': 'linkedin'}];
+  const list = [
+    {'name': 'coppy', 'text': 'Coppy link', 'url': '/'}, 
+    {'name': 'twitter', 'url': '/'}, 
+    {'name':'facebook', 'url': '/'}, 
+    {'name': 'linkedin', 'url': '/'}
+  ];
 
   return (
     <ListIcon>
       {list.map(item => (
-        <SocialButtonItem name={item.name} text={item.text}/>
+        <SocialButtonItem name={item.name} text={item.text} url={item.url}/>
       ))}
     </ListIcon>
   );
@@ -28,7 +33,6 @@ const ListIcon = styled.ul`
   align-items: center;
   li {
     margin: 0 6px;
-    padding: 10px;
     border: 1px solid #BBC0C5;
     border-radius: 8px;
     cursor: pointer;

@@ -29,6 +29,7 @@ export default SocialIcon
 
 const Icon = styled.span`
   display: flex;
+  padding: 10px;
   svg {
     width: 20px;
     height: 20px;

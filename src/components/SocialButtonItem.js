@@ -7,11 +7,12 @@ const SocialButtonItem = (props) => {
   const {
     name,
     text,
+    url,
   } = props;
 
   return (
     <li>
-        <Link ariaLabel={name}>
+        <Link ariaLabel={name} to={url}>
           <SocialIcon name={name} text={text}/>
         </Link>
     </li>
@@ -21,11 +22,13 @@ const SocialButtonItem = (props) => {
 SocialButtonItem.propTypes = {
   name: PropTypes.string,
   text: PropTypes.string,
+  url: PropTypes.string,
 };
 
 SocialButtonItem.defaultProps = {
   name: '',
   text: '',
+  url: '',
 };
 
 export default SocialButtonItem;
