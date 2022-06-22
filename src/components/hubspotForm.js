@@ -18,17 +18,19 @@ const HubspotForm = props => {
 
   return (
     <Wrapper width={width} className={customClass}>
-      {title && displayTitle ? (
-        <Title className={classnames('popupTitle')}>{title}</Title>
-      ) : null}
-      <Form>
-        <ReactHubspotForm
-          portalId={portalId}
-          formId={formId}
-          sfdcCampaignId={campaignId}
-          loading={<Loading />}
-        />
-      </Form>
+      <Content>
+        {title && displayTitle ? (
+          <Title className={classnames('popupTitle')}>{title}</Title>
+        ) : null}
+        <Form>
+          <ReactHubspotForm
+            portalId={portalId}
+            formId={formId}
+            sfdcCampaignId={campaignId}
+            loading={<Loading />}
+          />
+        </Form>
+      </Content>
     </Wrapper>
   )
 }
@@ -53,6 +55,16 @@ const Wrapper = styled.div`
   max-width: 100%;
 
   ${({ width }) => (width ? `width: ${width}` : 'min-width: 300px')}
+`
+
+const Content = styled.div`
+  .newsletterOnNewsDetail &{
+    background: ${({ theme }) => theme.white};
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1); 
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 7px 29px 0px;
+    border-radius: 24px;
+    padding: 32px;
+  }
 `
 
 const Form = styled.div`

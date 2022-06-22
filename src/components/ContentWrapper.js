@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 const ContentWrapper = props => {
   const { children, columns, styleOverride, customClass, ...rest } = props
-
+  console.log(customClass);
   return (
     <Container className={customClass} styleOverride={styleOverride} {...rest}>
       <ContainerInner>{children}</ContainerInner>
@@ -21,6 +21,9 @@ ContentWrapper.propTypes = {
 const Container = styled.div`
   padding-right: 20px;
   padding-left: 20px;
+  &.storiesOnNewsDetail{
+    margin-bottom: 96px;
+  }
   &.overlap-bg-32 {
     transform: translateY(32px);
     margin-bottom: 64px;

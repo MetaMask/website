@@ -288,6 +288,11 @@ const ContentInfo = styled.div`
 `
 const SubInfo = styled.div`
   display: block;
+
+  .storiesOnNewsDetail &{
+    text-align: center;
+    color: ${({ theme }) => theme.text.default};
+  }
 `
 const TabContent = styled.div`
   @media (min-width: ${({ theme }) => theme.device.tablet}) {
