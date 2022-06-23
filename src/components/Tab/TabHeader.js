@@ -42,8 +42,6 @@ const TabHeader = props => {
       }
     }
   }, [
-    headerRef,
-    heroContainerRef,
     params.category,
     params.page,
     paginationPage,
