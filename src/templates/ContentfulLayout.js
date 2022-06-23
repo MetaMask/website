@@ -53,10 +53,15 @@ const ContentfulLayout = props => {
     '&fmt=gif"/>'
 
   const [idFaqActive, setIdFaqActive] = React.useState('')
+  const [paginationPage, setPaginationPage] = React.useState(1)
   const valueContext = {
     faq: {
       idFaqActive,
       setIdFaqActive,
+    },
+    pagination: {
+      paginationPage,
+      setPaginationPage,
     },
   }
 

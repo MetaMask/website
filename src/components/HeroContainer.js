@@ -9,6 +9,7 @@ import classnames from 'classnames'
 import Image from './Image'
 import isEmpty from 'lodash/isEmpty'
 import ContextClientSide from '../Context/ContextClientSide'
+import Context from '../Context/ContextPage'
 
 const HeroContainerComponent = props => {
   const {
@@ -75,9 +76,10 @@ const HeroContainerComponent = props => {
   ) {
     heroTitleFontsize = '30px'
   }
+  const { heroContainer: heroContainerREF } = React.useContext(Context)
+  const { heroContainerRef } = heroContainerREF || {}
 
   const scrollRef = React.useRef(null)
-  const scrollHero = React.useRef(null)
   const [scrolled, setScrolled] = React.useState(false)
 
   const onScroll = () => {
@@ -88,12 +90,12 @@ const HeroContainerComponent = props => {
       0
     if (
       scrollRef.current.getBoundingClientRect().top <=
-      scrollHero.current.offsetTop
+      Number(heroContainerRef.current.offsetTop - 40)
     ) {
       setScrolled(true)
     }
 
-    if (windowY <= 80) {
+    if (windowY <= 40) {
       setScrolled(false)
     }
   }
@@ -124,7 +126,7 @@ const HeroContainerComponent = props => {
         isStyleCenterSimple={isStyleCenterSimple}
         showFavIcon={showFavIcon}
         image={!isThankYou && backgroundImage}
-        ref={scrollHero}
+        ref={heroContainerRef}
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor,
           [`bg-mobile-${backgroundColorMobile}`]: backgroundColorMobile,
@@ -309,16 +311,18 @@ const HeroContainer = styled(Section)`
   min-width: 100%;
   transition: all 0.5s ease;
   &.custom-newsHero + div{
-    padding-top: 64px !important; 
+    padding-top: 64px !important;
+    padding-bottom: 0;
   }
-  &.scrolled.custom-newsHero {
+  &.scrolled.custom-newsHero.bg-default,
+  &.scrolled.custom-newsHero.bg-default:not(.noPaddingBottom){
     + div{
-     padding-top: 300px !important; 
+     padding-top: 320px !important;
     }
     position: fixed;
     z-index: 2;
     transition: all 0.5s ease;
-    padding: 8px 0 !important;
+    padding: 24px 0 !important;
   }
 
   ${({ isThankYou }) =>
@@ -456,7 +460,7 @@ const HeroContentContainer = styled.div`
     background-size: 90%;
     background-attachment: scroll;
     padding-bottom: 0;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
     ${({ isFlask }) =>
       isFlask
         ? `
@@ -576,7 +580,7 @@ const HeroContentContainer = styled.div`
       : ''}
   
   .scrolled.custom-newsHero &{
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
     padding-top: 0 !important;
   }
 `
@@ -647,12 +651,16 @@ const HeroTitle = styled.h1`
   line-height: 1.2;
   padding-top: 20px;
   padding-bottom: 20px;
+  transition: all 0.5s ease;
   body.dark-mode .custom-newsHero &{
     color: ${({ theme }) => theme.textColor};
   }
 
   .newsHero & {
     font-size: 40px !important;
+  }
+  .scrolled.custom-newsHero &{
+    padding: 0;
   }
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     .newsHero & {

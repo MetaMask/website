@@ -256,6 +256,10 @@ const Title = styled(SectionTitle)`
 
 const Modules = styled.div`
   display: block;
+  .storiesOnNewsDetail &{
+    padding-top: 40px;
+    position: relative; 
+  }
   ${({ contentAlignCenter }) =>
     contentAlignCenter
       ? `
@@ -306,6 +310,11 @@ const ContentInfo = styled.div`
 
 const SubInfo = styled.div`
   display: block;
+
+  .storiesOnNewsDetail & {
+    text-align: center;
+    color: ${({ theme }) => theme.text.default};
+  }
 `
 
 const TabContent = styled.div`
