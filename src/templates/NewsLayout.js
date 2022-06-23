@@ -48,7 +48,7 @@ function NewsLayout(props) {
       <div className="news-page-content">
         {contentfulModuleToComponent(hero)}
         <NewsContainer>
-          <ContentWrapper>
+          <ContentWrapper className="news-content">
             {contentfulModuleToComponent(cta)}
             <Title>{title}</Title>
             <Subtitle>{subtitle}</Subtitle>
