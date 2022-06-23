@@ -310,6 +310,7 @@ const HeroContainer = styled(Section)`
   transition: all 0.5s ease;
   &.custom-newsHero + div{
     padding-top: 64px !important;
+    padding-bottom: 0;
   }
   &.scrolled.custom-newsHero.bg-default,
   &.scrolled.custom-newsHero.bg-default:not(.noPaddingBottom){

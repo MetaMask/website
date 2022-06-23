@@ -68,9 +68,7 @@ const Content = styled.div`
     padding: 32px;
     position: absolute;
     z-index: 1;
-    width: 100%;
-    max-height: 450px;
-    overflow: auto;
+    width: calc(100% - 40px);
     .dark-mode & {
       box-shadow: 0 10px 30px 0 rgba(255, 255, 255, 0.2);
     }

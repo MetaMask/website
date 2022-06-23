@@ -216,6 +216,9 @@ const CTAContainer = styled.div`
       color: ${({ theme }) => theme.text.default};
     }
   }
+  .news-content &{
+    padding: 0 22px;
+  }
 `
 const LinkTitle = styled.span`
   display: flex;
@@ -233,6 +236,7 @@ const ContentWrapper = styled(Link)`
   transition: all 0.15s ease;
   text-decoration: none;
   position: relative;
+  .news-content &,
   .storiesOnNewsDetail &{
     padding-left: 20px;
     color: ${({ theme }) => theme.text.default};

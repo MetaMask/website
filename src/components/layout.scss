@@ -1296,10 +1296,7 @@ body.dark-mode {
 }
 
 .newsletterOnNewsDetail{
-  .legal-consent-container{
-    max-height: 70px;
-    overflow: auto;
-  }
+  .legal-consent-container,
   .hs-recaptcha{
     display: none;
   }
@@ -1320,6 +1317,7 @@ body.dark-mode {
   .popupTitle {
     position: relative;
     padding-left: 48px;
+    margin-bottom: 32px;
   }
   .popupTitle:before {
     background: url('/images/telegram.svg');
@@ -1363,7 +1361,7 @@ body.dark-mode {
     input:focus {
       border-color: #037DD6;
     }
-    label{
+    >label{
       display: none;
     }
   }
