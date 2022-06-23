@@ -8,7 +8,6 @@ import Coppy from '../images/icons/icon-coppy.svg'
 
 const SocialIcon = props => {
   const { name, text } = props
-  console.log(text);
   return (
     <Icon>
       {'coppy' === name && <Coppy />}
@@ -40,5 +39,8 @@ const Icon = styled.span`
   span {
     color: #BBC0C5;
     padding-left: 6px;
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      display: none;
+    }
   }
 `

@@ -5,10 +5,10 @@ import SocialButtonItem from './SocialButtonItem'
 
 const SocialButtonList = () => {
   const list = [
-    {'name': 'coppy', 'text': 'Coppy link', 'url': '/'}, 
-    {'name': 'twitter', 'url': '/'}, 
-    {'name':'facebook', 'url': '/'}, 
-    {'name': 'linkedin', 'url': '/'}
+    {'name': 'coppy', 'text': 'Coppy link'}, 
+    {'name': 'twitter', 'url': 'https://twitter.com/intent/tweet?'+window.location.href}, 
+    {'name':'facebook', 'url': 'https://www.facebook.com/sharer/sharer.php?u='+window.location.href}, 
+    {'name': 'linkedin', 'url': 'https://www.linkedin.com/sharing/share-offsite/?url='+window.location.href}
   ];
 
   return (
@@ -36,5 +36,8 @@ const ListIcon = styled.ul`
     border: 1px solid #BBC0C5;
     border-radius: 8px;
     cursor: pointer;
+  }
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    padding-top: 20px;
   }
 `

@@ -1338,6 +1338,9 @@ body.dark-mode {
       span{
         color: #24272A;
         font-weight: normal;
+        .dark-mode &{
+          color: #FFF;
+        }
       }
     }
   }
@@ -1365,5 +1368,8 @@ body.dark-mode {
     margin-bottom: 32px;
     color: #24272A;
     font-weight: normal;
+    .dark-mode &{
+      color: #FFF;
+    }
   }
 }
