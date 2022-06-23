@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
-import { navigate } from '@reach/router'
 import lowerCase from 'lodash/lowerCase'
+import Context from '../../Context/ContextPage'
 const DownloadContainer = props => {
   const {
     activeId,
@@ -11,16 +11,23 @@ const DownloadContainer = props => {
     setActiveStateId,
     isTabParam,
   } = props
+  const { pagination: paginationContextValue } = React.useContext(Context)
+  const { setPaginationPage } = paginationContextValue || {}
+  const changeTab = () => {
+    setActiveStateId(id)
+    if (setPaginationPage) {
+      setPaginationPage(1)
+    }
+    if (isTabParam) {
+      window.history.pushState(
+        '',
+        '',
+        `?category=${encodeURIComponent(lowerCase(label))}`
+      )
+    }
+  }
   return (
-    <Item
-      typeLayout={typeLayout}
-      active={activeId === id}
-      onClick={
-        isTabParam
-          ? () => navigate(`?category=${encodeURIComponent(lowerCase(label))}`)
-          : () => setActiveStateId(id)
-      }
-    >
+    <Item typeLayout={typeLayout} active={activeId === id} onClick={changeTab}>
       {label}
     </Item>
   )

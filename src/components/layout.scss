@@ -1294,3 +1294,99 @@ body.dark-mode {
     content: '';
   }
 }
+
+.newsletterOnNewsDetail{
+  .hs-email{
+    position: relative;
+  }
+  .hs-submit{
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    input{
+      padding: 14px 40px !important;
+      font-weight: normal;
+    }
+  }
+  .legal-consent-container,
+  .hs-recaptcha{
+    display: none;
+  }
+  .submitted-message {
+    position: relative;
+    padding-left: 32px;
+  }
+  .submitted-message:before {
+    background: url('/images/icon-check.svg');
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    content: '';
+  }
+  .popupTitle {
+    position: relative;
+    padding-left: 48px;
+    margin-bottom: 32px;
+  }
+  .popupTitle:before {
+    background: url('/images/telegram.svg');
+    width: 33px;
+    height: 33px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    content: '';
+    background-repeat: no-repeat;
+  }
+  ul.inputs-list{
+    list-style: none;
+    margin: 0;
+    .hs-form-checkbox-display{
+      display: flex;
+      align-items: center;
+      input{
+        width: 20px;
+        margin-right: 16px;
+      }
+      span{
+        color: #24272A;
+        font-weight: normal;
+        .dark-mode &{
+          color: #FFF;
+        }
+      }
+    }
+  }
+  .hs-form-field.hs-email{
+    input,
+    input:focus-visible {
+      border-color: #cdd6e1;
+      outline: none;
+      border-radius: 50px;
+      padding: 20px 16px;
+      height: auto;
+    } 
+    input:focus {
+      border-color: #037DD6;
+    }
+    >label{
+      display: none;
+    }
+  }
+  .hs-submit input[type='submit'].hs-button {
+    border-radius: 50px;
+    background: #037dd6;
+  }
+  .hs-fieldtype-checkbox.hs-form-field>label{
+    margin-bottom: 32px;
+    color: #24272A;
+    font-weight: normal;
+    .dark-mode &{
+      color: #FFF;
+    }
+  }
+}
