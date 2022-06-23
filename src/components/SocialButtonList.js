@@ -2,31 +2,32 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import SocialButtonItem from './SocialButtonItem'
+import { useLocation } from '@reach/router'
 
 const SocialButtonList = () => {
   const list = [
     { name: 'coppy', text: 'Coppy link' },
     {
       name: 'twitter',
-      url: 'https://twitter.com/intent/tweet?' + window.location.href,
+      url: 'https://twitter.com/intent/tweet?',
     },
     {
       name: 'facebook',
       url:
-        'https://www.facebook.com/sharer/sharer.php?u=' + window.location.href,
+        'https://www.facebook.com/sharer/sharer.php?u=',
     },
     {
       name: 'linkedin',
       url:
-        'https://www.linkedin.com/sharing/share-offsite/?url=' +
-        window.location.href,
+        'https://www.linkedin.com/sharing/share-offsite/?url=',
     },
   ]
+  const location = useLocation();
 
   return (
     <ListIcon>
       {list.map(item => (
-        <SocialButtonItem name={item.name} text={item.text} url={item.url} />
+        <SocialButtonItem name={item.name} text={item.text} url={item.url + location.href} />
       ))}
     </ListIcon>
   )
