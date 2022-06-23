@@ -63,7 +63,6 @@ const Wrapper = styled.div`
 const Content = styled.div`
   .newsletterOnNewsDetail & {
     background: ${({ theme }) => theme.background.white};
-    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 7px 29px 0px;
     border-radius: 24px;
     padding: 32px;
