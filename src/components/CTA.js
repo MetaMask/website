@@ -220,8 +220,10 @@ const CTAContainer = styled.div`
     padding: 0 22px;
   }
   .storiesOnNewsDetail &{
-    position: absolute;
-    top: -110px;
+    @media (min-width: ${({ theme }) => theme.device.tablet}) { 
+      position: absolute;
+      top: -110px;
+    }
   }
 `
 const LinkTitle = styled.span`
