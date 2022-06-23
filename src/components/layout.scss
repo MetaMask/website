@@ -1296,6 +1296,13 @@ body.dark-mode {
 }
 
 .newsletterOnNewsDetail{
+  .legal-consent-container{
+    max-height: 70px;
+    overflow: auto;
+  }
+  .hs-recaptcha{
+    display: none;
+  }
   .submitted-message {
     position: relative;
     padding-left: 32px;
