@@ -1296,6 +1296,18 @@ body.dark-mode {
 }
 
 .newsletterOnNewsDetail{
+  .hs-email{
+    position: relative;
+  }
+  .hs-submit{
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    input{
+      padding: 14px 40px !important;
+      font-weight: normal;
+    }
+  }
   .legal-consent-container,
   .hs-recaptcha{
     display: none;

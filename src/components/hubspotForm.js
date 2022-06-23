@@ -16,6 +16,19 @@ const HubspotForm = props => {
     customClass,
   } = props
 
+  const moveSubmit = () => {
+    if (customClass == 'newsletterOnNewsDetail') {
+      const hsEmail = document.querySelector(
+        '.newsletterOnNewsDetail .hs-email'
+      )
+      const hsSubmit = document.querySelector(
+        '.newsletterOnNewsDetail .hs-submit'
+      )
+      hsEmail.appendChild(hsSubmit)
+    }
+    return
+  }
+
   return (
     <Wrapper width={width} className={customClass}>
       <Content>
@@ -27,6 +40,7 @@ const HubspotForm = props => {
             portalId={portalId}
             formId={formId}
             sfdcCampaignId={campaignId}
+            onReady={moveSubmit}
             loading={<Loading />}
           />
         </Form>
