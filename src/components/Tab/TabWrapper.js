@@ -29,7 +29,7 @@ const TabWrapper = props => {
       }
     }
     return activeTabDefault
-  }, [activeTabDefault, isTabParam, search, tabs])
+  }, [])
 
   const [activeStateId, setActiveStateId] = React.useState(
     isTabParam ? tabDefaultFromParam : activeTabDefault
