@@ -7,6 +7,7 @@ import Layout from './PageLayout'
 import { Section } from '../components/StyledGeneral'
 import ContentWrapper from '../components/ContentWrapper'
 import Image from '../components/Image'
+import SocialButtonList from '../components/SocialButtonList'
 
 function NewsLayout(props) {
   const {
@@ -47,15 +48,18 @@ function NewsLayout(props) {
       <div className="news-page-content">
         {contentfulModuleToComponent(hero)}
         <NewsContainer>
-          <ContentWrapper>
+          <ContentWrapper className="news-content">
             {contentfulModuleToComponent(cta)}
             <Title>{title}</Title>
             <Subtitle>{subtitle}</Subtitle>
             <Image image={image} />
-            {contentfulModuleToComponent({
-              ...author,
-              publishDate,
-            })}
+            <Author>
+              {contentfulModuleToComponent({
+                ...author,
+                publishDate,
+              })}
+              <SocialButtonList />
+            </Author>
           </ContentWrapper>
           <NewsContentWrapper bgUrl={bgUrl}>
             {contentfulModuleToComponent(contentConfig)}
@@ -71,6 +75,15 @@ function NewsLayout(props) {
 
 const NewsContainer = styled(Section)`
   position: relative;
+`
+const Author = styled.div`
+  padding-top: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    flex-direction: column;
+  }
 `
 
 const NewsContentWrapper = styled.div`
@@ -90,9 +103,17 @@ const NewsContentWrapper = styled.div`
   }
 `
 
-const Title = styled.h2``
+const Title = styled.h2`
+  font-size: 40px;
+  line-height: 40px;
+  padding-top: 64px;
+`
 
-const Subtitle = styled.p``
+const Subtitle = styled.p`
+  font-size: 16px;
+  line-height: 24px;
+  padding-top: 24px;
+`
 
 const categoryProps = PropTypes.shape({
   name: PropTypes.string.isRequired,

@@ -11,6 +11,8 @@ import {
 import scrollTo from '../lib/utils/scrollToElement'
 import Context from '../Context/ContextPage'
 import ContextClientSide from '../Context/ContextClientSide'
+import queryString from 'query-string'
+
 
 /**
  * @name PageLayout
@@ -19,7 +21,7 @@ import ContextClientSide from '../Context/ContextClientSide'
  */
 const PageLayout = props => {
   const { location, children, themeColor, h2FontSize, ...rest } = props
-  const { pathname } = location || {}
+  const { pathname, search } = location || {}
   const [idFaqActive, setIdFaqActive] = React.useState('')
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
@@ -32,10 +34,27 @@ const PageLayout = props => {
       ? defaultDarkTheme
       : defaultTheme
 
+  const params = queryString.parse(search)
+  const { page } = params
+  const [paginationPage, setPaginationPage] = React.useState(
+    parseInt(page || 1, 10)
+  )
+  const headerRef = React.useRef()
+  const heroContainerRef = React.useRef(null)
   const valueContext = {
     faq: {
       idFaqActive,
       setIdFaqActive,
+    },
+    pagination: {
+      paginationPage,
+      setPaginationPage,
+    },
+    header: {
+      headerRef,
+    },
+    heroContainer: {
+      heroContainerRef,
     },
   }
   const [dimensionScript, setDimensionScript] = React.useState('')

@@ -51,14 +51,14 @@ const AuthorWrapper = styled.div`
 `
 
 const AuthorInner = styled(Link)`
-  display: block;
+  display: flex;
+  align-items: center;
   color: ${({ theme }) => theme.text.body};
 `
 
 const ImageWrapper = styled.div`
   height: 40px;
-  margin-bottom: 16px;
-
+  margin-right: 12px;
   img {
     height: 100%;
     width: auto;
