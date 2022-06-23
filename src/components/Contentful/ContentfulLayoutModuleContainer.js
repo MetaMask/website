@@ -240,6 +240,10 @@ const Title = styled(SectionTitle)`
 `
 const Modules = styled.div`
   display: block;
+  .storiesOnNewsDetail &{
+    padding-top: 40px;
+    position: relative; 
+  }
   ${({ contentAlignCenter }) =>
     contentAlignCenter
       ? `

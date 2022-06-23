@@ -219,6 +219,10 @@ const CTAContainer = styled.div`
   .news-content &{
     padding: 0 22px;
   }
+  .storiesOnNewsDetail &{
+    position: absolute;
+    top: -110px;
+  }
 `
 const LinkTitle = styled.span`
   display: flex;
