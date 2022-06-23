@@ -61,8 +61,8 @@ const ContentfulLayout = props => {
     },
     pagination: {
       paginationPage,
-      setPaginationPage
-    }
+      setPaginationPage,
+    },
   }
 
   // takes all modules single content type for a page and returns all instances

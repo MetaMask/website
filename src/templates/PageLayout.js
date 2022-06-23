@@ -11,8 +11,6 @@ import {
 import scrollTo from '../lib/utils/scrollToElement'
 import Context from '../Context/ContextPage'
 import ContextClientSide from '../Context/ContextClientSide'
-import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
-import { browserName } from 'react-device-detect'
 import queryString from 'query-string'
 
 /**
@@ -35,9 +33,11 @@ const PageLayout = props => {
       ? defaultDarkTheme
       : defaultTheme
 
-      const params = queryString.parse(search)
-        const { page } = params
-  const [paginationPage, setPaginationPage] = React.useState(parseInt(page || 1, 10))
+  const params = queryString.parse(search)
+  const { page } = params
+  const [paginationPage, setPaginationPage] = React.useState(
+    parseInt(page || 1, 10)
+  )
   const headerRef = React.useRef()
   const heroContainerRef = React.useRef(null)
   const valueContext = {
@@ -47,12 +47,12 @@ const PageLayout = props => {
     },
     pagination: {
       paginationPage,
-      setPaginationPage
+      setPaginationPage,
     },
     header: {
       headerRef,
     },
-    heroContainer:{
+    heroContainer: {
       heroContainerRef,
     },
   }
@@ -104,9 +104,11 @@ const PageLayout = props => {
 
       // Detect Web3 Wallet
       if (typeof window.ethereum !== 'undefined') {
-        setDimensionScript("if (typeof ga === 'function') {" +
-          "ga('set', 'dimension1', 'Web3 Wallet Detected');" +
-          "}")
+        setDimensionScript(
+          "if (typeof ga === 'function') {" +
+            "ga('set', 'dimension1', 'Web3 Wallet Detected');" +
+            '}'
+        )
       }
     }
   }, [pathname])

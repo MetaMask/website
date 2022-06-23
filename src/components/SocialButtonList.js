@@ -5,19 +5,31 @@ import SocialButtonItem from './SocialButtonItem'
 
 const SocialButtonList = () => {
   const list = [
-    {'name': 'coppy', 'text': 'Coppy link'}, 
-    {'name': 'twitter', 'url': 'https://twitter.com/intent/tweet?'+window.location.href}, 
-    {'name':'facebook', 'url': 'https://www.facebook.com/sharer/sharer.php?u='+window.location.href}, 
-    {'name': 'linkedin', 'url': 'https://www.linkedin.com/sharing/share-offsite/?url='+window.location.href}
-  ];
+    { name: 'coppy', text: 'Coppy link' },
+    {
+      name: 'twitter',
+      url: 'https://twitter.com/intent/tweet?' + window.location.href,
+    },
+    {
+      name: 'facebook',
+      url:
+        'https://www.facebook.com/sharer/sharer.php?u=' + window.location.href,
+    },
+    {
+      name: 'linkedin',
+      url:
+        'https://www.linkedin.com/sharing/share-offsite/?url=' +
+        window.location.href,
+    },
+  ]
 
   return (
     <ListIcon>
       {list.map(item => (
-        <SocialButtonItem name={item.name} text={item.text} url={item.url}/>
+        <SocialButtonItem name={item.name} text={item.text} url={item.url} />
       ))}
     </ListIcon>
-  );
+  )
 }
 
 SocialButtonList.propTypes = {
@@ -33,7 +45,7 @@ const ListIcon = styled.ul`
   align-items: center;
   li {
     margin: 0 6px;
-    border: 1px solid #BBC0C5;
+    border: 1px solid #bbc0c5;
     border-radius: 8px;
     cursor: pointer;
   }

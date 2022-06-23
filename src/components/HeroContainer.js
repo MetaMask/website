@@ -75,7 +75,7 @@ const HeroContainerComponent = props => {
     heroTitleFontsize = '30px'
   }
   const { heroContainer: heroContainerREF } = React.useContext(Context)
-  const {heroContainerRef} = heroContainerREF || {}
+  const { heroContainerRef } = heroContainerREF || {}
 
   const scrollRef = React.useRef(null)
   const [scrolled, setScrolled] = React.useState(false)
@@ -479,7 +479,7 @@ const HeroContentContainer = styled.div`
 
     ${({ isInstitutions }) =>
       isInstitutions
-      ? `
+        ? `
       flex-direction: column;
       background-position: 50% 0%;
       background-size: 250px;

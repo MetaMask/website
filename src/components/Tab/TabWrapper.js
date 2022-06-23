@@ -15,7 +15,6 @@ const TabWrapper = props => {
     typeLayout,
     isTabParam,
   } = props
-  let activeId = activeTabDefault
   const location = useLocation()
   const { search } = location
   const tabDefaultFromParam = React.useMemo(() => {
@@ -30,8 +29,11 @@ const TabWrapper = props => {
       }
     }
     return activeTabDefault
-  }, [])
-  const [activeStateId, setActiveStateId] = React.useState(isTabParam ? tabDefaultFromParam : activeTabDefault)
+  }, [activeTabDefault, isTabParam, search, tabs])
+
+  const [activeStateId, setActiveStateId] = React.useState(
+    isTabParam ? tabDefaultFromParam : activeTabDefault
+  )
   return (
     <Wrapper>
       <TabHeader

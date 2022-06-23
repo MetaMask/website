@@ -1,6 +1,5 @@
 /* eslint-disable no-useless-computed-key */
 import React from 'react'
-import { navigate } from '@reach/router'
 import styled from 'styled-components'
 import queryString from 'query-string'
 
@@ -14,12 +13,16 @@ const PaginationWrapper = props => {
   const { active, isFirst, isLast, total, setPageState } = props
   const list = range(total)
   const handleClickPage = i => {
-    if(setPageState){
-      setPageState(i);
+    if (setPageState) {
+      setPageState(i)
     }
-    const paramsDefault = queryString.parse(window.location.search);
+    const paramsDefault = queryString.parse(window.location.search)
     const params = { ...paramsDefault, page: i }
-    window.history.pushState(window.location.search, '', `?${queryString.stringify(params)}`)
+    window.history.pushState(
+      window.location.search,
+      '',
+      `?${queryString.stringify(params)}`
+    )
   }
   return (
     <Wrapper>

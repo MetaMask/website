@@ -16,7 +16,7 @@ export const SectionTitle = styled.h2`
     line-height: 46px;
     margin-top: 0;
   }
-  .storiesOnNewsDetail &{
+  .storiesOnNewsDetail & {
     font-size: 40px;
     line-height: 56px;
   }

@@ -12,22 +12,22 @@ const DownloadContainer = props => {
     isTabParam,
   } = props
   const { pagination: paginationContextValue } = React.useContext(Context)
-  const {setPaginationPage} = paginationContextValue|| {}
+  const { setPaginationPage } = paginationContextValue || {}
   const changeTab = () => {
-    setActiveStateId(id);
-    if(setPaginationPage){
-      setPaginationPage(1);
+    setActiveStateId(id)
+    if (setPaginationPage) {
+      setPaginationPage(1)
     }
-    if (isTabParam){
-      window.history.pushState('', '', `?category=${encodeURIComponent(lowerCase(label))}`)
+    if (isTabParam) {
+      window.history.pushState(
+        '',
+        '',
+        `?category=${encodeURIComponent(lowerCase(label))}`
+      )
     }
-  };
+  }
   return (
-    <Item
-      typeLayout={typeLayout}
-      active={activeId === id}
-      onClick={changeTab}
-    >
+    <Item typeLayout={typeLayout} active={activeId === id} onClick={changeTab}>
       {label}
     </Item>
   )

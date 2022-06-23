@@ -31,7 +31,7 @@ const StyledHeader = props => {
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const menuRef = React.useRef()
   const { header: headerREF } = React.useContext(Context)
-  const {headerRef} = headerREF || {}
+  const { headerRef } = headerREF || {}
   const { isDarkMode, setIsDarkMode } = darkModeContextValue || {}
   const [topMenuMobile, setTopMenuMobile] = React.useState('88px')
 

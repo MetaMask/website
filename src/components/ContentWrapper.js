@@ -20,7 +20,7 @@ ContentWrapper.propTypes = {
 const Container = styled.div`
   padding-right: 20px;
   padding-left: 20px;
-  &.storiesOnNewsDetail{
+  &.storiesOnNewsDetail {
     margin-bottom: 96px;
     margin-top: 96px;
   }

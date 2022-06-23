@@ -289,7 +289,7 @@ const ContentInfo = styled.div`
 const SubInfo = styled.div`
   display: block;
 
-  .storiesOnNewsDetail &{
+  .storiesOnNewsDetail & {
     text-align: center;
     color: ${({ theme }) => theme.text.default};
   }

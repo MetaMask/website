@@ -1,15 +1,10 @@
 import React from 'react'
 import PaginationBar from './PaginattionBar'
 import PropTypes from 'prop-types'
-import queryString from 'query-string'
 import Context from '../../Context/ContextPage'
 
 const PaginationWrapper = props => {
   const { data, itemPerPage, listingComponent, setActivePage } = props
-  const location = window.location
-  const { search } = location
-  const params = queryString.parse(search)
-  const category = React.useRef(params?.category)
   const { pagination: paginationContextValue } = React.useContext(Context)
   const { paginationPage: pageState, setPaginationPage: setPageState } =
     paginationContextValue || {}

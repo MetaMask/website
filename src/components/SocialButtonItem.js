@@ -9,12 +9,12 @@ const SocialButtonItem = props => {
 
   const [tooltip, setTooltip] = React.useState(false)
   const handleClick = () => {
-    navigator.clipboard.writeText(window.location.href);
-    setTooltip(true);
+    navigator.clipboard.writeText(window.location.href)
+    setTooltip(true)
 
     setTimeout(() => {
-      setTooltip(false);
-    }, 2000);
+      setTooltip(false)
+    }, 2000)
   }
 
   return (
@@ -62,7 +62,7 @@ const Tooltip = styled.div`
   opacity: 0;
   visibility: hidden;
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 100%;
     left: 50%;
@@ -72,10 +72,10 @@ const Tooltip = styled.div`
     border-color: transparent transparent #333333b0 transparent;
   }
   ${({ tooltip }) =>
-      tooltip
-        ? `
+    tooltip
+      ? `
     opacity: 1;
     visibility: visible;
     `
-        : ''}
+      : ''}
 `

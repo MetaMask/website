@@ -16,25 +16,39 @@ const TabHeader = props => {
     isTabParam,
   } = props
   const { header: headerREF } = React.useContext(Context)
-  const {headerRef} = headerREF || {}
+  const { headerRef } = headerREF || {}
   const { heroContainer: heroContainerREF } = React.useContext(Context)
-  const {heroContainerRef} = heroContainerREF || {}
+  const { heroContainerRef } = heroContainerREF || {}
 
   const { pagination: paginationContextValue } = React.useContext(Context)
-  const {paginationPage} = paginationContextValue|| {}
-  const ref = React.useRef(null);
-  const location = useLocation();
-  const params = qs.parse(location.search);
+  const { paginationPage } = paginationContextValue || {}
+  const ref = React.useRef(null)
+  const location = useLocation()
+  const params = qs.parse(location.search)
+
   React.useEffect(() => {
-    if(ref && ref.current && (params.category || params.page)) {
-      const y = headerRef.current.clientHeight + heroContainerRef.current.clientHeight - 60;
-      if (headerRef.current.clientHeight + heroContainerRef.current.clientHeight > 320){
-        window.scrollTo({top: 180, behavior: 'smooth'});
+    if (ref && ref.current && (params.category || params.page)) {
+      const y =
+        headerRef.current.clientHeight +
+        heroContainerRef.current.clientHeight -
+        60
+      if (
+        headerRef.current.clientHeight + heroContainerRef.current.clientHeight >
+        320
+      ) {
+        window.scrollTo({ top: 180, behavior: 'smooth' })
       } else {
-        window.scrollTo({top: y, behavior: 'smooth'});
+        window.scrollTo({ top: y, behavior: 'smooth' })
       }
     }
-  },[params.category, params.page, paginationPage]);
+  }, [
+    headerRef,
+    heroContainerRef,
+    params.category,
+    params.page,
+    paginationPage,
+  ])
+
   return (
     <Header ref={ref} centerAlign={centerAlign} typeLayout={typeLayout}>
       <HeaderInner typeLayout={typeLayout}>

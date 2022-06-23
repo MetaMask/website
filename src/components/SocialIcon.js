@@ -14,9 +14,9 @@ const SocialIcon = props => {
       {'twitter' === name && <Twitter />}
       {'facebook' === name && <Facebook />}
       {'linkedin' === name && <Linkedin />}
-      {text ? (<span>{text}</span>) : null}
+      {text ? <span>{text}</span> : null}
     </Icon>
-  ) 
+  )
 }
 
 SocialIcon.propTypes = {
@@ -33,11 +33,11 @@ const Icon = styled.span`
     width: 20px;
     height: 20px;
     path {
-      fill: #BBC0C5;
+      fill: #bbc0c5;
     }
   }
   span {
-    color: #BBC0C5;
+    color: #bbc0c5;
     padding-left: 6px;
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       display: none;
