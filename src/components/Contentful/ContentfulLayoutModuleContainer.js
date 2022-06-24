@@ -256,11 +256,11 @@ const Title = styled(SectionTitle)`
   .storiesOnNewsDetail & {
     font-size: 40px;
     line-height: 56px;
-    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) { 
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       font-size: 30px;
       line-height: 36px;
     }
-    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) { 
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
       font-size: 25px;
       line-height: 30px;
     }
@@ -269,8 +269,8 @@ const Title = styled(SectionTitle)`
 
 const Modules = styled.div`
   display: block;
-  .storiesOnNewsDetail &{
-    @media (min-width: ${({ theme }) => theme.device.tablet}) { 
+  .storiesOnNewsDetail & {
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
       padding-top: 40px;
       position: relative;
     }

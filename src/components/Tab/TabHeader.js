@@ -33,7 +33,8 @@ const TabHeader = props => {
         heroContainerRef.current.clientHeight -
         60
       if (
-        headerRef.current.clientHeight + heroContainerRef.current.clientHeight > 320
+        headerRef.current.clientHeight + heroContainerRef.current.clientHeight >
+        320
       ) {
         setTimeout(() => {
           window.scrollTo({ top: 180, behavior: 'smooth' })
@@ -44,11 +45,7 @@ const TabHeader = props => {
         }, 100)
       }
     }
-  }, [
-    params.category,
-    params.page,
-    paginationPage,
-  ])
+  }, [params.category, params.page, paginationPage])
 
   return (
     <Header ref={ref} centerAlign={centerAlign} typeLayout={typeLayout}>

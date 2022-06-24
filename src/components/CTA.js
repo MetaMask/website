@@ -216,11 +216,11 @@ const CTAContainer = styled.div`
       color: ${({ theme }) => theme.text.default};
     }
   }
-  .news-content &{
+  .news-content & {
     padding: 0 22px;
   }
-  .storiesOnNewsDetail &{
-    @media (min-width: ${({ theme }) => theme.device.tablet}) { 
+  .storiesOnNewsDetail & {
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
       position: absolute;
       top: -110px;
     }

@@ -15,12 +15,12 @@ const TabWrapper = props => {
     isTabParam,
   } = props
 
-  const [searchState, setSearchState] = React.useState('');
+  const [searchState, setSearchState] = React.useState('')
   React.useEffect(() => {
-    if(typeof window !== "undefined"){
+    if (typeof window !== 'undefined') {
       setSearchState(window.location?.search)
     }
-  },[])
+  }, [])
 
   const tabDefaultFromParam = React.useMemo(() => {
     if (searchState && isTabParam) {
