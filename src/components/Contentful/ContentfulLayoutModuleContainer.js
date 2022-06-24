@@ -270,7 +270,7 @@ const Title = styled(SectionTitle)`
 const Modules = styled.div`
   display: block;
   .storiesOnNewsDetail &{
-    @media (min-width: ${({ theme }) => theme.device.tablet}) { 
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) { 
       padding-top: 40px;
       position: relative;
     }
@@ -318,7 +318,7 @@ const ContentInfo = styled.div`
     text-align: center;
   }
   
-  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+  @media (max-width: ${({ theme }) => theme.device.miniDesktop}) {
     padding-top: 0;
     .storiesOnNewsDetail & {
       padding-top: 40px;
