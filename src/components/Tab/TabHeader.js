@@ -35,9 +35,13 @@ const TabHeader = props => {
       if (
         headerRef.current.clientHeight + heroContainerRef.current.clientHeight > 320
       ) {
-        window.scrollTo({ top: 180, behavior: 'smooth' })
+        setTimeout(() => {
+          window.scrollTo({ top: 180, behavior: 'smooth' })
+        }, 100)
       } else {
-        window.scrollTo({ top: y, behavior: 'smooth' })
+        setTimeout(() => {
+          window.scrollTo({ top: y, behavior: 'smooth' })
+        }, 100)
       }
     }
   }, [
