@@ -17,7 +17,7 @@ const HubspotForm = props => {
   } = props
 
   const moveSubmit = () => {
-    if (customClass == 'newsletterOnNewsDetail') {
+    if (customClass === 'newsletterOnNewsDetail') {
       const hsEmail = document.querySelector(
         '.newsletterOnNewsDetail .hs-email'
       )
