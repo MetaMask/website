@@ -220,7 +220,7 @@ const CTAContainer = styled.div`
     padding: 0 22px;
   }
   .storiesOnNewsDetail & {
-    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
       position: absolute;
       top: -110px;
     }
