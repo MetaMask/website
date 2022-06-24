@@ -13,7 +13,6 @@ import Context from '../Context/ContextPage'
 import ContextClientSide from '../Context/ContextClientSide'
 import queryString from 'query-string'
 
-
 /**
  * @name PageLayout
  * @summary - Wrapper container to hold all public pages

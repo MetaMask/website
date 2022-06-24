@@ -3,7 +3,6 @@ import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import TabHeader from './TabHeader'
 import TabContent from './TabContent'
-import { useLocation } from '@reach/router'
 import queryString from 'query-string'
 import lowerCase from 'lodash/lowerCase'
 
@@ -15,11 +14,17 @@ const TabWrapper = props => {
     typeLayout,
     isTabParam,
   } = props
-  const location = useLocation()
-  const { search } = location
+
+  const [searchState, setSearchState] = React.useState('')
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setSearchState(window.location?.search)
+    }
+  }, [])
+
   const tabDefaultFromParam = React.useMemo(() => {
-    if (search && isTabParam) {
-      const param = queryString.parse(search)
+    if (searchState && isTabParam) {
+      const param = queryString.parse(searchState)
       const { category } = param
       if (category) {
         const tabActive = tabs.find(
@@ -28,8 +33,12 @@ const TabWrapper = props => {
         return tabActive?.id
       }
     }
-    return activeTabDefault
-  }, [])
+    return ''
+  }, [searchState])
+
+  React.useEffect(() => {
+    setActiveStateId(tabDefaultFromParam || activeTabDefault)
+  }, [tabDefaultFromParam])
 
   const [activeStateId, setActiveStateId] = React.useState(
     isTabParam ? tabDefaultFromParam : activeTabDefault
