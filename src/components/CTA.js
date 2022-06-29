@@ -13,6 +13,7 @@ import Popup from './Popup'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Image from './Image'
 import classnames from 'classnames'
+import ArrowLeft from '../images/icons/icon-arrow-right.svg'
 
 const CTA = props => {
   const {
@@ -115,6 +116,9 @@ const CTA = props => {
         onClick={handleCustomClick}
       >
         {socialLink ? <SocialIcon name={socialLink} /> : null}
+        <NewsIcon>
+          <ArrowLeft />
+        </NewsIcon>
         <LinkTitle>
           {text} {!isHideArrow || socialLink ? <Arrow {...icon} /> : null}{' '}
         </LinkTitle>
@@ -216,10 +220,8 @@ const CTAContainer = styled.div`
       color: ${({ theme }) => theme.text.default};
     }
   }
-  .news-content & {
-    padding: 0 22px;
-  }
   .storiesOnNewsDetail & {
+    padding-left: 0;
     @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
       position: absolute;
       top: -110px;
@@ -244,18 +246,9 @@ const ContentWrapper = styled(Link)`
   position: relative;
   .news-content &,
   .storiesOnNewsDetail &{
-    padding-left: 20px;
+    display: flex;
+    align-items: center;
     color: ${({ theme }) => theme.text.default};
-    :before{
-      content: '';
-      background: url('/images/icon-arrow-left.svg');
-      width: 20px;
-      height: 100%;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      right: 100%;
-    }
   }
   ${({ typeLayout, color, theme }) =>
     typeLayout === ''
@@ -304,6 +297,35 @@ const ContentWrapper = styled(Link)`
     }
   `
       : ``}
+
+  &:hover {
+    .news-content &,
+    .storiesOnNewsDetail &{
+      path{
+        fill: ${({ theme }) => theme.darkBlue};
+      }
+    }
+  }
+`
+
+const NewsIcon = styled.span`
+  display: none;
+  .news-content &,
+  .storiesOnNewsDetail &{
+    display: inline-block;
+    padding-left: 10px;
+    transform: rotate(180deg);
+    svg{
+      height: 12px;
+      width: 25px;
+    }
+    path{
+      fill: ${({ theme }) => theme.text.default};
+      .light-mode &{
+        opacity: 0.8;
+      }
+    }
+  }
 `
 
 const alignMapping = align => {
