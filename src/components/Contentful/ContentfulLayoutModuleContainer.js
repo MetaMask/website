@@ -29,6 +29,7 @@ const ContentfulModuleContainer = props => {
       customClass,
       eyebrow,
       sideImage,
+      showLeftArrow,
     },
   } = props
 
@@ -51,6 +52,7 @@ const ContentfulModuleContainer = props => {
           ),
         }))
       : null
+
   return (
     <Container
       sectionPadding={sectionPadding}
@@ -113,6 +115,7 @@ const ContentfulModuleContainer = props => {
                     color: ['dark'].includes(backgroundColor)
                       ? 'white'
                       : 'black',
+                    showLeftArrow,
                   })
                 )}
               </Modules>

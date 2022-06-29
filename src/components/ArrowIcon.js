@@ -2,11 +2,17 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const ArrowIcon = props => {
-  const { fill = 'white', height = '25px', width = '50px' } = props
+  const {
+    fill = 'white',
+    height = '25px',
+    width = '50px',
+    transform = 'none',
+  } = props
   return (
     <svg
       width={width}
       height={height}
+      transform={transform}
       viewBox="0 0 50 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -25,4 +31,5 @@ ArrowIcon.propTypes = {
   fill: PropTypes.string,
   height: PropTypes.string,
   width: PropTypes.string,
+  transform: PropTypes.string,
 }

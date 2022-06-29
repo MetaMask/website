@@ -13,7 +13,6 @@ import Popup from './Popup'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Image from './Image'
 import classnames from 'classnames'
-import ArrowLeft from '../images/icons/icon-arrow-right.svg'
 
 const CTA = props => {
   const {
@@ -24,7 +23,8 @@ const CTA = props => {
     iconConfig,
     color,
     button = false,
-    isHideArrow = true,
+    showRightArrow = false,
+    showLeftArrow = false,
     typeLayout = '',
     buttonSize,
     customClick,
@@ -116,11 +116,15 @@ const CTA = props => {
         onClick={handleCustomClick}
       >
         {socialLink ? <SocialIcon name={socialLink} /> : null}
-        <NewsIcon>
-          <ArrowLeft />
-        </NewsIcon>
-        <LinkTitle>
-          {text} {!isHideArrow || socialLink ? <Arrow {...icon} /> : null}{' '}
+        <LinkTitle
+          className={classnames({
+            [`leftArrow`]: showLeftArrow,
+            [`rightArrow`]: showRightArrow || socialLink,
+          })}
+        >
+          {showLeftArrow ? <Arrow {...icon} transform={'rotate(180)'} /> : null}
+          {text}
+          {showRightArrow || socialLink ? <Arrow {...icon} /> : null}
         </LinkTitle>
       </ContentWrapper>
     </CTAContainer>
@@ -197,7 +201,8 @@ CTA.propTypes = {
   button: PropTypes.bool,
   align: PropTypes.string,
   iconConfig: PropTypes.object,
-  isHideArrow: PropTypes.bool,
+  showRightArrow: PropTypes.bool,
+  showLeftArrow: PropTypes.bool,
   newTab: PropTypes.bool,
   eventCategory: PropTypes.string,
   eventLabel: PropTypes.string,
@@ -303,26 +308,6 @@ const ContentWrapper = styled(Link)`
     .storiesOnNewsDetail &{
       path{
         fill: ${({ theme }) => theme.darkBlue};
-      }
-    }
-  }
-`
-
-const NewsIcon = styled.span`
-  display: none;
-  .news-content &,
-  .storiesOnNewsDetail &{
-    display: inline-block;
-    padding-left: 10px;
-    transform: rotate(180deg);
-    svg{
-      height: 12px;
-      width: 25px;
-    }
-    path{
-      fill: ${({ theme }) => theme.text.default};
-      .light-mode &{
-        opacity: 0.8;
       }
     }
   }
