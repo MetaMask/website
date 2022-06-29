@@ -244,6 +244,9 @@ const LinkTitle = styled.span`
       fill: ${({ theme }) => theme.text.default};
     }
   }
+  &.leftArrow {
+    svg {margin: 2px 12px 0 0;}
+  }
 `
 const ContentWrapper = styled(Link)`
   transition: all 0.15s ease;
