@@ -12,7 +12,8 @@ const ContentfulCta = props => {
       ctaAlignment,
       displayText,
       typeLayout = '',
-      isHideArrow = true,
+      showRightArrow = false,
+      showLeftArrow = false,
       color = 'primary',
       buttonSize,
       customClick,
@@ -45,7 +46,8 @@ const ContentfulCta = props => {
       align={ctaAlignment}
       color={color}
       typeLayout={typeLayout}
-      isHideArrow={isHideArrow}
+      showRightArrow={showRightArrow}
+      showLeftArrow={showLeftArrow}
       buttonSize={buttonSize}
       customClick={customClick}
       fontSize={fontSize}
@@ -70,8 +72,6 @@ ContentfulCta.propTypes = {
     ctaText: PropTypes.string,
     socialLink: PropTypes.string,
     isButton: PropTypes.bool,
-    typeLayout: PropTypes.string,
-    isHideArrow: PropTypes.bool,
     eventCategory: PropTypes.string,
     eventLabel: PropTypes.string,
     hubSpotForm: PropTypes.object,
