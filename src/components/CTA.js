@@ -245,7 +245,9 @@ const LinkTitle = styled.span`
     }
   }
   &.leftArrow {
-    svg {margin: 2px 12px 0 0;}
+    svg {
+      margin: 2px 12px 0 0;
+    }
   }
 `
 const ContentWrapper = styled(Link)`
