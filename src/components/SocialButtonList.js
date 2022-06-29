@@ -6,28 +6,41 @@ import { useLocation } from '@reach/router'
 
 const SocialButtonList = () => {
   const list = [
-    { name: 'coppy', text: 'Coppy link' },
+    { name: 'copy', text: 'Copy link' },
     {
       name: 'twitter',
-      url: 'https://twitter.com/intent/tweet?',
+      url: 'https://twitter.com/intent/tweet?url=',
     },
     {
       name: 'facebook',
-      url:
-        'https://www.facebook.com/sharer/sharer.php?u=',
+      url: 'https://www.facebook.com/sharer/sharer.php?u=',
     },
     {
       name: 'linkedin',
-      url:
-        'https://www.linkedin.com/sharing/share-offsite/?url=',
+      url: 'https://www.linkedin.com/sharing/share-offsite/?url=',
     },
   ]
-  const location = useLocation();
+  const location = useLocation()
+  const { href } = location
+
+  const [hrefState, setHrefState] = React.useState('')
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setHrefState(window.location?.href)
+    } else {
+      setHrefState(href)
+    }
+  }, [href])
 
   return (
     <ListIcon>
       {list.map(item => (
-        <SocialButtonItem name={item.name} text={item.text} url={item.url + location.href} />
+        <SocialButtonItem
+          name={item.name}
+          text={item.text}
+          url={item.url + hrefState}
+          customColor={'#bbc0c5'}
+        />
       ))}
     </ListIcon>
   )

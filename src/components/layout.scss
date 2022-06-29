@@ -1307,8 +1307,11 @@ body.dark-mode {
       padding: 14px 40px !important;
       font-weight: normal;
     }
+    @media (max-width: 576px){
+      position: inherit;
+      right: 0;
+    }
   }
-  .legal-consent-container,
   .hs-recaptcha{
     display: none;
   }
@@ -1330,6 +1333,14 @@ body.dark-mode {
     position: relative;
     padding-left: 48px;
     margin-bottom: 32px;
+    @media (max-width: 767px){
+      font-size: 24px;
+      line-height: 36px;
+    }
+    @media (max-width: 479px){
+      font-size: 20px;
+      line-height: 26px;
+    }
   }
   .popupTitle:before {
     background: url('/images/telegram.svg');
@@ -1369,6 +1380,9 @@ body.dark-mode {
       border-radius: 50px;
       padding: 20px 16px;
       height: auto;
+      @media (max-width: 576px){
+        padding: 12px 16px;
+      }
     } 
     input:focus {
       border-color: #037DD6;

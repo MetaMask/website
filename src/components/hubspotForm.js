@@ -17,7 +17,7 @@ const HubspotForm = props => {
   } = props
 
   const moveSubmit = () => {
-    if (customClass == 'newsletterOnNewsDetail') {
+    if (customClass === 'newsletterOnNewsDetail') {
       const hsEmail = document.querySelector(
         '.newsletterOnNewsDetail .hs-email'
       )
@@ -69,7 +69,7 @@ const Wrapper = styled.div`
   max-width: 100%;
   ${({ width }) => (width ? `width: ${width};` : 'min-width: 300px;')}
   &.newsletterOnNewsDetail {
-    height: 300px;
+    height: 410px;
     position: relative;
   }
 `

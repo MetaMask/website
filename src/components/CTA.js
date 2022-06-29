@@ -23,7 +23,8 @@ const CTA = props => {
     iconConfig,
     color,
     button = false,
-    isHideArrow = true,
+    showRightArrow = false,
+    showLeftArrow = false,
     typeLayout = '',
     buttonSize,
     customClick,
@@ -115,8 +116,15 @@ const CTA = props => {
         onClick={handleCustomClick}
       >
         {socialLink ? <SocialIcon name={socialLink} /> : null}
-        <LinkTitle>
-          {text} {!isHideArrow || socialLink ? <Arrow {...icon} /> : null}{' '}
+        <LinkTitle
+          className={classnames({
+            [`leftArrow`]: showLeftArrow,
+            [`rightArrow`]: showRightArrow || socialLink,
+          })}
+        >
+          {showLeftArrow ? <Arrow {...icon} transform={'rotate(180)'} /> : null}
+          {text}
+          {showRightArrow || socialLink ? <Arrow {...icon} /> : null}
         </LinkTitle>
       </ContentWrapper>
     </CTAContainer>
@@ -193,7 +201,8 @@ CTA.propTypes = {
   button: PropTypes.bool,
   align: PropTypes.string,
   iconConfig: PropTypes.object,
-  isHideArrow: PropTypes.bool,
+  showRightArrow: PropTypes.bool,
+  showLeftArrow: PropTypes.bool,
   newTab: PropTypes.bool,
   eventCategory: PropTypes.string,
   eventLabel: PropTypes.string,
@@ -216,12 +225,12 @@ const CTAContainer = styled.div`
       color: ${({ theme }) => theme.text.default};
     }
   }
-  .news-content &{
-    padding: 0 22px;
-  }
-  .storiesOnNewsDetail &{
-    position: absolute;
-    top: -110px;
+  .storiesOnNewsDetail & {
+    padding-left: 0;
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      position: absolute;
+      top: -110px;
+    }
   }
 `
 const LinkTitle = styled.span`
@@ -235,6 +244,11 @@ const LinkTitle = styled.span`
       fill: ${({ theme }) => theme.text.default};
     }
   }
+  &.leftArrow {
+    svg {
+      margin: 2px 12px 0 0;
+    }
+  }
 `
 const ContentWrapper = styled(Link)`
   transition: all 0.15s ease;
@@ -242,18 +256,9 @@ const ContentWrapper = styled(Link)`
   position: relative;
   .news-content &,
   .storiesOnNewsDetail &{
-    padding-left: 20px;
+    display: flex;
+    align-items: center;
     color: ${({ theme }) => theme.text.default};
-    :before{
-      content: '';
-      background: url('/images/icon-arrow-left.svg');
-      width: 20px;
-      height: 100%;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      right: 100%;
-    }
   }
   ${({ typeLayout, color, theme }) =>
     typeLayout === ''
@@ -302,6 +307,15 @@ const ContentWrapper = styled(Link)`
     }
   `
       : ``}
+
+  &:hover {
+    .news-content &,
+    .storiesOnNewsDetail &{
+      path{
+        fill: ${({ theme }) => theme.darkBlue};
+      }
+    }
+  }
 `
 
 const alignMapping = align => {
