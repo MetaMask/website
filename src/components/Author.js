@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Image from './Image'
 import Link from './Link'
 import ContextClientSide from '../Context/ContextClientSide'
-import Moment from 'moment';
+import Moment from 'moment'
 
 /**
  * @name Author
@@ -16,7 +16,7 @@ const Author = props => {
   const { name, image, imageDarkMode, link, date } = props
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
-  const formatDate = Moment(date).format("D MMM YYYY");
+  const formatDate = Moment(date).format('D MMM YYYY')
   return (
     <AuthorWrapper>
       <AuthorInner to={link} newTab>

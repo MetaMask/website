@@ -6,7 +6,7 @@ import { useLocation } from '@reach/router'
 
 const SocialButtonList = () => {
   const list = [
-    { name: 'coppy', text: 'Coppy link' },
+    { name: 'copy', text: 'Copy link' },
     {
       name: 'twitter',
       url: 'https://twitter.com/intent/tweet?url=',
@@ -39,6 +39,7 @@ const SocialButtonList = () => {
           name={item.name}
           text={item.text}
           url={item.url + hrefState}
+          customColor={'#bbc0c5'}
         />
       ))}
     </ListIcon>

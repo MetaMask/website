@@ -4,13 +4,13 @@ import styled from 'styled-components'
 import Twitter from '../images/icons/twitter.svg'
 import Facebook from '../images/icons/facebook.svg'
 import Linkedin from '../images/icons/linkedin.svg'
-import Coppy from '../images/icons/icon-coppy.svg'
+import Copy from '../images/icons/icon-copy.svg'
 
 const SocialIcon = props => {
-  const { name, text } = props
+  const { name, text, customColor } = props
   return (
-    <Icon>
-      {'coppy' === name && <Coppy />}
+    <Icon customColor={customColor}>
+      {'copy' === name && <Copy />}
       {'twitter' === name && <Twitter />}
       {'facebook' === name && <Facebook />}
       {'linkedin' === name && <Linkedin />}
@@ -22,6 +22,7 @@ const SocialIcon = props => {
 SocialIcon.propTypes = {
   name: PropTypes.string,
   text: PropTypes.string,
+  customColor: PropTypes.string,
 }
 
 export default SocialIcon
@@ -32,12 +33,22 @@ const Icon = styled.span`
   svg {
     width: 20px;
     height: 20px;
-    path {
-      fill: #bbc0c5;
-    }
+    ${({ customColor }) =>
+      customColor
+        ? `
+        path {
+          fill: ${customColor};
+        }
+      `
+        : ''}
   }
   span {
-    color: #bbc0c5;
+    ${({ customColor }) =>
+      customColor
+        ? `
+        color: #bbc0c5;
+      `
+        : ''}
     padding-left: 6px;
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       display: none;
