@@ -5,7 +5,7 @@ import Link from './Link'
 import SocialIcon from './SocialIcon'
 
 const SocialButtonItem = props => {
-  const { name, text, url } = props
+  const { name, text, url, customColor } = props
 
   const [tooltip, setTooltip] = React.useState(false)
   const handleClick = () => {
@@ -19,14 +19,14 @@ const SocialButtonItem = props => {
 
   return (
     <li>
-      {name === 'coppy' ? (
-        <CoppyLink onClick={handleClick}>
-          <SocialIcon name={name} text={text} />
-          <Tooltip tooltip={tooltip}>Coppied</Tooltip>
-        </CoppyLink>
+      {name === 'copy' ? (
+        <CopyLink onClick={handleClick}>
+          <SocialIcon name={name} text={text} customColor={customColor} />
+          <Tooltip tooltip={tooltip}>Copied</Tooltip>
+        </CopyLink>
       ) : (
         <Link ariaLabel={name} to={url} newTab>
-          <SocialIcon name={name} text={text} />
+          <SocialIcon name={name} text={text} customColor={customColor} />
         </Link>
       )}
     </li>
@@ -37,6 +37,7 @@ SocialButtonItem.propTypes = {
   name: PropTypes.string,
   text: PropTypes.string,
   url: PropTypes.string,
+  customColor: PropTypes.string,
 }
 
 SocialButtonItem.defaultProps = {
@@ -47,7 +48,7 @@ SocialButtonItem.defaultProps = {
 
 export default SocialButtonItem
 
-const CoppyLink = styled.div`
+const CopyLink = styled.div`
   position: relative;
 `
 const Tooltip = styled.div`
