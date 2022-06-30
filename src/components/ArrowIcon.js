@@ -6,7 +6,7 @@ const ArrowIcon = props => {
     fill = 'white',
     height = '25px',
     width = '50px',
-    transform = 'none',
+    transform = '',
   } = props
   return (
     <svg
