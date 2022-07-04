@@ -81,9 +81,7 @@ const CTA = props => {
   }
   React.useEffect(() => {
     if (isDownloadBrowser) {
-      if (typeof navigator?.brave !== 'undefined') {
-        setKeyBrowser('brave')
-      } else if (isMobile) {
+      if (isMobile) {
         if (isAndroid && downloadBrowsers['android']) {
           setKeyBrowser('android')
         } else if (isIOS && downloadBrowsers['ios']) {
@@ -92,7 +90,9 @@ const CTA = props => {
           setKeyBrowser('chrome')
         }
       } else {
-        if (downloadBrowsers[lowerBrowserName]) {
+        if (typeof navigator?.brave !== 'undefined') {
+          setKeyBrowser('brave')
+        } else if (downloadBrowsers[lowerBrowserName]) {
           setKeyBrowser(lowerBrowserName)
         } else {
           setKeyBrowser('chrome')
