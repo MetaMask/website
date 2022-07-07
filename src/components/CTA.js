@@ -51,13 +51,13 @@ const CTA = props => {
     lowerBrowserName = lowerCase(browserName),
     iconBrowser = ''
   if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
-    label = eventLabel.replace('$browser', downloadBrowsers[keyBrowser].text)
-    text = textDefault.replace('$browser', downloadBrowsers[keyBrowser].text)
-    if (['ios', 'android'].includes(keyBrowser)) {
-      text = downloadBrowsers[keyBrowser].text
+    label = eventLabel.replace('$browser', downloadBrowsers[keyBrowser]?.text)
+    text = textDefault.replace('$browser', downloadBrowsers[keyBrowser]?.text)
+    if (['ios', 'android', 'not-supported'].includes(keyBrowser)) {
+      text = downloadBrowsers[keyBrowser]?.text
     }
     link = downloadBrowsers[keyBrowser]?.link
-    iconBrowser = downloadBrowsers[keyBrowser].icon
+    iconBrowser = downloadBrowsers[keyBrowser]?.icon
   }
   const onClosePopup = () => {
     setShowPopup(false)
@@ -81,19 +81,24 @@ const CTA = props => {
   }
   React.useEffect(() => {
     if (isDownloadBrowser) {
-      if (isMobile) {
+      if (
+        isMobile &&
+        ((isAndroid && downloadBrowsers['android']) ||
+          (isIOS && downloadBrowsers['ios']))
+      ) {
         if (isAndroid && downloadBrowsers['android']) {
           setKeyBrowser('android')
         } else if (isIOS && downloadBrowsers['ios']) {
           setKeyBrowser('ios')
-        } else {
-          setKeyBrowser('chrome')
         }
       } else {
         if (typeof navigator?.brave !== 'undefined') {
-          setKeyBrowser('brave')
-        } else if (downloadBrowsers[lowerBrowserName]) {
+          lowerBrowserName = 'brave'
+        }
+        if (downloadBrowsers[lowerBrowserName]) {
           setKeyBrowser(lowerBrowserName)
+        } else if (downloadBrowsers['not-supported']) {
+          setKeyBrowser('not-supported')
         } else {
           setKeyBrowser('chrome')
         }
@@ -150,15 +155,19 @@ const CTA = props => {
     )
   }
 
-  if (isDownloadBrowser && keyBrowser === 'safari') {
+  if (
+    isDownloadBrowser &&
+    !Object.keys(downloadBrowsers).includes(lowerBrowserName) &&
+    downloadBrowsers['browsers-supported']
+  ) {
     ele = (
       <BrowserWrapper>
         <BrowserInfo>
           <BrowserInfoTitle>
-            {downloadBrowsers[keyBrowser].text}
+            {downloadBrowsers['browsers-supported'].text}
           </BrowserInfoTitle>
           <BrowserInfoDesc>
-            {downloadBrowsers[keyBrowser].description}
+            {downloadBrowsers['browsers-supported'].description}
           </BrowserInfoDesc>
         </BrowserInfo>
         <BrowserList>
