@@ -58,9 +58,6 @@ const FullWidthCta = props => {
                 {ctas.map(cta =>
                   contentfulModuleToComponent({
                     ...cta,
-                    color: ['dark'].includes(backgroundColor)
-                      ? 'white'
-                      : 'black',
                   })
                 )}
               </CTAWrapper>
