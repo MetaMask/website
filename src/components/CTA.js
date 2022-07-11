@@ -92,10 +92,12 @@ const CTA = props => {
           setKeyBrowser('ios')
         }
       } else {
-        if (typeof navigator?.brave !== 'undefined') {
-          lowerBrowserName = 'brave'
-        }
-        if (downloadBrowsers[lowerBrowserName]) {
+        if (
+          typeof navigator?.brave !== 'undefined' &&
+          downloadBrowsers['brave']
+        ) {
+          setKeyBrowser('brave')
+        } else if (downloadBrowsers[lowerBrowserName]) {
           setKeyBrowser(lowerBrowserName)
         } else if (downloadBrowsers['not-supported']) {
           setKeyBrowser('not-supported')
@@ -157,7 +159,7 @@ const CTA = props => {
 
   if (
     isDownloadBrowser &&
-    !Object.keys(downloadBrowsers).includes(lowerBrowserName) &&
+    !Object.keys(downloadBrowsers).includes(keyBrowser) &&
     downloadBrowsers['browsers-supported']
   ) {
     ele = (
