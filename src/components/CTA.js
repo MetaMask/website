@@ -97,7 +97,10 @@ const CTA = props => {
           downloadBrowsers['brave']
         ) {
           setKeyBrowser('brave')
-        } else if (downloadBrowsers[lowerBrowserName]) {
+        } else if (
+          downloadBrowsers[lowerBrowserName] ||
+          downloadBrowsers['browsers-supported']
+        ) {
           setKeyBrowser(lowerBrowserName)
         } else if (downloadBrowsers['not-supported']) {
           setKeyBrowser('not-supported')
@@ -136,6 +139,7 @@ const CTA = props => {
       </ContentWrapper>
     </CTAContainer>
   )
+
   if (isButton) {
     ele = (
       <Button
