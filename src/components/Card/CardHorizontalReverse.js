@@ -87,13 +87,13 @@ const CTA = styled.div`
   display: flex;
   flex-flow: wrap;
   margin-top: auto;
-
+  padding-top: 16px;
   .button {
     margin: 0 16px 16px 0;
   }
-
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     justify-content: center;
+    flex-direction: column;
 
     .button {
       margin: 0 8px 16px;
@@ -116,6 +116,17 @@ const CardInner = styled(Link)`
   align-items: center;
   color: ${({ theme }) => theme.text.dark};
   border-radius: 48px;
+
+  @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+    .snapsCardHorizontalResize & {
+      position: relative;
+      overflow: hidden;
+    }
+  }
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    flex-direction: column;
+    text-align: center;
+  }
   ${({ theme }) =>
     `
   @media (max-width: ${theme.device.mobileMediaMax}){
@@ -140,9 +151,19 @@ const CardInner = styled(Link)`
 `
 
 const ImageWrapper = styled.div`
-  width: 200px;
+  max-width: 200px;
   margin-left: 64px;
-
+  @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+    .snapsCardHorizontalResize & {
+      position: absolute;
+      right: 0;
+    }
+  }
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    max-width: 125px;
+    margin-left: 0;
+    margin-bottom: 24px;
+  }
   ${({ theme }) =>
     `
   @media (max-width: ${theme.device.mobileMediaMax}){
@@ -174,11 +195,16 @@ const Title = styled.div`
   font-size: 48px;
   line-height: 1.2;
   margin-bottom: 8px;
-
+  .snapsCardHorizontalResize & {
+    font-size: 40px;
+  }
   ${({ theme }) =>
     `
   @media (max-width: ${theme.device.mobileMediaMax}){
     font-size: 32px;
+    .snapsCardHorizontalResize & {
+      font-size: 24px;
+    }
   }
   `}
 `

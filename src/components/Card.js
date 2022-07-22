@@ -260,4 +260,5 @@ const CTAWrapper = styled.div`
   display: block;
   margin-top: 8px;
   font-weight: bold;
+  color: ${({ theme }) => theme.text.title};
 `

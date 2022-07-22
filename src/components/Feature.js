@@ -24,6 +24,7 @@ const FeatureComponent = props => {
     imageAlignment,
     animation,
     backgroundColor,
+    backgroundImage,
     headlineMarginTop0,
     sectionPadding,
     noPaddingBottom,
@@ -112,9 +113,11 @@ const FeatureComponent = props => {
       ) : null}
     </>
   )
+
   return (
     <Container
       sectionPadding={sectionPadding}
+      image={backgroundImage}
       className={classnames({
         noPaddingBottom: noPaddingBottom,
         [`bg-${backgroundColor}`]: backgroundColor,
@@ -204,7 +207,22 @@ FeatureComponent.propTypes = {
   noPaddingBottom: PropTypes.bool,
 }
 
-const Container = styled(Section)``
+const Container = styled(Section)`
+  ${({ image, theme }) =>
+    image
+      ? ` background-image: url(${image});
+      background-size: cover;
+      height: 100%;
+      padding: 32px;
+
+      @media (max-width: ${theme.device.tabletMediaMax}){
+        .columnTypetag & {
+          padding: 12px;
+        }
+      }
+    `
+      : ''}
+`
 const Image = styled.div`
   display: block;
   width: 100%;

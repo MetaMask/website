@@ -320,14 +320,14 @@ export const darkTheme = {
 
 export const darkDarkTheme = {
   ...theme,
-  primaryColor: theme.darker[400],
+  primaryColor: theme.white,
   button: {
     primary: {
-      bg: theme.darker[400],
-      gradient: theme.darker[400],
+      bg: theme.white,
+      gradient: theme.white,
       bgHover: theme.darkBlue,
       gradientHover: theme.darkBlue,
-      text: theme.white,
+      text: theme.black,
     },
   },
   linkColor: theme.lightBlue,
