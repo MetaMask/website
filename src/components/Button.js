@@ -134,15 +134,23 @@ const ButtonWrapper = styled(Link)`
   ${({ color, theme }) =>
     color === 'secondary'
       ? `
-  background: transparent !important;
-  color: ${theme.darkBlue};
-  border: 2px solid ${theme.darkBlue};
-  @media (min-width: ${theme.device.miniDesktop}){
-    &:hover {
-      border-color: ${theme.darkerBlue};
-      color: ${theme.darkerBlue};
+    background: transparent !important;
+    color: ${theme.darkBlue};
+    border: 2px solid ${theme.darkBlue};
+    @media (min-width: ${theme.device.miniDesktop}){
+      &:hover {
+        border-color: ${theme.darkerBlue};
+        color: ${theme.darkerBlue};
+      }
     }
-  }
+    .theme-dark &{
+      color: ${theme.black};
+      border: 2px solid ${theme.black};
+    }
+    .dark-mode .theme-dark &{
+      color: ${theme.white};
+      border: 2px solid ${theme.white};
+    }
   `
       : ''}
 
@@ -164,4 +172,10 @@ const ButtonWrapper = styled(Link)`
     font-size: ${fontSize};
   `
       : ''}
+
+  .theme-dark &{
+    min-height: 42px;
+    padding: 8px 24px;
+    font-weight: 700;
+  }
 `

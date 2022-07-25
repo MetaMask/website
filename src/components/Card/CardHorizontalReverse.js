@@ -108,7 +108,15 @@ const CTA = styled.div`
   }
 `
 
-const Card = styled.div``
+const Card = styled.div`
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+  @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+    .snapsCardHorizontalResize & {
+      width: 100%;
+    }
+  }
+`
 
 const CardInner = styled(Link)`
   display: flex;
@@ -117,7 +125,7 @@ const CardInner = styled(Link)`
   color: ${({ theme }) => theme.text.dark};
   border-radius: 48px;
 
-  @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+  @media (min-width: ${({ theme }) => theme.device.tablet}) {
     .snapsCardHorizontalResize & {
       position: relative;
       overflow: hidden;
@@ -153,7 +161,7 @@ const CardInner = styled(Link)`
 const ImageWrapper = styled.div`
   max-width: 200px;
   margin-left: 64px;
-  @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+  @media (min-width: ${({ theme }) => theme.device.tablet}) {
     .snapsCardHorizontalResize & {
       position: absolute;
       right: 0;

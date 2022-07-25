@@ -213,7 +213,6 @@ const Container = styled(Section)`
       ? ` background-image: url(${image});
       background-size: cover;
       height: 100%;
-      padding: 32px;
 
       @media (max-width: ${theme.device.tabletMediaMax}){
         .columnTypetag & {
@@ -231,6 +230,11 @@ const SideImage = styled.div`
   display: block;
   flex: 1;
   min-width: 0;
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    .noPaddingBottom & {
+      margin-bottom: 0 !important;
+    }
+  }
 `
 const ImageSrc = styled(ImageItem)`
   display: block;
