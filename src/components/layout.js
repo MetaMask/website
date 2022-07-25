@@ -68,11 +68,16 @@ const Wrapper = styled.div`
     h2FontSize
       ? `
   h2 {
-    @media (min-width: ${theme.device.miniDesktop}){
+    @media (min-width: ${theme.device.tablet}){
       font-size: ${h2FontSize};
       line-height: 1.2;
     }
   }
   `
       : ''}
+
+  &.theme-dark {
+    font-size: 18px;
+    line-height: 25px;
+  }
 `
