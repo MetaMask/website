@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Feature from '../Feature'
+import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
 
 const ContentfulLayoutFeature = props => {
   const {
@@ -22,6 +23,7 @@ const ContentfulLayoutFeature = props => {
       newTab,
       animation,
       backgroundColor,
+      backgroundImage,
       headlineMarginTop0,
       sectionPadding,
       noPaddingBottom,
@@ -35,6 +37,7 @@ const ContentfulLayoutFeature = props => {
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
+  const bgUrl = parseContentfulAssetUrl(backgroundImage)
 
   return (
     <Feature
@@ -55,6 +58,7 @@ const ContentfulLayoutFeature = props => {
       newTab={newTab}
       animation={animation}
       backgroundColor={backgroundColor}
+      backgroundImage={bgUrl || ''}
       headlineMarginTop0={headlineMarginTop0}
       sectionPadding={sectionPadding}
       noPaddingBottom={noPaddingBottom}

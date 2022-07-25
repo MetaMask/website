@@ -116,7 +116,6 @@ const Wrapper = styled.div`
   .contentfulModuleContainerWrapper {
     margin-bottom: 0 !important;
   }
-
   ${({ isFaq, theme }) =>
     isFaq
       ? `
