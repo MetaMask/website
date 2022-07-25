@@ -420,7 +420,11 @@ const CTAWrapper = styled.div`
   a {
     min-width: 160px;
   }
-
+  .snapsLiveMetaMaskFlask & {
+    order: 1;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     .button {
       width: 100%;

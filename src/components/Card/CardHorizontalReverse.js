@@ -111,6 +111,7 @@ const CTA = styled.div`
 const Card = styled.div`
   padding-top: 16px !important;
   padding-bottom: 16px !important;
+
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     .snapsCardHorizontalResize & {
       width: 100%;
@@ -147,7 +148,7 @@ const CardInner = styled(Link)`
       ? ` background-image: url(${image});
       background-size: cover;
       height: 100%;
-      padding: 32px;
+      padding: 40px;
 
       @media (max-width: ${theme.device.tabletMediaMax}){
         .columnTypetag & {
@@ -165,6 +166,13 @@ const ImageWrapper = styled.div`
     .snapsCardHorizontalResize & {
       position: absolute;
       right: 0;
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+    .snapsCardHorizontalResize .column-1 & {
+      max-width: 500px;
+      right: 48px;
     }
   }
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
@@ -220,19 +228,25 @@ const Title = styled.div`
 const Description = styled.div`
   display: block;
   font-size: 24px;
-  line-height: 30px;
+  line-height: 32px;
+
   p:last-child {
     margin-bottom: 0;
   }
   ${({ theme }) =>
     `
-  @media (max-width: ${theme.device.mobileMediaMax}){
-    font-size: 16px;
-    line-height: 20px;
-  }
+    @media (max-width: ${theme.device.tabletMediaMax}){
+      font-size: 18px !important;
+      line-height: 26px !important;
+    }
+    @media (max-width: ${theme.device.mobileMediaMax}){
+      font-size: 16px;
+      line-height: 22px;
+    }
   `}
 `
 const CTAWrapper = styled.div`
   display: block;
   margin-top: auto;
+  font-weight: 700;
 `
