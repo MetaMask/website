@@ -133,7 +133,7 @@ const CTA = props => {
           })}
         >
           {showLeftArrow ? <Arrow {...icon} transform={'rotate(180)'} /> : null}
-          {text}
+          <span dangerouslySetInnerHTML={{ __html: text }} />
           {showRightArrow || socialLink ? <Arrow {...icon} /> : null}
         </LinkTitle>
       </ContentWrapper>
@@ -247,6 +247,9 @@ const CTAContainer = styled.div`
       top: -110px;
     }
   }
+  .snapsLiveMetaMaskFlask & {
+    justify-content: center;
+  }
 `
 const LinkTitle = styled.span`
   display: flex;
@@ -262,6 +265,24 @@ const LinkTitle = styled.span`
   &.leftArrow {
     svg {
       margin: 2px 12px 0 0;
+    }
+  }
+  .snapsLiveMetaMaskFlask & {
+    color: #222;
+    background-color: white;
+    padding: 5px 8px;
+    border-radius: 50px;
+    font-weight: 700;
+    span > span:first-child {
+      background: #d73a49;
+      border-radius: 50px;
+      color: #fff;
+      padding: 0 5px;
+      margin-right: 8px;
+    }
+    span > span:last-child {
+      font-size: 24px;
+      display: contents;
     }
   }
 `

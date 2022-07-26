@@ -194,6 +194,16 @@ export const ContentfulLayoutFeatureFields = graphql`
     eyebrow
     animation
     backgroundColor
+    backgroundImage {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
     sectionPadding
     noPaddingBottom
     customClass
@@ -352,8 +362,21 @@ export const ContentfulCardFields = graphql`
     }
     link
     linkText
+    cta {
+      ...ContentfulCtaFields
+    }
     newTab
     backgroundColor
+    backgroundImage {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
     layoutType
     layoutSize
     contentAlignment

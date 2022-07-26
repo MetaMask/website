@@ -8,8 +8,10 @@ import Link from './Link'
 import CardFeature from './Card/CardFeature'
 import CardFeatureHorizontal from './Card/CardFeatureHorizontal'
 import CardHorizontal from './Card/CardHorizontal'
+import CardHorizontalReverse from './Card/CardHorizontalReverse'
 import CardNews from './Card/CardNews'
 import ContextClientSide from '../Context/ContextClientSide'
+import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 
 /**
  * @name Card
@@ -23,9 +25,12 @@ const StyledCard = props => {
     image,
     imageDarkMode,
     link,
+    linkText,
     title,
+    cta,
     newTab,
     backgroundColor,
+    backgroundImage,
     imageMargin,
     layoutType,
   } = props
@@ -41,6 +46,9 @@ const StyledCard = props => {
     case 'horizontal':
       // code block
       return <CardHorizontal {...props} isDarkMode={isDarkMode} />
+    case 'horizontal-reverse':
+      // code block
+      return <CardHorizontalReverse {...props} isDarkMode={isDarkMode} />
     case 'news':
       // code block
       return <CardNews {...props} isDarkMode={isDarkMode} />
@@ -55,6 +63,7 @@ const StyledCard = props => {
         to={link}
         newTab={newTab}
         backgroundColor={backgroundColor}
+        image={backgroundImage}
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor,
         })}
@@ -80,7 +89,17 @@ const StyledCard = props => {
               <ArrowIcon />
             </ArrowItem>
           ) : null}
+          {linkText ? <CTAWrapper>{linkText}</CTAWrapper> : null}
         </Inner>
+        {cta ? (
+          <CTA>
+            {cta.map(cta =>
+              contentfulModuleToComponent({
+                ...cta,
+              })
+            )}
+          </CTA>
+        ) : null}
       </CardInner>
     </Card>
   )
@@ -96,6 +115,8 @@ StyledCard.propTypes = {
   description: PropTypes.string,
   imageMargin: PropTypes.bool,
 }
+
+const CTA = styled.div``
 
 const Card = styled.div`
   display: block;
@@ -145,6 +166,21 @@ const CardInner = styled(Link)`
       ? `
     padding: 20px;
   `
+      : ''}
+  ${({ image, theme }) =>
+    image
+      ? ` background-image: url(${image});
+      background-size: cover;
+      border-radius: 10px;
+      height: 100%;
+      padding: 24px;
+
+      @media (max-width: ${theme.device.tabletMediaMax}){
+        .columnTypetag & {
+          padding: 12px;
+        }
+      }
+    `
       : ''}
 `
 
@@ -218,4 +254,11 @@ const InnerContent = styled.div`
     text-align: left;
   `
       : ''}
+`
+
+const CTAWrapper = styled.div`
+  display: block;
+  margin-top: 8px;
+  font-weight: bold;
+  color: ${({ theme }) => theme.text.title};
 `

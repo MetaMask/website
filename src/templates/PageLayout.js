@@ -6,6 +6,8 @@ import {
   defaultTheme,
   purpleTheme,
   purpleDarkTheme,
+  darkTheme,
+  darkDarkTheme,
   defaultDarkTheme,
 } from '../lib/theme'
 import scrollTo from '../lib/utils/scrollToElement'
@@ -29,6 +31,10 @@ const PageLayout = props => {
       ? isDarkMode
         ? purpleDarkTheme
         : purpleTheme
+      : themeColor === 'dark'
+      ? isDarkMode
+        ? darkDarkTheme
+        : darkTheme
       : isDarkMode
       ? defaultDarkTheme
       : defaultTheme
@@ -115,7 +121,12 @@ const PageLayout = props => {
 
   return (
     <Context.Provider value={valueContext}>
-      <Layout theme={pageTheme} h2FontSize={h2FontSize} {...rest}>
+      <Layout
+        theme={pageTheme}
+        themeColor={themeColor}
+        h2FontSize={h2FontSize}
+        {...rest}
+      >
         <Notifications />
         {children}
         {dimensionScript && (

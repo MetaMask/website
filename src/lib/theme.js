@@ -138,7 +138,7 @@ export const defaultTheme = {
 
 export const defaultDarkTheme = {
   ...theme,
-  primaryColor: theme.blue[400],
+  primaryColor: theme.darker[400],
   button: {
     primary: {
       bg: theme.blue[400],
@@ -273,6 +273,97 @@ export const purpleDarkTheme = {
   shadowCardGray: 'rgba(255, 255, 255, 0.1)',
   shadowCardFeatureLogo: 'rgba(0, 0, 0, 0.8)',
   theme: 'purple',
+}
+
+export const darkTheme = {
+  ...theme,
+  primaryColor: theme.darker,
+  button: {
+    primary: {
+      bg: theme.darker,
+      gradient: theme.darker,
+      bgHover: theme.dark,
+      gradientHover: theme.dark,
+      text: theme.white,
+    },
+  },
+  linkColor: theme.darker,
+  eyebrowHero: theme.darker,
+  gradientFAQ: 'linear-gradient(90deg, #f5841f, #2c56dd)',
+  background: {
+    white: theme.white,
+    faqAnswer: '#f4f6f8',
+    faqAnswerCustom1: theme.white,
+    faqAnswerCustom2: '#4c4c4c',
+    downloadCta: theme.white,
+    downloadCtaShadow: '#dbdbdb',
+    navBtnHover: '#dbdbdb',
+    isCustodyOverlayHero:
+      'linear-gradient(180deg, rgba(247, 249, 251, 0), #f7f9fb 3%)',
+    logoBlue: 'rgba(3, 125, 214, 0.03)',
+    tabModuleOuter: '#F2F4F6',
+    cardFeatureInner: 'rgba(3, 125, 214, 0.03)',
+  },
+  text: {
+    default: theme.textColor,
+    title: theme.darker,
+    body: theme.textColor,
+    menu: '#222',
+    menuHover: theme.darker,
+    menuBgHover: '#e6eaee',
+    menuFooter: 'rgba(0, 0, 0, 0.74)',
+    menuFooterHover: theme.lightBlue,
+    dark: theme.dark,
+  },
+  theme: 'dark',
+}
+
+export const darkDarkTheme = {
+  ...theme,
+  primaryColor: theme.white,
+  button: {
+    primary: {
+      bg: theme.white,
+      gradient: theme.white,
+      bgHover: theme.darkBlue,
+      gradientHover: theme.darkBlue,
+      text: theme.black,
+    },
+  },
+  linkColor: theme.lightBlue,
+  eyebrowHero: theme.darkBlue,
+  background: {
+    white: theme.darker,
+    faqAnswer: theme.dark,
+    faqAnswerCustom1: theme.darker,
+    faqAnswerCustom2: theme.dark,
+    downloadCta: theme.dark,
+    downloadCtaShadow: theme.dark,
+    navBtnHover: theme.dark,
+    isCustodyOverlayHero:
+      'linear-gradient(180deg, rgba(247, 249, 251, 0), #24292e 3%)',
+    logoBlue: 'rgb(36, 41, 46)',
+    tabModuleOuter: theme.dark,
+    cardFeatureInner: '#212a30',
+  },
+  text: {
+    default: theme.white,
+    title: theme.white,
+    body: 'rgba(255,255,255,0.6)',
+    menu: theme.white,
+    menuHover: theme.darkBlue,
+    menuBgHover: theme.dark,
+    menuFooter: theme.white,
+    menuFooterHover: theme.lightBlue,
+    dark: theme.white,
+  },
+  footerBg: '#3C444B',
+  shadowSubMenu: 'rgba(255, 255, 255, 0.15)',
+  gradientFAQ: 'linear-gradient(90deg, #f5841f, #2c56dd)',
+  shadowCard: 'rgba(0, 0, 0, 0.4)',
+  shadowCardGray: 'rgba(255, 255, 255, 0.1)',
+  shadowCardFeatureLogo: 'rgba(0, 0, 0, 0.8)',
+  theme: 'dark',
 }
 
 export default theme

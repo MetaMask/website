@@ -78,6 +78,7 @@ const ContentfulModuleContainer = props => {
               isLiquiditySection={isLiquiditySection}
               className={classnames('moduleContainerListModules', {
                 [`columnType${columnType}`]: columnType,
+                [`column-${columns}`]: columns,
               })}
             >
               {modulesOther.map(m =>
@@ -116,7 +117,6 @@ const Wrapper = styled.div`
   .contentfulModuleContainerWrapper {
     margin-bottom: 0 !important;
   }
-
   ${({ isFaq, theme }) =>
     isFaq
       ? `
