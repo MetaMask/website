@@ -21,6 +21,7 @@ const StyledCard = props => {
     title,
     newTab,
     backgroundColor,
+    backgroundImage,
     imageMargin,
     layoutSize,
     linkText,
@@ -33,6 +34,7 @@ const StyledCard = props => {
         to={link}
         newTab={newTab}
         backgroundColor={backgroundColor}
+        image={backgroundImage}
         layoutSize={layoutSize}
         className={classnames('custom-card-bg', {
           [`bg-${backgroundColor}`]: backgroundColor,
@@ -83,6 +85,13 @@ const CardInner = styled(Link)`
   flex-direction: column;
   height: 100%;
   color: ${({ theme }) => theme.text.dark};
+  ${({ image }) =>
+    image
+      ? ` background-image: url(${image});
+      background-size: cover;
+      padding: 24px;
+    `
+      : ''}
 `
 
 const ImageWrapper = styled.div`

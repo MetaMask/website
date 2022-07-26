@@ -21,6 +21,7 @@ const StyledCard = props => {
     title,
     newTab,
     backgroundColor,
+    backgroundImage,
     imageMargin,
     layoutSize,
     linkText,
@@ -33,6 +34,7 @@ const StyledCard = props => {
         to={link}
         newTab={newTab}
         backgroundColor={backgroundColor}
+        image={backgroundImage}
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor,
         })}
@@ -86,6 +88,14 @@ const CardInner = styled(Link)`
     align-items: center;
   }
   `}
+  ${({ image }) =>
+    image
+      ? ` background-image: url(${image});
+      background-size: cover;
+      padding: 16px;
+      border-radius: 12px;
+    `
+      : ''}
 `
 
 const ImageWrapper = styled.div`
