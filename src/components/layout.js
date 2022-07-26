@@ -82,7 +82,7 @@ const Wrapper = styled.div`
     a:not(.button) {
       color: ${({ theme }) => theme.linkColor};
     }
-    a:hover {
+    a:not(.cardLink):hover {
       opacity: 0.9;
     }
   }
