@@ -79,5 +79,11 @@ const Wrapper = styled.div`
   &.theme-dark {
     font-size: 18px;
     line-height: 25px;
+    a:not(.button) {
+      color: ${({ theme }) => theme.linkColor};
+    }
+    a:hover {
+      opacity: 0.9;
+    }
   }
 `
