@@ -21,6 +21,7 @@ const StyledCard = props => {
     title,
     newTab,
     backgroundColor,
+    backgroundImage,
     imageMargin,
     layoutSize,
     linkText,
@@ -33,6 +34,7 @@ const StyledCard = props => {
         to={link}
         newTab={newTab}
         backgroundColor={backgroundColor}
+        image={backgroundImage}
         layoutSize={layoutSize}
         className={classnames('custom-card-bg', {
           [`bg-${backgroundColor}`]: backgroundColor,
@@ -92,6 +94,12 @@ const CardInner = styled(Link)`
       box-shadow: 0px 4px 24px ${theme.shadowCard};
   `
       : null}
+  ${({ image }) =>
+    image
+      ? ` background-image: url(${image});
+      background-size: cover;
+    `
+      : ''}
 `
 
 const ImageWrapper = styled.div`

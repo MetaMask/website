@@ -325,13 +325,13 @@ export const darkDarkTheme = {
     primary: {
       bg: theme.white,
       gradient: theme.white,
-      bgHover: theme.darkBlue,
-      gradientHover: theme.darkBlue,
+      bgHover: theme.white,
+      gradientHover: theme.white,
       text: theme.black,
     },
   },
-  linkColor: theme.lightBlue,
-  eyebrowHero: theme.darkBlue,
+  linkColor: theme.white,
+  eyebrowHero: theme.white,
   background: {
     white: theme.darker,
     faqAnswer: theme.dark,
