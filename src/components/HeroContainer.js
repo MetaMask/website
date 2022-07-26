@@ -713,7 +713,11 @@ const HeroTitle = styled.h1`
       text-align: left;
   `
       : ''}
-
+  .contentMaxWidth480 & {
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      max-width: 480px;
+    }
+  }
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     font-size: 46px;
   }
@@ -743,6 +747,11 @@ const HeroDescription = styled.div`
       margin-bottom: 0;
     }
     margin-bottom: 0;
+  }
+  .contentMaxWidth480 & {
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      max-width: 480px;
+    }
   }
   ${({ isFaq }) =>
     isFaq
@@ -810,6 +819,17 @@ const HeroSideImage = styled.div`
   .sideImageFlex40 & {
     @media (min-width: ${({ theme }) => theme.device.desktop}) {
       width: 40%;
+    }
+  }
+  .sideImageFlex35 & {
+    @media (min-width: ${({ theme }) => theme.device.desktop}) {
+      width: 35%;
+    }
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      width: 50%;
+    }
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      width: 100%;
     }
   }
   @media (min-width: ${({ theme }) => theme.device.desktop}) {
