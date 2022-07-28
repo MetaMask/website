@@ -270,19 +270,20 @@ const LinkTitle = styled.span`
   .snapsLiveMetaMaskFlask & {
     color: #222;
     background-color: white;
-    padding: 5px 8px;
-    border-radius: 50px;
+    padding: 6px;
+    gap: 6px;
+    border-radius: 36px;
     font-weight: 700;
     span > span:first-child {
-      background: #d73a49;
-      border-radius: 50px;
+      background: #BB2534;
+      border-radius: 16px;
       color: #fff;
-      padding: 0 5px;
-      margin-right: 8px;
+      padding: 2px 10px;
+      margin-right: 2px;
     }
     span > span:last-child {
-      font-size: 24px;
-      display: contents;
+      display: inline-block;
+      margin-left: 4px;
     }
   }
 `
