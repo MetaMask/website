@@ -211,7 +211,7 @@ const Title = styled.div`
   font-size: 32px;
   line-height: 45px;
   margin-bottom: 16px;
-  
+
   ${({ theme }) =>
     `
   @media (max-width: ${theme.device.mobileMediaMax}){

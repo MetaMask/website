@@ -275,7 +275,7 @@ const LinkTitle = styled.span`
     border-radius: 36px;
     font-weight: 700;
     span > span:first-child {
-      background: #BB2534;
+      background: #bb2534;
       border-radius: 16px;
       color: #fff;
       padding: 2px 10px;
