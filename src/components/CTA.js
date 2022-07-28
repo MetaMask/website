@@ -275,14 +275,14 @@ const LinkTitle = styled.span`
     border-radius: 36px;
     font-weight: 700;
     span > span:first-child {
-      background: #BB2534;
+      background: #bb2534;
       border-radius: 16px;
       color: #fff;
       padding: 2px 10px;
-      margin-right: 2px;
+      margin-right: 4px;
     }
     span > span:last-child {
-      display: inline-block;
+      font-size: 25px;
       margin-left: 4px;
     }
   }
