@@ -423,6 +423,9 @@ const CTAWrapper = styled.div`
   .snapsLiveMetaMaskFlask & {
     order: 1;
     margin-top: 0;
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+     margin-bottom: 16px;
+    }
   }
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     .button {
