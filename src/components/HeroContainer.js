@@ -218,8 +218,7 @@ const HeroContainerComponent = props => {
                   isFlask={isFlask}
                   ref={scrollRef}
                 >
-                  {' '}
-                  {headline}{' '}
+                  <div dangerouslySetInnerHTML={{ __html: headline }} />
                 </HeroTitle>
               )}
               {description && (
@@ -669,6 +668,7 @@ const HeroTitle = styled.h1`
       padding-bottom: 8px;
     }
   }
+  
   ${({ hideHeadline }) =>
     hideHeadline
       ? `
@@ -713,11 +713,14 @@ const HeroTitle = styled.h1`
       text-align: left;
   `
       : ''}
-  .contentMaxWidth480 & {
+  
+  .titleFontSize60 & {
     @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
-      max-width: 480px;
+      font-size: 60px;
+      max-width: 600px;
     }
   }
+  
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     font-size: 46px;
   }
