@@ -37,7 +37,7 @@ const StyledCard = props => {
         newTab={newTab}
         backgroundColor={backgroundColor}
         image={backgroundImage}
-        className={classnames({
+        className={classnames('cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
         })}
       >
@@ -89,7 +89,7 @@ const CTA = styled.div`
   margin-top: auto;
   padding-top: 16px;
   .button {
-    margin: 0 16px 16px 0;
+    margin: 0 16px 0 0;
   }
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     justify-content: center;
@@ -148,7 +148,7 @@ const CardInner = styled(Link)`
       ? ` background-image: url(${image});
       background-size: cover;
       height: 100%;
-      padding: 40px;
+      padding: 32px;
 
       @media (max-width: ${theme.device.tabletMediaMax}){
         .columnTypetag & {
@@ -208,16 +208,13 @@ const Inner = styled.div`
 `
 const Title = styled.div`
   font-weight: 700;
-  font-size: 48px;
-  line-height: 1.2;
-  margin-bottom: 8px;
-  .snapsCardHorizontalResize & {
-    font-size: 40px;
-  }
+  font-size: 32px;
+  line-height: 45px;
+  margin-bottom: 16px;
+  
   ${({ theme }) =>
     `
   @media (max-width: ${theme.device.mobileMediaMax}){
-    font-size: 32px;
     .snapsCardHorizontalResize & {
       font-size: 24px;
     }
@@ -227,8 +224,6 @@ const Title = styled.div`
 
 const Description = styled.div`
   display: block;
-  font-size: 24px;
-  line-height: 32px;
 
   p:last-child {
     margin-bottom: 0;
@@ -249,4 +244,7 @@ const CTAWrapper = styled.div`
   display: block;
   margin-top: auto;
   font-weight: 700;
+  &:hover {
+    opacity: 0.9;
+  }
 `

@@ -36,7 +36,7 @@ const StyledCard = props => {
         newTab={newTab}
         backgroundColor={backgroundColor}
         image={backgroundImage}
-        className={classnames('custom-card-bg', {
+        className={classnames('custom-card-bg cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
           [`bg-default`]: !backgroundColor,
         })}
@@ -171,4 +171,7 @@ const Description = styled.div`
 const CTAWrapper = styled.div`
   display: block;
   margin-top: auto;
+  &:hover {
+    opacity: 0.9;
+  }
 `
