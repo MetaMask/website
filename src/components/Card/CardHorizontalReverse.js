@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import Image from '../Image'
 import classnames from 'classnames'
 import Link from '../Link'
-import CTAAngleIcon from './CTAAngleIcon'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 
 /**
@@ -111,12 +110,6 @@ const CTA = styled.div`
 const Card = styled.div`
   padding-top: 16px !important;
   padding-bottom: 16px !important;
-
-  @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
-    .snapsCardHorizontalResize & {
-      width: 100%;
-    }
-  }
 `
 
 const CardInner = styled(Link)`
@@ -124,25 +117,17 @@ const CardInner = styled(Link)`
   flex-direction: row-reverse;
   align-items: center;
   color: ${({ theme }) => theme.text.dark};
-  border-radius: 48px;
-
-  @media (min-width: ${({ theme }) => theme.device.tablet}) {
-    .snapsCardHorizontalResize & {
-      position: relative;
-      overflow: hidden;
-    }
-  }
+  border-radius: 24px;
+  
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     flex-direction: column;
     text-align: center;
   }
-  ${({ theme }) =>
-    `
-  @media (max-width: ${theme.device.mobileMediaMax}){
-    flex-direction: column;
+
+  @media (max-width: $${({ theme }) => theme.device.mobileMediaMax}){
     align-items: center;
   }
-  `}
+  
   ${({ image, theme }) =>
     image
       ? ` background-image: url(${image});
@@ -151,44 +136,44 @@ const CardInner = styled(Link)`
       padding: 32px;
 
       @media (max-width: ${theme.device.tabletMediaMax}){
-        .columnTypetag & {
-          padding: 12px;
-        }
+        background-image: url(${image});
       }
     `
+      : ''}
+
+  ${({ backgroundColor }) =>
+    backgroundColor === 'white'
+      ? `
+    box-shadow: 0 10px 30px 0 rgba(0,0,0,0.09);
+    transition: box-shadow 200ms ease;
+
+    &:hover {
+      box-shadow: 0 10px 30px 0 rgba(0,0,0,0.2);
+      filter: saturate(1.15);
+    }
+  `
       : ''}
 `
 
 const ImageWrapper = styled.div`
   max-width: 200px;
   margin-left: 64px;
-  @media (min-width: ${({ theme }) => theme.device.tablet}) {
-    .snapsCardHorizontalResize & {
-      position: absolute;
-      right: 0;
-    }
-  }
-
-  @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
-    .snapsCardHorizontalResize .column-1 & {
-      max-width: 500px;
-      right: 48px;
-    }
-  }
+  
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-    max-width: 125px;
+    max-width: 150px;
     margin-left: 0;
     margin-bottom: 24px;
   }
-  ${({ theme }) =>
-    `
-  @media (max-width: ${theme.device.mobileMediaMax}){
-    width: 100px;
-    margin-left: 0;
+
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    max-width: 120px;
     margin-bottom: 16px;
   }
-  `}
-
+  
+  .cardHorizontalSideImageFull & {
+    max-width: 200px;
+  }
+  
   img {
     object-fit: contain;
   }
@@ -211,15 +196,6 @@ const Title = styled.div`
   font-size: 32px;
   line-height: 45px;
   margin-bottom: 16px;
-  
-  ${({ theme }) =>
-    `
-  @media (max-width: ${theme.device.mobileMediaMax}){
-    .snapsCardHorizontalResize & {
-      font-size: 24px;
-    }
-  }
-  `}
 `
 
 const Description = styled.div`
@@ -228,17 +204,15 @@ const Description = styled.div`
   p:last-child {
     margin-bottom: 0;
   }
-  ${({ theme }) =>
-    `
-    @media (max-width: ${theme.device.tabletMediaMax}){
-      font-size: 18px !important;
-      line-height: 26px !important;
-    }
-    @media (max-width: ${theme.device.mobileMediaMax}){
-      font-size: 16px;
-      line-height: 22px;
-    }
-  `}
+
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
+    font-size: 18px !important;
+    line-height: 26px !important;
+  }
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}){
+    font-size: 16px;
+    line-height: 22px;
+  }
 `
 const CTAWrapper = styled.div`
   display: block;

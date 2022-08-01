@@ -318,6 +318,7 @@ const ContentInfo = styled.div`
       : ''}
 
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    margin-bottom: 24px;
     text-align: center;
   }
   

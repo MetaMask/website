@@ -182,6 +182,10 @@ const CardInner = styled(Link)`
       }
     `
       : ''}
+
+  .snapsCardBorderRadius24 & {
+    border-radius: 24px;
+  }
 `
 
 const ImageWrapper = styled.div`
