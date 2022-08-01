@@ -199,7 +199,7 @@ const CardInner = styled(Link)`
     `
       : ''}
 
-  .snapsCardBorderRadius24 & {
+  .cardBorderRadius24 & {
     border-radius: 24px;
   }
 `
