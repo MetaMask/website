@@ -1213,7 +1213,7 @@ body.dark-mode {
   }
 
   .pb-2-res {
-    padding-bottom: 0!important;
+    padding-bottom: 0 !important;
   }
 }
 
@@ -1398,6 +1398,40 @@ body.dark-mode {
     transform: translateY(-50%);
     right: calc(100% + 10px);
     content: '';
+  }
+  &.newsletterOnSnaps {
+    .hs-form-field input {
+      height: 52px;
+      @media (max-width: 767px) {
+        height: 40px;
+      }
+    }
+    .hs-submit {
+      right: 6px;
+      top: 6px;
+      input[type='submit'].hs-button {
+        font-size: 18px;
+        line-height: 25px;
+        font-weight: 700;
+        background: black;
+        @media (max-width: 767px) {
+          background: white;
+          color: black;
+          width: 100%;
+        }
+      }
+      @media (max-width: 767px) {
+        position: inherit;
+        width: 100%;
+        right: inherit;
+        top: inherit;
+      }
+    }
+    @media (max-width: 767px) {
+      .hs-form-field {
+        margin-bottom: 8px;
+      }
+    }
   }
 }
 

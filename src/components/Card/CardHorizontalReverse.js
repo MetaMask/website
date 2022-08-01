@@ -101,7 +101,13 @@ const CardInner = styled(Link)`
   align-items: center;
   color: ${({ theme }) => theme.text.dark};
   border-radius: 24px;
-  
+
+  @media (min-width: ${({ theme }) => theme.device.tablet}) {
+    .snapCardHorizontalMobile.ImageFull & {
+      position: relative;
+      overflow: hidden;
+    }
+  }
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     border-radius: 48px;
     flex-direction: column;
@@ -172,6 +178,10 @@ const ImageWrapper = styled.div`
 
   .snapCardHorizontalMobile.ImageFull & {
     max-width: 200px;
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      position: absolute;
+      right: 0;
+    }
   }
 
   img {
@@ -190,6 +200,9 @@ const Inner = styled.div`
   flex: 1;
   width: 100%;
   height: 100%;
+  .snapCardHorizontalMobile.ImageFull & {
+    z-index: 1;
+  }
 `
 
 const Title = styled.div`
@@ -252,6 +265,11 @@ const CTA = styled.div`
   padding-top: 16px;
   .button {
     margin: 0 16px 0 0;
+  }
+  .snapCardHorizontalMobile.ImageFull & {
+    a:hover {
+      opacity: 1;
+    }
   }
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     justify-content: center;
