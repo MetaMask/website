@@ -176,7 +176,7 @@ const ImageWrapper = styled.div`
     margin-bottom: 16px;
   }
 
-  .cardmageFull & {
+  .cardImageFull & {
     max-width: 200px;
     @media (min-width: ${({ theme }) => theme.device.tablet}) {
       position: absolute;
