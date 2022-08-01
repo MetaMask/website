@@ -170,7 +170,7 @@ const ImageWrapper = styled.div`
     margin-bottom: 16px;
   }
 
-  .snapCardHorizontalMobile.ImageFull & {
+  .imageFull & {
     max-width: 200px;
   }
 
