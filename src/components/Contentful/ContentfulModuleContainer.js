@@ -238,7 +238,7 @@ const Modules = styled.div`
       margin: -${gridModulesGap} !important;
       
       @media (max-width: ${theme.device.tabletMediaMax}){
-        .cardGridModulesGap12 & {
+        .mobileCardGridModulesGap12 & {
           margin: -12px !important;
         }
       }
@@ -251,7 +251,7 @@ const Modules = styled.div`
     }
     @media (max-width: ${theme.device.tabletMediaMax}){
       ${columnsOnMobile && columns > 2 ? `width: 50%` : ''};
-      .cardGridModulesGap12 & {
+      .mobileCardGridModulesGap12 & {
         padding: 12px !important;
       }
     }
