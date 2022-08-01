@@ -120,6 +120,7 @@ const CardInner = styled(Link)`
   border-radius: 24px;
   
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    border-radius: 48px;
     flex-direction: column;
     text-align: center;
   }
@@ -170,7 +171,7 @@ const ImageWrapper = styled.div`
     margin-bottom: 16px;
   }
   
-  .cardHorizontalSideImageFull & {
+  .snapCardHorizontalMobile & {
     max-width: 200px;
   }
   
