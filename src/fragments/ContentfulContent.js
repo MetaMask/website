@@ -204,6 +204,16 @@ export const ContentfulLayoutFeatureFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
+    backgroundImageMobile {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
     sectionPadding
     noPaddingBottom
     customClass
@@ -366,8 +376,21 @@ export const ContentfulCardFields = graphql`
       ...ContentfulCtaFields
     }
     newTab
+    hubSpotForm {
+      ...ContentfulHubSpotFormFields
+    }
     backgroundColor
     backgroundImage {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
+    backgroundImageMobile {
       title
       description
       file {

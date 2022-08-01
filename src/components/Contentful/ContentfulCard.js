@@ -15,14 +15,17 @@ const ContentfulCard = props => {
       newTab,
       backgroundColor,
       backgroundImage,
+      backgroundImageMobile,
       imageMargin,
       previewMode,
       layoutType,
       layoutSize,
+      hubSpotForm,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
   const bgUrl = parseContentfulAssetUrl(backgroundImage)
+  const bgMobileUrl = parseContentfulAssetUrl(backgroundImageMobile)
 
   return (
     <Card
@@ -35,10 +38,12 @@ const ContentfulCard = props => {
       newTab={newTab}
       backgroundColor={backgroundColor}
       backgroundImage={bgUrl || ''}
+      backgroundImageMobile={bgMobileUrl || ''}
       imageMargin={imageMargin}
       layoutType={layoutType}
       layoutSize={layoutSize}
       cta={cta}
+      hubSpotForm={hubSpotForm}
     />
   )
 }
@@ -54,6 +59,7 @@ ContentfulCard.propTypes = {
     newTab: PropTypes.bool,
     backgroundColor: PropTypes.string,
     backgroundImage: PropTypes.object,
+    backgroundImageMobile: PropTypes.object,
     cta: PropTypes.array,
     imageMargin: PropTypes.bool,
     layoutType: PropTypes.string,

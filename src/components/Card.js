@@ -31,8 +31,10 @@ const StyledCard = props => {
     newTab,
     backgroundColor,
     backgroundImage,
+    backgroundImageMobile,
     imageMargin,
     layoutType,
+    hubSpotForm,
   } = props
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
@@ -64,6 +66,7 @@ const StyledCard = props => {
         newTab={newTab}
         backgroundColor={backgroundColor}
         image={backgroundImage}
+        imageMobile={backgroundImageMobile}
         className={classnames('cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
         })}
@@ -83,6 +86,9 @@ const StyledCard = props => {
                 <div dangerouslySetInnerHTML={{ __html: description }}></div>
               </Description>
             ) : null}
+            {hubSpotForm ? (
+              <>{contentfulModuleToComponent(hubSpotForm)}</>
+            ) : null}
           </InnerContent>
           {isCtaType ? (
             <ArrowItem>
@@ -90,16 +96,16 @@ const StyledCard = props => {
             </ArrowItem>
           ) : null}
           {linkText ? <CTAWrapper>{linkText}</CTAWrapper> : null}
+          {cta ? (
+            <CTA>
+              {cta.map(cta =>
+                contentfulModuleToComponent({
+                  ...cta,
+                })
+              )}
+            </CTA>
+          ) : null}
         </Inner>
-        {cta ? (
-          <CTA>
-            {cta.map(cta =>
-              contentfulModuleToComponent({
-                ...cta,
-              })
-            )}
-          </CTA>
-        ) : null}
       </CardInner>
     </Card>
   )
@@ -114,6 +120,7 @@ StyledCard.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   imageMargin: PropTypes.bool,
+  hubSpotForm: PropTypes.object,
 }
 
 const CTA = styled.div``
@@ -182,6 +189,19 @@ const CardInner = styled(Link)`
       }
     `
       : ''}
+
+  ${({ imageMobile, theme }) =>
+    imageMobile
+      ? ` 
+      @media (max-width: ${theme.device.tabletMediaMax}){
+        background-image: url(${imageMobile});
+      }
+    `
+      : ''}
+
+  .snapsCardBorderRadius24 & {
+    border-radius: 24px;
+  }
 `
 
 const ImageWrapper = styled.div`
