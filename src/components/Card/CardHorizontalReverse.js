@@ -93,7 +93,7 @@ StyledCard.propTypes = {
 const Card = styled.div`
   padding-top: 16px !important;
   padding-bottom: 16px !important;
-  .cardImageFull & {
+  .cardImageAbsolute & {
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       width: 100%;
     }
@@ -165,7 +165,7 @@ const CardInner = styled(Link)`
   `
       : ''}
 
-  .cardImageFull &{
+  .cardImageAbsolute &{
     box-shadow: none;
   }
 `
@@ -185,7 +185,7 @@ const ImageWrapper = styled.div`
     margin-bottom: 16px;
   }
 
-  .cardImageFull & {
+  .cardImageAbsolute & {
     max-width: 200px;
   }
 
