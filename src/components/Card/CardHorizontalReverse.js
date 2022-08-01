@@ -103,7 +103,7 @@ const CardInner = styled(Link)`
   border-radius: 24px;
 
   @media (min-width: ${({ theme }) => theme.device.tablet}) {
-    .snapCardHorizontalMobile.ImageFull & {
+    .snapCardHorizontalMobile.cardImageFull & {
       position: relative;
       overflow: hidden;
     }
@@ -200,7 +200,7 @@ const Inner = styled.div`
   flex: 1;
   width: 100%;
   height: 100%;
-  .snapCardHorizontalMobile.ImageFull & {
+  .snapCardHorizontalMobile.cardImageFull & {
     z-index: 1;
   }
 `
@@ -266,7 +266,7 @@ const CTA = styled.div`
   .button {
     margin: 0 16px 0 0;
   }
-  .snapCardHorizontalMobile.ImageFull & {
+  .snapCardHorizontalMobile.cardImageFull & {
     a:hover {
       opacity: 1;
     }
