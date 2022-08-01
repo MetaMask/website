@@ -24,6 +24,7 @@ const ContentfulLayoutFeature = props => {
       animation,
       backgroundColor,
       backgroundImage,
+      backgroundImageMobile,
       headlineMarginTop0,
       sectionPadding,
       noPaddingBottom,
@@ -38,6 +39,7 @@ const ContentfulLayoutFeature = props => {
 
   const { childMarkdownRemark: { html } = {} } = description || {}
   const bgUrl = parseContentfulAssetUrl(backgroundImage)
+  const bgMobileUrl = parseContentfulAssetUrl(backgroundImageMobile)
 
   return (
     <Feature
@@ -59,6 +61,7 @@ const ContentfulLayoutFeature = props => {
       animation={animation}
       backgroundColor={backgroundColor}
       backgroundImage={bgUrl || ''}
+      backgroundImageMobile={bgMobileUrl || ''}
       headlineMarginTop0={headlineMarginTop0}
       sectionPadding={sectionPadding}
       noPaddingBottom={noPaddingBottom}
