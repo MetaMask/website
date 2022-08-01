@@ -1431,6 +1431,14 @@ body.dark-mode {
       .hs-form-field {
         margin-bottom: 8px;
       }
+      .hs-error-msgs label {
+        color: white;
+      }
+    }
+  }
+  .dark-mode &.newsletterOnSnaps {
+    .hs-error-msgs label {
+      color: white;
     }
   }
 }
