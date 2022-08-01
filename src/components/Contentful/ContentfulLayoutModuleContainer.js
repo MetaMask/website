@@ -291,7 +291,7 @@ const Modules = styled.div`
     &:not(:last-child) {
       margin-bottom: ${({ modulesMargin }) => modulesMargin || '40px'};
       @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-        .snapCardHorizontalMobile & {
+        .cardGridModulesGap12 & {
           margin-bottom: 12px !important;
         }
       }
