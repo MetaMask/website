@@ -170,7 +170,7 @@ const ImageWrapper = styled.div`
     margin-bottom: 16px;
   }
 
-  .imageFull & {
+  .cardmageFull & {
     max-width: 200px;
   }
 
