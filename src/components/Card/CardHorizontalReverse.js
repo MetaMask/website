@@ -178,6 +178,9 @@ const ImageWrapper = styled.div`
 
   .cardImageFull & {
     max-width: 200px;
+  }
+
+  .cardImageAbsoluteRight0 & {
     @media (min-width: ${({ theme }) => theme.device.tablet}) {
       position: absolute;
       right: 0;
