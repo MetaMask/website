@@ -269,7 +269,7 @@ const LinkTitle = styled.span`
   }
   .snapsLiveMetaMaskFlask & {
     color: #222;
-    background-color: #ffffffba;
+    background-color: #ffffffbf;
     padding: 6px 40px 6px 6px;
     gap: 6px;
     border-radius: 32px;
