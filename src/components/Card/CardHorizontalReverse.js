@@ -169,7 +169,11 @@ const CardInner = styled(Link)`
   `
       : ''}
 
-  .cardImageAbsolute &{
+  .cardBoxShadowNone &:not(:hover) {
+    box-shadow: none;
+  }
+
+  .cardHoverBoxShadowNone &:hover {
     box-shadow: none;
   }
 `
@@ -286,11 +290,7 @@ const CTA = styled.div`
   .button {
     margin: 0 16px 0 0;
   }
-  .cardImageAbsolute & {
-    a:hover {
-      opacity: 1;
-    }
-  }
+  
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     justify-content: center;
     flex-direction: column;
