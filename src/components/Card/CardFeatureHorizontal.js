@@ -102,6 +102,7 @@ const CardInner = styled(Link)`
   border-radius: 12px;
   overflow: hidden;
   color: ${({ theme }) => theme.text.dark};
+  
   ${({ contentAlignment }) =>
     contentAlignment === 'left'
       ? `
@@ -115,12 +116,14 @@ const CardInner = styled(Link)`
     flex-direction: column;
   }
   `}
+  
   ${({ image }) =>
     image
       ? ` background-image: url(${image});
       background-size: cover;
     `
       : ''}
+  
   ${({ imageMobile, theme }) =>
     imageMobile
       ? ` 
@@ -130,6 +133,14 @@ const CardInner = styled(Link)`
       }
     `
       : ''}
+
+  .cardBoxShadowNone &:not(:hover) {
+    box-shadow: none;
+  }
+
+  .cardHoverBoxShadowNone &:hover {
+    box-shadow: none;
+  }
 `
 
 const ImageWrapper = styled.div`

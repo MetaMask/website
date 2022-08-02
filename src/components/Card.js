@@ -206,6 +206,14 @@ const CardInner = styled(Link)`
   .cardBorderRadius24 & {
     border-radius: 24px;
   }
+  
+  .cardBoxShadowNone &:not(:hover) {
+    box-shadow: none;
+  }
+
+  .cardHoverBoxShadowNone &:hover {
+    box-shadow: none;
+  }
 `
 
 const ImageWrapper = styled.div`
