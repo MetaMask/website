@@ -288,7 +288,7 @@ const CTAWrapper = styled.div`
   color: ${({ theme }) => theme.text.title};
   &:hover {
     opacity: 0.9;
-    .ctaArrowHoverAnimation:after {
+    .arrowAnimation:after {
       margin-left: 6px;
     }
   }
