@@ -104,6 +104,7 @@ const CardInner = styled(Link)`
     align-items: center;
   }
   `}
+  
   ${({ image }) =>
     image
       ? ` background-image: url(${image});
@@ -112,6 +113,7 @@ const CardInner = styled(Link)`
       border-radius: 12px;
     `
       : ''}
+  
   ${({ imageMobile, theme }) =>
     imageMobile
       ? ` 
@@ -121,6 +123,14 @@ const CardInner = styled(Link)`
       }
     `
       : ''}
+
+  .cardBoxShadowNone &:not(:hover) {
+    box-shadow: none;
+  }
+
+  .cardHoverBoxShadowNone &:hover {
+    box-shadow: none;
+  }
 `
 
 const ImageWrapper = styled.div`

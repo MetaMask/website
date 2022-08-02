@@ -104,12 +104,14 @@ const CardInner = styled(Link)`
   border-radius: 12px;
   height: 100%;
   color: ${({ theme }) => theme.text.dark};
+  
   ${({ layoutSize, theme }) =>
     layoutSize === 'small'
       ? `
       box-shadow: 0px 4px 24px ${theme.shadowCard};
   `
       : null}
+  
   ${({ image }) =>
     image
       ? ` background-image: url(${image});
@@ -126,6 +128,14 @@ const CardInner = styled(Link)`
         }
     `
       : ''}
+
+  .cardBoxShadowNone &:not(:hover) {
+    box-shadow: none;
+  }
+
+  .cardHoverBoxShadowNone &:hover {
+    box-shadow: none;
+  }
 `
 
 const ImageWrapper = styled.div`

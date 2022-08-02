@@ -5,7 +5,6 @@ import Image from '../Image'
 import classnames from 'classnames'
 import Link from '../Link'
 import CTAAngleIcon from './CTAAngleIcon'
-import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 
 /**
  * @name Card
@@ -26,9 +25,7 @@ const StyledCard = props => {
     backgroundImageMobile,
     imageMargin,
     layoutSize,
-    hubSpotForm,
     linkText,
-    cta,
     isDarkMode,
   } = props
 
@@ -59,21 +56,10 @@ const StyledCard = props => {
               <div dangerouslySetInnerHTML={{ __html: description }}></div>
             </Description>
           ) : null}
-          {hubSpotForm ? <>{contentfulModuleToComponent(hubSpotForm)}</> : null}
           {linkText ? (
             <CTAWrapper>
               <CTAAngleIcon text={linkText} />
             </CTAWrapper>
-          ) : null}
-          {cta ? (
-            <CTA>
-              {cta.map(cta =>
-                contentfulModuleToComponent({
-                  ...cta,
-                  buttonSize: 'hero',
-                })
-              )}
-            </CTA>
           ) : null}
         </Inner>
       </CardInner>
@@ -169,6 +155,7 @@ const Inner = styled.div`
   flex: 1;
   width: 100%;
 `
+
 const Title = styled.div`
   font-weight: 700;
   font-size: 18px;
@@ -210,31 +197,6 @@ const CTAWrapper = styled.div`
     opacity: 0.9;
     .arrowAnimation:after {
       margin-left: 6px;
-    }
-  }
-`
-
-const CTA = styled.div`
-  display: flex;
-  flex-flow: wrap;
-  margin-top: auto;
-  padding-top: 16px;
-  .button {
-    margin: 0 16px 0 0;
-  }
-  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-    justify-content: center;
-    flex-direction: column;
-
-    .button {
-      margin: 0 8px 16px;
-    }
-  }
-
-  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
-    .button {
-      width: 100%;
-      margin: 0 0 16px 0;
     }
   }
 `
