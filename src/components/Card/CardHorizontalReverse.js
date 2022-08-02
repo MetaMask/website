@@ -62,7 +62,11 @@ const StyledCard = props => {
             </Description>
           ) : null}
           {hubSpotForm ? <>{contentfulModuleToComponent(hubSpotForm)}</> : null}
-          {linkText ? <CTAWrapper>{linkText}</CTAWrapper> : null}
+          {linkText ? (
+            <CTAWrapper>
+              <span dangerouslySetInnerHTML={{ __html: linkText }} />
+            </CTAWrapper>
+          ) : null}
           {cta ? (
             <CTA>
               {cta.map(cta =>
@@ -265,8 +269,12 @@ const CTAWrapper = styled.div`
   display: block;
   margin-top: auto;
   font-weight: 700;
+  position: relative;
   &:hover {
     opacity: 0.9;
+    .ctaArrowHoverAnimation:after {
+      margin-left: 6px;
+    }
   }
 `
 

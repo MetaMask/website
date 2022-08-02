@@ -1413,10 +1413,8 @@ body.dark-mode {
         font-size: 18px;
         line-height: 25px;
         font-weight: 700;
-        background: black;
+        background: #121212;
         @media (max-width: 767px) {
-          background: white;
-          color: black;
           width: 100%;
         }
       }
@@ -1432,11 +1430,22 @@ body.dark-mode {
         margin-bottom: 8px;
       }
       .hs-error-msgs label {
-        color: white;
+        color: #121212;
       }
     }
   }
   .dark-mode &.newsletterOnSnaps {
+    @media (min-width: 768px) {
+      .hs-form-field input {
+        background-color: #121212;
+        border-color: #121212;
+        color: white;
+      }
+    }
+    .hs-submit input[type='submit'].hs-button {
+      background-color: white;
+      color: #121212;
+    }
     .hs-error-msgs label {
       color: white;
     }
@@ -1550,5 +1559,21 @@ body.dark-mode {
     .dark-mode & {
       color: #fff;
     }
+  }
+}
+
+.ctaArrowHoverAnimation {
+  width: 30px;
+  display: inline-grid;
+  &:after {
+    content: '→';
+    font-size: 20px;
+    margin-left: 4px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+      sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    transition: ease 0.3s all;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-52%);
   }
 }

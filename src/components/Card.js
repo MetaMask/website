@@ -95,7 +95,11 @@ const StyledCard = props => {
               <ArrowIcon />
             </ArrowItem>
           ) : null}
-          {linkText ? <CTAWrapper>{linkText}</CTAWrapper> : null}
+          {linkText ? (
+            <CTAWrapper>
+              <span dangerouslySetInnerHTML={{ __html: linkText }} />
+            </CTAWrapper>
+          ) : null}
           {cta ? (
             <CTA>
               {cta.map(cta =>
@@ -280,8 +284,12 @@ const CTAWrapper = styled.div`
   display: block;
   margin-top: 8px;
   font-weight: bold;
+  position: relative;
   color: ${({ theme }) => theme.text.title};
   &:hover {
     opacity: 0.9;
+    .ctaArrowHoverAnimation:after {
+      margin-left: 6px;
+    }
   }
 `
