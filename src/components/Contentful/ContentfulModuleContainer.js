@@ -117,6 +117,7 @@ const Wrapper = styled.div`
   .contentfulModuleContainerWrapper {
     margin-bottom: 0 !important;
   }
+
   ${({ isFaq, theme }) =>
     isFaq
       ? `
@@ -235,6 +236,12 @@ const Modules = styled.div`
     columns && gridModules && columnType !== 'tag'
       ? `
       margin: -${gridModulesGap} !important;
+      
+      @media (max-width: ${theme.device.tabletMediaMax}){
+        .mobileCardGridModulesGap12 & {
+          margin: -12px !important;
+        }
+      }
 
     > * {
     width: calc(100%/${columns});
@@ -244,6 +251,9 @@ const Modules = styled.div`
     }
     @media (max-width: ${theme.device.tabletMediaMax}){
       ${columnsOnMobile && columns > 2 ? `width: 50%` : ''};
+      .mobileCardGridModulesGap12 & {
+        padding: 12px !important;
+      }
     }
     @media (max-width: ${theme.device.mobileMediaMax}){
       width: ${columnsOnMobile ? `calc(100%/${columnsOnMobile})` : '50%'};

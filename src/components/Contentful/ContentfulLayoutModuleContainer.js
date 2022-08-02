@@ -290,6 +290,11 @@ const Modules = styled.div`
   > * {
     &:not(:last-child) {
       margin-bottom: ${({ modulesMargin }) => modulesMargin || '40px'};
+      @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+        .mobileCardGridModulesGap12 & {
+          margin-bottom: 12px !important;
+        }
+      }
     }
   }
 
@@ -318,6 +323,7 @@ const ContentInfo = styled.div`
       : ''}
 
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    margin-bottom: 24px;
     text-align: center;
   }
   

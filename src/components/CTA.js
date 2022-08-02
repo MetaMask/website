@@ -267,23 +267,30 @@ const LinkTitle = styled.span`
       margin: 2px 12px 0 0;
     }
   }
+
+  &:hover {
+    .arrowAnimation:after {
+      margin-left: 6px;
+    }
+  }
+  
   .snapsLiveMetaMaskFlask & {
     color: #222;
-    background-color: white;
+    background-color: #ffffffbf;
     padding: 6px;
     gap: 6px;
-    border-radius: 36px;
+    border-radius: 32px;
     font-weight: 700;
+    transition: ease 0.3s all;
     span > span:first-child {
       background: #bb2534;
       border-radius: 16px;
       color: #fff;
       padding: 2px 10px;
-      margin-right: 2px;
+      margin-right: 4px;
     }
-    span > span:last-child {
-      display: inline-block;
-      margin-left: 4px;
+    &:hover {
+      background-color: white;
     }
   }
 `

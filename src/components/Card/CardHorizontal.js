@@ -5,6 +5,7 @@ import Image from '../Image'
 import classnames from 'classnames'
 import Link from '../Link'
 import CTAAngleIcon from './CTAAngleIcon'
+import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 
 /**
  * @name Card
@@ -22,9 +23,12 @@ const StyledCard = props => {
     newTab,
     backgroundColor,
     backgroundImage,
+    backgroundImageMobile,
     imageMargin,
     layoutSize,
+    hubSpotForm,
     linkText,
+    cta,
     isDarkMode,
   } = props
 
@@ -35,6 +39,7 @@ const StyledCard = props => {
         newTab={newTab}
         backgroundColor={backgroundColor}
         image={backgroundImage}
+        imageMobile={backgroundImageMobile}
         className={classnames('cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
         })}
@@ -57,6 +62,17 @@ const StyledCard = props => {
             <CTAWrapper>
               <CTAAngleIcon text={linkText} />
             </CTAWrapper>
+          ) : null}
+          {hubSpotForm ? <>{contentfulModuleToComponent(hubSpotForm)}</> : null}
+          {cta ? (
+            <CTA>
+              {cta.map(cta =>
+                contentfulModuleToComponent({
+                  ...cta,
+                  buttonSize: 'hero',
+                })
+              )}
+            </CTA>
           ) : null}
         </Inner>
       </CardInner>
@@ -94,6 +110,15 @@ const CardInner = styled(Link)`
       background-size: cover;
       padding: 16px;
       border-radius: 12px;
+    `
+      : ''}
+  ${({ imageMobile, theme }) =>
+    imageMobile
+      ? ` 
+      @media (max-width: ${theme.device.tabletMediaMax}){
+        background-image: url(${imageMobile});
+        background-position: center;
+      }
     `
       : ''}
 `
@@ -153,5 +178,33 @@ const CTAWrapper = styled.div`
   margin-top: auto;
   &:hover {
     opacity: 0.9;
+    .arrowAnimation:after {
+      margin-left: 6px;
+    }
+  }
+`
+
+const CTA = styled.div`
+  display: flex;
+  flex-flow: wrap;
+  margin-top: auto;
+  padding-top: 16px;
+  .button {
+    margin: 0 16px 0 0;
+  }
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    justify-content: center;
+    flex-direction: column;
+
+    .button {
+      margin: 0 8px 16px;
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    .button {
+      width: 100%;
+      margin: 0 0 16px 0;
+    }
   }
 `
