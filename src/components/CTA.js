@@ -267,6 +267,13 @@ const LinkTitle = styled.span`
       margin: 2px 12px 0 0;
     }
   }
+
+  &:hover {
+    .arrowAnimation:after {
+      margin-left: 6px;
+    }
+  }
+  
   .snapsLiveMetaMaskFlask & {
     color: #222;
     background-color: #ffffffbf;
@@ -284,9 +291,6 @@ const LinkTitle = styled.span`
     }
     &:hover {
       background-color: white;
-      .ctaArrowHoverAnimation:after {
-        margin-left: 6px;
-      }
     }
   }
 `

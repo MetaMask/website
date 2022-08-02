@@ -90,6 +90,12 @@ const Icon = styled.span`
 const ButtonWrapper = styled(Link)`
   color: #fff;
   opacity: ${({ hide }) => (hide ? 0 : 1)};
+  &:hover {
+    .arrowAnimation:after {
+      margin-left: 6px;
+    }
+  }
+  
   ${({ gradient, color, theme }) =>
     color && theme['button'] && theme['button'][color]
       ? `
