@@ -270,7 +270,7 @@ const LinkTitle = styled.span`
   .snapsLiveMetaMaskFlask & {
     color: #222;
     background-color: #ffffffbf;
-    padding: 6px 40px 6px 6px;
+    padding: 6px;
     gap: 6px;
     border-radius: 32px;
     font-weight: 700;
@@ -282,18 +282,10 @@ const LinkTitle = styled.span`
       padding: 2px 10px;
       margin-right: 4px;
     }
-    span > span:last-child {
-      font-size: 20px;
-      margin-left: 8px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica,
-        Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-      transition: ease 0.3s all;
-      position: absolute;
-    }
     &:hover {
       background-color: white;
-      span > span:last-child {
-        margin-left: 12px;
+      .ctaArrowHoverAnimation:after {
+        margin-left: 6px;
       }
     }
   }
