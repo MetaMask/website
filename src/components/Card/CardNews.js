@@ -208,6 +208,9 @@ const CTAWrapper = styled.div`
   margin-top: auto;
   &:hover {
     opacity: 0.9;
+    .arrowAnimation:after {
+      margin-left: 6px;
+    }
   }
 `
 

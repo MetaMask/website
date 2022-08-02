@@ -272,7 +272,7 @@ const CTAWrapper = styled.div`
   position: relative;
   &:hover {
     opacity: 0.9;
-    .ctaArrowHoverAnimation:after {
+    .arrowAnimation:after {
       margin-left: 6px;
     }
   }
