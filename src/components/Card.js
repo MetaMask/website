@@ -245,6 +245,11 @@ const Inner = styled.div`
     align-items: center;
   `
       : ''}
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 `
 const Title = styled.div`
   font-weight: 700;
