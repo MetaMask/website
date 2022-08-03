@@ -104,7 +104,11 @@ const CardInner = styled(Link)`
   border-radius: 12px;
   height: 100%;
   color: ${({ theme }) => theme.text.dark};
-  
+  &:hover {
+    .arrowAnimation:after {
+      margin-left: 6px;
+    }
+  }
   ${({ layoutSize, theme }) =>
     layoutSize === 'small'
       ? `
@@ -219,9 +223,6 @@ const CTAWrapper = styled.div`
   margin-top: auto;
   &:hover {
     opacity: 0.9;
-    .arrowAnimation:after {
-      margin-left: 6px;
-    }
   }
 `
 const CTA = styled.div`

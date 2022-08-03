@@ -87,6 +87,11 @@ const CardInner = styled(Link)`
   flex-direction: column;
   height: 100%;
   color: ${({ theme }) => theme.text.dark};
+  &:hover {
+    .arrowAnimation:after {
+      margin-left: 6px;
+    }
+  }
   ${({ image }) =>
     image
       ? ` background-image: url(${image});
@@ -195,8 +200,5 @@ const CTAWrapper = styled.div`
   margin-top: auto;
   &:hover {
     opacity: 0.9;
-    .arrowAnimation:after {
-      margin-left: 6px;
-    }
   }
 `
