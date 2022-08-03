@@ -273,7 +273,7 @@ const LinkTitle = styled.span`
       margin-left: 6px;
     }
   }
-  
+
   .snapsLiveMetaMaskFlask & {
     color: #222;
     background-color: #ffffffbf;
