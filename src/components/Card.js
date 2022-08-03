@@ -146,6 +146,11 @@ const CardInner = styled(Link)`
   .columnTypetag & {
     padding: 15px 24px;
   }
+  &:hover {
+    .arrowAnimation:after {
+      margin-left: 6px;
+    }
+  }
   ${({ backgroundColor, theme }) =>
     backgroundColor
       ? `
@@ -301,8 +306,5 @@ const CTAWrapper = styled.div`
   color: ${({ theme }) => theme.text.title};
   &:hover {
     opacity: 0.9;
-    .arrowAnimation:after {
-      margin-left: 6px;
-    }
   }
 `

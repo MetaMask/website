@@ -96,7 +96,11 @@ const Card = styled.div``
 const CardInner = styled(Link)`
   display: flex;
   color: ${({ theme }) => theme.text.dark};
-
+  &:hover {
+    .arrowAnimation:after {
+      margin-left: 6px;
+    }
+  }
   ${({ theme }) =>
     `
   @media (max-width: ${theme.device.mobileMediaMax}){
@@ -188,9 +192,6 @@ const CTAWrapper = styled.div`
   margin-top: auto;
   &:hover {
     opacity: 0.9;
-    .arrowAnimation:after {
-      margin-left: 6px;
-    }
   }
 `
 
