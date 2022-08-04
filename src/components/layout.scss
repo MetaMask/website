@@ -850,12 +850,6 @@ input[type='submit'].hs-button {
   font-size: 32px !important;
 }
 
-.fz-24-mobile {
-  @media (max-width: 479px) {
-    font-size: 24px !important;
-  }
-}
-
 .br-round {
   border-radius: 999px !important;
 }
@@ -1318,6 +1312,10 @@ body.dark-mode {
   text-fill-color: transparent;
 }
 
+.text-white {
+  color: #FFFFFF;
+}
+
 .show-toolip {
   cursor: pointer;
   position: relative;
@@ -1400,6 +1398,9 @@ body.dark-mode {
     content: '';
   }
   &.newsletterOnSnaps {
+    .hs_error_rollup {
+      display: none;
+    }
     .hs-form-field input {
       height: 52px;
       @media (max-width: 767px) {
@@ -1566,14 +1567,24 @@ body.dark-mode {
   width: 30px;
   display: inline-grid;
   &:after {
-    content: '→';
+    background-image: url('/images/arrow-right-black.svg');
+    background-position: center;
+    background-size: contain;
+    width: 20px;
+    height: 25px;
+    content: '';
     font-size: 20px;
-    margin-left: 4px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
       sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
     transition: ease 0.3s all;
     position: absolute;
     top: 50%;
     transform: translateY(-52%);
+  }
+  .dark-mode &:after {
+    background-image: url('/images/arrow-right-white.svg');
+  }
+  .dark-mode .snapsLiveMetaMaskFlask &:after {
+    background-image: url('/images/arrow-right-black.svg');
   }
 }

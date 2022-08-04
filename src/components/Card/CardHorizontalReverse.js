@@ -110,7 +110,11 @@ const CardInner = styled(Link)`
   align-items: center;
   color: ${({ theme }) => theme.text.dark};
   border-radius: 24px;
-
+  &:hover {
+    .arrowAnimation:after {
+      margin-left: 6px;
+    }
+  }
   @media (min-width: ${({ theme }) => theme.device.tablet}) {
     .cardImageAbsolute & {
       position: relative;
@@ -276,9 +280,6 @@ const CTAWrapper = styled.div`
   position: relative;
   &:hover {
     opacity: 0.9;
-    .arrowAnimation:after {
-      margin-left: 6px;
-    }
   }
 `
 
@@ -290,7 +291,7 @@ const CTA = styled.div`
   .button {
     margin: 0 16px 0 0;
   }
-  
+
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     justify-content: center;
     flex-direction: column;
