@@ -1394,6 +1394,9 @@ body.dark-mode {
     content: '';
   }
   &.newsletterOnSnaps {
+    .hs_error_rollup {
+      display: none;
+    }
     .hs-form-field input {
       height: 52px;
       @media (max-width: 767px) {
