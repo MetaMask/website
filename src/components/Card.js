@@ -143,14 +143,17 @@ const Card = styled.div`
 const CardInner = styled(Link)`
   display: block;
   color: ${({ theme }) => theme.text.body} !important;
+  
   .columnTypetag & {
     padding: 15px 24px;
   }
+  
   &:hover {
     .arrowAnimation:after {
       margin-left: 6px;
     }
   }
+  
   ${({ backgroundColor, theme }) =>
     backgroundColor
       ? `
@@ -219,6 +222,15 @@ const CardInner = styled(Link)`
   .cardHoverBoxShadowNone &:hover {
     box-shadow: none;
   }
+  
+  ${({ to }) =>
+    !to
+      ? `
+      .cardBoxShadowNone &:hover {
+        box-shadow: none;
+      }
+  `
+      : ''}
 `
 
 const ImageWrapper = styled.div`
