@@ -1312,6 +1312,10 @@ body.dark-mode {
   text-fill-color: transparent;
 }
 
+.text-white {
+  color: #FFFFFF;
+}
+
 .show-toolip {
   cursor: pointer;
   position: relative;
@@ -1394,6 +1398,9 @@ body.dark-mode {
     content: '';
   }
   &.newsletterOnSnaps {
+    .hs_error_rollup {
+      display: none;
+    }
     .hs-form-field input {
       height: 52px;
       @media (max-width: 767px) {
@@ -1567,7 +1574,6 @@ body.dark-mode {
     height: 25px;
     content: '';
     font-size: 20px;
-    margin-left: 4px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
       sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
     transition: ease 0.3s all;

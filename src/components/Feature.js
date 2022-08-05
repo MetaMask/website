@@ -248,6 +248,11 @@ const ImageSrc = styled(ImageItem)`
   max-width: 100%;
   width: auto;
   height: auto;
+  
+  .imageWidth280 & {
+    width: 280px;
+  }
+  
   ${({ widthImg, theme }) =>
     widthImg
       ? `
@@ -257,12 +262,14 @@ const ImageSrc = styled(ImageItem)`
     }
   `
       : ''}
+  
   ${({ imageAlignment }) =>
     imageAlignment === 'left'
       ? `
     margin: 0 auto 0 0;
   `
       : ''}
+  
   ${({ imageAlignment }) =>
     imageAlignment === 'right'
       ? `
@@ -348,6 +355,7 @@ const FeatureWrapper = styled.div`
       }
   `
       : ''}
+  
   ${({ contentAlignLR, theme }) =>
     contentAlignLR === 'left'
       ? `
@@ -373,6 +381,7 @@ const FeatureWrapper = styled.div`
       }
   `
       : ''}
+  
   ${({ alignItemsCenter }) =>
     alignItemsCenter
       ? `
@@ -387,20 +396,22 @@ const FeatureWrapper = styled.div`
     text-align: center;
   `
       : ''}
+  
   & > * {
     padding: 10px;
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       padding: 0 10px;
     }
   }
-${({ sectionPadding }) =>
-  sectionPadding === '0px'
-    ? `
-                & > * {
-    padding-bottom: 0px;
+  
+  ${({ sectionPadding }) =>
+    sectionPadding === '0px'
+      ? `
+    & > * {
+      padding-bottom: 0px;
     }
                 `
-    : ''}
+      : ''}
 `
 const FeatureInner = styled.div`
   display: block;
