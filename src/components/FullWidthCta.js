@@ -20,6 +20,7 @@ const FullWidthCta = props => {
     marginBottom,
     logoType,
     sectionPadding,
+    customClass,
   } = props
 
   return (
@@ -29,9 +30,11 @@ const FullWidthCta = props => {
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
     >
-      <ContentWrapper>
+      <ContentWrapper customClass={customClass}>
         <FullWidthCtaWrapper showLogoAnimation={showLogoAnimation}>
-          {showLogoAnimation ? <LogoAnimation logoType={logoType} /> : null}
+          {showLogoAnimation && customClass !== 'metaMaskUninstalled' ? (
+            <LogoAnimation logoType={logoType} />
+          ) : null}
           <FullWidthCtaInner
             marginBottom={marginBottom}
             backgroundColor={backgroundColor}
@@ -52,6 +55,9 @@ const FullWidthCta = props => {
             ) : null}
             {hubSpotForm ? (
               <>{contentfulModuleToComponent(hubSpotForm)}</>
+            ) : null}
+            {showLogoAnimation && customClass == 'metaMaskUninstalled' ? (
+              <LogoAnimation logoType={logoType} />
             ) : null}
             {ctas ? (
               <CTAWrapper>
@@ -116,6 +122,16 @@ const Headline = styled(SectionTitle)`
 
 const FullWidthCtaInner = styled.div`
   display: block;
+
+  .metaMaskUninstalled & {
+    #logo-container{
+      padding: 24px 0;
+      @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+        padding: 0;
+      }
+    }
+  }
+
   ${({ backgroundColor, theme }) =>
     backgroundColor === 'dark'
       ? `
@@ -144,6 +160,24 @@ const CTAWrapper = styled.div`
     margin: 0 8px 16px;
   }
 
+  .metaMaskUninstalled & {
+    flex-direction: column;
+    .button{
+      margin: 0 8px 16px;
+      max-width: 327px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+    }
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      margin-top: 16px;
+      margin-bottom: 16px;
+      .button{
+        max-width: 273px;
+      }
+    }
+  }
+
   ${({ showLogoAnimation, theme }) =>
     showLogoAnimation
       ? `
@@ -166,5 +200,24 @@ const Description = styled.div`
   margin-top: 8px;
   & + ${CTAWrapper} {
     margin-top: 24px;
+  }
+
+  .metaMaskUninstalled & {
+    p {
+      font-size: 18px;
+      line-height: 25px;
+    }
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      h2 {
+        font-size: 32px;
+        padding: 0 32px;
+      }
+    }
+
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      h2 {
+        padding: 0;
+      }
+    }
   }
 `

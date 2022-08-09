@@ -51,7 +51,6 @@ const ContainerInner = styled.div`
   margin-right: auto;
   max-width: 992px;
   width: 100%;
-
   .scrolled.custom-newsHero & {
     max-width: calc(992px + 200px);
   }
@@ -77,6 +76,22 @@ const ContainerInner = styled.div`
         theme.device.miniDesktopMediaMax}) {
       max-width: 100% !important;
       padding-left: max(calc((100vw - 728px) / 2), 20px);
+    }
+  }
+
+  .metaMaskUninstalled & {
+    max-width: 606px;
+    border: 1px solid #d6d9dc;
+    border-radius: 10px;
+    padding: 48px;
+
+    @media (min-width: 1600px) {
+      max-width: 800px;
+      padding: 48px 64px;
+    }
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      max-width: 417px;
+      padding: 24px;
     }
   }
 `
