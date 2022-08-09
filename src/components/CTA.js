@@ -51,8 +51,8 @@ const CTA = props => {
     lowerBrowserName = lowerCase(browserName),
     iconBrowser = ''
   if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
-    label = eventLabel.replace('$browser', downloadBrowsers[keyBrowser]?.text)
-    text = textDefault.replace('$browser', downloadBrowsers[keyBrowser]?.text)
+    label = eventLabel?.replace('$browser', downloadBrowsers[keyBrowser]?.text)
+    text = textDefault?.replace('$browser', downloadBrowsers[keyBrowser]?.text)
     if (['ios', 'android', 'not-supported'].includes(keyBrowser)) {
       text = downloadBrowsers[keyBrowser]?.text
     }
