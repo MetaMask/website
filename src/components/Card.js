@@ -214,6 +214,10 @@ const CardInner = styled(Link)`
   .cardBorderRadius24 & {
     border-radius: 24px;
   }
+
+  .dark-mode .cardContentWhiteOnDark & {
+    color: white !important;
+  }
   
   .cardBoxShadowNone &:not(:hover) {
     box-shadow: none;
