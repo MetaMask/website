@@ -182,6 +182,5 @@ const ButtonWrapper = styled(Link)`
   .theme-dark &{
     min-height: 42px;
     padding: 8px 24px;
-    font-weight: 700;
   }
 `

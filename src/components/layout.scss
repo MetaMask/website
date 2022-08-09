@@ -1413,8 +1413,8 @@ body.dark-mode {
       input[type='submit'].hs-button {
         font-size: 18px;
         line-height: 25px;
-        font-weight: 700;
         background: #121212;
+        font-weight: normal;
         @media (max-width: 767px) {
           width: 100%;
         }
@@ -1430,25 +1430,14 @@ body.dark-mode {
       .hs-form-field {
         margin-bottom: 8px;
       }
-      .hs-error-msgs label {
-        color: #121212;
-      }
     }
   }
   .dark-mode &.newsletterOnSnaps {
-    @media (min-width: 768px) {
-      .hs-form-field input {
-        background-color: #121212;
-        border-color: #121212;
-        color: white;
+    @media (max-width: 767px) {
+      .hs-submit input[type='submit'].hs-button {
+        background-color: white;
+        color: #121212;
       }
-    }
-    .hs-submit input[type='submit'].hs-button {
-      background-color: white;
-      color: #121212;
-    }
-    .hs-error-msgs label {
-      color: white;
     }
   }
 }
