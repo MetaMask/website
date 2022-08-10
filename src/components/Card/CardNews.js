@@ -165,6 +165,11 @@ const Title = styled.div`
   font-weight: 700;
   font-size: 18px;
   margin-bottom: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 
   ${({ layoutSize }) =>
     layoutSize === 'small'
@@ -182,8 +187,13 @@ const Title = styled.div`
 `
 
 const Description = styled.div`
-  display: block;
   line-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+
   &:not(:last-child) {
     margin-bottom: 64px;
   }
