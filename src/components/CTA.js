@@ -38,6 +38,7 @@ const CTA = props => {
     buttonSecondary,
     socialLink,
   } = props
+
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
   const isButton = buttonDisplay || button
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
@@ -254,6 +255,7 @@ const CTAContainer = styled.div`
 const LinkTitle = styled.span`
   display: flex;
   align-items: center;
+
   svg {
     width: 20px;
     margin-left: 8px;
@@ -262,6 +264,7 @@ const LinkTitle = styled.span`
       fill: ${({ theme }) => theme.text.default};
     }
   }
+
   &.leftArrow {
     svg {
       margin: 2px 12px 0 0;
@@ -271,6 +274,17 @@ const LinkTitle = styled.span`
   &:hover {
     .arrowAnimation:after {
       margin-left: 6px;
+    }
+  }
+
+  .news-content &,
+  .storiesOnNewsDetail & {
+    svg {
+      width: 24px;
+      path {
+        fill: none;
+        stroke: ${({ theme }) => theme.text.default};
+      }
     }
   }
 
@@ -354,9 +368,10 @@ const ContentWrapper = styled(Link)`
 
   &:hover {
     .news-content &,
-    .storiesOnNewsDetail &{
-      path{
-        fill: ${({ theme }) => theme.darkBlue};
+    .storiesOnNewsDetail & {
+      path {
+        fill: none;
+        stroke: ${({ theme }) => theme.darkBlue};
       }
     }
   }

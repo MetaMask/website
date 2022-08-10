@@ -59,9 +59,24 @@ const ListIcon = styled.ul`
   align-items: center;
   li {
     margin: 0 6px;
-    border: 1px solid #bbc0c5;
+    border: 1px solid #D6D9DC;
     border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
     cursor: pointer;
+    
+    &:hover {
+      background: #F2F4F6;
+      border-color: #BBC0C5;
+      
+      span {
+        color: #535A61;
+      }
+      
+      svg > path {
+        fill: #535A61;
+      }
+      
+    }
   }
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     padding-top: 20px;

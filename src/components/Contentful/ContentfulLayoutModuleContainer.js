@@ -30,6 +30,7 @@ const ContentfulModuleContainer = props => {
       eyebrow,
       sideImage,
       showLeftArrow,
+      iconConfig,
     },
   } = props
 
@@ -116,6 +117,7 @@ const ContentfulModuleContainer = props => {
                       ? 'white'
                       : 'black',
                     showLeftArrow,
+                    iconConfig,
                   })
                 )}
               </Modules>

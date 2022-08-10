@@ -49,7 +49,11 @@ function NewsLayout(props) {
         {contentfulModuleToComponent(hero)}
         <NewsContainer>
           <ContentWrapper className="news-content">
-            {contentfulModuleToComponent({ ...cta, showLeftArrow: true })}
+            {contentfulModuleToComponent({
+              ...cta,
+              iconConfig: { news: true, width: '24px', height: '24px' },
+              showLeftArrow: true,
+            })}
             <Title>{title}</Title>
             <Subtitle>{subtitle}</Subtitle>
             <Image image={image} />
@@ -65,7 +69,11 @@ function NewsLayout(props) {
             {contentfulModuleToComponent(contentConfig)}
             {contentfulModuleToComponent(hubspot)}
           </NewsContentWrapper>
-          {contentfulModuleToComponent({ ...latest, showLeftArrow: true })}
+          {contentfulModuleToComponent({
+            ...latest,
+            iconConfig: { news: true, width: '24px', height: '24px' },
+            showLeftArrow: true,
+          })}
           {contentfulModuleToComponent(footer)}
         </NewsContainer>
       </div>

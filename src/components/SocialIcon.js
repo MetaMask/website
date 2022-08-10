@@ -42,12 +42,13 @@ const Icon = styled.span`
       `
         : ''}
   }
+  
   span {
     ${({ customColor }) =>
       customColor
         ? `
-        color: #bbc0c5;
-      `
+          color: ${customColor};
+        `
         : ''}
     padding-left: 6px;
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {

@@ -50,8 +50,7 @@ const PaginationWrapper = props => {
 export default PaginationWrapper
 
 const Item = styled.div`
-  color: ${({ active, theme }) =>
-    active ? theme.primaryColor : theme.text.default};
+  color: color: ${({ theme }) => theme.text.default};
   width: 40px;
   height: 40px;
   display: inline-flex;
@@ -59,6 +58,21 @@ const Item = styled.div`
   justify-content: center;
   margin: 0 12px;
   cursor: pointer;
+
+  ${({ active })  =>
+  active ? `
+      border: 1px solid #BBC0C5;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+      border-radius: 8px;
+  `
+  : ''}
+
+  &:hover {
+    color: #535A61;
+    background: #F2F4F6;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    border-radius: 8px;
+  }
 `
 
 const Wrapper = styled.div`
@@ -69,12 +83,16 @@ const Wrapper = styled.div`
   order: 1;
 `
 const ArrowIcon = styled.span`
-  font-size: 24px;
+  font-size: 28px;
   cursor: pointer;
+
+  &:hover {
+    color: ${({ theme }) => theme.darkBlue};
+  }
   &:first-child {
-    margin-right: 24px;
+    margin-right: 32px;
   }
   &:last-child {
-    margin-left: 24px;
+    margin-left: 32px;
   }
 `
