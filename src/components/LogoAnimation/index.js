@@ -2,23 +2,23 @@ import React from 'react'
 const LogoAnimation = props => {
   const { logoType } = props
 
-  const [isMobile, setIsMobile] = React.useState(false)
+  const [isSmallScreen, setIsSmallScreen] = React.useState(false)
   const handleWindowSizeChange = () => {
     if (
       window.innerWidth < 768 &&
-      document.getElementsByClassName('metaMaskUninstalled').length == 1
+      document.getElementsByClassName('metaMaskUninstalled').length === 1
     ) {
-      setIsMobile(true)
+      setIsSmallScreen(true)
     } else {
-      setIsMobile(false)
+      setIsSmallScreen(false)
     }
   }
   React.useEffect(() => {
+    let viewer
     // This runs the script logo
     window.addEventListener('resize', handleWindowSizeChange)
-    console.log(isMobile)
     if (typeof window !== 'undefined' && window.document) {
-      var ModelViewer = require('@metamask/logo')
+      const ModelViewer = require('@metamask/logo')
       let meshJson
       switch (logoType) {
         case 'flask':
@@ -30,9 +30,9 @@ const LogoAnimation = props => {
 
       if (
         window.innerWidth < 768 &&
-        document.getElementsByClassName('metaMaskUninstalled').length == 1
+        document.getElementsByClassName('metaMaskUninstalled').length === 1
       ) {
-        var viewer = ModelViewer({
+        viewer = ModelViewer({
           pxNotRatio: true,
           width: 130,
           height: 130,
@@ -40,7 +40,7 @@ const LogoAnimation = props => {
           meshJson,
         })
       } else {
-        var viewer = ModelViewer({
+        viewer = ModelViewer({
           pxNotRatio: true,
           width: 230,
           height: 230,
@@ -49,7 +49,7 @@ const LogoAnimation = props => {
         })
       }
 
-      var container = document.getElementById('logo-container')
+      const container = document.getElementById('logo-container')
       container.replaceChildren('')
       container.appendChild(viewer.container)
     }
@@ -57,7 +57,7 @@ const LogoAnimation = props => {
     return () => {
       window.removeEventListener('resize', handleWindowSizeChange)
     }
-  }, [logoType, isMobile])
+  }, [logoType, isSmallScreen])
   return <div id="logo-container"></div>
 }
 
