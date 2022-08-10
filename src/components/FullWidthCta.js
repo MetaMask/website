@@ -20,6 +20,7 @@ const FullWidthCta = props => {
     marginBottom,
     logoType,
     sectionPadding,
+    customClass,
   } = props
 
   return (
@@ -29,9 +30,11 @@ const FullWidthCta = props => {
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
     >
-      <ContentWrapper>
+      <ContentWrapper customClass={customClass}>
         <FullWidthCtaWrapper showLogoAnimation={showLogoAnimation}>
-          {showLogoAnimation ? <LogoAnimation logoType={logoType} /> : null}
+          {showLogoAnimation && customClass !== 'metaMaskUninstalled' ? (
+            <LogoAnimation logoType={logoType} />
+          ) : null}
           <FullWidthCtaInner
             marginBottom={marginBottom}
             backgroundColor={backgroundColor}
@@ -52,6 +55,9 @@ const FullWidthCta = props => {
             ) : null}
             {hubSpotForm ? (
               <>{contentfulModuleToComponent(hubSpotForm)}</>
+            ) : null}
+            {showLogoAnimation && customClass === 'metaMaskUninstalled' ? (
+              <LogoAnimation logoType={logoType} />
             ) : null}
             {ctas ? (
               <CTAWrapper>
@@ -89,6 +95,7 @@ const FullWidthCtaWrapper = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
+
   ${({ showLogoAnimation, theme }) =>
     showLogoAnimation
       ? `
@@ -104,7 +111,7 @@ const Headline = styled(SectionTitle)`
   ${({ backgroundColor, theme }) =>
     backgroundColor === 'dark'
       ? `
-  color: ${theme.white};
+      color: ${theme.white};
   `
       : ``}
 
@@ -116,6 +123,16 @@ const Headline = styled(SectionTitle)`
 
 const FullWidthCtaInner = styled.div`
   display: block;
+
+  .metaMaskUninstalled & {
+    #logo-container{
+      padding: 24px 0 8px 0;
+      @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+        padding: 24px 0;
+      }
+    }
+  }
+
   ${({ backgroundColor, theme }) =>
     backgroundColor === 'dark'
       ? `
@@ -130,18 +147,36 @@ const FullWidthCtaInner = styled.div`
   `
       : ''}
 
-  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
-  margin-bottom: 0;
-}
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    margin-bottom: 0;
+  }
 `
 const CTAWrapper = styled.div`
   display: flex;
   flex-flow: wrap;
   margin-top: 32px;
   justify-content: center;
-  
+
   .button {
     margin: 0 8px 16px;
+  }
+
+  .metaMaskUninstalled & {
+    flex-direction: column;
+
+    .button {
+      max-width: 327px;
+      margin: 0 auto 16px;
+      width: 100%;
+    }
+
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      margin-top: 16px;
+      margin-bottom: 16px;
+      .button {
+        max-width: 273px;
+      }
+    }
   }
 
   ${({ showLogoAnimation, theme }) =>
@@ -152,19 +187,39 @@ const CTAWrapper = styled.div`
       }
   `
       : ``}
-
-  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}){
-  .button {
-    width: 100%;
-    margin: 0 0 16px 0;
+  
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    .button {
+      width: 100%;
+      margin: 0 0 16px 0;
+    }
   }
-}
 `
 
 const Description = styled.div`
   display: block;
   margin-top: 8px;
+
   & + ${CTAWrapper} {
     margin-top: 24px;
+  }
+
+  .metaMaskUninstalled & {
+    p {
+      font-size: 18px;
+      line-height: 25px;
+    }
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      h2 {
+        font-size: 32px;
+        padding: 0 32px;
+      }
+    }
+
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      h2 {
+        padding: 0;
+      }
+    }
   }
 `
