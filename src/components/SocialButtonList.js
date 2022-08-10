@@ -59,23 +59,22 @@ const ListIcon = styled.ul`
   align-items: center;
   li {
     margin: 0 6px;
-    border: 1px solid #D6D9DC;
+    border: 1px solid #d6d9dc;
     border-radius: 8px;
     box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
     cursor: pointer;
-    
+
     &:hover {
-      background: #F2F4F6;
-      border-color: #BBC0C5;
-      
+      background: #f2f4f6;
+      border-color: #bbc0c5;
+
       span {
-        color: #535A61;
+        color: #535a61;
       }
-      
+
       svg > path {
-        fill: #535A61;
+        fill: #535a61;
       }
-      
     }
   }
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {

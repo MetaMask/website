@@ -42,7 +42,7 @@ const Icon = styled.span`
       `
         : ''}
   }
-  
+
   span {
     ${({ customColor }) =>
       customColor

@@ -15,7 +15,7 @@ function NewsLayout(props) {
       header,
       hero,
       cta,
-      news: { title, subtitle, image, author, publishDate, content },
+      news: { title, subtitle, image, content },
       news_bg: {
         file: { url: bgUrl },
       },
@@ -57,13 +57,9 @@ function NewsLayout(props) {
             <Title>{title}</Title>
             <Subtitle>{subtitle}</Subtitle>
             <Image image={image} />
-            <Author>
-              {contentfulModuleToComponent({
-                ...author,
-                publishDate,
-              })}
+            <SocialShare>
               <SocialButtonList />
-            </Author>
+            </SocialShare>
           </ContentWrapper>
           <NewsContentWrapper bgUrl={bgUrl}>
             {contentfulModuleToComponent(contentConfig)}
@@ -84,11 +80,11 @@ function NewsLayout(props) {
 const NewsContainer = styled(Section)`
   position: relative;
 `
-const Author = styled.div`
+const SocialShare = styled.div`
   padding-top: 32px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: right;
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     flex-direction: column;
   }
@@ -140,7 +136,6 @@ NewsLayout.propTypes = {
       subtitle: PropTypes.string.isRequired,
       publishDate: PropTypes.string,
       categories: PropTypes.arrayOf(categoryProps),
-      author: PropTypes.object,
     }),
   }).isRequired,
   pageContext: PropTypes.shape({

@@ -15,7 +15,6 @@ import ContentfulRichText from './ContentfulRichText'
 import ContentfulSeo from './ContentfulSeo'
 import ContentfulPopupAnnouncement from './ContentfulPopupAnnouncement'
 import ContentfulConsenSysResources from './ContentfulConsenSysResources'
-import ContentfulNewsAuthor from './ContentfulNewsAuthor'
 import ContentfulNewsCategory from './ContentfulNewsCategory'
 
 export {
@@ -36,6 +35,5 @@ export {
   ContentfulSeo,
   ContentfulPopupAnnouncement,
   ContentfulConsenSysResources,
-  ContentfulNewsAuthor,
   ContentfulNewsCategory,
 }

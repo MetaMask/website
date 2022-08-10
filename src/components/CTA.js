@@ -322,9 +322,9 @@ const ContentWrapper = styled(Link)`
     typeLayout === ''
       ? `
       color: ${color};
-    &:hover {
-      color: ${theme.darkBlue};
-    }
+      &:hover {
+        color: ${theme.primaryColor};
+      }
   `
       : ``}
   ${({ typeLayout, theme }) =>
@@ -371,7 +371,7 @@ const ContentWrapper = styled(Link)`
     .storiesOnNewsDetail & {
       path {
         fill: none;
-        stroke: ${({ theme }) => theme.darkBlue};
+        stroke: ${({ theme }) => theme.primaryColor};
       }
     }
   }

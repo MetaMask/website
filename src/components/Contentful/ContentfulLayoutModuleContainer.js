@@ -94,15 +94,14 @@ const ContentfulModuleContainer = props => {
                 ) : null}
               </ContentInfo>
             ) : null}
-            {isTab && modules && modules.length ? (
+            {tabs ? (
               <TabWrapper
                 tabs={tabs}
                 typeLayout={'module'}
                 activeTabDefault={modules[0].contentful_id}
                 isTabParam={isCategoryTab}
               ></TabWrapper>
-            ) : null}
-            {!isTab && modules && modules.length ? (
+            ) : (
               <Modules
                 contentAlignCenter={contentAlignCenter}
                 modulesMargin={modulesMargin}
@@ -121,7 +120,7 @@ const ContentfulModuleContainer = props => {
                   })
                 )}
               </Modules>
-            ) : null}
+            )}
           </MainContent>
           {sideImageUrl ? (
             <SideImage sectionPadding={sectionPadding}>

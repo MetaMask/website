@@ -59,13 +59,14 @@ const Item = styled.div`
   margin: 0 12px;
   cursor: pointer;
 
-  ${({ active })  =>
-  active ? `
+  ${({ active }) =>
+    active
+      ? `
       border: 1px solid #BBC0C5;
       box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
       border-radius: 8px;
   `
-  : ''}
+      : ''}
 
   &:hover {
     color: #535A61;
@@ -87,7 +88,7 @@ const ArrowIcon = styled.span`
   cursor: pointer;
 
   &:hover {
-    color: ${({ theme }) => theme.darkBlue};
+    color: ${({ theme }) => theme.primaryColor};
   }
   &:first-child {
     margin-right: 32px;

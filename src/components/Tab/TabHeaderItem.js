@@ -42,8 +42,9 @@ const Item = styled.div`
   justify-content: center;
   height: 42px;
   padding: 8px 24px;
-  color: ${({ theme }) => theme.darkBlue};
-  border: 1px solid ${({ theme }) => theme.darkBlue};
+  color: ${({ theme }) => theme.primaryColor};
+  border: 1px solid ${({ theme }) => theme.primaryColor};
+
   &:not(:first-child) {
     border-left: 0;
   }
@@ -61,8 +62,8 @@ const Item = styled.div`
   ${({ active, theme }) =>
     active
       ? `
-  background-color: ${theme.primaryColor};
-  color: #fff;
+    background-color: ${theme.button.primary.bg};
+    color: ${theme.button.primary.text};
   `
       : ''}
 
@@ -72,11 +73,16 @@ const Item = styled.div`
     border-radius: 999px !important;
     height: 40px;
     border: none !important;
-    background-color: ${active ? theme.primaryColor : 'transparent'};
-    color: ${active ? theme.white : theme.text.dark};
+    background-color: ${active ? theme.button.primary.bg : 'transparent'};
+    color: ${active ? theme.button.primary.text : theme.text.darkGray};
+    box-shadow: ${active ? '0 4px 9px rgba(196, 196, 196, 0.1)' : ''};
     min-width: 200px;
     white-space: nowrap;
-
+    
+    &:hover {
+      color: ${!active ? theme.text.dark : ''};
+    }
+    
     @media (max-width: ${theme.device.miniDesktopMediaMax}){
       min-width: 100px;
     }

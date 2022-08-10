@@ -739,20 +739,20 @@ const HeroDescription = styled.div`
 
     a {
       color: #535a61;
-      
+
       svg {
         margin-right: 16px;
         path {
-          fill:  #535a61;
+          fill: #535a61;
         }
       }
 
       &:hover {
-        color: ${({ theme }) => theme.darkBlue};
+        color: ${({ theme }) => theme.primaryColor};
 
         svg {
           path {
-            fill: ${({ theme }) => theme.darkBlue};
+            fill: ${({ theme }) => theme.primaryColor};
           }
         }
       }
