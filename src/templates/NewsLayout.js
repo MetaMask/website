@@ -15,7 +15,7 @@ function NewsLayout(props) {
       header,
       hero,
       cta,
-      news: { title, subtitle, image, author, publishDate, content },
+      news: { title, subtitle, image, content },
       news_bg: {
         file: { url: bgUrl },
       },
@@ -49,23 +49,27 @@ function NewsLayout(props) {
         {contentfulModuleToComponent(hero)}
         <NewsContainer>
           <ContentWrapper className="news-content">
-            {contentfulModuleToComponent({ ...cta, showLeftArrow: true })}
+            {contentfulModuleToComponent({
+              ...cta,
+              iconConfig: { news: true, width: '24px', height: '24px' },
+              showLeftArrow: true,
+            })}
             <Title>{title}</Title>
             <Subtitle>{subtitle}</Subtitle>
             <Image image={image} />
-            <Author>
-              {contentfulModuleToComponent({
-                ...author,
-                publishDate,
-              })}
+            <SocialShare>
               <SocialButtonList />
-            </Author>
+            </SocialShare>
           </ContentWrapper>
           <NewsContentWrapper bgUrl={bgUrl}>
             {contentfulModuleToComponent(contentConfig)}
             {contentfulModuleToComponent(hubspot)}
           </NewsContentWrapper>
-          {contentfulModuleToComponent({ ...latest, showLeftArrow: true })}
+          {contentfulModuleToComponent({
+            ...latest,
+            iconConfig: { news: true, width: '24px', height: '24px' },
+            showLeftArrow: true,
+          })}
           {contentfulModuleToComponent(footer)}
         </NewsContainer>
       </div>
@@ -76,11 +80,11 @@ function NewsLayout(props) {
 const NewsContainer = styled(Section)`
   position: relative;
 `
-const Author = styled.div`
+const SocialShare = styled.div`
   padding-top: 32px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: right;
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     flex-direction: column;
   }
@@ -132,7 +136,6 @@ NewsLayout.propTypes = {
       subtitle: PropTypes.string.isRequired,
       publishDate: PropTypes.string,
       categories: PropTypes.arrayOf(categoryProps),
-      author: PropTypes.object,
     }),
   }).isRequired,
   pageContext: PropTypes.shape({

@@ -733,16 +733,29 @@ const HeroTitle = styled.h1`
 const HeroDescription = styled.div`
   display: block;
   margin-bottom: 24px;
+
   .newsHero & {
     font-size: 20px;
-    color: #535a61;
+
     a {
       color: #535a61;
-    }
-    p {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+
+      svg {
+        margin-right: 16px;
+        path {
+          fill: #535a61;
+        }
+      }
+
+      &:hover {
+        color: ${({ theme }) => theme.primaryColor};
+
+        svg {
+          path {
+            fill: ${({ theme }) => theme.primaryColor};
+          }
+        }
+      }
     }
   }
   .scrolled.custom-newsHero & {

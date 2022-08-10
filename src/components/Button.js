@@ -141,21 +141,13 @@ const ButtonWrapper = styled(Link)`
     color === 'secondary'
       ? `
     background: transparent !important;
-    color: ${theme.darkBlue};
-    border: 2px solid ${theme.darkBlue};
+    color: ${theme.button.primary.bg};
+    border: 2px solid ${theme.button.primary.bg};
     @media (min-width: ${theme.device.miniDesktop}){
       &:hover {
-        border-color: ${theme.darkerBlue};
-        color: ${theme.darkerBlue};
+        border-color: ${theme.button.primary.bgHover};
+        color: ${theme.button.primary.bgHover};
       }
-    }
-    .theme-dark &{
-      color: ${theme.black};
-      border: 2px solid ${theme.black};
-    }
-    .dark-mode .theme-dark &{
-      color: ${theme.white};
-      border: 2px solid ${theme.white};
     }
   `
       : ''}
