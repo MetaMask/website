@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import Image from '../Image'
 import classnames from 'classnames'
 import Link from '../Link'
-import CTAAngleIcon from './CTAAngleIcon'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 
 /**
@@ -27,8 +26,9 @@ const StyledCard = props => {
     imageMargin,
     layoutSize,
     linkText,
-    hubSpotForm,
     cta,
+    contentAlignment,
+    hubSpotForm,
     isDarkMode,
   } = props
 
@@ -40,8 +40,8 @@ const StyledCard = props => {
         backgroundColor={backgroundColor}
         image={backgroundImage}
         imageMobile={backgroundImageMobile}
-        layoutSize={layoutSize}
-        className={classnames('custom-card-bg cardLink', {
+        contentAlignment={contentAlignment}
+        className={classnames('cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
         })}
       >
@@ -53,7 +53,9 @@ const StyledCard = props => {
           </ImageWrapper>
         ) : null}
         <Inner>
-          {title ? <Title layoutSize={layoutSize}>{title}</Title> : null}
+          {title ? (
+            <Title contentAlignment={contentAlignment}>{title}</Title>
+          ) : null}
           {description ? (
             <Description>
               <div dangerouslySetInnerHTML={{ __html: description }}></div>
@@ -62,7 +64,7 @@ const StyledCard = props => {
           {hubSpotForm ? <>{contentfulModuleToComponent(hubSpotForm)}</> : null}
           {linkText ? (
             <CTAWrapper>
-              <CTAAngleIcon text={linkText} />
+              <span dangerouslySetInnerHTML={{ __html: linkText }} />
             </CTAWrapper>
           ) : null}
           {cta ? (
@@ -92,27 +94,50 @@ StyledCard.propTypes = {
   imageMargin: PropTypes.bool,
 }
 
-const Card = styled.div``
+const Card = styled.div`
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+  .cardImageAbsolute & {
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      width: 100%;
+    }
+  }
+`
 
 const CardInner = styled(Link)`
-  padding: 16px 16px 24px 16px;
-  text-align: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   align-items: center;
-  box-shadow: 0px 64px 64px -8px ${({ theme }) => theme.shadowCardGray};
-  border-radius: 12px;
-  height: 100%;
   color: ${({ theme }) => theme.text.dark};
+  border-radius: 24px;
   &:hover {
     .arrowAnimation:after {
       margin-left: 6px;
     }
   }
-  ${({ layoutSize, theme }) =>
-    layoutSize === 'small'
+  @media (min-width: ${({ theme }) => theme.device.tablet}) {
+    .cardImageAbsolute & {
+      position: relative;
+      overflow: hidden;
+    }
+  }
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    border-radius: 48px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  @media (max-width: $${({ theme }) => theme.device.mobileMediaMax}){
+    align-items: center;
+  }
+
+  ${({ contentAlignment }) =>
+    contentAlignment === 'center'
       ? `
-      box-shadow: 0px 4px 24px ${theme.shadowCard};
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      background-position: center;
   `
       : null}
   
@@ -120,17 +145,32 @@ const CardInner = styled(Link)`
     image
       ? ` background-image: url(${image});
       background-size: cover;
+      height: 100%;
+      padding: 32px;
     `
       : ''}
-
+  
   ${({ imageMobile, theme }) =>
     imageMobile
       ? ` 
-        @media (max-width: ${theme.device.tabletMediaMax}){
-          background-image: url(${imageMobile});
-          background-position: center;
-        }
+      @media (max-width: ${theme.device.tabletMediaMax}){
+        background-image: url(${imageMobile});
+        background-position: center;
+      }
     `
+      : ''}
+
+  ${({ backgroundColor }) =>
+    backgroundColor === 'white'
+      ? `
+    box-shadow: 0 10px 30px 0 rgba(0,0,0,0.09);
+    transition: box-shadow 200ms ease;
+
+    &:hover {
+      box-shadow: 0 10px 30px 0 rgba(0,0,0,0.2);
+      filter: saturate(1.15);
+    }
+  `
       : ''}
 
   .cardBoxShadowNone &:not(:hover) {
@@ -143,34 +183,34 @@ const CardInner = styled(Link)`
 `
 
 const ImageWrapper = styled.div`
-  height: 140px;
-  margin-bottom: 24px;
-  box-shadow: 0px 7.1px 42.6px ${({ theme }) => theme.shadowCardFeatureLogo};
-  border-radius: 100%;
-  margin-top: 40px;
+  max-width: 200px;
+  margin-left: 64px;
 
-  img {
-    height: 100%;
-    width: auto;
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    max-width: 150px;
+    margin-left: 0;
+    margin-bottom: 24px;
+  }
 
-    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
-      margin: 0 auto;
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    max-width: 120px;
+    margin-bottom: 16px;
+  }
+
+  .cardImageAbsolute & {
+    max-width: 200px;
+  }
+
+  .cardImageAbsolute & {
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      position: absolute;
+      right: 0;
     }
   }
 
-  ${({ layoutSize }) =>
-    layoutSize === 'small'
-      ? `
-    height: 80px;
-  `
-      : null}
-
-  ${({ layoutSize, theme }) =>
-    `
-  @media (max-width: ${theme.device.mobileMediaMax}){
-    height: ${layoutSize === 'small' ? '80px' : '96px'};
+  img {
+    object-fit: contain;
   }
-  `}
 `
 
 const ImageSrc = styled(Image)`
@@ -180,51 +220,69 @@ const ImageSrc = styled(Image)`
 const Inner = styled.div`
   display: flex;
   flex-direction: column;
-  background: ${({ theme }) => theme.background.cardFeatureInner};
-  border-radius: 12px;
   min-height: 0;
   flex: 1;
   width: 100%;
-  padding: 32px 16px;
+  height: 100%;
+  .cardImageAbsolute & {
+    z-index: 1;
+  }
 `
+
 const Title = styled.div`
   font-weight: 700;
-  font-size: 24px;
-  margin-bottom: 32px;
+  font-size: 32px;
+  line-height: 45px;
+  margin-bottom: 16px;
 
-  ${({ layoutSize }) =>
-    layoutSize === 'small'
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    font-size: 28px;
+    line-height: 1.4;
+  }
+
+  ${({ contentAlignment, theme }) =>
+    contentAlignment === 'center'
       ? `
-      font-size: 18px;
+      margin: 0 auto 16px;
+      text-align: center;
+      @media (max-width: ${theme.device.mobileMediaMax}) {
+        font-size: 32px;
+        line-height: 45px;
+        max-width: 300px;
+        margin-bottom: 24px;
+      }
   `
       : null}
-
-  ${({ layoutSize, theme }) =>
-    `
-  @media (max-width: ${theme.device.mobileMediaMax}){
-    font-size: ${layoutSize === 'small' ? '16px' : '20px'};
-  }
-  `}
 `
 
 const Description = styled.div`
   display: block;
 
-  &:not(:last-child) {
-    margin-bottom: 64px;
-  }
-
   p:last-child {
     margin-bottom: 0;
   }
+
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    font-size: 18px !important;
+    line-height: 26px !important;
+  }
+
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    font-size: 16px;
+    line-height: 22px;
+  }
 `
+
 const CTAWrapper = styled.div`
   display: block;
   margin-top: auto;
+  font-weight: 700;
+  position: relative;
   &:hover {
     opacity: 0.9;
   }
 `
+
 const CTA = styled.div`
   display: flex;
   flex-flow: wrap;
@@ -233,6 +291,7 @@ const CTA = styled.div`
   .button {
     margin: 0 16px 0 0;
   }
+
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     justify-content: center;
     flex-direction: column;

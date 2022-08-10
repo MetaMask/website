@@ -68,9 +68,15 @@ const Wrapper = styled.div`
   display: block;
   max-width: 100%;
   ${({ width }) => (width ? `width: ${width};` : 'min-width: 300px;')}
+
   &.newsletterOnNewsDetail {
     height: 410px;
     position: relative;
+  }
+
+  &.newsletterOnSnaps {
+    width: 460px;
+    margin: 0 auto;
   }
 `
 

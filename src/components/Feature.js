@@ -24,6 +24,8 @@ const FeatureComponent = props => {
     imageAlignment,
     animation,
     backgroundColor,
+    backgroundImage,
+    backgroundImageMobile,
     headlineMarginTop0,
     sectionPadding,
     noPaddingBottom,
@@ -112,9 +114,12 @@ const FeatureComponent = props => {
       ) : null}
     </>
   )
+
   return (
     <Container
       sectionPadding={sectionPadding}
+      image={backgroundImage}
+      imageMobile={backgroundImageMobile}
       className={classnames({
         noPaddingBottom: noPaddingBottom,
         [`bg-${backgroundColor}`]: backgroundColor,
@@ -204,7 +209,25 @@ FeatureComponent.propTypes = {
   noPaddingBottom: PropTypes.bool,
 }
 
-const Container = styled(Section)``
+const Container = styled(Section)`
+  ${({ image }) =>
+    image
+      ? ` background-image: url(${image});
+      background-size: cover;
+      background-position: center;
+      height: 100%;
+    `
+      : ''}
+
+  ${({ imageMobile, theme }) =>
+    imageMobile
+      ? ` 
+      @media (max-width: ${theme.device.mobileMediaMax}){
+        background-image: url(${imageMobile});
+      }
+    `
+      : ''}
+`
 const Image = styled.div`
   display: block;
   width: 100%;
@@ -213,6 +236,11 @@ const SideImage = styled.div`
   display: block;
   flex: 1;
   min-width: 0;
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    .noPaddingBottom & {
+      margin-bottom: 0 !important;
+    }
+  }
 `
 const ImageSrc = styled(ImageItem)`
   display: block;
@@ -220,6 +248,11 @@ const ImageSrc = styled(ImageItem)`
   max-width: 100%;
   width: auto;
   height: auto;
+  
+  .imageWidth280 & {
+    width: 280px;
+  }
+  
   ${({ widthImg, theme }) =>
     widthImg
       ? `
@@ -229,12 +262,14 @@ const ImageSrc = styled(ImageItem)`
     }
   `
       : ''}
+  
   ${({ imageAlignment }) =>
     imageAlignment === 'left'
       ? `
     margin: 0 auto 0 0;
   `
       : ''}
+  
   ${({ imageAlignment }) =>
     imageAlignment === 'right'
       ? `
@@ -320,6 +355,7 @@ const FeatureWrapper = styled.div`
       }
   `
       : ''}
+  
   ${({ contentAlignLR, theme }) =>
     contentAlignLR === 'left'
       ? `
@@ -345,6 +381,7 @@ const FeatureWrapper = styled.div`
       }
   `
       : ''}
+  
   ${({ alignItemsCenter }) =>
     alignItemsCenter
       ? `
@@ -359,20 +396,22 @@ const FeatureWrapper = styled.div`
     text-align: center;
   `
       : ''}
+  
   & > * {
     padding: 10px;
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       padding: 0 10px;
     }
   }
-${({ sectionPadding }) =>
-  sectionPadding === '0px'
-    ? `
-                & > * {
-    padding-bottom: 0px;
+  
+  ${({ sectionPadding }) =>
+    sectionPadding === '0px'
+      ? `
+    & > * {
+      padding-bottom: 0px;
     }
                 `
-    : ''}
+      : ''}
 `
 const FeatureInner = styled.div`
   display: block;
@@ -398,7 +437,13 @@ const CTAWrapper = styled.div`
   a {
     min-width: 160px;
   }
-
+  .snapsLiveMetaMaskFlask & {
+    order: 1;
+    margin-top: 0;
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      margin-bottom: 16px;
+    }
+  }
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     .button {
       width: 100%;

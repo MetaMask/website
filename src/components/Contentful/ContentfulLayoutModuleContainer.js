@@ -30,6 +30,7 @@ const ContentfulModuleContainer = props => {
       eyebrow,
       sideImage,
       showLeftArrow,
+      iconConfig,
     },
   } = props
 
@@ -93,15 +94,14 @@ const ContentfulModuleContainer = props => {
                 ) : null}
               </ContentInfo>
             ) : null}
-            {isTab && modules && modules.length ? (
+            {tabs ? (
               <TabWrapper
                 tabs={tabs}
                 typeLayout={'module'}
                 activeTabDefault={modules[0].contentful_id}
                 isTabParam={isCategoryTab}
               ></TabWrapper>
-            ) : null}
-            {!isTab && modules && modules.length ? (
+            ) : (
               <Modules
                 contentAlignCenter={contentAlignCenter}
                 modulesMargin={modulesMargin}
@@ -116,10 +116,11 @@ const ContentfulModuleContainer = props => {
                       ? 'white'
                       : 'black',
                     showLeftArrow,
+                    iconConfig,
                   })
                 )}
               </Modules>
-            ) : null}
+            )}
           </MainContent>
           {sideImageUrl ? (
             <SideImage sectionPadding={sectionPadding}>
@@ -290,6 +291,11 @@ const Modules = styled.div`
   > * {
     &:not(:last-child) {
       margin-bottom: ${({ modulesMargin }) => modulesMargin || '40px'};
+      @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+        .mobileCardGridModulesGap12 & {
+          margin-bottom: 12px !important;
+        }
+      }
     }
   }
 
@@ -318,6 +324,7 @@ const ContentInfo = styled.div`
       : ''}
 
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    margin-bottom: 24px;
     text-align: center;
   }
   

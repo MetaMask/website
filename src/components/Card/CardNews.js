@@ -21,6 +21,8 @@ const StyledCard = props => {
     title,
     newTab,
     backgroundColor,
+    backgroundImage,
+    backgroundImageMobile,
     imageMargin,
     layoutSize,
     linkText,
@@ -33,8 +35,10 @@ const StyledCard = props => {
         to={link}
         newTab={newTab}
         backgroundColor={backgroundColor}
+        image={backgroundImage}
+        imageMobile={backgroundImageMobile}
         layoutSize={layoutSize}
-        className={classnames('custom-card-bg', {
+        className={classnames('custom-card-bg cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
         })}
       >
@@ -83,6 +87,27 @@ const CardInner = styled(Link)`
   flex-direction: column;
   height: 100%;
   color: ${({ theme }) => theme.text.dark};
+  &:hover {
+    .arrowAnimation:after {
+      margin-left: 6px;
+    }
+  }
+  ${({ image }) =>
+    image
+      ? ` background-image: url(${image});
+      background-size: cover;
+      padding: 24px;
+    `
+      : ''}
+  ${({ imageMobile, theme }) =>
+    imageMobile
+      ? ` 
+      @media (max-width: ${theme.device.tabletMediaMax}){
+        background-image: url(${imageMobile});
+        background-position: center;
+      }
+    `
+      : ''}
 `
 
 const ImageWrapper = styled.div`
@@ -135,10 +160,16 @@ const Inner = styled.div`
   flex: 1;
   width: 100%;
 `
+
 const Title = styled.div`
   font-weight: 700;
   font-size: 18px;
   margin-bottom: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 
   ${({ layoutSize }) =>
     layoutSize === 'small'
@@ -156,8 +187,13 @@ const Title = styled.div`
 `
 
 const Description = styled.div`
-  display: block;
   line-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+
   &:not(:last-child) {
     margin-bottom: 64px;
   }
@@ -172,4 +208,7 @@ const Description = styled.div`
 const CTAWrapper = styled.div`
   display: block;
   margin-top: auto;
+  &:hover {
+    opacity: 0.9;
+  }
 `

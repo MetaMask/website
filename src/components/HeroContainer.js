@@ -218,8 +218,7 @@ const HeroContainerComponent = props => {
                   isFlask={isFlask}
                   ref={scrollRef}
                 >
-                  {' '}
-                  {headline}{' '}
+                  <div dangerouslySetInnerHTML={{ __html: headline }} />
                 </HeroTitle>
               )}
               {description && (
@@ -669,6 +668,7 @@ const HeroTitle = styled.h1`
       padding-bottom: 8px;
     }
   }
+  
   ${({ hideHeadline }) =>
     hideHeadline
       ? `
@@ -713,7 +713,14 @@ const HeroTitle = styled.h1`
       text-align: left;
   `
       : ''}
-
+  
+  .titleFontSize60 & {
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      font-size: 60px;
+      max-width: 600px;
+    }
+  }
+  
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     font-size: 46px;
   }
@@ -726,16 +733,29 @@ const HeroTitle = styled.h1`
 const HeroDescription = styled.div`
   display: block;
   margin-bottom: 24px;
+
   .newsHero & {
     font-size: 20px;
-    color: #535a61;
+
     a {
       color: #535a61;
-    }
-    p {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+
+      svg {
+        margin-right: 16px;
+        path {
+          fill: #535a61;
+        }
+      }
+
+      &:hover {
+        color: ${({ theme }) => theme.primaryColor};
+
+        svg {
+          path {
+            fill: ${({ theme }) => theme.primaryColor};
+          }
+        }
+      }
     }
   }
   .scrolled.custom-newsHero & {
@@ -743,6 +763,11 @@ const HeroDescription = styled.div`
       margin-bottom: 0;
     }
     margin-bottom: 0;
+  }
+  .contentMaxWidth480 & {
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      max-width: 480px;
+    }
   }
   ${({ isFaq }) =>
     isFaq
@@ -812,6 +837,17 @@ const HeroSideImage = styled.div`
       width: 40%;
     }
   }
+  .sideImageFlex35 & {
+    @media (min-width: ${({ theme }) => theme.device.desktop}) {
+      width: 35%;
+    }
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      width: 50%;
+    }
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      width: 100%;
+    }
+  }
   @media (min-width: ${({ theme }) => theme.device.desktop}) {
     padding: 0 !important;
   }
@@ -836,6 +872,9 @@ const HeroCTA = styled.div`
 
     .button {
       margin: 0 8px 16px;
+    }
+    .theme-dark & {
+      flex-direction: column;
     }
   }
 

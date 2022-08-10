@@ -9,6 +9,7 @@ const ContentfulCta = props => {
       ctaText,
       newTab,
       buttonDisplay,
+      iconConfig,
       ctaAlignment,
       displayText,
       typeLayout = '',
@@ -42,6 +43,7 @@ const ContentfulCta = props => {
       link={ctaLink}
       text={displayText || ctaText}
       newTab={newTab}
+      iconConfig={iconConfig}
       button={buttonDisplay}
       align={ctaAlignment}
       color={color}
@@ -66,6 +68,7 @@ export default ContentfulCta
 
 ContentfulCta.propTypes = {
   moduleConfig: PropTypes.shape({
+    iconConfig: PropTypes.object,
     ctaAlignment: PropTypes.string,
     ctaLink: PropTypes.string,
     newTab: PropTypes.bool,

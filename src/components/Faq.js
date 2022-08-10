@@ -62,7 +62,7 @@ const QuestionItem = styled.div`
   padding: 20px;
   align-items: center;
   justify-content: space-between;
-  background-color: ${({ theme }) => theme.darkBlue};
+  background-color: ${({ theme }) => theme.primaryColor};
   font-size: 16px;
   line-height: 24px;
   font-weight: 700;

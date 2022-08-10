@@ -38,6 +38,7 @@ const CTA = props => {
     buttonSecondary,
     socialLink,
   } = props
+
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
   const isButton = buttonDisplay || button
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
@@ -51,8 +52,8 @@ const CTA = props => {
     lowerBrowserName = lowerCase(browserName),
     iconBrowser = ''
   if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
-    label = eventLabel.replace('$browser', downloadBrowsers[keyBrowser]?.text)
-    text = textDefault.replace('$browser', downloadBrowsers[keyBrowser]?.text)
+    label = eventLabel?.replace('$browser', downloadBrowsers[keyBrowser]?.text)
+    text = textDefault?.replace('$browser', downloadBrowsers[keyBrowser]?.text)
     if (['ios', 'android', 'not-supported'].includes(keyBrowser)) {
       text = downloadBrowsers[keyBrowser]?.text
     }
@@ -133,7 +134,7 @@ const CTA = props => {
           })}
         >
           {showLeftArrow ? <Arrow {...icon} transform={'rotate(180)'} /> : null}
-          {text}
+          <span dangerouslySetInnerHTML={{ __html: text }} />
           {showRightArrow || socialLink ? <Arrow {...icon} /> : null}
         </LinkTitle>
       </ContentWrapper>
@@ -247,10 +248,14 @@ const CTAContainer = styled.div`
       top: -110px;
     }
   }
+  .snapsLiveMetaMaskFlask & {
+    justify-content: center;
+  }
 `
 const LinkTitle = styled.span`
   display: flex;
   align-items: center;
+
   svg {
     width: 20px;
     margin-left: 8px;
@@ -259,9 +264,47 @@ const LinkTitle = styled.span`
       fill: ${({ theme }) => theme.text.default};
     }
   }
+
   &.leftArrow {
     svg {
       margin: 2px 12px 0 0;
+    }
+  }
+
+  &:hover {
+    .arrowAnimation:after {
+      margin-left: 6px;
+    }
+  }
+
+  .news-content &,
+  .storiesOnNewsDetail & {
+    svg {
+      width: 24px;
+      path {
+        fill: none;
+        stroke: ${({ theme }) => theme.text.default};
+      }
+    }
+  }
+
+  .snapsLiveMetaMaskFlask & {
+    color: #222;
+    background-color: #ffffffbf;
+    padding: 6px;
+    gap: 6px;
+    border-radius: 32px;
+    font-weight: 700;
+    transition: ease 0.3s all;
+    span > span:first-child {
+      background: #bb2534;
+      border-radius: 16px;
+      color: #fff;
+      padding: 2px 10px;
+      margin-right: 4px;
+    }
+    &:hover {
+      background-color: white;
     }
   }
 `
@@ -279,9 +322,9 @@ const ContentWrapper = styled(Link)`
     typeLayout === ''
       ? `
       color: ${color};
-    &:hover {
-      color: ${theme.darkBlue};
-    }
+      &:hover {
+        color: ${theme.primaryColor};
+      }
   `
       : ``}
   ${({ typeLayout, theme }) =>
@@ -325,9 +368,10 @@ const ContentWrapper = styled(Link)`
 
   &:hover {
     .news-content &,
-    .storiesOnNewsDetail &{
-      path{
-        fill: ${({ theme }) => theme.darkBlue};
+    .storiesOnNewsDetail & {
+      path {
+        fill: none;
+        stroke: ${({ theme }) => theme.primaryColor};
       }
     }
   }

@@ -5,6 +5,7 @@ import Image from '../Image'
 import classnames from 'classnames'
 import Link from '../Link'
 import CTAAngleIcon from './CTAAngleIcon'
+import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 
 /**
  * @name Card
@@ -21,10 +22,14 @@ const StyledCard = props => {
     title,
     newTab,
     backgroundColor,
+    backgroundImage,
+    backgroundImageMobile,
     imageMargin,
     layoutSize,
     linkText,
     contentAlignment,
+    hubSpotForm,
+    cta,
     isDarkMode,
   } = props
 
@@ -34,7 +39,9 @@ const StyledCard = props => {
         to={link}
         newTab={newTab}
         backgroundColor={backgroundColor}
-        className={classnames('custom-card-bg', {
+        image={backgroundImage}
+        imageMobile={backgroundImageMobile}
+        className={classnames('custom-card-bg cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
           [`bg-default`]: !backgroundColor,
         })}
@@ -54,10 +61,21 @@ const StyledCard = props => {
               <div dangerouslySetInnerHTML={{ __html: description }}></div>
             </Description>
           ) : null}
+          {hubSpotForm ? <>{contentfulModuleToComponent(hubSpotForm)}</> : null}
           {linkText ? (
             <CTAWrapper>
               <CTAAngleIcon text={linkText} />
             </CTAWrapper>
+          ) : null}
+          {cta ? (
+            <CTA>
+              {cta.map(cta =>
+                contentfulModuleToComponent({
+                  ...cta,
+                  buttonSize: 'hero',
+                })
+              )}
+            </CTA>
           ) : null}
         </Inner>
       </CardInner>
@@ -84,6 +102,7 @@ const CardInner = styled(Link)`
   border-radius: 12px;
   overflow: hidden;
   color: ${({ theme }) => theme.text.dark};
+  
   ${({ contentAlignment }) =>
     contentAlignment === 'left'
       ? `
@@ -97,6 +116,31 @@ const CardInner = styled(Link)`
     flex-direction: column;
   }
   `}
+  
+  ${({ image }) =>
+    image
+      ? ` background-image: url(${image});
+      background-size: cover;
+    `
+      : ''}
+  
+  ${({ imageMobile, theme }) =>
+    imageMobile
+      ? ` 
+      @media (max-width: ${theme.device.tabletMediaMax}){
+        background-image: url(${imageMobile});
+        background-position: center;
+      }
+    `
+      : ''}
+
+  .cardBoxShadowNone &:not(:hover) {
+    box-shadow: none;
+  }
+
+  .cardHoverBoxShadowNone &:hover {
+    box-shadow: none;
+  }
 `
 
 const ImageWrapper = styled.div`
@@ -163,4 +207,35 @@ const Description = styled.div`
 const CTAWrapper = styled.div`
   display: block;
   margin-top: auto;
+  &:hover {
+    opacity: 0.9;
+    .arrowAnimation:after {
+      margin-left: 6px;
+    }
+  }
+`
+
+const CTA = styled.div`
+  display: flex;
+  flex-flow: wrap;
+  margin-top: auto;
+  padding-top: 16px;
+  .button {
+    margin: 0 16px 0 0;
+  }
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    justify-content: center;
+    flex-direction: column;
+
+    .button {
+      margin: 0 8px 16px;
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    .button {
+      width: 100%;
+      margin: 0 0 16px 0;
+    }
+  }
 `

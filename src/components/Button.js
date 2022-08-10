@@ -90,6 +90,12 @@ const Icon = styled.span`
 const ButtonWrapper = styled(Link)`
   color: #fff;
   opacity: ${({ hide }) => (hide ? 0 : 1)};
+  &:hover {
+    .arrowAnimation:after {
+      margin-left: 6px;
+    }
+  }
+  
   ${({ gradient, color, theme }) =>
     color && theme['button'] && theme['button'][color]
       ? `
@@ -134,15 +140,15 @@ const ButtonWrapper = styled(Link)`
   ${({ color, theme }) =>
     color === 'secondary'
       ? `
-  background: transparent !important;
-  color: ${theme.darkBlue};
-  border: 2px solid ${theme.darkBlue};
-  @media (min-width: ${theme.device.miniDesktop}){
-    &:hover {
-      border-color: ${theme.darkerBlue};
-      color: ${theme.darkerBlue};
+    background: transparent !important;
+    color: ${theme.button.primary.bg};
+    border: 2px solid ${theme.button.primary.bg};
+    @media (min-width: ${theme.device.miniDesktop}){
+      &:hover {
+        border-color: ${theme.button.primary.bgHover};
+        color: ${theme.button.primary.bgHover};
+      }
     }
-  }
   `
       : ''}
 
@@ -164,4 +170,9 @@ const ButtonWrapper = styled(Link)`
     font-size: ${fontSize};
   `
       : ''}
+
+  .theme-dark &{
+    min-height: 42px;
+    padding: 8px 24px;
+  }
 `

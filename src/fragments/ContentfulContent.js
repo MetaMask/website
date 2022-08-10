@@ -194,6 +194,26 @@ export const ContentfulLayoutFeatureFields = graphql`
     eyebrow
     animation
     backgroundColor
+    backgroundImage {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
+    backgroundImageMobile {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
     sectionPadding
     noPaddingBottom
     customClass
@@ -236,6 +256,7 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
     }
     backgroundColor
     sectionPadding
+    customClass
   }
 `
 
@@ -352,8 +373,34 @@ export const ContentfulCardFields = graphql`
     }
     link
     linkText
+    cta {
+      ...ContentfulCtaFields
+    }
     newTab
+    hubSpotForm {
+      ...ContentfulHubSpotFormFields
+    }
     backgroundColor
+    backgroundImage {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
+    backgroundImageMobile {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
     layoutType
     layoutSize
     contentAlignment
@@ -628,9 +675,6 @@ export const ContentfulNewsFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
-    author {
-      ...ContentfulNewsAuthorFields
-    }
     publishDate
     content {
       childMarkdownRemark {
@@ -643,37 +687,6 @@ export const ContentfulNewsFields = graphql`
       }
     }
     isPrivate
-  }
-`
-
-export const ContentfulNewsAuthorFields = graphql`
-  fragment ContentfulNewsAuthorFields on ContentfulNewsAuthor {
-    contentful_id
-    internal {
-      type
-    }
-    name
-    image {
-      title
-      description
-      file {
-        url
-      }
-      fluid(maxWidth: 80, quality: 100, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
-    }
-    imageDarkMode {
-      title
-      description
-      file {
-        url
-      }
-      fluid(maxWidth: 80, quality: 100, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
-    }
-    link
   }
 `
 

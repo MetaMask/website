@@ -43,6 +43,7 @@ const Container = styled.div`
       padding-right: 0;
     }
   }
+
   ${({ styleOverride }) => styleOverride}
 `
 
@@ -77,6 +78,25 @@ const ContainerInner = styled.div`
         theme.device.miniDesktopMediaMax}) {
       max-width: 100% !important;
       padding-left: max(calc((100vw - 728px) / 2), 20px);
+    }
+  }
+
+  .metaMaskUninstalled & {
+    max-width: 608px;
+    border: 1px solid #d6d9dc;
+    border-radius: 10px;
+    padding: 48px;
+    margin-bottom: 48px;
+
+    @media (min-width: 1600px) {
+      max-width: 800px;
+      padding: 48px 64px;
+      margin-bottom: 80px;
+    }
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      max-width: 416px;
+      padding: 24px;
+      margin-bottom: 8px;
     }
   }
 `

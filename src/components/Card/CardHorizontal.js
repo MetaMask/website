@@ -5,6 +5,7 @@ import Image from '../Image'
 import classnames from 'classnames'
 import Link from '../Link'
 import CTAAngleIcon from './CTAAngleIcon'
+import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 
 /**
  * @name Card
@@ -21,9 +22,13 @@ const StyledCard = props => {
     title,
     newTab,
     backgroundColor,
+    backgroundImage,
+    backgroundImageMobile,
     imageMargin,
     layoutSize,
+    hubSpotForm,
     linkText,
+    cta,
     isDarkMode,
   } = props
 
@@ -33,7 +38,9 @@ const StyledCard = props => {
         to={link}
         newTab={newTab}
         backgroundColor={backgroundColor}
-        className={classnames({
+        image={backgroundImage}
+        imageMobile={backgroundImageMobile}
+        className={classnames('cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
         })}
       >
@@ -55,6 +62,17 @@ const StyledCard = props => {
             <CTAWrapper>
               <CTAAngleIcon text={linkText} />
             </CTAWrapper>
+          ) : null}
+          {hubSpotForm ? <>{contentfulModuleToComponent(hubSpotForm)}</> : null}
+          {cta ? (
+            <CTA>
+              {cta.map(cta =>
+                contentfulModuleToComponent({
+                  ...cta,
+                  buttonSize: 'hero',
+                })
+              )}
+            </CTA>
           ) : null}
         </Inner>
       </CardInner>
@@ -78,7 +96,11 @@ const Card = styled.div``
 const CardInner = styled(Link)`
   display: flex;
   color: ${({ theme }) => theme.text.dark};
-
+  &:hover {
+    .arrowAnimation:after {
+      margin-left: 6px;
+    }
+  }
   ${({ theme }) =>
     `
   @media (max-width: ${theme.device.mobileMediaMax}){
@@ -86,6 +108,33 @@ const CardInner = styled(Link)`
     align-items: center;
   }
   `}
+  
+  ${({ image }) =>
+    image
+      ? ` background-image: url(${image});
+      background-size: cover;
+      padding: 16px;
+      border-radius: 12px;
+    `
+      : ''}
+  
+  ${({ imageMobile, theme }) =>
+    imageMobile
+      ? ` 
+      @media (max-width: ${theme.device.tabletMediaMax}){
+        background-image: url(${imageMobile});
+        background-position: center;
+      }
+    `
+      : ''}
+
+  .cardBoxShadowNone &:not(:hover) {
+    box-shadow: none;
+  }
+
+  .cardHoverBoxShadowNone &:hover {
+    box-shadow: none;
+  }
 `
 
 const ImageWrapper = styled.div`
@@ -141,4 +190,32 @@ const Description = styled.div`
 const CTAWrapper = styled.div`
   display: block;
   margin-top: auto;
+  &:hover {
+    opacity: 0.9;
+  }
+`
+
+const CTA = styled.div`
+  display: flex;
+  flex-flow: wrap;
+  margin-top: auto;
+  padding-top: 16px;
+  .button {
+    margin: 0 16px 0 0;
+  }
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    justify-content: center;
+    flex-direction: column;
+
+    .button {
+      margin: 0 8px 16px;
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    .button {
+      width: 100%;
+      margin: 0 0 16px 0;
+    }
+  }
 `
