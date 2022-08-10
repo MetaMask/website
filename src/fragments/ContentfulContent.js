@@ -256,6 +256,7 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
     }
     backgroundColor
     sectionPadding
+    customClass
   }
 `
 
