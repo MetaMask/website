@@ -56,7 +56,7 @@ const FullWidthCta = props => {
             {hubSpotForm ? (
               <>{contentfulModuleToComponent(hubSpotForm)}</>
             ) : null}
-            {showLogoAnimation && customClass == 'metaMaskUninstalled' ? (
+            {showLogoAnimation && customClass === 'metaMaskUninstalled' ? (
               <LogoAnimation logoType={logoType} />
             ) : null}
             {ctas ? (
@@ -95,6 +95,7 @@ const FullWidthCtaWrapper = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
+
   ${({ showLogoAnimation, theme }) =>
     showLogoAnimation
       ? `
@@ -110,7 +111,7 @@ const Headline = styled(SectionTitle)`
   ${({ backgroundColor, theme }) =>
     backgroundColor === 'dark'
       ? `
-  color: ${theme.white};
+      color: ${theme.white};
   `
       : ``}
 
@@ -125,9 +126,9 @@ const FullWidthCtaInner = styled.div`
 
   .metaMaskUninstalled & {
     #logo-container{
-      padding: 24px 0;
+      padding: 24px 0 8px 0;
       @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-        padding: 0;
+        padding: 24px 0;
       }
     }
   }
@@ -146,33 +147,33 @@ const FullWidthCtaInner = styled.div`
   `
       : ''}
 
-  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
-  margin-bottom: 0;
-}
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    margin-bottom: 0;
+  }
 `
 const CTAWrapper = styled.div`
   display: flex;
   flex-flow: wrap;
   margin-top: 32px;
   justify-content: center;
-  
+
   .button {
     margin: 0 8px 16px;
   }
 
   .metaMaskUninstalled & {
     flex-direction: column;
-    .button{
-      margin: 0 8px 16px;
+
+    .button {
       max-width: 327px;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto 16px;
       width: 100%;
     }
+
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       margin-top: 16px;
       margin-bottom: 16px;
-      .button{
+      .button {
         max-width: 273px;
       }
     }
@@ -186,18 +187,19 @@ const CTAWrapper = styled.div`
       }
   `
       : ``}
-
-  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}){
-  .button {
-    width: 100%;
-    margin: 0 0 16px 0;
+  
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    .button {
+      width: 100%;
+      margin: 0 0 16px 0;
+    }
   }
-}
 `
 
 const Description = styled.div`
   display: block;
   margin-top: 8px;
+
   & + ${CTAWrapper} {
     margin-top: 24px;
   }
