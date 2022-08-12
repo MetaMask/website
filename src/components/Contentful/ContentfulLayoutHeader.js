@@ -7,6 +7,7 @@ const ContentfulLayoutHeader = props => {
   const {
     moduleConfig: {
       logo,
+      logoMobile,
       menuItems,
       downloadButton,
       previewMode,
@@ -21,6 +22,7 @@ const ContentfulLayoutHeader = props => {
   return (
     <Header
       logo={logo}
+      logoMobile={logoMobile}
       menus={menuItems}
       downloadButton={downloadButton}
       hideDownloadBtn={hideDownloadBtn}
@@ -34,6 +36,7 @@ export default ContentfulLayoutHeader
 ContentfulLayoutHeader.propTypes = {
   moduleConfig: PropTypes.shape({
     logo: PropTypes.object,
+    logoMobile: PropTypes.object,
     menuItems: PropTypes.arrayOf(
       PropTypes.shape({
         // top level columns
