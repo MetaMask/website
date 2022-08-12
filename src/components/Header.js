@@ -20,14 +20,7 @@ const StyledHeader = props => {
       },
       widthLogo,
     },
-    logoMobile: {
-      title: titleLogoMobile,
-      logo: {
-        file: { url: srcLogoMobile },
-        svg: svgLogoMobile,
-      },
-      widthLogo: widthLogoMobile,
-    },
+    logoMobile,
     menus,
     downloadButton,
     popupAnnouncement,
@@ -45,12 +38,11 @@ const StyledHeader = props => {
   const { isDarkMode, setIsDarkMode } = darkModeContextValue || {}
   const [topMenuMobile, setTopMenuMobile] = React.useState('88px')
 
-  if (!menus) {
-    setLocalStorage('darkMode', '0')
-    setIsDarkMode(false)
-  }
-
   React.useEffect(() => {
+    if (!menus) {
+      setLocalStorage('darkMode', '0')
+      setIsDarkMode(false)
+    }
     const handleOuterClick = e => {
       if (hamburgerActive && menuRef && menuRef.current) {
         const ref = menuRef.current
@@ -104,7 +96,7 @@ const StyledHeader = props => {
             {srcLogo ? (
               <LogoWrapper
                 className={classnames({
-                  'hidden-mobile': srcLogoMobile,
+                  'hidden-mobile': logoMobile,
                 })}
               >
                 {svgLogo?.content ? (
@@ -119,20 +111,20 @@ const StyledHeader = props => {
                 )}
               </LogoWrapper>
             ) : null}
-            {srcLogoMobile ? (
+            {logoMobile ? (
               <LogoWrapper className={classnames('hidden-desktop')}>
-                {svgLogoMobile?.content ? (
+                {logoMobile.logo.svg?.content ? (
                   <div
                     className="logoMetamaskSvg"
                     dangerouslySetInnerHTML={{
-                      __html: svgLogoMobile?.content,
+                      __html: logoMobile.logo.svg?.content,
                     }}
                   />
                 ) : (
                   <Logo
-                    src={srcLogoMobile}
-                    alt={titleLogoMobile}
-                    widthCustom={widthLogoMobile}
+                    src={logoMobile.logo.file.src}
+                    alt={logoMobile.title}
+                    widthCustom={logoMobile.widthLogo}
                   />
                 )}
               </LogoWrapper>
