@@ -9,6 +9,9 @@ export const ContentfulLayoutHeaderFields = graphql`
     logo {
       ...ContentfulLogoFields
     }
+    logoMobile {
+      ...ContentfulLogoFields
+    }
     menuItems {
       ... on ContentfulModuleContainer {
         columns

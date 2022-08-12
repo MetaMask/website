@@ -8,15 +8,25 @@ import ToggleDarkMode from './ToggleDarkMode'
 import ContextClientSide from '../Context/ContextClientSide'
 import { setLocalStorage } from '../lib/utils/localStorage'
 import Context from '../Context/ContextPage'
+import classnames from 'classnames'
 
 const StyledHeader = props => {
   const {
     logo: {
-      title,
+      title: titleLogo,
       logo: {
         file: { url: srcLogo },
         svg: svgLogo,
       },
+      widthLogo,
+    },
+    logoMobile: {
+      title: titleLogoMobile,
+      logo: {
+        file: { url: srcLogoMobile },
+        svg: svgLogoMobile,
+      },
+      widthLogo: widthLogoMobile,
     },
     menus,
     downloadButton,
@@ -34,6 +44,11 @@ const StyledHeader = props => {
   const { headerRef } = headerREF || {}
   const { isDarkMode, setIsDarkMode } = darkModeContextValue || {}
   const [topMenuMobile, setTopMenuMobile] = React.useState('88px')
+
+  if (!menus) {
+    setLocalStorage('darkMode', '0')
+    setIsDarkMode(false)
+  }
 
   React.useEffect(() => {
     const handleOuterClick = e => {
@@ -86,78 +101,106 @@ const StyledHeader = props => {
       <HeaderContainer>
         <LogoContainer>
           <Link to="/">
-            <LogoWrapper>
-              {svgLogo?.content ? (
-                <div
-                  className="logoMetamaskSvg"
-                  dangerouslySetInnerHTML={{
-                    __html: svgLogo?.content,
-                  }}
-                />
-              ) : (
-                <Logo src={srcLogo} alt={title} />
-              )}
-            </LogoWrapper>
+            {srcLogo ? (
+              <LogoWrapper
+                className={classnames({
+                  'hidden-mobile': srcLogoMobile,
+                })}
+              >
+                {svgLogo?.content ? (
+                  <div
+                    className="logoMetamaskSvg"
+                    dangerouslySetInnerHTML={{
+                      __html: svgLogo?.content,
+                    }}
+                  />
+                ) : (
+                  <Logo src={srcLogo} alt={titleLogo} widthCustom={widthLogo} />
+                )}
+              </LogoWrapper>
+            ) : null}
+            {srcLogoMobile ? (
+              <LogoWrapper className={classnames('hidden-desktop')}>
+                {svgLogoMobile?.content ? (
+                  <div
+                    className="logoMetamaskSvg"
+                    dangerouslySetInnerHTML={{
+                      __html: svgLogoMobile?.content,
+                    }}
+                  />
+                ) : (
+                  <Logo
+                    src={srcLogoMobile}
+                    alt={titleLogoMobile}
+                    widthCustom={widthLogoMobile}
+                  />
+                )}
+              </LogoWrapper>
+            ) : null}
           </Link>
         </LogoContainer>
-        <HamburgerButton
-          onClick={handleHamburgerButton}
-          active={hamburgerActive}
-          className="w-icon w-icon-nav-menu"
-        ></HamburgerButton>
-        <NavMain
-          hamburgerActive={hamburgerActive}
-          ref={menuRef}
-          topMenuMobile={topMenuMobile}
-        >
-          <NavMainInner>
-            {menus.map((menu, index) => {
-              const { title, modules } = menu
-              const active = menuActive === index
-              return (
-                <NavMenu
-                  key={index}
-                  active={active}
-                  onMouseEnter={() => handleMenuMouseEnter(index)}
-                  onMouseLeave={() => handleMenuMouseLeave(index)}
-                >
-                  <NavMenuMain onClick={() => handleMenuClick(index)}>
-                    {title}
-                    <Icon className="w-icon w-icon-dropdown-toggle"></Icon>
-                  </NavMenuMain>
-                  <NavMenuChild active={active}>
-                    {modules && modules.length
-                      ? modules.map(m =>
-                          contentfulModuleToComponent({
-                            ...m,
-                            hasModuleContainer: true,
-                            typeLayout: 'header',
-                          })
-                        )
-                      : null}
-                  </NavMenuChild>
-                </NavMenu>
-              )
-            })}
-            {downloadButton ? (
-              <ButtonsWrapper hideDownloadBtn={hideDownloadBtn}>
-                {contentfulModuleToComponent({
-                  ...downloadButton,
-                  hasModuleContainer: true,
-                  isHeaderMenu: true,
+        {menus ? (
+          <>
+            <HamburgerButton
+              onClick={handleHamburgerButton}
+              active={hamburgerActive}
+              className="w-icon w-icon-nav-menu"
+            ></HamburgerButton>
+            <NavMain
+              hamburgerActive={hamburgerActive}
+              ref={menuRef}
+              topMenuMobile={topMenuMobile}
+            >
+              <NavMainInner>
+                {menus.map((menu, index) => {
+                  const { title, modules } = menu
+                  const active = menuActive === index
+                  return (
+                    <NavMenu
+                      key={index}
+                      active={active}
+                      onMouseEnter={() => handleMenuMouseEnter(index)}
+                      onMouseLeave={() => handleMenuMouseLeave(index)}
+                    >
+                      <NavMenuMain onClick={() => handleMenuClick(index)}>
+                        {title}
+                        <Icon className="w-icon w-icon-dropdown-toggle"></Icon>
+                      </NavMenuMain>
+                      <NavMenuChild active={active}>
+                        {modules && modules.length
+                          ? modules.map(m =>
+                              contentfulModuleToComponent({
+                                ...m,
+                                hasModuleContainer: true,
+                                typeLayout: 'header',
+                              })
+                            )
+                          : null}
+                      </NavMenuChild>
+                    </NavMenu>
+                  )
                 })}
-              </ButtonsWrapper>
-            ) : null}
-            <DarkModeWrapper loading={isDarkMode === null}>
-              <ToggleDarkMode
-                onChange={onChangeDarkMode}
-                checked={isDarkMode}
-                name="darkMode"
-                value="dark"
-              />
-            </DarkModeWrapper>
-          </NavMainInner>
-        </NavMain>
+                {downloadButton ? (
+                  <ButtonsWrapper hideDownloadBtn={hideDownloadBtn}>
+                    {contentfulModuleToComponent({
+                      ...downloadButton,
+                      hasModuleContainer: true,
+                      isHeaderMenu: true,
+                    })}
+                  </ButtonsWrapper>
+                ) : null}
+                <DarkModeWrapper loading={isDarkMode === null}>
+                  <ToggleDarkMode
+                    onChange={onChangeDarkMode}
+                    checked={isDarkMode}
+                    name="darkMode"
+                    value="dark"
+                  />
+                </DarkModeWrapper>
+              </NavMainInner>
+            </NavMain>
+          </>
+        ) : null}
       </HeaderContainer>
     </HeaderElement>
   )
@@ -167,11 +210,12 @@ export default withTheme(StyledHeader)
 
 StyledHeader.propTypes = {
   logo: PropTypes.object,
+  logoMobile: PropTypes.object,
   menus: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
     })
-  ).isRequired,
+  ),
   downloadButton: PropTypes.object,
 }
 
@@ -262,6 +306,14 @@ const Logo = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
+
+  ${({ widthCustom }) =>
+    widthCustom
+      ? `
+      width: ${widthCustom};
+      height: auto !important;
+    `
+      : ''}
 `
 const NavMenu = styled.div`
   display: inline-flex;
