@@ -122,7 +122,7 @@ const StyledHeader = props => {
                   />
                 ) : (
                   <Logo
-                    src={logoMobile.logo.file.src}
+                    src={logoMobile.logo.file.url}
                     alt={logoMobile.title}
                     widthCustom={logoMobile.widthLogo}
                   />
