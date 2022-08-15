@@ -28,9 +28,10 @@ const FullWidthCta = props => {
       sectionPadding={sectionPadding}
       className={classnames({
         [`bg-${backgroundColor}`]: backgroundColor,
+        [customClass]: customClass,
       })}
     >
-      <ContentWrapper customClass={customClass}>
+      <ContentWrapper>
         <FullWidthCtaWrapper showLogoAnimation={showLogoAnimation}>
           {showLogoAnimation && customClass !== 'metaMaskUninstalled' ? (
             <LogoAnimation logoType={logoType} />
@@ -87,6 +88,11 @@ FullWidthCta.propTypes = {
 
 const Container = styled(Section)`
   display: block;
+  &.metaMaskUninstalled {
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      padding: 24px 0;
+    }
+  }
 `
 
 const FullWidthCtaWrapper = styled.div`
