@@ -54,8 +54,11 @@ const CTA = props => {
   if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
     label = eventLabel?.replace('$browser', downloadBrowsers[keyBrowser]?.text)
     text = textDefault?.replace('$browser', downloadBrowsers[keyBrowser]?.text)
-    if (['ios', 'android', 'not-supported'].includes(keyBrowser)) {
-      text = downloadBrowsers[keyBrowser]?.text
+    if (
+      ['ios', 'android', 'not-supported'].includes(keyBrowser) &&
+      downloadBrowsers[keyBrowser]?.text
+    ) {
+      text = downloadBrowsers[keyBrowser].text
     }
     link = downloadBrowsers[keyBrowser]?.link
     iconBrowser = downloadBrowsers[keyBrowser]?.icon
@@ -308,6 +311,7 @@ const LinkTitle = styled.span`
     }
   }
 `
+
 const ContentWrapper = styled(Link)`
   transition: all 0.15s ease;
   text-decoration: none;
