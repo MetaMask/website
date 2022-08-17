@@ -14,6 +14,7 @@ const ContentfulLayoutHero = props => {
       sideImage = {},
       sideImageDarkMode = {},
       sideImageFlex = false,
+      sideImageFoxAnimation = false,
       eyebrow,
       eyebrowLogo,
       eyebrowMobileLogo,
@@ -62,6 +63,7 @@ const ContentfulLayoutHero = props => {
       backgroundColor={backgroundColor}
       headlineBorderBottom={headlineBorderBottom}
       sideImageFlex={sideImageFlex}
+      sideImageFoxAnimation={sideImageFoxAnimation}
       backgroundColorMobile={backgroundColorMobile}
       ctas={ctas}
       customClass={customClass}
@@ -86,6 +88,7 @@ ContentfulLayoutHero.propTypes = {
     hideHeadline: PropTypes.bool,
     headlineBorderBottom: PropTypes.bool,
     sideImageFlex: PropTypes.bool,
+    sideImageFoxAnimation: PropTypes.bool,
     eyebrow: PropTypes.string,
     sectionPadding: PropTypes.string,
   }),
