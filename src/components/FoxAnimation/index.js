@@ -12,7 +12,7 @@ const FoxAnimation = props => {
         <MetamaskBoxAnimation
           phi={0}
           theta={Math.PI / 2}
-          distance={800}
+          distance={1024}
           hemisphereAxis={[0.1, 1, 0.2]}
           hemisphereColor1={[1, 1, 1]}
           hemisphereColor0={[0.5, 0.5, 0.5]}
@@ -32,8 +32,6 @@ export default withTheme(FoxAnimation)
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  border-radius: 100%;
-  background: ${({ theme }) => theme.background.tabModuleOuter};
 
   &:before {
     content: '';
