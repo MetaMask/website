@@ -986,11 +986,6 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15;
   background-color: #f7f9fb;
 }
 
-.bg-gray-40 {
-  background-color: #f2f4f6;
-}
-
-
 .bg-darkGray {
   background-color: #6a737d;
   color: #fff;
@@ -1131,16 +1126,11 @@ body.dark-mode {
     color: #fff;
   }
   .bg-white,
-  .bg-gray-40,
   .bg-default {
     background-color: #121212;
 
     &.custom-card-bg {
       background: #23272a;
-    }
-
-    .bg-gray-40 & {
-      background: #1b1b1b;
     }
   }
   .bg-neutrals {
