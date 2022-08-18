@@ -10,6 +10,9 @@ import Image from './Image'
 import isEmpty from 'lodash/isEmpty'
 import ContextClientSide from '../Context/ContextClientSide'
 import Context from '../Context/ContextPage'
+import Loadable from '@loadable/component'
+
+const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
 
 const HeroContainerComponent = props => {
   const {
@@ -34,6 +37,7 @@ const HeroContainerComponent = props => {
     backgroundColor,
     headlineBorderBottom,
     sideImageFlex,
+    sideImageFoxAnimation,
     backgroundColorMobile,
     isFaq,
     sectionPadding,
@@ -238,13 +242,17 @@ const HeroContainerComponent = props => {
               ) : null}
               {hubspotWrapper ? hubspotWrapper : null}
             </HeroImageTextContainer>
-            {sideImage ? (
+            {sideImage || sideImageFoxAnimation ? (
               <HeroSideImage
                 sideImageFlex={sideImageFlex}
                 isStyleHubspot={isStyleHubspot}
                 isFlask={isFlask}
               >
-                {isStyleHubspot || sideImageFlex || isFlask ? (
+                {sideImageFoxAnimation ? (
+                  <LogoAnimation logoType={'fox'} />
+                ) : null}
+                {!sideImageFoxAnimation &&
+                (isStyleHubspot || sideImageFlex || isFlask) ? (
                   <Image
                     image={
                       isDarkMode && !isEmpty(sideImageDarkMode)
@@ -299,6 +307,7 @@ HeroContainerComponent.propTypes = {
   hideHeadline: PropTypes.bool,
   showLearnMore: PropTypes.bool,
   showFavIcon: PropTypes.bool,
+  sideImageFoxAnimation: PropTypes.bool,
   sectionPadding: PropTypes.string,
 }
 

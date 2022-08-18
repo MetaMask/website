@@ -40,6 +40,24 @@ const ContentfulModuleContainer = props => {
       ? modules.filter(modules => modules.__typename !== 'ContentfulFaq')
       : []
   const isFaq = faqList && faqList.length
+
+  const [modulesRender, setModulesRender] = React.useState(modulesOther)
+  const [shuffled, setShuffled] = React.useState(false)
+
+  React.useEffect(() => {
+    if(columnType === 'randomize') {
+      const lastItem = modulesOther.pop();
+      let modulesShuffled = modulesOther.map(
+        value => ({ value, sort: Math.random() })).
+        sort((a, b) => a.sort - b.sort).
+        map(({ value }) => value)
+      modulesShuffled.push(lastItem)
+      setModulesRender(modulesShuffled)
+      setShuffled(true)
+    }
+  }, [shuffled])
+
+
   return (
     <Wrapper
       isFaq={isFaq}
@@ -67,7 +85,7 @@ const ContentfulModuleContainer = props => {
           {isFaq ? (
             <FaqList list={faqList} containerBgColor={containerBgColor} />
           ) : null}
-          {modulesOther.length ? (
+          {modulesRender.length ? (
             <Modules
               columnType={columnType}
               columns={columns}
@@ -81,7 +99,7 @@ const ContentfulModuleContainer = props => {
                 [`column-${columns}`]: columns,
               })}
             >
-              {modulesOther.map(m =>
+              {modulesRender.map(m =>
                 contentfulModuleToComponent({
                   ...m,
                   numberOfItem,

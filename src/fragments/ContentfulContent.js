@@ -85,6 +85,7 @@ export const ContentfulLayoutHeroFields = graphql`
       ...ContentfulLogoFields
     }
     sideImageFlex
+    sideImageFoxAnimation
     sideImage {
       title
       description
