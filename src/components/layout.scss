@@ -315,6 +315,10 @@ h4,
 h5,
 h6 {
   color: #333333;
+
+  .theme-dark & {
+    color: #222222;
+  }
 }
 
 h1 {
@@ -1123,8 +1127,13 @@ body.dark-mode {
   h6,
   strong,
   b {
-    color: #fff;
+    color: #ffffff;
+
+    .theme-dark & {
+      background: #ffffff;
+    }
   }
+
   .bg-white,
   .bg-default {
     background-color: #121212;
@@ -1429,14 +1438,6 @@ body.dark-mode {
     @media (max-width: 767px) {
       .hs-form-field {
         margin-bottom: 8px;
-      }
-    }
-  }
-  .dark-mode &.newsletterOnSnaps {
-    @media (max-width: 767px) {
-      .hs-submit input[type='submit'].hs-button {
-        background-color: white;
-        color: #121212;
       }
     }
   }

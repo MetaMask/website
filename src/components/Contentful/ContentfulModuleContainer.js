@@ -45,18 +45,17 @@ const ContentfulModuleContainer = props => {
   const [shuffled, setShuffled] = React.useState(false)
 
   React.useEffect(() => {
-    if(columnType === 'randomize') {
-      const lastItem = modulesOther.pop();
-      let modulesShuffled = modulesOther.map(
-        value => ({ value, sort: Math.random() })).
-        sort((a, b) => a.sort - b.sort).
-        map(({ value }) => value)
+    if (columnType === 'randomize') {
+      const lastItem = modulesOther.pop()
+      let modulesShuffled = modulesOther
+        .map(value => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value)
       modulesShuffled.push(lastItem)
       setModulesRender(modulesShuffled)
       setShuffled(true)
     }
   }, [shuffled])
-
 
   return (
     <Wrapper

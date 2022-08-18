@@ -108,8 +108,17 @@ const CardInner = styled(Link)`
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  color: ${({ theme }) => theme.text.dark};
+  color: #222222;
   border-radius: 24px;
+
+  .theme-dark & {
+    color: #222222 !important;
+
+    .dark-mode & {
+      color: #ffffff !important;
+    }
+  }
+  
   &:hover {
     .arrowAnimation:after {
       margin-left: 6px;
