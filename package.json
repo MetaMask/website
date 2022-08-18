@@ -44,6 +44,7 @@
     "gatsby-transformer-inline-svg": "^1.1.0",
     "gatsby-transformer-remark": "^2.16.1",
     "gatsby-transformer-sharp": "^2.2.21",
+    "gl-matrix": "^3.4.3",
     "lodash": "^4.17.11",
     "node-html-parser": "^5.2.0",
     "path": "^0.12.7",
@@ -64,6 +65,7 @@
     "recompose": "^0.30.0",
     "rimble-ui": "^0.14.0",
     "sass": "^1.43.4",
+    "simplex-noise": "^4.0.0",
     "styled-components": "^4.4.0"
   },
   "keywords": [

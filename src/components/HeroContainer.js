@@ -12,7 +12,7 @@ import ContextClientSide from '../Context/ContextClientSide'
 import Context from '../Context/ContextPage'
 import Loadable from '@loadable/component'
 
-const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
+const FoxAnimation = Loadable(() => import('./FoxAnimation/'))
 
 const HeroContainerComponent = props => {
   const {
@@ -249,7 +249,7 @@ const HeroContainerComponent = props => {
                 isFlask={isFlask}
               >
                 {sideImageFoxAnimation ? (
-                  <LogoAnimation logoType={'fox'} />
+                  <FoxAnimation />
                 ) : null}
                 {!sideImageFoxAnimation &&
                 (isStyleHubspot || sideImageFlex || isFlask) ? (

@@ -121,6 +121,7 @@ export const defaultTheme = {
     logoBlue: 'rgba(3, 125, 214, 0.03)',
     tabModuleOuter: '#F2F4F6',
     cardFeatureInner: 'rgba(3, 125, 214, 0.03)',
+    circleFoxAnimation: '#EEEFEF'
   },
   text: {
     default: theme.textColor,
@@ -164,6 +165,7 @@ export const defaultDarkTheme = {
     logoBlue: 'rgb(36, 41, 46)',
     tabModuleOuter: theme.dark,
     cardFeatureInner: '#212a30',
+    circleFoxAnimation: '#313538'
   },
   text: {
     default: theme.white,
@@ -213,6 +215,7 @@ export const purpleTheme = {
     logoBlue: 'rgba(3, 125, 214, 0.03)',
     tabModuleOuter: '#F2F4F6',
     cardFeatureInner: 'rgba(3, 125, 214, 0.03)',
+    circleFoxAnimation: '#EEEFEF'
   },
   text: {
     default: theme.textColor,
@@ -257,6 +260,7 @@ export const purpleDarkTheme = {
     logoBlue: 'rgb(36, 41, 46)',
     tabModuleOuter: theme.dark,
     cardFeatureInner: '#212a30',
+    circleFoxAnimation: '#313538'
   },
   text: {
     default: theme.white,
@@ -307,6 +311,7 @@ export const darkTheme = {
     logoBlue: 'rgba(3, 125, 214, 0.03)',
     tabModuleOuter: '#F2F4F6',
     cardFeatureInner: 'rgba(3, 125, 214, 0.03)',
+    circleFoxAnimation: '#313538'
   },
   text: {
     default: theme.textColor,
@@ -350,6 +355,7 @@ export const darkDarkTheme = {
     logoBlue: 'rgb(36, 41, 46)',
     tabModuleOuter: theme.dark,
     cardFeatureInner: '#212a30',
+    circleFoxAnimation: '#313538'
   },
   text: {
     default: theme.white,
