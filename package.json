@@ -18,6 +18,8 @@
     "lint:css": "stylelint './src/**/*.js'"
   },
   "dependencies": {
+    "gl-matrix": "^3.4.3",
+    "simplex-noise": "^4.0.0",
     "@loadable/component": "^5.14.1",
     "@mdx-js/mdx": "^1.0.0",
     "@mdx-js/react": "^1.6.22",

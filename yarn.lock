@@ -8273,6 +8273,11 @@ gl-mat4@1.1.4:
   resolved "https://registry.yarnpkg.com/gl-mat4/-/gl-mat4-1.1.4.tgz#1e895b55892e56a896867abd837d38f37a178086"
   integrity sha1-HolbVYkuVqiWhnq9g30483oXgIY=
 
+gl-matrix@^3.4.3:
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/gl-matrix/-/gl-matrix-3.4.3.tgz#fc1191e8320009fd4d20e9339595c6041ddc22c9"
+  integrity sha512-wcCp8vu8FT22BnvKVPjXa/ICBWRq/zjFfdofZy1WSpQZpphblv12/bOQLBC1rMM7SGOFS9ltVmKOHil5+Ml7gA==
+
 gl-vec3@1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/gl-vec3/-/gl-vec3-1.0.3.tgz#110fd897d0729f6398307381567d0944941bf22b"
@@ -16304,6 +16309,11 @@ simple-swizzle@^0.2.2:
   integrity sha1-pNprY1/8zMoz9w0Xy5JZLeleVXo=
   dependencies:
     is-arrayish "^0.3.1"
+
+simplex-noise@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/simplex-noise/-/simplex-noise-4.0.0.tgz#d9ea9773be3d74cd042184e724f6fbc22e68dd61"
+  integrity sha512-ciRAxJnRdQhFhZ7+yZKxk8bQJoIq2J2UPO2pbzy1vcrWFq70P4hNCCmcCTkBKDCIeXZVd/yKjL8Fmh8Aeu5+6g==
 
 single-trailing-newline@^1.0.0:
   version "1.0.0"
