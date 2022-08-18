@@ -4,16 +4,22 @@ import styled, { withTheme } from 'styled-components'
 const FoxAnimation = props => {
   const [shouldMount, setShouldMount] = React.useState(false)
   const [distance, setDistance] = React.useState(1120)
-
-  console.log(distance)
-  React.useEffect(() => {
+  const handleWindowSizeChange = () => {
     if (window.innerWidth < 1120) {
       setDistance(window.innerWidth)
     } else {
       setDistance(1120)
     }
+  }
+
+  React.useEffect(() => {
+    window.addEventListener('resize', handleWindowSizeChange)
     setShouldMount(true)
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange)
+    }
   }, [distance])
+  
   return (
     <Wrapper id="fox-logo-container">
       {shouldMount && (
