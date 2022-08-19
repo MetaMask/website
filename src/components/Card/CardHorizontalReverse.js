@@ -108,7 +108,7 @@ const CardInner = styled(Link)`
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  color: #222222;
+  color: ${({ theme }) => theme.text.dark};
   border-radius: 24px;
 
   .theme-dark & {
