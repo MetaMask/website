@@ -110,6 +110,16 @@ const CardInner = styled(Link)`
   align-items: center;
   color: ${({ theme }) => theme.text.dark};
   border-radius: 24px;
+
+  .theme-dark & {
+    color: #222222 !important;
+
+    .dark-mode & {
+      color: #ffffff !important;
+      background-color: #1b1b1b;
+    }
+  }
+  
   &:hover {
     .arrowAnimation:after {
       margin-left: 6px;

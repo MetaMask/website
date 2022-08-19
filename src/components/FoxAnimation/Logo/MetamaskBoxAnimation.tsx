@@ -8,6 +8,7 @@ const MAX_DISTANCE = 800
 
 export type MetamaskBoxAnimationProps = {
   noGLFallback: React.ReactNode
+  left: number
   phi: number
   theta: number
   distance: number
@@ -283,6 +284,8 @@ export class MetamaskBoxAnimation extends React.Component<
         renderer.foxLookAt(this.props.lookPixel[0], this.props.lookPixel[1])
       }
     }
+    const left = this.props.left
+
     return (
       <div
         style={{
@@ -293,7 +296,7 @@ export class MetamaskBoxAnimation extends React.Component<
           padding: 0,
           margin: 0,
           top: 0,
-          left: 0
+          left: left
         }}
         onMouseDown={(ev) => {
           if (MetamaskBoxAnimation.renderer) {
