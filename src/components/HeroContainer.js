@@ -596,8 +596,8 @@ const HeroImageTextContainer = styled.div`
   display: block;
   position: relative;
   transition: all 0.5s ease;
-  z-index: 1
-;
+  z-index: 1;
+  
   .scrolled.custom-newsHero &{
     flex-direction: row;
     justify-content: space-between;
@@ -727,7 +727,6 @@ const HeroTitle = styled.h1`
   .titleFontSize64 & {
     @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
       font-size: 64px;
-      line-height: 81px;
     }
   }
   
@@ -768,17 +767,20 @@ const HeroDescription = styled.div`
       }
     }
   }
+  
   .scrolled.custom-newsHero & {
     p {
       margin-bottom: 0;
     }
     margin-bottom: 0;
   }
+  
   .contentMaxWidth480 & {
     @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
       max-width: 480px;
     }
   }
+  
   ${({ isFaq }) =>
     isFaq
       ? `

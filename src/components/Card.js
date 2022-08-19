@@ -146,6 +146,10 @@ const CardInner = styled(Link)`
   
   .theme-dark & {
     color: #222222 !important;
+
+    .dark-mode & {
+      background-color: #1b1b1b;
+    }
   }
   
   .columnTypetag & {
@@ -204,13 +208,7 @@ const CardInner = styled(Link)`
         }
       }
     `
-      : `
-    .theme-dark & {
-      .dark-mode & {
-        background: #1b1b1b;
-    }
-  }
-    `}
+      : ``}
 
   ${({ imageMobile, theme }) =>
     imageMobile

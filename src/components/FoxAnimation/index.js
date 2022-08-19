@@ -3,27 +3,38 @@ import { MetamaskBoxAnimation } from './Logo/MetamaskBoxAnimation'
 import styled, { withTheme } from 'styled-components'
 const FoxAnimation = props => {
   const [shouldMount, setShouldMount] = React.useState(false)
-  const [distance, setDistance] = React.useState(1120)
+  const [left, setLeft] = React.useState(24)
+  const [distance, setDistance] = React.useState(1200)
   const handleWindowSizeChange = () => {
-    if (window.innerWidth < 1120) {
+    if (window.innerWidth < 992) {
+      setLeft(0)
       setDistance(window.innerWidth)
-    } else {
-      setDistance(1120)
+    }
+    else {
+      console.log(window.innerWidth)
+      if (window.innerWidth < 1400) {
+        setDistance(window.innerWidth - 200)
+      } else {
+        setDistance(1200)
+      }
     }
   }
 
   React.useEffect(() => {
+    console.log(distance)
+    handleWindowSizeChange()
     window.addEventListener('resize', handleWindowSizeChange)
     setShouldMount(true)
     return () => {
       window.removeEventListener('resize', handleWindowSizeChange)
     }
-  }, [distance])
-  
+  }, [left, distance])
+
   return (
     <Wrapper id="fox-logo-container">
       {shouldMount && (
         <MetamaskBoxAnimation
+          left={left}
           phi={0}
           theta={Math.PI / 2}
           distance={distance}

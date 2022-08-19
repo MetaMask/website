@@ -116,6 +116,7 @@ const CardInner = styled(Link)`
 
     .dark-mode & {
       color: #ffffff !important;
+      background-color: #1b1b1b;
     }
   }
   
