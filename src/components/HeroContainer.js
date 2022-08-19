@@ -767,20 +767,20 @@ const HeroDescription = styled.div`
       }
     }
   }
-  
+
   .scrolled.custom-newsHero & {
     p {
       margin-bottom: 0;
     }
     margin-bottom: 0;
   }
-  
+
   .contentMaxWidth480 & {
     @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
       max-width: 480px;
     }
   }
-  
+
   ${({ isFaq }) =>
     isFaq
       ? `

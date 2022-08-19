@@ -9,9 +9,7 @@ const FoxAnimation = props => {
     if (window.innerWidth < 992) {
       setLeft(0)
       setDistance(window.innerWidth)
-    }
-    else {
-      console.log(window.innerWidth)
+    } else {
       if (window.innerWidth < 1400) {
         setDistance(window.innerWidth - 200)
       } else {
@@ -21,7 +19,6 @@ const FoxAnimation = props => {
   }
 
   React.useEffect(() => {
-    console.log(distance)
     handleWindowSizeChange()
     window.addEventListener('resize', handleWindowSizeChange)
     setShouldMount(true)
