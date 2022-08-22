@@ -317,6 +317,7 @@ const HeroContainer = styled(Section)`
   justify-content: center;
   min-width: 100%;
   transition: all 0.5s ease;
+  overflow: hidden;
   &.custom-newsHero + div{
     padding-top: 64px !important;
     padding-bottom: 0;

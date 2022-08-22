@@ -207,7 +207,7 @@ export class MetamaskBoxAnimation extends React.Component<
     }
 
     const touch = ev.touches[0]
-    this._handleMove(touch.layerX, touch.layerY)
+    this._handleMove(touch.layerX || touch.clientX, touch.layerY || touch.clientY)
   }
 
   private _handleMouseMove = (ev: MouseEvent) => {
@@ -216,7 +216,7 @@ export class MetamaskBoxAnimation extends React.Component<
       return
     }
     ev.preventDefault()
-    this._handleMove(ev.layerX, ev.layerY)
+    this._handleMove(ev.layerX || ev.clientX, ev.layerY || ev.clientY)
   }
 
   private _handleMouseUp = () => {
@@ -237,7 +237,7 @@ export class MetamaskBoxAnimation extends React.Component<
       return
     }
     if (ev.touches.length === 1) {
-      this._handleMouseDown(touch.layerX, touch.layerY)
+      this._handleMouseDown(touch.layerX || touch.clientX, touch.layerY || touch.clientY)
     } else {
       this._lastPinchDist = Math.hypot(
         ev.touches[0].pageX - ev.touches[1].pageX,
@@ -300,12 +300,12 @@ export class MetamaskBoxAnimation extends React.Component<
         }}
         onMouseDown={(ev) => {
           if (MetamaskBoxAnimation.renderer) {
-            this._handleMouseDown(ev.layerX, ev.layerY)
+            this._handleMouseDown(ev.layerX || ev.clientX, ev.layerY || ev.clientY)
           }
         }}
         onMouseMove={(ev) => {
           if (this.props.followMouse && MetamaskBoxAnimation.renderer) {
-            MetamaskBoxAnimation.renderer.foxLookAt(ev.layerX, ev.layerY)
+            MetamaskBoxAnimation.renderer.foxLookAt(ev.layerX || ev.clientX, ev.layerY || ev.clientY)
           }
         }}
         ref={(container) => {
