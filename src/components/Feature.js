@@ -55,7 +55,7 @@ const FeatureComponent = props => {
           hideHeadline={hideHeadline}
           headlineMarginTop0={headlineMarginTop0}
         >
-          {headline}
+          <div dangerouslySetInnerHTML={{ __html: headline }} />
         </Headline>
       ) : null}
       {description ? (
@@ -455,6 +455,11 @@ const Eyebrow = styled.div`
   font-weight: 700;
   letter-spacing: 5px;
   margin-bottom: 16px;
+  
+  .eyebrowSize13 & {
+    font-size: 13px;
+    line-height: 1.1;
+  }
 `
 const FeatureItems = styled.div`
   display: block;

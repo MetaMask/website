@@ -804,7 +804,18 @@ input[type='submit'].hs-button {
 .fz-14 {
   font-size: 14px !important;
 }
-
+.fz-20-res {
+  font-size: 20px !important;
+  line-height: 28px !important;
+  @media (max-width: 767px) {
+    font-size: 18px !important;
+    line-height: 26px !important;
+  }
+  @media (max-width: 479px) {
+    font-size: 16px !important;
+    line-height: 22px !important;
+  }
+}
 .fz-24-res {
   font-size: 24px !important;
   line-height: 32px !important;
@@ -1162,6 +1173,14 @@ body.dark-mode {
     }
   }
 
+  .logoSvg {
+    svg {
+      path {
+        fill: #fff;
+      }
+    }
+  }
+
   .btn-primary {
     background: #1098fc;
   }
@@ -1270,6 +1289,52 @@ body.dark-mode {
     justify-content: center;
     background: #037dd6;
     border-radius: 100%;
+  }
+}
+
+.dl-checklist {
+  dt {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 26px;
+
+    @media (max-width: 767px) {
+      text-align: center;
+      justify-content: center;
+    }
+
+    &:before {
+      @include ico-content;
+      content: '\eb17';
+      font-weight: 400;
+      align-items: center;
+      background-position: center center;
+      background-repeat: no-repeat;
+      border-radius: 100%;
+      display: inline-flex;
+      height: 20px;
+      justify-content: center;
+      margin-left: 0;
+      margin-right: 12px;
+      min-width: 20px;
+      position: relative;
+      width: 20px;
+      background-color: #2c56dd;
+      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.07);
+      color: #fff;
+      font-size: 10px;
+    }
+  }
+
+  dd {
+    margin-left: 32px;
+    @media (max-width: 767px) {
+      margin-left: 0;
+      text-align: center;
+      justify-content: center;
+    }
   }
 }
 

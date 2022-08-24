@@ -52,6 +52,7 @@ const HeroContainerComponent = props => {
   const isFlask = pathname === '/flask/'
   const isInstitutions = pathname === '/institutions/'
   const isInstitutionalChild =
+    pathname === '/institutions/daos/' ||
     pathname === '/institutions/portfolio/' ||
     pathname === '/institutions/compliance/' ||
     pathname === '/institutions/nft/'
