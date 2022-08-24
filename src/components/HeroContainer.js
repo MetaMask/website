@@ -169,7 +169,7 @@ const HeroContainerComponent = props => {
               isHome={isHome}
               headlineBorderBottom={headlineBorderBottom}
               className={classnames({
-                heroMobileOverlayContent: !backgroundImage,
+                heroMobileOverlayContent: !backgroundImage && !sideImageFoxAnimation,
               })}
               center={!sideImageFlex && !isHome}
               sideImageFlex={sideImageFlex}
