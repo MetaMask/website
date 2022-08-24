@@ -6,6 +6,22 @@ import { FoxRenderer } from './fox-render'
 const MIN_DISTANCE = 100
 const MAX_DISTANCE = 800
 
+const getOffset = (evt) => {
+  var el = evt.target,
+      x = 0,
+      y = 0;
+  
+  while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
+    x += el.offsetLeft - el.scrollLeft;
+    y += el.offsetTop - el.scrollTop;
+    el = el.offsetParent;
+  }
+  x = evt.clientX - x + window.scrollX;
+  y = evt.clientY - y + window.scrollY;
+
+  return { x: x, y: y };
+}
+
 export type MetamaskBoxAnimationProps = {
   noGLFallback: React.ReactNode
   left: number
@@ -207,7 +223,8 @@ export class MetamaskBoxAnimation extends React.Component<
     }
 
     const touch = ev.touches[0]
-    this._handleMove(touch.layerX || touch.clientX, touch.layerY || touch.clientY)
+    const offset = getOffset(touch);
+    this._handleMove(touch.layerX || offset?.x || touch.clientX, touch.layerY || offset?.y || touch.clientY)
   }
 
   private _handleMouseMove = (ev: MouseEvent) => {
@@ -216,7 +233,8 @@ export class MetamaskBoxAnimation extends React.Component<
       return
     }
     ev.preventDefault()
-    this._handleMove(ev.layerX || ev.clientX, ev.layerY || ev.clientY)
+    const offset = getOffset(ev);
+    this._handleMove(ev.layerX || offset?.x || ev.clientX, ev.layerY || offset?.y || ev.clientY)
   }
 
   private _handleMouseUp = () => {
@@ -237,7 +255,8 @@ export class MetamaskBoxAnimation extends React.Component<
       return
     }
     if (ev.touches.length === 1) {
-      this._handleMouseDown(touch.layerX || touch.clientX, touch.layerY || touch.clientY)
+      const offset = getOffset(touch);
+      this._handleMouseDown(touch.layerX || offset?.x || touch.clientX, touch.layerY || offset?.y || touch.clientY)
     } else {
       this._lastPinchDist = Math.hypot(
         ev.touches[0].pageX - ev.touches[1].pageX,
@@ -300,12 +319,14 @@ export class MetamaskBoxAnimation extends React.Component<
         }}
         onMouseDown={(ev) => {
           if (MetamaskBoxAnimation.renderer) {
-            this._handleMouseDown(ev.layerX || ev.clientX, ev.layerY || ev.clientY)
+            const offset = getOffset(ev);
+            this._handleMouseDown(ev.layerX || offset?.x || ev.clientX, ev.layerY || offset?.y || ev.clientY)
           }
         }}
         onMouseMove={(ev) => {
           if (this.props.followMouse && MetamaskBoxAnimation.renderer) {
-            MetamaskBoxAnimation.renderer.foxLookAt(ev.layerX || ev.clientX, ev.layerY || ev.clientY)
+            const offset = getOffset(ev);
+            MetamaskBoxAnimation.renderer.foxLookAt(ev.layerX || offset?.x || ev.clientX, ev.layerY || offset?.y || ev.clientY)
           }
         }}
         ref={(container) => {

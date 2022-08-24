@@ -6,7 +6,10 @@ const FoxAnimation = props => {
   const [left, setLeft] = React.useState(24)
   const [distance, setDistance] = React.useState(1200)
   const handleWindowSizeChange = () => {
-    if (window.innerWidth < 992) {
+    if (window.innerWidth < 480) {
+      setLeft(0)
+      setDistance(window.innerWidth * 1.5)
+    } else if (window.innerWidth < 992) {
       setLeft(0)
       setDistance(window.innerWidth)
     } else {
@@ -54,6 +57,10 @@ export default withTheme(FoxAnimation)
 const Wrapper = styled.div`
   position: absolute;
   width: 100%;
+
+  @media (max-width: ${({theme}) => theme.device.mobile}){
+    width: 150%;
+  }
 
   &:before {
     content: '';
