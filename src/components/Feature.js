@@ -236,10 +236,15 @@ const SideImage = styled.div`
   display: block;
   flex: 1;
   min-width: 0;
+  
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     .noPaddingBottom & {
       margin-bottom: 0 !important;
     }
+  }
+  
+  .snapsLiveMetaMaskFlask & {
+    padding: 0;
   }
 `
 const ImageSrc = styled(ImageItem)`
