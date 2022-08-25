@@ -1430,15 +1430,16 @@ body.dark-mode {
   .hs-form-field label:not(.hs-error-msg) {
     display: none;
   }
+
   .hs-form-field input {
     border-color: #cdd6e1;
     border-radius: 50px;
   }
-  .hs-form-field input,
+  .hs-form-field input::placeholder {
+    color: #bbc0c5;
+  }
   .hs-form-field input:focus-visible {
-    border-color: #cdd6e1;
     outline: none;
-    border-radius: 50px;
   }
   form {
     position: relative;
@@ -1448,6 +1449,7 @@ body.dark-mode {
     position: absolute;
     top: 0;
     right: 0;
+    z-index: 10;
     border-radius: 50px;
   }
   .hs-submit input[type='submit'].hs-button {
@@ -1471,10 +1473,10 @@ body.dark-mode {
     right: calc(100% + 10px);
     content: '';
   }
+  .hs_error_rollup {
+    display: none;
+  }
   &.newsletterOnSnaps {
-    .hs_error_rollup {
-      display: none;
-    }
     .hs-form-field input {
       height: 52px;
       @media (max-width: 767px) {
@@ -1500,6 +1502,7 @@ body.dark-mode {
         top: inherit;
       }
     }
+
     @media (max-width: 767px) {
       .hs-form-field {
         margin-bottom: 8px;
