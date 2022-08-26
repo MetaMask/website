@@ -26,7 +26,14 @@ const HubspotForm = props => {
       )
       hsEmail.appendChild(hsSubmit)
     }
-    return
+
+    if (customClass.includes('newsletterOn')) {
+      const hsEmailInput = document.querySelector('.hs-email input')
+      if(hsEmailInput) {
+        hsEmailInput.setAttribute('placeholder', 'Email address')
+      }
+    }
+    return true
   }
 
   return (

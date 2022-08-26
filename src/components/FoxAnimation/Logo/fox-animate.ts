@@ -10,8 +10,8 @@ const K_ROT_DAMPING = 0.4
 const K_POS_RECOVER = 0.1
 const K_ROT_RECOVER = 0.1
 
-const NOISE_MAG = 8
-const NOISE_SCALE = 0.005
+const NOISE_MAG = 4
+const NOISE_SCALE = 0.008
 const WAVE_FREQ = 0.012
 
 function allocBuffer(N: number, stride: number): any {
