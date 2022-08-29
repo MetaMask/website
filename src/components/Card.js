@@ -144,6 +144,14 @@ const CardInner = styled(Link)`
   display: block;
   color: ${({ theme }) => theme.text.body} !important;
   
+  .theme-dark & {
+    color: #222222 !important;
+
+    .dark-mode & {
+      background-color: #1b1b1b;
+    }
+  }
+  
   .columnTypetag & {
     padding: 15px 24px;
   }
@@ -200,7 +208,7 @@ const CardInner = styled(Link)`
         }
       }
     `
-      : ''}
+      : ``}
 
   ${({ imageMobile, theme }) =>
     imageMobile

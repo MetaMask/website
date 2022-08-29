@@ -12,7 +12,7 @@ import ContextClientSide from '../Context/ContextClientSide'
 import Context from '../Context/ContextPage'
 import Loadable from '@loadable/component'
 
-const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
+const FoxAnimation = Loadable(() => import('./FoxAnimation/'))
 
 const HeroContainerComponent = props => {
   const {
@@ -52,6 +52,7 @@ const HeroContainerComponent = props => {
   const isFlask = pathname === '/flask/'
   const isInstitutions = pathname === '/institutions/'
   const isInstitutionalChild =
+    pathname === '/institutions/daos/' ||
     pathname === '/institutions/portfolio/' ||
     pathname === '/institutions/compliance/' ||
     pathname === '/institutions/nft/'
@@ -168,7 +169,7 @@ const HeroContainerComponent = props => {
               isHome={isHome}
               headlineBorderBottom={headlineBorderBottom}
               className={classnames({
-                heroMobileOverlayContent: !backgroundImage,
+                heroMobileOverlayContent: !backgroundImage && !sideImageFoxAnimation,
               })}
               center={!sideImageFlex && !isHome}
               sideImageFlex={sideImageFlex}
@@ -246,11 +247,10 @@ const HeroContainerComponent = props => {
               <HeroSideImage
                 sideImageFlex={sideImageFlex}
                 isStyleHubspot={isStyleHubspot}
+                sideImageFoxAnimation={sideImageFoxAnimation}
                 isFlask={isFlask}
               >
-                {sideImageFoxAnimation ? (
-                  <LogoAnimation logoType={'fox'} />
-                ) : null}
+                {sideImageFoxAnimation ? <FoxAnimation /> : null}
                 {!sideImageFoxAnimation &&
                 (isStyleHubspot || sideImageFlex || isFlask) ? (
                   <Image
@@ -318,6 +318,7 @@ const HeroContainer = styled(Section)`
   justify-content: center;
   min-width: 100%;
   transition: all 0.5s ease;
+  overflow: hidden;
   &.custom-newsHero + div{
     padding-top: 64px !important;
     padding-bottom: 0;
@@ -597,6 +598,8 @@ const HeroImageTextContainer = styled.div`
   display: block;
   position: relative;
   transition: all 0.5s ease;
+  z-index: 1;
+  
   .scrolled.custom-newsHero &{
     flex-direction: row;
     justify-content: space-between;
@@ -723,10 +726,9 @@ const HeroTitle = styled.h1`
   `
       : ''}
   
-  .titleFontSize60 & {
+  .titleFontSize64 & {
     @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
-      font-size: 60px;
-      max-width: 600px;
+      font-size: 64px;
     }
   }
   
@@ -767,17 +769,20 @@ const HeroDescription = styled.div`
       }
     }
   }
+
   .scrolled.custom-newsHero & {
     p {
       margin-bottom: 0;
     }
     margin-bottom: 0;
   }
+
   .contentMaxWidth480 & {
     @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
       max-width: 480px;
     }
   }
+
   ${({ isFaq }) =>
     isFaq
       ? `
@@ -807,7 +812,7 @@ const HeroSideImage = styled.div`
   `
       : ''}
 
-  ${({ isFlask, theme }) =>
+  ${({ isFlask }) =>
     isFlask
       ? `
     height: auto;
@@ -816,6 +821,7 @@ const HeroSideImage = styled.div`
     
   `
       : ''}
+  
   .sideImageOverflow &,
   .sideImageOverflowRight & {
     img {
@@ -826,15 +832,16 @@ const HeroSideImage = styled.div`
     @media (min-width: ${({ theme }) =>
       theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
   theme.device.twoKResolutionMax}) {
-      min-width: 62%;
-    }
+        min-width: 62%;
+      }
 
     @media (max-width: ${({ theme }) =>
       theme.device.tablet}) and (max-width: ${({ theme }) =>
   theme.device.miniDesktopMediaMax}) {
-      min-width: 60%;
-    } 
-  }
+        min-width: 60%;
+      } 
+    }
+  
   .sideImageFlex45 & {
     @media (min-width: ${({ theme }) => theme.device.desktop}) {
       width: 45%;
@@ -846,6 +853,7 @@ const HeroSideImage = styled.div`
       width: 40%;
     }
   }
+  
   .sideImageFlex35 & {
     @media (min-width: ${({ theme }) => theme.device.desktop}) {
       width: 35%;
@@ -857,14 +865,23 @@ const HeroSideImage = styled.div`
       width: 100%;
     }
   }
+  
   @media (min-width: ${({ theme }) => theme.device.desktop}) {
     padding: 0 !important;
   }
+  
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     height: 220px;
     margin-bottom: 10px;
     padding-bottom: 0;
     width: 100%;
+
+    ${({ sideImageFoxAnimation }) =>
+      sideImageFoxAnimation
+        ? `
+        height: 320px !important;
+    `
+        : ''}
   }
 `
 

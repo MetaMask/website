@@ -79,6 +79,14 @@ const Wrapper = styled.div`
   &.theme-dark {
     font-size: 18px;
     line-height: 25px;
+    background: #f2f4f6;
+    color: #222;
+
+    .dark-mode & {
+      background: #121212;
+      color: #fff;
+    }
+
     a:not(.button) {
       color: ${({ theme }) => theme.linkColor};
     }
