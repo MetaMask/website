@@ -10,7 +10,7 @@ const Image = props => {
   if (!urlImg) return null
   if (link) {
     return (
-      <LinkImage to={link}>
+      <LinkImage newTab to={link}>
         <img
           loading={'lazy'}
           decoding="async"
