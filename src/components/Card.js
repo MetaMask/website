@@ -266,19 +266,17 @@ const ImageSrc = styled(Image)`
 `
 
 const Inner = styled.div`
-  display: block;
+  display: flex;
   ${({ isCtaType }) =>
     isCtaType
       ? `
-    display: flex;
-    align-items: center;
+      align-items: center;
   `
-      : ''}
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+    : `
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  `}
 `
 const Title = styled.div`
   font-weight: 700;
