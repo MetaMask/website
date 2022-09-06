@@ -35,6 +35,7 @@ const CTA = props => {
     eventCategory,
     eventLabel,
     hubSpotForm,
+    embedHTML,
     buttonSecondary,
     socialLink,
   } = props
@@ -68,6 +69,10 @@ const CTA = props => {
   }
   const handleCustomClick = e => {
     if (hubSpotForm) {
+      setShowPopup(true)
+      return
+    }
+    if (embedHTML) {
       setShowPopup(true)
       return
     }
@@ -208,6 +213,20 @@ const CTA = props => {
           })}
         </Popup>
       ) : null}
+      {embedHTML ? (
+        <Popup
+          width={'800px'}
+          showPopup={showPopup}
+          onClosePopup={onClosePopup}
+          hideCloseIcon
+        >
+          <EmbedHtmlPopup
+            dangerouslySetInnerHTML={{
+              __html: embedHTML.embed.embed,
+            }}
+          ></EmbedHtmlPopup>
+        </Popup>
+      ) : null}
     </>
   )
 }
@@ -255,6 +274,7 @@ const CTAContainer = styled.div`
     justify-content: center;
   }
 `
+
 const LinkTitle = styled.span`
   display: flex;
   align-items: center;
@@ -448,4 +468,30 @@ const BrowserName = styled.div`
   display: block;
   margin-top: 16px;
   color: ${({ theme }) => theme.text.body};
+`
+
+const EmbedHtmlPopup = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+
+  &:before {
+    content: '';
+    display: block;
+    padding-bottom: 56.25%;
+  }
+
+  iframe {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0 !important;
+  }
 `
