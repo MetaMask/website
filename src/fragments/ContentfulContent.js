@@ -429,6 +429,9 @@ export const ContentfulCtaFields = graphql`
     hubSpotForm {
       ...ContentfulHubSpotFormFields
     }
+    embedHTML {
+      ...ContentfulEmbedFields
+    }
     socialLink
     downloadBrowsers {
       internal {

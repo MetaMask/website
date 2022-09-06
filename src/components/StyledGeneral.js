@@ -93,5 +93,9 @@ export const EyebrowStyle = styled.div`
   font-weight: 700;
   letter-spacing: 5px;
   margin-bottom: 16px;
-  font-size: 16px;
+
+  .eyebrowSize13 & {
+    font-size: 13px;
+    line-height: 1.1;
+  }
 `
