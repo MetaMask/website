@@ -24,6 +24,7 @@ const ContentfulCta = props => {
       eventCategory,
       eventLabel,
       hubSpotForm,
+      embedHTML,
       buttonSecondary,
       socialLink,
     },
@@ -58,6 +59,7 @@ const ContentfulCta = props => {
       eventCategory={eventCategory}
       eventLabel={eventLabel}
       hubSpotForm={hubSpotForm}
+      embedHTML={embedHTML}
       buttonSecondary={buttonSecondary}
       socialLink={socialLink}
     />
@@ -78,6 +80,7 @@ ContentfulCta.propTypes = {
     eventCategory: PropTypes.string,
     eventLabel: PropTypes.string,
     hubSpotForm: PropTypes.object,
+    embedHTML: PropTypes.object,
     buttonSecondary: PropTypes.bool,
   }),
 }

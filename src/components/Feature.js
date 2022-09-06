@@ -4,7 +4,7 @@ import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import ScrollAnimation from 'react-animate-on-scroll'
 import classnames from 'classnames'
-import { Section } from './StyledGeneral'
+import { EyebrowStyle, Section } from './StyledGeneral'
 import ImageItem from './Image'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import ContextClientSide from '../Context/ContextClientSide'
@@ -47,7 +47,7 @@ const FeatureComponent = props => {
   const isContentAlignVertical = contentAlignment === 'vertical'
   const innerContent = (
     <>
-      {eyebrow ? <Eyebrow className="hidden-mobile">{eyebrow}</Eyebrow> : null}
+      {eyebrow ? <EyebrowStyle className="hidden-mobile">{eyebrow}</EyebrowStyle> : null}
       {headline ? (
         <Headline
           hasEyebrow={eyebrow}
@@ -136,9 +136,7 @@ const FeatureComponent = props => {
           hideImageOnMobile={hideImageOnMobile}
           sectionPadding={sectionPadding}
         >
-          {eyebrow ? (
-            <Eyebrow className="hidden-desktop">{eyebrow}</Eyebrow>
-          ) : null}
+          {eyebrow ? <EyebrowStyle className="hidden-desktop">{eyebrow}</EyebrowStyle> : null}
           {image || imageMobile ? (
             <SideImage>
               <Image>
@@ -455,17 +453,7 @@ const CTAWrapper = styled.div`
     }
   }
 `
-const Eyebrow = styled.div`
-  color: #f6851b;
-  font-weight: 700;
-  letter-spacing: 5px;
-  margin-bottom: 16px;
-  
-  .eyebrowSize13 & {
-    font-size: 13px;
-    line-height: 1.1;
-  }
-`
+
 const FeatureItems = styled.div`
   display: block;
   margin-top: 32px;

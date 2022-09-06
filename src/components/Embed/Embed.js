@@ -74,15 +74,9 @@ export default EmbedHtml
 
 EmbedHtml.propTypes = {
   moduleConfig: PropTypes.shape({
-    displayTitle: PropTypes.bool,
-    title: PropTypes.string,
-    embed: PropTypes.oneOfType([
-      PropTypes.shape({
-        embed: PropTypes.string.isRequired,
-      }),
-      PropTypes.string,
-    ]),
-    moduleId: PropTypes.string,
+    html: PropTypes.string,
+    playOnPopup: PropTypes.bool,
+    thumbnailUrl: PropTypes.string,
   }),
 }
 
