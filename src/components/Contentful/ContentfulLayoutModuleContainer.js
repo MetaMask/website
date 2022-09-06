@@ -61,6 +61,7 @@ const ContentfulModuleContainer = props => {
       backgroundSize={backgroundSize}
       className={classnames({
         noPaddingBottom: noPaddingBottom,
+        [customClass]: customClass,
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
     >
@@ -188,8 +189,8 @@ const SideImage = styled.div`
   width: 100%;
 
   @media (min-width: ${({ theme }) =>
-      theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
-      theme.device.twoKResolutionMax}) {
+    theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
+    theme.device.twoKResolutionMax}) {
     margin-top: 0;
     width: 33.33%;
 
@@ -246,12 +247,19 @@ const BackgroundSection = styled.div`
 
 const Container = styled(Section)`
   position: relative;
+  
   ${({ bgUrl }) =>
     bgUrl
       ? ` 
     z-index: 3;
    `
       : ''}
+
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    &.mobileSectionBottom0 {
+      padding-bottom: 0;
+    }
+  }
 `
 
 const Title = styled(SectionTitle)`
@@ -324,6 +332,10 @@ const ContentInfo = styled.div`
   `
       : ''}
 
+  .contentInfoBottom0 & {
+    margin-bottom: 0;
+  }
+  
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     margin-bottom: 24px;
     text-align: center;
