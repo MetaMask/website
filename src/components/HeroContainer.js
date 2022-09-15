@@ -244,7 +244,11 @@ const HeroContainerComponent = props => {
                   />
                 </HeroSideImage>
               ) : null}
-              {isSDK ? (<ConnectMetaMask></ConnectMetaMask>) : null}
+              {isSDK && (
+                  <HeroConnectCTA>
+                    <ConnectMetaMask></ConnectMetaMask>
+                  </HeroConnectCTA>
+              )}
               {description && (
                 <HeroDescription isFaq={isFaq}>
                   <div dangerouslySetInnerHTML={{ __html: description }} />
@@ -765,6 +769,11 @@ const HeroTitle = styled.h1`
     font-size: 34px !important;
     line-height: 43px;
   }
+`
+const HeroConnectCTA = styled.div`
+  display: block;
+  margin-top: 56px;
+  margin-bottom: 24px;
 `
 
 const HeroDescription = styled.div`
