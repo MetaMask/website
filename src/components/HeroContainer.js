@@ -244,7 +244,7 @@ const HeroContainerComponent = props => {
                 </HeroSideImage>
               ) : null}
               {description && (
-                <HeroDescription isFaq={isFaq} isSDK={isSDK}>
+                <HeroDescription isFaq={isFaq}>
                   <div dangerouslySetInnerHTML={{ __html: description }} />
                 </HeroDescription>
               )}
@@ -449,6 +449,13 @@ const HeroContentContainer = styled.div`
     }
   `
       : ''}
+
+  ${({ isSDK }) =>
+    isSDK
+     ? `
+    margin-bottom: 64px;
+  `
+  : ''}
 
   ${({ contentAlignment }) =>
     contentAlignment === 'center'
@@ -807,12 +814,6 @@ const HeroDescription = styled.div`
   `
       : ''}
   
-  ${({ isSDK }) =>
-    isSDK
-      ? `
-    margin-bottom: 96px;
-  `
-   : ''}
 `
 
 const HeroSideImage = styled.div`
