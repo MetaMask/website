@@ -852,7 +852,7 @@ const HeroSideImage = styled.div`
       ? `
     height: auto;
     margin-top: 24px;
-    margin-bottom: 56px;
+    margin-bottom: 24px;
     width: 100%;
     
   `
