@@ -89,7 +89,7 @@ export const IconCloseModal = styled.span`
 `
 
 export const EyebrowStyle = styled.div`
-  color: #f6851b;
+  color: ${({ theme }) => theme.orange};
   font-weight: 700;
   letter-spacing: 5px;
   margin-bottom: 16px;

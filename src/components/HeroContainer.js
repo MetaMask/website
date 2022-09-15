@@ -50,6 +50,7 @@ const HeroContainerComponent = props => {
   const isHome = pathname === '/'
   const isAbout = pathname === '/about/'
   const isFlask = pathname === '/flask/'
+  const isSDK = pathname === '/sdk/'
   const isInstitutions = pathname === '/institutions/'
   const isInstitutionalChild =
     pathname === '/institutions/daos/' ||
@@ -149,7 +150,7 @@ const HeroContainerComponent = props => {
             isStyleCenterSimple={isStyleCenterSimple}
             contentAlignment={contentAlignment}
             bgSrc={
-              !isStyleHubspot && !sideImageFlex && !isFlask
+              !isStyleHubspot && !sideImageFlex && !isFlask && !isSDK
                 ? isDarkMode && sideImageDarkModeUrl
                   ? sideImageDarkModeUrl
                   : sideImageUrl
@@ -161,6 +162,7 @@ const HeroContainerComponent = props => {
             isCustody={isCustody}
             isInstitutions={isInstitutions}
             isFlask={isFlask}
+            isSDK={isSDK}
             isInstitutionalChild={isInstitutionalChild}
             isThankYou={isThankYou}
           >
@@ -213,7 +215,7 @@ const HeroContainerComponent = props => {
                   )}
                 </EyebrowWrapper>
               ) : null}
-              {eyebrow ? <EyebrowText>{eyebrow}</EyebrowText> : null}
+              {eyebrow ? <EyebrowText isSDK={isSDK}>{eyebrow}</EyebrowText> : null}
               {headline && (
                 <HeroTitle
                   headlineBorderBottom={headlineBorderBottom}
@@ -221,17 +223,32 @@ const HeroContainerComponent = props => {
                   fontSize={heroTitleFontsize}
                   isFaq={isFaq}
                   isFlask={isFlask}
+                  isSDK={isSDK}
                   ref={scrollRef}
                 >
                   <div dangerouslySetInnerHTML={{ __html: headline }} />
                 </HeroTitle>
               )}
+              {sideImage && isSDK && !sideImageFoxAnimation ? (
+                <HeroSideImage
+                  sideImageFlex={sideImageFlex}
+                  isSDK={isSDK}
+                >
+                  <Image
+                    image={
+                      isDarkMode && !isEmpty(sideImageDarkMode)
+                        ? sideImageDarkMode
+                        : sideImage
+                    }
+                  />
+                </HeroSideImage>
+              ) : null}
               {description && (
-                <HeroDescription isFaq={isFaq}>
+                <HeroDescription isFaq={isFaq} isSDK={isSDK}>
                   <div dangerouslySetInnerHTML={{ __html: description }} />
                 </HeroDescription>
               )}
-              {!isEmpty(ctas) && !isFlask ? (
+              {!isEmpty(ctas) && !isFlask && !isSDK ? (
                 <HeroCTA>
                   {ctas.map(cta =>
                     contentfulModuleToComponent({
@@ -243,7 +260,7 @@ const HeroContainerComponent = props => {
               ) : null}
               {hubspotWrapper ? hubspotWrapper : null}
             </HeroImageTextContainer>
-            {sideImage || sideImageFoxAnimation ? (
+            {(sideImage || sideImageFoxAnimation) && !isSDK ? (
               <HeroSideImage
                 sideImageFlex={sideImageFlex}
                 isStyleHubspot={isStyleHubspot}
@@ -263,8 +280,8 @@ const HeroContainerComponent = props => {
                 ) : null}
               </HeroSideImage>
             ) : null}
-            {!isEmpty(ctas) && isFlask ? (
-              <HeroCTA isFlask={isFlask}>
+            {!isEmpty(ctas) && (isFlask || isSDK) ? (
+              <HeroCTA>
                 {ctas.map(cta =>
                   contentfulModuleToComponent({
                     ...cta,
@@ -704,8 +721,8 @@ const HeroTitle = styled.h1`
   `
       : ''}
   
-  ${({ isFlask }) =>
-    isFlask
+  ${({ isFlask, isSDK }) =>
+    isFlask || isSDK
       ? `
     font-size: 50px !important;
     font-weight: bold;
@@ -789,6 +806,13 @@ const HeroDescription = styled.div`
     color: #727272;
   `
       : ''}
+  
+  ${({ isSDK }) =>
+    isSDK
+      ? `
+    margin-bottom: 96px;
+  `
+   : ''}
 `
 
 const HeroSideImage = styled.div`
@@ -821,6 +845,17 @@ const HeroSideImage = styled.div`
     
   `
       : ''}
+
+  ${({ isSDK }) =>
+    isSDK
+      ? `
+    height: auto;
+    margin-top: 24px;
+    margin-bottom: 56px;
+    width: 100%;
+    
+  `
+ : ''}
   
   .sideImageOverflow &,
   .sideImageOverflowRight & {
@@ -988,6 +1023,13 @@ const EyebrowText = styled.div`
   font-weight: bold;
   text-transform: uppercase;
   color: ${({ theme }) => theme.eyebrowHero};
+
+  ${({ isSDK, theme }) =>
+    isSDK
+      ? `
+        color: ${theme.orange};
+    `
+    : ''}
 `
 
 const BackgroundImageContain = styled.div`
