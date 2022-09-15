@@ -11,6 +11,7 @@ import isEmpty from 'lodash/isEmpty'
 import ContextClientSide from '../Context/ContextClientSide'
 import Context from '../Context/ContextPage'
 import Loadable from '@loadable/component'
+import ConnectMetaMask from './ConnectMetaMask'
 
 const FoxAnimation = Loadable(() => import('./FoxAnimation/'))
 
@@ -266,12 +267,13 @@ const HeroContainerComponent = props => {
                   </HeroSideImage>
                 </HeightSlide>
               ) : null}
+              {isSDK ? (<ConnectMetaMask></ConnectMetaMask>) : null}
               {description && (
                 <HeroDescription isFaq={isFaq}>
                   <div dangerouslySetInnerHTML={{ __html: description }} />
                 </HeroDescription>
               )}
-              {!isEmpty(ctas) && !isFlask && !isSDK ? (
+              {!isEmpty(ctas) && !isFlask ? (
                 <HeroCTA>
                   {ctas.map(cta =>
                     contentfulModuleToComponent({
@@ -303,7 +305,7 @@ const HeroContainerComponent = props => {
                 ) : null}
               </HeroSideImage>
             ) : null}
-            {!isEmpty(ctas) && (isFlask || isSDK) ? (
+            {!isEmpty(ctas) && isFlask ? (
               <HeroCTA>
                 {ctas.map(cta =>
                   contentfulModuleToComponent({
@@ -881,7 +883,7 @@ const HeroSideImage = styled.div`
       ? `
     height: auto;
     margin-top: 24px;
-    margin-bottom: 24px;
+    margin-bottom: 56px;
     width: 100vw;
     position: absolute;
     left: 0;
