@@ -32,6 +32,7 @@ const StyledCard = props => {
     backgroundColor,
     backgroundImage,
     backgroundImageMobile,
+    customClass,
     imageMargin,
     layoutType,
     hubSpotForm,
@@ -60,7 +61,7 @@ const StyledCard = props => {
   const isCtaType = layoutType === 'cta'
 
   return (
-    <Card className="moduleCardWrapper" isCtaType={isCtaType}>
+    <Card className='moduleCardWrapper' isCtaType={isCtaType}>
       <CardInner
         to={link}
         newTab={newTab}
@@ -69,6 +70,7 @@ const StyledCard = props => {
         imageMobile={backgroundImageMobile}
         className={classnames('cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
+          [customClass]: customClass,
         })}
       >
         {image ? (
@@ -144,6 +146,16 @@ const CardInner = styled(Link)`
   display: block;
   color: ${({ theme }) => theme.text.body} !important;
   
+  &.borderPink {
+    border: 2px solid #FFB0EB;
+  }
+  &.borderYellow {
+    border: 2px solid #FFD33D;
+  }
+  &.borderBlue {
+    border: 2px solid #037DD6;
+  }
+
   .theme-dark & {
     color: #222222 !important;
 
@@ -295,6 +307,13 @@ const Description = styled.div`
 
   p:last-child {
     margin-bottom: 0;
+  }
+  ul {
+    list-style: none;
+    margin-bottom: 0;
+    &.dark-mode {
+      background-color: #1b1b1b;
+    }
   }
 `
 const ArrowItem = styled.div`

@@ -405,6 +405,7 @@ export const ContentfulCardFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
+    customClass
     layoutType
     layoutSize
     contentAlignment
