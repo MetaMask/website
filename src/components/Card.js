@@ -311,9 +311,14 @@ const Description = styled.div`
   ul {
     list-style: none;
     margin-bottom: 0;
-    &.dark-mode {
-      background-color: #1b1b1b;
-    }
+    li {
+      margin-bottom: 8px;
+      a {
+        color: ${({ theme }) => theme.darkBlue};
+        font-size: 18px;
+        line-height: 25px;
+      }
+    } 
   }
 `
 const ArrowItem = styled.div`
