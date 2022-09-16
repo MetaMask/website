@@ -115,6 +115,25 @@ const HeroContainerComponent = props => {
     }
   }, [])
 
+
+  const sdkRef = React.useRef(null);
+  const [height, setHeight] = React.useState(0);
+
+  React.useEffect(() => {
+    if (isSDK && sdkRef.current?.clientHeight) {
+      handleWindowSizeChange()
+      window.addEventListener('resize', handleWindowSizeChange)
+      return () => {
+        window.removeEventListener('resize', handleWindowSizeChange)
+      }
+    }
+  }, [sdkRef.current?.clientHeight])
+
+  const handleWindowSizeChange = () => {
+    setHeight(sdkRef.current.clientHeight + 48)
+  }
+  
+  // console.log(height);
   return (
     <>
       {showFavIcon ? (
@@ -176,6 +195,7 @@ const HeroContainerComponent = props => {
               })}
               center={!sideImageFlex && !isHome}
               sideImageFlex={sideImageFlex}
+              isSDK={isSDK}
             >
               {eyebrowLogo ? (
                 <EyebrowWrapper
@@ -231,18 +251,21 @@ const HeroContainerComponent = props => {
                 </HeroTitle>
               )}
               {sideImage && isSDK && !sideImageFoxAnimation ? (
-                <HeroSideImage
-                  sideImageFlex={sideImageFlex}
-                  isSDK={isSDK}
-                >
-                  <Image
-                    image={
-                      isDarkMode && !isEmpty(sideImageDarkMode)
-                        ? sideImageDarkMode
-                        : sideImage
-                    }
-                  />
-                </HeroSideImage>
+                <HeightSlide height={height} isSDK={isSDK}>
+                  <HeroSideImage
+                    sideImageFlex={sideImageFlex}
+                    isSDK={isSDK}
+                    ref={sdkRef}
+                  >
+                    <Image
+                      image={
+                        isDarkMode && !isEmpty(sideImageDarkMode)
+                          ? sideImageDarkMode
+                          : sideImage
+                      }
+                    />
+                  </HeroSideImage>
+                </HeightSlide>
               ) : null}
               {isSDK ? (<ConnectMetaMask></ConnectMetaMask>) : null}
               {description && (
@@ -625,7 +648,7 @@ const HeroImageTextContainer = styled.div`
   position: relative;
   transition: all 0.5s ease;
   z-index: 1;
-  
+
   .scrolled.custom-newsHero &{
     flex-direction: row;
     justify-content: space-between;
@@ -680,6 +703,12 @@ const HeroImageTextContainer = styled.div`
     text-align: center;
   }
 
+  ${({ isSDK }) =>
+    isSDK
+      ? `
+    position: inherit
+  `
+  : ''}
 `
 
 const HeroTitle = styled.h1`
@@ -855,8 +884,12 @@ const HeroSideImage = styled.div`
     height: auto;
     margin-top: 24px;
     margin-bottom: 56px;
-    width: 100%;
-    
+    width: 100vw;
+    position: absolute;
+    left: 0;
+    img{
+      width: 100%;
+    }
   `
  : ''}
   
@@ -921,6 +954,18 @@ const HeroSideImage = styled.div`
     `
         : ''}
   }
+`
+
+const HeightSlide = styled.div`
+  display: block;
+
+  ${({ height }) =>
+    height
+    ? `
+    height: ${height}px
+  `
+  : ''}
+  
 `
 
 const HeroCTA = styled.div`
