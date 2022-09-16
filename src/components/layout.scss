@@ -804,6 +804,25 @@ input[type='submit'].hs-button {
 .fz-14 {
   font-size: 14px !important;
 }
+
+.fz-18-res-16 {
+  font-size: 18px !important;
+  line-height: 26px !important;
+  @media (max-width: 479px) {
+    font-size: 16px !important;
+    line-height: 22px !important;
+  }
+}
+
+.fz-18-res {
+  font-size: 18px !important;
+  line-height: 26px !important;
+  @media (max-width: 479px) {
+    font-size: 14px !important;
+    line-height: 18px !important;
+  }
+}
+
 .fz-20-res {
   font-size: 20px !important;
   line-height: 28px !important;
@@ -816,6 +835,7 @@ input[type='submit'].hs-button {
     line-height: 22px !important;
   }
 }
+
 .fz-24-res {
   font-size: 24px !important;
   line-height: 32px !important;
@@ -828,28 +848,26 @@ input[type='submit'].hs-button {
     line-height: 22px !important;
   }
 }
+
+.fz-26-res {
+  font-size: 26px !important;
+  line-height: 36px !important;
+  @media (max-width: 767px) {
+    font-size: 18px !important;
+    line-height: 26px !important;
+  }
+  @media (max-width: 479px) {
+    font-size: 16px !important;
+    line-height: 22px !important;
+  }
+}
+
 .fz-28-res {
   font-size: 28px !important;
   line-height: 45px !important;
   @media (max-width: 479px) {
     font-size: 18px !important;
     line-height: 26px !important;
-  }
-}
-.fz-18-res-16 {
-  font-size: 18px !important;
-  line-height: 26px !important;
-  @media (max-width: 479px) {
-    font-size: 16px !important;
-    line-height: 22px !important;
-  }
-}
-.fz-18-res {
-  font-size: 18px !important;
-  line-height: 26px !important;
-  @media (max-width: 479px) {
-    font-size: 14px !important;
-    line-height: 18px !important;
   }
 }
 
@@ -937,6 +955,7 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15;
 .btn-primary {
   background: #037dd6;
 }
+
 .fullwidth-mobile {
   @media (max-width: 479px) {
     width: 100%;
@@ -1644,5 +1663,18 @@ body.dark-mode {
   }
   .dark-mode .snapsLiveMetaMaskFlask &:after {
     background-image: url('/images/arrow-right-black.svg');
+  }
+}
+
+.beta-text {
+  color: #037DD6;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 32px;
+  margin-left: 10px;
+  position: absolute;
+
+  @media (max-width: 767px) {
+    line-height: 28px;
   }
 }
