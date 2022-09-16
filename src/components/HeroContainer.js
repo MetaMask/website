@@ -894,7 +894,7 @@ const HeroSideImage = styled.div`
     width: 100vw;
     position: absolute;
     left: 0;
-    img{
+    img {
       width: 100%;
     }
   `

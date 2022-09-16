@@ -188,7 +188,7 @@ const CTA = props => {
         <BrowserList>
           {Object.keys(downloadBrowsers).map(key => {
             const { link, icon, text } = downloadBrowsers[key]
-            if (['chrome', 'firefox', 'brave', 'edge'].includes(key)) {
+            if (['chrome', 'firefox', 'brave', 'edge', 'opera'].includes(key)) {
               return (
                 <BrowserItem key={text} to={link} newTab>
                   <Image src={icon} />
@@ -441,8 +441,9 @@ const BrowserList = styled.div`
   }
 
   & > * {
-    width: 25%;
-    padding: 20px;
+    width: 20%;
+    padding: 16px;
+    
     @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
       width: 100%;
       padding: 12px;

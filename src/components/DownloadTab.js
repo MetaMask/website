@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import Image from './Image'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
-import { browserName, isMobile } from 'react-device-detect'
+import { browserName, isMobile, isOpera } from 'react-device-detect'
 
 const TabContentDownload = props => {
   const {
@@ -13,6 +13,7 @@ const TabContentDownload = props => {
     ctaChrome,
     ctaFirefox,
     ctaEdge,
+    ctaOpera,
     ctaChromeBrowser,
     ctaFirefoxBrowser,
     id,
@@ -22,12 +23,15 @@ const TabContentDownload = props => {
   if (id === 'browser') {
     const isChrome = browserName === 'Chrome' || browserName === 'Brave'
     const isFirefox = browserName === 'Firefox'
+    const isOpera = browserName === 'Opera'
     const isEdge = browserName === 'Edge'
 
     if (isChrome || isMobile) {
       ctasDownload = [ctaChrome]
     } else if (isFirefox) {
       ctasDownload = [ctaFirefox]
+    } else if (isOpera) {
+      ctasDownload = [ctaOpera]
     } else if (isEdge) {
       ctasHeading =
         'We are aware that Edge is particularly slow at approving updates to MetaMask. For the latest version, we recommend using Firefox or Chrome.'
