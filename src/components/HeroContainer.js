@@ -115,7 +115,6 @@ const HeroContainerComponent = props => {
     }
   }, [])
 
-
   const sdkRef = React.useRef(null);
   const [height, setHeight] = React.useState(0);
 
@@ -132,8 +131,7 @@ const HeroContainerComponent = props => {
   const handleWindowSizeChange = () => {
     setHeight(sdkRef.current.clientHeight + 48)
   }
-  
-  // console.log(height);
+
   return (
     <>
       {showFavIcon ? (
@@ -267,7 +265,11 @@ const HeroContainerComponent = props => {
                   </HeroSideImage>
                 </HeightSlide>
               ) : null}
-              {isSDK ? (<ConnectMetaMask></ConnectMetaMask>) : null}
+              {isSDK && (
+                  <HeroConnectCTA>
+                    <ConnectMetaMask></ConnectMetaMask>
+                  </HeroConnectCTA>
+              )}
               {description && (
                 <HeroDescription isFaq={isFaq}>
                   <div dangerouslySetInnerHTML={{ __html: description }} />
@@ -795,6 +797,11 @@ const HeroTitle = styled.h1`
     line-height: 43px;
   }
 `
+const HeroConnectCTA = styled.div`
+  display: block;
+  margin-top: 56px;
+  margin-bottom: 24px;
+`
 
 const HeroDescription = styled.div`
   display: block;
@@ -883,7 +890,7 @@ const HeroSideImage = styled.div`
       ? `
     height: auto;
     margin-top: 24px;
-    margin-bottom: 56px;
+    margin-bottom: 24px;
     width: 100vw;
     position: absolute;
     left: 0;
