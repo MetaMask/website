@@ -3,6 +3,7 @@ import React from 'react'
 import accessiBeScript from './lib/services/accessibe'
 import livePersonScript from './lib/services/live-person'
 import redirect from './lib/services/redirect'
+// import { MetaMaskProvider } from '@metamask/sdk-react'
 
 const HTML = props => {
   const {
@@ -42,24 +43,26 @@ const HTML = props => {
         />
       </head>
       <body {...bodyAttributes}>
-        {preBodyComponents}
-        <div
-          key={`body`}
-          id="___gatsby"
-          dangerouslySetInnerHTML={{ __html: body }}
-        />
-        {postBodyComponents}
-        {process.env.NODE_ENV === 'production' && (
-            <script
-              type="text/javascript"
-              dangerouslySetInnerHTML={{ __html: livePersonScript }}
-            />
-          ) && (
-            <script
-              type="text/javascript"
-              dangerouslySetInnerHTML={{ __html: accessiBeScript }}
-            />
-          )}
+        {/* <MetaMaskProvider> */}
+          {preBodyComponents}
+          <div
+            key={`body`}
+            id="___gatsby"
+            dangerouslySetInnerHTML={{ __html: body }}
+          />
+          {postBodyComponents}
+          {process.env.NODE_ENV === 'production' && (
+              <script
+                type="text/javascript"
+                dangerouslySetInnerHTML={{ __html: livePersonScript }}
+              />
+            ) && (
+              <script
+                type="text/javascript"
+                dangerouslySetInnerHTML={{ __html: accessiBeScript }}
+              />
+            )}
+        {/* </MetaMaskProvider> */}
       </body>
     </html>
   )
