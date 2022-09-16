@@ -1,13 +1,12 @@
 import React from 'react'
 import Button from './Button'
-
+// import { MetaMaskButton } from '@metamask/sdk-react'
 const ConnectMetaMask = props => {
   return (
-    <Button
-    text={'Connect with MetaMask'}
-    link={'#'}
-    fontSize={'20px'}
-  />)
+    // <MetaMaskButton>
+      <Button text={'Connect with MetaMask'} link={'#'} fontSize={'20px'} />
+    // </MetaMaskButton>
+  )
 }
 
 export default ConnectMetaMask
