@@ -20,6 +20,7 @@ const ContentfulModuleContainer = props => {
       displayHeadline,
       headlineAlignCenter,
       contentAlignCenter,
+      headlineMarginTop0,
       noPaddingBottom,
       modules,
       sectionPadding,
@@ -78,6 +79,7 @@ const ContentfulModuleContainer = props => {
                 {eyebrow ? <EyebrowStyle>{eyebrow}</EyebrowStyle> : null}
                 {headline && displayHeadline ? (
                   <Title
+                    headlineMarginTop0={headlineMarginTop0}
                     className={classnames({
                       'txt-center': headlineAlignCenter,
                     })}
@@ -146,6 +148,7 @@ ContentfulModuleContainer.propTypes = {
     backgroundImage: PropTypes.object,
     headlineAlignCenter: PropTypes.bool,
     contentAlignCenter: PropTypes.bool,
+    headlineMarginTop0: PropTypes.bool,
     displayHeadline: PropTypes.bool,
     noPaddingBottom: PropTypes.bool,
   }),
@@ -265,6 +268,9 @@ const Container = styled(Section)`
 const Title = styled(SectionTitle)`
   display: block;
   margin-bottom: 20px;
+
+  ${({ headlineMarginTop0 }) =>
+    headlineMarginTop0 ? 'margin-top: 0;' : ``}
 
   .storiesOnNewsDetail & {
     font-size: 40px;

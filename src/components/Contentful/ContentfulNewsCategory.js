@@ -40,7 +40,7 @@ function ContentfulNewsCategory(props) {
 
   let stories = data.stories?.nodes || []
   stories = stories.filter(({ categories }) =>
-    categories.some(
+    categories?.some(
       ({ contentful_id: categoryId }) => categoryId === contentful_id
     )
   )
