@@ -77,7 +77,7 @@ const Icon = styled.span`
       img {
         width: 28px;
         height: 28px;
-        margin: auto;
+        margin: auto !important;
       }
     `
       : `

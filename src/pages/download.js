@@ -24,11 +24,13 @@ const DownloadPage = props => {
       browser_firefox,
       browser_brave,
       browser_edge,
+      browser_opera,
       cta_chrome,
       cta_ios,
       cta_android,
       cta_firefox,
       cta_edge,
+      cta_opera,
       cta_chrome_browser,
       cta_firefox_browser,
     },
@@ -55,6 +57,11 @@ const DownloadPage = props => {
       cta: cta_edge,
       label: 'Edge',
     },
+    {
+      image: browser_opera,
+      cta: cta_opera,
+      label: 'Opera',
+    },
   ]
 
   const appExtensions = {
@@ -65,8 +72,9 @@ const DownloadPage = props => {
       ctaChrome: cta_chrome,
       ctaFirefox: cta_firefox,
       ctaEdge: cta_edge,
-      ctaChromeBrowser: cta_chrome_browser,
-      ctaFirefoxBrowser: cta_firefox_browser,
+      ctaOpera: cta_opera,
+      ctaChromeBrowser: cta_chrome_browser, // Show when the browser is not supported.
+      ctaFirefoxBrowser: cta_firefox_browser, // Show when the browser is not supported.
     },
     ios: {
       image: download_ios,
@@ -123,6 +131,9 @@ export const DownloadPageQuery = graphql`
     }
     cta_edge: contentfulCta(contentful_id: { eq: "5EWyZidEFFdMHvX2cTisje" }) {
       ...ContentfulCtaFields
+    }
+    cta_opera: contentfulCta(contentful_id: { eq: "5yNHtUxlS4DuImyCNQXJ1B" }) {
+        ...ContentfulCtaFields
     }
     cta_ios: contentfulCta(contentful_id: { eq: "6IujWp8Z8TSdB8fpBifwZQ" }) {
       ...ContentfulCtaFields
@@ -183,6 +194,15 @@ export const DownloadPageQuery = graphql`
       file {
         url
       }
+    }
+    browser_opera: contentfulAsset(
+        contentful_id: { eq: "3jXxCAi5Q93Lf5fE6zmuAG" }
+    ) {
+        title
+        description
+        file {
+            url
+        }
     }
     browser_edge: contentfulAsset(
       contentful_id: { eq: "2O0Uh2Nt1OciYoK96DscLF" }
