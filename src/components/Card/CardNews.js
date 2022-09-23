@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import Image from '../Image'
 import classnames from 'classnames'
 import Link from '../Link'
-import CTAAngleIcon from './CTAAngleIcon'
 
 /**
  * @name Card
@@ -14,54 +13,35 @@ import CTAAngleIcon from './CTAAngleIcon'
 
 const StyledCard = props => {
   const {
-    description,
-    image,
-    imageDarkMode,
-    link,
     title,
-    newTab,
-    backgroundColor,
-    backgroundImage,
-    backgroundImageMobile,
-    imageMargin,
-    layoutSize,
-    linkText,
-    isDarkMode,
+    image,
+    link,
+    description,
   } = props
 
   return (
     <Card className="moduleCardWrapper">
       <CardInner
         to={link}
-        newTab={newTab}
-        backgroundColor={backgroundColor}
-        image={backgroundImage}
-        imageMobile={backgroundImageMobile}
-        layoutSize={layoutSize}
-        className={classnames('custom-card-bg cardLink', {
-          [`bg-${backgroundColor}`]: backgroundColor,
-        })}
+        className={classnames('custom-card-bg cardLink')}
       >
         {image ? (
-          <ImageWrapper imageMargin={imageMargin} layoutSize={layoutSize}>
-            <ImageSrc
-              image={isDarkMode && imageDarkMode ? imageDarkMode : image}
-            />
-          </ImageWrapper>
+          <ImageInner>
+            <ImageWrapper>
+              <ImageSrc
+                image={image}
+              />
+            </ImageWrapper>
+          </ImageInner>
         ) : null}
-        <Inner>
-          {title ? <Title layoutSize={layoutSize}>{title}</Title> : null}
+        <ContentInner>
+          {title ? <Title>{title}</Title> : null}
           {description ? (
             <Description>
               <div dangerouslySetInnerHTML={{ __html: description }}></div>
             </Description>
           ) : null}
-          {linkText ? (
-            <CTAWrapper>
-              <CTAAngleIcon text={linkText} />
-            </CTAWrapper>
-          ) : null}
-        </Inner>
+        </ContentInner>
       </CardInner>
     </Card>
   )
@@ -92,70 +72,45 @@ const CardInner = styled(Link)`
       margin-left: 6px;
     }
   }
-  ${({ image }) =>
-    image
-      ? ` background-image: url(${image});
-      background-size: cover;
-      padding: 24px;
-    `
-      : ''}
-  ${({ imageMobile, theme }) =>
-    imageMobile
-      ? ` 
-      @media (max-width: ${theme.device.tabletMediaMax}){
-        background-image: url(${imageMobile});
-        background-position: center;
-      }
-    `
-      : ''}
+`
+
+const ImageInner = styled.div`
+  height: 0;
+  padding: 0 0 56%;
+  position: relative;
 `
 
 const ImageWrapper = styled.div`
-  min-height: 176px;
-  margin-bottom: 24px;
-  padding: 10px 16px;
+  display: block;
   border-radius: 12px;
-  body.light-mode &{
+  height: 100%;
+  max-width: 100%;
+  padding: 10px 16px;
+  position: absolute;
+  width: 100%;
+  
+  body.light-mode & {
     background: #F2F4F6;
   }
-  body.dark-mode &{
+  
+  body.dark-mode & {
     background: #F2F4F615;
   }
-  img {
-    height: 100%;
-    width: auto;
-    border-radius: 12px;
-    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
-      margin: 0 auto;
-    }
-  }
-
-  ${({ layoutSize }) =>
-    layoutSize === 'small'
-      ? `
-    height: 80px;
-  `
-      : null}
-
-  ${({ layoutSize, theme }) =>
-    `
-  @media (max-width: ${theme.device.mobileMediaMax}){
-    height: ${layoutSize === 'small' ? '80px' : '96px'};
-  }
-  `}
-    @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
-      height: auto;
-    }
 `
 
 const ImageSrc = styled(Image)`
+  border-radius: 12px;
   display: block;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 `
 
-const Inner = styled.div`
+const ContentInner = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 12px;
+  margin-top: 24px;
   min-height: 0;
   flex: 1;
   width: 100%;
@@ -170,20 +125,6 @@ const Title = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-
-  ${({ layoutSize }) =>
-    layoutSize === 'small'
-      ? `
-      font-size: 18px;
-  `
-      : null}
-
-  ${({ layoutSize, theme }) =>
-    `
-  @media (max-width: ${theme.device.mobileMediaMax}){
-    font-size: ${layoutSize === 'small' ? '16px' : '20px'};
-  }
-  `}
 `
 
 const Description = styled.div`
@@ -205,10 +146,4 @@ const Description = styled.div`
     color: #535a61;
   }
 `
-const CTAWrapper = styled.div`
-  display: block;
-  margin-top: auto;
-  &:hover {
-    opacity: 0.9;
-  }
-`
+

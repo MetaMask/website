@@ -59,8 +59,9 @@ const ContainerInner = styled.div`
 
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     max-width: 728px;
-    .scrolled.custom-newsHero & {
-      max-width: calc(728px + 200px);
+    
+    .news-page-content & {
+      max-width: 784px;
     }
   }
 
