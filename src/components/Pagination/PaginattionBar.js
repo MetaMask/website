@@ -87,7 +87,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   order: 1;
-  
+
   .newsCategoriesTab & {
     margin: 24px 0;
   }

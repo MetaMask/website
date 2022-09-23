@@ -133,7 +133,7 @@ export const DownloadPageQuery = graphql`
       ...ContentfulCtaFields
     }
     cta_opera: contentfulCta(contentful_id: { eq: "7l1t8JzfKGwk3OWiSp1L43" }) {
-        ...ContentfulCtaFields
+      ...ContentfulCtaFields
     }
     cta_ios: contentfulCta(contentful_id: { eq: "6IujWp8Z8TSdB8fpBifwZQ" }) {
       ...ContentfulCtaFields
@@ -196,13 +196,13 @@ export const DownloadPageQuery = graphql`
       }
     }
     browser_opera: contentfulAsset(
-        contentful_id: { eq: "1CHeQ1aJteDeBW8Dw3h4PN" }
+      contentful_id: { eq: "1CHeQ1aJteDeBW8Dw3h4PN" }
     ) {
-        title
-        description
-        file {
-            url
-        }
+      title
+      description
+      file {
+        url
+      }
     }
     browser_edge: contentfulAsset(
       contentful_id: { eq: "2O0Uh2Nt1OciYoK96DscLF" }

@@ -115,8 +115,8 @@ const HeroContainerComponent = props => {
     }
   }, [])
 
-  const sdkRef = React.useRef(null);
-  const [height, setHeight] = React.useState(0);
+  const sdkRef = React.useRef(null)
+  const [height, setHeight] = React.useState(0)
 
   React.useEffect(() => {
     if (isSDK && sdkRef.current?.clientHeight) {
@@ -189,7 +189,8 @@ const HeroContainerComponent = props => {
               isHome={isHome}
               headlineBorderBottom={headlineBorderBottom}
               className={classnames({
-                heroMobileOverlayContent: !backgroundImage && !sideImageFoxAnimation,
+                heroMobileOverlayContent:
+                  !backgroundImage && !sideImageFoxAnimation,
               })}
               center={!sideImageFlex && !isHome}
               sideImageFlex={sideImageFlex}
@@ -234,7 +235,9 @@ const HeroContainerComponent = props => {
                   )}
                 </EyebrowWrapper>
               ) : null}
-              {eyebrow ? <EyebrowText isSDK={isSDK}>{eyebrow}</EyebrowText> : null}
+              {eyebrow ? (
+                <EyebrowText isSDK={isSDK}>{eyebrow}</EyebrowText>
+              ) : null}
               {headline && (
                 <HeroTitle
                   headlineBorderBottom={headlineBorderBottom}
@@ -266,9 +269,9 @@ const HeroContainerComponent = props => {
                 </HeightSlide>
               ) : null}
               {isSDK && (
-                  <HeroConnectCTA>
-                    <ConnectMetaMask></ConnectMetaMask>
-                  </HeroConnectCTA>
+                <HeroConnectCTA>
+                  <ConnectMetaMask></ConnectMetaMask>
+                </HeroConnectCTA>
               )}
               {description && (
                 <HeroDescription isFaq={isFaq}>
@@ -479,10 +482,10 @@ const HeroContentContainer = styled.div`
 
   ${({ isSDK }) =>
     isSDK
-     ? `
+      ? `
     margin-bottom: 64px;
   `
-  : ''}
+      : ''}
 
   ${({ contentAlignment }) =>
     contentAlignment === 'center'
@@ -710,7 +713,7 @@ const HeroImageTextContainer = styled.div`
       ? `
     position: inherit
   `
-  : ''}
+      : ''}
 `
 
 const HeroTitle = styled.h1`
@@ -852,7 +855,6 @@ const HeroDescription = styled.div`
     color: #727272;
   `
       : ''}
-  
 `
 
 const HeroSideImage = styled.div`
@@ -899,7 +901,7 @@ const HeroSideImage = styled.div`
       width: 100%;
     }
   `
- : ''}
+      : ''}
   
   .sideImageOverflow &,
   .sideImageOverflowRight & {
@@ -969,11 +971,10 @@ const HeightSlide = styled.div`
 
   ${({ height }) =>
     height
-    ? `
+      ? `
     height: ${height}px
   `
-  : ''}
-  
+      : ''}
 `
 
 const HeroCTA = styled.div`
@@ -1085,7 +1086,7 @@ const EyebrowText = styled.div`
       ? `
         color: ${theme.orange};
     `
-    : ''}
+      : ''}
 `
 
 const BackgroundImageContain = styled.div`

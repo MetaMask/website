@@ -47,7 +47,9 @@ const FeatureComponent = props => {
   const isContentAlignVertical = contentAlignment === 'vertical'
   const innerContent = (
     <>
-      {eyebrow ? <EyebrowStyle className="hidden-mobile">{eyebrow}</EyebrowStyle> : null}
+      {eyebrow ? (
+        <EyebrowStyle className="hidden-mobile">{eyebrow}</EyebrowStyle>
+      ) : null}
       {headline ? (
         <Headline
           hasEyebrow={eyebrow}
@@ -136,7 +138,9 @@ const FeatureComponent = props => {
           hideImageOnMobile={hideImageOnMobile}
           sectionPadding={sectionPadding}
         >
-          {eyebrow ? <EyebrowStyle className="hidden-desktop">{eyebrow}</EyebrowStyle> : null}
+          {eyebrow ? (
+            <EyebrowStyle className="hidden-desktop">{eyebrow}</EyebrowStyle>
+          ) : null}
           {image || imageMobile ? (
             <SideImage>
               <Image>
@@ -234,13 +238,13 @@ const SideImage = styled.div`
   display: block;
   flex: 1;
   min-width: 0;
-  
+
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     .noPaddingBottom & {
       margin-bottom: 0 !important;
     }
   }
-  
+
   .snapsLiveMetaMaskFlask & {
     padding: 0;
   }

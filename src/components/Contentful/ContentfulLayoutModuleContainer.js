@@ -192,8 +192,8 @@ const SideImage = styled.div`
   width: 100%;
 
   @media (min-width: ${({ theme }) =>
-    theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
-    theme.device.twoKResolutionMax}) {
+      theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
+      theme.device.twoKResolutionMax}) {
     margin-top: 0;
     width: 33.33%;
 
@@ -269,8 +269,7 @@ const Title = styled(SectionTitle)`
   display: block;
   margin-bottom: 20px;
 
-  ${({ headlineMarginTop0 }) =>
-    headlineMarginTop0 ? 'margin-top: 0;' : ``}
+  ${({ headlineMarginTop0 }) => (headlineMarginTop0 ? 'margin-top: 0;' : ``)}
 
   .storiesOnNewsDetail & {
     font-size: 40px;
@@ -341,12 +340,12 @@ const ContentInfo = styled.div`
   .contentInfoBottom0 & {
     margin-bottom: 0;
   }
-  
+
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     margin-bottom: 24px;
     text-align: center;
   }
-  
+
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     padding-top: 0;
     .storiesOnNewsDetail & {
