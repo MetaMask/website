@@ -77,6 +77,7 @@ const Wrapper = styled.div`
   ${({ width }) => (width ? `width: ${width};` : 'min-width: 300px;')}
 
   &.newsletterOnNewsDetail {
+    margin-top: 56px;
     height: 410px;
     position: relative;
   }
