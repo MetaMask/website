@@ -726,6 +726,7 @@ const HeroTitle = styled.h1`
 
   .newsHero & {
     font-size: 40px !important;
+    line-height: 1.2;
   }
   .scrolled.custom-newsHero &{
     padding: 0;
