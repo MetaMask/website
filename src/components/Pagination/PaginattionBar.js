@@ -59,6 +59,11 @@ const Item = styled.div`
   margin: 0 12px;
   cursor: pointer;
 
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    margin: 0 4px;
+    padding: 0 8px;
+  }
+
   ${({ active }) =>
     active
       ? `
@@ -82,6 +87,10 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   order: 1;
+  
+  .newsCategoriesTab & {
+    margin: 24px 0;
+  }
 `
 const ArrowIcon = styled.span`
   font-size: 28px;
@@ -92,8 +101,14 @@ const ArrowIcon = styled.span`
   }
   &:first-child {
     margin-right: 32px;
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      margin-right: 16px;
+    }
   }
   &:last-child {
     margin-left: 32px;
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      margin-left: 16px;
+    }
   }
 `

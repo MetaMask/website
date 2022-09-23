@@ -16,15 +16,17 @@ function NewsLayout(props) {
       hero,
       cta,
       news: { title, subtitle, image, content },
-      news_bg: {
-        file: { url: bgUrl },
-      },
+      news_bg,
+      news_dark_bg,
       hubspot,
       latest,
       footer,
     },
     pageContext: { pathBuild },
   } = props
+
+  const bgUrl = news_bg?.file?.url || ''
+  const darkBgUrl = news_dark_bg?.file?.url || ''
 
   const seoModuleConfig = {
     internal: { type: 'ContentfulSeo' },
@@ -61,7 +63,7 @@ function NewsLayout(props) {
               <SocialButtonList />
             </SocialShare>
           </ContentWrapper>
-          <NewsContentWrapper bgUrl={bgUrl}>
+          <NewsContentWrapper bgUrl={bgUrl} darkBgUrl={darkBgUrl}>
             {contentfulModuleToComponent(contentConfig)}
             {contentfulModuleToComponent(hubspot)}
           </NewsContentWrapper>
@@ -81,24 +83,39 @@ const NewsContainer = styled(Section)`
   position: relative;
 `
 const SocialShare = styled.div`
-  padding-top: 32px;
+  margin: 32px 0;
   display: flex;
   align-items: center;
   justify-content: right;
+  
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     flex-direction: column;
   }
 `
 
 const NewsContentWrapper = styled.div`
-  ${({ bgUrl }) =>
-    bgUrl
-      ? ` background-image: url(${bgUrl});
-      background-size: contain;
+  ${({ bgUrl, darkBgUrl }) =>
+    bgUrl || darkBgUrl
+      ? ` background-size: contain;
       background-repeat: no-repeat;
       background-position: bottom;
    `
-      : ''}
+    : ''}
+
+  ${({ bgUrl }) =>
+    bgUrl
+      ? ` background-image: url(${bgUrl});
+  `
+    : ''}
+  
+  ${({ darkBgUrl }) =>
+    darkBgUrl
+      ? ` 
+      body.dark-mode & {
+        background-image: url(${darkBgUrl});
+      }
+   `
+   : ''}
 
   & > * {
     max-width: 784px;
@@ -167,6 +184,12 @@ export const NewsLayoutQuery = graphql`
     }
 
     news_bg: contentfulAsset(contentful_id: { eq: "3hGSTCAVrdhSMmLJHSHOWT" }) {
+      file {
+        url
+      }
+    }
+
+    news_dark_bg: contentfulAsset(contentful_id: { eq: "2StKLJf0XE38EyT9GlzQuO" }) {
       file {
         url
       }
