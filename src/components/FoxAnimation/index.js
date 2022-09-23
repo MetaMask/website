@@ -58,7 +58,7 @@ const Wrapper = styled.div`
   width: 100%;
   max-width: 1800px;
 
-  @media (max-width: ${({theme}) => theme.device.mobile}){
+  @media (max-width: ${({ theme }) => theme.device.mobile}) {
     width: 150%;
   }
 
