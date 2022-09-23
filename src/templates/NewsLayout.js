@@ -81,10 +81,11 @@ const NewsContainer = styled(Section)`
   position: relative;
 `
 const SocialShare = styled.div`
-  padding-top: 32px;
+  margin: 32px 0;
   display: flex;
   align-items: center;
   justify-content: right;
+  
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     flex-direction: column;
   }
