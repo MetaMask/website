@@ -44,24 +44,24 @@ const HTML = props => {
       </head>
       <body {...bodyAttributes}>
         {/* <MetaMaskProvider> */}
-          {preBodyComponents}
-          <div
-            key={`body`}
-            id="___gatsby"
-            dangerouslySetInnerHTML={{ __html: body }}
-          />
-          {postBodyComponents}
-          {process.env.NODE_ENV === 'production' && (
-              <script
-                type="text/javascript"
-                dangerouslySetInnerHTML={{ __html: livePersonScript }}
-              />
-            ) && (
-              <script
-                type="text/javascript"
-                dangerouslySetInnerHTML={{ __html: accessiBeScript }}
-              />
-            )}
+        {preBodyComponents}
+        <div
+          key={`body`}
+          id="___gatsby"
+          dangerouslySetInnerHTML={{ __html: body }}
+        />
+        {postBodyComponents}
+        {process.env.NODE_ENV === 'production' && (
+            <script
+              type="text/javascript"
+              dangerouslySetInnerHTML={{ __html: livePersonScript }}
+            />
+          ) && (
+            <script
+              type="text/javascript"
+              dangerouslySetInnerHTML={{ __html: accessiBeScript }}
+            />
+          )}
         {/* </MetaMaskProvider> */}
       </body>
     </html>

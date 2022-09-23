@@ -443,7 +443,7 @@ const BrowserList = styled.div`
   & > * {
     width: 20%;
     padding: 16px;
-    
+
     @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
       width: 100%;
       padding: 12px;

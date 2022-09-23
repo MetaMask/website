@@ -61,7 +61,7 @@ const StyledCard = props => {
   const isCtaType = layoutType === 'cta'
 
   return (
-    <Card className='moduleCardWrapper' isCtaType={isCtaType}>
+    <Card className="moduleCardWrapper" isCtaType={isCtaType}>
       <CardInner
         to={link}
         newTab={newTab}
@@ -284,7 +284,7 @@ const Inner = styled.div`
       ? `
       align-items: center;
   `
-    : `
+      : `
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
@@ -318,7 +318,7 @@ const Description = styled.div`
         font-size: 18px;
         line-height: 25px;
       }
-    } 
+    }
   }
 `
 const ArrowItem = styled.div`

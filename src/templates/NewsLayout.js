@@ -87,7 +87,7 @@ const SocialShare = styled.div`
   display: flex;
   align-items: center;
   justify-content: right;
-  
+
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     flex-direction: column;
   }
@@ -100,13 +100,13 @@ const NewsContentWrapper = styled.div`
       background-repeat: no-repeat;
       background-position: bottom;
    `
-    : ''}
+      : ''}
 
   ${({ bgUrl }) =>
     bgUrl
       ? ` background-image: url(${bgUrl});
   `
-    : ''}
+      : ''}
   
   ${({ darkBgUrl }) =>
     darkBgUrl
@@ -115,7 +115,7 @@ const NewsContentWrapper = styled.div`
         background-image: url(${darkBgUrl});
       }
    `
-   : ''}
+      : ''}
 
   & > * {
     max-width: 784px;
@@ -189,7 +189,9 @@ export const NewsLayoutQuery = graphql`
       }
     }
 
-    news_dark_bg: contentfulAsset(contentful_id: { eq: "2StKLJf0XE38EyT9GlzQuO" }) {
+    news_dark_bg: contentfulAsset(
+      contentful_id: { eq: "2StKLJf0XE38EyT9GlzQuO" }
+    ) {
       file {
         url
       }
