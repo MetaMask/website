@@ -66,7 +66,7 @@ Built With:
 The main configuration file for a Gatsby site. This is where you can specify information about your site (metadata), site title ,and description, which Gatsby plugins we are using, etc. (Check out the [config docs](https://www.gatsbyjs.org/docs/gatsby-config/) for more detail).
 
 **`src/fragments/`**
-GraphQL query fragments that create standard data requests across componenets
+GraphQL query fragments that create standard data requests across components
 
 **`src/lib/theme.js`**
 Contains styling constants for font sizes and weights, device sizes for media queries, shadows, and colors.
