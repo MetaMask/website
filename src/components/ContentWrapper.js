@@ -59,7 +59,7 @@ const ContainerInner = styled.div`
 
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     max-width: 728px;
-    
+
     .news-page-content & {
       max-width: 784px;
     }

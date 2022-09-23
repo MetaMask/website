@@ -4,7 +4,7 @@ import Button from './Button'
 const ConnectMetaMask = props => {
   return (
     // <MetaMaskButton>
-      <Button text={'Connect with MetaMask'} link={'#'} fontSize={'20px'} />
+    <Button text={'Connect with MetaMask'} link={'#'} fontSize={'20px'} />
     // </MetaMaskButton>
   )
 }

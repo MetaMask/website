@@ -12,25 +12,15 @@ import Link from '../Link'
  */
 
 const StyledCard = props => {
-  const {
-    title,
-    image,
-    link,
-    description,
-  } = props
+  const { title, image, link, description } = props
 
   return (
     <Card className="moduleCardWrapper">
-      <CardInner
-        to={link}
-        className={classnames('custom-card-bg cardLink')}
-      >
+      <CardInner to={link} className={classnames('custom-card-bg cardLink')}>
         {image ? (
           <ImageInner>
             <ImageWrapper>
-              <ImageSrc
-                image={image}
-              />
+              <ImageSrc image={image} />
             </ImageWrapper>
           </ImageInner>
         ) : null}
@@ -88,13 +78,13 @@ const ImageWrapper = styled.div`
   padding: 10px 16px;
   position: absolute;
   width: 100%;
-  
+
   body.light-mode & {
-    background: #F2F4F6;
+    background: #f2f4f6;
   }
-  
+
   body.dark-mode & {
-    background: #F2F4F615;
+    background: #f2f4f615;
   }
 `
 
@@ -146,4 +136,3 @@ const Description = styled.div`
     color: #535a61;
   }
 `
-

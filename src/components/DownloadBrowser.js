@@ -67,7 +67,7 @@ const BrowserList = styled.div`
   & > * {
     width: 20%;
     padding: 20px;
-    
+
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       width: 33.33%;
     }
