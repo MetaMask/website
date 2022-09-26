@@ -31,6 +31,7 @@ const StyledCard = props => {
     hubSpotForm,
     cta,
     isDarkMode,
+    customClass,
   } = props
 
   return (
@@ -44,6 +45,7 @@ const StyledCard = props => {
         className={classnames('custom-card-bg cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
           [`bg-default`]: !backgroundColor,
+          [customClass]: customClass,
         })}
         contentAlignment={contentAlignment}
       >
@@ -184,6 +186,11 @@ const Title = styled.div`
   font-size: 32px;
   line-height: 1.4;
   margin-bottom: 24px;
+  
+  .titleFZ40 & {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
 
   ${({ theme }) =>
     `
