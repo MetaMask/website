@@ -30,6 +30,7 @@ const StyledCard = props => {
     contentAlignment,
     hubSpotForm,
     isDarkMode,
+    customClass,
   } = props
 
   return (
@@ -43,6 +44,7 @@ const StyledCard = props => {
         contentAlignment={contentAlignment}
         className={classnames('cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
+          [customClass]: customClass,
         })}
       >
         {image ? (
