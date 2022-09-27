@@ -268,7 +268,7 @@ const ImageSrc = styled(ImageItem)`
     width: 280px;
   }
 
-  @media (max-width: ${theme.device.tabletMediaMax}) {
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     .imageMobileMaxWidth180 & {
       max-width: 180px;
     }
