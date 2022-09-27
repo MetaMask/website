@@ -274,6 +274,7 @@ const ImageSrc = styled(ImageItem)`
     width: ${widthImg};
     @media (max-width: ${theme.device.tabletMediaMax}){
       width: 100%;
+      max-width: 180px;
     }
   `
       : ''}
