@@ -729,6 +729,7 @@ const HeroTitle = styled.h1`
 
   .newsHero & {
     font-size: 40px !important;
+    line-height: 1.2;
   }
   .scrolled.custom-newsHero &{
     padding: 0;
@@ -896,7 +897,7 @@ const HeroSideImage = styled.div`
     width: 100vw;
     position: absolute;
     left: 0;
-    img{
+    img {
       width: 100%;
     }
   `
