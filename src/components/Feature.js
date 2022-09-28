@@ -25,6 +25,7 @@ const FeatureComponent = props => {
     animation,
     backgroundColor,
     backgroundImage,
+    backgroundImageDarkMode,
     backgroundImageMobile,
     headlineMarginTop0,
     sectionPadding,
@@ -121,6 +122,7 @@ const FeatureComponent = props => {
     <Container
       sectionPadding={sectionPadding}
       image={backgroundImage}
+      imageDarkMode={backgroundImageDarkMode}
       imageMobile={backgroundImageMobile}
       className={classnames({
         noPaddingBottom: noPaddingBottom,
@@ -220,7 +222,13 @@ const Container = styled(Section)`
       height: 100%;
     `
       : ''}
-
+  .dark-mode & {
+    ${({ imageDarkMode }) =>
+      imageDarkMode
+        ? ` background-image: url(${imageDarkMode});
+    `
+        : ''}
+  }
   ${({ imageMobile, theme }) =>
     imageMobile
       ? ` 
@@ -258,6 +266,12 @@ const ImageSrc = styled(ImageItem)`
   
   .imageWidth280 & {
     width: 280px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    .imageMobileMaxWidth180 & {
+      max-width: 180px;
+    }
   }
   
   ${({ widthImg, theme }) =>

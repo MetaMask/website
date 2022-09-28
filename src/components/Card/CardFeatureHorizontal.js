@@ -186,7 +186,7 @@ const Title = styled.div`
   font-size: 32px;
   line-height: 1.4;
   margin-bottom: 24px;
-  
+
   .titleFZ40 & {
     font-size: 40px;
     margin-bottom: 12px;

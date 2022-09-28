@@ -732,7 +732,7 @@ body {
 
 .hs-form-field input {
   height: 40px;
-  background: #ffffff;
+  background-color: #ffffff;
   border: 1px solid #333333;
   border-radius: 10px;
   padding: 0 15px;
@@ -770,7 +770,7 @@ select.hs-input.error {
 
 input[type='submit'].hs-button {
   height: 40px;
-  background: #ff7a59;
+  background-color: #ff7a59;
   border-radius: 10px;
   border: none;
   box-shadow: none;
@@ -962,7 +962,7 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15;
 }
 
 .btn-primary {
-  background: #037dd6;
+  background-color: #037dd6;
 }
 
 .fullwidth-mobile {
@@ -979,7 +979,7 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15;
 }
 @media (min-width: 1025px) {
   .btn-primary:hover {
-    background: #1565c0;
+    background-color: #1565c0;
   }
 }
 
@@ -1022,7 +1022,7 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15;
 }
 
 .bg-neutrals {
-  background: #fcfcfd;
+  background-color: #fcfcfd;
 }
 
 .bg-gray {
@@ -1060,7 +1060,7 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15;
     .bg-mobile-white {
       background-color: #fff;
       .heroMobileOverlayContent {
-        background: #fff;
+        background-color: #fff;
       }
     }
   }
@@ -1156,7 +1156,7 @@ body {
 }
 
 body.dark-mode {
-  background: #121212;
+  background-color: #121212;
   color: #fff;
   h1,
   h2,
@@ -1169,7 +1169,7 @@ body.dark-mode {
     color: #ffffff;
 
     .theme-dark & {
-      background: #ffffff;
+      background-color: #ffffff;
     }
   }
 
@@ -1178,20 +1178,20 @@ body.dark-mode {
     background-color: #121212;
 
     &.custom-card-bg {
-      background: #23272a;
+      background-color: #23272a;
     }
   }
   .bg-neutrals {
-    background: #23272a;
+    background-color: #23272a;
   }
   .paragraph {
     color: #fff;
   }
   .bg-gray {
-    background: #24292e;
+    background-color: #24292e;
   }
   .bg-dark {
-    background: #393e46;
+    background-color: #393e46;
   }
   .logoMetamaskSvg {
     svg {
@@ -1210,7 +1210,7 @@ body.dark-mode {
   }
 
   .btn-primary {
-    background: #1098fc;
+    background-color: #1098fc;
   }
 
   @media (max-width: 767px) {
@@ -1290,7 +1290,7 @@ body.dark-mode {
 
   &:hover {
     .embed-popup-target-overlay {
-      background: rgba(0, 0, 0, 0.3);
+      background-color: rgba(0, 0, 0, 0.3);
     }
   }
 }
@@ -1301,7 +1301,7 @@ body.dark-mode {
   right: 0;
   top: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
   transition: background 300ms ease;
   display: flex;
   align-items: center;
@@ -1315,7 +1315,7 @@ body.dark-mode {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #037dd6;
+    background-color: #037dd6;
     border-radius: 100%;
   }
 }
@@ -1407,7 +1407,7 @@ body.dark-mode {
 }
 
 .text-gradient {
-  background: linear-gradient(44.91deg, #f5841f 26.41%, #2c56dd 76.65%);
+  background-color: linear-gradient(44.91deg, #f5841f 26.41%, #2c56dd 76.65%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1423,7 +1423,7 @@ body.dark-mode {
   position: relative;
   .tooltip {
     display: none;
-    background: #ffffff;
+    background-color: #ffffff;
     border: 1px solid #efefef;
     box-shadow: -15px 15px 24px rgba(0, 0, 0, 0.05),
       -3px 3px 10px rgba(0, 0, 0, 0.07);
@@ -1441,7 +1441,7 @@ body.dark-mode {
     text-align: left;
 
     .dark-mode & {
-      background: #121212;
+      background-color: #121212;
       color: #fff;
       border: 1px solid #23272a;
     }
@@ -1482,7 +1482,7 @@ body.dark-mode {
   }
   .hs-submit input[type='submit'].hs-button {
     border-radius: 50px;
-    background: #037dd6;
+    background-color: #037dd6;
   }
   .hs-submit input[placeholder] {
     color: #cdd6e1;
@@ -1517,7 +1517,7 @@ body.dark-mode {
       input[type='submit'].hs-button {
         font-size: 18px;
         line-height: 25px;
-        background: #121212;
+        background-color: #121212;
         font-weight: normal;
         @media (max-width: 767px) {
           width: 100%;
@@ -1637,7 +1637,7 @@ body.dark-mode {
   }
   .hs-submit input[type='submit'].hs-button {
     border-radius: 50px;
-    background: #037dd6;
+    background-color: #037dd6;
   }
   .hs-fieldtype-checkbox.hs-form-field > label {
     margin-bottom: 32px;
