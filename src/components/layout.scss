@@ -814,6 +814,15 @@ input[type='submit'].hs-button {
   }
 }
 
+.fz-18-lh-23-res {
+  font-size: 18px !important;
+  line-height: 23px !important;
+  @media (max-width: 479px) {
+    font-size: 16px !important;
+    line-height: 22px !important;
+  }
+}
+
 .fz-18-res {
   font-size: 18px !important;
   line-height: 26px !important;

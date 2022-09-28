@@ -30,6 +30,7 @@ const StyledCard = props => {
     linkText,
     cta,
     isDarkMode,
+    customClass,
   } = props
 
   return (
@@ -42,6 +43,7 @@ const StyledCard = props => {
         imageMobile={backgroundImageMobile}
         className={classnames('cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
+          [customClass]: customClass,
         })}
       >
         {image ? (
