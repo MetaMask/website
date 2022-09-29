@@ -98,4 +98,7 @@ export const EyebrowStyle = styled.div`
     font-size: 13px;
     line-height: 1.1;
   }
+  .eyebrowLetterSpacing3 & {
+    letter-spacing: 3px;
+  }
 `
