@@ -241,6 +241,13 @@ const Container = styled(Section)`
 const Image = styled.div`
   display: block;
   width: 100%;
+
+  @media (min-width: ${({ theme }) => theme.device.tablet}) {
+    .floatImageRightMinus32 & {
+      width: calc(50% + 32vw);
+      max-width: 170%;
+    }
+  }
 `
 const SideImage = styled.div`
   display: block;
@@ -433,6 +440,28 @@ const FeatureWrapper = styled.div`
     }
                 `
       : ''}
+  
+  h1.feature-hero-title {
+    font-weight: ${({ theme }) => theme.font.weight.bold};
+    font-size: ${({ theme }) => theme.font.size.xxxl}rem;
+    line-height: 1.2;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    transition: all 0.5s ease;
+
+    @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+    font-size: 46px;
+    }
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      font-size: 34px !important;
+      line-height: 43px;
+    }
+  }
+  .dark-mode & {
+    svg path.can-fill-color {
+      fill: ${({ theme }) => theme.white};
+    }
+  }
 `
 const FeatureInner = styled.div`
   display: block;
