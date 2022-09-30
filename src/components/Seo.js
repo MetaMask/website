@@ -19,6 +19,7 @@ const SEO = props => {
     linkTags,
     pageType,
     pagePath,
+    canonicalUrl,
   } = props
 
   const location = useLocation()
@@ -37,7 +38,7 @@ const SEO = props => {
         const seo = {
           title: title || defaultTitle,
           desc: description || defaultDescription,
-          canonicalUrl: `${siteUrl}${pagePath}`,
+          canonicalUrl: canonicalUrl || `${siteUrl}${pagePath}`,
         }
         const getMetaTags = (name, value) =>
           name && value

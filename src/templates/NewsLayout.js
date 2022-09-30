@@ -15,7 +15,7 @@ function NewsLayout(props) {
       header,
       hero,
       cta,
-      news: { title, subtitle, image, content },
+      news: { title, subtitle, image, content, canonicalUrl },
       news_bg,
       news_dark_bg,
       hubspot,
@@ -34,6 +34,7 @@ function NewsLayout(props) {
     pageDescription: subtitle,
     featuredImage: image,
     pagePath: pathBuild,
+    canonicalUrl: canonicalUrl,
     pageType: 'news',
   }
 
