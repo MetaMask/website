@@ -13,6 +13,7 @@ const ContentfulSeo = props => {
       featuredImage,
       pageType = 'page',
       pagePath,
+      canonicalUrl,
     },
   } = props
 
@@ -26,6 +27,7 @@ const ContentfulSeo = props => {
       description={pageDescription}
       pageType={pageType}
       pagePath={pagePath}
+      canonicalUrl={canonicalUrl}
       image={featuredImage}
       metaTags={ex_metaTags}
       linkTags={ex_linkTags}
@@ -41,6 +43,7 @@ ContentfulSeo.propTypes = {
   linkTags: PropTypes.arrayOf(PropTypes.object),
   featuredImage: PropTypes.object,
   pagePath: PropTypes.string,
+  canonicalUrl: PropTypes.string,
 }
 
 export default ContentfulSeo
