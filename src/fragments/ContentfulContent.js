@@ -155,6 +155,9 @@ export const ContentfulLayoutFeatureFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
+    embed {
+      ...ContentfulEmbedFields
+    }
     imageDarkMode {
       title
       description
