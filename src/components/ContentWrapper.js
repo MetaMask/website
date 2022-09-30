@@ -45,7 +45,7 @@ const Container = styled.div`
   }
 
   &.overflowHidden {
-    overflow: hidden
+    overflow: hidden;
   }
 
   ${({ styleOverride }) => styleOverride}
