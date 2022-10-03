@@ -91,6 +91,14 @@ const EmbedHtmlWrapper = styled.div`
   iframe {
     border-radius: 12px;
   }
+  .displayEmbedAsNormal & {
+    border-radius: 12px;
+    .embed-popup-target {
+      &:before {
+        padding-bottom: 56.25%;
+      }
+    }
+  }
   ${({ playOnPopup, theme }) =>
     playOnPopup
       ? `
