@@ -654,6 +654,15 @@ const HeroImageTextContainer = styled.div`
   transition: all 0.5s ease;
   z-index: 1;
 
+  .contentWidth70 & {
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      width: 70%;
+      img {
+        width: 50%;
+      }
+    }
+  }
+
   .scrolled.custom-newsHero &{
     flex-direction: row;
     justify-content: space-between;
