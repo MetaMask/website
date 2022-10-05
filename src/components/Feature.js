@@ -8,10 +8,13 @@ import { EyebrowStyle, Section } from './StyledGeneral'
 import ImageItem from './Image'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import ContextClientSide from '../Context/ContextClientSide'
+import Embed from './Embed'
+import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
 
 const FeatureComponent = props => {
   const {
     cta,
+    embed,
     headline,
     hideHeadline,
     description,
@@ -165,6 +168,15 @@ const FeatureComponent = props => {
               </Image>
             </SideImage>
           ) : null}
+          {embed ? (
+            <SideEmbed>
+              <Embed
+                html={embed.embed?.embed}
+                thumbnailUrl={parseContentfulAssetUrl(embed.thumbnail)}
+                playOnPopup={embed.playOnPopup}
+              />
+            </SideEmbed>
+          ) : null}
           <FeatureInner
             withContent={withContent}
             contentPaddingTop={contentPaddingTop}
@@ -241,6 +253,13 @@ const Container = styled(Section)`
 const Image = styled.div`
   display: block;
   width: 100%;
+
+  @media (min-width: ${({ theme }) => theme.device.tablet}) {
+    .floatImageRightMinus32 & {
+      width: calc(50% + 32vw);
+      max-width: 170%;
+    }
+  }
 `
 const SideImage = styled.div`
   display: block;
@@ -251,6 +270,27 @@ const SideImage = styled.div`
     .noPaddingBottom & {
       margin-bottom: 0 !important;
     }
+  }
+
+  .snapsLiveMetaMaskFlask & {
+    padding: 0;
+  }
+
+  .sideImageMaxWidth667 & {
+    max-width: 667px;
+  }
+`
+
+const SideEmbed = styled.div`
+  display: block;
+  flex: 1;
+  min-width: 0;
+
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    .noPaddingBottom & {
+      margin-bottom: 0 !important;
+    }
+    width: 100%;
   }
 
   .snapsLiveMetaMaskFlask & {
@@ -355,6 +395,9 @@ const FeatureWrapper = styled.div`
     ${SideImage} {
       margin-bottom: 32px;
     }
+    ${SideEmbed} {
+      margin-bottom: 32px;
+    }
   }
 
   ${({ hideImageOnMobile, theme }) =>
@@ -362,6 +405,9 @@ const FeatureWrapper = styled.div`
       ? `
       @media (max-width: ${theme.device.tabletMediaMax}) {
         ${SideImage} {
+          display: none;
+        }
+        ${SideEmbed} {
           display: none;
         }
       }
@@ -395,6 +441,9 @@ const FeatureWrapper = styled.div`
         margin-top: 20px;
       }
       ${SideImage} {
+        order: 3;
+      }
+      ${SideEmbed} {
         order: 3;
       }
       ${FeatureInner} {
@@ -433,6 +482,28 @@ const FeatureWrapper = styled.div`
     }
                 `
       : ''}
+  
+  h1.feature-hero-title {
+    font-weight: ${({ theme }) => theme.font.weight.bold};
+    font-size: ${({ theme }) => theme.font.size.xxxl}rem;
+    line-height: 1.2;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    transition: all 0.5s ease;
+
+    @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+    font-size: 46px;
+    }
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      font-size: 34px !important;
+      line-height: 43px;
+    }
+  }
+  .dark-mode & {
+    svg path.can-fill-color {
+      fill: ${({ theme }) => theme.white};
+    }
+  }
 `
 const FeatureInner = styled.div`
   display: block;
@@ -451,6 +522,11 @@ const FeatureInner = styled.div`
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     width: 100%;
     padding-top: 0;
+  }
+
+  .contentWidth667 & {
+    width: 667px;
+    max-width: 100%;
   }
 `
 const CTAWrapper = styled.div`
