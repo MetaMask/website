@@ -14,25 +14,43 @@ const WRITE_KEY = (params.env == "production") ? PROD_WRITE_KEY : DEV_WRITE_KEY;
     });
   }
 
-  const submitSurvey = document.getElementById('submitSurvey');
-  if(submitSurvey) {
-    submitSurvey.onclick = function() {
-      const checkboxes = document.getElementsByName('reasons');
-      let reasons = [];
-      for (var i=0; i<checkboxes.length; i++) {
-         if (checkboxes[i].checked) {
-            reasons.push(checkboxes[i].value);
-         }
-      }
-      if(reasons.length > 0) {
-        analytics.track('Survey Submitted', {
-          survey_type: "mm_ext_uninstall",
-          field_reason: reasons,
-        });
-        location.href = '/';
-      }
+  const checkReasons = function () {
+    const checkboxes = document.getElementsByName('reasons');
+    let count = 0;
+    for (var i=0; i<checkboxes.length; i++) {
+       if (checkboxes[i].checked) {
+          count ++;
+       }
     }
-  }
+    document.getElementById('submitSurvey').disabled = !count;
+  };
 
+  const submitSurvey = function() {
+    let reasons = [];
+    const checkboxes = document.getElementsByName('reasons');
+    for (let i=0; i<checkboxes.length; i++) {
+       if (checkboxes[i].checked) {
+          reasons.push(checkboxes[i].value);
+       }
+    }
+    if(reasons.length > 0) {
+      analytics.track('Survey Submitted', {
+        survey_type: "mm_ext_uninstall",
+        field_reason: reasons,
+      });
+      location.href = '/';
+    }
+  };
+
+  setTimeout(function () {
+    const checkboxes = document.getElementsByName('reasons');
+    for (let i=0; i<checkboxes.length; i++) {
+      checkboxes[i].onchange = checkReasons;
+    }
+    const submitSurveyButton = document.getElementById('submitSurvey');
+    if(submitSurveyButton) {
+      submitSurveyButton.onclick = submitSurvey;
+    }
+  }, 1000);
 }}();
 `
