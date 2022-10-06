@@ -6,6 +6,7 @@ import isArray from 'lodash/isArray'
 import Layout from './PageLayout'
 import Context from '../Context/ContextPage'
 import linkedInTrackingScript from '../lib/services/lintrk'
+import analyticsUninstalledScript from '../lib/services/analytics'
 import { useLocation } from '@reach/router'
 import Helmet from 'react-helmet'
 
@@ -40,30 +41,8 @@ const ContentfulLayout = props => {
 
   const location = useLocation()
   const pathname = location.pathname
-  let appUninstalledScript = ''
   let partnerId = '451393'
   let conversionId = ''
-  if (pathname.includes('/uninstalled')) {
-    appUninstalledScript =
-      'const DEV_WRITE_KEY = "PZkSwsTBxW1BrbyIYEUjFBEumGvTyjcz", PROD_WRITE_KEY = "MHae0tTVRqyHDim9qQ9ablSZpvm3Tvzc";\n' +
-      'const params = new Proxy(new URLSearchParams(window.location.search), { get: (searchParams, prop) => searchParams.get(prop), });\n' +
-      'const WRITE_KEY = (params.env == "production") ? PROD_WRITE_KEY : DEV_WRITE_KEY;\n' +
-      '\n' +
-      '!function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey=WRITE_KEY;analytics.SNIPPET_VERSION="4.15.2";\n' +
-      '  // only ping Segment if an id exists\n' +
-      '  if (params.mmi) {\n' +
-      '    analytics.load(WRITE_KEY);\n' +
-      '\n' +
-      '    // identify user by anonId\n' +
-      '    analytics.identify(atob(params.mmi));\n' +
-      "    analytics.track('App Uninstalled', {\n" +
-      '      app_version: params.av\n' +
-      '    });\n' +
-      '    // clear session cookies. meant to be one-time event to close loop\n' +
-      '    analytics.reset();\n' +
-      '  }\n' +
-      '}}();'
-  }
   if (pathname.includes('/institutions')) {
     partnerId = '4249353'
     conversionId = '7714137'
@@ -117,12 +96,12 @@ const ContentfulLayout = props => {
     <Context.Provider value={valueContext}>
       <Layout {...rest} themeColor={themeColor} h2FontSize={h2FontSize}>
         {seo && contentfulModuleToComponent({ ...seo, pagePath: pathBuild })}
-        {appUninstalledScript && (
+        {pathname.includes('/uninstalled') && (
           <Helmet
             script={[
               {
                 type: 'text/javascript',
-                innerHTML: appUninstalledScript,
+                innerHTML: analyticsUninstalledScript,
               },
             ]}
           />
