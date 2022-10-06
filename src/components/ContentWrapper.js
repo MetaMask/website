@@ -87,15 +87,15 @@ const ContainerInner = styled.div`
   }
 
   .metaMaskUninstalled & {
-    max-width: 608px;
+    max-width: 800px;
     border: 1px solid #d6d9dc;
     border-radius: 10px;
-    padding: 48px;
+    padding: 40px 48px;
     margin-bottom: 48px;
 
     @media (min-width: 1600px) {
-      max-width: 800px;
-      padding: 48px 64px;
+      max-width: 980px;
+      padding: 40px 102px;
       margin-bottom: 80px;
     }
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
