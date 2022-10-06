@@ -153,6 +153,7 @@ const FullWidthCtaInner = styled.div`
       background-color: #F2F4F6;
       border-radius: 8px;
       padding-bottom: 32px;
+      margin-left: auto;
       .uninstallSurvey {
         padding: 32px;
         background-color: #F2F4F6;
@@ -211,6 +212,7 @@ const FullWidthCtaInner = styled.div`
       }
       #submitSurvey {
         width: calc(100% - 64px);
+        cursor: pointer;
       }
       @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
         width: 100%;
