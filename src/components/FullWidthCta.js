@@ -13,6 +13,7 @@ const FullWidthCta = props => {
   const {
     ctas,
     hubSpotForm,
+    embedHtml,
     description,
     showLogoAnimation,
     backgroundColor,
@@ -54,11 +55,14 @@ const FullWidthCta = props => {
                 <div dangerouslySetInnerHTML={{ __html: description }} />
               </Description>
             ) : null}
+            {showLogoAnimation && customClass === 'metaMaskUninstalled' ? (
+              <LogoAnimation logoType={logoType} />
+            ) : null}
             {hubSpotForm ? (
               <>{contentfulModuleToComponent(hubSpotForm)}</>
             ) : null}
-            {showLogoAnimation && customClass === 'metaMaskUninstalled' ? (
-              <LogoAnimation logoType={logoType} />
+            {embedHtml ? (
+              <>{contentfulModuleToComponent(embedHtml)}</>
             ) : null}
             {ctas ? (
               <CTAWrapper>
@@ -80,6 +84,7 @@ export default withTheme(FullWidthCta)
 
 FullWidthCta.propTypes = {
   hubSpotForm: PropTypes.object,
+  embedHtml: PropTypes.object,
   headline: PropTypes.string,
   description: PropTypes.string,
   ctas: PropTypes.arrayOf(PropTypes.object),
