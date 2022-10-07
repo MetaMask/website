@@ -59,10 +59,14 @@ const FullWidthCta = props => {
               <LogoAnimation logoType={logoType} />
             ) : null}
             {hubSpotForm ? (
-              <>{contentfulModuleToComponent(hubSpotForm)}</>
+              <div id={'hubspot-container'}>
+                {contentfulModuleToComponent(hubSpotForm)}
+              </div>
             ) : null}
             {embedHtml ? (
-              <>{contentfulModuleToComponent(embedHtml)}</>
+              <div id={'html-container'}>
+                {contentfulModuleToComponent(embedHtml)}
+              </div>
             ) : null}
             {ctas ? (
               <CTAWrapper>
@@ -140,6 +144,7 @@ const FullWidthCtaInner = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    
     #logo-container{
       width: 30%;
       padding: 24px 0 8px 0;
@@ -148,15 +153,18 @@ const FullWidthCtaInner = styled.div`
         display: none;
       }
     }
-    #take-a-moment-to-share-why-youre-uninstalling-meta-mask {
+    
+    #html-container {
       width: 60%;
       background-color: #F2F4F6;
       border-radius: 8px;
       padding-bottom: 32px;
       margin-left: auto;
+      
       .dark-mode & {
         background-color: ${({ theme }) => theme.text.dark};
       }
+      
       .uninstallSurvey {
         padding: 32px;
         border-radius: 8px;
@@ -216,10 +224,12 @@ const FullWidthCtaInner = styled.div`
           display: none;
         }
       }
-      #submitSurvey {
+      
+      .buttonSurvey > button {
         width: calc(100% - 64px);
         cursor: pointer;
         transition: all 0.3s ease;
+        
         &:disabled {
           background-color: ${({ theme }) => theme.text.darkGray};
           cursor: not-allowed;
@@ -228,6 +238,7 @@ const FullWidthCtaInner = styled.div`
           opacity: 0.8;
         }
       }
+      
       @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
         width: 100%;
         background-color: transparent;
@@ -235,16 +246,19 @@ const FullWidthCtaInner = styled.div`
         .dark-mode & {
           background-color: transparent;
         }
+        
         .uninstallSurvey {
           padding: 24px 42px;
           h6 {
             text-align: center;
           }
         }
+        
         .buttonSurvey {
           padding: 40px 0 20px 0;
         }
       }
+      
       @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
         .uninstallSurvey {
           padding: 24px;
