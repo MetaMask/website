@@ -154,11 +154,17 @@ const FullWidthCtaInner = styled.div`
       border-radius: 8px;
       padding-bottom: 32px;
       margin-left: auto;
+      .dark-mode & {
+        background-color: ${({ theme }) => theme.text.dark};
+      }
       .uninstallSurvey {
         padding: 32px;
-        background-color: #F2F4F6;
         border-radius: 8px;
         text-align: left;
+        background-color: #F2F4F6;
+        .dark-mode & {
+          background-color: ${({ theme }) => theme.text.dark};
+        }
         > div {
           padding-bottom: 16px;
           display: flex;
@@ -213,11 +219,22 @@ const FullWidthCtaInner = styled.div`
       #submitSurvey {
         width: calc(100% - 64px);
         cursor: pointer;
+        transition: all 0.3s ease;
+        &:disabled {
+          background-color: ${({ theme }) => theme.text.darkGray};
+          cursor: not-allowed;
+        }
+        &:hover:disabled {
+          opacity: 0.8;
+        }
       }
       @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
         width: 100%;
         background-color: transparent;
         padding-bottom: 0;
+        .dark-mode & {
+          background-color: transparent;
+        }
         .uninstallSurvey {
           padding: 24px 42px;
           h6 {
