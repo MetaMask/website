@@ -261,6 +261,16 @@ const ImageWrapper = styled.div`
   height: 90px;
   margin-bottom: 16px;
 
+  .image-height-31 & {
+    height: 31px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    .image-height-31 & {
+      height: 62px;
+    }
+  }
+
   img {
     height: 100%;
     width: auto;
@@ -317,6 +327,34 @@ const Description = styled.div`
         color: ${({ theme }) => theme.darkBlue};
         font-size: 18px;
         line-height: 25px;
+      }
+    }
+  }
+
+  .organizations-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .cta {
+      color: #2c56dd;
+      display: flex;
+      align-items: center;
+      margin: 0 auto;
+
+      a {
+        font-size: 13px;
+        font-weight: 600;
+        color: inherit;
+      }
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.device.mobile}) {
+    .organizations-description {
+      min-height: 153px;
+      .cta {
+        margin: unset;
       }
     }
   }
