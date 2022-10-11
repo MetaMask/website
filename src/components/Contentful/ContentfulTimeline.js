@@ -95,9 +95,9 @@ const Container = styled.article`
     width: 20px;
     height: 20px;
     right: -17px;
-    background-color: #2c56dd;
+    background-color: #f5841f;
     ${({ theme }) => `border: 4px solid ${theme.white};`}
-    top: 16px;
+    top: 28px;
     border-radius: 50%;
     z-index: 1;
     .dark-mode & {
@@ -110,7 +110,7 @@ const Container = styled.article`
   }
 
   .content {
-    padding: 20px 0;
+    padding: 32px 0;
     position: relative;
     border-radius: 6px;
   }
@@ -142,7 +142,7 @@ const Headline = styled.h3`
 `
 
 const Eyebrow = styled(EyebrowStyle)`
-  color: #2c56dd;
+  color: #f5841f;
   margin-bottom: 14px;
 `
 
