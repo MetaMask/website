@@ -923,6 +923,10 @@ const HeroSideImage = styled.div`
       theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
   theme.device.twoKResolutionMax}) {
         min-width: 62%;
+
+        .sideImageMinWidth50 & {
+          min-width: 50%;
+        }
       }
 
     @media (max-width: ${({ theme }) =>
@@ -1061,6 +1065,14 @@ const EyebrowWrapper = styled.div`
         margin-bottom: 0;
     `
         : ''}
+  }
+
+  .logoHeight40 & {
+    img {
+      height: 40px;
+      width: auto;
+      margin: unset;
+    }
   }
 `
 
