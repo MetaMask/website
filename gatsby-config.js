@@ -47,6 +47,7 @@ if (env.errors) {
       'gatsby-transformer-remark',
       'gatsby-plugin-root-import',
       'gatsby-transformer-inline-svg',
+      'gatsby-plugin-meta-redirect',
       {
         resolve: `gatsby-source-contentful`,
         options: {

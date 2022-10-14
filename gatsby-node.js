@@ -2,7 +2,10 @@ const path = require('path')
 const { getNewsUrl } = require(`./src/lib/utils/news`)
 
 exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions
+  const { createPage, createRedirect } = actions
+
+  // Generally you create redirects while creating pages.
+  createRedirect({ fromPath: '/institutions/overview-amer/', toPath: '/institutions/', isPermanent: true, redirectInBrowser: true })
 
   /* Customized Pages Built Inside Contentful CMS */
   const contentfulLayouts = graphql(`
