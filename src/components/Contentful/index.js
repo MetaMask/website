@@ -16,6 +16,7 @@ import ContentfulSeo from './ContentfulSeo'
 import ContentfulPopupAnnouncement from './ContentfulPopupAnnouncement'
 import ContentfulConsenSysResources from './ContentfulConsenSysResources'
 import ContentfulNewsCategory from './ContentfulNewsCategory'
+import ContentfulTimeline from './ContentfulTimeline'
 
 export {
   ContentfulLayoutHeader,
@@ -36,4 +37,5 @@ export {
   ContentfulPopupAnnouncement,
   ContentfulConsenSysResources,
   ContentfulNewsCategory,
+  ContentfulTimeline,
 }

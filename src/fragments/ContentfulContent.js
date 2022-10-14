@@ -248,6 +248,37 @@ export const ContentfulLayoutFeatureFields = graphql`
   }
 `
 
+export const ContentfulTimelineFields = graphql`
+  fragment ContentfulTimelineFields on ContentfulTimeline {
+    contentful_id
+    internal {
+      type
+    }
+    eyebrow
+    headline {
+      childMarkdownRemark {
+        html
+      }
+    }
+    description {
+      childMarkdownRemark {
+        html
+      }
+    }
+    image {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
+    customClass
+  }
+`
+
 export const ContentfulLayoutFullWidthCtaFields = graphql`
   fragment ContentfulLayoutFullWidthCtaFields on ContentfulLayoutFullWidthCta {
     contentful_id
@@ -308,6 +339,9 @@ export const ContentfulLayoutModuleContainerFields = graphql`
       }
       ... on ContentfulHubSpotForm {
         ...ContentfulHubSpotFormFields
+      }
+      ... on ContentfulTimeline {
+        ...ContentfulTimelineFields
       }
     }
     backgroundColor
