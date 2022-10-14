@@ -11,7 +11,6 @@ import isEmpty from 'lodash/isEmpty'
 import ContextClientSide from '../Context/ContextClientSide'
 import Context from '../Context/ContextPage'
 import Loadable from '@loadable/component'
-import ConnectMetaMask from './ConnectMetaMask'
 
 const FoxAnimation = Loadable(() => import('./FoxAnimation/'))
 
@@ -268,11 +267,6 @@ const HeroContainerComponent = props => {
                   </HeroSideImage>
                 </HeightSlide>
               ) : null}
-              {isSDK && (
-                <HeroConnectCTA>
-                  <ConnectMetaMask></ConnectMetaMask>
-                </HeroConnectCTA>
-              )}
               {description && (
                 <HeroDescription isFaq={isFaq}>
                   <div dangerouslySetInnerHTML={{ __html: description }} />
@@ -653,6 +647,15 @@ const HeroImageTextContainer = styled.div`
   position: relative;
   transition: all 0.5s ease;
   z-index: 1;
+
+  .contentWidth70 & {
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      width: 70%;
+      img {
+        width: 50%;
+      }
+    }
+  }
 
   .scrolled.custom-newsHero &{
     flex-direction: row;
