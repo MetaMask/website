@@ -153,12 +153,6 @@ const ImageWrapper = styled.div`
     object-fit: cover;
   }
 
-  .cardImgHeight100 & {
-    img {
-      height: 100%;
-    }
-  }
-
   ${({ theme }) =>
     `
   @media (max-width: ${theme.device.mobileMediaMax}){
