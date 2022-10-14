@@ -13,6 +13,7 @@ const FullWidthCta = props => {
   const {
     ctas,
     hubSpotForm,
+    embedHtml,
     description,
     showLogoAnimation,
     backgroundColor,
@@ -54,11 +55,18 @@ const FullWidthCta = props => {
                 <div dangerouslySetInnerHTML={{ __html: description }} />
               </Description>
             ) : null}
-            {hubSpotForm ? (
-              <>{contentfulModuleToComponent(hubSpotForm)}</>
-            ) : null}
             {showLogoAnimation && customClass === 'metaMaskUninstalled' ? (
               <LogoAnimation logoType={logoType} />
+            ) : null}
+            {hubSpotForm ? (
+              <div id={'hubspot-container'}>
+                {contentfulModuleToComponent(hubSpotForm)}
+              </div>
+            ) : null}
+            {embedHtml ? (
+              <div id={'html-container'}>
+                {contentfulModuleToComponent(embedHtml)}
+              </div>
             ) : null}
             {ctas ? (
               <CTAWrapper>
@@ -80,6 +88,7 @@ export default withTheme(FullWidthCta)
 
 FullWidthCta.propTypes = {
   hubSpotForm: PropTypes.object,
+  embedHtml: PropTypes.object,
   headline: PropTypes.string,
   description: PropTypes.string,
   ctas: PropTypes.arrayOf(PropTypes.object),
@@ -131,10 +140,129 @@ const FullWidthCtaInner = styled.div`
   display: block;
 
   .metaMaskUninstalled & {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
     #logo-container{
+      width: 30%;
       padding: 24px 0 8px 0;
       @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
         padding: 24px 0;
+        display: none;
+      }
+    }
+    
+    #html-container {
+      width: 60%;
+      background-color: #F2F4F6;
+      border-radius: 8px;
+      padding-bottom: 32px;
+      margin-left: auto;
+      
+      .dark-mode & {
+        background-color: ${({ theme }) => theme.text.dark};
+      }
+      
+      .uninstallSurvey {
+        padding: 32px;
+        border-radius: 8px;
+        text-align: left;
+        background-color: #F2F4F6;
+        .dark-mode & {
+          background-color: ${({ theme }) => theme.text.dark};
+        }
+        > div {
+          padding-bottom: 16px;
+          display: flex;
+        }
+        h6 {
+          margin-top: 0;
+          margin-bottom: 16px;
+        }
+        label {
+          font-size: 16px;
+          line-height: 24px;
+          position: relative;
+          cursor: pointer;
+          display: flex;
+          align-items: flex-start;
+          &:before {
+            content: '';
+            -webkit-appearance: none;
+            background-color: transparent;
+            border: 1px solid #BBC0C5;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            position: relative;
+            vertical-align: middle;
+            cursor: pointer;
+            margin-right: 8px;
+            border-radius: 6px;
+            margin-top: 2px;
+          }
+        }
+        input:checked + label:before { 
+          background-color: #037DD6;
+          border-color: #037DD6;
+        }
+        input:checked + label:after {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 6px;
+          left: 8px;
+          width: 5px;
+          height: 10px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+        }
+        input[type=checkbox] {
+          display: none;
+        }
+      }
+      
+      .buttonSurvey > button {
+        width: calc(100% - 64px);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:disabled {
+          background-color: ${({ theme }) => theme.text.darkGray};
+          cursor: not-allowed;
+        }
+        &:hover:disabled {
+          opacity: 0.8;
+        }
+      }
+      
+      @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+        width: 100%;
+        background-color: transparent;
+        padding-bottom: 0;
+        .dark-mode & {
+          background-color: transparent;
+        }
+        
+        .uninstallSurvey {
+          padding: 24px 42px;
+          h6 {
+            text-align: center;
+          }
+        }
+        
+        .buttonSurvey {
+          padding: 40px 0 20px 0;
+        }
+      }
+      
+      @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+        .uninstallSurvey {
+          padding: 24px;
+        }
       }
     }
   }
@@ -211,14 +339,21 @@ const Description = styled.div`
   }
 
   .metaMaskUninstalled & {
+    margin-bottom: 32px;
     p {
       font-size: 18px;
       line-height: 25px;
+      max-width: 75%;
+      margin-left: auto;
+      margin-right: auto;
     }
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       h2 {
         font-size: 32px;
         padding: 0 32px;
+      }
+      p {
+        max-width: 100%;
       }
     }
 

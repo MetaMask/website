@@ -11,7 +11,6 @@ import isEmpty from 'lodash/isEmpty'
 import ContextClientSide from '../Context/ContextClientSide'
 import Context from '../Context/ContextPage'
 import Loadable from '@loadable/component'
-import ConnectMetaMask from './ConnectMetaMask'
 
 const FoxAnimation = Loadable(() => import('./FoxAnimation/'))
 
@@ -268,11 +267,6 @@ const HeroContainerComponent = props => {
                   </HeroSideImage>
                 </HeightSlide>
               ) : null}
-              {isSDK && (
-                <HeroConnectCTA>
-                  <ConnectMetaMask></ConnectMetaMask>
-                </HeroConnectCTA>
-              )}
               {description && (
                 <HeroDescription isFaq={isFaq}>
                   <div dangerouslySetInnerHTML={{ __html: description }} />
@@ -654,6 +648,15 @@ const HeroImageTextContainer = styled.div`
   transition: all 0.5s ease;
   z-index: 1;
 
+  .contentWidth70 & {
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      width: 70%;
+      img {
+        width: 50%;
+      }
+    }
+  }
+
   .scrolled.custom-newsHero &{
     flex-direction: row;
     justify-content: space-between;
@@ -914,6 +917,10 @@ const HeroSideImage = styled.div`
       theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
   theme.device.twoKResolutionMax}) {
         min-width: 62%;
+
+        .sideImageMinWidth50 & {
+          min-width: 50%;
+        }
       }
 
     @media (max-width: ${({ theme }) =>
@@ -1052,6 +1059,14 @@ const EyebrowWrapper = styled.div`
         margin-bottom: 0;
     `
         : ''}
+  }
+
+  .logoHeight40 & {
+    img {
+      height: 40px;
+      width: auto;
+      margin: unset;
+    }
   }
 `
 

@@ -266,6 +266,9 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
     hubSpotForm {
       ...ContentfulHubSpotFormFields
     }
+    embedHtml {
+      ...ContentfulRichTextFields
+    }
     ctas {
       ... on ContentfulCta {
         ...ContentfulCtaFields
