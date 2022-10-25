@@ -34,11 +34,12 @@ const WRITE_KEY = (params.env == "production") ? PROD_WRITE_KEY : DEV_WRITE_KEY;
        }
     }
     if(reasons.length > 0) {
+      document.getElementById('submitSurvey').style.display = 'none';
       analytics.track('Survey Submitted', {
         survey_type: "mm_ext_uninstall",
         field_reason: reasons,
       });
-      location.href = '/';
+      document.getElementById('uninstall_survey').innerHTML = 'Thank you for your feedback.';
     }
   };
 
