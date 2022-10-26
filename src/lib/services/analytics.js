@@ -13,45 +13,48 @@ const WRITE_KEY = (params.env == "production") ? PROD_WRITE_KEY : DEV_WRITE_KEY;
       app_version: params.av
     });
   }
+}}();
 
-  const checkReasons = function () {
-    const checkboxes = document.getElementsByName('reasons');
-    let count = 0;
-    for (var i=0; i<checkboxes.length; i++) {
-       if (checkboxes[i].checked) {
-          count ++;
-       }
-    }
-    document.getElementById('submitSurvey').disabled = !count;
-  };
+window.addEventListener('load', function () {
+    const checkReasons = function () {
+      const checkboxes = document.getElementsByName('reasons');
+      let count = 0;
+      for (var i=0; i<checkboxes.length; i++) {
+         if (checkboxes[i].checked) {
+            count ++;
+         }
+      }
+      document.getElementById('submitSurvey').disabled = !count;
+    };
+  
+    const submitSurvey = function() {
+      let reasons = [];
+      const checkboxes = document.getElementsByName('reasons');
+      for (let i=0; i<checkboxes.length; i++) {
+         if (checkboxes[i].checked) {
+            reasons.push(checkboxes[i].value);
+         }
+      }
+      if(reasons.length > 0) {
+        document.getElementById('submitSurvey').style.display = 'none';
+        analytics.track('Survey Submitted', {
+          survey_type: "mm_ext_uninstall",
+          field_reason: reasons,
+        });
+        document.getElementById('uninstall_survey').innerHTML = 'Thank you for your feedback.';
+      }
+    };
 
-  const submitSurvey = function() {
-    let reasons = [];
-    const checkboxes = document.getElementsByName('reasons');
-    for (let i=0; i<checkboxes.length; i++) {
-       if (checkboxes[i].checked) {
-          reasons.push(checkboxes[i].value);
-       }
-    }
-    if(reasons.length > 0) {
-      document.getElementById('submitSurvey').style.display = 'none';
-      analytics.track('Survey Submitted', {
-        survey_type: "mm_ext_uninstall",
-        field_reason: reasons,
-      });
-      document.getElementById('uninstall_survey').innerHTML = 'Thank you for your feedback.';
-    }
-  };
-
-  setTimeout(function () {
     const checkboxes = document.getElementsByName('reasons');
     for (let i=0; i<checkboxes.length; i++) {
       checkboxes[i].onchange = checkReasons;
     }
+    
     const submitSurveyButton = document.getElementById('submitSurvey');
     if(submitSurveyButton) {
-      submitSurveyButton.onclick = submitSurvey;
+      submitSurveyButton.addEventListener('click', function () {
+        submitSurvey()
+      })      
     }
-  }, 1000);
-}}();
+});
 `
