@@ -1,7 +1,7 @@
-Contact: mailto:security@metamask.io
-Expires: 2022-12-31T23:59:00.000Z
+Contact: mailto:metamask.security@consensys.net
+Expires: 2023-10-26T13:00:00.000Z
 Encryption: https://metamask.io/pgp-key.txt
-Preferred-Languages: en
+Preferred-Languages: en, es, fa
 Canonical: https://metamask.io/.well-known/security.txt
-Policy: https://metamask.io/security
+Policy: https://consensys.net/security/
 Hiring: https://consensys.net/careers/
