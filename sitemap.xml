@@ -36,6 +36,7 @@
 <url> <loc>https://metamask.io/faqs/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/1559/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/about/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/developers/snapshot-snap-custom-notifications-for-on-chain-activities/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/building-an-extensible-world-with-meta-mask-grants-dao/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/security/using-lava-moat-to-solve-software-supply-chain-security/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/understanding-and-avoiding-crypto-honeypot-scams/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
