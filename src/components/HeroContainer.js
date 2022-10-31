@@ -49,7 +49,7 @@ const HeroContainerComponent = props => {
   const pathname = location.pathname.replace(/\/?$/, '/')
   const isHome = pathname === '/'
   const isAbout = pathname === '/about/'
-  const isFlask = pathname === '/flask/'
+  const isFlask = ['/flask/', '/flask-v2/'].includes(pathname)
   const isSDK = pathname === '/sdk/'
   const isInstitutions = pathname === '/institutions/'
   const isInstitutionalChild =
@@ -970,6 +970,13 @@ const HeroSideImage = styled.div`
         height: 320px !important;
     `
         : ''}
+  }
+
+  .image-m-250-0 & {
+    margin: 100px 0;
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      margin: 250px 0;
+    }
   }
 `
 

@@ -98,7 +98,17 @@ export const EyebrowStyle = styled.div`
     font-size: 13px;
     line-height: 1.1;
   }
+  .eyebrowSize18 & {
+    font-size: 18px;
+    line-height: 25.31px;
+  }
   .eyebrowLetterSpacing3 & {
     letter-spacing: 3px;
+  }
+  .eyebrowLetterSpacingNormal & {
+    letter-spacing: normal;
+  }
+  .eyebrowPurple & {
+    color: ${({ theme }) => theme.lightPurple};
   }
 `

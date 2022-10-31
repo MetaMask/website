@@ -37,7 +37,7 @@ const Button = props => {
           <Image src={iconUrl} />
         </Icon>
       ) : null}
-      <span>{text}</span>
+      <ButtonText>{text}</ButtonText>
       {iconPosition === 'end' && iconUrl ? (
         <Icon hasBg>
           <Image src={iconUrl} />
@@ -174,5 +174,13 @@ const ButtonWrapper = styled(Link)`
   .theme-dark &{
     min-height: 42px;
     padding: 6px 24px;
+  }
+  .cta-w-377 & {
+    max-width: 377px;
+  }
+`
+const ButtonText = styled.span`
+  .cta-p-59 & {
+    padding: 0 59px;
   }
 `
