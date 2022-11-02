@@ -56,7 +56,39 @@ if (env.errors) {
       'gatsby-plugin-sharp',
       `gatsby-plugin-styled-components`,
       'gatsby-transformer-sharp',
-      'gatsby-transformer-remark',
+      {
+        resolve: `gatsby-transformer-remark`,
+        options: {
+          plugins: [
+            'gatsby-remark-prismjs-copy-button',
+            {
+              resolve: `gatsby-remark-prismjs`,
+              options: {
+                classPrefix: "language-",
+                inlineCodeMarker: null,
+                aliases: {},
+                showLineNumbers: false,
+                noInlineHighlight: false,
+                languageExtensions: [
+                  {
+                    language: "superscript",
+                    extend: "javascript",
+                    definition: {
+                      superscript_types: /(SuperType)/,
+                    },
+                    insertBefore: {
+                      function: {
+                        superscript_keywords: /(superif|superelse)/,
+                      },
+                    },
+                  },
+                ],
+                escapeEntities: {},
+              },
+            },
+          ],
+        },
+      },
       'gatsby-plugin-root-import',
       'gatsby-transformer-inline-svg',
       'gatsby-plugin-meta-redirect',
