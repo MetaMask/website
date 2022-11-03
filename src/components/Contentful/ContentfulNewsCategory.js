@@ -18,6 +18,15 @@ function ContentfulNewsCategory(props) {
         nodes {
           title
           subtitle
+          publishDate(formatString: "DD MMM YYYY")
+          author {
+            name
+            avatar {
+              fluid(maxWidth: 480, quality: 100, toFormat: WEBP) {
+                ...GatsbyContentfulFluid_withWebp
+              }
+            }
+          }
           categories {
             name
             contentful_id

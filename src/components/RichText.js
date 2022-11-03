@@ -52,7 +52,7 @@ const RichTextWrapper = styled.div`
     }
   }
 
-  pre[class *='line-numbers'] {
+  pre[class*='line-numbers'] {
     padding: 2rem 1.5rem 1.5rem 2rem;
   }
 
