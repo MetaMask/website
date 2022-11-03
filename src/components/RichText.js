@@ -46,6 +46,14 @@ const RichTextWrapper = styled.div`
   pre[class*='language-'] {
     font-size: 0.85rem;
     padding: 2rem 1.5rem 1.5rem;
+
+    & > span.line-numbers-rows {
+      top: 2rem;
+    }
+  }
+
+  pre[class *='line-numbers'] {
+    padding: 2rem 1.5rem 1.5rem 2rem;
   }
 
   .gatsby-highlight pre[class*='language-']::before {
@@ -64,15 +72,15 @@ const RichTextWrapper = styled.div`
     text-shadow: none;
     top: 0px;
   }
-  .gatsby-highlight pre[class='language-javascript']::before {
+  .gatsby-highlight pre[class~='language-javascript']::before {
     content: 'js';
     background: #f7df1c;
   }
-  .gatsby-highlight pre[class='language-js']::before {
+  .gatsby-highlight pre[class~='language-js']::before {
     content: 'js';
     background: #f7df1c;
   }
-  .gatsby-highlight pre[class='language-css']::before {
+  .gatsby-highlight pre[class~='language-css']::before {
     content: 'css';
     background: #ff9800;
   }
