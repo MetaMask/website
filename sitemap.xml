@@ -36,6 +36,7 @@
 <url> <loc>https://metamask.io/faqs/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/1559/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/about/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/latest/how-we-selected-bridge-providers-for-meta-mask-bridges/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/revoke-snap-revoking-leftover-approvals-on-erc-20-token-contracts/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/aleph-zero-snap-onboarding-web-3-users-to-aleph-zero-network/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/snapshot-snap-custom-notifications-for-on-chain-activities/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
