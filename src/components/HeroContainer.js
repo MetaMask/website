@@ -17,6 +17,7 @@ const FoxAnimation = Loadable(() => import('./FoxAnimation/'))
 const HeroContainerComponent = props => {
   const {
     backgroundImage,
+    backgroundImageDarkMode,
     headline,
     hideHeadline,
     description,
@@ -148,7 +149,12 @@ const HeroContainerComponent = props => {
         headlineBorderBottom={headlineBorderBottom}
         isStyleCenterSimple={isStyleCenterSimple}
         showFavIcon={showFavIcon}
-        image={!isThankYou && backgroundImage}
+        image={
+          !isThankYou &&
+          (isDarkMode && backgroundImageDarkMode
+            ? backgroundImageDarkMode
+            : backgroundImage)
+        }
         ref={heroContainerRef}
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor,
@@ -159,7 +165,14 @@ const HeroContainerComponent = props => {
       >
         {isThankYou && backgroundImage ? (
           <BackgroundImageContain>
-            <img alt={headline} src={backgroundImage} />
+            <img
+              alt={headline}
+              src={
+                isDarkMode && backgroundImageDarkMode
+                  ? backgroundImageDarkMode
+                  : backgroundImage
+              }
+            />
           </BackgroundImageContain>
         ) : null}
         <ContentWrapper customClass={customClass}>
@@ -337,6 +350,7 @@ export default withTheme(HeroContainerComponent)
 
 HeroContainerComponent.propTypes = {
   backgroundImage: PropTypes.string,
+  backgroundImageDarkMode: PropTypes.string,
   eyebrowLogo: PropTypes.object,
   eyebrowMobileLogo: PropTypes.object,
   sideImageUrl: PropTypes.string,
@@ -726,9 +740,6 @@ const HeroTitle = styled.h1`
   padding-top: 20px;
   padding-bottom: 20px;
   transition: all 0.5s ease;
-  body.dark-mode .custom-newsHero &{
-    color: ${({ theme }) => theme.textColor};
-  }
 
   .newsHero & {
     font-size: 40px !important;
@@ -819,23 +830,31 @@ const HeroDescription = styled.div`
 
     a {
       color: #535a61;
+      body.dark-mode & {
+        color: ${({ theme }) => theme.white};
+      }
 
       svg {
         margin-right: 16px;
         path {
           fill: #535a61;
+          body.dark-mode & {
+            fill: ${({ theme }) => theme.white};
+          }
+          transition: all ease 0.5s;
         }
       }
 
       &:hover {
-        color: ${({ theme }) => theme.primaryColor};
+        color: ${({ theme }) => theme.primaryColor} !important;
 
         svg {
           path {
-            fill: ${({ theme }) => theme.primaryColor};
+            fill: ${({ theme }) => theme.primaryColor} !important;
           }
         }
       }
+      transition: all ease 0.5s;
     }
   }
 

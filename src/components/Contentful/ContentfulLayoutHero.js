@@ -7,6 +7,7 @@ const ContentfulLayoutHero = props => {
   const {
     moduleConfig: {
       backgroundImage,
+      backgroundImageDarkMode,
       ctas,
       description,
       headline,
@@ -35,6 +36,7 @@ const ContentfulLayoutHero = props => {
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
   const bgUrl = parseContentfulAssetUrl(backgroundImage)
+  const bgDarkModeUrl = parseContentfulAssetUrl(backgroundImageDarkMode)
   const sideImageUrl = parseContentfulAssetUrl(sideImage)
   const sideImageDarkModeUrl = parseContentfulAssetUrl(sideImageDarkMode)
   const backgroundColorMobile = sideImageFlex ? 'white' : ''
@@ -50,6 +52,7 @@ const ContentfulLayoutHero = props => {
       eyebrowLogoDarkMode={eyebrowLogoDarkMode}
       eyebrowMobileLogoDarkMode={eyebrowMobileLogoDarkMode}
       backgroundImage={bgUrl || ''}
+      backgroundImageDarkMode={bgDarkModeUrl || ''}
       modules={modules}
       sideImageUrl={sideImageUrl || ''}
       sideImageDarkModeUrl={sideImageDarkModeUrl || ''}
@@ -79,6 +82,7 @@ ContentfulLayoutHero.propTypes = {
     eyebrowMobileLogo: PropTypes.object,
     sideImage: PropTypes.object,
     backgroundImage: PropTypes.object,
+    backgroundImageDarkMode: PropTypes.object,
     ctaLink: PropTypes.string,
     ctaText: PropTypes.string,
     backgroundColor: PropTypes.string,
