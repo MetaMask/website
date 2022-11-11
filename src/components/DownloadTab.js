@@ -33,8 +33,6 @@ const TabContentDownload = props => {
     } else if (isOpera) {
       ctasDownload = [ctaOpera]
     } else if (isEdge) {
-      ctasHeading =
-        'We are aware that Edge is particularly slow at approving updates to MetaMask. For the latest version, we recommend using Firefox or Chrome.'
       ctasDownload = [ctaEdge]
     } else {
       ctasHeading = `${browserName} is not supported. Please download a browser that supports MetaMask.`
