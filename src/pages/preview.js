@@ -23,8 +23,13 @@ class PreviewPage extends React.PureComponent {
 
   getModule = async () => {
     const { location } = this.props
-    if (location && location.search && qs.parse(location.search).module_id) {
-      const id = qs.parse(location.search).module_id
+    const queryParams = qs.parse(location.search ?? '')
+    if (queryParams.module_id) {
+      if (queryParams.environment && queryParams.environment === "master") {
+        delete queryParams.environment
+        return window.location.href = `https://metamask.io${location.pathname}?${qs.stringify(queryParams)}`
+      }
+      const id = queryParams.module_id
       const moduleConfig = await fetchContentfulModule(id)
       return this.setState({
         loading: false,
