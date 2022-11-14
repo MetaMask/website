@@ -5,11 +5,11 @@ import flatMap from 'lodash/flatMap'
 import {
   CONTENTFUL_SPACE_ID,
   CONTENTFUL_ENVIRONMENT,
-  CONTENTFUL_API_KEY,
-  CONTENTFUL_HOST,
+  CONTENTFUL_PREVIEW_API_KEY,
+  CONTENTFUL_PREVIEW_HOST,
 } from '../config'
 
-export const fetchContentfulData = dataType => (id, host = CONTENTFUL_HOST) => {
+export const fetchContentfulData = dataType => (id, host = CONTENTFUL_PREVIEW_HOST) => {
   if (dataType !== 'module' && dataType !== 'asset') {
     return {
       error: {
@@ -32,7 +32,7 @@ export const fetchContentfulData = dataType => (id, host = CONTENTFUL_HOST) => {
   const resource_url =
     `/spaces/${CONTENTFUL_SPACE_ID}` +
     `/environments/${CONTENTFUL_ENVIRONMENT}` +
-    `/${resource}/${id}?access_token=${CONTENTFUL_API_KEY}`
+    `/${resource}/${id}?access_token=${CONTENTFUL_PREVIEW_API_KEY}`
 
   return axios
     .get('https://' + host + resource_url)
