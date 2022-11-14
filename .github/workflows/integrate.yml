@@ -17,17 +17,6 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Create production env file
-        run: |
-          touch gatsby.production.env
-          echo GATSBY_CONTENTFUL_API_KEY =${{ secrets.GATSBY_CONTENTFUL_API_KEY }} >> gatsby.production.env
-          echo GATSBY_CONTENTFUL_DOWNLOAD_LOCAL =${{ secrets.GATSBY_CONTENTFUL_DOWNLOAD_LOCAL }} >> gatsby.production.env
-          echo GATSBY_CONTENTFUL_ENVIRONMENT =${{ secrets.GATSBY_CONTENTFUL_ENVIRONMENT }} >> gatsby.production.env
-          echo GATSBY_CONTENTFUL_HOST =${{ secrets.GATSBY_CONTENTFUL_HOST }} >> gatsby.production.env
-          echo GATSBY_CONTENTFUL_SPACE_ID =${{ secrets.GATSBY_CONTENTFUL_SPACE_ID }} >> gatsby.production.env
-          echo GATSBY_GA_ID =${{ secrets.GATSBY_GA_ID }} >> gatsby.production.env
-          echo GATSBY_GTM_ID =${{ secrets.GATSBY_GTM_ID }} >> gatsby.production.env
-
       - name: Create development env file
         run: |
           touch gatsby.development.env
@@ -39,6 +28,8 @@ jobs:
           echo GATSBY_GA_ID =${{ secrets.GATSBY_GA_ID }} >> gatsby.development.env
           echo GATSBY_GTM_ID =${{ secrets.GATSBY_GTM_ID }} >> gatsby.development.env
           echo GATSBY_CONSENSYS_HOST =${{ secrets.GATSBY_CONSENSYS_HOST }} >> gatsby.development.env
+          echo GATSBY_CONTENTFUL_PREVIEW_HOST =${{ secrets.GATSBY_CONTENTFUL_PREVIEW_HOST }} >> gatsby.development.env
+          echo GATSBY_CONTENTFUL_PREVIEW_API_KEY =${{ secrets.GATSBY_CONTENTFUL_PREVIEW_API_KEY }} >> gatsby.development.env
 
       - name: Read .nvmrc
         run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
