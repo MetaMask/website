@@ -67,6 +67,12 @@ const SEO = props => {
               }
             : {},
           ...(metaTags || []),
+          urlImageMetaClean
+            ? {
+                name: 'twitter:card',
+                content: 'summary_large_image',
+              }
+            : {},
         ]
 
         const link = [
