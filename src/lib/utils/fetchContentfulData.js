@@ -9,7 +9,10 @@ import {
   CONTENTFUL_PREVIEW_HOST,
 } from '../config'
 
-export const fetchContentfulData = dataType => (id, host = CONTENTFUL_PREVIEW_HOST) => {
+export const fetchContentfulData = dataType => (
+  id,
+  host = CONTENTFUL_PREVIEW_HOST
+) => {
   if (dataType !== 'module' && dataType !== 'asset') {
     return {
       error: {
