@@ -49,6 +49,7 @@ const HeroContainerComponent = props => {
   const location = useLocation()
   const pathname = location.pathname.replace(/\/?$/, '/')
   const isHome = pathname === '/'
+  const isNewsList = pathname === '/news/'
   const isAbout = pathname === '/about/'
   const isFlask = pathname === '/flask/'
   const isSDK = pathname === '/sdk/'
@@ -108,10 +109,11 @@ const HeroContainerComponent = props => {
   }
 
   React.useEffect(() => {
+    if (!isNewsList) return
     window.addEventListener('scroll', onScroll)
 
     return () => {
-      window.addEventListener('scroll', onScroll)
+      window.removeEventListener('scroll', onScroll)
     }
   }, [])
 
