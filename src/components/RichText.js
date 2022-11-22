@@ -1,15 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 import kebabCase from 'lodash/kebabCase'
+import Markdown from './Markdown'
 
 const RichText = props => {
-  const { moduleId, title, html, displayTitle = true } = props
+  const { moduleId, title, html, displayTitle = true, content } = props
+
   return (
     <RichTextWrapper id={moduleId || kebabCase(title || '')}>
       {displayTitle && <RichTextTitle> {title} </RichTextTitle>}
       {html && (
         <HTML className="richText" dangerouslySetInnerHTML={{ __html: html }} />
-      )}
+        )}
+      {(!html && content) && <Markdown content={content} />}
     </RichTextWrapper>
   )
 }
@@ -19,33 +22,10 @@ export default RichText
 const RichTextWrapper = styled.div`
   padding: 0;
 
-  .gatsby-remark-prismjs-copy-button-container {
-    left: -3px;
-
-    & > div.gatsby-remark-prismjs-copy-button {
-      color: black;
-      padding: 3px 8px 2px;
-      opacity: 0.3;
-      transition: all 0.2s ease-in-out;
-
-      &:hover {
-        opacity: 1;
-        background-color: lightgray;
-      }
-
-      @media (max-width: 600px) {
-        visibility: hidden;
-      }
-    }
-  }
-
-  .gatsby-highlight {
-    position: relative;
-  }
-
   pre[class*='language-'] {
     font-size: 0.85rem;
     padding: 2rem 1.5rem 1.5rem;
+    margin: 0 0 1.45rem;
 
     & > span.line-numbers-rows {
       top: 2rem;
@@ -53,10 +33,14 @@ const RichTextWrapper = styled.div`
   }
 
   pre[class*='line-numbers'] {
-    padding: 2rem 1.5rem 1.5rem 2rem;
+    padding: 2rem 1.5rem 1.5rem 3rem;
+    & > code[class*='language-']::before {
+      left: 0;
+      top: -2rem;
+    }
   }
 
-  .gatsby-highlight pre[class*='language-']::before {
+  pre > code[class*='language-']::before {
     border-radius: 0px 0px 4px 4px;
     color: black;
     font-size: 0.75rem;
@@ -70,33 +54,88 @@ const RichTextWrapper = styled.div`
     text-align: right;
     text-transform: uppercase;
     text-shadow: none;
-    top: 0px;
+    top: 0;
   }
-  .gatsby-highlight pre[class~='language-javascript']::before {
+  code[class*='language-'] {
+    span.token.operator {
+      background-color: transparent;
+    }
+    font-family: inherit;
+    font-size: 13.6px;
+    background-color: #fcfaf6;
+    text-shadow: none;
+    body.dark-mode & {
+      background-color: #fcfaf6;
+    }
+  }
+  pre > code[class~='language-javascript']::before {
     content: 'js';
     background: #f7df1c;
   }
-  .gatsby-highlight pre[class~='language-js']::before {
+  pre > code[class~='language-js']::before {
     content: 'js';
     background: #f7df1c;
   }
-  .gatsby-highlight pre[class~='language-css']::before {
+  pre > code[class~='language-ts']::before {
+    content: 'ts';
+    background: #005a9c;
+    color: #fff;
+  }
+  pre > code[class~='language-typescript']::before {
+    content: 'ts';
+    background: #005a9c;
+    color: #fff;
+  }
+  pre > code[class~='language-css']::before {
     content: 'css';
     background: #ff9800;
   }
-  .gatsby-highlight pre[class~='language-html']::before {
+  pre > code[class~='language-html']::before {
     content: 'html';
     background: #005a9c;
   }
 
   pre {
+    position: relative;
     background-color: #fcfaf6;
-    & > code > span {
-      background-color: transparent !important;
+  }
+  .btn-copy {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    top: 28px;
+    margin-top: -28px;
+    z-index: 2;
+    button {
+      border: none;
+      cursor: pointer;
+      border-radius: 3px;
+      font-size: 13px;
+      background-color: transparent;
+      opacity: 0.5;
+      padding: 3px 8px;
+      transition: all 0.2s ease-in-out;
+      :hover {
+        opacity: 1;
+        background-color: lightgray;
+      }
+    }
+    transition: all 0.5s ease-in-out;
+    &.copying {
+      opacity: 0.6;
+      animation: opacity-hide-show 1.6s;
     }
   }
   code[class='language-text'] {
     background-color: #f5f5f5;
+  }
+  code {
+    body.dark-mode & {
+      background-color: darkgray;
+    }
+    &::after {
+      content: '';
+    }
   }
 `
 
