@@ -17,7 +17,7 @@ class PreviewPage extends React.PureComponent {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.getModule()
   }
 
