@@ -55,6 +55,8 @@ class PreviewPage extends React.PureComponent {
       previewMode: true,
     }
 
+    if (loading) return <div>Loading...</div>
+
     return (
       <Layout>
         {internal && internal.type !== 'ContentfulLayout' ? (

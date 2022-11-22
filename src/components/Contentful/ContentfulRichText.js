@@ -4,15 +4,16 @@ import RichText from '../RichText'
 
 const ContentfulRichText = props => {
   const {
-    moduleConfig: { title, htmlBody, displayTitle, moduleId, previewMode },
+    moduleConfig: { title, htmlBody, displayTitle, moduleId, previewMode, previewContent },
   } = props
 
-  const { childMarkdownRemark: { html } = {} } = htmlBody || {}
+  const { childMarkdownRemark: { html } = {}, content } = htmlBody || {}
 
   return (
     <RichText
       title={title}
       html={previewMode ? htmlBody : html}
+      content={previewMode ? previewContent : content}
       displayTitle={displayTitle}
       moduleId={moduleId}
     />
@@ -33,6 +34,7 @@ ContentfulRichText.propTypes = {
         }),
         PropTypes.string,
       ]),
+      previewContent: PropTypes.string,
       hasModuleContainer: PropTypes.bool,
       displayTitle: PropTypes.bool,
       moduleId: PropTypes.string,
