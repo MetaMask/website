@@ -94,6 +94,16 @@ const RichTextWrapper = styled.div`
     content: 'html';
     background: #005a9c;
   }
+  pre > code[class~='language-solidity']::before {
+    content: 'sol';
+    background: #636363;
+    color: #fff;
+  }
+  pre > code[class~='language-sol']::before {
+    content: 'sol';
+    background: #636363;
+    color: #fff;
+  }
 
   pre {
     position: relative;

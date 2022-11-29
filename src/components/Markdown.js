@@ -5,6 +5,7 @@ import rehypeRaw from 'rehype-raw'
 import Prism from 'prismjs'
 import remarkGfm from 'remark-gfm'
 import 'prismjs/components/prism-typescript'
+import 'prismjs/components/prism-solidity'
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
 
 const CopyButton = ({ content }) => {
