@@ -11,8 +11,8 @@ const RichText = props => {
       {displayTitle && <RichTextTitle> {title} </RichTextTitle>}
       {html && (
         <HTML className="richText" dangerouslySetInnerHTML={{ __html: html }} />
-        )}
-      {(!html && content) && <Markdown content={content} />}
+      )}
+      {!html && content && <Markdown content={content} />}
     </RichTextWrapper>
   )
 }
@@ -93,6 +93,16 @@ const RichTextWrapper = styled.div`
   pre > code[class~='language-html']::before {
     content: 'html';
     background: #005a9c;
+  }
+  pre > code[class~='language-solidity']::before {
+    content: 'sol';
+    background: #636363;
+    color: #fff;
+  }
+  pre > code[class~='language-sol']::before {
+    content: 'sol';
+    background: #636363;
+    color: #fff;
   }
 
   pre {
