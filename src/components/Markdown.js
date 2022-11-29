@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import Prism from 'prismjs'
+import remarkGfm from 'remark-gfm'
 import 'prismjs/components/prism-typescript'
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
 
@@ -30,6 +31,7 @@ const Markdown = ({ content }) => {
   return (
     <ReactMarkdown
       children={content}
+      remarkPlugins={[remarkGfm]}
       rehypePlugins={[rehypeRaw]}
       components={{
         pre(props) {
@@ -38,7 +40,7 @@ const Markdown = ({ content }) => {
           const codeScript = String(children).replace(/\n$/, '')
           let lineNumbers = false
           let langFromMd = className
-          let langDetected;
+          let langDetected
           if (className?.includes('showLineNumbers')) {
             lineNumbers = true
           }
@@ -48,11 +50,14 @@ const Markdown = ({ content }) => {
               langFromMd = undefined
             }
           }
-          if(langFromMd) {
+          if (langFromMd) {
             langDetected = langFromMd
           } else {
             const langSubset = ['html', 'css', 'javascript', 'typescript']
-            const { language: hlLang } = hljs.highlightAuto(codeScript, langSubset)
+            const { language: hlLang } = hljs.highlightAuto(
+              codeScript,
+              langSubset
+            )
             langDetected = `language-${hlLang || 'text'}`
           }
           return (

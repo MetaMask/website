@@ -11,8 +11,8 @@ const RichText = props => {
       {displayTitle && <RichTextTitle> {title} </RichTextTitle>}
       {html && (
         <HTML className="richText" dangerouslySetInnerHTML={{ __html: html }} />
-        )}
-      {(!html && content) && <Markdown content={content} />}
+      )}
+      {!html && content && <Markdown content={content} />}
     </RichTextWrapper>
   )
 }
