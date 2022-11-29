@@ -746,9 +746,7 @@ export const ContentfulNewsFields = graphql`
     }
     publishDate
     content {
-      childMarkdownRemark {
-        html
-      }
+      content
     }
     categories {
       ... on ContentfulNewsCategory {
