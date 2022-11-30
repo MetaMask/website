@@ -744,7 +744,10 @@ export const ContentfulNewsFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
-    publishDate
+    publishDate(formatString: "MMMM D, YYYY")
+    author {
+      name
+    }
     content {
       content
     }
