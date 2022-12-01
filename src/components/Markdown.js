@@ -1,7 +1,6 @@
 import hljs from 'highlight.js'
 import React, { useEffect, useState } from 'react'
 import Prism from 'prismjs'
-import remarkGfm from 'remark-gfm'
 import 'prismjs/components/prism-typescript'
 import 'prismjs/components/prism-solidity'
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
@@ -31,7 +30,6 @@ const Markdown = ({ content }) => {
   return (
     <ParseMD
       children={content}
-      remarkPlugins={[remarkGfm]}
       components={{
         pre(props) {
           const element = props.children[0].props

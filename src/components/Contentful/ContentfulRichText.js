@@ -19,7 +19,7 @@ const ContentfulRichText = props => {
   return (
     <RichText
       title={title}
-      html={previewMode ? htmlBody : html}
+      html={previewMode ? undefined : html}
       content={previewMode ? htmlBody : content}
       displayTitle={displayTitle}
       moduleId={moduleId}
