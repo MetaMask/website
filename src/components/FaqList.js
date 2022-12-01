@@ -4,7 +4,7 @@ import styled, { withTheme } from 'styled-components'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 
 const FaqList = props => {
-  const { list, containerBgColor } = props
+  const { list, containerBgColor, previewMode = false } = props
   if (!list.length) return null
   return (
     <Wrapper>
@@ -12,6 +12,7 @@ const FaqList = props => {
         contentfulModuleToComponent({
           ...m,
           containerBgColor: containerBgColor,
+          previewMode,
         })
       )}
     </Wrapper>
@@ -23,6 +24,7 @@ export default withTheme(FaqList)
 FaqList.propTypes = {
   list: PropTypes.array.isRequired,
   containerBgColor: PropTypes.string,
+  previewMode: PropTypes.bool,
 }
 
 const Wrapper = styled.div`

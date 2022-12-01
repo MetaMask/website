@@ -4,10 +4,18 @@ import styled, { withTheme } from 'styled-components'
 import PlusIcon from '../images/icons/icon-plus.svg'
 import AnimateHeight from 'react-animate-height'
 import Context from '../Context/ContextPage'
+import ParseMD from './ParseMD'
 
 const Faq = props => {
   const { faq: faqContextValue } = React.useContext(Context)
-  const { question, answer, id, backgroundColor, containerBgColor } = props
+  const {
+    question,
+    answer,
+    id,
+    backgroundColor,
+    containerBgColor,
+    previewMode = false,
+  } = props
   const { idFaqActive: activeId, setIdFaqActive: setActiveId } =
     faqContextValue || {}
   const isActive = activeId === id
@@ -26,10 +34,14 @@ const Faq = props => {
         <AnswerItem>
           <AnimateHeight
             duration={500}
-            height={isActive ? 'auto' : '0'} // see props documentation below
+            height={isActive ? 'auto' : 0} // see props documentation below
           >
             <AnswerItemInner containerBgColor={containerBgColor}>
-              <div dangerouslySetInnerHTML={{ __html: answer }} />
+              {previewMode ? (
+                <ParseMD>{answer}</ParseMD>
+              ) : (
+                <div dangerouslySetInnerHTML={{ __html: answer }} />
+              )}
             </AnswerItemInner>
           </AnimateHeight>
         </AnswerItem>
@@ -43,6 +55,7 @@ export default withTheme(Faq)
 Faq.propTypes = {
   question: PropTypes.string,
   answer: PropTypes.string,
+  previewMode: PropTypes.bool,
 }
 
 const FaqItem = styled.div`

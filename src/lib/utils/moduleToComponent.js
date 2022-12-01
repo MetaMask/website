@@ -1,5 +1,6 @@
 import React from 'react'
 import * as ContenfulComponents from '../../components/Contentful'
+import { convertContentfulPreviewTypename } from './fetchContentfulData'
 
 /**
  * @name contentfulModuleToComponent
@@ -12,16 +13,28 @@ import * as ContenfulComponents from '../../components/Contentful'
  */
 export const contentfulModuleToComponent = (moduleConfig = {}) => {
   if (!moduleConfig) return null
-  const { internal, contentful_id } = moduleConfig
-  if (!internal || !internal.type) return null
-  const Component = ContenfulComponents[internal.type] // route data to component based on auto generated type by Contentful CMS
+
+  let __typename = undefined
+  let __id = undefined
+
+  if (moduleConfig.previewMode) {
+    __id = moduleConfig.sys?.id
+    __typename = convertContentfulPreviewTypename(moduleConfig.__typename)
+  } else {
+    const { internal, contentful_id } = moduleConfig
+    __typename = internal?.type
+    __id = contentful_id
+  }
+
+  if (!__typename) return null
+  const Component = ContenfulComponents[__typename] // route data to component based on auto generated type by Contentful CMS
   if (!Component) {
-    console.log(`No component defined for - ${internal.type} CMS model.
+    console.log(`No component defined for - ${__typename} CMS model.
       Check that CMS component names have not been changed.
       If new content-type, define in components/Contentful/[type]
     `)
     return null
   }
-  const key = `${internal.type}__${contentful_id}` // React key for component
+  const key = `${__typename}__${__id}` // React key for component
   return <Component key={key} moduleConfig={moduleConfig} />
 }

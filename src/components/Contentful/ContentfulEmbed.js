@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { SectionTitle } from '../StyledGeneral'
 import Embed from '../Embed'
 import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
 const ContentfulEmbed = props => {
   const {
@@ -12,13 +13,13 @@ const ContentfulEmbed = props => {
       title,
       displayTitle,
       moduleId,
-      previewMode,
+      previewMode = false,
       layoutType,
       playOnPopup,
       thumbnail,
     },
   } = props
-  const thumbnailUrl = parseContentfulAssetUrl(thumbnail)
+  const thumbnailUrl = parseContentfulAssetUrl(thumbnail, previewMode)
   return (
     <Wrapper id={moduleId} layoutType={layoutType}>
       {title && displayTitle ? <Title>{title}</Title> : null}
@@ -31,7 +32,19 @@ const ContentfulEmbed = props => {
   )
 }
 
-export default ContentfulEmbed
+const parsePreviewData = data => {
+  data = data.moduleConfig.previewContent || data.moduleConfig
+
+  const dataUpdate = {
+    moduleConfig: {
+      previewMode: true,
+      ...data,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(ContentfulEmbed)
 
 ContentfulEmbed.propTypes = {
   moduleConfig: PropTypes.shape({
