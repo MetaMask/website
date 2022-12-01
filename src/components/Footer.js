@@ -7,7 +7,7 @@ import Wrapper from './ContentWrapper'
 import ColumnWrapper from './ColumnWrapper'
 
 const StyledFooter = props => {
-  const { menus, copyright, logoTitle, logoUrl, logoSvg } = props
+  const { menus, copyright, logoTitle, logoUrl, logoSvg, previewMode } = props
 
   return (
     <FooterContainer>
@@ -45,6 +45,7 @@ const StyledFooter = props => {
                             ...m,
                             hasModuleContainer: true,
                             typeLayout: 'footer',
+                            previewMode,
                           })
                         )
                       : null}
@@ -83,6 +84,7 @@ StyledFooter.propTypes = {
     })
   ).isRequired,
   copyright: PropTypes.string,
+  previewMode: PropTypes.bool,
 }
 
 const FooterContainer = styled.div`

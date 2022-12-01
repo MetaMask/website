@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import RichText from '../RichText'
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
 const ContentfulRichText = props => {
   const {
@@ -9,8 +10,7 @@ const ContentfulRichText = props => {
       htmlBody,
       displayTitle,
       moduleId,
-      previewMode,
-      previewContent,
+      previewMode = false,
     },
   } = props
 
@@ -20,14 +20,26 @@ const ContentfulRichText = props => {
     <RichText
       title={title}
       html={previewMode ? htmlBody : html}
-      content={previewMode ? previewContent : content}
+      content={previewMode ? htmlBody : content}
       displayTitle={displayTitle}
       moduleId={moduleId}
     />
   )
 }
 
-export default ContentfulRichText
+const parsePreviewData = data => {
+  data = data.moduleConfig.previewContent || data.moduleConfig
+
+  const dataUpdate = {
+    moduleConfig: {
+      previewMode: true,
+      ...data,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(ContentfulRichText)
 
 ContentfulRichText.propTypes = {
   moduleConfig: PropTypes.shape({
@@ -41,7 +53,7 @@ ContentfulRichText.propTypes = {
         }),
         PropTypes.string,
       ]),
-      previewContent: PropTypes.string,
+      previewMode: PropTypes.bool,
       hasModuleContainer: PropTypes.bool,
       displayTitle: PropTypes.bool,
       moduleId: PropTypes.string,

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import FullwidthCta from '../FullWidthCta'
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
 const ContentfulLayoutFullWidthCta = props => {
   const {
@@ -16,7 +17,7 @@ const ContentfulLayoutFullWidthCta = props => {
       logoType,
       sectionPadding,
       customClass,
-      previewMode,
+      previewMode = false,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -33,11 +34,28 @@ const ContentfulLayoutFullWidthCta = props => {
       logoType={logoType}
       sectionPadding={sectionPadding}
       customClass={customClass}
+      previewMode={previewMode}
     />
   )
 }
 
-export default ContentfulLayoutFullWidthCta
+const parsePreviewData = data => {
+  data = data.moduleConfig.previewContent || data.moduleConfig
+  const { ctasCollection } = data
+
+  const dataUpdate = {
+    moduleConfig: {
+      previewMode: true,
+      ctas: ctasCollection?.items,
+      ...data,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(
+  ContentfulLayoutFullWidthCta
+)
 
 ContentfulLayoutFullWidthCta.propTypes = {
   moduleConfig: PropTypes.shape({

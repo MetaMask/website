@@ -1,12 +1,11 @@
 import hljs from 'highlight.js'
 import React, { useEffect, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
-import rehypeRaw from 'rehype-raw'
 import Prism from 'prismjs'
 import remarkGfm from 'remark-gfm'
 import 'prismjs/components/prism-typescript'
 import 'prismjs/components/prism-solidity'
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
+import ParseMD from './ParseMD'
 
 const CopyButton = ({ content }) => {
   const [copying, setCopying] = useState(false)
@@ -30,10 +29,9 @@ const Markdown = ({ content }) => {
   }, [])
 
   return (
-    <ReactMarkdown
+    <ParseMD
       children={content}
       remarkPlugins={[remarkGfm]}
-      rehypePlugins={[rehypeRaw]}
       components={{
         pre(props) {
           const element = props.children[0].props

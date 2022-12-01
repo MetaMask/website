@@ -5,23 +5,37 @@ import ContentWrapper from '../ContentWrapper'
 import { Section } from '../StyledGeneral'
 import SocialButtonList from '../SocialButtonList'
 import Image from '../Image'
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
-// Currently only use for preview
+// For preview only
 const ContentfulNewsLayout = props => {
-  const { content, image, title, subtitle } = props.moduleConfig
+  const {
+    moduleConfig: {
+      content,
+      image,
+      title,
+      subtitle,
+      previewMode = false,
+      publishDate,
+      author,
+    },
+  } = props
 
   const contentConfig = {
-    internal: { type: 'ContentfulRichText' },
+    __typename: 'RichText',
     previewContent: content,
     displayTitle: false,
     previewMode: true,
+    publishDate,
+    author,
   }
+
   return (
     <NewsContainer>
       <ContentWrapper className="news-content">
         <Title>{title}</Title>
         <Subtitle>{subtitle}</Subtitle>
-        <Image image={image} />
+        <Image image={image} previewMode={previewMode} />
         <SocialShare>
           <SocialButtonList />
         </SocialShare>
@@ -32,6 +46,20 @@ const ContentfulNewsLayout = props => {
     </NewsContainer>
   )
 }
+
+const parsePreviewData = data => {
+  data = data.moduleConfig.previewContent || data.moduleConfig
+
+  const dataUpdate = {
+    moduleConfig: {
+      previewMode: true,
+      ...data,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(ContentfulNewsLayout)
 
 const NewsContainer = styled(Section)`
   position: relative;
@@ -90,5 +118,3 @@ const SocialShare = styled.div`
     flex-direction: column;
   }
 `
-
-export default ContentfulNewsLayout

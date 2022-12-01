@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import Header from '../Header'
+import cloneDeep from 'lodash/cloneDeep'
+import isEmpty from 'lodash/isEmpty'
 
 const ContentfulLayoutHeader = props => {
   const {
@@ -10,14 +12,11 @@ const ContentfulLayoutHeader = props => {
       logoMobile,
       menuItems,
       downloadButton,
-      previewMode,
+      previewMode = false,
       popupAnnouncement,
     },
     hideDownloadBtn,
   } = props
-  if (previewMode) {
-    logo.logo = { ...logo?.logo, file: { url: logo?.logo?.assetUrl } }
-  }
 
   return (
     <Header
@@ -27,11 +26,57 @@ const ContentfulLayoutHeader = props => {
       downloadButton={downloadButton}
       hideDownloadBtn={hideDownloadBtn}
       popupAnnouncement={popupAnnouncement}
+      previewMode={previewMode}
     />
   )
 }
 
-export default ContentfulLayoutHeader
+const parsePreviewData = data => {
+  data = data.moduleConfig.previewContent || data.moduleConfig
+  const { downloadButton, menuItemsCollection, popupAnnouncement } = data
+
+  let menuItems = menuItemsCollection
+    ? cloneDeep(menuItemsCollection.items)
+    : []
+  menuItems.forEach((item, index) => {
+    if (item.modulesCollection?.items.length > 0) {
+      menuItems[index].modules = item.modulesCollection.items
+      delete item.modulesCollection
+    }
+  })
+  menuItems = !isEmpty(menuItems) ? menuItems : undefined
+  const dataUpdate = {
+    moduleConfig: {
+      previewMode: true,
+      logo: data.logo
+        ? {
+            title: data.logo.title,
+            logo: {
+              file: {
+                url: data.logo.logo.url,
+              },
+            },
+          }
+        : undefined,
+      logoMobile: data.logoMobile
+        ? {
+            title: data.logoMobile.title,
+            logo: {
+              file: {
+                url: data.logoMobile.logo?.url,
+              },
+            },
+          }
+        : undefined,
+      menuItems,
+      downloadButton,
+      popupAnnouncement,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(ContentfulLayoutHeader)
 
 ContentfulLayoutHeader.propTypes = {
   moduleConfig: PropTypes.shape({
@@ -53,5 +98,6 @@ ContentfulLayoutHeader.propTypes = {
     ),
     downloadButton: PropTypes.object,
     announcement: PropTypes.object,
+    previewMode: PropTypes.bool,
   }),
 }
