@@ -99,6 +99,13 @@ const EmbedHtmlWrapper = styled.div`
       }
     }
   }
+  .embedHeight20 & {
+    .embed-popup-target {
+      &:before {
+        padding-bottom: 20%;
+      }
+    }
+  }
   ${({ playOnPopup, theme }) =>
     playOnPopup
       ? `
