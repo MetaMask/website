@@ -73,4 +73,7 @@ const Wrapper = styled.div`
       }
   `
       : ``}
+  .embed-mb-20 & {
+    margin-bottom: 20px;
+  }
 `

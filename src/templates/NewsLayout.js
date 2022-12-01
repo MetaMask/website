@@ -208,7 +208,6 @@ NewsLayout.propTypes = {
       publishDate: PropTypes.string,
       categories: PropTypes.arrayOf(categoryProps),
       author: PropTypes.string,
-      publishDate: PropTypes.string,
     }),
   }).isRequired,
   pageContext: PropTypes.shape({
