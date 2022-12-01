@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
 import Hero from '../HeroContainer'
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
 const ContentfulLayoutHero = props => {
   const {
@@ -30,15 +31,21 @@ const ContentfulLayoutHero = props => {
       headlineBorderBottom,
       isFaq,
       sectionPadding,
-      previewMode,
+      previewMode = false,
       customClass,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
-  const bgUrl = parseContentfulAssetUrl(backgroundImage)
-  const bgDarkModeUrl = parseContentfulAssetUrl(backgroundImageDarkMode)
-  const sideImageUrl = parseContentfulAssetUrl(sideImage)
-  const sideImageDarkModeUrl = parseContentfulAssetUrl(sideImageDarkMode)
+  const bgUrl = parseContentfulAssetUrl(backgroundImage, previewMode)
+  const bgDarkModeUrl = parseContentfulAssetUrl(
+    backgroundImageDarkMode,
+    previewMode
+  )
+  const sideImageUrl = parseContentfulAssetUrl(sideImage, previewMode)
+  const sideImageDarkModeUrl = parseContentfulAssetUrl(
+    sideImageDarkMode,
+    previewMode
+  )
   const backgroundColorMobile = sideImageFlex ? 'white' : ''
   return (
     <Hero
@@ -70,11 +77,26 @@ const ContentfulLayoutHero = props => {
       backgroundColorMobile={backgroundColorMobile}
       ctas={ctas}
       customClass={customClass}
+      previewMode={previewMode}
     />
   )
 }
 
-export default ContentfulLayoutHero
+const parsePreviewData = data => {
+  data = data.moduleConfig.previewContent || data.moduleConfig
+  const { ctasCollection } = data
+
+  const dataUpdate = {
+    moduleConfig: {
+      previewMode: true,
+      ctas: ctasCollection?.items,
+      ...data,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(ContentfulLayoutHero)
 
 ContentfulLayoutHero.propTypes = {
   moduleConfig: PropTypes.shape({
@@ -95,5 +117,6 @@ ContentfulLayoutHero.propTypes = {
     sideImageFoxAnimation: PropTypes.bool,
     eyebrow: PropTypes.string,
     sectionPadding: PropTypes.string,
+    previewMode: PropTypes.bool,
   }),
 }

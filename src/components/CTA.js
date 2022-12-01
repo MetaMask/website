@@ -38,6 +38,7 @@ const CTA = props => {
     embedHTML,
     buttonSecondary,
     socialLink,
+    previewMode = false,
   } = props
 
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
@@ -210,6 +211,7 @@ const CTA = props => {
         <Popup showPopup={showPopup} onClosePopup={onClosePopup}>
           {contentfulModuleToComponent({
             ...hubSpotForm,
+            previewMode,
           })}
         </Popup>
       ) : null}
@@ -245,6 +247,7 @@ CTA.propTypes = {
   eventCategory: PropTypes.string,
   eventLabel: PropTypes.string,
   socialLink: PropTypes.string,
+  previewMode: PropTypes.bool,
 }
 
 const CTAContainer = styled.div`

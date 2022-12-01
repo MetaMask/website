@@ -36,6 +36,7 @@ const StyledCard = props => {
     imageMargin,
     layoutType,
     hubSpotForm,
+    previewMode = false,
   } = props
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
@@ -77,6 +78,7 @@ const StyledCard = props => {
           <ImageWrapper imageMargin={imageMargin}>
             <ImageSrc
               image={isDarkMode && imageDarkMode ? imageDarkMode : image}
+              previewMode={previewMode}
             />
           </ImageWrapper>
         ) : null}
@@ -89,7 +91,9 @@ const StyledCard = props => {
               </Description>
             ) : null}
             {hubSpotForm ? (
-              <>{contentfulModuleToComponent(hubSpotForm)}</>
+              <>
+                {contentfulModuleToComponent({ ...hubSpotForm, previewMode })}
+              </>
             ) : null}
           </InnerContent>
           {isCtaType ? (
@@ -107,6 +111,7 @@ const StyledCard = props => {
               {cta.map(cta =>
                 contentfulModuleToComponent({
                   ...cta,
+                  previewMode,
                 })
               )}
             </CTA>
