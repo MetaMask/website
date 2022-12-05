@@ -535,7 +535,7 @@ export const ContentfulEmbedFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
