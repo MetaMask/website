@@ -76,7 +76,7 @@ const Item = styled.div`
     background-color: ${active ? theme.button.primary.bg : 'transparent'};
     color: ${active ? theme.button.primary.text : theme.text.darkGray};
     box-shadow: ${active ? '0 4px 9px rgba(196, 196, 196, 0.1)' : ''};
-    min-width: 200px;
+    min-width: 190px;
     white-space: nowrap;
     
     &:hover {
@@ -87,7 +87,7 @@ const Item = styled.div`
       min-width: 100px;
     }
     @media (max-width: ${theme.device.tabletMediaMax}){
-      padding: 8px 16px;
+      padding: 8px 104px;
     }
     @media (max-width: ${theme.device.mobileMediaMax}){
       padding: 8px 12px;
