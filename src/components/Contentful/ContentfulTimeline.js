@@ -5,6 +5,8 @@ import ContextClientSide from '../../Context/ContextClientSide'
 import ContentWrapper from '../ContentWrapper'
 import ImageItem from '../Image'
 import { EyebrowStyle } from '../StyledGeneral'
+import ParseMD from '../ParseMD'
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
 const ContentfulTimeline = props => {
   const {
@@ -15,6 +17,7 @@ const ContentfulTimeline = props => {
       image,
       imageDarkMode,
       customClass,
+      previewMode = false,
     },
   } = props
   const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
@@ -33,16 +36,27 @@ const ContentfulTimeline = props => {
               <div className="text-content">
                 {headline ? (
                   <Headline hasEyebrow={eyebrow}>
-                    <div dangerouslySetInnerHTML={{ __html: htmlHeadline }} />
+                    {previewMode ? (
+                      <ParseMD>{headline}</ParseMD>
+                    ) : (
+                      <div dangerouslySetInnerHTML={{ __html: htmlHeadline }} />
+                    )}
                   </Headline>
                 ) : null}
-                <Description
-                  dangerouslySetInnerHTML={{ __html: htmlDescription }}
-                />
+                {previewMode ? (
+                  <Description>
+                    <ParseMD>{description}</ParseMD>
+                  </Description>
+                ) : (
+                  <Description
+                    dangerouslySetInnerHTML={{ __html: htmlDescription }}
+                  />
+                )}
               </div>
               {image ? (
                 <ImageSrc
                   image={isDarkMode && imageDarkMode ? imageDarkMode : image}
+                  previewMode={previewMode}
                 />
               ) : null}
             </div>
@@ -53,7 +67,19 @@ const ContentfulTimeline = props => {
   )
 }
 
-export default ContentfulTimeline
+const parsePreviewData = data => {
+  data = data.moduleConfig.previewContent || data.moduleConfig
+
+  const dataUpdate = {
+    moduleConfig: {
+      previewMode: true,
+      ...data,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(ContentfulTimeline)
 
 ContentfulTimeline.propTypes = {
   moduleConfig: PropTypes.shape({
@@ -63,6 +89,7 @@ ContentfulTimeline.propTypes = {
     image: PropTypes.object,
     imageDarkMode: PropTypes.object,
     customClass: PropTypes.string,
+    previewMode: PropTypes.bool,
   }),
 }
 

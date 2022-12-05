@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import CTA from '../CTA'
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
 const ContentfulCta = props => {
   const {
@@ -27,6 +28,7 @@ const ContentfulCta = props => {
       embedHTML,
       buttonSecondary,
       socialLink,
+      previewMode = false,
     },
   } = props
   // check work with preview
@@ -62,11 +64,24 @@ const ContentfulCta = props => {
       embedHTML={embedHTML}
       buttonSecondary={buttonSecondary}
       socialLink={socialLink}
+      previewMode={previewMode}
     />
   )
 }
 
-export default ContentfulCta
+const parsePreviewData = data => {
+  data = data.moduleConfig.previewContent || data.moduleConfig
+
+  const dataUpdate = {
+    moduleConfig: {
+      previewMode: true,
+      ...data,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(ContentfulCta)
 
 ContentfulCta.propTypes = {
   moduleConfig: PropTypes.shape({
@@ -82,5 +97,6 @@ ContentfulCta.propTypes = {
     hubSpotForm: PropTypes.object,
     embedHTML: PropTypes.object,
     buttonSecondary: PropTypes.bool,
+    previewMode: PropTypes.bool,
   }),
 }

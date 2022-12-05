@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useContext } from 'react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import ScrollAnimation from 'react-animate-on-scroll'
@@ -10,6 +10,7 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import ContextClientSide from '../Context/ContextClientSide'
 import Embed from './Embed'
 import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
+import ParseMD from './ParseMD'
 
 const FeatureComponent = props => {
   const {
@@ -42,8 +43,9 @@ const FeatureComponent = props => {
     hideImageOnMobile,
     imageLink,
     customClass,
+    previewMode = false,
   } = props
-  const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
+  const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
   const contentAlignLR = ['left', 'right'].includes(contentAlignment)
     ? contentAlignment
@@ -66,7 +68,11 @@ const FeatureComponent = props => {
       ) : null}
       {description ? (
         <Description>
-          <div dangerouslySetInnerHTML={{ __html: description }} />
+          {previewMode ? (
+            <ParseMD>{description}</ParseMD>
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: description }} />
+          )}
         </Description>
       ) : null}
       {featureItems && featureItems.length ? (
@@ -75,6 +81,7 @@ const FeatureComponent = props => {
             <FeatureItem>
               {contentfulModuleToComponent({
                 ...m,
+                previewMode,
               })}
             </FeatureItem>
           ))}
@@ -87,6 +94,7 @@ const FeatureComponent = props => {
             color: ['white', 'gray', 'default'].includes(backgroundColor)
               ? cta.color
               : 'white-outline',
+            previewMode,
           })}
         </CTAWrapper>
       ) : null}
@@ -103,6 +111,7 @@ const FeatureComponent = props => {
           widthImg={imageWidth}
           imageAlignment={imageAlignment}
           link={imageLink}
+          previewMode={previewMode}
         />
       ) : null}
       {imageMobile ? (
@@ -116,6 +125,7 @@ const FeatureComponent = props => {
           widthImg={imageWidth}
           imageAlignment={imageAlignment}
           link={imageLink}
+          previewMode={previewMode}
         />
       ) : null}
     </>
@@ -172,7 +182,10 @@ const FeatureComponent = props => {
             <SideEmbed>
               <Embed
                 html={embed.embed?.embed}
-                thumbnailUrl={parseContentfulAssetUrl(embed.thumbnail)}
+                thumbnailUrl={parseContentfulAssetUrl(
+                  embed.thumbnail,
+                  previewMode
+                )}
                 playOnPopup={embed.playOnPopup}
               />
             </SideEmbed>
@@ -205,6 +218,7 @@ const FeatureComponent = props => {
                 color: ['white', 'gray', 'default'].includes(backgroundColor)
                   ? cta.color
                   : 'white-outline',
+                previewMode,
               })}
             </CTAWrapper>
           ) : null}
@@ -223,6 +237,7 @@ FeatureComponent.propTypes = {
   modules: PropTypes.arrayOf(PropTypes.object.isRequired),
   sectionPadding: PropTypes.string,
   noPaddingBottom: PropTypes.bool,
+  previewMode: PropTypes.bool,
 }
 
 const Container = styled(Section)`

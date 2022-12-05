@@ -1,182 +1,154 @@
 import axios from 'axios'
-import mapValues from 'lodash/mapValues'
-import flatMap from 'lodash/flatMap'
-
 import {
   CONTENTFUL_SPACE_ID,
   CONTENTFUL_ENVIRONMENT,
   CONTENTFUL_PREVIEW_API_KEY,
   CONTENTFUL_PREVIEW_HOST,
+  CONTENTFUL_API_KEY,
 } from '../config'
+import { ApolloClient, InMemoryCache } from '@apollo/client'
+import { ContentfulRestLink } from 'apollo-link-contentful'
+import {
+  ContentfulCardQuery,
+  ContentfulConsenSysResourcesQuery,
+  ContentfulCtaQuery,
+  ContentfulEmbedQuery,
+  ContentfulFaqQuery,
+  ContentfulHubSpotFormQuery,
+  ContentfulLayoutFeatureQuery,
+  ContentfulLayoutFooterQuery,
+  ContentfulLayoutFullWidthCtaQuery,
+  ContentfulLayoutHeaderQuery,
+  ContentfulLayoutHeroQuery,
+  ContentfulLayoutModuleContainerQuery,
+  ContentfulLayoutQuery,
+  ContentfulLogoQuery,
+  ContentfulModuleContainerQuery,
+  ContentfulNewsCategoryQuery,
+  ContentfulNewsLayoutQuery,
+  ContentfulPopupAnnouncementQuery,
+  ContentfulRichTextQuery,
+  ContentfulTimelineQuery,
+} from '../../fragments/previewQuery'
 
-export const fetchContentfulData = dataType => (
-  id,
-  host = CONTENTFUL_PREVIEW_HOST
-) => {
-  if (dataType !== 'module' && dataType !== 'asset') {
-    return {
-      error: {
-        message:
-          'Can only retrieve `module` and `asset` data types from Contentful',
-      },
-    }
+export const fetchContentfulTypename = id => {
+  if (!id) {
+    return null
   }
 
-  if (!id || typeof id !== 'string') {
-    return {
-      error: {
-        message: `No ${dataType} ID provided to retrieve Contenful data : ${id}`,
-      },
-    }
-  }
-
-  // construct API url based on resource and env vars
-  const resource = dataType === 'module' ? 'entries' : 'assets'
   const resource_url =
     `/spaces/${CONTENTFUL_SPACE_ID}` +
     `/environments/${CONTENTFUL_ENVIRONMENT}` +
-    `/${resource}/${id}?access_token=${CONTENTFUL_PREVIEW_API_KEY}`
+    `/entries/${id}?access_token=${CONTENTFUL_PREVIEW_API_KEY}`
+
+  const url = 'https://' + CONTENTFUL_PREVIEW_HOST + resource_url
 
   return axios
-    .get('https://' + host + resource_url)
-    .then(result => {
-      if (result.error || !result.data) {
-        return {
-          error: result.error || {
-            message:
-              `No data returned for Contentful ${dataType} with id: ` + id,
-          },
-        }
+    .get(url)
+    .then(res => {
+      if (res.data) {
+        const type = res.data.sys.contentType.sys.id
+        const typename = convertContentfulPreviewTypename(type)
+        return typename
       }
-
-      //  If requesting Modules (Custom Content Models)
-      if (dataType === 'module') {
-        return handleModuleResponse(result)
-      }
-
-      //  If requesting Assets (Images)
-      if (dataType === 'asset') {
-        return handleAssetResponse(result)
-      }
+      return null
     })
-    .catch(error => {
-      throw error
-    })
+    .catch(() => null)
 }
 
-export const fetchContentfulModule = fetchContentfulData('module')
-export const fetchContentfulAsset = fetchContentfulData('asset')
-
-const handleModuleResponse = response => {
-  if (!response.data) {
-    return {
-      error: {
-        message: 'Could not parse Module response',
-      },
-    }
+const mapTypeToQuery = type => {
+  let query = ''
+  switch (type) {
+    case 'ContentfulLayoutHeader':
+      query = ContentfulLayoutHeaderQuery
+      break
+    case 'ContentfulLayoutFooter':
+      query = ContentfulLayoutFooterQuery
+      break
+    case 'ContentfulLayoutHero':
+      query = ContentfulLayoutHeroQuery
+      break
+    case 'ContentfulLayoutFeature':
+      query = ContentfulLayoutFeatureQuery
+      break
+    case 'ContentfulLayoutFullWidthCta':
+      query = ContentfulLayoutFullWidthCtaQuery
+      break
+    case 'ContentfulLayout':
+      query = ContentfulLayoutQuery
+      break
+    case 'ContentfulLayoutModuleContainer':
+      query = ContentfulLayoutModuleContainerQuery
+      break
+    case 'ContentfulCard':
+      query = ContentfulCardQuery
+      break
+    case 'ContentfulConsenSysResources':
+      query = ContentfulConsenSysResourcesQuery
+      break
+    case 'ContentfulCta':
+      query = ContentfulCtaQuery
+      break
+    case 'ContentfulEmbed':
+      query = ContentfulEmbedQuery
+      break
+    case 'ContentfulFaq':
+      query = ContentfulFaqQuery
+      break
+    case 'ContentfulHubSpotForm':
+      query = ContentfulHubSpotFormQuery
+      break
+    case 'ContentfulLogo':
+      query = ContentfulLogoQuery
+      break
+    case 'ContentfulModuleContainer':
+      query = ContentfulModuleContainerQuery
+      break
+    case 'ContentfulNewsLayout':
+      query = ContentfulNewsLayoutQuery
+      break
+    case 'ContentfulNewsCategory':
+      query = ContentfulNewsCategoryQuery
+      break
+    case 'ContentfulPopupAnnouncement':
+      query = ContentfulPopupAnnouncementQuery
+      break
+    case 'ContentfulTimeline':
+      query = ContentfulTimelineQuery
+      break
+    case 'ContentfulRichText':
+      query = ContentfulRichTextQuery
+      break
+    default:
+      break
   }
+  return query
+}
 
-  const {
-    data: {
-      fields: moduleConfig,
-      sys: {
-        id: contentful_id,
-        contentType: {
-          sys: { id: type },
-        },
-      },
+export const fetchContentfulData = (type, id) => {
+  const query = mapTypeToQuery(type, id)
+  return apolloClient.query({
+    query,
+    variables: { id, preview: true },
+  })
+}
+
+export const convertContentfulPreviewTypename = type => {
+  if (!type) return undefined
+  return `Contentful${type.charAt(0).toUpperCase() + type.slice(1)}`
+}
+
+export const apolloClient = new ApolloClient({
+  link: new ContentfulRestLink(
+    {
+      space: CONTENTFUL_SPACE_ID,
+      accessToken: CONTENTFUL_API_KEY,
+      previewAccessToken: CONTENTFUL_PREVIEW_API_KEY,
+      environment: CONTENTFUL_ENVIRONMENT,
     },
-  } = response
-
-  // format module type to mimic what is returned by GraphQL for our component mapping
-  const internal = {
-    type: `Contentful${type.charAt(0).toUpperCase() + type.slice(1)}`,
-  }
-  const nestedModules = getNestedModules(moduleConfig)
-  const allModuleRequests = resolveModuleRequests(nestedModules)
-
-  return Promise.all(allModuleRequests)
-    .then(result => {
-      const resolvedModules = result.reduce((acc, key, i) => {
-        // update module config to replace resolved promises
-        // with normal objects with module data to be used in component rendering
-        if (typeof key === 'string') {
-          return { ...acc, [key]: result[i + 1] }
-        } else {
-          return acc
-        }
-      }, moduleConfig)
-      return {
-        ...resolvedModules,
-        internal,
-        contentful_id,
-      }
-    })
-    .catch(error => error)
-}
-
-const handleAssetResponse = response => {
-  if (!response.data) {
-    return {
-      error: {
-        message: 'Could not parse Asset response',
-      },
+    {
+      include: 10,
     }
-  }
-
-  const {
-    data: {
-      fields: { file },
-    },
-  } = response
-
-  if (!file) return
-
-  const { url, contentType } = file
-  // Contentful returns a same protocol uri starting with '//' which is improperly handled by Gatsby
-  const assetUrl = `https://${url.slice(2, url.length)}`
-
-  return {
-    assetUrl,
-    contentType,
-  }
-}
-
-const getNestedModules = moduleConfig => {
-  if (moduleConfig) {
-    const resolvedModuleFields = mapValues(moduleConfig, (field, i) => {
-      // Assume that anything in an array is another module (ModuleContainer or Page)
-      // Coerce module into correct format to work with next mapValues call
-      if (Array.isArray(field))
-        return field.map(mod => getNestedModules({ mod }))
-
-      // if field contains Contentful metadata then retrieve module/asset ID and call API again
-      if (!field.sys) {
-        return field
-      } else {
-        const {
-          sys: { linkType, id },
-        } = field
-        return linkType === 'Asset'
-          ? fetchContentfulAsset(id)
-          : fetchContentfulModule(id)
-      }
-    })
-    return { ...resolvedModuleFields }
-  } else {
-    return false
-  }
-}
-
-const resolveModuleRequests = modules => {
-  return flatMap(modules, (mod, key) => {
-    // Check if module is a Promise API request to get more module data
-    // return to array to await all module data before rendering
-    // https://stackoverflow.com/questions/27746304/how-do-i-tell-if-an-object-is-a-promise/38339199#38339199
-    if (Array.isArray(mod)) {
-      const promiseList = mod.map(e => e.mod)
-      return [key, Promise.all(promiseList)]
-    }
-    return Promise.resolve(mod) === mod ? [key, mod] : null
-  }).filter(mod => !!mod)
-}
+  ),
+  cache: new InMemoryCache(),
+})

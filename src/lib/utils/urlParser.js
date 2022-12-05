@@ -13,9 +13,11 @@ export const findFileInListByName = list => name =>
     return filename === kebabCase(name)
   })
 
-export const parseContentfulAssetUrl = asset => {
+export const parseContentfulAssetUrl = (asset, previewMode = false) => {
   if (!asset) return false
-
+  if (previewMode) {
+    return asset.url
+  }
   // url path can take to forms depending on where module data is called
   // `assetUrl` is from function `fetchContentfulData` for previews
   // `asset.fluid|fluid.src` is from GraphQL during production page building

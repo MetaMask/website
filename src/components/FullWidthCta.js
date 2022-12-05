@@ -6,6 +6,7 @@ import Loadable from '@loadable/component'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { Section, SectionTitle } from './StyledGeneral'
 import classnames from 'classnames'
+import ParseMD from './ParseMD'
 
 const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
 
@@ -22,6 +23,7 @@ const FullWidthCta = props => {
     logoType,
     sectionPadding,
     customClass,
+    previewMode = false,
   } = props
 
   return (
@@ -52,7 +54,11 @@ const FullWidthCta = props => {
             ) : null}
             {description ? (
               <Description>
-                <div dangerouslySetInnerHTML={{ __html: description }} />
+                {previewMode ? (
+                  <ParseMD>{description}</ParseMD>
+                ) : (
+                  <div dangerouslySetInnerHTML={{ __html: description }} />
+                )}
               </Description>
             ) : null}
             {showLogoAnimation && customClass === 'metaMaskUninstalled' ? (
@@ -60,12 +66,12 @@ const FullWidthCta = props => {
             ) : null}
             {hubSpotForm ? (
               <div id={'hubspot-container'}>
-                {contentfulModuleToComponent(hubSpotForm)}
+                {contentfulModuleToComponent({ ...hubSpotForm, previewMode })}
               </div>
             ) : null}
             {embedHtml ? (
               <div id={'html-container'}>
-                {contentfulModuleToComponent(embedHtml)}
+                {contentfulModuleToComponent({ ...embedHtml, previewMode })}
               </div>
             ) : null}
             {ctas ? (
@@ -73,6 +79,7 @@ const FullWidthCta = props => {
                 {ctas.map(cta =>
                   contentfulModuleToComponent({
                     ...cta,
+                    previewMode,
                   })
                 )}
               </CTAWrapper>
@@ -93,6 +100,7 @@ FullWidthCta.propTypes = {
   description: PropTypes.string,
   ctas: PropTypes.arrayOf(PropTypes.object),
   sectionPadding: PropTypes.string,
+  previewMode: PropTypes.bool,
 }
 
 const Container = styled(Section)`

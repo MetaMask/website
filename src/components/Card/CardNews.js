@@ -12,7 +12,7 @@ import Link from '../Link'
  */
 
 const StyledCard = props => {
-  const { title, image, link, description } = props
+  const { title, image, link, description, previewMode = false } = props
 
   return (
     <Card className="moduleCardWrapper">
@@ -20,7 +20,7 @@ const StyledCard = props => {
         {image ? (
           <ImageInner>
             <ImageWrapper>
-              <ImageSrc image={image} />
+              <ImageSrc image={image} previewMode={previewMode} />
             </ImageWrapper>
           </ImageInner>
         ) : null}

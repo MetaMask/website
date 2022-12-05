@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import styled, { withTheme } from 'styled-components'
 import Link from './Link'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
@@ -25,20 +25,21 @@ const StyledHeader = props => {
     downloadButton,
     popupAnnouncement,
     hideDownloadBtn,
+    previewMode = false,
   } = props
   const isDesktop = useMediaQuery({
     query: '(min-width: 1025px)',
   })
-  const [menuActive, setMenuActive] = React.useState('')
-  const [hamburgerActive, setHamburgerActive] = React.useState(false)
-  const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
-  const menuRef = React.useRef()
-  const { header: headerREF } = React.useContext(Context)
+  const [menuActive, setMenuActive] = useState('')
+  const [hamburgerActive, setHamburgerActive] = useState(false)
+  const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
+  const menuRef = useRef()
+  const { header: headerREF } = useContext(Context)
   const { headerRef } = headerREF || {}
   const { isDarkMode, setIsDarkMode } = darkModeContextValue || {}
-  const [topMenuMobile, setTopMenuMobile] = React.useState('88px')
+  const [topMenuMobile, setTopMenuMobile] = useState('88px')
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!menus) {
       setLocalStorage('darkMode', '0')
       setIsDarkMode(false)
@@ -88,6 +89,7 @@ const StyledHeader = props => {
       <Announcement>
         {contentfulModuleToComponent({
           ...popupAnnouncement,
+          previewMode,
         })}
       </Announcement>
       <HeaderContainer>
@@ -165,6 +167,7 @@ const StyledHeader = props => {
                                 ...m,
                                 hasModuleContainer: true,
                                 typeLayout: 'header',
+                                previewMode,
                               })
                             )
                           : null}
@@ -178,6 +181,7 @@ const StyledHeader = props => {
                       ...downloadButton,
                       hasModuleContainer: true,
                       isHeaderMenu: true,
+                      previewMode,
                     })}
                   </ButtonsWrapper>
                 ) : null}
@@ -209,6 +213,7 @@ StyledHeader.propTypes = {
     })
   ),
   downloadButton: PropTypes.object,
+  previewMode: PropTypes.bool,
 }
 
 const HeaderElement = styled.header`

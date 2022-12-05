@@ -5,23 +5,46 @@ import ContentWrapper from '../ContentWrapper'
 import { Section } from '../StyledGeneral'
 import SocialButtonList from '../SocialButtonList'
 import Image from '../Image'
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
+import moment from 'moment'
 
-// Currently only use for preview
+// For preview only
 const ContentfulNewsLayout = props => {
-  const { content, image, title, subtitle } = props.moduleConfig
+  const {
+    moduleConfig: {
+      content,
+      image,
+      title,
+      subtitle,
+      previewMode = false,
+      publishDate,
+      author,
+    },
+  } = props
 
   const contentConfig = {
-    internal: { type: 'ContentfulRichText' },
-    previewContent: content,
+    __typename: 'RichText',
+    htmlBody: content,
     displayTitle: false,
     previewMode: true,
+    publishDate,
+    author,
   }
+
   return (
     <NewsContainer>
       <ContentWrapper className="news-content">
         <Title>{title}</Title>
         <Subtitle>{subtitle}</Subtitle>
-        <Image image={image} />
+        <NewsInfo>
+          <span>by&nbsp;</span>
+          <span className="author">{author?.name || 'MetaMask'}</span>
+          <span className="separator" />
+          <span className="publishDate">
+            {publishDate ? moment(publishDate).format('MMMM D, YYYY') : ''}
+          </span>
+        </NewsInfo>
+        <Image image={image} previewMode={previewMode} />
         <SocialShare>
           <SocialButtonList />
         </SocialShare>
@@ -32,6 +55,20 @@ const ContentfulNewsLayout = props => {
     </NewsContainer>
   )
 }
+
+const parsePreviewData = data => {
+  data = data.moduleConfig.previewContent || data.moduleConfig
+
+  const dataUpdate = {
+    moduleConfig: {
+      previewMode: true,
+      ...data,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(ContentfulNewsLayout)
 
 const NewsContainer = styled(Section)`
   position: relative;
@@ -91,4 +128,41 @@ const SocialShare = styled.div`
   }
 `
 
-export default ContentfulNewsLayout
+const NewsInfo = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  padding-top: 0.75rem;
+
+  .separator {
+    background-color: #333;
+    display: inline-flex;
+    height: 1px;
+    margin: 0 0.5rem;
+    width: 0.5rem;
+    body.dark-mode & {
+      background-color: #fff;
+    }
+  }
+  .author,
+  .publishDate {
+    font-weight: 700;
+  }
+
+  &::before {
+    background-color: #333;
+    content: '';
+    height: 3px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 3.5rem;
+
+    body.dark-mode & {
+      background-color: #fff;
+    }
+  }
+`

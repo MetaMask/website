@@ -7,6 +7,8 @@ import classnames from 'classnames'
 import { SectionTitle, Section, EyebrowStyle } from '../StyledGeneral'
 import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
 import TabWrapper from '../Tab/TabWrapper'
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
+import ParseMD from '../ParseMD'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -25,7 +27,7 @@ const ContentfulModuleContainer = props => {
       modules,
       sectionPadding,
       modulesMargin,
-      previewMode,
+      previewMode = false,
       isTab,
       customClass,
       eyebrow,
@@ -36,19 +38,20 @@ const ContentfulModuleContainer = props => {
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
-  const bgUrl = parseContentfulAssetUrl(backgroundImage)
-  const sideImageUrl = parseContentfulAssetUrl(sideImage)
+  const bgUrl = parseContentfulAssetUrl(backgroundImage, previewMode)
+  const sideImageUrl = parseContentfulAssetUrl(sideImage, previewMode)
   const htmlData = previewMode ? description : html
   const isCategoryTab = customClass === 'newsCategoriesTab' && isTab
   const tabs =
     isTab && modules && modules.length
       ? modules.map(item => ({
           label: item.title,
-          id: item.contentful_id,
+          id: previewMode ? item.title : item.contentful_id,
           content: (
             <TabContent>
               {contentfulModuleToComponent({
                 ...item,
+                previewMode,
               })}
             </TabContent>
           ),
@@ -88,12 +91,24 @@ const ContentfulModuleContainer = props => {
                   </Title>
                 ) : null}
                 {htmlData ? (
-                  <SubInfo
-                    className={classnames({
-                      'txt-center': contentAlignCenter,
-                    })}
-                    dangerouslySetInnerHTML={{ __html: htmlData }}
-                  />
+                  <>
+                    {previewMode ? (
+                      <SubInfo
+                        className={classnames({
+                          'txt-center': contentAlignCenter,
+                        })}
+                      >
+                        <ParseMD>{htmlData}</ParseMD>
+                      </SubInfo>
+                    ) : (
+                      <SubInfo
+                        className={classnames({
+                          'txt-center': contentAlignCenter,
+                        })}
+                        dangerouslySetInnerHTML={{ __html: htmlData }}
+                      />
+                    )}
+                  </>
                 ) : null}
               </ContentInfo>
             ) : null}
@@ -101,7 +116,9 @@ const ContentfulModuleContainer = props => {
               <TabWrapper
                 tabs={tabs}
                 typeLayout={'module'}
-                activeTabDefault={modules[0].contentful_id}
+                activeTabDefault={
+                  previewMode ? modules[0].title : modules[0].contentful_id
+                }
                 isTabParam={isCategoryTab}
               ></TabWrapper>
             ) : null}
@@ -137,7 +154,23 @@ const ContentfulModuleContainer = props => {
   )
 }
 
-export default ContentfulModuleContainer
+const parsePreviewData = data => {
+  data = data.moduleConfig.previewContent || data.moduleConfig
+  const { modulesCollection } = data
+
+  const dataUpdate = {
+    moduleConfig: {
+      previewMode: true,
+      modules: modulesCollection?.items,
+      ...data,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(
+  ContentfulModuleContainer
+)
 
 ContentfulModuleContainer.propTypes = {
   moduleConfig: PropTypes.shape({
