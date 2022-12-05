@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Faq from '../Faq'
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
 const ContentfulFaq = props => {
   const {
@@ -10,7 +11,7 @@ const ContentfulFaq = props => {
       contentful_id,
       backgroundColor,
       containerBgColor,
-      previewMode,
+      previewMode = false,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = answer || {}
@@ -21,11 +22,24 @@ const ContentfulFaq = props => {
       id={contentful_id}
       backgroundColor={backgroundColor}
       containerBgColor={containerBgColor}
-    ></Faq>
+      previewMode={previewMode}
+    />
   )
 }
 
-export default ContentfulFaq
+const parsePreviewData = data => {
+  data = data.moduleConfig.previewContent || data.moduleConfig
+
+  const dataUpdate = {
+    moduleConfig: {
+      previewMode: true,
+      ...data,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(ContentfulFaq)
 
 ContentfulFaq.propTypes = {
   moduleConfig: PropTypes.shape({
@@ -34,5 +48,6 @@ ContentfulFaq.propTypes = {
     contentful_id: PropTypes.string,
     backgroundColor: PropTypes.string,
     containerBgColor: PropTypes.string,
+    previewMode: PropTypes.bool,
   }),
 }

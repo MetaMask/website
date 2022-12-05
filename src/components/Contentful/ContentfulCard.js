@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Card from '../Card'
 import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
 const ContentfulCard = props => {
   const {
@@ -17,15 +18,18 @@ const ContentfulCard = props => {
       backgroundImage,
       backgroundImageMobile,
       imageMargin,
-      previewMode,
+      previewMode = false,
       layoutType,
       layoutSize,
       hubSpotForm,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
-  const bgUrl = parseContentfulAssetUrl(backgroundImage)
-  const bgMobileUrl = parseContentfulAssetUrl(backgroundImageMobile)
+  const bgUrl = parseContentfulAssetUrl(backgroundImage, previewMode)
+  const bgMobileUrl = parseContentfulAssetUrl(
+    backgroundImageMobile,
+    previewMode
+  )
 
   return (
     <Card
@@ -44,11 +48,24 @@ const ContentfulCard = props => {
       layoutSize={layoutSize}
       cta={cta}
       hubSpotForm={hubSpotForm}
+      previewMode={previewMode}
     />
   )
 }
 
-export default ContentfulCard
+const parsePreviewData = data => {
+  data = data.moduleConfig.previewContent || data.moduleConfig
+
+  const dataUpdate = {
+    moduleConfig: {
+      previewMode: true,
+      ...data,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(ContentfulCard)
 
 ContentfulCard.propTypes = {
   moduleConfig: PropTypes.shape({

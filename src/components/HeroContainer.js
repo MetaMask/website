@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import { useLocation } from '@reach/router'
@@ -11,6 +11,7 @@ import isEmpty from 'lodash/isEmpty'
 import ContextClientSide from '../Context/ContextClientSide'
 import Context from '../Context/ContextPage'
 import Loadable from '@loadable/component'
+import ParseMD from './ParseMD'
 
 const FoxAnimation = Loadable(() => import('./FoxAnimation/'))
 
@@ -43,32 +44,27 @@ const HeroContainerComponent = props => {
     isFaq,
     sectionPadding,
     customClass,
+    previewMode = false,
   } = props
-  const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
+  const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
   const location = useLocation()
   const pathname = location.pathname.replace(/\/?$/, '/')
-  const isHome = pathname === '/'
   const isNewsList = pathname === '/news/'
-  const isAbout = pathname === '/about/'
-  const isFlask = pathname === '/flask/'
-  const isSDK = pathname === '/sdk/'
-  const isInstitutions = pathname === '/institutions/'
-  const isInstitutionalChild =
-    pathname === '/institutions/daos/' ||
-    pathname === '/institutions/portfolio/' ||
-    pathname === '/institutions/compliance/' ||
-    pathname === '/institutions/nft/'
-  const isCustody = pathname === '/institutions/custody/'
-  const isThankYou =
-    pathname === '/institutions/thank-you/' ||
-    pathname === '/institutions/defi-web3-report-thank-you/'
+  const isHome = customClass?.includes('page-home')
+  const isAbout = customClass?.includes('page-about')
+  const isFlask = customClass?.includes('page-flask')
+  const isSDK = customClass?.includes('page-sdk')
+  const isInstitutions = customClass?.includes('page-institutions')
+  const isInstitutionalChild = customClass?.includes('page-institutional-child')
+  const isThankYou = customClass?.includes('page-thank-you')
   let hubspotWrapper
   if (hubSpotForm) {
     hubspotWrapper = (
       <HubSpotDefault>
         {contentfulModuleToComponent({
           ...hubSpotForm,
+          previewMode,
         })}
       </HubSpotDefault>
     )
@@ -84,11 +80,11 @@ const HeroContainerComponent = props => {
   ) {
     heroTitleFontsize = '30px'
   }
-  const { heroContainer: heroContainerREF } = React.useContext(Context)
+  const { heroContainer: heroContainerREF } = useContext(Context)
   const { heroContainerRef } = heroContainerREF || {}
 
-  const scrollRef = React.useRef(null)
-  const [scrolled, setScrolled] = React.useState(false)
+  const scrollRef = useRef(null)
+  const [scrolled, setScrolled] = useState(false)
 
   const onScroll = () => {
     const windowY =
@@ -108,7 +104,7 @@ const HeroContainerComponent = props => {
     }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isNewsList) return
     window.addEventListener('scroll', onScroll)
 
@@ -117,10 +113,10 @@ const HeroContainerComponent = props => {
     }
   }, [])
 
-  const sdkRef = React.useRef(null)
-  const [height, setHeight] = React.useState(0)
+  const sdkRef = useRef(null)
+  const [height, setHeight] = useState(0)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSDK && sdkRef.current?.clientHeight) {
       handleWindowSizeChange()
       window.addEventListener('resize', handleWindowSizeChange)
@@ -191,7 +187,6 @@ const HeroContainerComponent = props => {
             isAbout={isAbout}
             reverse={contentAlignment === 'right'}
             center={sideImageFlex}
-            isCustody={isCustody}
             isInstitutions={isInstitutions}
             isFlask={isFlask}
             isSDK={isSDK}
@@ -221,10 +216,12 @@ const HeroContainerComponent = props => {
                       ? {
                           ...eyebrowLogoDarkMode,
                           cleanStyle: true,
+                          previewMode,
                         }
                       : {
                           ...eyebrowLogo,
                           cleanStyle: true,
+                          previewMode,
                         }
                   )}
                 </EyebrowWrapper>
@@ -241,10 +238,12 @@ const HeroContainerComponent = props => {
                       ? {
                           ...eyebrowMobileLogoDarkMode,
                           cleanStyle: true,
+                          previewMode,
                         }
                       : {
                           ...eyebrowMobileLogo,
                           cleanStyle: true,
+                          previewMode,
                         }
                   )}
                 </EyebrowWrapper>
@@ -278,13 +277,19 @@ const HeroContainerComponent = props => {
                           ? sideImageDarkMode
                           : sideImage
                       }
+                      onLoad={handleWindowSizeChange}
+                      previewMode={previewMode}
                     />
                   </HeroSideImage>
                 </HeightSlide>
               ) : null}
               {description && (
                 <HeroDescription isFaq={isFaq}>
-                  <div dangerouslySetInnerHTML={{ __html: description }} />
+                  {previewMode ? (
+                    <ParseMD>{description}</ParseMD>
+                  ) : (
+                    <div dangerouslySetInnerHTML={{ __html: description }} />
+                  )}
                 </HeroDescription>
               )}
               {!isEmpty(ctas) && !isFlask ? (
@@ -293,6 +298,7 @@ const HeroContainerComponent = props => {
                     contentfulModuleToComponent({
                       ...cta,
                       buttonSize: 'hero',
+                      previewMode,
                     })
                   )}
                 </HeroCTA>
@@ -315,6 +321,7 @@ const HeroContainerComponent = props => {
                         ? sideImageDarkMode
                         : sideImage
                     }
+                    previewMode={previewMode}
                   />
                 ) : null}
               </HeroSideImage>
@@ -325,6 +332,7 @@ const HeroContainerComponent = props => {
                   contentfulModuleToComponent({
                     ...cta,
                     buttonSize: 'hero',
+                    previewMode,
                   })
                 )}
               </HeroCTA>
@@ -366,6 +374,7 @@ HeroContainerComponent.propTypes = {
   showFavIcon: PropTypes.bool,
   sideImageFoxAnimation: PropTypes.bool,
   sectionPadding: PropTypes.string,
+  previewMode: PropTypes.bool,
 }
 
 const HeroContainer = styled(Section)`
@@ -585,44 +594,6 @@ const HeroContentContainer = styled.div`
     }
   `
       : ``}
-  ${({ isCustody, theme }) =>
-    isCustody
-      ? `
-    background-position: 100% 50%;
-    background-size: auto 400px;
-    
-    ${EyebrowWrapper} {
-      img {
-        width: 224px;
-        height: auto;
-      }
-    }
-    
-    @media (max-width: ${theme.device.tabletMediaMax}){
-      margin-top: 39px;
-      background-position: 50% 0%;
-      background-size: 382px;
-      ${EyebrowWrapper} {
-        img {
-          margin: 0 auto;
-        }
-      }
-      
-      ${HeroTitle} {
-        padding-top: 10px;
-      }
-      
-      ${HeroImageTextContainer} {
-        padding-top: 42px;
-        background-image: ${theme.background.isCustodyOverlayHero} !important;
-
-      }
-    }
-    @media (max-width: ${theme.device.mobileMediaMax}){
-      background-size: 250px;
-    }
-  `
-      : ''}
 
   ${({ isThankYou, theme }) =>
     isThankYou

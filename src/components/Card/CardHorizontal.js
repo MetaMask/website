@@ -31,6 +31,7 @@ const StyledCard = props => {
     cta,
     isDarkMode,
     customClass,
+    previewMode = false,
   } = props
 
   return (
@@ -50,6 +51,7 @@ const StyledCard = props => {
           <ImageWrapper imageMargin={imageMargin} layoutSize={layoutSize}>
             <ImageSrc
               image={isDarkMode && imageDarkMode ? imageDarkMode : image}
+              previewMode={previewMode}
             />
           </ImageWrapper>
         ) : null}

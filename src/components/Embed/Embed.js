@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import parseIframe from './parseIframe'
@@ -11,7 +11,7 @@ const EmbedHtml = props => {
   const contentRef = React.useRef(null)
   let htmlParse = html
   let iframePopupData
-  if (htmlParse.includes('<iframe')) {
+  if (htmlParse?.includes('<iframe')) {
     const { htmlString, iframeList } = parseIframe(
       htmlParse,
       playOnPopup,
@@ -25,8 +25,8 @@ const EmbedHtml = props => {
     setPopupId('')
   }
 
-  React.useEffect(() => {
-    if (playOnPopup && iframePopupData.length) {
+  useEffect(() => {
+    if (playOnPopup && iframePopupData?.length) {
       const popupTargets = contentRef.current.querySelectorAll(
         '.embed-popup-target'
       )
@@ -39,7 +39,7 @@ const EmbedHtml = props => {
         })
       }
     }
-  }, [playOnPopup, iframePopupData.length])
+  }, [playOnPopup, iframePopupData?.length])
 
   return (
     <>

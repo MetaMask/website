@@ -4,9 +4,10 @@ import Link from './Link'
 import styled from 'styled-components'
 
 const Image = props => {
-  const { image, src, link, ...rest } = props
+  const { image, src, link, previewMode = false, ...rest } = props
   const { title, description } = image || {}
-  const urlImg = src ? src : parseContentfulAssetUrl(image)
+
+  const urlImg = src ? src : parseContentfulAssetUrl(image, previewMode)
   if (!urlImg) return null
   if (link) {
     return (

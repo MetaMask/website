@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Feature from '../Feature'
 import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
 const ContentfulLayoutFeature = props => {
   const {
@@ -31,7 +32,7 @@ const ContentfulLayoutFeature = props => {
       noPaddingBottom,
       cta,
       embed,
-      previewMode,
+      previewMode = false,
       featureItems,
       imageShadow,
       hideImageOnMobile,
@@ -40,9 +41,15 @@ const ContentfulLayoutFeature = props => {
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
-  const bgUrl = parseContentfulAssetUrl(backgroundImage)
-  const bgDarkUrl = parseContentfulAssetUrl(backgroundImageDarkMode)
-  const bgMobileUrl = parseContentfulAssetUrl(backgroundImageMobile)
+  const bgUrl = parseContentfulAssetUrl(backgroundImage, previewMode)
+  const bgDarkUrl = parseContentfulAssetUrl(
+    backgroundImageDarkMode,
+    previewMode
+  )
+  const bgMobileUrl = parseContentfulAssetUrl(
+    backgroundImageMobile,
+    previewMode
+  )
 
   return (
     <Feature
@@ -75,11 +82,33 @@ const ContentfulLayoutFeature = props => {
       imageShadow={imageShadow}
       hideImageOnMobile={hideImageOnMobile}
       customClass={customClass}
+      previewMode={previewMode}
     />
   )
 }
 
-export default ContentfulLayoutFeature
+const parsePreviewData = data => {
+  data = data.moduleConfig.previewContent || data.moduleConfig
+  const { featureItemsCollection, embed } = data
+
+  const dataUpdate = {
+    moduleConfig: {
+      previewMode: true,
+      featureItems: featureItemsCollection?.items,
+      ...data,
+      embed: embed
+        ? {
+            embed: embed,
+            thumbnail: embed.thumbnail,
+            playOnPopup: embed.playOnPopup,
+          }
+        : undefined,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(ContentfulLayoutFeature)
 
 ContentfulLayoutFeature.propTypes = {
   moduleConfig: PropTypes.shape({

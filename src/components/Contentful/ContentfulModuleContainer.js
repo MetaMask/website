@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
@@ -6,6 +6,7 @@ import classnames from 'classnames'
 import FaqList from '../FaqList'
 import kebabCase from 'lodash/kebabCase'
 import { EyebrowStyle } from '../StyledGeneral'
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -24,7 +25,7 @@ const ContentfulModuleContainer = props => {
       gridModulesGap: gridModulesGapDefault,
       isLiquiditySection,
       containerBgColor,
-      previewMode,
+      previewMode = false,
       columnType,
     },
   } = props
@@ -33,18 +34,22 @@ const ContentfulModuleContainer = props => {
   const htmlData = previewMode ? description : html
   const faqList =
     modules && modules.length
-      ? modules.filter(modules => modules.__typename === 'ContentfulFaq')
+      ? modules.filter(modules =>
+          ['ContentfulFaq', 'Faq'].includes(modules.__typename)
+        )
       : []
   const modulesOther =
     modules && modules.length
-      ? modules.filter(modules => modules.__typename !== 'ContentfulFaq')
+      ? modules.filter(
+          modules => !['ContentfulFaq', 'Faq'].includes(modules.__typename)
+        )
       : []
   const isFaq = faqList && faqList.length
 
-  const [modulesRender, setModulesRender] = React.useState(modulesOther)
-  const [shuffled, setShuffled] = React.useState(false)
+  const [modulesRender, setModulesRender] = useState(modulesOther)
+  const [shuffled, setShuffled] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (columnType === 'randomize') {
       const lastItem = modulesOther.pop()
       let modulesShuffled = modulesOther
@@ -82,7 +87,11 @@ const ContentfulModuleContainer = props => {
         ) : null}
         <ModulesWrapper splitModules={splitModules}>
           {isFaq ? (
-            <FaqList list={faqList} containerBgColor={containerBgColor} />
+            <FaqList
+              list={faqList}
+              containerBgColor={containerBgColor}
+              previewMode={previewMode}
+            />
           ) : null}
           {modulesRender.length ? (
             <Modules
@@ -113,12 +122,28 @@ const ContentfulModuleContainer = props => {
   )
 }
 
-export default ContentfulModuleContainer
+const parsePreviewData = data => {
+  data = data.moduleConfig.previewContent || data.moduleConfig
+  const { modulesCollection } = data
+
+  const dataUpdate = {
+    moduleConfig: {
+      previewMode: true,
+      modules: modulesCollection.items,
+      ...data,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(
+  ContentfulModuleContainer
+)
 
 ContentfulModuleContainer.propTypes = {
   moduleConfig: PropTypes.shape({
     title: PropTypes.string,
-    description: PropTypes.object,
+    description: PropTypes.object | PropTypes.string,
     numberOfItem: PropTypes.number,
     columns: PropTypes.number,
     contentAlignment: PropTypes.string,
