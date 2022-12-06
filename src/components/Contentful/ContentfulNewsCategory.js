@@ -18,6 +18,10 @@ function ContentfulNewsCategory(props) {
         nodes {
           title
           subtitle
+          publishDate(formatString: "MMMM D, YYYY")
+          author {
+            name
+          }
           categories {
             name
             contentful_id
