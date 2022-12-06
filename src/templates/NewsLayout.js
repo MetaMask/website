@@ -15,7 +15,15 @@ function NewsLayout(props) {
       header,
       hero,
       cta,
-      news: { title, subtitle, image, content, canonicalUrl },
+      news: {
+        title,
+        subtitle,
+        image,
+        content,
+        canonicalUrl,
+        author,
+        publishDate,
+      },
       news_bg,
       news_dark_bg,
       hubspot,
@@ -59,6 +67,12 @@ function NewsLayout(props) {
             })}
             <Title>{title}</Title>
             <Subtitle>{subtitle}</Subtitle>
+            <NewsInfo>
+              <span>by&nbsp;</span>
+              <span className="author">{author?.name || 'MetaMask'}</span>
+              <span className="separator" />
+              <span className="publishDate">{publishDate}</span>
+            </NewsInfo>
             <Image image={image} />
             <SocialShare>
               <SocialButtonList />
@@ -134,7 +148,7 @@ const Title = styled.h2`
 const Subtitle = styled.p`
   font-size: 16px;
   line-height: 24px;
-  padding-top: 24px;
+  padding-top: 8px;
 `
 
 const categoryProps = PropTypes.shape({
@@ -143,6 +157,45 @@ const categoryProps = PropTypes.shape({
     name: PropTypes.string.isRequired,
   }),
 })
+
+const NewsInfo = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  padding-top: 0.75rem;
+
+  .separator {
+    background-color: #333;
+    display: inline-flex;
+    height: 1px;
+    margin: 0 0.5rem;
+    width: 0.5rem;
+    body.dark-mode & {
+      background-color: #fff;
+    }
+  }
+  .author,
+  .publishDate {
+    font-weight: 700;
+  }
+
+  &::before {
+    background-color: #333;
+    content: '';
+    height: 3px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 3.5rem;
+
+    body.dark-mode & {
+      background-color: #fff;
+    }
+  }
+`
 
 NewsLayout.propTypes = {
   data: PropTypes.shape({
@@ -154,6 +207,7 @@ NewsLayout.propTypes = {
       subtitle: PropTypes.string.isRequired,
       publishDate: PropTypes.string,
       categories: PropTypes.arrayOf(categoryProps),
+      author: PropTypes.string,
     }),
   }).isRequired,
   pageContext: PropTypes.shape({
