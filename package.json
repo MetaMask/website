@@ -73,7 +73,6 @@
     "reactjs-popup": "^2.0.5",
     "recompose": "^0.30.0",
     "rehype-raw": "^6.1.1",
-    "remark-gfm": "^3.0.1",
     "rimble-ui": "^0.14.0",
     "sass": "^1.43.4",
     "simplex-noise": "^4.0.0",

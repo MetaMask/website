@@ -2,13 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
-import remarkGfm from 'remark-gfm'
 
-const ParseMD = ({ children, rehypePlugins, ...props }) => {
+const ParseMD = ({ children, ...props }) => {
   return (
     <ReactMarkdown
-      rehypePlugins={[rehypeRaw, ...rehypePlugins]}
-      remarkPlugins={[remarkGfm]}
+      rehypePlugins={[rehypeRaw]}
       {...props}
     >
       {children}
@@ -18,12 +16,10 @@ const ParseMD = ({ children, rehypePlugins, ...props }) => {
 
 ParseMD.propTypes = {
   children: PropTypes.node.isRequired,
-  rehypePlugins: PropTypes.array,
 }
 
 ParseMD.defaultProps = {
   children: null,
-  rehypePlugins: [],
 }
 
 export default ParseMD
