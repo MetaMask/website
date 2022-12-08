@@ -21,7 +21,7 @@ function NewsLayout(props) {
         image,
         content,
         canonicalUrl,
-        author,
+        authors,
         publishDate,
       },
       news_bg,
@@ -52,6 +52,14 @@ function NewsLayout(props) {
     displayTitle: false,
   }
 
+  const hasAuthors = authors && authors.length > 0
+  const authorsName =
+    hasAuthors &&
+    authors.reduce((acc, cur) => {
+      acc.push(cur.name)
+      return acc
+    }, [])
+
   return (
     <Layout {...props}>
       {contentfulModuleToComponent(seoModuleConfig)}
@@ -69,7 +77,9 @@ function NewsLayout(props) {
             <Subtitle>{subtitle}</Subtitle>
             <NewsInfo>
               <span>by&nbsp;</span>
-              <span className="author">{author?.name || 'MetaMask'}</span>
+              <span className="author">
+                {hasAuthors ? authorsName.join(', ') : 'MetaMask'}
+              </span>
               <span className="separator" />
               <span className="publishDate">{publishDate}</span>
             </NewsInfo>
@@ -161,6 +171,7 @@ const categoryProps = PropTypes.shape({
 const NewsInfo = styled.div`
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   font-size: 1rem;
   margin-top: 2rem;
@@ -207,7 +218,7 @@ NewsLayout.propTypes = {
       subtitle: PropTypes.string.isRequired,
       publishDate: PropTypes.string,
       categories: PropTypes.arrayOf(categoryProps),
-      author: PropTypes.string,
+      author: PropTypes.arrayOf(PropTypes.shape(PropTypes.string.isRequired)),
     }),
   }).isRequired,
   pageContext: PropTypes.shape({

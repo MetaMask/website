@@ -16,8 +16,15 @@ function NewsList(props) {
   return (
     <>
       {data.map(news => {
-        const { title, subtitle, image, publishDate, author } = news
+        const { title, subtitle, image, publishDate, authors } = news
         const newsUrl = getNewsUrl(news)
+        const hasAuthors = authors && authors.length > 0
+        const authorsName =
+          hasAuthors &&
+          authors.reduce((acc, cur) => {
+            acc.push(cur.name)
+            return acc
+          }, [])
         return (
           <NewsListWrapper>
             <Card
@@ -29,7 +36,9 @@ function NewsList(props) {
             />
             <NewsInfo hasMt={!!subtitle}>
               <span>by&nbsp;</span>
-              <span className="author">{author?.name || 'MetaMask'}</span>
+              <span className="author">
+                {hasAuthors ? authorsName.join(', ') : 'MetaMask'}
+              </span>
               <span className="separator" />
               <span className="publishDate">{publishDate}</span>
             </NewsInfo>
@@ -45,6 +54,7 @@ const NewsListWrapper = styled.div``
 const NewsInfo = styled.div`
   margin-top: ${({ hasMt }) => (hasMt ? '0.75rem' : 0)};
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   font-size: 11px;
 

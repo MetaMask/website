@@ -745,7 +745,7 @@ export const ContentfulNewsFields = graphql`
       }
     }
     publishDate(formatString: "MMMM D, YYYY")
-    author {
+    authors {
       name
     }
     content {

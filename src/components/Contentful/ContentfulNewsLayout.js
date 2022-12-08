@@ -18,7 +18,7 @@ const ContentfulNewsLayout = props => {
       subtitle,
       previewMode = false,
       publishDate,
-      author,
+      authors,
     },
   } = props
 
@@ -28,8 +28,15 @@ const ContentfulNewsLayout = props => {
     displayTitle: false,
     previewMode: true,
     publishDate,
-    author,
   }
+
+  const hasAuthors = authors && authors.length > 0
+  const authorsName =
+    hasAuthors &&
+    authors.reduce((acc, cur) => {
+      acc.push(cur.name)
+      return acc
+    }, [])
 
   return (
     <NewsContainer>
@@ -38,7 +45,9 @@ const ContentfulNewsLayout = props => {
         <Subtitle>{subtitle}</Subtitle>
         <NewsInfo>
           <span>by&nbsp;</span>
-          <span className="author">{author?.name || 'MetaMask'}</span>
+          <span className="author">
+            {hasAuthors ? authorsName.join(', ') : 'MetaMask'}
+          </span>
           <span className="separator" />
           <span className="publishDate">
             {publishDate ? moment(publishDate).format('MMMM D, YYYY') : ''}
@@ -58,10 +67,12 @@ const ContentfulNewsLayout = props => {
 
 const parsePreviewData = data => {
   data = data.moduleConfig.previewContent || data.moduleConfig
+  const { authorsCollection } = data
 
   const dataUpdate = {
     moduleConfig: {
       previewMode: true,
+      authors: authorsCollection.items,
       ...data,
     },
   }
@@ -131,6 +142,7 @@ const SocialShare = styled.div`
 const NewsInfo = styled.div`
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   font-size: 1rem;
   margin-top: 2rem;
