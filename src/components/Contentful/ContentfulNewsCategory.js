@@ -19,7 +19,7 @@ function ContentfulNewsCategory(props) {
           title
           subtitle
           publishDate(formatString: "MMMM D, YYYY")
-          author {
+          authors {
             name
           }
           categories {
