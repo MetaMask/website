@@ -15,6 +15,7 @@ import ParseMD from './ParseMD'
 const FeatureComponent = props => {
   const {
     cta,
+    ctaSecond,
     embed,
     headline,
     hideHeadline,
@@ -96,6 +97,17 @@ const FeatureComponent = props => {
               : 'white-outline',
             previewMode,
           })}
+          {ctaSecond ? (
+            <>
+              {contentfulModuleToComponent({
+                ...ctaSecond,
+                color: ['white', 'gray', 'default'].includes(backgroundColor)
+                  ? ctaSecond.color
+                  : 'white-outline',
+                previewMode,
+              })}
+            </>
+          ) : null}
         </CTAWrapper>
       ) : null}
     </>
@@ -220,6 +232,19 @@ const FeatureComponent = props => {
                   : 'white-outline',
                 previewMode,
               })}
+              {ctaSecond ? (
+                <>
+                  {contentfulModuleToComponent({
+                    ...ctaSecond,
+                    color: ['white', 'gray', 'default'].includes(
+                      backgroundColor
+                    )
+                      ? ctaSecond.color
+                      : 'white-outline',
+                    previewMode,
+                  })}
+                </>
+              ) : null}
             </CTAWrapper>
           ) : null}
         </FeatureWrapper>
@@ -545,6 +570,10 @@ const FeatureInner = styled.div`
   }
 `
 const CTAWrapper = styled.div`
+  display: inline-flex;
+  justify-content: center;
+  row-gap: 8px;
+  column-gap: 16px;
   margin-top: 40px;
   a {
     min-width: 160px;
@@ -557,6 +586,7 @@ const CTAWrapper = styled.div`
     }
   }
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    flex-wrap: wrap;
     .button {
       width: 100%;
     }
