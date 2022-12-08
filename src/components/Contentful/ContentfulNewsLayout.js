@@ -72,7 +72,7 @@ const parsePreviewData = data => {
   const dataUpdate = {
     moduleConfig: {
       previewMode: true,
-      authors: authorsCollection.items,
+      authors: authorsCollection?.items,
       ...data,
     },
   }
