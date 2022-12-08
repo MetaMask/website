@@ -13,8 +13,10 @@ export const ContentfulNewsLayoutFields = gql`
     }
     publishDate
     content
-    author(preview: true) {
-      name
+    authorsCollection(preview: true) {
+      items {
+        name
+      }
     }
     publishDate
   }

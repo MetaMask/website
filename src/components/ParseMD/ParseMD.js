@@ -5,10 +5,7 @@ import rehypeRaw from 'rehype-raw'
 
 const ParseMD = ({ children, ...props }) => {
   return (
-    <ReactMarkdown
-      rehypePlugins={[rehypeRaw]}
-      {...props}
-    >
+    <ReactMarkdown rehypePlugins={[rehypeRaw]} {...props}>
       {children}
     </ReactMarkdown>
   )
