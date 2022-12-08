@@ -89,7 +89,6 @@ class PreviewPage extends React.Component {
 
     if (loading) return <PreviewLoading />
     if (moduleConfig) {
-      console.log(moduleConfig)
       return (
         <Layout
           themeColor={moduleConfig.themeColor}
