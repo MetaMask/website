@@ -255,6 +255,9 @@ export const ContentfulLayoutFeatureFields = graphql`
     cta {
       ...ContentfulCtaFields
     }
+    ctaSecond {
+      ...ContentfulCtaFields
+    }
   }
 `
 

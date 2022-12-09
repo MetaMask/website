@@ -31,6 +31,7 @@ const ContentfulLayoutFeature = props => {
       sectionPadding,
       noPaddingBottom,
       cta,
+      ctaSecond,
       embed,
       previewMode = false,
       featureItems,
@@ -77,6 +78,7 @@ const ContentfulLayoutFeature = props => {
       sectionPadding={sectionPadding}
       noPaddingBottom={noPaddingBottom}
       cta={cta}
+      ctaSecond={ctaSecond}
       embed={embed}
       featureItems={featureItems}
       imageShadow={imageShadow}
