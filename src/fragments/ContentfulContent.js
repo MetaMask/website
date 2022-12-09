@@ -634,6 +634,7 @@ export const ContentfulModuleContainerFields = graphql`
     splitModules
     displayTitle
     isLiquiditySection
+    isTrustBar
     gridModulesGap
     modules {
       ... on ContentfulLogo {

@@ -294,6 +294,7 @@ export const ContentfulModuleContainerFields = gql`
     gridModulesGap
     splitModules
     isLiquiditySection
+    isTrustBar
     displayTitle
     modulesCollection(preview: true) {
       items {
