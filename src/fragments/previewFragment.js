@@ -557,6 +557,9 @@ export const ContentfulLayoutFeatureFields = gql`
     cta(preview: true) {
       ...ContentfulCtaFields
     }
+    ctaSecond(preview: true) {
+      ...ContentfulCtaFields
+    }
   }
 `
 
