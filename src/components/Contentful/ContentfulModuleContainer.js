@@ -24,6 +24,7 @@ const ContentfulModuleContainer = props => {
       gridModules = true,
       gridModulesGap: gridModulesGapDefault,
       isLiquiditySection,
+      isTrustBar,
       containerBgColor,
       previewMode = false,
       columnType,
@@ -102,6 +103,7 @@ const ContentfulModuleContainer = props => {
               gridModules={gridModules}
               gridModulesGap={isLiquiditySection ? '16px' : gridModulesGap}
               isLiquiditySection={isLiquiditySection}
+              isTrustBar={isTrustBar}
               className={classnames('moduleContainerListModules', {
                 [`columnType${columnType}`]: columnType,
                 [`column-${columns}`]: columns,
@@ -149,6 +151,7 @@ ContentfulModuleContainer.propTypes = {
     contentAlignment: PropTypes.string,
     splitModules: PropTypes.bool,
     columnsOnMobile: PropTypes.number,
+    isTrustBar: PropTypes.bool,
   }),
 }
 
@@ -267,6 +270,34 @@ const Modules = styled.div`
   `
       : ''}
 
+  ${({ isTrustBar, columns, columnsOnMobile, theme }) =>
+    isTrustBar
+      ? `
+    padding: 10px 19px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 24px rgb(0 0 0 / 10%);
+    align-items: center;
+
+    & > * {
+      width: calc(100%/${columns});
+      padding: 16px;
+
+      @media (max-width: ${theme.device.tabletMediaMax}){
+        padding: 16px 8px;
+      }
+
+      @media (max-width: ${theme.device.mobileMediaMax}){
+        width: ${columnsOnMobile ? `calc(100%/${columnsOnMobile})` : '50%'};
+        padding: 16px;
+      }
+    }
+    
+    body.dark-mode & {
+      background-color: #3c444b;
+    }
+  `
+      : ''}
+
   ${({
     gridModules,
     columnType,
@@ -274,8 +305,9 @@ const Modules = styled.div`
     columns,
     columnsOnMobile,
     theme,
+    isTrustBar,
   }) =>
-    columns && gridModules && columnType !== 'tag'
+    columns && gridModules && columnType !== 'tag' && !isTrustBar
       ? `
       margin: -${gridModulesGap} !important;
       
