@@ -37,6 +37,7 @@
 <url> <loc>https://metamask.io/faqs/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/1559/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/about/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/developers/invisible-keys-snap-multi-cloud-private-key-storage/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/meta-mask-swaps-says-hello-to-portfolio-dapp-and-l-2-networks-arbitrum-and-optimism/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/security/meta-mask-security-monthly-november-2022/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/we-hosted-a-group-of-artists-together-in-miami-during-art-basel-to-discuss-the-state-of-nf-ts-heres-what-we-learned/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
@@ -44,8 +45,8 @@
 <url> <loc>https://metamask.io/news/security/meta-mask-and-laconic-launch-moby-mask-light-client/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/smart-account-session-snap-gaming-dapp-auto-approvals/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/web-3-dubai-snaps-bounty/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
-<url> <loc>https://metamask.io/news/developers/blackbelt-snap-real-time-self-defense-against-scams/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/mpc-snap-integrating-multi-factor-authentication-into-meta-mask/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/developers/blackbelt-snap-real-time-self-defense-against-scams/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/meta-mask-launches-bridge-aggregator-in-dapp-to-easily-move-tokens-across-chains/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/how-we-selected-bridge-providers-for-meta-mask-bridges/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/revoke-snap-revoking-leftover-approvals-on-erc-20-token-contracts/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
