@@ -37,6 +37,7 @@
 <url> <loc>https://metamask.io/faqs/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/1559/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/about/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/security/meta-mask-security-monthly-december-2022/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/meta-mask-grants-dao-funds-agoric-and-safeheron-with-first-round-of-grants/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/invisible-keys-snap-multi-cloud-private-key-storage/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/meta-mask-swaps-says-hello-to-portfolio-dapp-and-l-2-networks-arbitrum-and-optimism/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
