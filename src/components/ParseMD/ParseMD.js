@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
+import rehypeSlug from 'rehype-slug'
 
 const ParseMD = ({ children, ...props }) => {
   return (
-    <ReactMarkdown rehypePlugins={[rehypeRaw]} {...props}>
+    <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSlug]} {...props}>
       {children}
     </ReactMarkdown>
   )
