@@ -131,7 +131,7 @@ const parsePreviewData = data => {
   const dataUpdate = {
     moduleConfig: {
       previewMode: true,
-      modules: modulesCollection.items,
+      modules: modulesCollection?.items,
       ...data,
     },
   }

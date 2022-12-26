@@ -71,6 +71,7 @@ export const ContentfulLayoutHeroFields = graphql`
         html
       }
     }
+    note
     eyebrow
     eyebrowLogo {
       ...ContentfulLogoFields
@@ -519,6 +520,7 @@ export const ContentfulHubSpotFormFields = graphql`
     displayTitle
     width
     customClass
+    customId
   }
 `
 
