@@ -60,6 +60,7 @@ const StyledCard = props => {
     // code block
   }
   const isCtaType = layoutType === 'cta'
+  const isEventType = layoutType === 'event'
 
   return (
     <Card className="moduleCardWrapper" isCtaType={isCtaType}>
@@ -84,9 +85,13 @@ const StyledCard = props => {
         ) : null}
         <Inner isCtaType={isCtaType}>
           <InnerContent isCtaType={isCtaType}>
-            {title ? <Title isCtaType={isCtaType}>{title}</Title> : null}
+            {title ? (
+              <Title isCtaType={isCtaType} isEventType={isEventType}>
+                {title}
+              </Title>
+            ) : null}
             {description ? (
-              <Description>
+              <Description isEventType={isEventType}>
                 <div dangerouslySetInnerHTML={{ __html: description }}></div>
               </Description>
             ) : null}
@@ -315,6 +320,17 @@ const Title = styled.div`
     line-height: 1.25;
   `
       : ''}
+
+  ${({ isEventType }) =>
+    isEventType &&
+    `
+      margin-top: -2px;
+      font-size: 12px;
+      line-height: 13.15px;
+      letter-spacing: 2.35px;
+      text-transform: uppercase;
+      color: #F6851B;
+  `}
 `
 
 const Description = styled.div`
@@ -363,6 +379,15 @@ const Description = styled.div`
       }
     }
   }
+
+  ${({ isEventType }) =>
+    isEventType &&
+    `
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 32px;
+      margin-top: 4px;
+  `}
 `
 const ArrowItem = styled.div`
   height: 35px;
