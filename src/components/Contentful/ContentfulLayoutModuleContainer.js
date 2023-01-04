@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ContentWrapper from '../ContentWrapper'
 import styled from 'styled-components'
+import { useLocation } from '@reach/router'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import classnames from 'classnames'
 import { SectionTitle, Section, EyebrowStyle } from '../StyledGeneral'
@@ -37,11 +38,13 @@ const ContentfulModuleContainer = props => {
     },
   } = props
 
+  const { pathname } = useLocation()
   const { childMarkdownRemark: { html } = {} } = description || {}
   const bgUrl = parseContentfulAssetUrl(backgroundImage, previewMode)
   const sideImageUrl = parseContentfulAssetUrl(sideImage, previewMode)
   const htmlData = previewMode ? description : html
   const isCategoryTab = customClass === 'newsCategoriesTab' && isTab
+  const isSecurityPage = pathname === '/security/'
   const tabs =
     isTab && modules && modules.length
       ? modules.map(item => ({
@@ -92,7 +95,7 @@ const ContentfulModuleContainer = props => {
                 ) : null}
                 {htmlData ? (
                   <>
-                    {previewMode ? (
+                    {previewMode || isSecurityPage ? (
                       <SubInfo
                         className={classnames({
                           'txt-center': contentAlignCenter,
@@ -397,6 +400,11 @@ const SubInfo = styled.div`
   .storiesOnNewsDetail & {
     text-align: center;
     color: ${({ theme }) => theme.text.default};
+  }
+
+  #reportBugFn {
+    cursor: pointer;
+    color: #2196f3;
   }
 `
 
