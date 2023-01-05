@@ -19,7 +19,11 @@ const DownloadBrowser = props => {
               {browsers.map(browser => {
                 const { cta, image, label } = browser
                 return (
-                  <BrowserItem key={label} to={cta.ctaLink} newTab={cta.newTab}>
+                  <BrowserItem
+                    key={label}
+                    to={cta?.ctaLink}
+                    newTab={cta?.newTab}
+                  >
                     <Image image={image} />
                     <BrowserName>{label}</BrowserName>
                   </BrowserItem>

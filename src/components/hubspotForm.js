@@ -14,6 +14,7 @@ const HubspotForm = props => {
     displayTitle,
     width,
     customClass,
+    customId,
   } = props
 
   const hasExternalStyles = customClass?.includes('external-styles')
@@ -39,7 +40,11 @@ const HubspotForm = props => {
   }
 
   return (
-    <Wrapper width={width} className={customClass}>
+    <Wrapper
+      width={width}
+      className={customClass}
+      {...(customId && { id: customId })}
+    >
       <Content>
         {title && displayTitle ? (
           <Title className={classnames('popupTitle')}>{title}</Title>
@@ -71,6 +76,15 @@ export default withTheme(HubspotForm)
 const Title = styled.h2`
   display: block;
   margin-bottom: 40px;
+
+  .registerEventForm & {
+    margin-bottom: 0;
+    font-size: 24px;
+  }
+
+  body.dark-mode .registerEventForm & {
+    color: #000;
+  }
 `
 
 const Wrapper = styled.div`
@@ -88,6 +102,24 @@ const Wrapper = styled.div`
     min-width: auto;
     width: 460px;
     margin: 0 auto;
+  }
+
+  .registerEventForm & {
+    padding: 20px;
+    padding-bottom: 3px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid rgba(51, 51, 51, 0.1);
+    box-shadow: -15px 15px 24px rgba(0, 0, 0, 0.05),
+      -3px 3px 10px rgba(0, 0, 0, 0.07);
+    border-radius: 5px;
+
+    @media (min-width: ${({ theme }) => theme.device.mobile}) {
+      padding-top: 40px;
+      padding-bottom: 23px;
+      padding-left: 55px;
+      padding-right: 55px;
+    }
   }
 `
 

@@ -192,6 +192,11 @@ ContentfulModuleContainer.propTypes = {
 
 const MainContent = styled.div`
   display: block;
+
+  .registerEventForm & {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 `
 
 const Inner = styled.div`
@@ -381,6 +386,10 @@ const ContentInfo = styled.div`
     margin-bottom: 27px;
   }
 
+  .contentInfoBottom35 & {
+    margin-bottom: 35px;
+  }
+
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     margin-bottom: 24px;
     text-align: center;
@@ -390,6 +399,19 @@ const ContentInfo = styled.div`
     padding-top: 0;
     .storiesOnNewsDetail & {
       padding-top: 40px;
+    }
+  }
+
+  .registerEventForm & {
+    width: 625px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-top: 32px;
+    font-size: 13px;
+    line-height: 150%;
+    letter-spacing: 0.2px;
+    & p {
+      margin-bottom: 0;
     }
   }
 `

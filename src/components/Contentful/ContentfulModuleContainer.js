@@ -31,6 +31,7 @@ const ContentfulModuleContainer = props => {
     },
   } = props
   const gridModulesGap = gridModulesGapDefault || '8px'
+  const gridModulesGapNumber = +gridModulesGap.slice(0, -2)
   const { childMarkdownRemark: { html } = {} } = description || {}
   const htmlData = previewMode ? description : html
   const faqList =
@@ -86,7 +87,10 @@ const ContentfulModuleContainer = props => {
             ) : null}
           </Content>
         ) : null}
-        <ModulesWrapper splitModules={splitModules}>
+        <ModulesWrapper
+          splitModules={splitModules}
+          overFlowHidden={gridModulesGapNumber > 20}
+        >
           {isFaq ? (
             <FaqList
               list={faqList}
@@ -131,7 +135,7 @@ const parsePreviewData = data => {
   const dataUpdate = {
     moduleConfig: {
       previewMode: true,
-      modules: modulesCollection.items,
+      modules: modulesCollection?.items,
       ...data,
     },
   }
@@ -197,6 +201,14 @@ const Inner = styled.div`
 `
 const ModulesWrapper = styled.div`
   display: block;
+
+  ${({ overFlowHidden }) =>
+    overFlowHidden
+      ? `
+      overflow: hidden;
+  `
+      : ``}
+
   ${({ splitModules, theme }) =>
     splitModules
       ? `

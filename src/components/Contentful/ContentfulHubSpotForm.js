@@ -11,6 +11,7 @@ const ContentfulHubSpotForm = props => {
       displayTitle,
       width,
       customClass,
+      customId,
     },
   } = props
 
@@ -23,6 +24,7 @@ const ContentfulHubSpotForm = props => {
       displayTitle={displayTitle}
       width={width}
       customClass={customClass}
+      customId={customId}
     />
   )
 }
@@ -38,5 +40,6 @@ ContentfulHubSpotForm.propTypes = {
     displayTitle: PropTypes.bool,
     width: PropTypes.string,
     customClass: PropTypes.string,
+    customId: PropTypes.string,
   }),
 }
