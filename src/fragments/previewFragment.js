@@ -74,6 +74,7 @@ export const ContentfulHubSpotFormFields = gql`
     displayTitle
     width
     customClass
+    customId
   }
 `
 
@@ -427,6 +428,7 @@ export const ContentfulLayoutHeroFields = gql`
     headline
     hideHeadline
     description
+    note
     eyebrow
     eyebrowLogo(preview: true) {
       ...ContentfulLogoFields

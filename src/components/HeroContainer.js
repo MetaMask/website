@@ -22,6 +22,7 @@ const HeroContainerComponent = props => {
     headline,
     hideHeadline,
     description,
+    note,
     sideImage,
     sideImageDarkMode,
     sideImageUrl,
@@ -303,6 +304,7 @@ const HeroContainerComponent = props => {
                   )}
                 </HeroCTA>
               ) : null}
+              {note && <HeroNote>{note}</HeroNote>}
               {hubspotWrapper ? hubspotWrapper : null}
             </HeroImageTextContainer>
             {(sideImage || sideImageFoxAnimation) && !isSDK ? (
@@ -963,6 +965,13 @@ const HeroSideImage = styled.div`
     `
         : ''}
   }
+
+  .sideImageLeft70 & {
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      position: relative;
+      left: 70px;
+    }
+  }
 `
 
 const HeightSlide = styled.div`
@@ -1110,4 +1119,11 @@ const BackgroundImageContain = styled.div`
     right: 0;
     width: 100%;
   }
+`
+
+const HeroNote = styled.p`
+  font-style: italic;
+  font-size: 12px;
+  color: ${({ theme }) => theme.darkGray};
+  margin-bottom: 0;
 `

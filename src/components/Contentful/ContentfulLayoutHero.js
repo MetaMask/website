@@ -11,6 +11,7 @@ const ContentfulLayoutHero = props => {
       backgroundImageDarkMode,
       ctas,
       description,
+      note,
       headline,
       modules,
       sideImage = {},
@@ -53,6 +54,7 @@ const ContentfulLayoutHero = props => {
       isFaq={isFaq}
       headline={headline}
       description={previewMode ? description : html}
+      note={note}
       eyebrow={eyebrow}
       eyebrowLogo={eyebrowLogo}
       eyebrowMobileLogo={eyebrowMobileLogo}
@@ -110,6 +112,7 @@ ContentfulLayoutHero.propTypes = {
     backgroundColor: PropTypes.string,
     layout: PropTypes.string,
     description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    note: PropTypes.string,
     headline: PropTypes.string,
     hideHeadline: PropTypes.bool,
     headlineBorderBottom: PropTypes.bool,
