@@ -179,6 +179,13 @@ const Wrapper = styled.div`
     }
   `
       : ``}
+
+  .registerEventForm & {
+    width: 625px;
+    max-width: 100%;
+    margin: 0 auto 40px;
+    line-height: 24px;
+  }
 `
 const Inner = styled.div`
   display: block;
