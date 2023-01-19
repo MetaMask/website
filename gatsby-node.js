@@ -6,6 +6,7 @@ exports.createPages = ({ graphql, actions }) => {
 
   // Generally you create redirects while creating pages.
   createRedirect({ fromPath: '/institutions/overview-amer/', toPath: '/institutions/', isPermanent: true, redirectInBrowser: true })
+  createRedirect({ fromPath: '/institutions/dine-and-defi-2023/', toPath: '/institutions/web3-connect-2023/', isPermanent: true, redirectInBrowser: true })
 
   /* Customized Pages Built Inside Contentful CMS */
   const contentfulLayouts = graphql(`
