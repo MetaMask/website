@@ -38,6 +38,7 @@
 <url> <loc>https://metamask.io/faqs/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/1559/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/about/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/developers/polysnap-invoking-polywrap-wasm-wrappers-on-the-fly/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/meta-mask-introduces-liquid-staking-in-dapp-for-an-easy-and-convenient-way-to-stake-eth/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/what-is-staking-how-do-i-do-it/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/the-first-ux-hackathon-in-web-3-building-is-not-just-coding/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
