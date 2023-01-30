@@ -93,7 +93,7 @@ const HeaderInner = styled.div`
     background: ${theme.background.tabModuleOuter};
     border-radius: 999px;
 
-    @media (max-width: ${theme.device.mobileMediaMax}){
+    @media (max-width: ${theme.device.tabletMediaMax}){
       width: 100%;
       flex-direction: column;
       border-radius: 8px;
