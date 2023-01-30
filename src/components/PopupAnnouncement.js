@@ -3,9 +3,17 @@ import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import ArrowIcon from '../images/icons/icon-arrow-right.svg'
 import Link from './Link'
+import ImageItem from './Image'
 
 const PopupAnnouncement = props => {
-  const { title, ctaText, ctaLink, backgroundColor } = props
+  const {
+    title,
+    ctaText,
+    ctaLink,
+    backgroundColor,
+    image,
+    previewMode = false,
+  } = props
 
   const [isHidden, setIsHidden] = React.useState(false)
 
@@ -20,8 +28,8 @@ const PopupAnnouncement = props => {
     <Wrapper backgroundColor={backgroundColor}>
       <WrapperInner>
         <WrapperInnerLink>
+          {image ? <ImageSrc image={image} previewMode={previewMode} /> : null}
           {ctaLink && <ClickArea to={ctaLink} newTab></ClickArea>}
-
           <Content>
             {title && <Title>{title}</Title>}
             {ctaText && (
@@ -136,5 +144,13 @@ const CloseBtn = styled.span`
 
   &:hover {
     opacity: 0.5;
+  }
+`
+
+const ImageSrc = styled(ImageItem)`
+  max-height: 100px;
+
+  @media (max-width: 767px) {
+    display: none;
   }
 `
