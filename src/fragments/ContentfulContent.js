@@ -793,6 +793,16 @@ export const ContentfulPopupAnnouncementFields = graphql`
     ctaText
     ctaLink
     backgroundColor
+    image {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 768, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
   }
 `
 

@@ -176,6 +176,11 @@ export const ContentfulPopupAnnouncementFields = gql`
     ctaText
     ctaLink
     backgroundColor
+    image(preview: true) {
+      title
+      description
+      url
+    }
   }
 `
 
