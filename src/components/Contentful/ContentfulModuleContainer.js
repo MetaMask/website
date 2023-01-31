@@ -17,6 +17,7 @@ const ContentfulModuleContainer = props => {
       numberOfItem,
       columns,
       columnsOnMobile,
+      centerOnMobile,
       contentAlignment,
       splitModules,
       displayTitle,
@@ -100,6 +101,7 @@ const ContentfulModuleContainer = props => {
               columns={columns}
               columnsOnMobile={columnsOnMobile}
               contentAlignment={contentAlignment}
+              centerOnMobile={centerOnMobile}
               gridModules={gridModules}
               gridModulesGap={isLiquiditySection ? '16px' : gridModulesGap}
               isLiquiditySection={isLiquiditySection}
@@ -152,6 +154,7 @@ ContentfulModuleContainer.propTypes = {
     splitModules: PropTypes.bool,
     columnsOnMobile: PropTypes.number,
     isTrustBar: PropTypes.bool,
+    centerOnMobile: PropTypes.bool,
   }),
 }
 
@@ -360,6 +363,18 @@ const Modules = styled.div`
     justify-content: center;
     .ctaModuleContainer {
       justify-content: center;
+    }
+  `
+      : ''}
+
+  ${({ centerOnMobile, theme }) =>
+    centerOnMobile
+      ? `
+    @media(max-width: ${theme.device.mobileMediaMax}) {
+      justify-content: center;
+      .ctaModuleContainer {
+        justify-content: center;
+      }
     }
   `
       : ''}
