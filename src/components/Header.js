@@ -25,6 +25,7 @@ const StyledHeader = props => {
     downloadButton,
     popupAnnouncement,
     hideDownloadBtn,
+    isUninstalledPage,
     previewMode = false,
   } = props
   const isDesktop = useMediaQuery({
@@ -85,7 +86,7 @@ const StyledHeader = props => {
     setIsDarkMode(e.target.checked)
   }
   return (
-    <HeaderElement ref={headerRef}>
+    <HeaderElement ref={headerRef} isUninstalledPage={isUninstalledPage}>
       <Announcement>
         {contentfulModuleToComponent({
           ...popupAnnouncement,
@@ -231,6 +232,13 @@ const HeaderElement = styled.header`
   top: 0;
   z-index: 999;
   transition: background 300ms ease;
+
+  ${({ isUninstalledPage }) =>
+    isUninstalledPage
+      ? `
+      position: unset;
+    `
+      : ''}
 `
 const Announcement = styled.div`
   margin: -24px -20px 16px -20px;
