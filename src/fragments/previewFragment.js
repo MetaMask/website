@@ -396,6 +396,7 @@ export const ContentfulLayoutHeaderFields = gql`
     downloadButton(preview: true) {
       ...ContentfulCtaFields
     }
+    isUninstalledPage
   }
 `
 
