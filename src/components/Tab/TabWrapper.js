@@ -3,7 +3,6 @@ import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import TabHeader from './TabHeader'
 import TabContent from './TabContent'
-import queryString from 'query-string'
 import lowerCase from 'lodash/lowerCase'
 
 const TabWrapper = props => {
@@ -18,17 +17,16 @@ const TabWrapper = props => {
   const [searchState, setSearchState] = React.useState('')
   React.useEffect(() => {
     if (typeof window !== 'undefined') {
-      setSearchState(window.location?.search)
+      setSearchState(window.location?.pathname)
     }
   }, [])
 
   const tabDefaultFromParam = React.useMemo(() => {
     if (searchState && isTabParam) {
-      const param = queryString.parse(searchState)
-      const { category } = param
+      const category = searchState.match('/news/([^/]*)/?')
       if (category) {
         const tabActive = tabs.find(
-          ({ label }) => encodeURIComponent(lowerCase(label)) === category
+          ({ label }) => encodeURIComponent(lowerCase(label)) === category[1]
         )
         return tabActive?.id
       }
