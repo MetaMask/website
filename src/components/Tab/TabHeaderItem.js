@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
+import { navigate } from 'gatsby'
 import lowerCase from 'lodash/lowerCase'
 import Context from '../../Context/ContextPage'
 const DownloadContainer = props => {
@@ -19,11 +20,7 @@ const DownloadContainer = props => {
       setPaginationPage(1)
     }
     if (isTabParam) {
-      window.history.pushState(
-        '',
-        '',
-        `/news/${encodeURIComponent(lowerCase(label))}/`
-      )
+      navigate(`/news/${encodeURIComponent(lowerCase(label))}/`)
     }
   }
   return (
