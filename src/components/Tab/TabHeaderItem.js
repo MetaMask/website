@@ -22,7 +22,7 @@ const DownloadContainer = props => {
       window.history.pushState(
         '',
         '',
-        `?category=${encodeURIComponent(lowerCase(label))}`
+        `/news/${encodeURIComponent(lowerCase(label))}/`
       )
     }
   }
