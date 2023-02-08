@@ -30,7 +30,7 @@ export const ContentfulLayoutHeaderFields = graphql`
     popupAnnouncement {
       ...ContentfulPopupAnnouncementFields
     }
-    isUninstalledPage
+    isSticky
   }
 `
 
