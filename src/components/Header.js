@@ -25,7 +25,7 @@ const StyledHeader = props => {
     downloadButton,
     popupAnnouncement,
     hideDownloadBtn,
-    isUninstalledPage,
+    isSticky,
     previewMode = false,
   } = props
   const isDesktop = useMediaQuery({
@@ -86,7 +86,7 @@ const StyledHeader = props => {
     setIsDarkMode(e.target.checked)
   }
   return (
-    <HeaderElement ref={headerRef} isUninstalledPage={isUninstalledPage}>
+    <HeaderElement ref={headerRef} className={classnames({ sticky: isSticky })}>
       <Announcement>
         {contentfulModuleToComponent({
           ...popupAnnouncement,
@@ -227,18 +227,14 @@ const HeaderElement = styled.header`
   margin-top: 0;
   overflow: visible;
   padding: 24px 20px;
-  position: sticky;
   right: 0;
   top: 0;
   z-index: 999;
   transition: background 300ms ease;
 
-  ${({ isUninstalledPage }) =>
-    isUninstalledPage
-      ? `
-      position: unset;
-    `
-      : ''}
+  &.sticky {
+    position: sticky;
+  }
 `
 const Announcement = styled.div`
   margin: -24px -20px 16px -20px;
