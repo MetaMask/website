@@ -3,8 +3,8 @@ import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import TabHeader from './TabHeader'
 import TabContent from './TabContent'
-import queryString from 'query-string'
 import lowerCase from 'lodash/lowerCase'
+import queryString from 'query-string'
 
 const TabWrapper = props => {
   const {
@@ -16,25 +16,41 @@ const TabWrapper = props => {
   } = props
 
   const [searchState, setSearchState] = React.useState('')
+  const [category, setCategory] = React.useState('')
+
   React.useEffect(() => {
     if (typeof window !== 'undefined') {
-      setSearchState(window.location?.search)
+      const search = window.location?.search
+      if (search) {
+        const params = queryString.parse(search)
+        const newsCategory = params.category
+        if (newsCategory) {
+          setCategory(newsCategory)
+        }
+      }
+      setSearchState(window.location?.pathname)
     }
   }, [])
 
   const tabDefaultFromParam = React.useMemo(() => {
+    if (category && isTabParam) {
+      const tabActive = tabs.find(
+        ({ label }) => encodeURIComponent(lowerCase(label)) === category
+      )
+      return tabActive?.id
+    }
     if (searchState && isTabParam) {
-      const param = queryString.parse(searchState)
-      const { category } = param
-      if (category) {
+      const newsCategory = searchState.match('/news/([^/]*)/?')
+      if (newsCategory) {
         const tabActive = tabs.find(
-          ({ label }) => encodeURIComponent(lowerCase(label)) === category
+          ({ label }) =>
+            encodeURIComponent(lowerCase(label)) === newsCategory[1]
         )
         return tabActive?.id
       }
     }
     return ''
-  }, [searchState])
+  }, [searchState, category])
 
   React.useEffect(() => {
     setActiveStateId(tabDefaultFromParam || activeTabDefault)
