@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
-import { navigate } from 'gatsby'
+import { Link } from 'gatsby'
 import lowerCase from 'lodash/lowerCase'
 import Context from '../../Context/ContextPage'
 const DownloadContainer = props => {
@@ -19,9 +19,20 @@ const DownloadContainer = props => {
     if (setPaginationPage) {
       setPaginationPage(1)
     }
-    if (isTabParam) {
-      navigate(`/news/${encodeURIComponent(lowerCase(label))}/`)
-    }
+  }
+
+  if (isTabParam) {
+    return (
+      <Link to={`/news/${encodeURIComponent(lowerCase(label))}/`}>
+        <Item
+          typeLayout={typeLayout}
+          active={activeId === id}
+          onClick={changeTab}
+        >
+          {label}
+        </Item>
+      </Link>
+    )
   }
   return (
     <Item typeLayout={typeLayout} active={activeId === id} onClick={changeTab}>
