@@ -30,6 +30,7 @@ export const ContentfulLayoutHeaderFields = graphql`
     popupAnnouncement {
       ...ContentfulPopupAnnouncementFields
     }
+    isSticky
   }
 `
 

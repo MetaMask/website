@@ -14,6 +14,7 @@ const ContentfulLayoutHeader = props => {
       downloadButton,
       previewMode = false,
       popupAnnouncement,
+      isSticky,
     },
     hideDownloadBtn,
   } = props
@@ -26,6 +27,7 @@ const ContentfulLayoutHeader = props => {
       downloadButton={downloadButton}
       hideDownloadBtn={hideDownloadBtn}
       popupAnnouncement={popupAnnouncement}
+      isSticky={isSticky}
       previewMode={previewMode}
     />
   )
@@ -33,7 +35,12 @@ const ContentfulLayoutHeader = props => {
 
 const parsePreviewData = data => {
   data = data.moduleConfig.previewContent || data.moduleConfig
-  const { downloadButton, menuItemsCollection, popupAnnouncement } = data
+  const {
+    downloadButton,
+    menuItemsCollection,
+    popupAnnouncement,
+    isSticky,
+  } = data
 
   let menuItems = menuItemsCollection
     ? cloneDeep(menuItemsCollection.items)
@@ -71,6 +78,7 @@ const parsePreviewData = data => {
       menuItems,
       downloadButton,
       popupAnnouncement,
+      isSticky,
     },
   }
   return dataUpdate
@@ -98,6 +106,7 @@ ContentfulLayoutHeader.propTypes = {
     ),
     downloadButton: PropTypes.object,
     announcement: PropTypes.object,
+    isSticky: PropTypes.bool,
     previewMode: PropTypes.bool,
   }),
 }
