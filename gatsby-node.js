@@ -8,141 +8,50 @@ exports.createPages = async ({ graphql, actions }) => {
   createRedirect({ fromPath: '/institutions/overview-amer/', toPath: '/institutions/', isPermanent: true })
   createRedirect({ fromPath: '/institutions/dine-and-defi-2023/', toPath: '/institutions/web3-connect-2023/', isPermanent: true })
 
-  createRedirect({ fromPath: '/news/security/meta-mask-security-monthly-october-2022/', toPath: '/news/security/metamask-security-monthly-october-2022/', isPermanent: true })
-  createRedirect({ fromPath: '/news/latest/building-an-extensible-world-with-meta-mask-grants-dao/', toPath: '/news/latest/building-an-extensible-world-with-metamask-grants-dao/', isPermanent: true })
+  createRedirect({ fromPath: '/news/developers/meta-mask-grants-dao-funds-spritely-foundation/', toPath: '/news/developers/metamask-grants-dao-funds-spritely-foundation/', isPermanent: true })
+  createRedirect({ fromPath: '/news/security/meta-mask-security-monthly-january-2023/', toPath: '/news/security/metamask-security-monthly-january-2023/', isPermanent: true })
+  createRedirect({ fromPath: '/news/latest/welcome-to-meta-mask-learn/', toPath: '/news/latest/welcome-to-metamask-learn/', isPermanent: true })
   createRedirect({
-    fromPath: '/news/developers/using-lava-moat-to-solve-software-supply-chain-security/', toPath: '/news/developers/using-lavamoat-to-solve-software-supply-chain-security/', isPermanent:
+    fromPath: '/news/latest/meta-mask-introduces-liquid-staking-in-dapp-for-an-easy-and-convenient-way-to-stake-eth/', toPath:
+      '/news/latest/metamask-introduces-liquid-staking-in-dapp-for-an-easy-and-convenient-way-to-stake-eth/', isPermanent: true
+  })
+  createRedirect({ fromPath: '/news/security/meta-mask-security-monthly-december-2022/', toPath: '/news/security/metamask-security-monthly-december-2022/', isPermanent: true })
+  createRedirect({
+    fromPath: '/news/developers/meta-mask-grants-dao-funds-agoric-and-safeheron-with-first-round-of-grants/', toPath:
+      '/news/developers/metamask-grants-dao-funds-agoric-and-safeheron-with-first-round-of-grants/', isPermanent: true
+  })
+  createRedirect({
+    fromPath: '/news/latest/meta-mask-swaps-says-hello-to-portfolio-dapp-and-l-2-networks-arbitrum-and-optimism/', toPath:
+      '/news/latest/metamask-swaps-says-hello-to-portfolio-dapp-and-l-2-networks-arbitrum-and-optimism/', isPermanent: true
+  })
+  createRedirect({ fromPath: '/news/security/meta-mask-security-monthly-november-2022/', toPath: '/news/security/metamask-security-monthly-november-2022/', isPermanent: true })
+  createRedirect({
+    fromPath: '/news/latest/we-hosted-a-group-of-artists-together-in-miami-during-art-basel-to-discuss-the-state-of-nf-ts-heres-what-we-learned/', toPath:
+      '/news/latest/we-hosted-a-group-of-artists-together-in-miami-during-art-basel-to-discuss-the-state-of-nfts-heres-what-we-learned/', isPermanent: true
+  })
+  createRedirect({ fromPath: '/news/security/meta-mask-and-laconic-launch-moby-mask-light-client/', toPath: '/news/security/metamask-and-laconic-launch-mobymask-light-client/', isPermanent: true })
+  createRedirect({
+    fromPath: '/news/developers/mpc-snap-integrating-multi-factor-authentication-into-meta-mask/', toPath: '/news/developers/mpc-snap-integrating-multi-factor-authentication-into-metamask/', isPermanent:
       true
   })
   createRedirect({
-    fromPath: '/news/latest/meta-mask-integrates-with-sardine-to-bring-instant-ach-to-crypto-option-for-users/', toPath:
-      '/news/latest/metamask-integrates-with-sardine-to-bring-instant-ach-to-crypto-option-for-users/', isPermanent: true
+    fromPath: '/news/latest/meta-mask-launches-bridge-aggregator-in-dapp-to-easily-move-tokens-across-chains/', toPath:
+      '/news/latest/metamask-launches-bridge-aggregator-in-dapp-to-easily-move-tokens-across-chains/', isPermanent: true
   })
+  createRedirect({ fromPath: '/news/latest/how-we-selected-bridge-providers-for-meta-mask-bridges/', toPath: '/news/latest/how-we-selected-bridge-providers-for-metamask-bridges/', isPermanent: true })
+  createRedirect({ fromPath: '/news/latest/building-an-extensible-world-with-meta-mask-grants-dao/', toPath: '/news/latest/building-an-extensible-world-with-metamask-grants-dao/', isPermanent: true })
+  createRedirect({ fromPath: '/news/security/using-lava-moat-to-solve-software-supply-chain-security/', toPath: '/news/security/using-lavamoat-to-solve-software-supply-chain-security/', isPermanent: true })
+  createRedirect({ fromPath: '/news/developers/meta-masks-community-at-the-core-of-its-growth/', toPath: '/news/developers/metamasks-community-at-the-core-of-its-growth/', isPermanent: true })
+  createRedirect({ fromPath: '/news/latest/how-did-meta-mask-come-to-life-the-origin-story-revealed/', toPath: '/news/latest/how-did-metamask-come-to-life-the-origin-story-revealed/', isPermanent: true })
+  createRedirect({ fromPath: '/news/latest/how-to-manage-multiple-wallets-with-meta-mask/', toPath: '/news/latest/how-to-manage-multiple-wallets-with-metamask/', isPermanent: true })
   createRedirect({
-    fromPath: '/news/security/meta-mask-security-monthly-september-2022/', toPath: '/news/security/metamask-security-monthly-september-2022/', isPermanent: true
-  })
-  createRedirect({ fromPath: '/news/security/meta-mask-security-monthly-august-2022/', toPath: '/news/security/metamask-security-monthly-august-2022/', isPermanent: true })
-  createRedirect({ fromPath: '/news/security/meta-mask-security-monthly-july-2022/', toPath: '/news/security/metamask-security-monthly-july-2022/', isPermanent: true })
-  createRedirect({ fromPath: '/news/security/meta-mask-security-monthly-june-2022/', toPath: '/news/security/metamask-security-monthly-june-2022/', isPermanent: true })
-  createRedirect({ fromPath: '/news/developers/meta-mask-api-method-deprecation/', toPath: '/news/developers/metamask-api-method-deprecation/', isPermanent: true })
-  createRedirect({
-    fromPath: '/news/developers/breaking-changes-to-the-meta-mask-provider-are-here-developers-1/', toPath:
-      '/news/developers/breaking-changes-to-the-metamask-provider-are-here-developers-1/', isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/releases/breaking-changes-to-the-meta-mask-provider-are-here-releases-developers-3/', toPath:
-      '/news/releases/breaking-changes-to-the-metamask-provider-are-here-releases-developers-3/', isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/releases/breaking-changes-to-the-meta-mask-provider-are-here-releases-developers-5/', toPath:
-      '/news/releases/breaking-changes-to-the-metamask-provider-are-here-releases-developers-5/', isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/releases/breaking-changes-to-the-meta-mask-provider-are-here-releases-developers-4/', toPath:
-      '/news/releases/breaking-changes-to-the-metamask-provider-are-here-releases-developers-4/', isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/releases/breaking-changes-to-the-meta-mask-provider-are-here-releases-developers-2/', toPath:
-      '/news/releases/breaking-changes-to-the-metamask-provider-are-here-releases-developers-2/', isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/releases/breaking-changes-to-the-meta-mask-provider-are-here-releases-developers-1/', toPath:
-      '/news/releases/breaking-changes-to-the-metamask-provider-are-here-releases-developers-1/', isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/developers/breaking-changes-to-the-meta-mask-provider-are-here-developers-2/', toPath:
-      '/news/developers/breaking-changes-to-the-metamask-provider-are-here-developers-2/', isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/releases/breaking-changes-to-the-meta-mask-provider-are-here-releases-1/', toPath: '/news/releases/breaking-changes-to-the-metamask-provider-are-here-releases-1/',
+    fromPath: '/news/developers/meta-mask-integrates-stark-ware-into-first-of-its-kind-zk-rollup-snap/', toPath: '/news/developers/metamask-integrates-starkware-into-first-of-its-kind-zk-rollup-snap/',
     isPermanent: true
   })
   createRedirect({
-    fromPath: '/news/releases/breaking-changes-to-the-meta-mask-provider-are-here-releases-2/', toPath: '/news/releases/breaking-changes-to-the-metamask-provider-are-here-releases-2/',
-    isPermanent: true
+    fromPath: '/news/developers/consen-sys-and-stark-ware-partner-to-bring-zk-rollups-to-infura-and-meta-mask/', toPath:
+      '/news/developers/consensys-and-starkware-partner-to-bring-zk-rollups-to-infura-and-metamask/', isPermanent: true
   })
-  createRedirect({
-    fromPath: '/news/security/breaking-changes-to-the-meta-mask-provider-are-here-security-15/', toPath: '/news/security/breaking-changes-to-the-metamask-provider-are-here-security-15/',
-    isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/security/breaking-changes-to-the-meta-mask-provider-are-here-security-14/', toPath: '/news/security/breaking-changes-to-the-metamask-provider-are-here-security-14/',
-    isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/security/breaking-changes-to-the-meta-mask-provider-are-here-security-13/', toPath: '/news/security/breaking-changes-to-the-metamask-provider-are-here-security-13/',
-    isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/security/breaking-changes-to-the-meta-mask-provider-are-here-security-11/', toPath: '/news/security/breaking-changes-to-the-metamask-provider-are-here-security-11/',
-    isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/security/breaking-changes-to-the-meta-mask-provider-are-here-security-10/', toPath: '/news/security/breaking-changes-to-the-metamask-provider-are-here-security-10/',
-    isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/security/breaking-changes-to-the-meta-mask-provider-are-here-security-9/', toPath: '/news/security/breaking-changes-to-the-metamask-provider-are-here-security-9/',
-    isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/security/breaking-changes-to-the-meta-mask-provider-are-here-security-8/', toPath: '/news/security/breaking-changes-to-the-metamask-provider-are-here-security-8/',
-    isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/security/breaking-changes-to-the-meta-mask-provider-are-here-security-6/', toPath: '/news/security/breaking-changes-to-the-metamask-provider-are-here-security-6/',
-    isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/security/breaking-changes-to-the-meta-mask-provider-are-here-security-5/', toPath: '/news/security/breaking-changes-to-the-metamask-provider-are-here-security-5/',
-    isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/security/breaking-changes-to-the-meta-mask-provider-are-here-security-3/', toPath: '/news/security/breaking-changes-to-the-metamask-provider-are-here-security-3/',
-    isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/security/breaking-changes-to-the-meta-mask-provider-are-here-security-4/', toPath: '/news/security/breaking-changes-to-the-metamask-provider-are-here-security-4/',
-    isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/security/breaking-changes-to-the-meta-mask-provider-are-here-security-2/', toPath: '/news/security/breaking-changes-to-the-metamask-provider-are-here-security-2/',
-    isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/releases/breaking-changes-to-the-meta-mask-provider-are-here-releases-developers-6/', toPath:
-      '/news/releases/breaking-changes-to-the-metamask-provider-are-here-releases-developers-6/', isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/security/breaking-changes-to-the-meta-mask-provider-are-here-security-1/', toPath: '/news/security/breaking-changes-to-the-metamask-provider-are-here-security-1/',
-    isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/developers/breaking-changes-to-the-meta-mask-provider-are-here-developers-3/', toPath:
-      '/news/developers/breaking-changes-to-the-metamask-provider-are-here-developers-3/', isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/security/breaking-changes-to-the-meta-mask-provider-are-here-security-16/', toPath: '/news/security/breaking-changes-to-the-metamask-provider-are-here-security-16/',
-    isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/releases/breaking-changes-to-the-meta-mask-provider-are-here-releases-3/', toPath: '/news/releases/breaking-changes-to-the-metamask-provider-are-here-releases-3/',
-    isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/releases/breaking-changes-to-the-meta-mask-provider-are-here-releases-5/', toPath: '/news/releases/breaking-changes-to-the-metamask-provider-are-here-releases-5/',
-    isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/security/breaking-changes-to-the-meta-mask-provider-are-here-security-7/', toPath: '/news/security/breaking-changes-to-the-metamask-provider-are-here-security-7/',
-    isPermanent: true
-  })
-  createRedirect({
-    fromPath: '/news/security/breaking-changes-to-the-meta-mask-provider-are-here-security-12/', toPath: '/news/security/breaking-changes-to-the-metamask-provider-are-here-security-12/',
-    isPermanent: true
-  })
-  createRedirect({ fromPath: '/news/security/meta-mask-security-monthly-may-2022/', toPath: '/news/security/metamask-security-monthly-may-2022/', isPermanent: true })
-  createRedirect({ fromPath: '/news/security/meta-mask-security-april-team-report/', toPath: '/news/security/metamask-security-april-team-report/', isPermanent: true })
 
   /* Customized Pages Built Inside Contentful CMS */
   const newsCategories = [];
