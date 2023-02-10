@@ -138,9 +138,10 @@ const CTA = props => {
         }
       } else {
         setLink(ctaLink)
+        setNewTab(newTabDefault || isDownloadBrowser)
       }
     })()
-  }, [isDownloadBrowser, keyBrowser, ctaLink])
+  }, [isDownloadBrowser, keyBrowser, ctaLink, newTabDefault])
   let ele = (
     <CTAContainer
       className={classnames('ctaModuleContainer', {
