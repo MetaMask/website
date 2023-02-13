@@ -13,13 +13,14 @@ import Popup from './Popup'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Image from './Image'
 import classnames from 'classnames'
+import get from "lodash/get"
 
 const CTA = props => {
   const {
     link: linkDefault,
     text: textDefault,
     align = 'left',
-    newTab,
+    newTab: newTabDefault,
     iconConfig,
     color,
     button = false,
@@ -49,7 +50,7 @@ const CTA = props => {
   const [delayShow, setDelayShow] = React.useState(isDownloadBrowser)
   const [showPopup, setShowPopup] = React.useState(false)
   let text = textDefault,
-    link = linkDefault,
+    ctaLink = linkDefault,
     label = eventLabel,
     lowerBrowserName = lowerCase(browserName),
     iconBrowser = ''
@@ -62,9 +63,11 @@ const CTA = props => {
     ) {
       text = downloadBrowsers[keyBrowser].text
     }
-    link = downloadBrowsers[keyBrowser]?.link
+    ctaLink = downloadBrowsers[keyBrowser]?.link
     iconBrowser = downloadBrowsers[keyBrowser]?.icon
   }
+  const [link, setLink] = React.useState(ctaLink)
+  const [newTab, setNewTab] = React.useState(newTabDefault || isDownloadBrowser)
   const onClosePopup = () => {
     setShowPopup(false)
   }
@@ -121,6 +124,24 @@ const CTA = props => {
       setDelayShow(false)
     }
   }, [downloadBrowsers, isDownloadBrowser, lowerBrowserName])
+  React.useEffect(() => {
+    (async () => {
+      if (isDownloadBrowser && keyBrowser === 'firefox') {
+        try {
+          const firefoxAddon = await fetch('https://addons.mozilla.org/api/v5/addons/addon/ether-metamask/')
+          const data = await firefoxAddon.json()
+          const latestVersion = get(data, "current_version.file.url")
+          setNewTab(false)
+          setLink(latestVersion)
+        } catch (e) {
+  
+        }
+      } else {
+        setLink(ctaLink)
+        setNewTab(newTabDefault || isDownloadBrowser)
+      }
+    })()
+  }, [isDownloadBrowser, keyBrowser, ctaLink, newTabDefault])
   let ele = (
     <CTAContainer
       className={classnames('ctaModuleContainer', {
@@ -130,7 +151,7 @@ const CTA = props => {
     >
       <ContentWrapper
         to={link}
-        newTab={newTab || isDownloadBrowser}
+        newTab={newTab}
         color={color}
         typeLayout={typeLayout}
         onClick={handleCustomClick}
@@ -157,7 +178,7 @@ const CTA = props => {
         link={link}
         text={text}
         className={keyBrowser}
-        newTab={newTab || isDownloadBrowser}
+        newTab={newTab}
         color={buttonSecondary ? 'secondary' : color}
         customClick={handleCustomClick}
         fontSize={fontSize}
