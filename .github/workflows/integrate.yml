@@ -10,6 +10,8 @@ on:
 jobs:
   build_deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
@@ -45,8 +47,6 @@ jobs:
 
       - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@068dc23d9710f1ba62e86896f84735d869951305
-        permissions:
-          contents: write
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages # The branch the action should deploy to.
