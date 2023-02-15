@@ -291,6 +291,7 @@ export const ContentfulModuleContainerFields = gql`
     numberOfItem
     columns
     columnsOnMobile
+    centerOnMobile
     columnType
     gridModulesGap
     splitModules
@@ -319,6 +320,7 @@ export const ContentfulModuleContainerFields = gql`
           numberOfItem
           columns
           columnsOnMobile
+          centerOnMobile
           columnType
           gridModulesGap
           splitModules
@@ -341,6 +343,7 @@ export const ContentfulModuleContainerFields = gql`
                 numberOfItem
                 columns
                 columnsOnMobile
+                centerOnMobile
                 columnType
                 gridModulesGap
                 splitModules

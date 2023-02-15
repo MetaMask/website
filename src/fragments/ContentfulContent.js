@@ -633,6 +633,7 @@ export const ContentfulModuleContainerFields = graphql`
     columns
     columnType
     columnsOnMobile
+    centerOnMobile
     contentAlignment
     splitModules
     displayTitle
@@ -675,6 +676,7 @@ export const ContentfulModuleContainerFields = graphql`
         columns
         columnType
         columnsOnMobile
+        centerOnMobile
         contentAlignment
         splitModules
         displayTitle
