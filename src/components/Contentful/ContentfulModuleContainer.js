@@ -17,6 +17,7 @@ const ContentfulModuleContainer = props => {
       numberOfItem,
       columns,
       columnsOnMobile,
+      centerOnMobile,
       contentAlignment,
       splitModules,
       displayTitle,
@@ -104,6 +105,7 @@ const ContentfulModuleContainer = props => {
               columns={columns}
               columnsOnMobile={columnsOnMobile}
               contentAlignment={contentAlignment}
+              centerOnMobile={centerOnMobile}
               gridModules={gridModules}
               gridModulesGap={isLiquiditySection ? '16px' : gridModulesGap}
               isLiquiditySection={isLiquiditySection}
@@ -153,6 +155,7 @@ ContentfulModuleContainer.propTypes = {
     numberOfItem: PropTypes.number,
     columns: PropTypes.number,
     contentAlignment: PropTypes.string,
+    centerOnMobile: PropTypes.bool,
     splitModules: PropTypes.bool,
     columnsOnMobile: PropTypes.number,
     isTrustBar: PropTypes.bool,
@@ -375,6 +378,18 @@ const Modules = styled.div`
     }
   `
       : ''}
+
+${({ centerOnMobile, theme }) =>
+  centerOnMobile
+    ? `
+    @media(max-width: ${theme.device.mobileMediaMax}) {
+      justify-content: center;
+      .ctaModuleContainer {
+        justify-content: center;
+      }
+    }
+  `
+    : ''}
 
   ${({ columnType, columns }) =>
     columnType === 'pinterest'

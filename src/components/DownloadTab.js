@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import styled, { withTheme } from 'styled-components'
 import Image from './Image'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { browserName, isMobile, isOpera } from 'react-device-detect'
-import get from "lodash/get"
+import get from 'lodash/get'
 
 const TabContentDownload = props => {
   const {
@@ -19,24 +19,24 @@ const TabContentDownload = props => {
     ctaFirefoxBrowser,
     id,
   } = props
-  const [downloadForFirefox, setDownloadForFirefox] = useState(ctaFirefox);
+  const [downloadForFirefox, setDownloadForFirefox] = useState(ctaFirefox)
   useEffect(() => {
-    (async () => {
-      if (id === "browser" && browserName === 'Firefox') {
+    ;(async () => {
+      if (id === 'browser' && browserName === 'Firefox') {
         try {
-          const firefoxAddon = await fetch('https://addons.mozilla.org/api/v5/addons/addon/ether-metamask/')
+          const firefoxAddon = await fetch(
+            'https://addons.mozilla.org/api/v5/addons/addon/ether-metamask/'
+          )
           const data = await firefoxAddon.json()
-          const latestVersion = get(data, "current_version.file.url")
+          const latestVersion = get(data, 'current_version.file.url')
           if (latestVersion) {
             setDownloadForFirefox({
               ...downloadForFirefox,
               ctaLink: latestVersion,
-              newTab: false
+              newTab: false,
             })
           }
-        } catch (e) {
-  
-        }
+        } catch (e) {}
       }
     })()
   }, [])

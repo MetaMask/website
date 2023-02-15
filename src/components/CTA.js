@@ -13,7 +13,7 @@ import Popup from './Popup'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Image from './Image'
 import classnames from 'classnames'
-import get from "lodash/get"
+import get from 'lodash/get'
 
 const CTA = props => {
   const {
@@ -125,17 +125,17 @@ const CTA = props => {
     }
   }, [downloadBrowsers, isDownloadBrowser, lowerBrowserName])
   React.useEffect(() => {
-    (async () => {
+    ;(async () => {
       if (isDownloadBrowser && keyBrowser === 'firefox') {
         try {
-          const firefoxAddon = await fetch('https://addons.mozilla.org/api/v5/addons/addon/ether-metamask/')
+          const firefoxAddon = await fetch(
+            'https://addons.mozilla.org/api/v5/addons/addon/ether-metamask/'
+          )
           const data = await firefoxAddon.json()
-          const latestVersion = get(data, "current_version.file.url")
+          const latestVersion = get(data, 'current_version.file.url')
           setNewTab(false)
           setLink(latestVersion)
-        } catch (e) {
-  
-        }
+        } catch (e) {}
       } else {
         setLink(ctaLink)
         setNewTab(newTabDefault || isDownloadBrowser)
