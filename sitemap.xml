@@ -47,8 +47,8 @@
 <url> <loc>https://metamask.io/news/developers/metamask-grants-dao-funds-spritely-foundation/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/security/metamask-security-monthly-january-2023/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/welcome-to-metamask-learn/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
-<url> <loc>https://metamask.io/news/developers/aa-snap-democratizing-account-abstraction/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/polysnap-invoking-polywrap-wasm-wrappers-on-the-fly/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/developers/aa-snap-democratizing-account-abstraction/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/metamask-introduces-liquid-staking-in-dapp-for-an-easy-and-convenient-way-to-stake-eth/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/what-is-staking-how-do-i-do-it/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/the-first-ux-hackathon-in-web-3-building-is-not-just-coding/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
@@ -62,12 +62,12 @@
 <url> <loc>https://metamask.io/news/security/metamask-and-laconic-launch-mobymask-light-client/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/smart-account-session-snap-gaming-dapp-auto-approvals/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/web-3-dubai-snaps-bounty/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
-<url> <loc>https://metamask.io/news/developers/blackbelt-snap-real-time-self-defense-against-scams/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/mpc-snap-integrating-multi-factor-authentication-into-metamask/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/developers/blackbelt-snap-real-time-self-defense-against-scams/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/metamask-launches-bridge-aggregator-in-dapp-to-easily-move-tokens-across-chains/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/how-we-selected-bridge-providers-for-metamask-bridges/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
-<url> <loc>https://metamask.io/news/developers/revoke-snap-revoking-leftover-approvals-on-erc-20-token-contracts/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/aleph-zero-snap-onboarding-web-3-users-to-aleph-zero-network/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/developers/revoke-snap-revoking-leftover-approvals-on-erc-20-token-contracts/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/snapshot-snap-custom-notifications-for-on-chain-activities/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/building-an-extensible-world-with-metamask-grants-dao/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/security/using-lavamoat-to-solve-software-supply-chain-security/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
