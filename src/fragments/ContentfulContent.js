@@ -23,6 +23,7 @@ export const ContentfulLayoutHeaderFields = graphql`
           }
         }
       }
+      ...ContentfulCtaFields
     }
     downloadButton {
       ...ContentfulCtaFields

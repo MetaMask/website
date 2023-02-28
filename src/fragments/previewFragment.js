@@ -394,6 +394,7 @@ export const ContentfulLayoutHeaderFields = gql`
     menuItemsCollection(preview: true) {
       items {
         ...ContentfulModuleContainerFields
+        ...ContentfulCtaFields
       }
     }
     downloadButton(preview: true) {
