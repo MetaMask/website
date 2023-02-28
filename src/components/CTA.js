@@ -126,7 +126,11 @@ const CTA = props => {
   }, [downloadBrowsers, isDownloadBrowser, lowerBrowserName])
   React.useEffect(() => {
     ;(async () => {
-      if (isDownloadBrowser && keyBrowser === 'firefox') {
+      if (
+        isDownloadBrowser &&
+        keyBrowser === 'firefox' &&
+        ctaLink.endsWith('/firefox/addon/ether-metamask/')
+      ) {
         try {
           const firefoxAddon = await fetch(
             'https://addons.mozilla.org/api/v5/addons/addon/ether-metamask/'
