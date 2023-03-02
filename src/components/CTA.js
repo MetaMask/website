@@ -380,7 +380,7 @@ const ContentWrapper = styled(Link)`
   `
       : ``}
   ${({ typeLayout, theme }) =>
-    typeLayout === 'header'
+    ['header', 'headerSingle'].includes(typeLayout)
       ? `
     font-size: 16px;
     line-height: 22px;
@@ -401,6 +401,16 @@ const ContentWrapper = styled(Link)`
     }
   `
       : ``}
+    ${({ typeLayout }) =>
+      typeLayout === 'headerSingle'
+        ? `
+    padding: 0;
+    margin: 0;
+    &:hover {
+      background-color: unset;
+    }
+  `
+        : ``}
   ${({ typeLayout, theme }) =>
     typeLayout === 'footer'
       ? `
