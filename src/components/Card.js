@@ -61,9 +61,16 @@ const StyledCard = props => {
   }
   const isCtaType = layoutType === 'cta'
   const isEventType = layoutType === 'event'
+  const isCardFlex =
+    customClass?.includes('custody-integrate-card') ||
+    customClass?.includes('custody-technical-card')
 
   return (
-    <Card className="moduleCardWrapper" isCtaType={isCtaType}>
+    <Card
+      className="moduleCardWrapper"
+      isCtaType={isCtaType}
+      isCardFlex={isCardFlex}
+    >
       <CardInner
         to={link}
         newTab={newTab}
@@ -148,6 +155,12 @@ const Card = styled.div`
     isCtaType
       ? `
     margin-bottom: 16px;
+  `
+      : ''}
+  ${({ isCardFlex }) =>
+    isCardFlex
+      ? `
+    display: flex;
   `
       : ''}
 `
@@ -265,6 +278,21 @@ const CardInner = styled(Link)`
       }
   `
       : ''}
+
+  &.custody-integrate-card, &.custody-technical-card {
+    padding: 24px;
+    border-radius: 12px;
+
+    body.dark-mode & {
+      background-color: ${({ theme }) => theme.dark};
+    }
+  }
+  &.custody-integrate-card {
+    background-color: #EDF6FE;
+  }
+  &.custody-technical-card {
+    background-color: #FFF0E2;
+  }
 `
 
 const ImageWrapper = styled.div`
