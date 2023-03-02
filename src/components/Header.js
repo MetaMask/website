@@ -148,7 +148,7 @@ const StyledHeader = props => {
             >
               <NavMainInner>
                 {menus.map((menu, index) => {
-                  const { title, modules } = menu
+                  const { title, modules, ctaLink } = menu
                   const active = menuActive === index
                   return (
                     <NavMenu
@@ -157,9 +157,22 @@ const StyledHeader = props => {
                       onMouseEnter={() => handleMenuMouseEnter(index)}
                       onMouseLeave={() => handleMenuMouseLeave(index)}
                     >
-                      <NavMenuMain onClick={() => handleMenuClick(index)}>
-                        {title}
-                        <Icon className="w-icon w-icon-dropdown-toggle"></Icon>
+                      <NavMenuMain
+                        hasChild={ctaLink ? false : true}
+                        onClick={() => handleMenuClick(index)}
+                      >
+                        {ctaLink ? (
+                          contentfulModuleToComponent({
+                            ...menu,
+                            typeLayout: 'headerSingle',
+                            previewMode,
+                          })
+                        ) : (
+                          <>
+                            {title}
+                            <Icon className="w-icon w-icon-dropdown-toggle" />
+                          </>
+                        )}
                       </NavMenuMain>
                       <NavMenuChild active={active}>
                         {modules && modules.length
@@ -374,10 +387,15 @@ const NavMenuMain = styled.div`
   height: 40px;
   padding: 0 20px;
   color: ${({ theme }) => theme.text.menu};
-  cursor: pointer;
   &:hover {
     color: ${({ theme }) => theme.text.menuHover};
   }
+  ${({ hasChild }) =>
+    hasChild
+      ? `
+      cursor: pointer;
+    `
+      : ``}
 
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     width: 100%;
