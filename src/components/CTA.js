@@ -126,14 +126,18 @@ const CTA = props => {
   }, [downloadBrowsers, isDownloadBrowser, lowerBrowserName])
   React.useEffect(() => {
     ;(async () => {
+      let isFlask = false
       if (
         isDownloadBrowser &&
         keyBrowser === 'firefox' &&
-        ctaLink.endsWith('/firefox/addon/ether-metamask/')
+        (ctaLink.endsWith('/firefox/addon/ether-metamask/') ||
+          (isFlask = ctaLink.endsWith('/firefox/addon/metamask-flask/')))
       ) {
         try {
           const firefoxAddon = await fetch(
-            'https://addons.mozilla.org/api/v5/addons/addon/ether-metamask/'
+            `https://addons.mozilla.org/api/v5/addons/addon/${
+              isFlask ? 'metamask-flask' : 'ether-metamask'
+            }/`
           )
           const data = await firefoxAddon.json()
           const latestVersion = get(data, 'current_version.file.url')
