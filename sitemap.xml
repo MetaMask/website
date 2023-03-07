@@ -43,6 +43,7 @@
 <url> <loc>https://metamask.io/faqs/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/1559/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/about/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/security/metamask-security-monthly-february-2023/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/metamask-bridges-launches-support-for-l-2-networks-arbitrum-and-optimism/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/metamask-grants-dao-funds-spritely-foundation/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/security/metamask-security-monthly-january-2023/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
