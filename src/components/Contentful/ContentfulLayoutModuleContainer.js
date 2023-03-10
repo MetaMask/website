@@ -324,6 +324,11 @@ const Title = styled(SectionTitle)`
       line-height: 30px;
     }
   }
+
+  .registerCustodyForm & {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
 `
 
 const Modules = styled.div`
@@ -414,6 +419,12 @@ const ContentInfo = styled.div`
       margin-bottom: 0;
     }
   }
+  .registerCustodyForm & {
+    width: 625px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-top: 0;
+  }
 `
 
 const SubInfo = styled.div`
@@ -427,6 +438,10 @@ const SubInfo = styled.div`
   #reportBugFn {
     cursor: pointer;
     color: #2196f3;
+  }
+
+  .registerCustodyForm & {
+    margin-bottom: 3.25rem !important;
   }
 `
 

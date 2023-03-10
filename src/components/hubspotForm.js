@@ -82,6 +82,11 @@ const Title = styled.h2`
     font-size: 24px;
   }
 
+  .registerCustodyForm & {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
   body.dark-mode .registerEventForm & {
     color: #000;
   }
@@ -104,7 +109,8 @@ const Wrapper = styled.div`
     margin: 0 auto;
   }
 
-  .registerEventForm & {
+  .registerEventForm &,
+  .registerCustodyForm & {
     padding: 20px;
     padding-bottom: 3px;
     margin: 0 auto;
@@ -120,6 +126,10 @@ const Wrapper = styled.div`
       padding-left: 55px;
       padding-right: 55px;
     }
+  }
+
+  body.dark-mode .registerCustodyForm & {
+    background-color: ${({ theme }) => theme.background.white};
   }
 `
 
