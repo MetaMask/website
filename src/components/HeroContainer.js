@@ -723,6 +723,9 @@ const HeroTitle = styled.h1`
   .scrolled.custom-newsHero &{
     padding: 0;
   }
+  .headline-max-width-754 & {
+    max-width: 754px;
+  }
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     .newsHero & {
       font-size: 30px !important;
