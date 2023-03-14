@@ -49,7 +49,7 @@ const FullWidthCta = props => {
                 showLogoAnimation={showLogoAnimation}
                 hasDescription={!!description}
               >
-                {headline}
+                <div dangerouslySetInnerHTML={{ __html: headline }} />
               </Headline>
             ) : null}
             {description ? (
