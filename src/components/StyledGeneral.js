@@ -40,6 +40,12 @@ export const Section = styled.div`
   &.noPaddingBottom {
     padding-bottom: 0 !important;
   }
+
+  &.removeSectionPaddingBottomOnDesktop {
+    @media (min-width: ${({ theme }) => theme.device.tablet}){
+      padding-bottom: 0 !important;
+    }
+  }
 `
 
 export const ModalInner = styled.div`

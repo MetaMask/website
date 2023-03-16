@@ -925,7 +925,11 @@ const HeroSideImage = styled.div`
   theme.device.miniDesktopMediaMax}) {
         min-width: 60%;
       } 
-    }
+  }
+  .removeShadowAndRadius & img {
+    filter: none;
+    border-radius: 0;
+  }
   
   .sideImageFlex45 & {
     @media (min-width: ${({ theme }) => theme.device.desktop}) {

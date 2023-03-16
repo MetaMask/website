@@ -560,6 +560,7 @@ export const ContentfulLayoutFeatureFields = gql`
     }
     sectionPadding
     noPaddingBottom
+    removeSectionPaddingBottomOnDesktop
     customClass
     featureItemsCollection(preview: true) {
       items {

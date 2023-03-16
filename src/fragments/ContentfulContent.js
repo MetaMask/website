@@ -246,6 +246,7 @@ export const ContentfulLayoutFeatureFields = graphql`
     }
     sectionPadding
     noPaddingBottom
+    removeSectionPaddingBottomOnDesktop
     customClass
     featureItems {
       ... on ContentfulLogo {

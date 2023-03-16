@@ -30,6 +30,7 @@ const ContentfulLayoutFeature = props => {
       headlineMarginTop0,
       sectionPadding,
       noPaddingBottom,
+      removeSectionPaddingBottomOnDesktop,
       cta,
       ctaSecond,
       embed,
@@ -77,6 +78,7 @@ const ContentfulLayoutFeature = props => {
       headlineMarginTop0={headlineMarginTop0}
       sectionPadding={sectionPadding}
       noPaddingBottom={noPaddingBottom}
+      removeSectionPaddingBottomOnDesktop={removeSectionPaddingBottomOnDesktop}
       cta={cta}
       ctaSecond={ctaSecond}
       embed={embed}
@@ -119,6 +121,7 @@ ContentfulLayoutFeature.propTypes = {
     description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     cta: PropTypes.object,
     noPaddingBottom: PropTypes.bool,
+    removeSectionPaddingBottomOnDesktop: PropTypes.bool,
     imageShadow: PropTypes.bool,
   }),
 }

@@ -35,6 +35,7 @@ const FeatureComponent = props => {
     headlineMarginTop0,
     sectionPadding,
     noPaddingBottom,
+    removeSectionPaddingBottomOnDesktop,
     imageMobile,
     eyebrow,
     featureItems,
@@ -68,7 +69,7 @@ const FeatureComponent = props => {
         </Headline>
       ) : null}
       {description ? (
-        <Description>
+        <Description sectionPadding={sectionPadding}>
           {previewMode ? (
             <ParseMD>{description}</ParseMD>
           ) : (
@@ -151,6 +152,7 @@ const FeatureComponent = props => {
       imageMobile={backgroundImageMobile}
       className={classnames({
         noPaddingBottom: noPaddingBottom,
+        removeSectionPaddingBottomOnDesktop: removeSectionPaddingBottomOnDesktop,
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
     >
@@ -262,6 +264,7 @@ FeatureComponent.propTypes = {
   modules: PropTypes.arrayOf(PropTypes.object.isRequired),
   sectionPadding: PropTypes.string,
   noPaddingBottom: PropTypes.bool,
+  removeSectionPaddingBottomOnDesktop: PropTypes.bool,
   previewMode: PropTypes.bool,
 }
 
@@ -417,6 +420,18 @@ const Headline = styled.h2`
 `
 const Description = styled.div`
   display: block;
+
+  .descriptionMinusSectionPadding & {
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      ${({ sectionPadding }) =>
+        sectionPadding
+          ? `
+        margin-top: -${sectionPadding};
+      `
+          : ''}
+    }
+  }
+
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     text-align: center;
     * {
