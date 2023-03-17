@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
+import { useHandleFeatureSlide } from '../lib/hooks/useHandleFeatureSlide'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import ScrollAnimation from 'react-animate-on-scroll'
@@ -21,6 +22,7 @@ const FeatureComponent = props => {
     hideHeadline,
     description,
     image,
+    extraImage,
     withContent,
     imageWidth,
     alignItemsCenter,
@@ -47,11 +49,18 @@ const FeatureComponent = props => {
     customClass,
     previewMode = false,
   } = props
+  const featureRef = useRef(null)
   const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
   const contentAlignLR = ['left', 'right'].includes(contentAlignment)
     ? contentAlignment
     : ''
+  const { extraCustomClass, currentImage } = useHandleFeatureSlide(
+    image,
+    extraImage,
+    contentAlignLR,
+    featureRef
+  )
   const isContentAlignVertical = contentAlignment === 'vertical'
   const innerContent = (
     <>
@@ -115,12 +124,12 @@ const FeatureComponent = props => {
   )
   const imageContent = (
     <>
-      {image ? (
+      {currentImage ? (
         <ImageSrc
           className={classnames({
             'hidden-mobile': imageMobile,
           })}
-          image={isDarkMode && imageDarkMode ? imageDarkMode : image}
+          image={isDarkMode && imageDarkMode ? imageDarkMode : currentImage}
           widthImg={imageWidth}
           imageAlignment={imageAlignment}
           link={imageLink}
@@ -155,8 +164,9 @@ const FeatureComponent = props => {
         removeSectionPaddingBottomOnDesktop: removeSectionPaddingBottomOnDesktop,
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
+      ref={featureRef}
     >
-      <ContentWrapper customClass={customClass}>
+      <ContentWrapper customClass={`${customClass} ${extraCustomClass}`}>
         <FeatureWrapper
           contentAlignLR={contentAlignLR}
           isContentAlignVertical={isContentAlignVertical}
@@ -180,6 +190,7 @@ const FeatureComponent = props => {
                         ? 'fadeInLeftMini'
                         : 'fadeInRightMini'
                     }
+                    initiallyVisible
                     animateOnce
                     delay={0}
                     offset={0}
@@ -296,6 +307,11 @@ const Container = styled(Section)`
 const Image = styled.div`
   display: block;
   width: 100%;
+
+  .sideImageMaxHeight500 & img {
+    max-height: 500px;
+    margin: 0 auto;
+  }
 
   @media (min-width: ${({ theme }) => theme.device.tablet}) {
     .floatImageRightMinus32 & {
@@ -429,6 +445,18 @@ const Description = styled.div`
         margin-top: -${sectionPadding};
       `
           : ''}
+    }
+  }
+
+  .descriptionMinHeight370 & {
+    min-height: 370px;
+
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      min-height: 320px;
+    }
+
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      min-height: 380px;
     }
   }
 
@@ -599,6 +627,9 @@ const CTAWrapper = styled.div`
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       margin-bottom: 16px;
     }
+  }
+  .ctaMt10 & {
+    margin-top: 10px;
   }
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     flex-wrap: wrap;

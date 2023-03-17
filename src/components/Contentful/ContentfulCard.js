@@ -55,10 +55,12 @@ const ContentfulCard = props => {
 
 const parsePreviewData = data => {
   data = data.moduleConfig.previewContent || data.moduleConfig
+  const { ctaCollection } = data
 
   const dataUpdate = {
     moduleConfig: {
       previewMode: true,
+      cta: ctaCollection?.items,
       ...data,
     },
   }

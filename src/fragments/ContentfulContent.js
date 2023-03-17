@@ -168,6 +168,16 @@ export const ContentfulLayoutFeatureFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
+    extraImage {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
     embed {
       ...ContentfulEmbedFields
     }
