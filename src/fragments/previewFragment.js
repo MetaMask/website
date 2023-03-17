@@ -512,6 +512,13 @@ export const ContentfulLayoutFeatureFields = gql`
       description
       url
     }
+    extraImageCollection(preview: true) {
+      items {
+        title
+        description
+        url
+      }
+    }
     embed(preview: true) {
       ...ContentfulEmbedFields
     }

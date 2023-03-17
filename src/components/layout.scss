@@ -1306,6 +1306,50 @@ body.dark-mode {
       justify-content: center;
     }
   }
+
+  &.mobile-center {
+    dl, dt {
+      @media (max-width: 767px) {
+        text-align: left;
+        justify-content: left;
+      }
+      @media (max-width: 479px) {
+        text-align: center;
+        justify-content: center;
+      }
+    }
+  }
+
+  &.checklist-inactive {
+    dt {
+      cursor: pointer;
+      color: #ADADAD;
+
+      &:before {
+        background-color: #ADADAD;
+      }
+      &.active {
+        color: #333;
+
+        & + dd {
+          max-height: 100px;
+          transition: max-height 1s ease;
+        }
+
+        &::before {
+          background-color: #2C56DD;
+        }
+      }
+    }
+    dd {
+      max-height: 0;
+      overflow-y: hidden;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
 }
 
 .ul-checklist {
