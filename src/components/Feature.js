@@ -4,6 +4,7 @@ import { useHandleFeatureSlide } from '../lib/hooks/useHandleFeatureSlide'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import ScrollAnimation from 'react-animate-on-scroll'
+import { useMediaQuery } from 'react-responsive'
 import classnames from 'classnames'
 import { EyebrowStyle, Section } from './StyledGeneral'
 import ImageItem from './Image'
@@ -49,6 +50,9 @@ const FeatureComponent = props => {
     customClass,
     previewMode = false,
   } = props
+  const isMobile = useMediaQuery({
+    query: '(max-width: 767px)',
+  })
   const featureRef = useRef(null)
   const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
@@ -98,7 +102,7 @@ const FeatureComponent = props => {
           ))}
         </FeatureItems>
       ) : null}
-      {cta && !isContentAlignVertical ? (
+      {cta && !isContentAlignVertical && !isMobile ? (
         <CTAWrapper>
           {contentfulModuleToComponent({
             ...cta,
@@ -261,6 +265,28 @@ const FeatureComponent = props => {
             </CTAWrapper>
           ) : null}
         </FeatureWrapper>
+        {cta && !isContentAlignVertical && isMobile ? (
+          <CTAWrapper>
+            {contentfulModuleToComponent({
+              ...cta,
+              color: ['white', 'gray', 'default'].includes(backgroundColor)
+                ? cta.color
+                : 'white-outline',
+              previewMode,
+            })}
+            {ctaSecond ? (
+              <>
+                {contentfulModuleToComponent({
+                  ...ctaSecond,
+                  color: ['white', 'gray', 'default'].includes(backgroundColor)
+                    ? ctaSecond.color
+                    : 'white-outline',
+                  previewMode,
+                })}
+              </>
+            ) : null}
+          </CTAWrapper>
+        ) : null}
       </ContentWrapper>
     </Container>
   )
@@ -329,6 +355,9 @@ const SideImage = styled.div`
     .noPaddingBottom & {
       margin-bottom: 0 !important;
     }
+    .sideImageOverflowRight & {
+      margin-right: -40px;
+    }
   }
 
   .snapsLiveMetaMaskFlask & {
@@ -351,6 +380,7 @@ const SideEmbed = styled.div`
     }
     width: 100%;
   }
+  max-width: 450px;
 
   .snapsLiveMetaMaskFlask & {
     padding: 0;
@@ -410,20 +440,6 @@ const Headline = styled.h2`
   ${({ headlineMarginTop0 }) =>
     headlineMarginTop0 ? 'margin-top: 0;' : 'margin-top: 40px;'}
 
-  ${({ hasCta, theme }) =>
-    !hasCta
-      ? `
-    @media (max-width: ${theme.device.tabletMediaMax}) {
-      font-size: 28px;
-      line-height: 32px;
-      margin-bottom: 15px;
-      margin-top: 16px;
-      padding-bottom: 0;
-      padding-top: 0;
-      text-align: center;
-    }`
-      : 'padding-bottom: 14px;'}
-
   ${({ hasEyebrow, theme }) =>
     hasEyebrow
       ? `
@@ -433,6 +449,16 @@ const Headline = styled.h2`
   }
   `
       : ''}
+
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 15px;
+    margin-top: 16px;
+    padding-bottom: 0;
+    padding-top: 0;
+    text-align: center;
+  }
 `
 const Description = styled.div`
   display: block;
@@ -460,6 +486,20 @@ const Description = styled.div`
     }
   }
 
+  .stake-logo-list {
+    display: flex;
+    column-gap: 20px;
+    row-gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    justify-content: left;
+
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      justify-content: center;
+    }
+  }
+
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     text-align: center;
     * {
@@ -471,15 +511,14 @@ const FeatureWrapper = styled.div`
   display: flex;
   margin: -10px;
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-    flex-direction: column;
+    flex-direction: column-reverse;
     margin: 0;
     align-items: center;
     text-align: center;
-    ${SideImage} {
-      margin-bottom: 32px;
-    }
-    ${SideEmbed} {
-      margin-bottom: 32px;
+    row-gap: 32px;
+
+    .rowGap16 & {
+      row-gap: 16px;
     }
   }
 
@@ -613,8 +652,7 @@ const FeatureInner = styled.div`
   }
 `
 const CTAWrapper = styled.div`
-  display: inline-flex;
-  justify-content: center;
+  display: flex;
   row-gap: 8px;
   column-gap: 16px;
   margin-top: 40px;
@@ -631,11 +669,11 @@ const CTAWrapper = styled.div`
   .ctaMt10 & {
     margin-top: 10px;
   }
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    justify-content: center;
+  }
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     flex-wrap: wrap;
-    .button {
-      width: 100%;
-    }
   }
 `
 

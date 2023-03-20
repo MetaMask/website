@@ -41,7 +41,6 @@ const HeroContainerComponent = props => {
     headlineBorderBottom,
     sideImageFlex,
     sideImageFoxAnimation,
-    backgroundColorMobile,
     isFaq,
     sectionPadding,
     customClass,
@@ -157,7 +156,6 @@ const HeroContainerComponent = props => {
         ref={heroContainerRef}
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor,
-          [`bg-mobile-${backgroundColorMobile}`]: backgroundColorMobile,
           [`custom-${customClass}`]: customClass,
           [`scrolled`]: scrolled,
         })}
@@ -198,10 +196,6 @@ const HeroContainerComponent = props => {
               isStyleHubspot={isStyleHubspot}
               isHome={isHome}
               headlineBorderBottom={headlineBorderBottom}
-              className={classnames({
-                heroMobileOverlayContent:
-                  !backgroundImage && !sideImageFoxAnimation,
-              })}
               center={!sideImageFlex && !isHome}
               sideImageFlex={sideImageFlex}
               isSDK={isSDK}
@@ -451,7 +445,7 @@ const HeroContainer = styled(Section)`
   ${({ sectionPadding }) =>
     sectionPadding
       ? `
-      padding-bottom: ${sectionPadding} !important;
+      padding-bottom: ${sectionPadding};
   `
       : ``}
   
@@ -539,7 +533,7 @@ const HeroContentContainer = styled.div`
       : ''}
 
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
-    flex-direction: column-reverse;
+    flex-direction: column;
     background-position: 50% 0%;
     background-size: 90%;
     background-attachment: scroll;
@@ -924,6 +918,11 @@ const HeroSideImage = styled.div`
       theme.device.tablet}) and (max-width: ${({ theme }) =>
   theme.device.miniDesktopMediaMax}) {
         min-width: 60%;
+      }
+
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+        margin-right: -40px;
+        width: calc(100% + 40px);
       } 
   }
   .removeShadowAndRadius & img {
@@ -1015,13 +1014,6 @@ const HeroCTA = styled.div`
     }
     .theme-dark & {
       flex-direction: column;
-    }
-  }
-
-  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
-    .button {
-      width: 100%;
-      margin: 0 0 16px 0;
     }
   }
 `

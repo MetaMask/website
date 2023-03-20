@@ -113,6 +113,17 @@ const EmbedHtmlWrapper = styled.div`
       }
     }
   }
+  .displayEmbedAsNormalOnMobile & {
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      border-radius: 12px;
+      .embed-popup-target {
+        &:before {
+          padding-bottom: 56.25%;
+        }
+      }
+    }
+  }
+
   ${({ playOnPopup, theme }) =>
     playOnPopup
       ? `
