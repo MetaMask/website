@@ -56,6 +56,7 @@ if (env.errors) {
           environment: process.env.GATSBY_CONTENTFUL_ENVIRONMENT,
           downloadLocal: process.env.GATSBY_CONTENTFUL_DOWNLOAD_LOCAL,
           host: process.env.GATSBY_CONTENTFUL_HOST,
+          localeFilter: locale => locale.code === 'en-US'
         },
       },
       {
