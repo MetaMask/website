@@ -47,7 +47,6 @@ const ContentfulLayoutHero = props => {
     sideImageDarkMode,
     previewMode
   )
-  const backgroundColorMobile = sideImageFlex ? 'white' : ''
   return (
     <Hero
       sectionPadding={sectionPadding}
@@ -76,7 +75,6 @@ const ContentfulLayoutHero = props => {
       headlineBorderBottom={headlineBorderBottom}
       sideImageFlex={sideImageFlex}
       sideImageFoxAnimation={sideImageFoxAnimation}
-      backgroundColorMobile={backgroundColorMobile}
       ctas={ctas}
       customClass={customClass}
       previewMode={previewMode}
