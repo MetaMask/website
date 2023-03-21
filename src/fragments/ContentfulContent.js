@@ -168,16 +168,6 @@ export const ContentfulLayoutFeatureFields = graphql`
         ...GatsbyContentfulFluid_withWebp
       }
     }
-    extraImage {
-      title
-      description
-      file {
-        url
-      }
-      fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
-    }
     embed {
       ...ContentfulEmbedFields
     }
@@ -272,6 +262,72 @@ export const ContentfulLayoutFeatureFields = graphql`
     ctaSecond {
       ...ContentfulCtaFields
     }
+  }
+`
+
+export const ContentfulLayoutFeatureSliderFields = graphql`
+  fragment ContentfulLayoutFeatureSliderFields on ContentfulLayoutFeatureSlider {
+    contentful_id
+    internal {
+      type
+    }
+    headline
+    description {
+      childMarkdownRemark {
+        html
+      }
+    }
+    featureSliderItems {
+      ... on ContentfulFeatureSliderItem {
+        ...ContentfulFeatureSliderItemFields
+      }
+    }
+    layoutType
+    sectionPadding
+    slideShow
+    animation
+    cta {
+      ...ContentfulCtaFields
+    }
+    backgroundColor
+    customClass
+  }
+`
+
+export const ContentfulFeatureSliderItemFields = graphql`
+  fragment ContentfulFeatureSliderItemFields on ContentfulFeatureSliderItem {
+    contentful_id
+    internal {
+      type
+    }
+    title
+    description {
+      childMarkdownRemark {
+        html
+      }
+    }
+    image {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
+    imageMobile {
+      title
+      description
+      file {
+        url
+      }
+      fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
+    hasShadow
+    customClass
   }
 `
 

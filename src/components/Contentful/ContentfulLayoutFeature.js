@@ -10,7 +10,6 @@ const ContentfulLayoutFeature = props => {
       headline,
       description,
       image,
-      extraImage,
       imageMobile,
       imageDarkMode,
       imageMobileDarkMode,
@@ -62,7 +61,6 @@ const ContentfulLayoutFeature = props => {
       description={previewMode ? description : html}
       headline={headline}
       image={image}
-      extraImage={extraImage}
       imageDarkMode={imageDarkMode}
       imageMobileDarkMode={imageMobileDarkMode}
       alignItemsCenter={alignItemsCenter}
@@ -95,12 +93,11 @@ const ContentfulLayoutFeature = props => {
 
 const parsePreviewData = data => {
   data = data.moduleConfig.previewContent || data.moduleConfig
-  const { featureItemsCollection, embed, extraImageCollection } = data
+  const { featureItemsCollection, embed } = data
   const dataUpdate = {
     moduleConfig: {
       previewMode: true,
       featureItems: featureItemsCollection?.items,
-      extraImage: extraImageCollection?.items,
       ...data,
       embed: embed
         ? {

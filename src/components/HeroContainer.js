@@ -317,6 +317,7 @@ const HeroContainerComponent = props => {
                         ? sideImageDarkMode
                         : sideImage
                     }
+                    lazyLoad={false}
                     previewMode={previewMode}
                   />
                 ) : null}
@@ -448,7 +449,12 @@ const HeroContainer = styled(Section)`
       padding-bottom: ${sectionPadding};
   `
       : ``}
-  
+
+  &.removePaddingBottomOnMobile {
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
+      padding-bottom: 0;
+    }
+  }  
 `
 
 const HeroContentContainer = styled.div`
@@ -925,6 +931,12 @@ const HeroSideImage = styled.div`
         width: calc(100% + 40px);
       } 
   }
+  .sideImageMobileOverflowHiddenBottom100 & {
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      margin-bottom: -100px;
+    }
+  }
+
   .removeShadowAndRadius & img {
     filter: none;
     border-radius: 0;
@@ -1014,6 +1026,13 @@ const HeroCTA = styled.div`
     }
     .theme-dark & {
       flex-direction: column;
+    }
+  }
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    display: inline-flex;
+    flex-direction: column;
+    a {
+      padding: 8px 40px;
     }
   }
 `

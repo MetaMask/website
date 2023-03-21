@@ -172,6 +172,11 @@ const Card = styled.div`
       margin-top: -80px;
     }
   }
+  &.removePaddingBottomOnMobile {
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      padding-bottom: 0 !important;
+    }
+  }
 `
 
 const CardInner = styled(Link)`
@@ -301,6 +306,9 @@ const CardInner = styled(Link)`
   }
   .custody-technical-card & {
     background-color: #FFF0E2;
+  }
+  body.dark-mode .borderInDarkMode & {
+    border: 1px solid white;
   }
 `
 
