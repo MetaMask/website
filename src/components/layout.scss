@@ -817,6 +817,14 @@ input[type='submit'].hs-button {
   }
 }
 
+.fz-32-res {
+  font-size: 32px !important;
+  line-height: 1.2 !important;
+  @media (max-width: 767px) {
+    font-size: 28px !important;
+  }
+}
+
 .fz-48-res {
   font-size: 48px !important;
   line-height: 1.2 !important;
@@ -1244,37 +1252,6 @@ body.dark-mode {
       }
     }
   }
-
-  &.checklist-inactive {
-    dt {
-      cursor: pointer;
-      color: #ADADAD;
-
-      &:before {
-        background-color: #ADADAD;
-      }
-      &.active {
-        color: #333;
-
-        & + dd {
-          max-height: 100px;
-          transition: max-height 1s ease;
-        }
-
-        &::before {
-          background-color: #2C56DD;
-        }
-      }
-    }
-    dd {
-      max-height: 0;
-      overflow-y: hidden;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
 }
 
 .ul-checklist {
@@ -1597,4 +1574,16 @@ body.dark-mode {
   @media (max-width: 767px) {
     line-height: 28px;
   }
+}
+
+body.dark-mode .hide-on-darkmode {
+  display: none !important;
+}
+
+body.light-mode .hide-on-lightmode {
+  display: none !important;
+}
+
+body.dark-mode .white-on-darkmode {
+  color: #FFF;
 }

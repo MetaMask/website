@@ -189,6 +189,9 @@ exports.createPages = async ({ graphql, actions }) => {
               ... on ContentfulLayoutFeature {
                 contentful_id
               }
+              ... on ContentfulLayoutFeatureSlider {
+                contentful_id
+              }
               ... on ContentfulLayoutModuleContainer {
                 contentful_id
               }

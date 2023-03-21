@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useContext, useRef } from 'react'
-import { useHandleFeatureSlide } from '../lib/hooks/useHandleFeatureSlide'
+import React, { useContext } from 'react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import ScrollAnimation from 'react-animate-on-scroll'
@@ -23,7 +22,6 @@ const FeatureComponent = props => {
     hideHeadline,
     description,
     image,
-    extraImage,
     withContent,
     imageWidth,
     alignItemsCenter,
@@ -53,23 +51,16 @@ const FeatureComponent = props => {
   const isMobile = useMediaQuery({
     query: '(max-width: 767px)',
   })
-  const featureRef = useRef(null)
   const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
   const contentAlignLR = ['left', 'right'].includes(contentAlignment)
     ? contentAlignment
     : ''
-  const { extraCustomClass, currentImage } = useHandleFeatureSlide(
-    image,
-    extraImage,
-    contentAlignLR,
-    featureRef
-  )
   const isContentAlignVertical = contentAlignment === 'vertical'
   const innerContent = (
     <>
       {eyebrow ? (
-        <EyebrowStyle className="hidden-mobile">{eyebrow}</EyebrowStyle>
+        <EyebrowStyle>{eyebrow}</EyebrowStyle>
       ) : null}
       {headline ? (
         <Headline
@@ -128,12 +119,12 @@ const FeatureComponent = props => {
   )
   const imageContent = (
     <>
-      {currentImage ? (
+      {image ? (
         <ImageSrc
           className={classnames({
             'hidden-mobile': imageMobile,
           })}
-          image={isDarkMode && imageDarkMode ? imageDarkMode : currentImage}
+          image={isDarkMode && imageDarkMode ? imageDarkMode : image}
           widthImg={imageWidth}
           imageAlignment={imageAlignment}
           link={imageLink}
@@ -168,9 +159,8 @@ const FeatureComponent = props => {
         removeSectionPaddingBottomOnDesktop: removeSectionPaddingBottomOnDesktop,
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
-      ref={featureRef}
     >
-      <ContentWrapper customClass={`${customClass} ${extraCustomClass}`}>
+      <ContentWrapper customClass={customClass}>
         <FeatureWrapper
           contentAlignLR={contentAlignLR}
           isContentAlignVertical={isContentAlignVertical}
@@ -181,9 +171,6 @@ const FeatureComponent = props => {
           hideImageOnMobile={hideImageOnMobile}
           sectionPadding={sectionPadding}
         >
-          {eyebrow ? (
-            <EyebrowStyle className="hidden-desktop">{eyebrow}</EyebrowStyle>
-          ) : null}
           {image || imageMobile ? (
             <SideImage>
               <Image>
@@ -474,18 +461,6 @@ const Description = styled.div`
     }
   }
 
-  .descriptionMinHeight370 & {
-    min-height: 370px;
-
-    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-      min-height: 320px;
-    }
-
-    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
-      min-height: 380px;
-    }
-  }
-
   .stake-logo-list {
     display: flex;
     column-gap: 20px;
@@ -558,6 +533,7 @@ const FeatureWrapper = styled.div`
     isContentAlignVertical
       ? `
       flex-direction: column !important;
+      row-gap: 0;
       ${CTAWrapper} {
         order: 4;
         margin-top: 20px;
