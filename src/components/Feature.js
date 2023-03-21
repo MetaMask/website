@@ -3,7 +3,6 @@ import React, { useContext } from 'react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import ScrollAnimation from 'react-animate-on-scroll'
-import { useMediaQuery } from 'react-responsive'
 import classnames from 'classnames'
 import { EyebrowStyle, Section } from './StyledGeneral'
 import ImageItem from './Image'
@@ -48,9 +47,7 @@ const FeatureComponent = props => {
     customClass,
     previewMode = false,
   } = props
-  const isMobile = useMediaQuery({
-    query: '(max-width: 767px)',
-  })
+
   const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
   const contentAlignLR = ['left', 'right'].includes(contentAlignment)
@@ -59,9 +56,7 @@ const FeatureComponent = props => {
   const isContentAlignVertical = contentAlignment === 'vertical'
   const innerContent = (
     <>
-      {eyebrow ? (
-        <EyebrowStyle>{eyebrow}</EyebrowStyle>
-      ) : null}
+      {eyebrow ? <EyebrowStyle>{eyebrow}</EyebrowStyle> : null}
       {headline ? (
         <Headline
           hasEyebrow={eyebrow}
@@ -93,8 +88,8 @@ const FeatureComponent = props => {
           ))}
         </FeatureItems>
       ) : null}
-      {cta && !isContentAlignVertical && !isMobile ? (
-        <CTAWrapper>
+      {cta && !isContentAlignVertical ? (
+        <CTAWrapper className="hidden-mobile">
           {contentfulModuleToComponent({
             ...cta,
             color: ['white', 'gray', 'default'].includes(backgroundColor)
@@ -252,8 +247,8 @@ const FeatureComponent = props => {
             </CTAWrapper>
           ) : null}
         </FeatureWrapper>
-        {cta && !isContentAlignVertical && isMobile ? (
-          <CTAWrapper>
+        {cta && !isContentAlignVertical ? (
+          <CTAWrapper className="hidden-desktop">
             {contentfulModuleToComponent({
               ...cta,
               color: ['white', 'gray', 'default'].includes(backgroundColor)
@@ -367,7 +362,6 @@ const SideEmbed = styled.div`
     }
     width: 100%;
   }
-  max-width: 450px;
 
   .snapsLiveMetaMaskFlask & {
     padding: 0;

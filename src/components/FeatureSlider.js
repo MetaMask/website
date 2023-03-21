@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import React, { useEffect, useRef, useState } from 'react'
 import ScrollAnimation from 'react-animate-on-scroll'
 import styled, { withTheme } from 'styled-components'
-import { useMediaQuery } from 'react-responsive'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import ContentWrapper from './ContentWrapper'
 import ParseMD from './ParseMD'
@@ -27,9 +26,6 @@ const FeatureSlider = props => {
 
   const timeoutRef = useRef(null)
   const [activeItem, setActiveItem] = useState(0)
-  const isMobile = useMediaQuery({
-    query: '(max-width: 767px)',
-  })
 
   function resetTimeout() {
     if (timeoutRef.current) {
@@ -38,7 +34,7 @@ const FeatureSlider = props => {
   }
 
   useEffect(() => {
-    if (true === slideShow && !isMobile) {
+    if (slideShow) {
       resetTimeout()
       timeoutRef.current = setTimeout(() => {
         if (activeItem + 1 === featureSliderItems.length) {
@@ -51,7 +47,7 @@ const FeatureSlider = props => {
         resetTimeout()
       }
     }
-  }, [activeItem, isMobile])
+  }, [activeItem])
 
   const imageContent = (image, imageMobile, itemCustomClass) => (
     <>
@@ -98,7 +94,7 @@ const FeatureSlider = props => {
               <SliderText className="dl-checklist fadeIn">
                 <SliderTitle
                   className={classnames({
-                    active: activeItem === index || isMobile,
+                    active: activeItem === index,
                   })}
                   onClick={() => setActiveItem(index)}
                 >
@@ -111,21 +107,15 @@ const FeatureSlider = props => {
                     <div dangerouslySetInnerHTML={{ __html: description }} />
                   )}
                 </SliderDescription>
-                {isMobile ? (
-                  <>
-                    {imageContent(
-                      item.image,
-                      item.imageMobile,
-                      item.customClass
-                    )}
-                  </>
-                ) : null}
+                <div class="hidden-desktop">
+                  {imageContent(item.image, item.imageMobile, item.customClass)}
+                </div>
               </SliderText>
             ))
           : null}
       </SliderTextWrapper>
-      {cta && !isMobile ? (
-        <CTAWrapper>
+      {cta ? (
+        <CTAWrapper className="hidden-mobile">
           {contentfulModuleToComponent({
             ...cta,
             color: ['white', 'gray', 'default'].includes(backgroundColor)
@@ -164,31 +154,29 @@ const FeatureSlider = props => {
               {innerContent}
             </ScrollAnimation>
           </FeatureSliderInner>
-          {!isMobile ? (
-            <SliderImage>
-              <ScrollAnimation
-                animateIn={animation ? 'fadeInRightMini' : ''}
-                initiallyVisible
-                animateOnce
-                delay={0}
-                offset={0}
-              >
-                {featureSliderItems &&
-                  featureSliderItems.map((item, index) => (
-                    <SliderImageItem
-                      className={classnames('fadeIn', {
-                        active: activeItem === index,
-                      })}
-                    >
-                      {imageContent(item.image, item.imageMobile)}
-                    </SliderImageItem>
-                  ))}
-              </ScrollAnimation>
-            </SliderImage>
-          ) : null}
+          <SliderImage className="hidden-mobile">
+            <ScrollAnimation
+              animateIn={animation ? 'fadeInRightMini' : ''}
+              initiallyVisible
+              animateOnce
+              delay={0}
+              offset={0}
+            >
+              {featureSliderItems &&
+                featureSliderItems.map((item, index) => (
+                  <SliderImageItem
+                    className={classnames('fadeIn', {
+                      active: activeItem === index,
+                    })}
+                  >
+                    {imageContent(item.image, item.imageMobile)}
+                  </SliderImageItem>
+                ))}
+            </ScrollAnimation>
+          </SliderImage>
         </FeatureSliderWrapper>
-        {cta && isMobile ? (
-          <CTAWrapper>
+        {cta ? (
+          <CTAWrapper className="hidden-desktop">
             {contentfulModuleToComponent({
               ...cta,
               color: ['white', 'gray', 'default'].includes(backgroundColor)
@@ -271,36 +259,39 @@ const CTAWrapper = styled.div`
 `
 
 const SliderTitle = styled.dt`
-  cursor: pointer;
-  color: #adadad;
-  transition: all 0.3s ease;
-
-  .dl-checklist &:before {
-    background-color: #adadad;
+  @media (min-width: ${({ theme }) => theme.device.tablet}) {
+    cursor: pointer;
+    color: #adadad;
     transition: all 0.3s ease;
-  }
-  &.active {
-    color: #333;
-
-    body.dark-mode & {
-      color: #fff;
+    .dl-checklist &:before {
+      background-color: #adadad;
+      transition: all 0.3s ease;
     }
+    &.active {
+      color: #333;
 
-    & + dd {
-      max-height: 100px;
-      opacity: 1;
-    }
+      body.dark-mode & {
+        color: #fff;
+      }
 
-    &::before {
-      background-color: #2c56dd;
+      & + dd {
+        max-height: 100px;
+        opacity: 1;
+      }
+
+      &::before {
+        background-color: #2c56dd;
+      }
     }
   }
 `
 const SliderDescription = styled.dd`
-  max-height: 0;
-  opacity: 0;
-  overflow-y: hidden;
-  transition: opacity 0.3s ease;
+  @media (min-width: ${({ theme }) => theme.device.tablet}) {
+    transition: opacity 0.3s ease;
+    max-height: 0;
+    opacity: 0;
+    overflow-y: hidden;
+  }
 
   p:last-child {
     margin-bottom: 0;
