@@ -20,6 +20,8 @@ import {
   ContentfulPopupAnnouncementFields,
   ContentfulRichTextFields,
   ContentfulTimelineFields,
+  ContentfulFeatureSliderItemFields,
+  ContentfulLayoutFeatureSliderFields,
 } from './previewFragment'
 
 export const ContentfulLayoutHeaderQuery = gql`
@@ -198,6 +200,24 @@ export const ContentfulRichTextQuery = gql`
   query($id: String!) {
     previewContent: richText(id: $id) {
       ...ContentfulRichTextFields
+    }
+  }
+`
+
+export const ContentfulFeatureSliderItemQuery = gql`
+  ${ContentfulFeatureSliderItemFields}
+  query($id: String!) {
+    previewContent: featureSliderItem(id: $id) {
+      ...ContentfulFeatureSliderItemFields
+    }
+  }
+`
+
+export const ContentfulLayoutFeatureSliderQuery = gql`
+  ${ContentfulLayoutFeatureSliderFields}
+  query($id: String!) {
+    previewContent: featureSlider(id: $id) {
+      ...ContentfulLayoutFeatureSliderFields
     }
   }
 `
