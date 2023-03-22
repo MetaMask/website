@@ -41,7 +41,6 @@ const HeroContainerComponent = props => {
     headlineBorderBottom,
     sideImageFlex,
     sideImageFoxAnimation,
-    backgroundColorMobile,
     isFaq,
     sectionPadding,
     customClass,
@@ -157,7 +156,6 @@ const HeroContainerComponent = props => {
         ref={heroContainerRef}
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor,
-          [`bg-mobile-${backgroundColorMobile}`]: backgroundColorMobile,
           [`custom-${customClass}`]: customClass,
           [`scrolled`]: scrolled,
         })}
@@ -198,10 +196,6 @@ const HeroContainerComponent = props => {
               isStyleHubspot={isStyleHubspot}
               isHome={isHome}
               headlineBorderBottom={headlineBorderBottom}
-              className={classnames({
-                heroMobileOverlayContent:
-                  !backgroundImage && !sideImageFoxAnimation,
-              })}
               center={!sideImageFlex && !isHome}
               sideImageFlex={sideImageFlex}
               isSDK={isSDK}
@@ -323,6 +317,7 @@ const HeroContainerComponent = props => {
                         ? sideImageDarkMode
                         : sideImage
                     }
+                    lazyLoad={false}
                     previewMode={previewMode}
                   />
                 ) : null}
@@ -451,10 +446,15 @@ const HeroContainer = styled(Section)`
   ${({ sectionPadding }) =>
     sectionPadding
       ? `
-      padding-bottom: ${sectionPadding} !important;
+      padding-bottom: ${sectionPadding};
   `
       : ``}
-  
+
+  &.removePaddingBottomOnMobile {
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
+      padding-bottom: 0;
+    }
+  }  
 `
 
 const HeroContentContainer = styled.div`
@@ -539,7 +539,7 @@ const HeroContentContainer = styled.div`
       : ''}
 
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
-    flex-direction: column-reverse;
+    flex-direction: column;
     background-position: 50% 0%;
     background-size: 90%;
     background-attachment: scroll;
@@ -924,8 +924,23 @@ const HeroSideImage = styled.div`
       theme.device.tablet}) and (max-width: ${({ theme }) =>
   theme.device.miniDesktopMediaMax}) {
         min-width: 60%;
+      }
+
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+        margin-right: -40px;
+        width: calc(100% + 40px);
       } 
+  }
+  .sideImageMobileOverflowHiddenBottom100 & {
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      margin-bottom: -100px;
     }
+  }
+
+  .removeShadowAndRadius & img {
+    filter: none;
+    border-radius: 0;
+  }
   
   .sideImageFlex45 & {
     @media (min-width: ${({ theme }) => theme.device.desktop}) {
@@ -975,6 +990,15 @@ const HeroSideImage = styled.div`
       left: 70px;
     }
   }
+
+  .hasShadow & img {
+    filter: drop-shadow(-16.1252px 16.1252px 25.8003px rgba(0, 0, 0, 0.05)) drop-shadow(-3.22503px 3.22503px 10.7501px rgba(0, 0, 0, 0.07));
+  }
+  .imagePl40 & img {
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      padding-left: 40px;
+    }
+  }
 `
 
 const HeightSlide = styled.div`
@@ -1006,11 +1030,11 @@ const HeroCTA = styled.div`
       flex-direction: column;
     }
   }
-
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
-    .button {
-      width: 100%;
-      margin: 0 0 16px 0;
+    display: inline-flex;
+    flex-direction: column;
+    a {
+      padding: 8px 40px;
     }
   }
 `

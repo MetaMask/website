@@ -12,7 +12,7 @@ export const SectionTitle = styled.h2`
   margin-top: 40px;
 
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-    font-size: 40px;
+    font-size: 28px;
     line-height: 46px;
     margin-top: 0;
   }
@@ -39,6 +39,12 @@ export const Section = styled.div`
 
   &.noPaddingBottom {
     padding-bottom: 0 !important;
+  }
+
+  &.removeSectionPaddingBottomOnDesktop {
+    @media (min-width: ${({ theme }) => theme.device.tablet}){
+      padding-bottom: 0 !important;
+    }
   }
 `
 

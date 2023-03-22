@@ -106,6 +106,24 @@ const EmbedHtmlWrapper = styled.div`
       }
     }
   }
+  .embedHeight50 & {
+    .embed-popup-target {
+      &:before {
+        padding-bottom: 50%;
+      }
+    }
+  }
+  .displayEmbedAsNormalOnMobile & {
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      border-radius: 12px;
+      .embed-popup-target {
+        &:before {
+          padding-bottom: 56.25%;
+        }
+      }
+    }
+  }
+
   ${({ playOnPopup, theme }) =>
     playOnPopup
       ? `

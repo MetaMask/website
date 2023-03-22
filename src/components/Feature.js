@@ -35,9 +35,11 @@ const FeatureComponent = props => {
     headlineMarginTop0,
     sectionPadding,
     noPaddingBottom,
+    removeSectionPaddingBottomOnDesktop,
     imageMobile,
     eyebrow,
     featureItems,
+    showFeatureItemsAsSlideImage,
     imageDarkMode,
     imageMobileDarkMode,
     imageShadow,
@@ -46,6 +48,7 @@ const FeatureComponent = props => {
     customClass,
     previewMode = false,
   } = props
+
   const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
   const contentAlignLR = ['left', 'right'].includes(contentAlignment)
@@ -54,9 +57,7 @@ const FeatureComponent = props => {
   const isContentAlignVertical = contentAlignment === 'vertical'
   const innerContent = (
     <>
-      {eyebrow ? (
-        <EyebrowStyle className="hidden-mobile">{eyebrow}</EyebrowStyle>
-      ) : null}
+      {eyebrow ? <EyebrowStyle>{eyebrow}</EyebrowStyle> : null}
       {headline ? (
         <Headline
           hasEyebrow={eyebrow}
@@ -68,7 +69,7 @@ const FeatureComponent = props => {
         </Headline>
       ) : null}
       {description ? (
-        <Description>
+        <Description sectionPadding={sectionPadding}>
           {previewMode ? (
             <ParseMD>{description}</ParseMD>
           ) : (
@@ -76,7 +77,7 @@ const FeatureComponent = props => {
           )}
         </Description>
       ) : null}
-      {featureItems && featureItems.length ? (
+      {featureItems && featureItems.length && !showFeatureItemsAsSlideImage ? (
         <FeatureItems>
           {featureItems.map(m => (
             <FeatureItem>
@@ -89,7 +90,7 @@ const FeatureComponent = props => {
         </FeatureItems>
       ) : null}
       {cta && !isContentAlignVertical ? (
-        <CTAWrapper>
+        <CTAWrapper className="hidden-mobile">
           {contentfulModuleToComponent({
             ...cta,
             color: ['white', 'gray', 'default'].includes(backgroundColor)
@@ -151,6 +152,7 @@ const FeatureComponent = props => {
       imageMobile={backgroundImageMobile}
       className={classnames({
         noPaddingBottom: noPaddingBottom,
+        removeSectionPaddingBottomOnDesktop: removeSectionPaddingBottomOnDesktop,
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
     >
@@ -165,9 +167,6 @@ const FeatureComponent = props => {
           hideImageOnMobile={hideImageOnMobile}
           sectionPadding={sectionPadding}
         >
-          {eyebrow ? (
-            <EyebrowStyle className="hidden-desktop">{eyebrow}</EyebrowStyle>
-          ) : null}
           {image || imageMobile ? (
             <SideImage>
               <Image>
@@ -178,6 +177,7 @@ const FeatureComponent = props => {
                         ? 'fadeInLeftMini'
                         : 'fadeInRightMini'
                     }
+                    initiallyVisible
                     animateOnce
                     delay={0}
                     offset={0}
@@ -201,6 +201,22 @@ const FeatureComponent = props => {
                 playOnPopup={embed.playOnPopup}
               />
             </SideEmbed>
+          ) : null}
+          {featureItems &&
+          featureItems.length &&
+          showFeatureItemsAsSlideImage ? (
+            <SlideFeatureItems>
+              <SlideFeatureItemInner>
+                {featureItems.map(m => (
+                  <>
+                    {contentfulModuleToComponent({
+                      ...m,
+                      previewMode,
+                    })}
+                  </>
+                ))}
+              </SlideFeatureItemInner>
+            </SlideFeatureItems>
           ) : null}
           <FeatureInner
             withContent={withContent}
@@ -248,6 +264,28 @@ const FeatureComponent = props => {
             </CTAWrapper>
           ) : null}
         </FeatureWrapper>
+        {cta && !isContentAlignVertical ? (
+          <CTAWrapper className="hidden-desktop">
+            {contentfulModuleToComponent({
+              ...cta,
+              color: ['white', 'gray', 'default'].includes(backgroundColor)
+                ? cta.color
+                : 'white-outline',
+              previewMode,
+            })}
+            {ctaSecond ? (
+              <>
+                {contentfulModuleToComponent({
+                  ...ctaSecond,
+                  color: ['white', 'gray', 'default'].includes(backgroundColor)
+                    ? ctaSecond.color
+                    : 'white-outline',
+                  previewMode,
+                })}
+              </>
+            ) : null}
+          </CTAWrapper>
+        ) : null}
       </ContentWrapper>
     </Container>
   )
@@ -262,6 +300,7 @@ FeatureComponent.propTypes = {
   modules: PropTypes.arrayOf(PropTypes.object.isRequired),
   sectionPadding: PropTypes.string,
   noPaddingBottom: PropTypes.bool,
+  removeSectionPaddingBottomOnDesktop: PropTypes.bool,
   previewMode: PropTypes.bool,
 }
 
@@ -294,6 +333,11 @@ const Image = styled.div`
   display: block;
   width: 100%;
 
+  .sideImageMaxHeight500 & img {
+    max-height: 500px;
+    margin: 0 auto;
+  }
+
   @media (min-width: ${({ theme }) => theme.device.tablet}) {
     .floatImageRightMinus32 & {
       width: calc(50% + 32vw);
@@ -309,6 +353,9 @@ const SideImage = styled.div`
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     .noPaddingBottom & {
       margin-bottom: 0 !important;
+    }
+    .sideImageOverflowRight & {
+      margin-right: -40px;
     }
   }
 
@@ -391,20 +438,6 @@ const Headline = styled.h2`
   ${({ headlineMarginTop0 }) =>
     headlineMarginTop0 ? 'margin-top: 0;' : 'margin-top: 40px;'}
 
-  ${({ hasCta, theme }) =>
-    !hasCta
-      ? `
-    @media (max-width: ${theme.device.tabletMediaMax}) {
-      font-size: 28px;
-      line-height: 32px;
-      margin-bottom: 15px;
-      margin-top: 16px;
-      padding-bottom: 0;
-      padding-top: 0;
-      text-align: center;
-    }`
-      : 'padding-bottom: 14px;'}
-
   ${({ hasEyebrow, theme }) =>
     hasEyebrow
       ? `
@@ -414,13 +447,55 @@ const Headline = styled.h2`
   }
   `
       : ''}
+
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 15px;
+    margin-top: 16px;
+    padding-bottom: 0;
+    padding-top: 0;
+    text-align: center;
+  }
 `
 const Description = styled.div`
   display: block;
+
+  .descriptionMinusSectionPadding & {
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      ${({ sectionPadding }) =>
+        sectionPadding
+          ? `
+        margin-top: -${sectionPadding};
+      `
+          : ''}
+    }
+  }
+
+  .stake-logo-list {
+    display: flex;
+    column-gap: 20px;
+    row-gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    justify-content: left;
+
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      justify-content: center;
+    }
+  }
+
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     text-align: center;
     * {
       max-width: initial !important;
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.device.tablet}) {
+    .descriptionMW453 & {
+      max-width: 453px;
     }
   }
 `
@@ -428,15 +503,14 @@ const FeatureWrapper = styled.div`
   display: flex;
   margin: -10px;
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-    flex-direction: column;
+    flex-direction: column-reverse;
     margin: 0;
     align-items: center;
     text-align: center;
-    ${SideImage} {
-      margin-bottom: 32px;
-    }
-    ${SideEmbed} {
-      margin-bottom: 32px;
+    row-gap: 32px;
+
+    .rowGap16 & {
+      row-gap: 16px;
     }
   }
 
@@ -476,6 +550,7 @@ const FeatureWrapper = styled.div`
     isContentAlignVertical
       ? `
       flex-direction: column !important;
+      row-gap: 0;
       ${CTAWrapper} {
         order: 4;
         margin-top: 20px;
@@ -570,8 +645,7 @@ const FeatureInner = styled.div`
   }
 `
 const CTAWrapper = styled.div`
-  display: inline-flex;
-  justify-content: center;
+  display: flex;
   row-gap: 8px;
   column-gap: 16px;
   margin-top: 40px;
@@ -585,11 +659,20 @@ const CTAWrapper = styled.div`
       margin-bottom: 16px;
     }
   }
+  .ctaMt10 & {
+    margin-top: 10px;
+  }
+  .ctaDesktopMt96 & {
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      margin-top: 96px;
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    justify-content: center;
+  }
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     flex-wrap: wrap;
-    .button {
-      width: 100%;
-    }
   }
 `
 
@@ -604,5 +687,45 @@ const FeatureItems = styled.div`
 const FeatureItem = styled.div`
   &:not(:last-child) {
     margin-bottom: 48px;
+  }
+`
+
+const SlideFeatureItems = styled.div`
+  flex: 1;
+  align-self: flex-start;
+`
+
+const SlideFeatureItemInner = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  flex: 1;
+  align-self: flex-start;
+
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    justify-content: center;
+  }
+  @media (min-width: ${({ theme }) => theme.device.tablet}) {
+    .slideFeatureMt52 & {
+      margin-top: 52px;
+    }
+    .slideFeatureMt56 & {
+      margin-top: 56px;
+    }
+    .slideFeatureMt59 & {
+      margin-top: 59px;
+    }
+    .slideFeatureMW520 & {
+      position: absolute;
+      max-width: 520px;
+    }
+    .slideFeatureMW545 & {
+      position: absolute;
+      max-width: 545px;
+    }
+    .slideFeatureMW400 & {
+      position: absolute;
+      max-width: 400px;
+    }
   }
 `
