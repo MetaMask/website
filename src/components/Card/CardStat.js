@@ -60,4 +60,8 @@ const Description = styled.div`
   color: #037dd6;
   font-weight: 600;
   font-size: 20px;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
 `
