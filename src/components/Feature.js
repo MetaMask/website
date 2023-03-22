@@ -39,6 +39,7 @@ const FeatureComponent = props => {
     imageMobile,
     eyebrow,
     featureItems,
+    showFeatureItemsAsSlideImage,
     imageDarkMode,
     imageMobileDarkMode,
     imageShadow,
@@ -76,7 +77,7 @@ const FeatureComponent = props => {
           )}
         </Description>
       ) : null}
-      {featureItems && featureItems.length ? (
+      {featureItems && featureItems.length && !showFeatureItemsAsSlideImage ? (
         <FeatureItems>
           {featureItems.map(m => (
             <FeatureItem>
@@ -200,6 +201,22 @@ const FeatureComponent = props => {
                 playOnPopup={embed.playOnPopup}
               />
             </SideEmbed>
+          ) : null}
+          {featureItems &&
+          featureItems.length &&
+          showFeatureItemsAsSlideImage ? (
+            <SlideFeatureItems>
+              <SlideFeatureItemInner>
+                {featureItems.map(m => (
+                  <>
+                    {contentfulModuleToComponent({
+                      ...m,
+                      previewMode,
+                    })}
+                  </>
+                ))}
+              </SlideFeatureItemInner>
+            </SlideFeatureItems>
           ) : null}
           <FeatureInner
             withContent={withContent}
@@ -475,6 +492,12 @@ const Description = styled.div`
       max-width: initial !important;
     }
   }
+
+  @media (min-width: ${({ theme }) => theme.device.tablet}) {
+    .descriptionMW453 & {
+      max-width: 453px;
+    }
+  }
 `
 const FeatureWrapper = styled.div`
   display: flex;
@@ -639,6 +662,12 @@ const CTAWrapper = styled.div`
   .ctaMt10 & {
     margin-top: 10px;
   }
+  .ctaDesktopMt96 & {
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      margin-top: 96px;
+    }
+  }
+
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     justify-content: center;
   }
@@ -658,5 +687,45 @@ const FeatureItems = styled.div`
 const FeatureItem = styled.div`
   &:not(:last-child) {
     margin-bottom: 48px;
+  }
+`
+
+const SlideFeatureItems = styled.div`
+  flex: 1;
+  align-self: flex-start;
+`
+
+const SlideFeatureItemInner = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  flex: 1;
+  align-self: flex-start;
+
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    justify-content: center;
+  }
+  @media (min-width: ${({ theme }) => theme.device.tablet}) {
+    .slideFeatureMt46 & {
+      margin-top: 46px;
+    }
+    .slideFeatureMt50 & {
+      margin-top: 50px;
+    }
+    .slideFeatureMt52 & {
+      margin-top: 52px;
+    }
+    .slideFeatureMW520 & {
+      position: absolute;
+      max-width: 520px;
+    }
+    .slideFeatureMW545 & {
+      position: absolute;
+      max-width: 545px;
+    }
+    .slideFeatureMW400 & {
+      position: absolute;
+      max-width: 400px;
+    }
   }
 `

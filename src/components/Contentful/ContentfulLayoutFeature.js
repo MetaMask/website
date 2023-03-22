@@ -36,6 +36,7 @@ const ContentfulLayoutFeature = props => {
       embed,
       previewMode = false,
       featureItems,
+      showFeatureItemsAsSlideImage,
       imageShadow,
       hideImageOnMobile,
       customClass,
@@ -83,6 +84,7 @@ const ContentfulLayoutFeature = props => {
       ctaSecond={ctaSecond}
       embed={embed}
       featureItems={featureItems}
+      showFeatureItemsAsSlideImage={showFeatureItemsAsSlideImage}
       imageShadow={imageShadow}
       hideImageOnMobile={hideImageOnMobile}
       customClass={customClass}

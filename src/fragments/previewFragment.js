@@ -568,6 +568,7 @@ export const ContentfulLayoutFeatureFields = gql`
         ...ContentfulLogoFields
       }
     }
+    showFeatureItemsAsSlideImage
     cta(preview: true) {
       ...ContentfulCtaFields
     }
