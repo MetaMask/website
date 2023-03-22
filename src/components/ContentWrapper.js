@@ -48,6 +48,12 @@ const Container = styled.div`
     overflow: hidden;
   }
 
+  &.addMoreDesktopPb56 {
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      padding-bottom: 56px;
+    }
+  }
+
   ${({ styleOverride }) => styleOverride}
 `
 
