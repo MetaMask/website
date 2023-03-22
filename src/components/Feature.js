@@ -706,14 +706,14 @@ const SlideFeatureItemInner = styled.div`
     justify-content: center;
   }
   @media (min-width: ${({ theme }) => theme.device.tablet}) {
-    .slideFeatureMt46 & {
-      margin-top: 46px;
-    }
-    .slideFeatureMt50 & {
-      margin-top: 50px;
-    }
     .slideFeatureMt52 & {
       margin-top: 52px;
+    }
+    .slideFeatureMt56 & {
+      margin-top: 56px;
+    }
+    .slideFeatureMt59 & {
+      margin-top: 59px;
     }
     .slideFeatureMW520 & {
       position: absolute;
