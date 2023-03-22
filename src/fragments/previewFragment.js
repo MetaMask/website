@@ -578,6 +578,56 @@ export const ContentfulLayoutFeatureFields = gql`
   }
 `
 
+export const ContentfulFeatureSliderItemFields = gql`
+  fragment ContentfulFeatureSliderItemFields on FeatureSliderItem {
+    __typename
+    sys {
+      id
+    }
+    title
+    description
+    image(preview: true) {
+      title
+      description
+      url
+    }
+    imageMobile(preview: true) {
+      title
+      description
+      url
+    }
+    hasShadow
+    customClass
+  }
+`
+
+export const ContentfulLayoutFeatureSliderFields = gql`
+  ${ContentfulFeatureSliderItemFields}
+  ${ContentfulCtaFields}
+  fragment ContentfulLayoutFeatureSliderFields on LayoutFeatureSlider {
+    __typename
+    sys {
+      id
+    }
+    headline
+    description
+    featureSliderItemsCollection(preview: true) {
+      items {
+        ...ContentfulFeatureSliderItemFields
+      }
+    }
+    layoutType
+    sectionPadding
+    slideShow
+    animation
+    cta(preview: true) {
+      ...ContentfulCtaFields
+    }
+    backgroundColor
+    customClass
+  }
+`
+
 export const ContentfulLayoutModuleContainerFields = gql`
   ${ContentfulCtaFields}
   ${ContentfulEmbedFields}
@@ -635,6 +685,7 @@ export const ContentfulLayoutFields = gql`
   ${ContentfulLayoutModuleContainerFields}
   ${ContentfulLayoutFooterFields}
   ${ContentfulLayoutFeatureFields}
+  ${ContentfulLayoutFeatureSliderFields}
   fragment ContentfulLayoutFields on Layout {
     __typename
     sys {
@@ -652,6 +703,7 @@ export const ContentfulLayoutFields = gql`
         ...ContentfulLayoutFullWidthCtaFields
         ...ContentfulLayoutHeroFields
         ...ContentfulLayoutModuleContainerFields
+        ...ContentfulLayoutFeatureSliderFields
       }
     }
     footer(preview: true) {

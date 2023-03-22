@@ -314,6 +314,9 @@ const CardInner = styled(Link)`
   body.dark-mode .borderInDarkMode & {
     border: 1px solid white;
   }
+  body.dark-mode .bgDarkInDarkmode & {
+    background-color: ${({ theme }) => theme.dark};
+  }
 `
 
 const ImageWrapper = styled.div`

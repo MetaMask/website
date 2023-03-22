@@ -41,11 +41,12 @@ const ContentfulLayoutFeatureSlider = props => {
 
 const parsePreviewData = data => {
   data = data.moduleConfig.previewContent || data.moduleConfig
-  const { featureItemsCollection } = data
+  const { featureSliderItemsCollection } = data
+
   const dataUpdate = {
     moduleConfig: {
       previewMode: true,
-      featureItems: featureItemsCollection?.items,
+      featureSliderItems: featureSliderItemsCollection?.items,
       ...data,
     },
   }
