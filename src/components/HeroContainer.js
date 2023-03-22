@@ -997,6 +997,15 @@ const HeroSideImage = styled.div`
       left: 70px;
     }
   }
+
+  .hasShadow & img {
+    filter: drop-shadow(-16.1252px 16.1252px 25.8003px rgba(0, 0, 0, 0.05)) drop-shadow(-3.22503px 3.22503px 10.7501px rgba(0, 0, 0, 0.07));
+  }
+  .imagePl40 & img {
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      padding-left: 40px;
+    }
+  }
 `
 
 const HeightSlide = styled.div`

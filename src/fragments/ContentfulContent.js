@@ -256,6 +256,7 @@ export const ContentfulLayoutFeatureFields = graphql`
         ...ContentfulCardFields
       }
     }
+    showFeatureItemsAsSlideImage
     cta {
       ...ContentfulCtaFields
     }
