@@ -55,6 +55,7 @@ const FeatureSlider = props => {
         <ImageSrc
           className={classnames({
             'hidden-mobile': imageMobile,
+            [itemCustomClass]: itemCustomClass,
           })}
           image={image}
           previewMode={previewMode}
