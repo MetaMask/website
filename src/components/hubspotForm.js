@@ -86,10 +86,6 @@ const Title = styled.h2`
     font-size: 24px;
     margin-bottom: 24px;
   }
-
-  body.dark-mode .registerEventForm & {
-    color: #000;
-  }
 `
 
 const Wrapper = styled.div`
@@ -128,6 +124,7 @@ const Wrapper = styled.div`
     }
   }
 
+  body.dark-mode .registerEventForm &,
   body.dark-mode .registerCustodyForm & {
     background-color: ${({ theme }) => theme.background.white};
   }

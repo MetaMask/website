@@ -6,6 +6,7 @@ import classnames from 'classnames'
 import ArrowIcon from '../images/icons/icon-arrow-right.svg'
 import Link from './Link'
 import CardFeature from './Card/CardFeature'
+import CardStat from './Card/CardStat'
 import CardFeatureHorizontal from './Card/CardFeatureHorizontal'
 import CardHorizontal from './Card/CardHorizontal'
 import CardHorizontalReverse from './Card/CardHorizontalReverse'
@@ -56,6 +57,9 @@ const StyledCard = props => {
     case 'news':
       // code block
       return <CardNews {...props} isDarkMode={isDarkMode} />
+    case 'stat':
+      // code block
+      return <CardStat {...props} isDarkMode={isDarkMode} />
     default:
     // code block
   }
@@ -67,9 +71,11 @@ const StyledCard = props => {
 
   return (
     <Card
-      className="moduleCardWrapper"
       isCtaType={isCtaType}
       isCardFlex={isCardFlex}
+      className={classnames('moduleCardWrapper', {
+        [customClass]: customClass,
+      })}
     >
       <CardInner
         to={link}
@@ -79,7 +85,6 @@ const StyledCard = props => {
         imageMobile={backgroundImageMobile}
         className={classnames('cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
-          [customClass]: customClass,
         })}
       >
         {image ? (
@@ -163,19 +168,32 @@ const Card = styled.div`
     display: flex;
   `
       : ''}
+  &.card-height-100 {
+    height: 100%;
+  }
+  &.card-move-up-80 {
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      margin-top: -80px;
+    }
+  }
+  &.removePaddingBottomOnMobile {
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      padding-bottom: 0 !important;
+    }
+  }
 `
 
 const CardInner = styled(Link)`
   display: block;
   color: ${({ theme }) => theme.text.body} !important;
   
-  &.borderPink {
+  .borderPink & {
     border: 2px solid #FFB0EB;
   }
-  &.borderYellow {
+  .borderYellow & {
     border: 2px solid #FFD33D;
   }
-  &.borderBlue {
+  .borderBlue & {
     border: 2px solid #037DD6;
   }
 
@@ -279,7 +297,7 @@ const CardInner = styled(Link)`
   `
       : ''}
 
-  &.custody-integrate-card, &.custody-technical-card {
+  .custody-integrate-card &, .custody-technical-card & {
     padding: 24px;
     border-radius: 12px;
 
@@ -287,11 +305,17 @@ const CardInner = styled(Link)`
       background-color: ${({ theme }) => theme.dark};
     }
   }
-  &.custody-integrate-card {
+  .custody-integrate-card & {
     background-color: #EDF6FE;
   }
-  &.custody-technical-card {
+  .custody-technical-card & {
     background-color: #FFF0E2;
+  }
+  body.dark-mode .borderInDarkMode & {
+    border: 1px solid white;
+  }
+  body.dark-mode .bgDarkInDarkmode & {
+    background-color: ${({ theme }) => theme.dark};
   }
 `
 

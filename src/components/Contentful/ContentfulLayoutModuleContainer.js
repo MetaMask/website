@@ -89,9 +89,8 @@ const ContentfulModuleContainer = props => {
                     className={classnames({
                       'txt-center': headlineAlignCenter,
                     })}
-                  >
-                    {headline}
-                  </Title>
+                    dangerouslySetInnerHTML={{ __html: headline }}
+                  />
                 ) : null}
                 {htmlData ? (
                   <>
@@ -363,15 +362,16 @@ const Modules = styled.div`
     padding: 22px;
     margin-bottom: 0;
   }
-  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
-    .button {
-      width: 100%;
-    }
-  }
 `
 
 const ContentInfo = styled.div`
   margin-bottom: 40px;
+
+  .contentInfoDesktopMb12 & {
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      margin-bottom: 12px;
+    }
+  }
 
   & > *:last-child {
     margin-bottom: 0 !important;

@@ -30,11 +30,13 @@ const ContentfulLayoutFeature = props => {
       headlineMarginTop0,
       sectionPadding,
       noPaddingBottom,
+      removeSectionPaddingBottomOnDesktop,
       cta,
       ctaSecond,
       embed,
       previewMode = false,
       featureItems,
+      showFeatureItemsAsSlideImage,
       imageShadow,
       hideImageOnMobile,
       customClass,
@@ -77,10 +79,12 @@ const ContentfulLayoutFeature = props => {
       headlineMarginTop0={headlineMarginTop0}
       sectionPadding={sectionPadding}
       noPaddingBottom={noPaddingBottom}
+      removeSectionPaddingBottomOnDesktop={removeSectionPaddingBottomOnDesktop}
       cta={cta}
       ctaSecond={ctaSecond}
       embed={embed}
       featureItems={featureItems}
+      showFeatureItemsAsSlideImage={showFeatureItemsAsSlideImage}
       imageShadow={imageShadow}
       hideImageOnMobile={hideImageOnMobile}
       customClass={customClass}
@@ -92,7 +96,6 @@ const ContentfulLayoutFeature = props => {
 const parsePreviewData = data => {
   data = data.moduleConfig.previewContent || data.moduleConfig
   const { featureItemsCollection, embed } = data
-
   const dataUpdate = {
     moduleConfig: {
       previewMode: true,
@@ -119,6 +122,7 @@ ContentfulLayoutFeature.propTypes = {
     description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     cta: PropTypes.object,
     noPaddingBottom: PropTypes.bool,
+    removeSectionPaddingBottomOnDesktop: PropTypes.bool,
     imageShadow: PropTypes.bool,
   }),
 }

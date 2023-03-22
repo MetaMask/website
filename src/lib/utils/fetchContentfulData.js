@@ -29,6 +29,8 @@ import {
   ContentfulPopupAnnouncementQuery,
   ContentfulRichTextQuery,
   ContentfulTimelineQuery,
+  ContentfulFeatureSliderItemQuery,
+  ContentfulLayoutFeatureSliderQuery,
 } from '../../fragments/previewQuery'
 
 export const fetchContentfulTypename = id => {
@@ -118,6 +120,12 @@ const mapTypeToQuery = type => {
       break
     case 'ContentfulRichText':
       query = ContentfulRichTextQuery
+      break
+    case 'ContentfulFeatureSliderItem':
+      query = ContentfulFeatureSliderItemQuery
+      break
+    case 'ContentfulLayoutFeatureSlider':
+      query = ContentfulLayoutFeatureSliderQuery
       break
     default:
       break

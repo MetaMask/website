@@ -2,6 +2,7 @@ import ContentfulLayoutHeader from './ContentfulLayoutHeader'
 import ContentfulLayoutFooter from './ContentfulLayoutFooter'
 import ContentfulLayoutHero from './ContentfulLayoutHero'
 import ContentfulLayoutFeature from './ContentfulLayoutFeature'
+import ContentfulLayoutFeatureSlider from './ContentfulLayoutFeatureSlider'
 import ContentfulLayoutFullWidthCta from './ContentfulLayoutFullWidthCta'
 import ContentfulLayoutModuleContainer from './ContentfulLayoutModuleContainer'
 import ContentfulCard from './ContentfulCard'
@@ -25,6 +26,7 @@ export {
   ContentfulLayoutFooter,
   ContentfulLayoutHero,
   ContentfulLayoutFeature,
+  ContentfulLayoutFeatureSlider,
   ContentfulLayoutFullWidthCta,
   ContentfulLayoutModuleContainer,
   ContentfulCard,

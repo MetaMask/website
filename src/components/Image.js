@@ -4,7 +4,14 @@ import Link from './Link'
 import styled from 'styled-components'
 
 const Image = props => {
-  const { image, src, link, previewMode = false, ...rest } = props
+  const {
+    image,
+    src,
+    link,
+    lazyLoad = true,
+    previewMode = false,
+    ...rest
+  } = props
   const { title, description } = image || {}
 
   const urlImg = src ? src : parseContentfulAssetUrl(image, previewMode)
@@ -13,7 +20,7 @@ const Image = props => {
     return (
       <LinkImage newTab to={link}>
         <img
-          loading={'lazy'}
+          loading={lazyLoad ? 'lazy' : 'eager'}
           decoding="async"
           src={urlImg}
           alt={description || title}
@@ -26,7 +33,7 @@ const Image = props => {
   }
   return (
     <img
-      loading={'lazy'}
+      loading={lazyLoad ? 'lazy' : 'eager'}
       decoding="async"
       src={urlImg}
       alt={description || title}

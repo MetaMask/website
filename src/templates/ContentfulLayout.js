@@ -23,6 +23,7 @@ const ContentfulLayout = props => {
       seo,
       heroes: H,
       features: F,
+      featureSliders: FS,
       richTexts: RT,
       layoutModuleContainers: LMC,
       moduleContainers: MC,
@@ -76,7 +77,7 @@ const ContentfulLayout = props => {
 
   // extract all top-level page modules from GraphQL and return in a flat array for rendering
   const pageModules = flatMapDeep(
-    [H, F, RT, LMC, MC, C, CTA, FAQ, HTML, L, HF, FWC],
+    [H, F, FS, RT, LMC, MC, C, CTA, FAQ, HTML, L, HF, FWC],
     getNodes
   )
 
@@ -168,6 +169,16 @@ export const ContentfulQuery = graphql`
       edges {
         node {
           ...ContentfulLayoutFeatureFields
+        }
+      }
+    }
+
+    featureSliders: allContentfulLayoutFeatureSlider(
+      filter: { contentful_id: { in: $modules } }
+    ) {
+      edges {
+        node {
+          ...ContentfulLayoutFeatureSliderFields
         }
       }
     }
