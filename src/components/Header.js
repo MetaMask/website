@@ -6,7 +6,6 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { useMediaQuery } from 'react-responsive'
 import ToggleDarkMode from './ToggleDarkMode'
 import ContextClientSide from '../Context/ContextClientSide'
-import { setLocalStorage } from '../lib/utils/localStorage'
 import Context from '../Context/ContextPage'
 import classnames from 'classnames'
 
@@ -37,13 +36,12 @@ const StyledHeader = props => {
   const menuRef = useRef()
   const { header: headerREF } = useContext(Context)
   const { headerRef } = headerREF || {}
-  const { isDarkMode, setIsDarkMode } = darkModeContextValue || {}
+  const { isDarkMode, toggleTheme } = darkModeContextValue || {}
   const [topMenuMobile, setTopMenuMobile] = useState('88px')
 
   useEffect(() => {
-    if (!menus) {
-      setLocalStorage('darkMode', '0')
-      setIsDarkMode(false)
+    if (!menus && isDarkMode) {
+      toggleTheme()
     }
     const handleOuterClick = e => {
       if (hamburgerActive && menuRef && menuRef.current) {
@@ -80,10 +78,6 @@ const StyledHeader = props => {
       setTopMenuMobile(`${h}px`)
     }
     setHamburgerActive(!hamburgerActive)
-  }
-  const onChangeDarkMode = e => {
-    setLocalStorage('darkMode', e.target.checked ? '1' : '0')
-    setIsDarkMode(e.target.checked)
   }
   return (
     <HeaderElement ref={headerRef} className={classnames({ sticky: isSticky })}>
@@ -199,9 +193,9 @@ const StyledHeader = props => {
                     })}
                   </ButtonsWrapper>
                 ) : null}
-                <DarkModeWrapper loading={isDarkMode === null}>
+                <DarkModeWrapper>
                   <ToggleDarkMode
-                    onChange={onChangeDarkMode}
+                    onChange={toggleTheme}
                     checked={isDarkMode}
                     name="darkMode"
                     value="dark"
@@ -231,7 +225,10 @@ StyledHeader.propTypes = {
 }
 
 const HeaderElement = styled.header`
-  background-color: ${({ theme }) => theme.background.white};
+  background-color: #fff;
+  body.dark-mode & {
+    background-color: #121212;
+  }
   bottom: 20px;
   display: block;
   left: 0;
@@ -386,7 +383,10 @@ const NavMenuMain = styled.div`
   align-items: center;
   height: 40px;
   padding: 0 20px;
-  color: ${({ theme }) => theme.text.menu};
+  color: #222;
+  body.dark-mode & {
+    color: #FFF;
+  }
   &:hover {
     color: ${({ theme }) => theme.text.menuHover};
   }
@@ -460,11 +460,6 @@ const DarkModeWrapper = styled.div`
   display: inline-flex;
   align-items: center;
   margin-left: 32px;
-  opacity: 0;
-
-  .client-ready & {
-    opacity: 1;
-  }
 
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     margin-top: 16px;

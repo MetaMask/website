@@ -1,57 +1,39 @@
 /* eslint-disable no-useless-computed-key */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ContextClientSide from '../../Context/ContextClientSide'
-import { getLocalStorage } from '../../lib/utils/localStorage'
-import Helmet from 'react-helmet'
-import classnames from 'classnames'
 
-const MailWidgetWrapper = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = React.useState(null)
-  const [ready, setReady] = React.useState(false)
-  const systemChangeDarkMode = event => {
-    const isDarkSystem = event.matches
-    setIsDarkMode(isDarkSystem)
+const ClientSideWrapper = ({ children }) => {
+  const [theme, setTheme] = useState(window?.__theme || 'light')
+  const [isDarkMode, setDarkMode] = useState(false)
+
+  const toggleTheme = () => {
+    const theme = window?.__theme
+    window.__setPreferredTheme(theme === 'light' ? 'dark' : 'light')
   }
-  React.useEffect(() => {
-    if (!window) return
-    const darkModeSystem =
-      window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-    const darkModeLocalStorage = getLocalStorage('darkMode')
-    if (darkModeLocalStorage === null) {
-      setIsDarkMode(darkModeSystem)
-    } else {
-      setIsDarkMode(darkModeLocalStorage === '1')
-    }
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', systemChangeDarkMode)
-    setTimeout(() => {
-      setReady(true)
-    }, 400)
-    return () =>
-      window
-        .matchMedia('(prefers-color-scheme: dark)')
-        .removeEventListener('change', systemChangeDarkMode)
+
+  useEffect(() => {
+    window.__onThemeChange = setTheme
   }, [])
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      setDarkMode(true)
+    } else {
+      setDarkMode(false)
+    }
+  }, [theme])
+
   const valueContext = {
     darkMode: {
       isDarkMode,
-      setIsDarkMode,
+      toggleTheme,
     },
   }
   return (
     <ContextClientSide.Provider value={valueContext}>
-      <Helmet>
-        <body
-          className={classnames(isDarkMode ? 'dark-mode' : 'light-mode', {
-            ['client-ready']: ready,
-          })}
-        />
-      </Helmet>
       {children}
     </ContextClientSide.Provider>
   )
 }
 
-export default MailWidgetWrapper
+export default ClientSideWrapper
