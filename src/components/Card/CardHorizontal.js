@@ -29,7 +29,6 @@ const StyledCard = props => {
     hubSpotForm,
     linkText,
     cta,
-    isDarkMode,
     customClass,
     previewMode = false,
   } = props
@@ -50,7 +49,8 @@ const StyledCard = props => {
         {image ? (
           <ImageWrapper imageMargin={imageMargin} layoutSize={layoutSize}>
             <ImageSrc
-              image={isDarkMode && imageDarkMode ? imageDarkMode : image}
+              image={image}
+              darkImage={imageDarkMode}
               previewMode={previewMode}
             />
           </ImageWrapper>

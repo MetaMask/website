@@ -1597,3 +1597,19 @@ img.with-shadow {
     max-width: 453px;
   }
 }
+
+img[src$="#only-light"] {
+  display: initial;
+}
+img[src$="#only-dark"] {
+  display: none;
+}
+
+body.dark-mode {
+  img[src$="#only-light"] {
+    display: none;
+  }
+  img[src$="#only-dark"] {
+    display: initial;
+  }
+}

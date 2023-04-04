@@ -267,11 +267,8 @@ const HeroContainerComponent = props => {
                     ref={sdkRef}
                   >
                     <Image
-                      image={
-                        isDarkMode && !isEmpty(sideImageDarkMode)
-                          ? sideImageDarkMode
-                          : sideImage
-                      }
+                      image={sideImage}
+                      darkImage={sideImageDarkMode}
                       onLoad={handleWindowSizeChange}
                       previewMode={previewMode}
                     />
@@ -312,12 +309,9 @@ const HeroContainerComponent = props => {
                 {!sideImageFoxAnimation &&
                 (isStyleHubspot || sideImageFlex || isFlask) ? (
                   <Image
-                    image={
-                      isDarkMode && !isEmpty(sideImageDarkMode)
-                        ? sideImageDarkMode
-                        : sideImage
-                    }
-                    lazyLoad={false}
+                    image={sideImage}
+                    darkImage={sideImageDarkMode}
+                    lazyLoad={!isInstitutions}
                     previewMode={previewMode}
                   />
                 ) : null}

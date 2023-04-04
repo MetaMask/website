@@ -398,7 +398,10 @@ const ContentWrapper = styled(Link)`
     background-color: transparent;
     font-weight: 400;
     height: auto;
-    color: ${theme.text.menu};
+    color: #222;
+    body.dark-mode & {
+      color: #FFF;
+    }
     &:hover {
       background-color: ${theme.text.menuBgHover};
       color: ${theme.text.menuHover};
@@ -418,7 +421,10 @@ const ContentWrapper = styled(Link)`
   ${({ typeLayout, theme }) =>
     typeLayout === 'footer'
       ? `
-    color: ${theme.text.menuFooter};
+    color: #000000bd;
+    body.dark-mode & {
+      color: #FFF;
+    }
     font-size: 12px;
     line-height: 30px;
     font-weight: 400;
