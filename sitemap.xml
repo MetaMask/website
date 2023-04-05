@@ -47,6 +47,7 @@
 <url> <loc>https://metamask.io/updates/password-required/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/faqs/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/about/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/security/metamask-security-monthly-march-2023/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/building-the-future-of-customer-support-with-metamask-activity/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/metamask-mobile-and-extension-updates-improve-wallet-experience-with-more-control-and-transparency/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/security/metamask-security-monthly-february-2023/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
