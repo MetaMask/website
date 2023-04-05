@@ -701,6 +701,8 @@ export const ContentfulModuleContainerFields = graphql`
     numberOfItem
     columns
     columnType
+    columnsOnTablet
+    centerOnTablet
     columnsOnMobile
     centerOnMobile
     contentAlignment
@@ -730,6 +732,9 @@ export const ContentfulModuleContainerFields = graphql`
       }
       ... on ContentfulNewsCategory {
         ...ContentfulNewsCategoryFields
+      }
+      ... on ContentfulHubSpotForm {
+        ...ContentfulHubSpotFormFields
       }
       ... on ContentfulModuleContainer {
         contentful_id

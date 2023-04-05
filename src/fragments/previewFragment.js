@@ -295,6 +295,8 @@ export const ContentfulModuleContainerFields = gql`
     contentAlignment
     numberOfItem
     columns
+    columnsOnTablet
+    centerOnTablet
     columnsOnMobile
     centerOnMobile
     columnType

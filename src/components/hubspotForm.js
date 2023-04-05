@@ -82,7 +82,8 @@ const Title = styled.h2`
     font-size: 24px;
   }
 
-  .registerCustodyForm & {
+  .registerCustodyForm &,
+  .accessFireBlockForm & {
     font-size: 24px;
     margin-bottom: 24px;
   }
@@ -103,6 +104,10 @@ const Wrapper = styled.div`
     min-width: auto;
     width: 460px;
     margin: 0 auto;
+  }
+
+  &.formMW510 {
+    max-width: 510px;
   }
 
   .registerEventForm &,
@@ -126,7 +131,7 @@ const Wrapper = styled.div`
 
   body.dark-mode .registerEventForm &,
   body.dark-mode .registerCustodyForm & {
-    background-color: ${({ theme }) => theme.background.white};
+    background-color: #121212;
   }
 `
 
@@ -143,10 +148,29 @@ const Content = styled.div`
       box-shadow: 0 10px 30px 0 rgba(255, 255, 255, 0.2);
     }
   }
+  .accessFireBlockForm & {
+    padding: 40px;
+    padding-bottom: 3px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid rgba(51, 51, 51, 0.1);
+    box-shadow: -15px 15px 24px rgba(0, 0, 0, 0.05),
+      -3px 3px 10px rgba(0, 0, 0, 0.07);
+    border-radius: 5px;
+
+    body.dark-mode & {
+      background-color: #24292e;
+    }
+  }
 `
 
 const Form = styled.div`
   display: block;
+  .formHidden & {
+    visibility: hidden;
+    height: 700px;
+    overflow: hidden;
+  }
   ${({ hasExternalStyles }) =>
     hasExternalStyles &&
     `

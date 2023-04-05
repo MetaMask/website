@@ -786,11 +786,11 @@ const HeroTitle = styled.h1`
     font-size: 34px !important;
     line-height: 43px;
   }
-`
-const HeroConnectCTA = styled.div`
-  display: block;
-  margin-top: 56px;
-  margin-bottom: 24px;
+  @media (min-width: ${({ theme }) => theme.device.desktop}) {
+    .mmi-fireblocks-hero & {
+      width: 480px;
+    }
+  }
 `
 
 const HeroDescription = styled.div`
@@ -929,6 +929,12 @@ const HeroSideImage = styled.div`
     @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
       margin-bottom: -100px;
     }
+  }
+
+  .mmi-fireblocks-hero & img {
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+        padding-left: 60px;
+      }
   }
 
   .removeShadowAndRadius & img {
