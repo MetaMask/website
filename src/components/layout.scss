@@ -1252,6 +1252,50 @@ body.dark-mode {
       }
     }
   }
+  &.dt-normal > dt {
+    font-weight: 400;
+  }
+  &.dt-align-start > dt {
+    align-items: flex-start;
+
+    @media (max-width: 767px) {
+      align-items: center;
+    }
+  }
+  &.dl-flex-col {
+    display: flex;
+    flex-direction: column;
+  }
+  &.dl-gap-24 {
+    row-gap: 24px;
+  }
+  &.keep-on-tablet {
+    & > dt {
+      @media (max-width: 767px) {
+        flex-direction: row;
+        text-align: left;
+        &::before {
+          margin-right: 12px;
+        }
+      }
+      @media (max-width: 479px) {
+        flex-direction: column;
+        row-gap: 6px;
+        text-align: center;
+        &::before {
+          margin-right: 0;
+        }
+      }
+    }
+    &.dt-align-start > dt {
+      @media (max-width: 767px) {
+        align-items: flex-start;
+      }
+      @media (max-width: 479px) {
+        align-items: center;
+      }
+    }
+  }
 }
 
 .ul-checklist {

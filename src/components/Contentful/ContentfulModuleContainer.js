@@ -16,6 +16,8 @@ const ContentfulModuleContainer = props => {
       description,
       numberOfItem,
       columns,
+      columnsOnTablet,
+      centerOnTablet,
       columnsOnMobile,
       centerOnMobile,
       contentAlignment,
@@ -100,8 +102,10 @@ const ContentfulModuleContainer = props => {
               columnType={columnType}
               columns={columns}
               columnsOnMobile={columnsOnMobile}
+              columnsOnTablet={columnsOnTablet}
               contentAlignment={contentAlignment}
               centerOnMobile={centerOnMobile}
+              centerOnTablet={centerOnTablet}
               gridModules={gridModules}
               gridModulesGap={isLiquiditySection ? '16px' : gridModulesGap}
               isLiquiditySection={isLiquiditySection}
@@ -154,6 +158,8 @@ ContentfulModuleContainer.propTypes = {
     centerOnMobile: PropTypes.bool,
     splitModules: PropTypes.bool,
     columnsOnMobile: PropTypes.number,
+    columnsOnTablet: PropTypes.number,
+    centerOnTablet: PropTypes.bool,
     isTrustBar: PropTypes.bool,
   }),
 }
@@ -281,7 +287,7 @@ const Modules = styled.div`
   `
       : ''}
 
-  ${({ isTrustBar, columns, columnsOnMobile, theme }) =>
+  ${({ isTrustBar, columns, columnsOnTablet, columnsOnMobile, theme }) =>
     isTrustBar
       ? `
     padding: 10px 19px;
@@ -295,6 +301,7 @@ const Modules = styled.div`
 
       @media (max-width: ${theme.device.tabletMediaMax}){
         padding: 16px 8px;
+        width: ${columnsOnTablet ? `calc(100%/${columnsOnTablet})` : '50%'};
       }
 
       @media (max-width: ${theme.device.mobileMediaMax}){
@@ -314,6 +321,7 @@ const Modules = styled.div`
     columnType,
     gridModulesGap,
     columns,
+    columnsOnTablet,
     columnsOnMobile,
     theme,
     isTrustBar,
@@ -335,10 +343,16 @@ const Modules = styled.div`
       ${columnsOnMobile && columns > 3 ? `width: 33.333%` : ''};
     }
     @media (max-width: ${theme.device.tabletMediaMax}){
-      ${columnsOnMobile && columns > 2 ? `width: 50%` : ''};
       .mobileCardGridModulesGap12 & {
         padding: 12px !important;
       }
+      width: ${
+        columnsOnTablet
+          ? `calc(100%/${columnsOnTablet})`
+          : columnsOnMobile && columns > 2
+          ? `width: 50%`
+          : ''
+      };
     }
     @media (max-width: ${theme.device.mobileMediaMax}){
       width: ${columnsOnMobile ? `calc(100%/${columnsOnMobile})` : '50%'};
@@ -367,6 +381,18 @@ const Modules = styled.div`
     }
   `
       : ''}
+
+${({ centerOnTablet, theme }) =>
+  centerOnTablet
+    ? `
+    @media(max-width: ${theme.device.tabletMediaMax}) {
+      justify-content: center;
+      .ctaModuleContainer {
+        justify-content: center;
+      }
+    }
+  `
+    : ''}
 
 ${({ centerOnMobile, theme }) =>
   centerOnMobile
