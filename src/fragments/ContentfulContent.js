@@ -290,6 +290,9 @@ export const ContentfulLayoutFeatureSliderFields = graphql`
     cta {
       ...ContentfulCtaFields
     }
+    ctaSecond {
+      ...ContentfulCtaFields
+    }
     backgroundColor
     customClass
   }

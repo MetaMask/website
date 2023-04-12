@@ -19,6 +19,7 @@ const FeatureSlider = props => {
     slideShow,
     animation,
     cta,
+    ctaSecond,
     backgroundColor,
     customClass,
     previewMode,
@@ -48,6 +49,27 @@ const FeatureSlider = props => {
       }
     }
   }, [activeItem])
+
+  const ctaContent = (
+    <>
+      {cta
+        ? contentfulModuleToComponent({
+            ...cta,
+            color: ['white', 'gray', 'default'].includes(backgroundColor)
+              ? cta.color
+              : 'white-outline',
+            previewMode,
+          })
+        : null}
+      {ctaSecond
+        ? contentfulModuleToComponent({
+            ...ctaSecond,
+            color: 'secondary',
+            previewMode,
+          })
+        : null}
+    </>
+  )
 
   const imageContent = (image, imageMobile, itemCustomClass) => (
     <>
@@ -116,15 +138,7 @@ const FeatureSlider = props => {
           : null}
       </SliderTextWrapper>
       {cta ? (
-        <CTAWrapper className="hidden-mobile">
-          {contentfulModuleToComponent({
-            ...cta,
-            color: ['white', 'gray', 'default'].includes(backgroundColor)
-              ? cta.color
-              : 'white-outline',
-            previewMode,
-          })}
-        </CTAWrapper>
+        <CTAWrapper className="hidden-mobile">{ctaContent}</CTAWrapper>
       ) : null}
     </InnerContent>
   )
@@ -177,15 +191,7 @@ const FeatureSlider = props => {
           </SliderImage>
         </FeatureSliderWrapper>
         {cta ? (
-          <CTAWrapper className="hidden-desktop">
-            {contentfulModuleToComponent({
-              ...cta,
-              color: ['white', 'gray', 'default'].includes(backgroundColor)
-                ? cta.color
-                : 'white-outline',
-              previewMode,
-            })}
-          </CTAWrapper>
+          <CTAWrapper className="hidden-desktop">{ctaContent}</CTAWrapper>
         ) : null}
       </ContentWrapper>
     </Container>
@@ -206,6 +212,7 @@ FeatureSlider.propTypes = {
   animation: PropTypes.bool,
   previewMode: PropTypes.bool,
   cta: PropTypes.object,
+  ctaSecond: PropTypes.object,
 }
 
 const Container = styled(Section)``
@@ -244,18 +251,16 @@ const Description = styled.div`
 
 const CTAWrapper = styled.div`
   display: flex;
-  row-gap: 8px;
-  column-gap: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
   margin-top: 40px;
   a {
     min-width: 160px;
   }
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     margin: 24px;
-    justify-content: center;
-  }
-  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
-    flex-wrap: wrap;
+    align-items: center;
   }
 `
 

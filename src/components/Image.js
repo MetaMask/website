@@ -40,7 +40,7 @@ const Image = props => {
           <img
             loading={lazyLoad ? 'lazy' : 'eager'}
             decoding="async"
-            src={urlImg}
+            src={urlDarkImg}
             alt={description || title}
             width="640"
             height="360"
