@@ -306,7 +306,7 @@ const SliderDescription = styled.dd`
 const SliderText = styled.dl`
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     img.sideImageOverflowRight {
-      margin-right: -40px;
+      margin-right: -20px;
     }
   }
   animation-duration: 0.5s;

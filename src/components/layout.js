@@ -64,6 +64,7 @@ Layout.propTypes = {
 export default Layout
 
 const Wrapper = styled.div`
+  overflow-x: hidden;
   ${({ h2FontSize, theme }) =>
     h2FontSize
       ? `
