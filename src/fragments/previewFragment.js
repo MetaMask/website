@@ -620,6 +620,9 @@ export const ContentfulLayoutFeatureSliderFields = gql`
     cta(preview: true) {
       ...ContentfulCtaFields
     }
+    ctaSecond(preview: true) {
+      ...ContentfulCtaFields
+    }
     backgroundColor
     customClass
   }
