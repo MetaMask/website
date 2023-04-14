@@ -14,6 +14,7 @@ const ContentfulLayoutFeatureSlider = props => {
       slideShow,
       animation,
       cta,
+      ctaSecond,
       backgroundColor,
       customClass,
       previewMode = false,
@@ -32,6 +33,7 @@ const ContentfulLayoutFeatureSlider = props => {
       slideShow={slideShow}
       animation={animation}
       cta={cta}
+      ctaSecond={ctaSecond}
       backgroundColor={backgroundColor}
       customClass={customClass}
       previewMode={previewMode}
