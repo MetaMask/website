@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
-import { useLocation } from '@reach/router'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { Section } from './StyledGeneral'
 import classnames from 'classnames'
@@ -48,9 +47,6 @@ const HeroContainerComponent = props => {
   } = props
   const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
-  const location = useLocation()
-  const pathname = location.pathname.replace(/\/?$/, '/')
-  const isNewsList = pathname === '/news/'
   const isHome = customClass?.includes('page-home')
   const isAbout = customClass?.includes('page-about')
   const isFlask = customClass?.includes('page-flask')
@@ -82,36 +78,6 @@ const HeroContainerComponent = props => {
   }
   const { heroContainer: heroContainerREF } = useContext(Context)
   const { heroContainerRef } = heroContainerREF || {}
-
-  const scrollRef = useRef(null)
-  const [scrolled, setScrolled] = useState(false)
-
-  const onScroll = () => {
-    const windowY =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop ||
-      0
-    if (
-      scrollRef.current.getBoundingClientRect().top <=
-      Number(heroContainerRef.current.offsetTop - 40)
-    ) {
-      setScrolled(true)
-    }
-
-    if (windowY <= 40) {
-      setScrolled(false)
-    }
-  }
-
-  useEffect(() => {
-    if (!isNewsList) return
-    window.addEventListener('scroll', onScroll)
-
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-    }
-  }, [])
 
   const sdkRef = useRef(null)
   const [height, setHeight] = useState(0)
@@ -157,7 +123,6 @@ const HeroContainerComponent = props => {
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor,
           [`custom-${customClass}`]: customClass,
-          [`scrolled`]: scrolled,
         })}
       >
         {isThankYou && backgroundImage ? (
@@ -254,7 +219,6 @@ const HeroContainerComponent = props => {
                   isFaq={isFaq}
                   isFlask={isFlask}
                   isSDK={isSDK}
-                  ref={scrollRef}
                 >
                   <div dangerouslySetInnerHTML={{ __html: headline }} />
                 </HeroTitle>
@@ -379,16 +343,6 @@ const HeroContainer = styled(Section)`
   &.custom-newsHero + div{
     padding-top: 64px !important;
     padding-bottom: 0;
-  }
-  &.scrolled.custom-newsHero.bg-default,
-  &.scrolled.custom-newsHero.bg-default:not(.noPaddingBottom){
-    + div{
-     padding-top: 320px !important;
-    }
-    position: fixed;
-    z-index: 2;
-    transition: all 0.5s ease;
-    padding: 24px 0 !important;
   }
 
   ${({ isThankYou }) =>
@@ -618,11 +572,6 @@ const HeroContentContainer = styled.div`
     }
   `
       : ''}
-  
-  .scrolled.custom-newsHero &{
-    transition: all 0.5s ease;
-    padding-top: 0 !important;
-  }
 `
 
 const HeroImageTextContainer = styled.div`
@@ -638,13 +587,6 @@ const HeroImageTextContainer = styled.div`
         width: 50%;
       }
     }
-  }
-
-  .scrolled.custom-newsHero &{
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.5s ease;
   }
   ${({ sideImageFlex }) =>
     sideImageFlex
@@ -713,9 +655,6 @@ const HeroTitle = styled.h1`
   .newsHero & {
     font-size: 40px !important;
     line-height: 1.2;
-  }
-  .scrolled.custom-newsHero &{
-    padding: 0;
   }
   .headline-max-width-754 & {
     max-width: 754px;
@@ -828,13 +767,6 @@ const HeroDescription = styled.div`
       }
       transition: all ease 0.5s;
     }
-  }
-
-  .scrolled.custom-newsHero & {
-    p {
-      margin-bottom: 0;
-    }
-    margin-bottom: 0;
   }
 
   .contentMaxWidth480 & {
