@@ -32,7 +32,7 @@ function ContentfulNewsCategory(props) {
             file {
               url
             }
-            fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
+            fluid(maxWidth: 1024, quality: 80, toFormat: WEBP) {
               ...GatsbyContentfulFluid_withWebp
             }
           }
