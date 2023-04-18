@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled, { withTheme } from 'styled-components'
 import TabHeader from './TabHeader'
 import TabContent from './TabContent'
@@ -15,50 +15,38 @@ const TabWrapper = props => {
     isTabParam,
   } = props
 
-  const [searchState, setSearchState] = React.useState('')
-  const [category, setCategory] = React.useState('')
+  const [activeStateId, setActiveStateId] = useState(
+    isTabParam ? '' : activeTabDefault
+  )
 
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const search = window.location?.search
-      if (search) {
-        const params = queryString.parse(search)
-        const newsCategory = params.category
-        if (newsCategory) {
-          setCategory(newsCategory)
-        }
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const { search, pathname } = window.location
+    if (search) {
+      const params = queryString.parse(search)
+      const newsCategory = params.category
+
+      if (newsCategory && isTabParam) {
+        const tabActive = tabs.find(
+          ({ label }) => encodeURIComponent(lowerCase(label)) === newsCategory
+        )
+        setActiveStateId(tabActive?.id)
+        return
       }
-      setSearchState(window.location?.pathname)
     }
-  }, [])
-
-  const tabDefaultFromParam = React.useMemo(() => {
-    if (category && isTabParam) {
-      const tabActive = tabs.find(
-        ({ label }) => encodeURIComponent(lowerCase(label)) === category
-      )
-      return tabActive?.id
-    }
-    if (searchState && isTabParam) {
-      const newsCategory = searchState.match('/news/([^/]*)/?')
+    if (pathname && isTabParam) {
+      const newsCategory = pathname.match('/news/([^/]*)/?')
       if (newsCategory) {
         const tabActive = tabs.find(
           ({ label }) =>
             encodeURIComponent(lowerCase(label)) === newsCategory[1]
         )
-        return tabActive?.id
+        setActiveStateId(tabActive?.id || activeTabDefault)
+        return
       }
     }
-    return ''
-  }, [searchState, category])
+  }, [])
 
-  React.useEffect(() => {
-    setActiveStateId(tabDefaultFromParam || activeTabDefault)
-  }, [tabDefaultFromParam])
-
-  const [activeStateId, setActiveStateId] = React.useState(
-    isTabParam ? tabDefaultFromParam : activeTabDefault
-  )
   return (
     <Wrapper>
       <TabHeader
