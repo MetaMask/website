@@ -3,7 +3,7 @@ import styled, { withTheme } from 'styled-components'
 import { Link } from 'gatsby'
 import lowerCase from 'lodash/lowerCase'
 import Context from '../../Context/ContextPage'
-const DownloadContainer = props => {
+const TabHeaderItem = props => {
   const {
     activeId,
     label,
@@ -24,11 +24,7 @@ const DownloadContainer = props => {
   if (isTabParam) {
     return (
       <Link to={`/news/${encodeURIComponent(lowerCase(label))}/`}>
-        <Item
-          typeLayout={typeLayout}
-          active={activeId === id}
-          onClick={changeTab}
-        >
+        <Item typeLayout={typeLayout} active={activeId === id}>
           {label}
         </Item>
       </Link>
@@ -41,7 +37,7 @@ const DownloadContainer = props => {
   )
 }
 
-export default withTheme(DownloadContainer)
+export default withTheme(TabHeaderItem)
 
 const Item = styled.div`
   cursor: pointer;

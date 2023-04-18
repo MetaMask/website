@@ -1,20 +1,10 @@
 import React from 'react'
-import styled, { withTheme } from 'styled-components'
 
 const TabContentItem = props => {
   const { activeId, content, id } = props
-  return <Item active={activeId === id}>{content}</Item>
+
+  if (activeId !== id) return null
+  return <>{content}</>
 }
 
-export default withTheme(TabContentItem)
-
-const Item = styled.div`
-  display: none;
-
-  ${({ active, theme }) =>
-    active
-      ? `
-  display: block
-  `
-      : ''}
-`
+export default TabContentItem

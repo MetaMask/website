@@ -95,7 +95,7 @@ export const ContentfulLayoutHeroFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -105,7 +105,7 @@ export const ContentfulLayoutHeroFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -128,7 +128,7 @@ export const ContentfulLayoutHeroFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -138,7 +138,7 @@ export const ContentfulLayoutHeroFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -164,7 +164,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1024, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -177,7 +177,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1024, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -187,7 +187,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 768, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 768, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -197,7 +197,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 768, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 768, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -220,7 +220,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -230,7 +230,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -240,7 +240,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -316,7 +316,7 @@ export const ContentfulFeatureSliderItemFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1024, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -326,7 +326,7 @@ export const ContentfulFeatureSliderItemFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1024, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -358,7 +358,7 @@ export const ContentfulTimelineFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -448,7 +448,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -459,7 +459,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -493,7 +493,7 @@ export const ContentfulCardFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1024, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -503,7 +503,7 @@ export const ContentfulCardFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1024, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1024, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -529,7 +529,7 @@ export const ContentfulCardFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -539,7 +539,7 @@ export const ContentfulCardFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -613,7 +613,7 @@ export const ContentfulEmbedFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -660,7 +660,7 @@ export const ContentfulLogoFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 480, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 480, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -677,7 +677,7 @@ export const ContentfulLogoFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 480, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 480, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
@@ -826,7 +826,7 @@ export const ContentfulNewsFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 100, toFormat: WEBP) {
+      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
         ...GatsbyContentfulFluid_withWebp
       }
     }
