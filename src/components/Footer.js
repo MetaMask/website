@@ -32,7 +32,7 @@ const StyledFooter = props => {
               </LogoWrapper>
             </Link>
           </LogoContainer>
-          <ColumnWrapper columns={4}>
+          <ColumnWrapper columns={menus.length}>
             {menus.map((menu, index) => {
               const { title, modules } = menu
               return (
@@ -89,7 +89,10 @@ StyledFooter.propTypes = {
 
 const FooterContainer = styled.div`
   width: 100%;
-  background-color: ${({ theme }) => theme.footerBg};
+  background-color: #e9ebee;
+  body.dark-mode & {
+    background-color: #3c444b;
+  }
 `
 
 const FooterInner = styled.div`

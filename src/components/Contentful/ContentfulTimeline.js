@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import ContextClientSide from '../../Context/ContextClientSide'
 import ContentWrapper from '../ContentWrapper'
 import ImageItem from '../Image'
 import { EyebrowStyle } from '../StyledGeneral'
@@ -20,8 +19,6 @@ const ContentfulTimeline = props => {
       previewMode = false,
     },
   } = props
-  const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
-  const { isDarkMode } = darkModeContextValue || {}
   const { childMarkdownRemark: { html: htmlDescription } = {} } =
     description || {}
   const { childMarkdownRemark: { html: htmlHeadline } = {} } = headline || {}
@@ -55,7 +52,8 @@ const ContentfulTimeline = props => {
               </div>
               {image ? (
                 <ImageSrc
-                  image={isDarkMode && imageDarkMode ? imageDarkMode : image}
+                  image={image}
+                  darkImage={imageDarkMode}
                   previewMode={previewMode}
                 />
               ) : null}

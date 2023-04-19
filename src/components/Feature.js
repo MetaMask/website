@@ -120,7 +120,8 @@ const FeatureComponent = props => {
           className={classnames({
             'hidden-mobile': imageMobile,
           })}
-          image={isDarkMode && imageDarkMode ? imageDarkMode : image}
+          image={image}
+          darkImage={imageDarkMode}
           widthImg={imageWidth}
           imageAlignment={imageAlignment}
           link={imageLink}
@@ -130,11 +131,8 @@ const FeatureComponent = props => {
       {imageMobile ? (
         <ImageSrc
           className={classnames('hidden-desktop')}
-          image={
-            isDarkMode && imageMobileDarkMode
-              ? imageMobileDarkMode
-              : imageMobile
-          }
+          image={imageMobile}
+          darkImage={imageMobileDarkMode}
           widthImg={imageWidth}
           imageAlignment={imageAlignment}
           link={imageLink}

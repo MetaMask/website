@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import accessiBeScript from './lib/services/accessibe'
 import livePersonScript from './lib/services/live-person'
+import checkThemeScript from './lib/services/thememode'
 import redirect from './lib/services/redirect'
 // import { MetaMaskProvider } from '@metamask/sdk-react'
 
@@ -44,6 +45,10 @@ const HTML = props => {
       </head>
       <body {...bodyAttributes}>
         {/* <MetaMaskProvider> */}
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{ __html: checkThemeScript }}
+        ></script>
         {preBodyComponents}
         <div
           key={`body`}
