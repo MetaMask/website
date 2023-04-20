@@ -170,7 +170,7 @@ const FullWidthCtaInner = styled.div`
       margin-left: auto;
       
       .dark-mode & {
-        background-color: ${({ theme }) => theme.text.dark};
+        background-color: #24292E;
       }
       
       .uninstallSurvey {
@@ -179,7 +179,7 @@ const FullWidthCtaInner = styled.div`
         text-align: left;
         background-color: #F2F4F6;
         .dark-mode & {
-          background-color: ${({ theme }) => theme.text.dark};
+          background-color: #24292E;
         }
         > div {
           padding-bottom: 16px;
@@ -239,7 +239,7 @@ const FullWidthCtaInner = styled.div`
         transition: all 0.3s ease;
         
         &:disabled {
-          background-color: ${({ theme }) => theme.text.darkGray};
+          background-color: #6A737D;
           cursor: not-allowed;
         }
         &:hover:disabled {
