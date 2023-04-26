@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
+import getWebpImage from '../lib/utils/getWebpImage'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Layout from './PageLayout'
 import { Section } from '../components/StyledGeneral'
@@ -33,8 +34,8 @@ function NewsLayout(props) {
     pageContext: { pathBuild },
   } = props
 
-  const bgUrl = news_bg?.file?.url || ''
-  const darkBgUrl = news_dark_bg?.file?.url || ''
+  const bgUrl = getWebpImage(news_bg?.file?.url)
+  const darkBgUrl = getWebpImage(news_dark_bg?.file?.url)
 
   const seoModuleConfig = {
     internal: { type: 'ContentfulSeo' },
