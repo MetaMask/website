@@ -42,11 +42,15 @@ const ConsenSysToU = ({ pageId }) => {
         <>
           <h1
             className="title"
-            dangerouslySetInnerHTML={{ __html: headerData.title || 'Terms of use' }}
+            dangerouslySetInnerHTML={{
+              __html: headerData.title || 'Terms of use',
+            }}
           />
           <h2
             className="description"
-            dangerouslySetInnerHTML={{ __html: headerData.description || 'Last Updated: ' }}
+            dangerouslySetInnerHTML={{
+              __html: headerData.description || 'Last Updated: ',
+            }}
           />
           <div dangerouslySetInnerHTML={{ __html: data || 'No Data' }} />
         </>
@@ -66,7 +70,7 @@ const Wrapper = styled.div`
 
   h1.title {
     text-align: center;
-     & > p {
+    & > p {
       margin-bottom: 0;
     }
   }
