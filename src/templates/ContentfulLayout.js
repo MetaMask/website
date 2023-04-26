@@ -9,6 +9,7 @@ import linkedInTrackingScript from '../lib/services/lintrk'
 import analyticsUninstalledScript from '../lib/services/analytics'
 import { useLocation } from '@reach/router'
 import Helmet from 'react-helmet'
+import capitalize from 'lodash/capitalize'
 
 /**
  * @name ContentfulLayout
@@ -93,10 +94,19 @@ const ContentfulLayout = props => {
 
   const allModules = [header, ...orderedPageModules, footer]
 
+  const seoData = { ...seo }
+  if (path.includes('/news/')) {
+    let category = path.match(/\/news\/(.*)\//)
+    category = category ? capitalize(category[1]) : 'Latest'
+    seoData.pageTitle = `${seoData.pageTitle} | ${category} | MetaMask`
+    seoData.pageDescription = `${seoData.pageDescription} | ${category}`
+  }
+
   return (
     <Context.Provider value={valueContext}>
       <Layout {...rest} themeColor={themeColor} h2FontSize={h2FontSize}>
-        {seo && contentfulModuleToComponent({ ...seo, pagePath: pathBuild })}
+        {seo &&
+          contentfulModuleToComponent({ ...seoData, pagePath: pathBuild })}
         {pathname.includes('/uninstalled') && (
           <Helmet
             script={[
