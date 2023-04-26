@@ -100,7 +100,6 @@ if (env.errors) {
       {
         resolve: `gatsby-plugin-sitemap`,
         options: {
-          exclude: [],
           query: `
           {
             site {
@@ -122,18 +121,44 @@ if (env.errors) {
                 }
               }
             }
+            allContentfulNewsPrivate: allContentfulNews(filter: {isPrivate: {eq: true}}) {
+              edges {
+                node {
+                  title
+                  categories {
+                    name
+                  }
+                }
+              }
+            }
+            allContentfulNewsNonCanonical: allContentfulNews(filter: {canonicalUrl: {ne: null}}) {
+              edges {
+                node {
+                  title
+                  categories {
+                    name
+                  }
+                }
+              }
+            }
           }`,
-          serialize: ({ site, allSitePage, allContentfulLayout }) => {
-            let privatePages = []
+          serialize: ({ site, allSitePage, allContentfulLayout, allContentfulNewsPrivate, allContentfulNewsNonCanonical }) => {
+            const allContentfulNews = { ...allContentfulNewsPrivate, ...allContentfulNewsNonCanonical }
+            let privatePages = ['/preview/']
             allContentfulLayout.edges.map(edge => {
               privatePages.push(edge.node.slug)
             })
 
+            allContentfulNews.edges.map((edge) => {
+              const newsUrl = getNewsUrl(edge.node);
+              privatePages.push(newsUrl);
+            });
+
             let pages = []
             const siteUrl =
               activeEnv === 'development'
-                ? 'https://metamask.consensys.net'
-                : site.siteMetadata.siteUrl
+              ? 'https://metamask.consensys.net'
+              : site.siteMetadata.siteUrl
             allSitePage.edges.map(edge => {
               if (privatePages.indexOf(edge.node.path) === -1) {
                 pages.push({
