@@ -430,6 +430,9 @@ export const ContentfulLayoutModuleContainerFields = graphql`
       ... on ContentfulTimeline {
         ...ContentfulTimelineFields
       }
+      ... on ContentfulConsenSysToU {
+        ...ContentfulConsenSysToUFields
+      }
     }
     backgroundColor
     displayHeadline
@@ -477,6 +480,17 @@ export const ContentfulConsenSysResourcesFields = graphql`
     linkText
     link
     showDate
+  }
+`
+
+export const ContentfulConsenSysToUFields = graphql`
+  fragment ContentfulConsenSysToUFields on ContentfulConsenSysToU {
+    contentful_id
+    internal {
+      type
+    }
+    title
+    pageId
   }
 `
 

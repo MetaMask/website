@@ -27,7 +27,7 @@ const Content = styled.div`
 
   ${({ typeLayout }) =>
     typeLayout === 'module'
-    ? `
+      ? `
     min-height: 200px;
     margin-top: 72px;
   `
