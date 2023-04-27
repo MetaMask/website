@@ -489,7 +489,6 @@ export const ContentfulConsenSysToUFields = graphql`
     internal {
       type
     }
-    title
     pageId
   }
 `

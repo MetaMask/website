@@ -11,6 +11,7 @@ import { ContentfulRestLink } from 'apollo-link-contentful'
 import {
   ContentfulCardQuery,
   ContentfulConsenSysResourcesQuery,
+  ContentfulConsenSysToUQuery,
   ContentfulCtaQuery,
   ContentfulEmbedQuery,
   ContentfulFaqQuery,
@@ -87,6 +88,9 @@ const mapTypeToQuery = type => {
       break
     case 'ContentfulConsenSysResources':
       query = ContentfulConsenSysResourcesQuery
+      break
+    case 'ContentfulConsenSysToU':
+      query = ContentfulConsenSysToUQuery
       break
     case 'ContentfulCta':
       query = ContentfulCtaQuery
