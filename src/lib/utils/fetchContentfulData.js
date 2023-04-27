@@ -31,6 +31,7 @@ import {
   ContentfulTimelineQuery,
   ContentfulFeatureSliderItemQuery,
   ContentfulLayoutFeatureSliderQuery,
+  ContentfulConsenSysToUQuery,
 } from '../../fragments/previewQuery'
 
 export const fetchContentfulTypename = id => {
@@ -87,6 +88,9 @@ const mapTypeToQuery = type => {
       break
     case 'ContentfulConsenSysResources':
       query = ContentfulConsenSysResourcesQuery
+      break
+    case 'ContentfulConsenSysToU':
+      query = ContentfulConsenSysToUQuery
       break
     case 'ContentfulCta':
       query = ContentfulCtaQuery
