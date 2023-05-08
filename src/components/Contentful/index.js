@@ -16,7 +16,6 @@ import ContentfulRichText from './ContentfulRichText'
 import ContentfulSeo from './ContentfulSeo'
 import ContentfulPopupAnnouncement from './ContentfulPopupAnnouncement'
 import ContentfulConsenSysResources from './ContentfulConsenSysResources'
-import ContentfulConsenSysToU from './ContentfulConsenSysToU'
 import ContentfulNewsCategory from './ContentfulNewsCategory'
 import ContentfulTimeline from './ContentfulTimeline'
 import ContentfulNewsLayout from './ContentfulNewsLayout'
@@ -45,5 +44,4 @@ export {
   ContentfulTimeline,
   ContentfulNewsLayout,
   ContentfulLayout,
-  ContentfulConsenSysToU,
 }

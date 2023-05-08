@@ -166,16 +166,6 @@ export const ContentfulConsenSysResourcesFields = gql`
   }
 `
 
-export const ContentfulConsenSysToUFields = gql`
-  fragment ContentfulConsenSysToUFields on ConsenSysToU {
-    __typename
-    sys {
-      id
-    }
-    pageId
-  }
-`
-
 export const ContentfulPopupAnnouncementFields = gql`
   fragment ContentfulPopupAnnouncementFields on PopupAnnouncement {
     __typename
@@ -645,7 +635,6 @@ export const ContentfulLayoutFeatureSliderFields = gql`
 
 export const ContentfulLayoutModuleContainerFields = gql`
   ${ContentfulCtaFields}
-  ${ContentfulConsenSysToUFields}
   ${ContentfulEmbedFields}
   ${ContentfulHubSpotFormFields}
   ${ContentfulTimelineFields}
@@ -667,7 +656,6 @@ export const ContentfulLayoutModuleContainerFields = gql`
         ...ContentfulRichTextFields
         ...ContentfulTimelineFields
         ...ContentfulModuleContainerFields
-        ...ContentfulConsenSysToUFields
       }
     }
     backgroundColor
