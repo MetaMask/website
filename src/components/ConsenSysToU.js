@@ -1,73 +1,42 @@
 import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import consensysData from '../lib/api/consensys/getData'
-import Loading from './Loading'
+import ContentWrapper from './ContentWrapper'
+import { Section } from './StyledGeneral'
 
-const ConsenSysToU = ({ pageId }) => {
-  const [loading, setLoading] = useState(true)
-  const [data, setData] = useState('')
-  const [headerData, setHeaderData] = useState({
-    title: '',
-    description: '',
-  })
-
-  useEffect(() => {
-    consensysData
-      .getToU(pageId, {
-        _fields: 'id,title,modules.rich-text,header_component',
-      })
-      .then(response => {
-        try {
-          if (response && response.modules?.length) {
-            const { content } = response.modules[0].children[0].config
-            const { title, description } = response.header_component[0]?.config
-            setData(content)
-            setHeaderData({ title, description })
-            setLoading(false)
-            return
-          }
-          setLoading(false)
-        } catch (error) {
-          setLoading(false)
-        }
-      })
-  }, [])
-
+const ConsenSysToU = ({ touData }) => {
   return (
-    <Wrapper>
-      {loading ? (
-        <Loading />
-      ) : (
-        <>
+    <Section>
+      <ContentWrapper>
+        <WrapperInner>
           <h1
             className="title"
             dangerouslySetInnerHTML={{
-              __html: headerData.title || 'Terms of use',
+              __html: touData.title || 'Terms of use',
             }}
           />
           <h2
             className="description"
             dangerouslySetInnerHTML={{
-              __html: headerData.description || 'Last Updated: ',
+              __html: touData.description || 'Last Updated: ',
             }}
           />
-          <div dangerouslySetInnerHTML={{ __html: data || 'No Data' }} />
-        </>
-      )}
-    </Wrapper>
+          <div
+            dangerouslySetInnerHTML={{ __html: touData.content || 'No Data' }}
+          />
+        </WrapperInner>
+      </ContentWrapper>
+    </Section>
   )
 }
 
 export default ConsenSysToU
 
 ConsenSysToU.propTypes = {
-  pageId: PropTypes.string.isRequired,
+  touData: PropTypes.object,
 }
 
-const Wrapper = styled.div`
-  min-height: calc(100vh - 94px);
-
+const WrapperInner = styled.div`
   h1.title {
     text-align: center;
     & > p {
@@ -82,6 +51,7 @@ const Wrapper = styled.div`
     font-size: 16px;
   }
 
+  h3,
   h4 {
     margin: 24px 0;
   }
