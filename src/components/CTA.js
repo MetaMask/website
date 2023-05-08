@@ -14,6 +14,7 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Image from './Image'
 import classnames from 'classnames'
 import get from 'lodash/get'
+import isChromium from '../lib/utils/isChromium'
 
 const CTA = props => {
   const {
@@ -114,7 +115,15 @@ const CTA = props => {
           downloadBrowsers[lowerBrowserName] ||
           downloadBrowsers['browsers-supported']
         ) {
-          setKeyBrowser(lowerBrowserName)
+          if (
+            lowerBrowserName === 'chrome' &&
+            isChromium() &&
+            downloadBrowsers['chromium']
+          ) {
+            setKeyBrowser('chromium')
+          } else {
+            setKeyBrowser(lowerBrowserName)
+          }
         } else if (downloadBrowsers['not-supported']) {
           setKeyBrowser('not-supported')
         } else {
