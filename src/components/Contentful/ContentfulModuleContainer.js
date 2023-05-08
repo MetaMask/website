@@ -39,13 +39,18 @@ const ContentfulModuleContainer = props => {
   const faqList =
     modules && modules.length
       ? modules.filter(modules =>
-          ['ContentfulFaq', 'Faq'].includes(modules.__typename)
+          ['ContentfulFaq', 'Faq'].includes(
+            previewMode ? modules.__typename : modules.internal.type
+          )
         )
       : []
   const modulesOther =
     modules && modules.length
       ? modules.filter(
-          modules => !['ContentfulFaq', 'Faq'].includes(modules.__typename)
+          modules =>
+            !['ContentfulFaq', 'Faq'].includes(
+              previewMode ? modules.__typename : modules.internal.type
+            )
         )
       : []
   const isFaq = faqList && faqList.length
@@ -151,7 +156,7 @@ export default withProcessPreviewData(parsePreviewData)(
 ContentfulModuleContainer.propTypes = {
   moduleConfig: PropTypes.shape({
     title: PropTypes.string,
-    description: PropTypes.object | PropTypes.string,
+    description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     numberOfItem: PropTypes.number,
     columns: PropTypes.number,
     contentAlignment: PropTypes.string,
@@ -309,7 +314,7 @@ const Modules = styled.div`
       }
     }
     
-    body.dark-mode & {
+    body.dark-mode && {
       background-color: #3c444b;
     }
   `
@@ -330,7 +335,7 @@ const Modules = styled.div`
       margin: -${gridModulesGap} !important;
       
       @media (max-width: ${theme.device.tabletMediaMax}){
-        .mobileCardGridModulesGap12 & {
+        .mobileCardGridModulesGap12 && {
           margin: -12px !important;
         }
       }
@@ -342,7 +347,7 @@ const Modules = styled.div`
       ${columnsOnMobile && columns > 3 ? `width: 33.333%` : ''};
     }
     @media (max-width: ${theme.device.tabletMediaMax}){
-      .mobileCardGridModulesGap12 & {
+      .mobileCardGridModulesGap12 && {
         padding: 12px !important;
       }
       width: ${

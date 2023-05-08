@@ -72,27 +72,14 @@ const FeatureSlider = props => {
   )
 
   const imageContent = (image, imageMobile, itemCustomClass) => (
-    <>
-      {image ? (
-        <ImageSrc
-          className={classnames({
-            'hidden-mobile': imageMobile,
-            [itemCustomClass]: itemCustomClass,
-          })}
-          image={image}
-          previewMode={previewMode}
-        />
-      ) : null}
-      {imageMobile ? (
-        <ImageSrc
-          className={classnames('hidden-desktop', {
-            [itemCustomClass]: itemCustomClass,
-          })}
-          image={imageMobile}
-          previewMode={previewMode}
-        />
-      ) : null}
-    </>
+    <ImageSrc
+      className={classnames({
+        [itemCustomClass]: itemCustomClass,
+      })}
+      image={image}
+      imageMobile={imageMobile}
+      previewMode={previewMode}
+    />
   )
 
   const innerContent = (
@@ -114,7 +101,7 @@ const FeatureSlider = props => {
       <SliderTextWrapper>
         {featureSliderItems
           ? featureSliderItems.map((item, index) => (
-              <SliderText className="dl-checklist fadeIn">
+              <SliderText className="dl-checklist fadeIn" key={index}>
                 <SliderTitle
                   className={classnames({
                     active: activeItem === index,
@@ -130,7 +117,7 @@ const FeatureSlider = props => {
                     <div dangerouslySetInnerHTML={{ __html: description }} />
                   )}
                 </SliderDescription>
-                <div class="hidden-desktop">
+                <div className="hidden-desktop">
                   {imageContent(item.image, item.imageMobile, item.customClass)}
                 </div>
               </SliderText>
@@ -183,6 +170,7 @@ const FeatureSlider = props => {
                     className={classnames('fadeIn', {
                       active: activeItem === index,
                     })}
+                    key={index}
                   >
                     {imageContent(item.image, item.imageMobile)}
                   </SliderImageItem>

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { graphql, StaticQuery } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import Helmet from 'react-helmet'
 import { useLocation } from '@reach/router'
 
@@ -10,7 +10,7 @@ import { useLocation } from '@reach/router'
  * @description -
  * @prop -
  */
-const SEO = props => {
+const SEO = (props) => {
   const {
     title,
     description,
@@ -25,65 +25,59 @@ const SEO = props => {
   const location = useLocation()
   const pathname = location.pathname
 
-  return (
-    <StaticQuery
-      query={siteSeoQuery}
-      render={data => {
-        const {
-          site: {
-            siteMetadata: { defaultTitle, defaultDescription, siteUrl },
-          },
-        } = data
+  const data = useStaticQuery(siteSeoQuery)
+  const {
+    site: {
+      siteMetadata: { defaultTitle, defaultDescription, siteUrl },
+    },
+  } = data
 
-        const seo = {
-          title: title || defaultTitle,
-          desc: description || defaultDescription,
-          canonicalUrl: canonicalUrl || `${siteUrl}${pagePath}`,
+  const seo = {
+    title: title || defaultTitle,
+    desc: description || defaultDescription,
+    canonicalUrl: canonicalUrl || `${siteUrl}${pagePath}`,
+  }
+  const getMetaTags = (name, value) =>
+    name && value
+      ? [
+          { name, content: value },
+          { property: `og:${name}`, content: value },
+          { name: `twitter:${name}`, content: value },
+        ]
+      : []
+  const urlImageMeta = image && image?.file?.url
+  const urlImageMetaClean =
+    urlImageMeta &&
+    typeof urlImageMeta === 'string' &&
+    urlImageMeta.startsWith('//')
+      ? `https:${urlImageMeta}`
+      : urlImageMeta
+  const meta = [
+    { property: 'og:type', content: pageType },
+    ...getMetaTags('title', seo.title),
+    ...getMetaTags('description', seo.desc),
+    ...getMetaTags('image', urlImageMetaClean),
+    pathname !== pagePath
+      ? {
+          'http-equiv': 'refresh',
+          content: `0;URL='${siteUrl}${pagePath}'`,
         }
-        const getMetaTags = (name, value) =>
-          name && value
-            ? [
-                { name, content: value },
-                { property: `og:${name}`, content: value },
-                { name: `twitter:${name}`, content: value },
-              ]
-            : []
-        const urlImageMeta = image && image?.file?.url
-        const urlImageMetaClean =
-          urlImageMeta &&
-          typeof urlImageMeta === 'string' &&
-          urlImageMeta.startsWith('//')
-            ? `https:${urlImageMeta}`
-            : urlImageMeta
-        const meta = [
-          { property: 'og:type', content: pageType },
-          ...getMetaTags('title', seo.title),
-          ...getMetaTags('description', seo.desc),
-          ...getMetaTags('image', urlImageMetaClean),
-          pathname !== pagePath
-            ? {
-                'http-equiv': 'refresh',
-                content: `0;URL='${siteUrl}${pagePath}'`,
-              }
-            : {},
-          ...(metaTags || []),
-          urlImageMetaClean
-            ? {
-                name: 'twitter:card',
-                content: 'summary_large_image',
-              }
-            : {},
-        ]
+      : {},
+    ...(metaTags || []),
+    urlImageMetaClean
+      ? {
+          name: 'twitter:card',
+          content: 'summary_large_image',
+        }
+      : {},
+  ]
 
-        const link = [
-          { rel: 'canonical', href: seo.canonicalUrl },
-          ...(linkTags || []),
-        ]
+  const link = [
+    { rel: 'canonical', href: seo.canonicalUrl },
+    ...(linkTags || []),
+  ]
 
-        return <Helmet meta={meta} link={link} title={seo.title} />
-      }}
-    />
-  )
+  return <Helmet meta={meta} link={link} title={seo.title} />
 }
 
 SEO.propTypes = {

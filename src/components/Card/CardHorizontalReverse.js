@@ -5,6 +5,7 @@ import Image from '../Image'
 import classnames from 'classnames'
 import Link from '../Link'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
+import GatsbyBackgroundImage from '../GatsbyBackgroundImage'
 
 /**
  * @name Card
@@ -38,50 +39,57 @@ const StyledCard = props => {
       <CardInner
         to={link}
         newTab={newTab}
-        backgroundColor={backgroundColor}
-        image={backgroundImage}
-        imageMobile={backgroundImageMobile}
-        contentAlignment={contentAlignment}
+        $backgroundColor={backgroundColor}
+        $image={backgroundImage}
+        $contentAlignment={contentAlignment}
         className={classnames('cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
           [customClass]: customClass,
         })}
       >
-        {image ? (
-          <ImageWrapper imageMargin={imageMargin} layoutSize={layoutSize}>
-            <ImageSrc
-              image={image}
-              darkImage={imageDarkMode}
-              previewMode={previewMode}
-            />
-          </ImageWrapper>
-        ) : null}
-        <Inner>
-          {title ? (
-            <Title contentAlignment={contentAlignment}>{title}</Title>
+        <GatsbyBackgroundImage
+          image={backgroundImage}
+          imageMobile={backgroundImageMobile}
+          previewMode={previewMode}
+        >
+          {image ? (
+            <ImageWrapper $imageMargin={imageMargin} layoutSize={layoutSize}>
+              <ImageSrc
+                image={image}
+                darkImage={imageDarkMode}
+                previewMode={previewMode}
+              />
+            </ImageWrapper>
           ) : null}
-          {description ? (
-            <Description>
-              <div dangerouslySetInnerHTML={{ __html: description }}></div>
-            </Description>
-          ) : null}
-          {hubSpotForm ? <>{contentfulModuleToComponent(hubSpotForm)}</> : null}
-          {linkText ? (
-            <CTAWrapper>
-              <span dangerouslySetInnerHTML={{ __html: linkText }} />
-            </CTAWrapper>
-          ) : null}
-          {cta ? (
-            <CTA>
-              {cta.map(cta =>
-                contentfulModuleToComponent({
-                  ...cta,
-                  buttonSize: 'hero',
-                })
-              )}
-            </CTA>
-          ) : null}
-        </Inner>
+          <Inner>
+            {title ? (
+              <Title $contentAlignment={contentAlignment}>{title}</Title>
+            ) : null}
+            {description ? (
+              <Description>
+                <div dangerouslySetInnerHTML={{ __html: description }}></div>
+              </Description>
+            ) : null}
+            {hubSpotForm ? (
+              <>{contentfulModuleToComponent(hubSpotForm)}</>
+            ) : null}
+            {linkText ? (
+              <CTAWrapper>
+                <span dangerouslySetInnerHTML={{ __html: linkText }} />
+              </CTAWrapper>
+            ) : null}
+            {cta ? (
+              <CTA>
+                {cta.map(cta =>
+                  contentfulModuleToComponent({
+                    ...cta,
+                    buttonSize: 'hero',
+                  })
+                )}
+              </CTA>
+            ) : null}
+          </Inner>
+        </GatsbyBackgroundImage>
       </CardInner>
     </Card>
   )
@@ -110,8 +118,16 @@ const Card = styled.div`
 
 const CardInner = styled(Link)`
   display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
+  overflow: hidden;
+  .gatsby-bg__content {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
   color: ${({ theme }) => theme.text.dark};
   border-radius: 24px;
 
@@ -137,16 +153,10 @@ const CardInner = styled(Link)`
   }
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     border-radius: 48px;
-    flex-direction: column;
-    text-align: center;
   }
 
-  @media (max-width: $${({ theme }) => theme.device.mobileMediaMax}){
-    align-items: center;
-  }
-
-  ${({ contentAlignment }) =>
-    contentAlignment === 'center'
+  ${({ $contentAlignment }) =>
+    $contentAlignment === 'center'
       ? `
       flex-direction: column;
       text-align: center;
@@ -155,27 +165,17 @@ const CardInner = styled(Link)`
   `
       : null}
   
-  ${({ image }) =>
-    image
-      ? ` background-image: url(${image});
-      background-size: cover;
-      height: 100%;
-      padding: 32px;
-    `
-      : ''}
-  
-  ${({ imageMobile, theme }) =>
-    imageMobile
-      ? ` 
-      @media (max-width: ${theme.device.tabletMediaMax}){
-        background-image: url(${imageMobile});
-        background-position: center;
+  ${({ $image }) =>
+    $image
+      ? `
+      .gatsby-bg__content {
+        padding: 32px;
       }
     `
       : ''}
 
-  ${({ backgroundColor }) =>
-    backgroundColor === 'white'
+  ${({ $backgroundColor }) =>
+    $backgroundColor === 'white'
       ? `
     box-shadow: 0 10px 30px 0 rgba(0,0,0,0.09);
     transition: box-shadow 200ms ease;
@@ -254,8 +254,8 @@ const Title = styled.div`
     line-height: 1.4;
   }
 
-  ${({ contentAlignment, theme }) =>
-    contentAlignment === 'center'
+  ${({ $contentAlignment, theme }) =>
+    $contentAlignment === 'center'
       ? `
       margin: 0 auto 16px;
       text-align: center;

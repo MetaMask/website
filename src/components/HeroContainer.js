@@ -11,6 +11,7 @@ import ContextClientSide from '../Context/ContextClientSide'
 import Context from '../Context/ContextPage'
 import Loadable from '@loadable/component'
 import ParseMD from './ParseMD'
+import GatsbyBackgroundImage from './GatsbyBackgroundImage'
 
 const FoxAnimation = Loadable(() => import('./FoxAnimation/'))
 
@@ -24,8 +25,6 @@ const HeroContainerComponent = props => {
     note,
     sideImage,
     sideImageDarkMode,
-    sideImageUrl,
-    sideImageDarkModeUrl,
     showLearnMore,
     eyebrow,
     eyebrowLogo,
@@ -66,7 +65,7 @@ const HeroContainerComponent = props => {
     )
   }
   const isStyleHubspot = hubSpotForm
-  const isStyleCenterSimple = contentAlignment === 'center' && !sideImageUrl
+  const isStyleCenterSimple = contentAlignment === 'center' && !sideImage
   let heroTitleFontsize = ''
   if (isStyleHubspot) {
     heroTitleFontsize = '16px'
@@ -108,7 +107,7 @@ const HeroContainerComponent = props => {
         </FavIconContainer>
       ) : null}
       <HeroContainer
-        isThankYou={isThankYou}
+        $isThankYou={isThankYou}
         sectionPadding={sectionPadding || ''}
         headlineBorderBottom={headlineBorderBottom}
         isStyleCenterSimple={isStyleCenterSimple}
@@ -125,175 +124,194 @@ const HeroContainerComponent = props => {
           [`custom-${customClass}`]: customClass,
         })}
       >
-        {isThankYou && backgroundImage ? (
-          <BackgroundImageContain>
-            <img
-              alt={headline}
-              src={
-                isDarkMode && backgroundImageDarkMode
-                  ? backgroundImageDarkMode
-                  : backgroundImage
-              }
-            />
-          </BackgroundImageContain>
-        ) : null}
-        <ContentWrapper customClass={customClass}>
-          <HeroContentContainer
-            isStyleCenterSimple={isStyleCenterSimple}
-            contentAlignment={contentAlignment}
-            bgSrc={
-              !isStyleHubspot && !sideImageFlex && !isFlask && !isSDK
-                ? isDarkMode && sideImageDarkModeUrl
-                  ? sideImageDarkModeUrl
-                  : sideImageUrl
-                : ''
-            }
-            isAbout={isAbout}
-            reverse={contentAlignment === 'right'}
-            center={sideImageFlex}
-            isInstitutions={isInstitutions}
-            isFlask={isFlask}
-            isSDK={isSDK}
-            isInstitutionalChild={isInstitutionalChild}
-            isThankYou={isThankYou}
-          >
-            <HeroImageTextContainer
-              isStyleHubspot={isStyleHubspot}
-              isHome={isHome}
-              headlineBorderBottom={headlineBorderBottom}
-              center={!sideImageFlex && !isHome}
-              sideImageFlex={sideImageFlex}
+        <GatsbyBackgroundImage
+          image={!isThankYou && backgroundImage}
+          imageDarkMode={!isThankYou && backgroundImageDarkMode}
+          previewMode={previewMode}
+          absolute
+        >
+          {isThankYou && backgroundImage ? (
+            <BackgroundImageContain>
+              <Image
+                alt={headline}
+                image={backgroundImage}
+                imageDarkMode={backgroundImageDarkMode}
+              />
+            </BackgroundImageContain>
+          ) : null}
+          <ContentWrapper customClass={customClass}>
+            <HeroContentContainer
+              isStyleCenterSimple={isStyleCenterSimple}
+              contentAlignment={contentAlignment}
+              isAbout={isAbout}
+              reverse={contentAlignment === 'right'}
+              center={sideImageFlex}
+              isInstitutions={isInstitutions}
+              isFlask={isFlask}
               isSDK={isSDK}
+              isInstitutionalChild={isInstitutionalChild}
+              isThankYou={isThankYou}
             >
-              {eyebrowLogo ? (
-                <EyebrowWrapper
-                  className={classnames({ 'hidden-mobile': eyebrowMobileLogo })}
-                  hideHeadline={hideHeadline}
-                  isFaq={isFaq}
-                >
-                  {contentfulModuleToComponent(
-                    eyebrowLogoDarkMode && isDarkMode
-                      ? {
-                          ...eyebrowLogoDarkMode,
-                          cleanStyle: true,
-                          previewMode,
-                        }
-                      : {
-                          ...eyebrowLogo,
-                          cleanStyle: true,
-                          previewMode,
-                        }
-                  )}
-                </EyebrowWrapper>
-              ) : null}
-              {eyebrowMobileLogo ? (
-                <EyebrowWrapper
-                  className={'hidden-desktop'}
-                  hideHeadline={hideHeadline}
-                  isMobileLogo={true}
-                  isFaq={isFaq}
-                >
-                  {contentfulModuleToComponent(
-                    eyebrowMobileLogoDarkMode && isDarkMode
-                      ? {
-                          ...eyebrowMobileLogoDarkMode,
-                          cleanStyle: true,
-                          previewMode,
-                        }
-                      : {
-                          ...eyebrowMobileLogo,
-                          cleanStyle: true,
-                          previewMode,
-                        }
-                  )}
-                </EyebrowWrapper>
-              ) : null}
-              {eyebrow ? (
-                <EyebrowText isSDK={isSDK}>{eyebrow}</EyebrowText>
-              ) : null}
-              {headline && (
-                <HeroTitle
+              <GatsbyBackgroundImage
+                image={
+                  !isStyleHubspot &&
+                  !sideImageFlex &&
+                  !isFlask &&
+                  !isSDK &&
+                  sideImage
+                }
+                imageDarkMode={
+                  !isStyleHubspot &&
+                  !sideImageFlex &&
+                  !isFlask &&
+                  !isSDK &&
+                  sideImageDarkMode
+                }
+                previewMode={previewMode}
+              >
+                <HeroImageTextContainer
+                  isStyleHubspot={isStyleHubspot}
+                  isHome={isHome}
                   headlineBorderBottom={headlineBorderBottom}
-                  hideHeadline={hideHeadline}
-                  fontSize={heroTitleFontsize}
-                  isFaq={isFaq}
-                  isFlask={isFlask}
+                  center={!sideImageFlex && !isHome}
+                  sideImageFlex={sideImageFlex}
                   isSDK={isSDK}
                 >
-                  <div dangerouslySetInnerHTML={{ __html: headline }} />
-                </HeroTitle>
-              )}
-              {sideImage && isSDK && !sideImageFoxAnimation ? (
-                <HeightSlide height={height} isSDK={isSDK}>
+                  {eyebrowLogo ? (
+                    <EyebrowWrapper
+                      className={classnames({
+                        'hidden-mobile': eyebrowMobileLogo,
+                      })}
+                      hideHeadline={hideHeadline}
+                      isFaq={isFaq}
+                    >
+                      {contentfulModuleToComponent(
+                        eyebrowLogoDarkMode && isDarkMode
+                          ? {
+                              ...eyebrowLogoDarkMode,
+                              cleanStyle: true,
+                              previewMode,
+                            }
+                          : {
+                              ...eyebrowLogo,
+                              cleanStyle: true,
+                              previewMode,
+                            }
+                      )}
+                    </EyebrowWrapper>
+                  ) : null}
+                  {eyebrowMobileLogo ? (
+                    <EyebrowWrapper
+                      className={'hidden-desktop'}
+                      hideHeadline={hideHeadline}
+                      isMobileLogo={true}
+                      isFaq={isFaq}
+                    >
+                      {contentfulModuleToComponent(
+                        eyebrowMobileLogoDarkMode && isDarkMode
+                          ? {
+                              ...eyebrowMobileLogoDarkMode,
+                              cleanStyle: true,
+                              previewMode,
+                            }
+                          : {
+                              ...eyebrowMobileLogo,
+                              cleanStyle: true,
+                              previewMode,
+                            }
+                      )}
+                    </EyebrowWrapper>
+                  ) : null}
+                  {eyebrow ? (
+                    <EyebrowText isSDK={isSDK}>{eyebrow}</EyebrowText>
+                  ) : null}
+                  {headline && (
+                    <HeroTitle
+                      headlineBorderBottom={headlineBorderBottom}
+                      hideHeadline={hideHeadline}
+                      fontSize={heroTitleFontsize}
+                      isFaq={isFaq}
+                      isFlask={isFlask}
+                      isSDK={isSDK}
+                    >
+                      <div dangerouslySetInnerHTML={{ __html: headline }} />
+                    </HeroTitle>
+                  )}
+                  {sideImage && isSDK && !sideImageFoxAnimation ? (
+                    <HeightSlide height={height} isSDK={isSDK}>
+                      <HeroSideImage
+                        sideImageFlex={sideImageFlex}
+                        isSDK={isSDK}
+                        ref={sdkRef}
+                      >
+                        <Image
+                          image={sideImage}
+                          darkImage={sideImageDarkMode}
+                          onLoad={handleWindowSizeChange}
+                          previewMode={previewMode}
+                        />
+                      </HeroSideImage>
+                    </HeightSlide>
+                  ) : null}
+                  {description && (
+                    <HeroDescription isFaq={isFaq}>
+                      {previewMode ? (
+                        <ParseMD>{description}</ParseMD>
+                      ) : (
+                        <div
+                          dangerouslySetInnerHTML={{ __html: description }}
+                        />
+                      )}
+                    </HeroDescription>
+                  )}
+                  {!isEmpty(ctas) && !isFlask ? (
+                    <HeroCTA>
+                      {ctas.map(cta =>
+                        contentfulModuleToComponent({
+                          ...cta,
+                          buttonSize: 'hero',
+                          previewMode,
+                        })
+                      )}
+                    </HeroCTA>
+                  ) : null}
+                  {note && <HeroNote>{note}</HeroNote>}
+                  {hubspotWrapper ? hubspotWrapper : null}
+                </HeroImageTextContainer>
+                {(sideImage || sideImageFoxAnimation) && !isSDK ? (
                   <HeroSideImage
                     sideImageFlex={sideImageFlex}
-                    isSDK={isSDK}
-                    ref={sdkRef}
+                    isStyleHubspot={isStyleHubspot}
+                    sideImageFoxAnimation={sideImageFoxAnimation}
+                    isFlask={isFlask}
                   >
-                    <Image
-                      image={sideImage}
-                      darkImage={sideImageDarkMode}
-                      onLoad={handleWindowSizeChange}
-                      previewMode={previewMode}
-                    />
+                    {sideImageFoxAnimation ? <FoxAnimation /> : null}
+                    {!sideImageFoxAnimation &&
+                    (isStyleHubspot || sideImageFlex || isFlask) ? (
+                      <Image
+                        image={sideImage}
+                        darkImage={sideImageDarkMode}
+                        lazyLoad={!isInstitutions}
+                        previewMode={previewMode}
+                      />
+                    ) : null}
                   </HeroSideImage>
-                </HeightSlide>
-              ) : null}
-              {description && (
-                <HeroDescription isFaq={isFaq}>
-                  {previewMode ? (
-                    <ParseMD>{description}</ParseMD>
-                  ) : (
-                    <div dangerouslySetInnerHTML={{ __html: description }} />
-                  )}
-                </HeroDescription>
-              )}
-              {!isEmpty(ctas) && !isFlask ? (
-                <HeroCTA>
-                  {ctas.map(cta =>
-                    contentfulModuleToComponent({
-                      ...cta,
-                      buttonSize: 'hero',
-                      previewMode,
-                    })
-                  )}
-                </HeroCTA>
-              ) : null}
-              {note && <HeroNote>{note}</HeroNote>}
-              {hubspotWrapper ? hubspotWrapper : null}
-            </HeroImageTextContainer>
-            {(sideImage || sideImageFoxAnimation) && !isSDK ? (
-              <HeroSideImage
-                sideImageFlex={sideImageFlex}
-                isStyleHubspot={isStyleHubspot}
-                sideImageFoxAnimation={sideImageFoxAnimation}
-                isFlask={isFlask}
-              >
-                {sideImageFoxAnimation ? <FoxAnimation /> : null}
-                {!sideImageFoxAnimation &&
-                (isStyleHubspot || sideImageFlex || isFlask) ? (
-                  <Image
-                    image={sideImage}
-                    darkImage={sideImageDarkMode}
-                    lazyLoad={!isInstitutions}
-                    previewMode={previewMode}
-                  />
                 ) : null}
-              </HeroSideImage>
-            ) : null}
-            {!isEmpty(ctas) && isFlask ? (
-              <HeroCTA>
-                {ctas.map(cta =>
-                  contentfulModuleToComponent({
-                    ...cta,
-                    buttonSize: 'hero',
-                    previewMode,
-                  })
-                )}
-              </HeroCTA>
-            ) : null}
-          </HeroContentContainer>
-        </ContentWrapper>
+                {!isEmpty(ctas) && isFlask ? (
+                  <HeroCTA>
+                    {ctas.map(cta =>
+                      contentfulModuleToComponent({
+                        ...cta,
+                        buttonSize: 'hero',
+                        previewMode,
+                      })
+                    )}
+                  </HeroCTA>
+                ) : null}
+              </GatsbyBackgroundImage>
+            </HeroContentContainer>
+          </ContentWrapper>
+        </GatsbyBackgroundImage>
       </HeroContainer>
       {showLearnMore ? (
         <div>
@@ -314,11 +332,13 @@ const HeroContainerComponent = props => {
 export default withTheme(HeroContainerComponent)
 
 HeroContainerComponent.propTypes = {
-  backgroundImage: PropTypes.string,
-  backgroundImageDarkMode: PropTypes.string,
+  backgroundImage: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  backgroundImageDarkMode: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
   eyebrowLogo: PropTypes.object,
   eyebrowMobileLogo: PropTypes.object,
-  sideImageUrl: PropTypes.string,
   sideImage: PropTypes.object,
   hubSpotForm: PropTypes.object,
   headline: PropTypes.string,
@@ -345,18 +365,12 @@ const HeroContainer = styled(Section)`
     padding-bottom: 0;
   }
 
-  ${({ isThankYou }) =>
-    isThankYou
+  ${({ $isThankYou }) =>
+    $isThankYou
       ? `
   z-index: 5;
   `
       : ``}
-  ${({ image }) =>
-    image
-      ? ` background-image: url(${image});
-    background-size: cover;
-   `
-      : ''}
 
   ${({ isStyleCenterSimple }) =>
     isStyleCenterSimple
@@ -409,11 +423,6 @@ const HeroContentContainer = styled.div`
   display: flex;
   margin: -10px;
   margin-top: 10px;
-  
-  & > * {
-    width: 50%;
-    padding: 10px;
-  }
 
   ${({ center }) =>
     center
@@ -426,28 +435,32 @@ const HeroContentContainer = styled.div`
   `
       : ''}
 
-  ${({ bgSrc }) =>
-    bgSrc
-      ? `
-    background-image: url(${bgSrc});
-    background-position: 100% 100%;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-  `
-      : ''}
-  
   ${({ isAbout }) =>
     isAbout
       ? `
-    background-position: 100% 0%;
-    background-size: 50%;
+    .gatsby-bg__content {
+      display: flex;
+      > * {
+        width: 50%;
+        padding: 10px;
+      }
+    }
+    .gatsby-bg__wrapper {
+      background-position: 100% 0%;
+      background-size: 50%;
+      background-repeat: no-repeat;
+    }
     ${HeroImageTextContainer} {
       padding-top: 0;
       padding-bottom: 0;
     }
   `
-      : ''}
+      : `
+      & > * {
+        width: 50%;
+        padding: 10px;
+      }
+      `}
 
   ${({ isSDK }) =>
     isSDK
@@ -486,13 +499,15 @@ const HeroContentContainer = styled.div`
   `
       : ''}
 
-  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
+  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     flex-direction: column;
-    background-position: 50% 0%;
-    background-size: 90%;
-    background-attachment: scroll;
     padding-bottom: 0;
     transition: all 0.5s ease;
+    .gatsby-bg__wrapper {
+      background-position: 50% 0%;
+      background-size: 90%;
+      background-attachment: scroll;
+    }
     ${({ isFlask }) =>
       isFlask
         ? `
@@ -508,6 +523,13 @@ const HeroContentContainer = styled.div`
       }
     `
         : ''}
+    .gatsby-bg__content {
+      flex-direction: column;
+      & > * {
+        width: 100%;
+      }
+    }
+
     & > * {
       width: 100%;
     }
@@ -545,8 +567,8 @@ const HeroContentContainer = styled.div`
   `
       : ``}
 
-  ${({ isThankYou, theme }) =>
-    isThankYou
+  ${({ $isThankYou, theme }) =>
+    $isThankYou
       ? `
     max-width: 500px;
     margin: 0 auto!important;
@@ -784,7 +806,7 @@ const HeroDescription = styled.div`
 `
 
 const HeroSideImage = styled.div`
-  display: block;
+  display: flex;
   height: 400px;
 
   ${({ sideImageFlex }) =>
@@ -823,9 +845,6 @@ const HeroSideImage = styled.div`
     width: 100vw;
     position: absolute;
     left: 0;
-    img {
-      width: 100%;
-    }
   `
       : ''}
   
@@ -1077,7 +1096,7 @@ const BackgroundImageContain = styled.div`
   right: 0;
   bottom: 0;
   top: 0;
-  img {
+  .gatsby-image-wrapper {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);

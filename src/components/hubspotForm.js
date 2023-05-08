@@ -101,8 +101,8 @@ const Wrapper = styled.div`
   }
 
   &.newsletterOnSnaps {
-    min-width: auto;
-    width: 460px;
+    width: 100%;
+    max-width: 460px;
     margin: 0 auto;
   }
 
