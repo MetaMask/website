@@ -74,12 +74,6 @@ if (env.errors) {
       {
         resolve: `gatsby-plugin-manifest`,
         options: {
-          name: 'gatsby-starter-default',
-          short_name: 'starter',
-          start_url: '/',
-          background_color: '#FFFFFF',
-          theme_color: '#333333',
-          display: 'minimal-ui',
           icon: `${__dirname}/src/images/metamask-logo.png`,
         },
       },
