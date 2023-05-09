@@ -14,7 +14,7 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Image from './Image'
 import classnames from 'classnames'
 import get from 'lodash/get'
-import isChromium from '../lib/utils/isChromium'
+import useIsChromium from '../lib/utils/isChromium'
 
 const CTA = props => {
   const {
@@ -48,6 +48,7 @@ const CTA = props => {
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
   const icon = { ...defaultIconConfig, fill: color, ...iconConfig }
   const isDownloadBrowser = !isEmpty(downloadBrowsers)
+  const isChromium = useIsChromium()
   const [delayShow, setDelayShow] = React.useState(isDownloadBrowser)
   const [showPopup, setShowPopup] = React.useState(false)
   let text = textDefault,
@@ -117,7 +118,7 @@ const CTA = props => {
         ) {
           if (
             lowerBrowserName === 'chrome' &&
-            isChromium() &&
+            isChromium &&
             downloadBrowsers['chromium']
           ) {
             setKeyBrowser('chromium')
@@ -132,7 +133,7 @@ const CTA = props => {
       }
       setDelayShow(false)
     }
-  }, [downloadBrowsers, isDownloadBrowser, lowerBrowserName])
+  }, [downloadBrowsers, isDownloadBrowser, lowerBrowserName, isChromium])
   React.useEffect(() => {
     ;(async () => {
       let isFlask = false
