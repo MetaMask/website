@@ -60,6 +60,12 @@ if (env.errors) {
         },
       },
       {
+        resolve: `gatsby-plugin-manifest`,
+        options: {
+          icon: `${__dirname}/src/images/metamask-logo.png`,
+        },
+      },
+      {
         resolve: `gatsby-source-filesystem`,
         options: {
           name: `images`,
@@ -155,9 +161,6 @@ if (env.errors) {
                 policy: [{ userAgent: '*', disallow: '/' }],
               },
       },
-      // this (optional) plugin enables Progressive Web App + Offline functionality
-      // To learn more, visit: https://gatsby.app/offline
-      // 'gatsby-plugin-offline',
     ],
   }
 }
