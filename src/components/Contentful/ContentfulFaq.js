@@ -32,6 +32,7 @@ const parsePreviewData = data => {
 
   const dataUpdate = {
     moduleConfig: {
+      contentful_id: data.sys?.id,
       previewMode: true,
       ...data,
     },
