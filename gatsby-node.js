@@ -135,7 +135,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
           if (slug === "/terms-of-use/") {
             if (!touData) return Promise.reject('Generate terms of use page error!');
-            const touUrls = ["/terms-of-use/", "/terms-of-use/standalone/"]
+            const touUrls = [slug, `${slug}standalone/`]
             touUrls.forEach((touUrl, index) => {
               createPage({
                 path: touUrl,
