@@ -12,18 +12,23 @@ import ConsenSysToU from '../components/ConsenSysToU'
 const ContentfulToULayout = props => {
   const {
     data: { header, footer, seo },
-    pageContext: { touData, pathBuild, themeColor, h2FontSize },
+    pageContext: { touData, pathBuild, themeColor, h2FontSize, isStandalone },
     path,
     ...rest
   } = props
 
   return (
     <>
-      <Layout {...rest} themeColor={themeColor} h2FontSize={h2FontSize}>
+      <Layout
+        {...rest}
+        themeColor={themeColor}
+        h2FontSize={h2FontSize}
+        isStandalone={isStandalone}
+      >
         {seo && contentfulModuleToComponent({ ...seo, pagePath: pathBuild })}
-        {contentfulModuleToComponent(header)}
+        {header && contentfulModuleToComponent(header)}
         <ConsenSysToU touData={touData} />
-        {contentfulModuleToComponent(footer)}
+        {footer && contentfulModuleToComponent(footer)}
       </Layout>
     </>
   )

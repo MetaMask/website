@@ -1657,3 +1657,11 @@ body.dark-mode {
     display: initial;
   }
 }
+
+body .acsb-trigger.acsb-ready {
+  display: none !important;
+}
+
+body.ascb-show .acsb-trigger.acsb-ready {
+  display: block !important;
+}

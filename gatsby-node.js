@@ -38,11 +38,13 @@ exports.createPages = async ({ graphql, actions }) => {
 
   let touData = undefined;
   try {
-    const touResult = await axios.get('https://content.consensys.net/wp-json/wp/v2/pages/27895?_fields=id%2Ctitle%2Cmodules.rich-text%2Cheader_component')
-    if (touResult.data) {
-      const { content } = touResult.data.modules[0].children[0].config
-      const { title, description } = touResult.data.header_component[0]?.config
-      touData = { title, description, content }
+    const touResult = await axios.get('https://content.consensys.net/wp-json/wp/v2/pages/?path=/terms-of-use/&_fields=id%2Ctitle%2Cmodules.rich-text%2Cheader_component')
+    if ( touResult.data && touResult.data[0]) {
+      const { content } = touResult.data[0].modules[0].children[0].config
+      const { title, description } = touResult.data[0].header_component[0]?.config
+      if (title, description, content) {
+        touData = { title, description, content }
+      }
     }
   } catch (error) {
     console.log('Fetch ToU data failed: ', error);
@@ -132,20 +134,24 @@ exports.createPages = async ({ graphql, actions }) => {
           }
 
           if (slug === "/terms-of-use/") {
-            if (!touData) return;
-            createPage({
-              path: slug,
-              component: path.resolve(`./src/templates/ContentfulToULayout.js`),
-              context: {
-                headerId,
-                footerId,
-                seoId,
-                touData,
-                themeColor,
-                pathBuild: slug,
-                isFaqLayout,
-                h2FontSize,
-              },
+            if (!touData) return Promise.reject('Generate terms of use page error!');
+            const touUrls = ["/terms-of-use/", "/terms-of-use/standalone/"]
+            touUrls.forEach((touUrl, index) => {
+              createPage({
+                path: touUrl,
+                component: path.resolve(`./src/templates/ContentfulToULayout.js`),
+                context: {
+                  headerId: index === 0 ? headerId : undefined,
+                  footerId: index === 0 ? footerId : undefined,
+                  seoId: index === 0 ? seoId : undefined,
+                  touData,
+                  themeColor,
+                  pathBuild: touUrl,
+                  isFaqLayout,
+                  h2FontSize,
+                  isStandalone: index === 1,
+                },
+              })
             })
             return
           }
