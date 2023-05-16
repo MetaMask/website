@@ -21,7 +21,14 @@ import queryString from 'query-string'
  * @description -
  */
 const PageLayout = props => {
-  const { location, children, themeColor, h2FontSize, ...rest } = props
+  const {
+    location,
+    children,
+    themeColor,
+    h2FontSize,
+    isStandalone,
+    ...rest
+  } = props
   const { pathname, search } = location || {}
   const [idFaqActive, setIdFaqActive] = React.useState('')
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
@@ -118,6 +125,14 @@ const PageLayout = props => {
       }
     }
   }, [pathname])
+
+  React.useEffect(() => {
+    if (isStandalone) {
+      document.body.classList.remove('ascb-show')
+    } else {
+      document.body.classList.add('ascb-show')
+    }
+  }, [])
 
   return (
     <Context.Provider value={valueContext}>
