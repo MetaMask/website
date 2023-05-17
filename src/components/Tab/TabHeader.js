@@ -50,8 +50,9 @@ const TabHeader = props => {
   return (
     <Header ref={ref} centerAlign={centerAlign} typeLayout={typeLayout}>
       <HeaderInner typeLayout={typeLayout}>
-        {items.map(item => (
+        {items.map((item, index) => (
           <TabHeaderItem
+            key={index}
             {...item}
             activeId={activeId}
             setActiveStateId={setActiveStateId}

@@ -6,6 +6,7 @@ import classnames from 'classnames'
 import Link from '../Link'
 import CTAAngleIcon from './CTAAngleIcon'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
+import GatsbyBackgroundImage from '../GatsbyBackgroundImage'
 
 /**
  * @name Card
@@ -38,48 +39,54 @@ const StyledCard = props => {
       <CardInner
         to={link}
         newTab={newTab}
-        backgroundColor={backgroundColor}
-        image={backgroundImage}
-        imageMobile={backgroundImageMobile}
-        layoutSize={layoutSize}
+        $backgroundColor={backgroundColor}
+        $layoutSize={layoutSize}
         className={classnames('custom-card-bg cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
           [customClass]: customClass,
         })}
       >
-        {image ? (
-          <ImageWrapper imageMargin={imageMargin} layoutSize={layoutSize}>
-            <ImageSrc
-              image={image}
-              darkImage={imageDarkMode}
-              previewMode={previewMode}
-            />
-          </ImageWrapper>
-        ) : null}
-        <Inner>
-          {title ? <Title layoutSize={layoutSize}>{title}</Title> : null}
-          {description ? (
-            <Description>
-              <div dangerouslySetInnerHTML={{ __html: description }}></div>
-            </Description>
+        <GatsbyBackgroundImage
+          image={backgroundImage}
+          imageMobile={backgroundImageMobile}
+          previewMode={previewMode}
+        >
+          {image ? (
+            <ImageWrapper $imageMargin={imageMargin} $layoutSize={layoutSize}>
+              <ImageSrc
+                image={image}
+                darkImage={imageDarkMode}
+                previewMode={previewMode}
+              />
+            </ImageWrapper>
           ) : null}
-          {hubSpotForm ? <>{contentfulModuleToComponent(hubSpotForm)}</> : null}
-          {linkText ? (
-            <CTAWrapper>
-              <CTAAngleIcon text={linkText} />
-            </CTAWrapper>
-          ) : null}
-          {cta ? (
-            <CTA>
-              {cta.map(cta =>
-                contentfulModuleToComponent({
-                  ...cta,
-                  buttonSize: 'hero',
-                })
-              )}
-            </CTA>
-          ) : null}
-        </Inner>
+          <Inner>
+            {title ? <Title $layoutSize={layoutSize}>{title}</Title> : null}
+            {description ? (
+              <Description>
+                <div dangerouslySetInnerHTML={{ __html: description }}></div>
+              </Description>
+            ) : null}
+            {hubSpotForm ? (
+              <>{contentfulModuleToComponent(hubSpotForm)}</>
+            ) : null}
+            {linkText ? (
+              <CTAWrapper>
+                <CTAAngleIcon text={linkText} />
+              </CTAWrapper>
+            ) : null}
+            {cta ? (
+              <CTA>
+                {cta.map(cta =>
+                  contentfulModuleToComponent({
+                    ...cta,
+                    buttonSize: 'hero',
+                  })
+                )}
+              </CTA>
+            ) : null}
+          </Inner>
+        </GatsbyBackgroundImage>
       </CardInner>
     </Card>
   )
@@ -113,29 +120,12 @@ const CardInner = styled(Link)`
       margin-left: 6px;
     }
   }
-  ${({ layoutSize, theme }) =>
-    layoutSize === 'small'
+  ${({ $layoutSize, theme }) =>
+    $layoutSize === 'small'
       ? `
       box-shadow: 0px 4px 24px ${theme.shadowCard};
   `
       : null}
-  
-  ${({ image }) =>
-    image
-      ? ` background-image: url(${image});
-      background-size: cover;
-    `
-      : ''}
-
-  ${({ imageMobile, theme }) =>
-    imageMobile
-      ? ` 
-        @media (max-width: ${theme.device.tabletMediaMax}){
-          background-image: url(${imageMobile});
-          background-position: center;
-        }
-    `
-      : ''}
 
   .cardBoxShadowNone &:not(:hover) {
     box-shadow: none;
@@ -162,17 +152,17 @@ const ImageWrapper = styled.div`
     }
   }
 
-  ${({ layoutSize }) =>
-    layoutSize === 'small'
+  ${({ $layoutSize }) =>
+    $layoutSize === 'small'
       ? `
     height: 80px;
   `
       : null}
 
-  ${({ layoutSize, theme }) =>
+  ${({ $layoutSize, theme }) =>
     `
   @media (max-width: ${theme.device.mobileMediaMax}){
-    height: ${layoutSize === 'small' ? '80px' : '96px'};
+    height: ${$layoutSize === 'small' ? '80px' : '96px'};
   }
   `}
 `
@@ -196,17 +186,17 @@ const Title = styled.div`
   font-size: 24px;
   margin-bottom: 32px;
 
-  ${({ layoutSize }) =>
-    layoutSize === 'small'
+  ${({ $layoutSize }) =>
+    $layoutSize === 'small'
       ? `
       font-size: 18px;
   `
       : null}
 
-  ${({ layoutSize, theme }) =>
+  ${({ $layoutSize, theme }) =>
     `
   @media (max-width: ${theme.device.mobileMediaMax}){
-    font-size: ${layoutSize === 'small' ? '16px' : '20px'};
+    font-size: ${$layoutSize === 'small' ? '16px' : '20px'};
   }
   `}
 `

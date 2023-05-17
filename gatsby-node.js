@@ -183,7 +183,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const contentfulNews = graphql(`
     {
       stories: allContentfulNews(
-        sort: { order: DESC, fields: publishDate }
+        sort: { publishDate: DESC }
       ) {
         edges {
           node {

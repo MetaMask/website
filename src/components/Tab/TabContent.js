@@ -7,8 +7,8 @@ const TabContent = props => {
   const { items, activeId, typeLayout } = props
   return (
     <Content typeLayout={typeLayout}>
-      {items.map(item => (
-        <TabContentItem {...item} activeId={activeId} />
+      {items.map((item, index) => (
+        <TabContentItem key={index} {...item} activeId={activeId} />
       ))}
     </Content>
   )

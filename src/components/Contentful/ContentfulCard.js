@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Card from '../Card'
-import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
 const ContentfulCard = props => {
@@ -25,11 +24,6 @@ const ContentfulCard = props => {
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
-  const bgUrl = parseContentfulAssetUrl(backgroundImage, previewMode)
-  const bgMobileUrl = parseContentfulAssetUrl(
-    backgroundImageMobile,
-    previewMode
-  )
 
   return (
     <Card
@@ -41,8 +35,8 @@ const ContentfulCard = props => {
       link={link}
       newTab={newTab}
       backgroundColor={backgroundColor}
-      backgroundImage={bgUrl || ''}
-      backgroundImageMobile={bgMobileUrl || ''}
+      backgroundImage={backgroundImage}
+      backgroundImageMobile={backgroundImageMobile}
       imageMargin={imageMargin}
       layoutType={layoutType}
       layoutSize={layoutSize}

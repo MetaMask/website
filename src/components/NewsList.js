@@ -15,7 +15,7 @@ function NewsList(props) {
 
   return (
     <>
-      {data.map(news => {
+      {data.map((news, index) => {
         const { title, subtitle, image, publishDate, authors } = news
         const newsUrl = getNewsUrl(news)
         const hasAuthors = authors && authors.length > 0
@@ -26,7 +26,7 @@ function NewsList(props) {
             return acc
           }, [])
         return (
-          <NewsListWrapper>
+          <NewsListWrapper key={index}>
             <Card
               title={title}
               image={image}

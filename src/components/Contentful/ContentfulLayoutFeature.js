@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Feature from '../Feature'
-import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
 const ContentfulLayoutFeature = props => {
@@ -44,15 +43,6 @@ const ContentfulLayoutFeature = props => {
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
-  const bgUrl = parseContentfulAssetUrl(backgroundImage, previewMode)
-  const bgDarkUrl = parseContentfulAssetUrl(
-    backgroundImageDarkMode,
-    previewMode
-  )
-  const bgMobileUrl = parseContentfulAssetUrl(
-    backgroundImageMobile,
-    previewMode
-  )
 
   return (
     <Feature
@@ -73,9 +63,9 @@ const ContentfulLayoutFeature = props => {
       newTab={newTab}
       animation={animation}
       backgroundColor={backgroundColor}
-      backgroundImage={bgUrl || ''}
-      backgroundImageDarkMode={bgDarkUrl || ''}
-      backgroundImageMobile={bgMobileUrl || ''}
+      backgroundImage={backgroundImage}
+      backgroundImageDarkMode={backgroundImageDarkMode}
+      backgroundImageMobile={backgroundImageMobile}
       headlineMarginTop0={headlineMarginTop0}
       sectionPadding={sectionPadding}
       noPaddingBottom={noPaddingBottom}

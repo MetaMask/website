@@ -27,10 +27,10 @@ const Button = props => {
       color={color}
       size={size}
       onClick={customClick}
-      gradient={buttonGradient}
+      $gradient={buttonGradient}
       className={classnames('button', className)}
       fontSize={fontSize}
-      hide={hide}
+      $hide={hide}
     >
       {iconPosition === 'start' && iconUrl ? (
         <Icon>
@@ -89,24 +89,24 @@ const Icon = styled.span`
 `
 const ButtonWrapper = styled(Link)`
   color: #fff;
-  opacity: ${({ hide }) => (hide ? 0 : 1)};
+  opacity: ${({ $hide }) => ($hide ? 0 : 1)};
   &:hover {
     .arrowAnimation:after {
       margin-left: 6px;
     }
   }
   
-  ${({ gradient, color, theme }) =>
+  ${({ $gradient, color, theme }) =>
     color && theme['button'] && theme['button'][color]
       ? `
   background: ${
-    gradient ? theme['button'][color].gradient : theme['button'][color].bg
+    $gradient ? theme['button'][color].gradient : theme['button'][color].bg
   };
   color: ${theme['button'][color].text};
   @media (min-width: ${theme.device.miniDesktop}){
     &:hover {
       background: ${
-        gradient
+        $gradient
           ? theme['button'][color].gradientHover
           : theme['button'][color].bgHover
       };

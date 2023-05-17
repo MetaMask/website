@@ -104,7 +104,11 @@ const StyledHeader = props => {
                     }}
                   />
                 ) : (
-                  <Logo src={srcLogo} alt={titleLogo} widthCustom={widthLogo} />
+                  <Logo
+                    src={srcLogo}
+                    alt={titleLogo}
+                    $widthCustom={widthLogo}
+                  />
                 )}
               </LogoWrapper>
             ) : null}
@@ -121,7 +125,7 @@ const StyledHeader = props => {
                   <Logo
                     src={logoMobile.logo.file.url}
                     alt={logoMobile.title}
-                    widthCustom={logoMobile.widthLogo}
+                    $widthCustom={logoMobile.widthLogo}
                   />
                 )}
               </LogoWrapper>
@@ -318,10 +322,10 @@ const Logo = styled.img`
   height: 100%;
   object-fit: contain;
 
-  ${({ widthCustom }) =>
-    widthCustom
+  ${({ $widthCustom }) =>
+    $widthCustom
       ? `
-      width: ${widthCustom};
+      width: ${$widthCustom};
       height: auto !important;
     `
       : ''}

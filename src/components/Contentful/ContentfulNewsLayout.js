@@ -86,29 +86,6 @@ const NewsContainer = styled(Section)`
 `
 
 const NewsContentWrapper = styled.div`
-  ${({ bgUrl, darkBgUrl }) =>
-    bgUrl || darkBgUrl
-      ? ` background-size: contain;
-      background-repeat: no-repeat;
-      background-position: bottom;
-   `
-      : ''}
-
-  ${({ bgUrl }) =>
-    bgUrl
-      ? ` background-image: url(${bgUrl});
-  `
-      : ''}
-  
-  ${({ darkBgUrl }) =>
-    darkBgUrl
-      ? ` 
-      body.dark-mode & {
-        background-image: url(${darkBgUrl});
-      }
-   `
-      : ''}
-
   & > * {
     max-width: 784px;
     margin: 0 auto;
