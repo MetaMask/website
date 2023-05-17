@@ -1645,21 +1645,21 @@ img.with-shadow {
 }
 
 img[src$='#only-light'],
-.image-light {
+div.image-light, img.image-light {
   display: initial;
 }
 img[src$='#only-dark'],
-.image-dark {
+div.image-dark, img.image-dark {
   display: none;
 }
 
 body.dark-mode {
   img[src$='#only-light'],
-  .image-light {
+  div.image-light, img.image-light {
     display: none;
   }
   img[src$='#only-dark'],
-  .image-dark {
+  div.image-dark, img.image-dark {
     display: initial;
   }
 }
