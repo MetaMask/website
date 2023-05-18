@@ -806,7 +806,7 @@ const HeroDescription = styled.div`
 `
 
 const HeroSideImage = styled.div`
-  display: flex;
+  display: block;
   height: 400px;
 
   ${({ sideImageFlex }) =>

@@ -34,6 +34,7 @@ const StyledHeader = props => {
   const [hamburgerActive, setHamburgerActive] = useState(false)
   const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
   const menuRef = useRef()
+  const buttonRef = useRef()
   const { header: headerREF } = useContext(Context)
   const { headerRef } = headerREF || {}
   const { isDarkMode, toggleTheme } = darkModeContextValue || {}
@@ -44,9 +45,10 @@ const StyledHeader = props => {
       toggleTheme()
     }
     const handleOuterClick = e => {
-      if (hamburgerActive && menuRef && menuRef.current) {
-        const ref = menuRef.current
-        if (!ref.contains(e.target) && hamburgerActive) {
+      const ref = menuRef?.current
+      const btnRef = buttonRef?.current
+      if (hamburgerActive && ref && btnRef) {
+        if (!ref.contains(e.target) && !btnRef.contains(e.target)) {
           setHamburgerActive(false)
         }
       }
@@ -137,6 +139,7 @@ const StyledHeader = props => {
             <HamburgerButton
               onClick={handleHamburgerButton}
               active={hamburgerActive}
+              ref={buttonRef}
               className="w-icon w-icon-nav-menu"
             ></HamburgerButton>
             <NavMain
