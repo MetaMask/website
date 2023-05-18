@@ -1645,22 +1645,34 @@ img.with-shadow {
 }
 
 img[src$='#only-light'],
-div.image-light, img.image-light {
+img.image-light {
   display: initial;
 }
+
+div.image-light {
+  display: block;
+}
+
 img[src$='#only-dark'],
-div.image-dark, img.image-dark {
+div.image-dark,
+img.image-dark {
   display: none;
 }
 
 body.dark-mode {
   img[src$='#only-light'],
-  div.image-light, img.image-light {
+  img.image-light,
+  div.image-light {
     display: none;
   }
+
   img[src$='#only-dark'],
-  div.image-dark, img.image-dark {
+  img.image-dark {
     display: initial;
+  }
+
+  div.image-dark {
+    display: block;
   }
 }
 
