@@ -49,7 +49,7 @@
 <url> <loc>https://metamask.io/updates/password-required/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/faqs/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/about/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
-<url> <loc>https://metamask.io/news/developers/trust-score-snap-simplifying-transactions/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/developers/trust-score-snap-simplifying-transactions-using-code-colors/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/multi-resolver-snap-solving-the-multi-resolver-issue/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/foxtagger-snap-mapping-addresses-with-user-defined-tags/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/latest/metamask-and-paypal-all-you-need-to-know-about-buying-eth/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
