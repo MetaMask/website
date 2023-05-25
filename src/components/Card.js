@@ -13,6 +13,7 @@ import CardHorizontalReverse from './Card/CardHorizontalReverse'
 import CardNews from './Card/CardNews'
 import ContextClientSide from '../Context/ContextClientSide'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
+import GatsbyBackgroundImage from './GatsbyBackgroundImage'
 
 /**
  * @name Card
@@ -80,61 +81,66 @@ const StyledCard = props => {
       <CardInner
         to={link}
         newTab={newTab}
-        backgroundColor={backgroundColor}
-        image={backgroundImage}
-        imageMobile={backgroundImageMobile}
+        $backgroundColor={backgroundColor}
+        $hasBackgroundImage={!!backgroundImage}
         className={classnames('cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
         })}
       >
-        {image ? (
-          <ImageWrapper imageMargin={imageMargin}>
-            <ImageSrc
-              image={image}
-              darkImage={imageDarkMode}
-              previewMode={previewMode}
-            />
-          </ImageWrapper>
-        ) : null}
-        <Inner isCtaType={isCtaType}>
-          <InnerContent isCtaType={isCtaType}>
-            {title ? (
-              <Title isCtaType={isCtaType} isEventType={isEventType}>
-                {title}
-              </Title>
-            ) : null}
-            {description ? (
-              <Description isEventType={isEventType}>
-                <div dangerouslySetInnerHTML={{ __html: description }}></div>
-              </Description>
-            ) : null}
-            {hubSpotForm ? (
-              <>
-                {contentfulModuleToComponent({ ...hubSpotForm, previewMode })}
-              </>
-            ) : null}
-          </InnerContent>
-          {isCtaType ? (
-            <ArrowItem>
-              <ArrowIcon />
-            </ArrowItem>
+        <GatsbyBackgroundImage
+          image={backgroundImage}
+          imageMobile={backgroundImageMobile}
+          previewMode={previewMode}
+        >
+          {image ? (
+            <ImageWrapper $imageMargin={imageMargin}>
+              <ImageSrc
+                image={image}
+                darkImage={imageDarkMode}
+                previewMode={previewMode}
+              />
+            </ImageWrapper>
           ) : null}
-          {linkText ? (
-            <CTAWrapper>
-              <span dangerouslySetInnerHTML={{ __html: linkText }} />
-            </CTAWrapper>
-          ) : null}
-          {cta ? (
-            <CTA>
-              {cta.map(cta =>
-                contentfulModuleToComponent({
-                  ...cta,
-                  previewMode,
-                })
-              )}
-            </CTA>
-          ) : null}
-        </Inner>
+          <Inner isCtaType={isCtaType}>
+            <InnerContent isCtaType={isCtaType}>
+              {title ? (
+                <Title isCtaType={isCtaType} isEventType={isEventType}>
+                  {title}
+                </Title>
+              ) : null}
+              {description ? (
+                <Description isEventType={isEventType}>
+                  <div dangerouslySetInnerHTML={{ __html: description }}></div>
+                </Description>
+              ) : null}
+              {hubSpotForm ? (
+                <>
+                  {contentfulModuleToComponent({ ...hubSpotForm, previewMode })}
+                </>
+              ) : null}
+            </InnerContent>
+            {isCtaType ? (
+              <ArrowItem>
+                <ArrowIcon />
+              </ArrowItem>
+            ) : null}
+            {linkText ? (
+              <CTAWrapper>
+                <span dangerouslySetInnerHTML={{ __html: linkText }} />
+              </CTAWrapper>
+            ) : null}
+            {cta ? (
+              <CTA>
+                {cta.map(cta =>
+                  contentfulModuleToComponent({
+                    ...cta,
+                    previewMode,
+                  })
+                )}
+              </CTA>
+            ) : null}
+          </Inner>
+        </GatsbyBackgroundImage>
       </CardInner>
     </Card>
   )
@@ -216,23 +222,27 @@ const CardInner = styled(Link)`
     }
   }
   
-  ${({ backgroundColor, theme }) =>
-    backgroundColor
+  ${({ $backgroundColor, theme }) =>
+    $backgroundColor
       ? `
     border-radius: 10px;
     height: 100%;
     padding: 24px;
+    .gatsby-bg__content {
+      border-radius: 10px;
+      padding: 24px;
+    }
 
     @media (max-width: ${theme.device.tabletMediaMax}){
-      .columnTypetag & {
+      .columnTypetag && {
         padding: 12px;
       }
     }
   `
       : ''}
 
-  ${({ backgroundColor }) =>
-    backgroundColor === 'white'
+  ${({ $backgroundColor }) =>
+    $backgroundColor === 'white'
       ? `
     box-shadow: 0 10px 30px 0 rgba(0,0,0,0.09);
     transition: box-shadow 200ms ease;
@@ -242,20 +252,17 @@ const CardInner = styled(Link)`
     }
   `
       : ''}
-  ${({ backgroundColor }) =>
-    backgroundColor === 'gray'
+  ${({ $backgroundColor }) =>
+    $backgroundColor === 'gray'
       ? `
     padding: 20px;
   `
       : ''}
-  ${({ image, theme }) =>
-    image
-      ? ` background-image: url(${image});
-      background-size: cover;
-      border-radius: 10px;
+  ${({ $hasBackgroundImage, theme }) =>
+    $hasBackgroundImage
+      ? `
       height: 100%;
-      padding: 24px;
-
+      padding: 0;
       @media (max-width: ${theme.device.tabletMediaMax}){
         .columnTypetag & {
           padding: 12px;
@@ -264,16 +271,7 @@ const CardInner = styled(Link)`
     `
       : ``}
 
-  ${({ imageMobile, theme }) =>
-    imageMobile
-      ? ` 
-      @media (max-width: ${theme.device.tabletMediaMax}){
-        background-image: url(${imageMobile});
-      }
-    `
-      : ''}
-
-  .cardBorderRadius24 & {
+  .gatsby-bg__wrapper img, .cardBorderRadius24 & {
     border-radius: 24px;
   }
 
@@ -343,11 +341,17 @@ const ImageWrapper = styled.div`
     }
   }
 
-  ${({ imageMargin }) => (imageMargin ? 'margin-left: -15px' : '')}
+  ${({ $imageMargin }) => ($imageMargin ? 'margin-left: -15px' : '')}
 `
 
 const ImageSrc = styled(Image)`
   display: block;
+  height: 100%;
+  border-radius: 5px;
+  img {
+    height: 90px;
+    object-fit: contain;
+  }
 `
 
 const Inner = styled.div`

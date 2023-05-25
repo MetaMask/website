@@ -23,11 +23,7 @@ export const parseContentfulAssetUrl = (asset, previewMode = false) => {
   // `asset.fluid|fluid.src` is from GraphQL during production page building
   // `asset.fixed|fixed.src` is from GraphQL during production page building
   // `asset.file|file.src` is from GraphQL during production page building
-  const url =
-    asset.assetUrl ||
-    (asset.fluid && asset.fluid.src) ||
-    (asset.fixed && asset.fixed.src) ||
-    (asset.file && asset.file.url)
+  const url = asset.assetUrl || (asset.file && asset.file.url)
 
   if (!url || typeof url !== 'string') return false
 

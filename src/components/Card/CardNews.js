@@ -89,11 +89,14 @@ const ImageWrapper = styled.div`
 `
 
 const ImageSrc = styled(Image)`
-  border-radius: 12px;
   display: block;
-  object-fit: cover;
   height: 100%;
   width: 100%;
+  &.gatsby-image-wrapper img {
+    border-radius: 12px;
+    height: 100%;
+    width: 100%;
+  }
 `
 
 const ContentInner = styled.div`

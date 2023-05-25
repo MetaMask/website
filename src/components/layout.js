@@ -1,4 +1,4 @@
-import { StaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, graphql } from 'gatsby'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -8,8 +8,20 @@ import globalTheme from '../lib/theme'
 import './layout.scss'
 import './animate.css'
 
-const Layout = props => {
+const Layout = (props) => {
   const { children, theme = {}, h2FontSize, themeColor } = props
+  const data = useStaticQuery(
+    graphql`
+      query {
+        site {
+          siteMetadata {
+            title
+            description
+          }
+        }
+      }
+    `
+  )
 
   return (
     <ThemeProvider theme={{ ...globalTheme, ...theme }}>
@@ -19,39 +31,22 @@ const Layout = props => {
           [`theme-${themeColor}`]: themeColor,
         })}
       >
-        <StaticQuery
-          query={graphql`
+        <Helmet
+          title={data.site.siteMetadata.title}
+          meta={[
             {
-              site {
-                siteMetadata {
-                  title
-                  description
-                }
-              }
-            }
-          `}
-          render={data => (
-            <>
-              <Helmet
-                title={data.site.siteMetadata.title}
-                meta={[
-                  {
-                    name: 'description',
-                    content: data.site.siteMetadata.description,
-                  },
-                  {
-                    name: 'keywords',
-                    content:
-                      'blockchain, entrepreneurs, innovation, venture studio',
-                  },
-                ]}
-              >
-                <html lang="en" />
-              </Helmet>
-              {children}
-            </>
-          )}
-        />
+              name: 'description',
+              content: data.site.siteMetadata.description,
+            },
+            {
+              name: 'keywords',
+              content: 'blockchain, entrepreneurs, innovation, venture studio',
+            },
+          ]}
+        >
+          <html lang="en" />
+        </Helmet>
+        {children}
       </Wrapper>
     </ThemeProvider>
   )

@@ -6,6 +6,7 @@ import classnames from 'classnames'
 import Link from '../Link'
 import CTAAngleIcon from './CTAAngleIcon'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
+import GatsbyBackgroundImage from '../GatsbyBackgroundImage'
 
 /**
  * @name Card
@@ -39,49 +40,55 @@ const StyledCard = props => {
       <CardInner
         to={link}
         newTab={newTab}
-        backgroundColor={backgroundColor}
-        image={backgroundImage}
-        imageMobile={backgroundImageMobile}
+        $backgroundColor={backgroundColor}
         className={classnames('custom-card-bg cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
           [`bg-default`]: !backgroundColor,
           [customClass]: customClass,
         })}
-        contentAlignment={contentAlignment}
+        $contentAlignment={contentAlignment}
       >
-        {image ? (
-          <ImageWrapper imageMargin={imageMargin} layoutSize={layoutSize}>
-            <ImageSrc
-              image={image}
-              darkImage={imageDarkMode}
-              previewMode={previewMode}
-            />
-          </ImageWrapper>
-        ) : null}
-        <Inner>
-          {title ? <Title>{title}</Title> : null}
-          {description ? (
-            <Description>
-              <div dangerouslySetInnerHTML={{ __html: description }}></div>
-            </Description>
+        <GatsbyBackgroundImage
+          image={backgroundImage}
+          imageMobile={backgroundImageMobile}
+          previewMode={previewMode}
+        >
+          {image ? (
+            <ImageWrapper $imageMargin={imageMargin} $layoutSize={layoutSize}>
+              <ImageSrc
+                image={image}
+                darkImage={imageDarkMode}
+                previewMode={previewMode}
+              />
+            </ImageWrapper>
           ) : null}
-          {hubSpotForm ? <>{contentfulModuleToComponent(hubSpotForm)}</> : null}
-          {linkText ? (
-            <CTAWrapper>
-              <CTAAngleIcon text={linkText} />
-            </CTAWrapper>
-          ) : null}
-          {cta ? (
-            <CTA>
-              {cta.map(cta =>
-                contentfulModuleToComponent({
-                  ...cta,
-                  buttonSize: 'hero',
-                })
-              )}
-            </CTA>
-          ) : null}
-        </Inner>
+          <Inner>
+            {title ? <Title>{title}</Title> : null}
+            {description ? (
+              <Description>
+                <div dangerouslySetInnerHTML={{ __html: description }}></div>
+              </Description>
+            ) : null}
+            {hubSpotForm ? (
+              <>{contentfulModuleToComponent(hubSpotForm)}</>
+            ) : null}
+            {linkText ? (
+              <CTAWrapper>
+                <CTAAngleIcon text={linkText} />
+              </CTAWrapper>
+            ) : null}
+            {cta ? (
+              <CTA>
+                {cta.map(cta =>
+                  contentfulModuleToComponent({
+                    ...cta,
+                    buttonSize: 'hero',
+                  })
+                )}
+              </CTA>
+            ) : null}
+          </Inner>
+        </GatsbyBackgroundImage>
       </CardInner>
     </Card>
   )
@@ -106,9 +113,9 @@ const CardInner = styled(Link)`
   border-radius: 12px;
   overflow: hidden;
   color: ${({ theme }) => theme.text.dark};
-  
-  ${({ contentAlignment }) =>
-    contentAlignment === 'left'
+
+  ${({ $contentAlignment }) =>
+    $contentAlignment === 'left'
       ? `
   flex-direction: row-reverse;
   `
@@ -120,23 +127,6 @@ const CardInner = styled(Link)`
     flex-direction: column;
   }
   `}
-  
-  ${({ image }) =>
-    image
-      ? ` background-image: url(${image});
-      background-size: cover;
-    `
-      : ''}
-  
-  ${({ imageMobile, theme }) =>
-    imageMobile
-      ? ` 
-      @media (max-width: ${theme.device.tabletMediaMax}){
-        background-image: url(${imageMobile});
-        background-position: center;
-      }
-    `
-      : ''}
 
   .cardBoxShadowNone &:not(:hover) {
     box-shadow: none;

@@ -12,7 +12,7 @@ function ContentfulNewsCategory(props) {
   const data = useStaticQuery(graphql`
     query CategoryQuery {
       stories: allContentfulNews(
-        sort: { order: DESC, fields: publishDate }
+        sort: { publishDate: DESC }
         filter: { isPrivate: { eq: false } }
       ) {
         nodes {
@@ -32,9 +32,7 @@ function ContentfulNewsCategory(props) {
             file {
               url
             }
-            fluid(maxWidth: 1024, quality: 80, toFormat: WEBP) {
-              ...GatsbyContentfulFluid_withWebp
-            }
+            gatsbyImageData(layout: CONSTRAINED, width: 1024, quality: 80, formats: [AUTO, WEBP])
           }
           isPrivate
         }

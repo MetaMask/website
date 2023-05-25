@@ -137,7 +137,7 @@ const NewsContentWrapper = styled.div`
   ${({ darkBgUrl }) =>
     darkBgUrl
       ? ` 
-      body.dark-mode & {
+      body.dark-mode && {
         background-image: url(${darkBgUrl});
       }
    `
@@ -216,7 +216,7 @@ NewsLayout.propTypes = {
       content: PropTypes.object,
       image: PropTypes.object,
       title: PropTypes.string.isRequired,
-      subtitle: PropTypes.string.isRequired,
+      subtitle: PropTypes.string,
       publishDate: PropTypes.string,
       categories: PropTypes.arrayOf(categoryProps),
       author: PropTypes.arrayOf(PropTypes.shape(PropTypes.string.isRequired)),

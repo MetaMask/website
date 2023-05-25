@@ -34,8 +34,9 @@ const SocialButtonList = () => {
 
   return (
     <ListIcon>
-      {list.map(item => (
+      {list.map((item, index) => (
         <SocialButtonItem
+          key={index}
           name={item.name}
           text={item.text}
           url={item.url + hrefState}

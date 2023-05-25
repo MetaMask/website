@@ -95,9 +95,7 @@ export const ContentfulLayoutHeroFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1920, quality: 80)
     }
     sideImageDarkMode {
       title
@@ -105,9 +103,7 @@ export const ContentfulLayoutHeroFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1920, quality: 80)
     }
     ctas {
       ...ContentfulCtaFields
@@ -128,9 +124,7 @@ export const ContentfulLayoutHeroFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1920, quality: 80)
     }
     backgroundImageDarkMode {
       title
@@ -138,9 +132,7 @@ export const ContentfulLayoutHeroFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1920, quality: 80)
     }
     customClass
   }
@@ -164,9 +156,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1024, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1024, quality: 80)
     }
     embed {
       ...ContentfulEmbedFields
@@ -177,9 +167,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1024, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1024, quality: 80)
     }
     imageMobile {
       title
@@ -187,9 +175,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 768, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 768, quality: 80)
     }
     imageMobileDarkMode {
       title
@@ -197,9 +183,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 768, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 768, quality: 80)
     }
     imageShadow
     hideImageOnMobile
@@ -220,9 +204,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1920, quality: 80)
     }
     backgroundImageDarkMode {
       title
@@ -230,9 +212,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1920, quality: 80)
     }
     backgroundImageMobile {
       title
@@ -240,9 +220,7 @@ export const ContentfulLayoutFeatureFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1920, quality: 80)
     }
     sectionPadding
     noPaddingBottom
@@ -316,9 +294,7 @@ export const ContentfulFeatureSliderItemFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1024, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1024, quality: 80)
     }
     imageMobile {
       title
@@ -326,9 +302,7 @@ export const ContentfulFeatureSliderItemFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1024, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1024, quality: 80)
     }
     hasShadow
     customClass
@@ -358,9 +332,7 @@ export const ContentfulTimelineFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1920, quality: 80)
     }
     customClass
   }
@@ -451,9 +423,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1920, quality: 80)
     }
     backgroundSize
     backgroundImage {
@@ -462,9 +432,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1920, quality: 80)
     }
   }
 `
@@ -506,9 +474,7 @@ export const ContentfulCardFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1024, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1024, quality: 80)
     }
     imageDarkMode {
       title
@@ -516,9 +482,7 @@ export const ContentfulCardFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1024, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1024, quality: 80)
     }
     imageMargin
     description {
@@ -542,9 +506,7 @@ export const ContentfulCardFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1920, quality: 80)
     }
     backgroundImageMobile {
       title
@@ -552,9 +514,7 @@ export const ContentfulCardFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1920, quality: 80)
     }
     customClass
     layoutType
@@ -626,9 +586,7 @@ export const ContentfulEmbedFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1920, quality: 80)
     }
     title
     displayTitle
@@ -673,9 +631,7 @@ export const ContentfulLogoFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 480, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 480, quality: 80)
     }
     logoDarkMode {
       title
@@ -690,9 +646,7 @@ export const ContentfulLogoFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 480, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 480, quality: 80)
     }
     link
     newTab
@@ -839,9 +793,7 @@ export const ContentfulNewsFields = graphql`
       file {
         url
       }
-      fluid(maxWidth: 1920, quality: 80, toFormat: WEBP) {
-        ...GatsbyContentfulFluid_withWebp
-      }
+      gatsbyImageData(width: 1920, quality: 80)
     }
     publishDate(formatString: "MMMM D, YYYY")
     authors {
@@ -928,6 +880,7 @@ export const ContentfulSeoFields = graphql`
       file {
         url
       }
+      gatsbyImageData(width: 768, quality: 100)
     }
   }
 `

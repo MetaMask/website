@@ -7,7 +7,7 @@ const envConfig = {
 const env = require('dotenv').config(envConfig)
 console.log('------- CURRENT ENVIRONMENT:', activeEnv.toUpperCase(), '-------')
 
-const { getNewsUrl } = require(`./src/lib/utils/news`);
+const { getNewsUrl } = require(`./src/lib/utils/news`)
 const low = require('lowlight')
 const { definer: solidityLangDef } = require('highlightjs-solidity')
 
@@ -53,8 +53,7 @@ if (env.errors) {
       },
       `gatsby-plugin-sass`,
       'gatsby-plugin-react-helmet',
-      'gatsby-plugin-sharp',
-      `gatsby-plugin-styled-components`,
+      'gatsby-plugin-styled-components',
       'gatsby-transformer-sharp',
       'gatsby-transformer-remark',
       'gatsby-plugin-root-import',
@@ -134,8 +133,8 @@ if (env.errors) {
             })
 
             allContentfulNews.edges.map((edge) => {
-              const newsUrl = getNewsUrl(edge.node);
-              privatePages.push(newsUrl);
+              const newsUrl = getNewsUrl(edge.node)
+              privatePages.push(newsUrl)
             });
 
             let pages = []
@@ -157,7 +156,15 @@ if (env.errors) {
         },
       },
       'gatsby-plugin-well-known',
-      'gatsby-plugin-preact',
+      'gatsby-plugin-image',
+      {
+        resolve: `gatsby-plugin-sharp`,
+        options: {
+          defaults: {
+            placeholder: `none`,
+          },
+        },
+      },
       {
         resolve: 'gatsby-plugin-robots-txt',
         options:

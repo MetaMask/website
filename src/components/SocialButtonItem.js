@@ -25,7 +25,7 @@ const SocialButtonItem = props => {
           <Tooltip tooltip={tooltip}>Copied</Tooltip>
         </CopyLink>
       ) : (
-        <Link ariaLabel={name} to={url} newTab>
+        <Link aria-label={name} to={url} newTab>
           <SocialIcon name={name} text={text} customColor={customColor} />
         </Link>
       )}

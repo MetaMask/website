@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useContext } from 'react'
+import React, { Fragment } from 'react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import ScrollAnimation from 'react-animate-on-scroll'
@@ -7,10 +7,10 @@ import classnames from 'classnames'
 import { EyebrowStyle, Section } from './StyledGeneral'
 import ImageItem from './Image'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
-import ContextClientSide from '../Context/ContextClientSide'
 import Embed from './Embed'
 import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
 import ParseMD from './ParseMD'
+import GatsbyBackgroundImage from './GatsbyBackgroundImage'
 
 const FeatureComponent = props => {
   const {
@@ -49,8 +49,6 @@ const FeatureComponent = props => {
     previewMode = false,
   } = props
 
-  const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
-  const { isDarkMode } = darkModeContextValue || {}
   const contentAlignLR = ['left', 'right'].includes(contentAlignment)
     ? contentAlignment
     : ''
@@ -81,8 +79,8 @@ const FeatureComponent = props => {
       ) : null}
       {featureItems && featureItems.length && !showFeatureItemsAsSlideImage ? (
         <FeatureItems>
-          {featureItems.map(m => (
-            <FeatureItem>
+          {featureItems.map((m, index) => (
+            <FeatureItem key={index}>
               {contentfulModuleToComponent({
                 ...m,
                 previewMode,
@@ -116,131 +114,145 @@ const FeatureComponent = props => {
     </>
   )
   const imageContent = (
-    <>
-      {image ? (
-        <ImageSrc
-          className={classnames({
-            'hidden-mobile': imageMobile,
-          })}
-          image={image}
-          darkImage={imageDarkMode}
-          widthImg={imageWidth}
-          imageAlignment={imageAlignment}
-          link={imageLink}
-          previewMode={previewMode}
-        />
-      ) : null}
-      {imageMobile ? (
-        <ImageSrc
-          className={classnames('hidden-desktop')}
-          image={imageMobile}
-          darkImage={imageMobileDarkMode}
-          widthImg={imageWidth}
-          imageAlignment={imageAlignment}
-          link={imageLink}
-          previewMode={previewMode}
-        />
-      ) : null}
-    </>
+    <ImageSrc
+      image={image}
+      darkImage={imageDarkMode}
+      imageMobile={imageMobile}
+      darkImageMobile={imageMobileDarkMode}
+      widthImg={imageWidth}
+      imageAlignment={imageAlignment}
+      link={imageLink}
+      previewMode={previewMode}
+    />
   )
 
   return (
     <Container
       sectionPadding={sectionPadding}
-      image={backgroundImage}
-      imageDarkMode={backgroundImageDarkMode}
-      imageMobile={backgroundImageMobile}
       className={classnames({
         noPaddingBottom: noPaddingBottom,
         removeSectionPaddingBottomOnDesktop: removeSectionPaddingBottomOnDesktop,
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
     >
-      <ContentWrapper customClass={customClass}>
-        <FeatureWrapper
-          contentAlignLR={contentAlignLR}
-          isContentAlignVertical={isContentAlignVertical}
-          alignItemsCenter={alignItemsCenter}
-          imageWidth={imageWidth}
-          backgroundColor={backgroundColor}
-          imageShadow={imageShadow}
-          hideImageOnMobile={hideImageOnMobile}
-          sectionPadding={sectionPadding}
-        >
-          {image || imageMobile ? (
-            <SideImage>
-              <Image>
-                {animation ? (
-                  <ScrollAnimation
-                    animateIn={
-                      contentAlignLR === 'right'
-                        ? 'fadeInLeftMini'
-                        : 'fadeInRightMini'
-                    }
-                    initiallyVisible
-                    animateOnce
-                    delay={0}
-                    offset={0}
-                  >
-                    {imageContent}
-                  </ScrollAnimation>
-                ) : (
-                  imageContent
-                )}
-              </Image>
-            </SideImage>
-          ) : null}
-          {embed ? (
-            <SideEmbed>
-              <Embed
-                html={embed.embed?.embed}
-                thumbnailUrl={parseContentfulAssetUrl(
-                  embed.thumbnail,
-                  previewMode
-                )}
-                playOnPopup={embed.playOnPopup}
-              />
-            </SideEmbed>
-          ) : null}
-          {featureItems &&
-          featureItems.length &&
-          showFeatureItemsAsSlideImage ? (
-            <SlideFeatureItems>
-              <SlideFeatureItemInner>
-                {featureItems.map(m => (
+      <GatsbyBackgroundImage
+        image={backgroundImage}
+        imageDarkMode={backgroundImageDarkMode}
+        imageMobile={backgroundImageMobile}
+        previewMode={previewMode}
+        mobileImageBreakpoint={'mobile'}
+        absolute
+      >
+        <ContentWrapper customClass={customClass}>
+          <FeatureWrapper
+            contentAlignLR={contentAlignLR}
+            isContentAlignVertical={isContentAlignVertical}
+            alignItemsCenter={alignItemsCenter}
+            imageWidth={imageWidth}
+            backgroundColor={backgroundColor}
+            imageShadow={imageShadow}
+            hideImageOnMobile={hideImageOnMobile}
+            sectionPadding={sectionPadding}
+          >
+            {image || imageMobile ? (
+              <SideImage>
+                <Image>
+                  {animation ? (
+                    <ScrollAnimation
+                      animateIn={
+                        contentAlignLR === 'right'
+                          ? 'fadeInLeftMini'
+                          : 'fadeInRightMini'
+                      }
+                      initiallyVisible
+                      animateOnce
+                      delay={0}
+                      offset={0}
+                    >
+                      {imageContent}
+                    </ScrollAnimation>
+                  ) : (
+                    imageContent
+                  )}
+                </Image>
+              </SideImage>
+            ) : null}
+            {embed ? (
+              <SideEmbed>
+                <Embed
+                  html={embed.embed?.embed}
+                  thumbnailUrl={parseContentfulAssetUrl(
+                    embed.thumbnail,
+                    previewMode
+                  )}
+                  playOnPopup={embed.playOnPopup}
+                />
+              </SideEmbed>
+            ) : null}
+            {featureItems &&
+            featureItems.length &&
+            showFeatureItemsAsSlideImage ? (
+              <SlideFeatureItems>
+                <SlideFeatureItemInner>
+                  {featureItems.map((m, index) => (
+                    <Fragment key={index}>
+                      {contentfulModuleToComponent({
+                        ...m,
+                        previewMode,
+                      })}
+                    </Fragment>
+                  ))}
+                </SlideFeatureItemInner>
+              </SlideFeatureItems>
+            ) : null}
+            <FeatureInner
+              withContent={withContent}
+              contentPaddingTop={contentPaddingTop}
+            >
+              {animation ? (
+                <ScrollAnimation
+                  animateIn={
+                    contentAlignLR === 'left'
+                      ? 'fadeInLeftMini'
+                      : 'fadeInRightMini'
+                  }
+                  animateOnce
+                  delay={0}
+                  offset={0}
+                >
+                  {innerContent}
+                </ScrollAnimation>
+              ) : (
+                <div>{innerContent}</div>
+              )}
+            </FeatureInner>
+            {cta && isContentAlignVertical ? (
+              <CTAWrapper>
+                {contentfulModuleToComponent({
+                  ...cta,
+                  color: ['white', 'gray', 'default'].includes(backgroundColor)
+                    ? cta.color
+                    : 'white-outline',
+                  previewMode,
+                })}
+                {ctaSecond ? (
                   <>
                     {contentfulModuleToComponent({
-                      ...m,
+                      ...ctaSecond,
+                      color: ['white', 'gray', 'default'].includes(
+                        backgroundColor
+                      )
+                        ? ctaSecond.color
+                        : 'white-outline',
                       previewMode,
                     })}
                   </>
-                ))}
-              </SlideFeatureItemInner>
-            </SlideFeatureItems>
-          ) : null}
-          <FeatureInner
-            withContent={withContent}
-            contentPaddingTop={contentPaddingTop}
-          >
-            {animation ? (
-              <ScrollAnimation
-                animateIn={
-                  contentAlignLR === 'left'
-                    ? 'fadeInLeftMini'
-                    : 'fadeInRightMini'
-                }
-                animateOnce
-                delay={0}
-                offset={0}
-              >
-                {innerContent}
-              </ScrollAnimation>
-            ) : (
-              <div>{innerContent}</div>
-            )}
-          </FeatureInner>
-          {cta && isContentAlignVertical ? (
-            <CTAWrapper>
+                ) : null}
+              </CTAWrapper>
+            ) : null}
+          </FeatureWrapper>
+          {cta && !isContentAlignVertical ? (
+            <CTAWrapper className="hidden-desktop">
               {contentfulModuleToComponent({
                 ...cta,
                 color: ['white', 'gray', 'default'].includes(backgroundColor)
@@ -263,30 +275,8 @@ const FeatureComponent = props => {
               ) : null}
             </CTAWrapper>
           ) : null}
-        </FeatureWrapper>
-        {cta && !isContentAlignVertical ? (
-          <CTAWrapper className="hidden-desktop">
-            {contentfulModuleToComponent({
-              ...cta,
-              color: ['white', 'gray', 'default'].includes(backgroundColor)
-                ? cta.color
-                : 'white-outline',
-              previewMode,
-            })}
-            {ctaSecond ? (
-              <>
-                {contentfulModuleToComponent({
-                  ...ctaSecond,
-                  color: ['white', 'gray', 'default'].includes(backgroundColor)
-                    ? ctaSecond.color
-                    : 'white-outline',
-                  previewMode,
-                })}
-              </>
-            ) : null}
-          </CTAWrapper>
-        ) : null}
-      </ContentWrapper>
+        </ContentWrapper>
+      </GatsbyBackgroundImage>
     </Container>
   )
 }
@@ -304,31 +294,7 @@ FeatureComponent.propTypes = {
   previewMode: PropTypes.bool,
 }
 
-const Container = styled(Section)`
-  ${({ image }) =>
-    image
-      ? ` background-image: url(${image});
-      background-size: cover;
-      background-position: center;
-      height: 100%;
-    `
-      : ''}
-  .dark-mode & {
-    ${({ imageDarkMode }) =>
-      imageDarkMode
-        ? ` background-image: url(${imageDarkMode});
-    `
-        : ''}
-  }
-  ${({ imageMobile, theme }) =>
-    imageMobile
-      ? ` 
-      @media (max-width: ${theme.device.mobileMediaMax}){
-        background-image: url(${imageMobile});
-      }
-    `
-      : ''}
-`
+const Container = styled(Section)``
 const Image = styled.div`
   display: block;
   width: 100%;
@@ -362,10 +328,6 @@ const SideImage = styled.div`
     }
   }
 
-  .snapsLiveMetaMaskFlask & {
-    padding: 0;
-  }
-
   .sideImageMaxWidth667 & {
     max-width: 667px;
   }
@@ -388,22 +350,16 @@ const SideEmbed = styled.div`
   }
 `
 const ImageSrc = styled(ImageItem)`
-  display: block;
   margin: 0 auto;
   max-width: 100%;
   width: auto;
   height: auto;
-  
-  .imageWidth280 & {
-    width: 280px;
+
+  &.gatsby-image-wrapper, img& {
+    display: block;
+    overflow: visible;
   }
 
-  @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-    .imageMobileMaxWidth180 & {
-      max-width: 180px;
-    }
-  }
-  
   ${({ widthImg, theme }) =>
     widthImg
       ? `
@@ -437,7 +393,7 @@ const Headline = styled.h2`
     display: none;
   `
       : ''}
-      
+  
   ${({ headlineMarginTop0 }) =>
     headlineMarginTop0 ? 'margin-top: 0;' : 'margin-top: 40px;'}
 
@@ -464,7 +420,7 @@ const Headline = styled.h2`
 const Description = styled.div`
   display: block;
 
-  .descriptionMinusSectionPadding & {
+  .descriptionMinusSectionPadding && {
     @media (min-width: ${({ theme }) => theme.device.tablet}) {
       ${({ sectionPadding }) =>
         sectionPadding
@@ -610,7 +566,7 @@ const FeatureWrapper = styled.div`
     transition: all 0.5s ease;
 
     @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
-    font-size: 46px;
+      font-size: 46px;
     }
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       font-size: 34px !important;

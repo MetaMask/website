@@ -32,8 +32,12 @@ const PaginationWrapper = props => {
           className="n-icon icon-arrow-left-thin"
         />
       ) : null}
-      {list.map(item => (
-        <Item active={active === item} onClick={() => handleClickPage(item)}>
+      {list.map((item, index) => (
+        <Item
+          key={index}
+          active={active === item}
+          onClick={() => handleClickPage(item)}
+        >
           {item}
         </Item>
       ))}
