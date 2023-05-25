@@ -20,8 +20,6 @@ ContentWrapper.propTypes = {
 const Container = styled.div`
   padding-right: 20px;
   padding-left: 20px;
-  display: flex;
-  width: 100%;
 
   &.storiesOnNewsDetail {
     margin-bottom: 96px;

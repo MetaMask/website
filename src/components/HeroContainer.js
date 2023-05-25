@@ -82,14 +82,14 @@ const HeroContainerComponent = props => {
   const [height, setHeight] = useState(0)
 
   useEffect(() => {
-    if (isSDK && sdkRef.current?.clientHeight) {
+    if (isSDK && sdkRef.current) {
       handleWindowSizeChange()
       window.addEventListener('resize', handleWindowSizeChange)
       return () => {
         window.removeEventListener('resize', handleWindowSizeChange)
       }
     }
-  }, [sdkRef.current?.clientHeight])
+  }, [sdkRef.current])
 
   const handleWindowSizeChange = () => {
     setHeight(sdkRef.current.clientHeight + 48)
@@ -150,7 +150,7 @@ const HeroContainerComponent = props => {
               isFlask={isFlask}
               isSDK={isSDK}
               isInstitutionalChild={isInstitutionalChild}
-              isThankYou={isThankYou}
+              $isThankYou={isThankYou}
             >
               <GatsbyBackgroundImage
                 image={
@@ -247,7 +247,6 @@ const HeroContainerComponent = props => {
                         <Image
                           image={sideImage}
                           darkImage={sideImageDarkMode}
-                          onLoad={handleWindowSizeChange}
                           previewMode={previewMode}
                         />
                       </HeroSideImage>
@@ -884,8 +883,8 @@ const HeroSideImage = styled.div`
 
   .mmi-fireblocks-hero & img {
     @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
-        padding-left: 60px;
-      }
+      padding-left: 60px;
+    }
   }
 
   .removeShadowAndRadius & img {

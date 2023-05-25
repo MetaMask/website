@@ -1644,7 +1644,7 @@ img.with-shadow {
   }
 }
 
-img[src$='#only-light'],
+img[src$="#only-light"],
 img.image-light {
   display: initial;
 }
@@ -1654,8 +1654,8 @@ div.image-light {
 }
 
 img[src$='#only-dark'],
-div.image-dark,
-img.image-dark {
+div.image-dark.image-dark,
+img.image-dark.image-dark {
   display: none;
 }
 

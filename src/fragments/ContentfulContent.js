@@ -876,6 +876,7 @@ export const ContentfulSeoFields = graphql`
       file {
         url
       }
+      gatsbyImageData(width: 768, quality: 100)
     }
   }
 `
