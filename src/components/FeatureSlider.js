@@ -317,11 +317,19 @@ const SliderImageItem = styled.div`
   }
 `
 const ImageSrc = styled(ImageItem)`
-  display: block;
   margin: 0 auto;
   max-width: 100%;
   width: auto;
   height: auto;
+
+  && {
+    display: flex;
+  }
+
+  && img {
+    margin-left: auto;
+    margin-right: auto;
+  }
 `
 const FeatureSliderInner = styled.div`
   width: 50%;

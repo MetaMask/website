@@ -345,11 +345,15 @@ const SideEmbed = styled.div`
   }
 `
 const ImageSrc = styled(ImageItem)`
-  display: block;
   margin: 0 auto;
   max-width: 100%;
   width: auto;
   height: auto;
+
+  &.gatsby-image-wrapper, img& {
+    display: block;
+    overflow: visible;
+  }
 
   ${({ widthImg, theme }) =>
     widthImg
@@ -411,7 +415,7 @@ const Headline = styled.h2`
 const Description = styled.div`
   display: block;
 
-  .descriptionMinusSectionPadding & {
+  .descriptionMinusSectionPadding && {
     @media (min-width: ${({ theme }) => theme.device.tablet}) {
       ${({ sectionPadding }) =>
         sectionPadding
