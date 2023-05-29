@@ -263,7 +263,7 @@ const HeroContainerComponent = props => {
                       )}
                     </HeroDescription>
                   )}
-                  {!isEmpty(ctas) && !isFlask ? (
+                  {!isEmpty(ctas) && !isFlask && !isHome ? (
                     <HeroCTA>
                       {ctas.map(cta =>
                         contentfulModuleToComponent({
@@ -272,6 +272,17 @@ const HeroContainerComponent = props => {
                           previewMode,
                         })
                       )}
+                    </HeroCTA>
+                  ) : null}
+                  {!isEmpty(ctas) && isHome ? (
+                    <HeroCTA>
+                      {
+                        contentfulModuleToComponent({
+                          ...ctas[ctas.length > 1 && typeof window !== 'undefined' && window.ethereum ? 1 : 0],
+                          buttonSize: 'hero',
+                          previewMode,
+                        })
+                      }
                     </HeroCTA>
                   ) : null}
                   {note && <HeroNote>{note}</HeroNote>}
@@ -807,6 +818,10 @@ const HeroDescription = styled.div`
 const HeroSideImage = styled.div`
   display: block;
   height: 400px;
+
+  .gatsby-image-wrapper {
+    overflow: visible;
+  }
 
   ${({ sideImageFlex }) =>
     sideImageFlex
