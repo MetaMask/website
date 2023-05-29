@@ -8,7 +8,7 @@ import globalTheme from '../lib/theme'
 import './layout.scss'
 import './animate.css'
 
-const Layout = (props) => {
+const Layout = props => {
   const { children, theme = {}, h2FontSize, themeColor } = props
   const data = useStaticQuery(
     graphql`
