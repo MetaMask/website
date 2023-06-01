@@ -825,6 +825,10 @@ const HeroSideImage = styled.div`
   display: block;
   height: 400px;
 
+  .gatsby-image-wrapper {
+    overflow: visible;
+  }
+
   ${({ sideImageFlex }) =>
     sideImageFlex
       ? `
