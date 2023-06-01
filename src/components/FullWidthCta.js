@@ -332,7 +332,6 @@ const CTAWrapper = styled.div`
   
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     .button {
-      width: 100%;
       margin: 0 0 16px 0;
     }
   }
