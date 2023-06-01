@@ -35,7 +35,8 @@ const Container = styled.div`
   }
 
   &.sideImageOverflow,
-  &.sideImageOverflowRight {
+  &.sideImageOverflowRight,
+  &.sideImageOverflowAll {
     @media (min-width: ${({ theme }) =>
         theme.device.tablet}) and (max-width: ${({ theme }) =>
         theme.device.twoKResolutionMax}) {
@@ -89,6 +90,19 @@ const ContainerInner = styled.div`
         theme.device.miniDesktopMediaMax}) {
       max-width: 100% !important;
       padding-left: max(calc((100vw - 728px) / 2), 20px);
+    }
+  }
+  .sideImageOverflowAll & {
+    @media (min-width: ${({ theme }) =>
+        theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
+        theme.device.twoKResolutionMax}) {
+      max-width: 100% !important;
+    }
+
+    @media (min-width: ${({ theme }) =>
+        theme.device.tablet}) and (max-width: ${({ theme }) =>
+        theme.device.miniDesktopMediaMax}) {
+      max-width: 100% !important;
     }
   }
 
