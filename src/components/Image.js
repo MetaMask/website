@@ -105,6 +105,8 @@ const LinkImage = styled(Link)`
 const StyledGatsbyImage = styled(GatsbyImage)`
   &.gatsby-image-wrapper img {
     width: auto;
+    height: auto;
+    max-height: 100%;
     max-width: 100%;
   }
 
