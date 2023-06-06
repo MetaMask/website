@@ -567,7 +567,6 @@ const HeroContentContainer = styled.div`
 
         .mmi-fireblocks-hero & {
           height: 30px;
-          margin: 0 !important;
         }
       }
     }
@@ -576,6 +575,10 @@ const HeroContentContainer = styled.div`
       ${EyebrowWrapper} {
         img {
           margin: 16px auto !important;
+
+          .mmi-fireblocks-hero & {
+            margin: 16px 0 0 0 !important;
+          }
         }
       }
     }
