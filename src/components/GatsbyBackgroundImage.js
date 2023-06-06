@@ -145,4 +145,5 @@ const Content = styled.div`
   position: relative;
   place-items: center;
   display: grid;
+  height: fit-content;
 `
