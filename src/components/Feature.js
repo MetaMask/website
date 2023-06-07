@@ -57,7 +57,9 @@ const FeatureComponent = props => {
   const isContentAlignVertical = contentAlignment === 'vertical'
   const innerContent = (
     <>
-      {eyebrow ? <EyebrowStyle>{eyebrow}</EyebrowStyle> : null}
+      {eyebrow ? (
+        <EyebrowStyle dangerouslySetInnerHTML={{ __html: eyebrow }} />
+      ) : null}
       {headline ? (
         <Headline
           hasEyebrow={eyebrow}
@@ -354,6 +356,9 @@ const SideImage = styled.div`
     }
     .sideImageOverflowRight & {
       margin-right: -40px;
+    }
+    .removeOverflowBelowMd & {
+      margin-right: unset;
     }
   }
 

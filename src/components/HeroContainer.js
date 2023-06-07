@@ -532,6 +532,10 @@ const HeroContentContainer = styled.div`
         height: 40px;
         width: auto;
         margin: 0 !important;
+
+        .mmi-fireblocks-hero & {
+          height: 30px;
+        }
       }
     }
     
@@ -539,6 +543,10 @@ const HeroContentContainer = styled.div`
       ${EyebrowWrapper} {
         img {
           margin: 16px auto !important;
+
+          .mmi-fireblocks-hero & {
+            margin: 16px 0 0 0 !important;
+          }
         }
       }
     }
@@ -726,8 +734,11 @@ const HeroTitle = styled.h1`
     line-height: 43px;
   }
   @media (min-width: ${({ theme }) => theme.device.desktop}) {
-    .mmi-fireblocks-hero & {
+    .mmi-fireblocks-access-hero & {
       width: 480px;
+    }
+    .mmi-fireblocks-hero & {
+      width: 540px;
     }
   }
 `
@@ -772,6 +783,12 @@ const HeroDescription = styled.div`
   .contentMaxWidth480 & {
     @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
       max-width: 480px;
+    }
+  }
+
+  .mmi-fireblocks-hero & {
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      width: 500px;
     }
   }
 
@@ -853,9 +870,14 @@ const HeroSideImage = styled.div`
       }
 
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
-        margin-right: -40px;
-        width: calc(100% + 40px);
-      } 
+      margin-right: -40px;
+      width: calc(100% + 40px);
+
+      .removeOverflowBelowMd & {
+        margin-right: unset;
+        width: 100%;
+      }
+    } 
   }
   .sideImageMobileOverflowHiddenBottom100 & {
     @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
@@ -863,9 +885,12 @@ const HeroSideImage = styled.div`
     }
   }
 
-  .mmi-fireblocks-hero & img {
-    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+  @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+    .mmi-fireblocks-access-hero & img {
       padding-left: 60px;
+    }
+    .mmi-fireblocks-hero & img {
+      padding-left: 120px;
     }
   }
 
