@@ -31,6 +31,7 @@ const ContentfulLayoutHero = props => {
       headlineBorderBottom,
       isFaq,
       sectionPadding,
+      contentful_id,
       previewMode = false,
       customClass,
     },
@@ -64,6 +65,7 @@ const ContentfulLayoutHero = props => {
       sideImageFlex={sideImageFlex}
       sideImageFoxAnimation={sideImageFoxAnimation}
       ctas={ctas}
+      contentfulId={contentful_id}
       customClass={customClass}
       previewMode={previewMode}
     />
