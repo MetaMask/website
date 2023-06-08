@@ -18,6 +18,7 @@
     "lint:css": "stylelint './src/**/*.js'"
   },
   "dependencies": {
+    "@contentful/live-preview": "^2.4.1",
     "@loadable/component": "^5.14.1",
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",

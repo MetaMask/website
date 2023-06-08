@@ -1,5 +1,9 @@
 import PropTypes from 'prop-types'
 import React, { useContext, useEffect, useRef, useState } from 'react'
+import {
+  useContentfulLiveUpdates,
+  useContentfulInspectorMode,
+} from '@contentful/live-preview/react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
@@ -41,11 +45,14 @@ const HeroContainerComponent = props => {
     sideImageFoxAnimation,
     isFaq,
     sectionPadding,
+    contentfulId,
     customClass,
     previewMode = false,
   } = props
   const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
+  const inspectorProps = useContentfulInspectorMode()
+
   const isHome = customClass?.includes('page-home')
   const isAbout = customClass?.includes('page-about')
   const isFlask = customClass?.includes('page-flask')
@@ -80,6 +87,13 @@ const HeroContainerComponent = props => {
 
   const sdkRef = useRef(null)
   const [height, setHeight] = useState(0)
+
+  const data = useContentfulLiveUpdates({
+    ...props,
+    sys: { id: contentfulId },
+  });
+
+  console.log(data);
 
   useEffect(() => {
     if (isSDK && sdkRef.current) {
@@ -225,7 +239,7 @@ const HeroContainerComponent = props => {
                   {eyebrow ? (
                     <EyebrowText isSDK={isSDK}>{eyebrow}</EyebrowText>
                   ) : null}
-                  {headline && (
+                  {data.headline && (
                     <HeroTitle
                       headlineBorderBottom={headlineBorderBottom}
                       hideHeadline={hideHeadline}
@@ -234,7 +248,13 @@ const HeroContainerComponent = props => {
                       isFlask={isFlask}
                       isSDK={isSDK}
                     >
-                      <div dangerouslySetInnerHTML={{ __html: headline }} />
+                      <div
+                        {...inspectorProps({
+                          entryId: contentfulId,
+                          fieldId: 'headline',
+                        })}
+                        dangerouslySetInnerHTML={{ __html: data.headline }}
+                      />
                     </HeroTitle>
                   )}
                   {sideImage && isSDK && !sideImageFoxAnimation ? (
@@ -276,13 +296,17 @@ const HeroContainerComponent = props => {
                   ) : null}
                   {!isEmpty(ctas) && isHome ? (
                     <HeroCTA>
-                      {
-                        contentfulModuleToComponent({
-                          ...ctas[ctas.length > 1 && typeof window !== 'undefined' && window.ethereum ? 1 : 0],
-                          buttonSize: 'hero',
-                          previewMode,
-                        })
-                      }
+                      {contentfulModuleToComponent({
+                        ...ctas[
+                          ctas.length > 1 &&
+                          typeof window !== 'undefined' &&
+                          window.ethereum
+                            ? 1
+                            : 0
+                        ],
+                        buttonSize: 'hero',
+                        previewMode,
+                      })}
                     </HeroCTA>
                   ) : null}
                   {note && <HeroNote>{note}</HeroNote>}
