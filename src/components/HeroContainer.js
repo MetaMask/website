@@ -1,9 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import {
-  useContentfulLiveUpdates,
-  useContentfulInspectorMode,
-} from '@contentful/live-preview/react'
+import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
@@ -87,13 +84,6 @@ const HeroContainerComponent = props => {
 
   const sdkRef = useRef(null)
   const [height, setHeight] = useState(0)
-
-  const data = useContentfulLiveUpdates({
-    ...props,
-    sys: { id: contentfulId },
-  });
-
-  console.log(data);
 
   useEffect(() => {
     if (isSDK && sdkRef.current) {
@@ -239,7 +229,7 @@ const HeroContainerComponent = props => {
                   {eyebrow ? (
                     <EyebrowText isSDK={isSDK}>{eyebrow}</EyebrowText>
                   ) : null}
-                  {data.headline && (
+                  {headline && (
                     <HeroTitle
                       headlineBorderBottom={headlineBorderBottom}
                       hideHeadline={hideHeadline}
@@ -253,7 +243,7 @@ const HeroContainerComponent = props => {
                           entryId: contentfulId,
                           fieldId: 'headline',
                         })}
-                        dangerouslySetInnerHTML={{ __html: data.headline }}
+                        dangerouslySetInnerHTML={{ __html: headline }}
                       />
                     </HeroTitle>
                   )}

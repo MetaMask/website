@@ -1,6 +1,7 @@
 import qs from 'query-string'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { useContentfulLiveUpdates } from '@contentful/live-preview/react'
 import PreviewLoading from '../components/PreviewLoading'
 import {
   convertContentfulPreviewTypename,
@@ -10,19 +11,13 @@ import {
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Layout from '../templates/PageLayout'
 
-class PreviewPage extends React.Component {
-  state = {
-    loading: true,
-    moduleConfig: null,
-    error: null,
-  }
+const PreviewPage = () => {
+  const [loading, setLoading] = useState(true)
+  const [moduleConfig, setModuleConfig] = useState(null)
+  const [error, setError] = useState(null)
 
-  componentDidMount() {
-    this.getModule()
-  }
-
-  getModule = async () => {
-    const { location } = this.props
+  const getModule = async () => {
+    const { location } = window
     const queryParams = qs.parse(location.search ?? '')
     const id = queryParams.module_id
 
@@ -35,22 +30,18 @@ class PreviewPage extends React.Component {
 
     try {
       if (!id) {
-        this.setState({
-          loading: false,
-          error: {
-            message: 'No module id provided to preview',
-          },
+        setLoading(false)
+        setError({
+          message: 'No module id provided to preview',
         })
         return
       }
 
       const type = await fetchContentfulTypename(id)
       if (!type) {
-        this.setState({
-          loading: false,
-          error: {
-            message: 'Failed to fetch contentful type name',
-          },
+        setLoading(false)
+        setError({
+          message: 'Failed to fetch contentful type name',
         })
         return
       }
@@ -66,41 +57,38 @@ class PreviewPage extends React.Component {
           },
           contentful_id: contentId,
         }
-        this.setState({
-          loading: false,
-          moduleConfig: dataUpdate,
-        })
+        setLoading(false)
+        setModuleConfig(dataUpdate)
         return
       }
     } catch (error) {
       console.log('Fetch preview data error: ', error)
     }
-
-    this.setState({
-      loading: false,
-      error: {
-        message: 'Failed to fetch preview data',
-      },
+    setLoading(false)
+    setError({
+      message: 'Failed to fetch preview data',
     })
   }
 
-  render() {
-    const { loading, moduleConfig, error } = this.state
+  useEffect(() => {
+    getModule()
+  }, [])
 
-    if (loading) return <PreviewLoading />
-    if (moduleConfig) {
-      return (
-        <Layout
-          themeColor={moduleConfig.themeColor}
-          h2FontSize={moduleConfig.h2FontSize}
-        >
-          <PreviewInfo>Preview mode</PreviewInfo>
-          {contentfulModuleToComponent(moduleConfig)}
-        </Layout>
-      )
-    }
-    return <h4>Failed to load preview component: {error?.message}</h4>
+  const updatedEntries = useContentfulLiveUpdates(moduleConfig)
+
+  if (loading) return <PreviewLoading />
+  if (moduleConfig) {
+    return (
+      <Layout
+        themeColor={moduleConfig.themeColor}
+        h2FontSize={moduleConfig.h2FontSize}
+      >
+        <PreviewInfo>Preview mode</PreviewInfo>
+        {contentfulModuleToComponent(updatedEntries)}
+      </Layout>
+    )
   }
+  return <h4>Failed to load preview component: {error?.message}</h4>
 }
 
 const PreviewInfo = styled.div`
