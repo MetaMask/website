@@ -55,7 +55,9 @@ const FeatureComponent = props => {
   const isContentAlignVertical = contentAlignment === 'vertical'
   const innerContent = (
     <>
-      {eyebrow ? <EyebrowStyle dangerouslySetInnerHTML={{ __html: eyebrow }} /> : null}
+      {eyebrow ? (
+        <EyebrowStyle dangerouslySetInnerHTML={{ __html: eyebrow }} />
+      ) : null}
       {headline ? (
         <Headline
           hasEyebrow={eyebrow}

@@ -31,7 +31,11 @@ const ClientSideWrapper = ({ children }) => {
     },
   }
   return (
-    <ContentfulLivePreviewProvider locale="en-US">
+    <ContentfulLivePreviewProvider
+      enableInspectorMode
+      enableLiveUpdates
+      locale="en-US"
+    >
       <ContextClientSide.Provider value={valueContext}>
         {children}
       </ContextClientSide.Provider>
