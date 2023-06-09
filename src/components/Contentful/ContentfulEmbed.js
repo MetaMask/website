@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import { SectionTitle } from '../StyledGeneral'
 import Embed from '../Embed'
 import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
@@ -17,17 +18,41 @@ const ContentfulEmbed = props => {
       layoutType,
       playOnPopup,
       thumbnail,
+      contentful_id,
     },
   } = props
+
+  const inspectorProps = useContentfulInspectorMode()
   const thumbnailUrl = parseContentfulAssetUrl(thumbnail, previewMode)
+
   return (
     <Wrapper id={moduleId} layoutType={layoutType}>
-      {title && displayTitle ? <Title>{title}</Title> : null}
-      <Embed
-        playOnPopup={playOnPopup}
-        html={previewMode ? props.moduleConfig.embed : embed}
-        thumbnailUrl={thumbnailUrl}
-      />
+      {title && displayTitle ? (
+        <Title
+          {...(previewMode
+            ? inspectorProps({
+                entryId: contentful_id,
+                fieldId: 'title',
+              })
+            : {})}
+        >
+          {title}
+        </Title>
+      ) : null}
+      <div
+        {...(previewMode
+          ? inspectorProps({
+              entryId: contentful_id,
+              fieldId: 'embed',
+            })
+          : {})}
+      >
+        <Embed
+          playOnPopup={playOnPopup}
+          html={previewMode ? props.moduleConfig.embed : embed}
+          thumbnailUrl={thumbnailUrl}
+        />
+      </div>
     </Wrapper>
   )
 }

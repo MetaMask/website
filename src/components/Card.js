@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
+import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import Image from './Image'
 import classnames from 'classnames'
 import ArrowIcon from '../images/icons/icon-arrow-right.svg'
@@ -39,9 +40,11 @@ const StyledCard = props => {
     layoutType,
     hubSpotForm,
     previewMode = false,
+    contentfulId,
   } = props
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
+  const inspectorProps = useContentfulInspectorMode()
   switch (layoutType) {
     case 'feature':
       // code block
@@ -60,7 +63,18 @@ const StyledCard = props => {
       return <CardNews {...props} isDarkMode={isDarkMode} />
     case 'stat':
       // code block
-      return <CardStat {...props} isDarkMode={isDarkMode} />
+      return (
+        <CardStat
+          {...props}
+          isDarkMode={isDarkMode}
+          {...(previewMode
+            ? inspectorProps({
+                entryId: contentfulId,
+                fieldId: 'title',
+              })
+            : {})}
+        />
+      )
     default:
     // code block
   }
@@ -93,7 +107,15 @@ const StyledCard = props => {
           previewMode={previewMode}
         >
           {image ? (
-            <ImageWrapper $imageMargin={imageMargin}>
+            <ImageWrapper
+              $imageMargin={imageMargin}
+              {...(previewMode
+                ? inspectorProps({
+                    entryId: contentfulId,
+                    fieldId: 'image',
+                  })
+                : {})}
+            >
               <ImageSrc
                 image={image}
                 darkImage={imageDarkMode}
@@ -104,12 +126,29 @@ const StyledCard = props => {
           <Inner isCtaType={isCtaType}>
             <InnerContent isCtaType={isCtaType}>
               {title ? (
-                <Title isCtaType={isCtaType} isEventType={isEventType}>
+                <Title
+                  isCtaType={isCtaType}
+                  isEventType={isEventType}
+                  {...(previewMode
+                    ? inspectorProps({
+                        entryId: contentfulId,
+                        fieldId: 'title',
+                      })
+                    : {})}
+                >
                   {title}
                 </Title>
               ) : null}
               {description ? (
-                <Description isEventType={isEventType}>
+                <Description
+                  isEventType={isEventType}
+                  {...(previewMode
+                    ? inspectorProps({
+                        entryId: contentfulId,
+                        fieldId: 'description',
+                      })
+                    : {})}
+                >
                   <div dangerouslySetInnerHTML={{ __html: description }}></div>
                 </Description>
               ) : null}
@@ -125,12 +164,26 @@ const StyledCard = props => {
               </ArrowItem>
             ) : null}
             {linkText ? (
-              <CTAWrapper>
+              <CTAWrapper
+                {...(previewMode
+                  ? inspectorProps({
+                      entryId: contentfulId,
+                      fieldId: 'linkText',
+                    })
+                  : {})}
+              >
                 <span dangerouslySetInnerHTML={{ __html: linkText }} />
               </CTAWrapper>
             ) : null}
             {cta ? (
-              <CTA>
+              <CTA
+                {...(previewMode
+                  ? inspectorProps({
+                      entryId: contentfulId,
+                      fieldId: 'cta',
+                    })
+                  : {})}
+              >
                 {cta.map(cta =>
                   contentfulModuleToComponent({
                     ...cta,

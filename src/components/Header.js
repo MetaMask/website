@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import styled, { withTheme } from 'styled-components'
+import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import Link from './Link'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { useMediaQuery } from 'react-responsive'
@@ -26,7 +27,10 @@ const StyledHeader = props => {
     hideDownloadBtn,
     isSticky,
     previewMode = false,
+    contentfulId,
   } = props
+
+  const inspectorProps = useContentfulInspectorMode()
   const isDesktop = useMediaQuery({
     query: '(min-width: 1025px)',
   })
@@ -83,7 +87,14 @@ const StyledHeader = props => {
   }
   return (
     <HeaderElement ref={headerRef} className={classnames({ sticky: isSticky })}>
-      <Announcement>
+      <Announcement
+        {...(previewMode
+          ? inspectorProps({
+              entryId: contentfulId,
+              fieldId: 'popupAnnouncement',
+            })
+          : {})}
+      >
         {contentfulModuleToComponent({
           ...popupAnnouncement,
           previewMode,
@@ -97,6 +108,12 @@ const StyledHeader = props => {
                 className={classnames({
                   'hidden-mobile': logoMobile,
                 })}
+                {...(previewMode
+                  ? inspectorProps({
+                      entryId: contentfulId,
+                      fieldId: 'logo',
+                    })
+                  : {})}
               >
                 {svgLogo?.content ? (
                   <div
@@ -157,6 +174,12 @@ const StyledHeader = props => {
                       active={active}
                       onMouseEnter={() => handleMenuMouseEnter(index)}
                       onMouseLeave={() => handleMenuMouseLeave(index)}
+                      {...(previewMode
+                        ? inspectorProps({
+                            entryId: contentfulId,
+                            fieldId: 'menuItems',
+                          })
+                        : {})}
                     >
                       <NavMenuMain
                         hasChild={ctaLink ? false : true}
@@ -191,7 +214,15 @@ const StyledHeader = props => {
                   )
                 })}
                 {downloadButton ? (
-                  <ButtonsWrapper hideDownloadBtn={hideDownloadBtn}>
+                  <ButtonsWrapper
+                    hideDownloadBtn={hideDownloadBtn}
+                    {...(previewMode
+                      ? inspectorProps({
+                          entryId: contentfulId,
+                          fieldId: 'downloadButton',
+                        })
+                      : {})}
+                  >
                     {contentfulModuleToComponent({
                       ...downloadButton,
                       hasModuleContainer: true,

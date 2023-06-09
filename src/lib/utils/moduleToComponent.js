@@ -20,10 +20,11 @@ export const contentfulModuleToComponent = (moduleConfig = {}) => {
   if (moduleConfig.previewMode) {
     __id = moduleConfig.sys?.id
     __typename = convertContentfulPreviewTypename(moduleConfig.__typename)
+    moduleConfig.contentful_id = __id
   } else {
     const { internal, contentful_id } = moduleConfig
-    __typename = internal?.type
     __id = contentful_id
+    __typename = internal?.type
   }
 
   if (!__typename) return null

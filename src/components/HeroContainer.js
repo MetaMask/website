@@ -139,7 +139,8 @@ const HeroContainerComponent = props => {
               <Image
                 alt={headline}
                 image={backgroundImage}
-                imageDarkMode={backgroundImageDarkMode}
+                darkImage={backgroundImageDarkMode}
+                previewMode
               />
             </BackgroundImageContain>
           ) : null}
@@ -227,7 +228,17 @@ const HeroContainerComponent = props => {
                     </EyebrowWrapper>
                   ) : null}
                   {eyebrow ? (
-                    <EyebrowText isSDK={isSDK}>{eyebrow}</EyebrowText>
+                    <EyebrowText
+                      {...(previewMode
+                        ? inspectorProps({
+                            entryId: contentfulId,
+                            fieldId: 'eyebrow',
+                          })
+                        : {})}
+                      isSDK={isSDK}
+                    >
+                      {eyebrow}
+                    </EyebrowText>
                   ) : null}
                   {headline && (
                     <HeroTitle
@@ -253,6 +264,12 @@ const HeroContainerComponent = props => {
                         sideImageFlex={sideImageFlex}
                         isSDK={isSDK}
                         ref={sdkRef}
+                        {...(previewMode
+                          ? inspectorProps({
+                              entryId: contentfulId,
+                              fieldId: 'sideImage',
+                            })
+                          : {})}
                       >
                         <Image
                           image={sideImage}
@@ -263,7 +280,15 @@ const HeroContainerComponent = props => {
                     </HeightSlide>
                   ) : null}
                   {description && (
-                    <HeroDescription isFaq={isFaq}>
+                    <HeroDescription
+                      isFaq={isFaq}
+                      {...(previewMode
+                        ? inspectorProps({
+                            entryId: contentfulId,
+                            fieldId: 'description',
+                          })
+                        : {})}
+                    >
                       {previewMode ? (
                         <ParseMD>{description}</ParseMD>
                       ) : (
@@ -274,7 +299,14 @@ const HeroContainerComponent = props => {
                     </HeroDescription>
                   )}
                   {!isEmpty(ctas) && !isFlask && !isHome ? (
-                    <HeroCTA>
+                    <HeroCTA
+                      {...(previewMode
+                        ? inspectorProps({
+                            entryId: contentfulId,
+                            fieldId: 'ctas',
+                          })
+                        : {})}
+                    >
                       {ctas.map(cta =>
                         contentfulModuleToComponent({
                           ...cta,
@@ -285,7 +317,14 @@ const HeroContainerComponent = props => {
                     </HeroCTA>
                   ) : null}
                   {!isEmpty(ctas) && isHome ? (
-                    <HeroCTA>
+                    <HeroCTA
+                      {...(previewMode
+                        ? inspectorProps({
+                            entryId: contentfulId,
+                            fieldId: 'ctas',
+                          })
+                        : {})}
+                    >
                       {contentfulModuleToComponent({
                         ...ctas[
                           ctas.length > 1 &&
@@ -299,7 +338,18 @@ const HeroContainerComponent = props => {
                       })}
                     </HeroCTA>
                   ) : null}
-                  {note && <HeroNote>{note}</HeroNote>}
+                  {note && (
+                    <HeroNote
+                      {...(previewMode
+                        ? inspectorProps({
+                            entryId: contentfulId,
+                            fieldId: 'note',
+                          })
+                        : {})}
+                    >
+                      {note}
+                    </HeroNote>
+                  )}
                   {hubspotWrapper ? hubspotWrapper : null}
                 </HeroImageTextContainer>
                 {(sideImage || sideImageFoxAnimation) && !isSDK ? (
@@ -308,6 +358,12 @@ const HeroContainerComponent = props => {
                     isStyleHubspot={isStyleHubspot}
                     sideImageFoxAnimation={sideImageFoxAnimation}
                     isFlask={isFlask}
+                    {...(previewMode
+                      ? inspectorProps({
+                          entryId: contentfulId,
+                          fieldId: 'sideImage',
+                        })
+                      : {})}
                   >
                     {sideImageFoxAnimation ? <FoxAnimation /> : null}
                     {!sideImageFoxAnimation &&
@@ -322,7 +378,14 @@ const HeroContainerComponent = props => {
                   </HeroSideImage>
                 ) : null}
                 {!isEmpty(ctas) && isFlask ? (
-                  <HeroCTA>
+                  <HeroCTA
+                    {...(previewMode
+                      ? inspectorProps({
+                          entryId: contentfulId,
+                          fieldId: 'ctas',
+                        })
+                      : {})}
+                  >
                     {ctas.map(cta =>
                       contentfulModuleToComponent({
                         ...cta,

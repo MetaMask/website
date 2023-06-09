@@ -4,10 +4,17 @@ import styled from 'styled-components'
 import Link from '../Link'
 
 const Wrapper = props => {
-  const { children, opensNewTab, link, cleanStyle, backgroundColor } = props
+  const {
+    children,
+    opensNewTab,
+    link,
+    cleanStyle,
+    backgroundColor,
+    ...rest
+  } = props
 
   return (
-    <Item cleanStyle={cleanStyle} backgroundColor={backgroundColor}>
+    <Item cleanStyle={cleanStyle} backgroundColor={backgroundColor} {...rest}>
       {backgroundColor ? (
         <Background backgroundColor={backgroundColor}>
           <Link newTab={opensNewTab} to={link}>

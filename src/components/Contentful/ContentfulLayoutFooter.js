@@ -6,7 +6,13 @@ import cloneDeep from 'lodash/cloneDeep'
 
 const ContentfulLayoutFooter = props => {
   const {
-    moduleConfig: { logo, menuItems, copyright, previewMode = false },
+    moduleConfig: {
+      logo,
+      menuItems,
+      copyright,
+      previewMode = false,
+      contentful_id,
+    },
   } = props
   return (
     <Footer
@@ -17,13 +23,14 @@ const ContentfulLayoutFooter = props => {
       menus={menuItems}
       copyright={copyright}
       previewMode={previewMode}
+      contentfulId={contentful_id}
     />
   )
 }
 
 const parsePreviewData = data => {
   data = data.moduleConfig.previewContent || data.moduleConfig
-  const { menuItemsCollection, copyright } = data
+  const { menuItemsCollection, copyright, contentful_id } = data
 
   const menuItems = cloneDeep(menuItemsCollection.items)
   menuItems.forEach((item, index) => {
@@ -37,6 +44,7 @@ const parsePreviewData = data => {
       previewMode: true,
       copyright,
       menuItems,
+      contentful_id,
       logo: data.logo
         ? {
             title: data.logo.title,

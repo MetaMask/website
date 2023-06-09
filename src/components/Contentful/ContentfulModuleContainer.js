@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import classnames from 'classnames'
 import FaqList from '../FaqList'
@@ -31,8 +32,11 @@ const ContentfulModuleContainer = props => {
       containerBgColor,
       previewMode = false,
       columnType,
+      contentful_id,
     },
   } = props
+
+  const inspectorProps = useContentfulInspectorMode()
   const gridModulesGap = gridModulesGapDefault || '8px'
   const { childMarkdownRemark: { html } = {} } = description || {}
   const htmlData = previewMode ? description : html
@@ -80,9 +84,30 @@ const ContentfulModuleContainer = props => {
       <Inner splitModules={splitModules}>
         {title || htmlData || eyebrow ? (
           <Content splitModules={splitModules}>
-            {eyebrow ? <EyebrowStyle>{eyebrow}</EyebrowStyle> : null}
+            {eyebrow ? (
+              <EyebrowStyle
+                {...(previewMode
+                  ? inspectorProps({
+                      entryId: contentful_id,
+                      fieldId: 'eyebrow',
+                    })
+                  : {})}
+              >
+                {eyebrow}
+              </EyebrowStyle>
+            ) : null}
             {title && displayTitle ? (
-              <Title isFaq={isFaq}>{title}</Title>
+              <Title
+                isFaq={isFaq}
+                {...(previewMode
+                  ? inspectorProps({
+                      entryId: contentful_id,
+                      fieldId: 'title',
+                    })
+                  : {})}
+              >
+                {title}
+              </Title>
             ) : null}
             {htmlData ? (
               <div
@@ -90,6 +115,12 @@ const ContentfulModuleContainer = props => {
                   'txt-center': contentAlignment === 'center',
                 })}
                 dangerouslySetInnerHTML={{ __html: htmlData }}
+                {...(previewMode
+                  ? inspectorProps({
+                      entryId: contentful_id,
+                      fieldId: 'description',
+                    })
+                  : {})}
               />
             ) : null}
           </Content>

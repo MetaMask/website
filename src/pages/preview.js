@@ -75,16 +75,17 @@ const PreviewPage = () => {
   }, [])
 
   const updatedEntries = useContentfulLiveUpdates(moduleConfig)
+  const resolvedModuleConfig = updatedEntries || moduleConfig
 
   if (loading) return <PreviewLoading />
-  if (moduleConfig) {
+  if (resolvedModuleConfig) {
     return (
       <Layout
-        themeColor={moduleConfig.themeColor}
-        h2FontSize={moduleConfig.h2FontSize}
+        themeColor={resolvedModuleConfig?.themeColor}
+        h2FontSize={resolvedModuleConfig?.h2FontSize}
       >
         <PreviewInfo>Preview mode</PreviewInfo>
-        {contentfulModuleToComponent(updatedEntries)}
+        {contentfulModuleToComponent(resolvedModuleConfig)}
       </Layout>
     )
   }
