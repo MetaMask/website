@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
+import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import ContentWrapper from './ContentWrapper'
 import Loadable from '@loadable/component'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
@@ -24,7 +25,10 @@ const FullWidthCta = props => {
     sectionPadding,
     customClass,
     previewMode = false,
+    contentfulId,
   } = props
+
+  const inspectorProps = useContentfulInspectorMode()
 
   return (
     <Container
@@ -48,12 +52,25 @@ const FullWidthCta = props => {
                 backgroundColor={backgroundColor}
                 showLogoAnimation={showLogoAnimation}
                 hasDescription={!!description}
+                {...(previewMode
+                  ? inspectorProps({
+                      entryId: contentfulId,
+                      fieldId: 'headline',
+                    })
+                  : {})}
               >
                 <div dangerouslySetInnerHTML={{ __html: headline }} />
               </Headline>
             ) : null}
             {description ? (
-              <Description>
+              <Description
+                {...(previewMode
+                  ? inspectorProps({
+                      entryId: contentfulId,
+                      fieldId: 'description',
+                    })
+                  : {})}
+              >
                 {previewMode ? (
                   <ParseMD>{description}</ParseMD>
                 ) : (
@@ -65,17 +82,38 @@ const FullWidthCta = props => {
               <LogoAnimation logoType={logoType} />
             ) : null}
             {hubSpotForm ? (
-              <div id={'hubspot-container'}>
+              <div
+                id={'hubspot-container'}
+                {...(previewMode
+                  ? inspectorProps({
+                      entryId: contentfulId,
+                      fieldId: 'hupSpotForm',
+                    })
+                  : {})}
+              >
                 {contentfulModuleToComponent({ ...hubSpotForm, previewMode })}
               </div>
             ) : null}
             {embedHtml ? (
-              <div id={'html-container'}>
+              <div
+                id={'html-container'}
+                {...(previewMode
+                  ? inspectorProps({
+                      entryId: contentfulId,
+                      fieldId: 'embedHtml',
+                    })
+                  : {})}
+              >
                 {contentfulModuleToComponent({ ...embedHtml, previewMode })}
               </div>
             ) : null}
             {ctas ? (
-              <CTAWrapper>
+              <CTAWrapper
+                {...inspectorProps({
+                  entryId: contentfulId,
+                  fieldId: 'ctas',
+                })}
+              >
                 {ctas.map(cta =>
                   contentfulModuleToComponent({
                     ...cta,

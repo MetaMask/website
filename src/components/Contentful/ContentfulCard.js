@@ -21,6 +21,7 @@ const ContentfulCard = props => {
       layoutType,
       layoutSize,
       hubSpotForm,
+      contentful_id,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -43,6 +44,7 @@ const ContentfulCard = props => {
       cta={cta}
       hubSpotForm={hubSpotForm}
       previewMode={previewMode}
+      contentfulId={contentful_id}
     />
   )
 }

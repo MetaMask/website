@@ -15,6 +15,7 @@ const ContentfulLayoutHeader = props => {
       previewMode = false,
       popupAnnouncement,
       isSticky,
+      contentful_id,
     },
     hideDownloadBtn,
   } = props
@@ -29,6 +30,7 @@ const ContentfulLayoutHeader = props => {
       popupAnnouncement={popupAnnouncement}
       isSticky={isSticky}
       previewMode={previewMode}
+      contentfulId={contentful_id}
     />
   )
 }
@@ -40,6 +42,7 @@ const parsePreviewData = data => {
     menuItemsCollection,
     popupAnnouncement,
     isSticky,
+    contentful_id,
   } = data
 
   let menuItems = menuItemsCollection
@@ -79,6 +82,7 @@ const parsePreviewData = data => {
       downloadButton,
       popupAnnouncement,
       isSticky,
+      contentful_id,
     },
   }
   return dataUpdate

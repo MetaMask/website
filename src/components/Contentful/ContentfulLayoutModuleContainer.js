@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ContentWrapper from '../ContentWrapper'
 import styled from 'styled-components'
 import { useLocation } from '@reach/router'
+import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import classnames from 'classnames'
 import { SectionTitle, Section, EyebrowStyle } from '../StyledGeneral'
@@ -35,9 +36,11 @@ const ContentfulModuleContainer = props => {
       sideImage,
       showLeftArrow,
       iconConfig,
+      contentful_id,
     },
   } = props
 
+  const inspectorProps = useContentfulInspectorMode()
   const { pathname } = useLocation()
   const { childMarkdownRemark: { html } = {} } = description || {}
   const bgUrl = parseContentfulAssetUrl(backgroundImage, previewMode)
@@ -82,7 +85,18 @@ const ContentfulModuleContainer = props => {
           <MainContent>
             {(headline && displayHeadline) || htmlData || eyebrow ? (
               <ContentInfo paddingTop={paddingTop}>
-                {eyebrow ? <EyebrowStyle>{eyebrow}</EyebrowStyle> : null}
+                {eyebrow ? (
+                  <EyebrowStyle
+                    {...(previewMode
+                      ? inspectorProps({
+                          entryId: contentful_id,
+                          fieldId: 'eyebrow',
+                        })
+                      : {})}
+                  >
+                    {eyebrow}
+                  </EyebrowStyle>
+                ) : null}
                 {headline && displayHeadline ? (
                   <Title
                     headlineMarginTop0={headlineMarginTop0}
@@ -90,6 +104,12 @@ const ContentfulModuleContainer = props => {
                       'txt-center': headlineAlignCenter,
                     })}
                     dangerouslySetInnerHTML={{ __html: headline }}
+                    {...(previewMode
+                      ? inspectorProps({
+                          entryId: contentful_id,
+                          fieldId: 'headline',
+                        })
+                      : {})}
                   />
                 ) : null}
                 {htmlData ? (
@@ -99,6 +119,12 @@ const ContentfulModuleContainer = props => {
                         className={classnames({
                           'txt-center': contentAlignCenter,
                         })}
+                        {...(previewMode
+                          ? inspectorProps({
+                              entryId: contentful_id,
+                              fieldId: 'description',
+                            })
+                          : {})}
                       >
                         <ParseMD>{htmlData}</ParseMD>
                       </SubInfo>
@@ -128,6 +154,12 @@ const ContentfulModuleContainer = props => {
               <Modules
                 contentAlignCenter={contentAlignCenter}
                 modulesMargin={modulesMargin}
+                {...(previewMode
+                  ? inspectorProps({
+                      entryId: contentful_id,
+                      fieldId: 'modules',
+                    })
+                  : {})}
               >
                 {modules.map(m =>
                   contentfulModuleToComponent({

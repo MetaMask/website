@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Fragment } from 'react'
 import styled, { withTheme } from 'styled-components'
+import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import ContentWrapper from './ContentWrapper'
 import ScrollAnimation from 'react-animate-on-scroll'
 import classnames from 'classnames'
@@ -47,7 +48,10 @@ const FeatureComponent = props => {
     imageLink,
     customClass,
     previewMode = false,
+    contentfulId,
   } = props
+
+  const inspectorProps = useContentfulInspectorMode()
 
   const contentAlignLR = ['left', 'right'].includes(contentAlignment)
     ? contentAlignment
@@ -56,7 +60,15 @@ const FeatureComponent = props => {
   const innerContent = (
     <>
       {eyebrow ? (
-        <EyebrowStyle dangerouslySetInnerHTML={{ __html: eyebrow }} />
+        <EyebrowStyle
+          {...(previewMode
+            ? inspectorProps({
+                entryId: contentfulId,
+                fieldId: 'eyebrow',
+              })
+            : {})}
+          dangerouslySetInnerHTML={{ __html: eyebrow }}
+        />
       ) : null}
       {headline ? (
         <Headline
@@ -64,12 +76,26 @@ const FeatureComponent = props => {
           hasCta={cta}
           hideHeadline={hideHeadline}
           headlineMarginTop0={headlineMarginTop0}
+          {...(previewMode
+            ? inspectorProps({
+                entryId: contentfulId,
+                fieldId: 'headline',
+              })
+            : {})}
         >
           <div dangerouslySetInnerHTML={{ __html: headline }} />
         </Headline>
       ) : null}
       {description ? (
-        <Description sectionPadding={sectionPadding}>
+        <Description
+          sectionPadding={sectionPadding}
+          {...(previewMode
+            ? inspectorProps({
+                entryId: contentfulId,
+                fieldId: 'description',
+              })
+            : {})}
+        >
           {previewMode ? (
             <ParseMD>{description}</ParseMD>
           ) : (
@@ -78,7 +104,14 @@ const FeatureComponent = props => {
         </Description>
       ) : null}
       {featureItems && featureItems.length && !showFeatureItemsAsSlideImage ? (
-        <FeatureItems>
+        <FeatureItems
+          {...(previewMode
+            ? inspectorProps({
+                entryId: contentfulId,
+                fieldId: 'featureItems',
+              })
+            : {})}
+        >
           {featureItems.map((m, index) => (
             <FeatureItem key={index}>
               {contentfulModuleToComponent({
@@ -90,7 +123,15 @@ const FeatureComponent = props => {
         </FeatureItems>
       ) : null}
       {cta && !isContentAlignVertical ? (
-        <CTAWrapper className="hidden-mobile">
+        <CTAWrapper
+          className="hidden-mobile"
+          {...(previewMode
+            ? inspectorProps({
+                entryId: contentfulId,
+                fieldId: 'cta',
+              })
+            : {})}
+        >
           {contentfulModuleToComponent({
             ...cta,
             color: ['white', 'gray', 'default'].includes(backgroundColor)
@@ -155,7 +196,14 @@ const FeatureComponent = props => {
             sectionPadding={sectionPadding}
           >
             {image || imageMobile ? (
-              <SideImage>
+              <SideImage
+                {...(previewMode
+                  ? inspectorProps({
+                      entryId: contentfulId,
+                      fieldId: 'image',
+                    })
+                  : {})}
+              >
                 <Image>
                   {animation ? (
                     <ScrollAnimation
@@ -178,7 +226,14 @@ const FeatureComponent = props => {
               </SideImage>
             ) : null}
             {embed ? (
-              <SideEmbed>
+              <SideEmbed
+                {...(previewMode
+                  ? inspectorProps({
+                      entryId: contentfulId,
+                      fieldId: 'embed',
+                    })
+                  : {})}
+              >
                 <Embed
                   html={embed.embed?.embed}
                   thumbnailUrl={parseContentfulAssetUrl(
@@ -192,7 +247,14 @@ const FeatureComponent = props => {
             {featureItems &&
             featureItems.length &&
             showFeatureItemsAsSlideImage ? (
-              <SlideFeatureItems>
+              <SlideFeatureItems
+                {...(previewMode
+                  ? inspectorProps({
+                      entryId: contentfulId,
+                      fieldId: 'featureItems',
+                    })
+                  : {})}
+              >
                 <SlideFeatureItemInner>
                   {featureItems.map((m, index) => (
                     <Fragment key={index}>
@@ -227,7 +289,14 @@ const FeatureComponent = props => {
               )}
             </FeatureInner>
             {cta && isContentAlignVertical ? (
-              <CTAWrapper>
+              <CTAWrapper
+                {...(previewMode
+                  ? inspectorProps({
+                      entryId: contentfulId,
+                      fieldId: 'cta',
+                    })
+                  : {})}
+              >
                 {contentfulModuleToComponent({
                   ...cta,
                   color: ['white', 'gray', 'default'].includes(backgroundColor)
@@ -252,7 +321,15 @@ const FeatureComponent = props => {
             ) : null}
           </FeatureWrapper>
           {cta && !isContentAlignVertical ? (
-            <CTAWrapper className="hidden-desktop">
+            <CTAWrapper
+              className="hidden-desktop"
+              {...(previewMode
+                ? inspectorProps({
+                    entryId: contentfulId,
+                    fieldId: 'cta',
+                  })
+                : {})}
+            >
               {contentfulModuleToComponent({
                 ...cta,
                 color: ['white', 'gray', 'default'].includes(backgroundColor)
@@ -292,6 +369,7 @@ FeatureComponent.propTypes = {
   noPaddingBottom: PropTypes.bool,
   removeSectionPaddingBottomOnDesktop: PropTypes.bool,
   previewMode: PropTypes.bool,
+  contentfulId: PropTypes.string.isRequired,
 }
 
 const Container = styled(Section)``

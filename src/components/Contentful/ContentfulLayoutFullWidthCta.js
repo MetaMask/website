@@ -18,6 +18,7 @@ const ContentfulLayoutFullWidthCta = props => {
       sectionPadding,
       customClass,
       previewMode = false,
+      contentful_id,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -35,6 +36,7 @@ const ContentfulLayoutFullWidthCta = props => {
       sectionPadding={sectionPadding}
       customClass={customClass}
       previewMode={previewMode}
+      contentfulId={contentful_id}
     />
   )
 }

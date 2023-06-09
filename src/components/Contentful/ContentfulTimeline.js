@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
+import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import ContentWrapper from '../ContentWrapper'
 import ImageItem from '../Image'
 import { EyebrowStyle } from '../StyledGeneral'
@@ -17,8 +18,11 @@ const ContentfulTimeline = props => {
       imageDarkMode,
       customClass,
       previewMode = false,
+      contentful_id,
     },
   } = props
+
+  const inspectorProps = useContentfulInspectorMode()
   const { childMarkdownRemark: { html: htmlDescription } = {} } =
     description || {}
   const { childMarkdownRemark: { html: htmlHeadline } = {} } = headline || {}
@@ -29,10 +33,29 @@ const ContentfulTimeline = props => {
         <div class="timeline">
           <div class="container right">
             <div class="content">
-              {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
+              {eyebrow ? (
+                <Eyebrow
+                  {...(previewMode
+                    ? inspectorProps({
+                        entryId: contentful_id,
+                        fieldId: 'eyebrow',
+                      })
+                    : {})}
+                >
+                  {eyebrow}
+                </Eyebrow>
+              ) : null}
               <div className="text-content">
                 {headline ? (
-                  <Headline hasEyebrow={eyebrow}>
+                  <Headline
+                    hasEyebrow={eyebrow}
+                    {...(previewMode
+                      ? inspectorProps({
+                          entryId: contentful_id,
+                          fieldId: 'headline',
+                        })
+                      : {})}
+                  >
                     {previewMode ? (
                       <ParseMD>{headline}</ParseMD>
                     ) : (
@@ -41,7 +64,14 @@ const ContentfulTimeline = props => {
                   </Headline>
                 ) : null}
                 {previewMode ? (
-                  <Description>
+                  <Description
+                    {...(previewMode
+                      ? inspectorProps({
+                          entryId: contentful_id,
+                          fieldId: 'description',
+                        })
+                      : {})}
+                  >
                     <ParseMD>{description}</ParseMD>
                   </Description>
                 ) : (
@@ -55,6 +85,12 @@ const ContentfulTimeline = props => {
                   image={image}
                   darkImage={imageDarkMode}
                   previewMode={previewMode}
+                  {...(previewMode
+                    ? inspectorProps({
+                        entryId: contentful_id,
+                        fieldId: 'image',
+                      })
+                    : {})}
                 />
               ) : null}
             </div>

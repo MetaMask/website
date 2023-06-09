@@ -18,6 +18,7 @@ const ContentfulLayoutFeatureSlider = props => {
       backgroundColor,
       customClass,
       previewMode = false,
+      contentful_id,
     },
   } = props
 
@@ -37,6 +38,7 @@ const ContentfulLayoutFeatureSlider = props => {
       backgroundColor={backgroundColor}
       customClass={customClass}
       previewMode={previewMode}
+      contentfulId={contentful_id}
     />
   )
 }

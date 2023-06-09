@@ -1,13 +1,23 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
+import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Link from './Link'
 import Wrapper from './ContentWrapper'
 import ColumnWrapper from './ColumnWrapper'
 
 const StyledFooter = props => {
-  const { menus, copyright, logoTitle, logoUrl, logoSvg, previewMode } = props
+  const {
+    menus,
+    copyright,
+    logoTitle,
+    logoUrl,
+    logoSvg,
+    previewMode,
+    contentfulId,
+  } = props
+  const inspectorProps = useContentfulInspectorMode()
 
   return (
     <FooterContainer>
@@ -18,7 +28,14 @@ const StyledFooter = props => {
         <FooterInner>
           <LogoContainer>
             <Link to="/">
-              <LogoWrapper>
+              <LogoWrapper
+                {...(previewMode
+                  ? inspectorProps({
+                      entryId: contentfulId,
+                      fieldId: 'logo',
+                    })
+                  : {})}
+              >
                 {logoSvg?.content ? (
                   <div
                     className="logoMetamaskSvg"
@@ -35,8 +52,17 @@ const StyledFooter = props => {
           <ColumnWrapper columns={menus.length}>
             {menus.map((menu, index) => {
               const { title, modules } = menu
+              const menuItemId = menu.sys?.id
               return (
-                <MenuItem key={index}>
+                <MenuItem
+                  key={index}
+                  {...(previewMode
+                    ? inspectorProps({
+                        entryId: menuItemId,
+                        fieldId: 'title',
+                      })
+                    : {})}
+                >
                   <MenuItemHeading>{title}</MenuItemHeading>
                   <MenuItemContent>
                     {modules && modules.length
@@ -56,7 +82,14 @@ const StyledFooter = props => {
           </ColumnWrapper>
 
           <SubFooterContainer>
-            <PolicyCopy>
+            <PolicyCopy
+              {...(previewMode
+                ? inspectorProps({
+                    entryId: contentfulId,
+                    fieldId: 'copyright',
+                  })
+                : {})}
+            >
               <PolicyCopyLink className="paragraph" as="span">
                 @{new Date().getFullYear()} {copyright}
               </PolicyCopyLink>

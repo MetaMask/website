@@ -5,10 +5,10 @@ import classnames from 'classnames'
 import Link from '../Link'
 
 const StyledCard = props => {
-  const { title, link, description } = props
+  const { title, link, description, ...rest } = props
 
   return (
-    <Card className="moduleCardWrapper">
+    <Card className="moduleCardWrapper" {...rest}>
       <CardInner to={link} className={classnames('custom-card-bg cardLink')}>
         <ContentInner>
           {title ? <Title>{title}</Title> : null}

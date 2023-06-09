@@ -2,6 +2,7 @@ import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useEffect, useRef, useState } from 'react'
 import ScrollAnimation from 'react-animate-on-scroll'
+import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import styled, { withTheme } from 'styled-components'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import ContentWrapper from './ContentWrapper'
@@ -23,8 +24,10 @@ const FeatureSlider = props => {
     backgroundColor,
     customClass,
     previewMode,
+    contentfulId,
   } = props
 
+  const inspectorProps = useContentfulInspectorMode()
   const timeoutRef = useRef(null)
   const [activeItem, setActiveItem] = useState(0)
 
@@ -85,12 +88,27 @@ const FeatureSlider = props => {
   const innerContent = (
     <InnerContent>
       {headline ? (
-        <Headline>
+        <Headline
+          {...(previewMode
+            ? inspectorProps({
+                entryId: contentfulId,
+                fieldId: 'headline',
+              })
+            : {})}
+        >
           <div dangerouslySetInnerHTML={{ __html: headline }} />
         </Headline>
       ) : null}
       {description ? (
-        <Description sectionPadding={sectionPadding}>
+        <Description
+          sectionPadding={sectionPadding}
+          {...(previewMode
+            ? inspectorProps({
+                entryId: contentfulId,
+                fieldId: 'description',
+              })
+            : {})}
+        >
           {previewMode ? (
             <ParseMD>{description}</ParseMD>
           ) : (
@@ -98,7 +116,14 @@ const FeatureSlider = props => {
           )}
         </Description>
       ) : null}
-      <SliderTextWrapper>
+      <SliderTextWrapper
+        {...(previewMode
+          ? inspectorProps({
+              entryId: contentfulId,
+              fieldId: 'featureSliderItems',
+            })
+          : {})}
+      >
         {featureSliderItems
           ? featureSliderItems.map((item, index) => (
               <SliderText className="dl-checklist fadeIn" key={index}>
@@ -125,7 +150,17 @@ const FeatureSlider = props => {
           : null}
       </SliderTextWrapper>
       {cta ? (
-        <CTAWrapper className="hidden-mobile">{ctaContent}</CTAWrapper>
+        <CTAWrapper
+          className="hidden-mobile"
+          {...(previewMode
+            ? inspectorProps({
+                entryId: contentfulId,
+                fieldId: 'cta',
+              })
+            : {})}
+        >
+          {ctaContent}
+        </CTAWrapper>
       ) : null}
     </InnerContent>
   )
