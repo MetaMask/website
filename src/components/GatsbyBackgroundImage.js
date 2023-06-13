@@ -44,9 +44,11 @@ const GatsbyBackgroundImage = props => {
     ? imageDarkMode
     : image
 
+  const parsedContentfulAssetUrl = parseContentfulAssetUrl(imageSrc, previewMode)
+
   return (
     <Wrapper
-      background={!getImage(imageSrc) && parseContentfulAssetUrl(imageSrc)}
+      background={!getImage(imageSrc) && parsedContentfulAssetUrl}
       className={classnames(className, 'gatsby-bg__wrapper')}
     >
       {getImage(imageSrc) && (
@@ -66,14 +68,6 @@ const GatsbyBackgroundImage = props => {
             />
           )}
         </>
-      )}
-      {/* For preview only */}
-      {previewMode && (
-        <StyledImage
-          src={parseContentfulAssetUrl(imageSrc, previewMode)}
-          alt={title || ''}
-          absolute={absolute}
-        />
       )}
       <Content className="gatsby-bg__content">{children}</Content>
     </Wrapper>
@@ -125,19 +119,6 @@ const StyledGatsbyImage = styled(GatsbyImage)`
     position: absolute;
     inset: 0;
   }
-`
-
-const StyledImage = styled.img`
-  grid-area: 1/1;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  ${({ $absolute }) =>
-    $absolute &&
-    `
-      position: absolute !important;
-      inset: 0;
-  `}
 `
 
 const Content = styled.div`
