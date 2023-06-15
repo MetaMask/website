@@ -27,6 +27,18 @@ if (env.errors) {
     },
     plugins: [
       {
+        resolve: 'gatsby-plugin-google-tagmanager',
+        options: {
+          id: process.env.GATSBY_GTM_ID,
+
+          // Defaults to false meaning GTM will only be loaded in production.
+          includeInDevelopment: false,
+
+          // Defaults to false
+          enableWebVitalsTracking: true,
+        },
+      },
+      {
         resolve: `gatsby-plugin-google-analytics`,
         options: {
           // The property ID; the tracking code won't be generated without it
