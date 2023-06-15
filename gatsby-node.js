@@ -1,5 +1,6 @@
 const path = require('path')
 const axios = require('axios')
+const download = require('download');
 const { getNewsUrl } = require(`./src/lib/utils/news`)
 const redirects = require("./redirects.json")
 
@@ -39,7 +40,7 @@ exports.createPages = async ({ graphql, actions }) => {
   let touData = undefined;
   try {
     const touResult = await axios.get('https://content.consensys.net/wp-json/wp/v2/pages/?path=/terms-of-use/&_fields=id%2Ctitle%2Cmodules.rich-text%2Cheader_component')
-    if ( touResult.data && touResult.data[0]) {
+    if (touResult.data && touResult.data[0]) {
       const { content } = touResult.data[0].modules[0].children[0].config
       const { title, description } = touResult.data[0].header_component[0]?.config
       if (title, description, content) {
@@ -81,6 +82,13 @@ exports.createPages = async ({ graphql, actions }) => {
               ... on ContentfulLayoutFullWidthCta {
                 contentful_id
               }
+              ...on ContentfulAssetStorage {
+                contentful_id
+                assets {
+                  url
+                  filename
+                }
+              }
             }
             themeColor
             isFaqLayout
@@ -113,6 +121,37 @@ exports.createPages = async ({ graphql, actions }) => {
           const moduleIds = modules.map(m => m.contentful_id)
           const seoId = seo ? seo.contentful_id : ''
 
+          if (slug === "/assets/") {
+            const assetResponseData = modules[0]?.assets
+            const assetUrls = assetResponseData?.map(el => el.url)
+            const assetData = assetResponseData?.map(el => ({
+              filename: el.filename,
+              url: `/assets/${path.parse(el.url).base}`
+            }))
+
+            if (assetUrls) {
+              (async () => {
+                await Promise.all(assetUrls.map(url => download(url, 'public/assets')))
+                  .catch(() => {
+                    return Promise.reject('Fetch MetaMask assets failed!')
+                  })
+              })()
+              createPage({
+                path: slug,
+                component: path.resolve(`./src/templates/ContentfulAssetLayout.js`),
+                context: {
+                  headerId,
+                  footerId,
+                  assetData,
+                  themeColor,
+                  isFaqLayout,
+                  h2FontSize,
+                },
+              })
+              return
+            }
+          }
+
           if (slug === "/news/") {
             const categoriesPath = newsCategories.map(cat => `/news/${cat}/`)
             categoriesPath.forEach(categoryPath => {
@@ -141,9 +180,9 @@ exports.createPages = async ({ graphql, actions }) => {
                 path: touUrl,
                 component: path.resolve(`./src/templates/ContentfulToULayout.js`),
                 context: {
-                  headerId: index === 0 ? headerId : undefined,
-                  footerId: index === 0 ? footerId : undefined,
-                  seoId: index === 0 ? seoId : undefined,
+                  headerId,
+                  footerId,
+                  seoId,
                   touData,
                   themeColor,
                   pathBuild: touUrl,

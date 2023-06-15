@@ -44,7 +44,10 @@ const GatsbyBackgroundImage = props => {
     ? imageDarkMode
     : image
 
-  const parsedContentfulAssetUrl = parseContentfulAssetUrl(imageSrc, previewMode)
+  const parsedContentfulAssetUrl = parseContentfulAssetUrl(
+    imageSrc,
+    previewMode
+  )
 
   return (
     <Wrapper

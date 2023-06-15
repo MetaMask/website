@@ -9,6 +9,7 @@ import ConsenSysToU from '../components/ConsenSysToU'
  * @summary -
  * @description -
  */
+
 const ContentfulToULayout = props => {
   const {
     data: { header, footer, seo },
@@ -17,20 +18,25 @@ const ContentfulToULayout = props => {
     ...rest
   } = props
 
-  return (
-    <>
+  if (isStandalone)
+    return (
       <Layout
         {...rest}
         themeColor={themeColor}
         h2FontSize={h2FontSize}
         isStandalone={isStandalone}
       >
-        {seo && contentfulModuleToComponent({ ...seo, pagePath: pathBuild })}
-        {header && contentfulModuleToComponent(header)}
-        <ConsenSysToU touData={touData} />
-        {footer && contentfulModuleToComponent(footer)}
+        {touData && <ConsenSysToU touData={touData} />}
       </Layout>
-    </>
+    )
+
+  return (
+    <Layout {...rest} themeColor={themeColor} h2FontSize={h2FontSize}>
+      {seo && contentfulModuleToComponent({ ...seo, pagePath: pathBuild })}
+      {header && contentfulModuleToComponent(header)}
+      {touData && <ConsenSysToU touData={touData} />}
+      {footer && contentfulModuleToComponent(footer)}
+    </Layout>
   )
 }
 

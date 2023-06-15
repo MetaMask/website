@@ -27,6 +27,7 @@
     "auth0-js": "^9.8.2",
     "body-scroll-lock": "^4.0.0-beta.0",
     "dotenv": "^8.1.0",
+    "download": "^8.0.0",
     "gatsby": "^5.0.0",
     "gatsby-cli": "^5.0.0",
     "gatsby-plugin-google-analytics": "^5.0.0",

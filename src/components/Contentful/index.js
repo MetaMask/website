@@ -20,6 +20,7 @@ import ContentfulNewsCategory from './ContentfulNewsCategory'
 import ContentfulTimeline from './ContentfulTimeline'
 import ContentfulNewsLayout from './ContentfulNewsLayout'
 import ContentfulLayout from './ContentfulLayout'
+import ContentfulAssetStorage from './ContentfulAssetStorage'
 
 export {
   ContentfulLayoutHeader,
@@ -44,4 +45,5 @@ export {
   ContentfulTimeline,
   ContentfulNewsLayout,
   ContentfulLayout,
+  ContentfulAssetStorage,
 }

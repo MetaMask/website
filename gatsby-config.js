@@ -147,7 +147,7 @@ if (env.errors) {
               ...allContentfulNewsPrivate,
               ...allContentfulNewsNonCanonical,
             }
-            let privatePages = ['/preview/']
+            let privatePages = ['/preview/', '/assets/']
             allContentfulLayout.edges.map(edge => {
               privatePages.push(edge.node.slug)
             })
