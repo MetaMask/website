@@ -125,9 +125,13 @@ const FeatureSlider = props => {
                 </SliderTitle>
                 <SliderDescription>
                   {previewMode ? (
-                    <ParseMD>{description}</ParseMD>
+                    <ParseMD>{item.description}</ParseMD>
                   ) : (
-                    <div dangerouslySetInnerHTML={{ __html: description }} />
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: item.description?.childMarkdownRemark.html,
+                      }}
+                    />
                   )}
                 </SliderDescription>
                 <div class="hidden-desktop">
