@@ -125,28 +125,38 @@ const FeatureSlider = props => {
           : {})}
       >
         {featureSliderItems
-          ? featureSliderItems.map((item, index) => (
-              <SliderText className="dl-checklist fadeIn" key={index}>
-                <SliderTitle
-                  className={classnames({
-                    active: activeItem === index,
-                  })}
-                  onClick={() => setActiveItem(index)}
-                >
-                  {item.title}
-                </SliderTitle>
-                <SliderDescription>
-                  {previewMode ? (
-                    <ParseMD>{description}</ParseMD>
-                  ) : (
-                    <div dangerouslySetInnerHTML={{ __html: description }} />
-                  )}
-                </SliderDescription>
-                <div className="hidden-desktop">
-                  {imageContent(item.image, item.imageMobile, item.customClass)}
-                </div>
-              </SliderText>
-            ))
+          ? featureSliderItems.map((item, index) => {
+              return (
+                <SliderText className="dl-checklist fadeIn" key={index}>
+                  <SliderTitle
+                    className={classnames({
+                      active: activeItem === index,
+                    })}
+                    onClick={() => setActiveItem(index)}
+                  >
+                    {item.title}
+                  </SliderTitle>
+                  <SliderDescription>
+                    {previewMode ? (
+                      <ParseMD>{item.description}</ParseMD>
+                    ) : (
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: item.description?.childMarkdownRemark.html,
+                        }}
+                      />
+                    )}
+                  </SliderDescription>
+                  <div className="hidden-desktop">
+                    {imageContent(
+                      item.image,
+                      item.imageMobile,
+                      item.customClass
+                    )}
+                  </div>
+                </SliderText>
+              )
+            })
           : null}
       </SliderTextWrapper>
       {cta ? (
