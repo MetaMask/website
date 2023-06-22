@@ -252,8 +252,8 @@
 <h4 class="mt-6" id="distributed-key-generation-as-a-metamask-snap-in-ecdsa-wasm">Distributed Key Generation as a MetaMask snap in ECDSA-WASM</h4>
 <p>Progress has been made on <a target="_blank" href="https://en.wikipedia.org/wiki/Secure_multi-party_computation">MPC</a> capabilities. We have taken the earlier PoC WebAssembaly (WASM) bindings and created a prototype snap, usable in <a target="_blank" href="https://metamask.io/flask/">MetaMask Flask</a>, which demonstrates <a target="_blank" href="https://en.wikipedia.org/wiki/Distributed_key_generation">DKG</a> and message signing. It supports exporting and importing key shares in addition to key generation and saving proofs for message signing.</p>
 <p>Under the hood, the package leverages <a target="_blank" href="https://github.com/ZenGo-X/multi-party-ecdsa">an implementation</a> of GG2020 (Gennaro and Goldfeder 2020, <a target="_blank" href="https://eprint.iacr.org/2020/540.pdf">https://eprint.iacr.org/2020/540.pdf</a>), a protocol that supports a non-interactive online phase allowing for players to asynchronously participate in the protocol without the need to be online simultaneously, and allows the efficient detection of aborting parties.</p>
-<div class="wp-block-image mt-7 mb-5">
-<figure class="aligncenter"><img src="https://miro.medium.com/max/4800/0*TSJ22GB9Yi7yXb5c" alt="" class="loaded-lazyload loaded-image"/></figure></div>
+<div class="mt-7 mb-5">
+<figure><img src="https://images.ctfassets.net/9sy2a0egs6zh/0GJggnY5iWSFXOocoU5Cl/35a3b58cedffc15016d3bd0622b68068/mm-snap-key-generation.png" width="744" height="212" alt="Distributed Key Generation as a MetaMask snap in ECDSA-WASM"/></figure></div>
 <p>The next steps are to make some improvements to the snap code; in particular, adding encryption support for snap_manageState so we don’t have to manage encryption of the key shares in the Snap code itself. Subsequently, we will be adding support for signing transactions.</p>
 <p>Source code: <a target="_blank" href="https://github.com/LavaMoat/ecdsa-wasm">https://github.com/LavaMoat/ecdsa-wasm</a></p>
 <h3 class="mt-8" id="join-the-security-team">Join the Security Team!</h3>
