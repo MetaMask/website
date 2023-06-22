@@ -101,6 +101,7 @@
 <url> <loc>https://metamask.io/news/latest/how-to-bridge-your-assets-using-connexts-bridge-protocol/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/metamask-integrates-starkware-into-first-of-its-kind-zk-rollup-snap/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/consensys-and-starkware-partner-to-bring-zk-rollups-to-infura-and-metamask/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/security/metamask-security-monthly-may-2022/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/security/metamask-security-april-team-report/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/download/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 </urlset>
