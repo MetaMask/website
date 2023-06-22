@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import styled, { withTheme } from 'styled-components'
 import Image from './Image'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
-import { browserName, isMobile, isOpera } from 'react-device-detect'
+import { browserName, isMobile } from 'react-device-detect'
 import get from 'lodash/get'
+import useIsChromium from '../lib/utils/isChromium'
 
 const TabContentDownload = props => {
   const {
@@ -20,6 +21,7 @@ const TabContentDownload = props => {
     id,
   } = props
   const [downloadForFirefox, setDownloadForFirefox] = useState(ctaFirefox)
+  const isChromium = useIsChromium()
   useEffect(() => {
     ;(async () => {
       if (id === 'browser' && browserName === 'Firefox') {
@@ -48,7 +50,14 @@ const TabContentDownload = props => {
     const isOpera = browserName === 'Opera'
     const isEdge = browserName === 'Edge'
 
-    if (isChrome || isMobile) {
+    if (isChromium) {
+      ctasDownload = [
+        {
+          ...ctaChrome,
+          displayText: ctaChrome.displayText.replace(/Chrome/g, 'Chromium'),
+        },
+      ]
+    } else if (isChrome || isMobile) {
       ctasDownload = [ctaChrome]
     } else if (isFirefox) {
       ctasDownload = [downloadForFirefox]

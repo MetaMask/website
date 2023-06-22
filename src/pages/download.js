@@ -10,6 +10,7 @@ import {
 import Layout from '../templates/PageLayout'
 import DownloadContainer from '../components/DownloadContainer'
 import DownloadBrowser from '../components/DownloadBrowser'
+import isChromium from '../lib/utils/isChromium'
 
 const DownloadPage = props => {
   const {
@@ -67,7 +68,7 @@ const DownloadPage = props => {
   const appExtensions = {
     browser: {
       image: download_extension,
-      label: isMobile ? 'Chrome' : browserName,
+      label: isMobile ? 'Chrome' : isChromium() ? 'Chromium' : browserName,
       title: 'Install MetaMask for your browser',
       ctaChrome: cta_chrome,
       ctaFirefox: cta_firefox,
