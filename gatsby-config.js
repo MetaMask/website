@@ -22,7 +22,7 @@ if (env.errors) {
       description: `MetaMask is a ConsenSys Formation.`,
       siteUrl:
         activeEnv === 'development'
-          ? 'https://metamask.consensys.net'
+          ? 'https://metamask.consensys.io'
           : 'https://metamask.io',
     },
     plugins: [
@@ -160,7 +160,7 @@ if (env.errors) {
             let pages = []
             const siteUrl =
               activeEnv === 'development'
-                ? 'https://metamask.consensys.net'
+                ? 'https://metamask.consensys.io'
                 : site.siteMetadata.siteUrl
             allSitePage.edges.map(edge => {
               if (privatePages.indexOf(edge.node.path) === -1) {
@@ -195,8 +195,8 @@ if (env.errors) {
                 policy: [{ userAgent: '*', allow: '/' }],
               }
             : {
-                host: 'https://metamask.consensys.net',
-                sitemap: 'https://metamask.consensys.net/sitemap.xml',
+                host: 'https://metamask.consensys.io',
+                sitemap: 'https://metamask.consensys.io/sitemap.xml',
                 policy: [{ userAgent: '*', disallow: '/' }],
               },
       },
