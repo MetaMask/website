@@ -50,6 +50,7 @@
 <url> <loc>https://metamask.io/updates/password-required/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/faqs/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/about/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
+<url> <loc>https://metamask.io/news/latest/metamask-extensions-updated-ux-elevates-network-dapp-and-account-selection/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/developers/integrate-a-feedback-form-into-your-dapp-collect-user-data-at-scale/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/security/metamask-security-monthly-june-2023/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
 <url> <loc>https://metamask.io/news/institutions/the-crypto-custody-debate-custody-vs-self-custody/</loc> <changefreq>daily</changefreq> <priority>0.8</priority> </url>
