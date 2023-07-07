@@ -27,6 +27,7 @@
     "gatsby": "^5.0.0",
     "gatsby-cli": "^5.0.0",
     "gatsby-plugin-google-analytics": "^5.0.0",
+    "gatsby-plugin-google-tagmanager": "^5.0.0",
     "gatsby-plugin-image": "^3.0.0",
     "gatsby-plugin-manifest": "^5.0.0",
     "gatsby-plugin-meta-redirect": "^1.1.1",
