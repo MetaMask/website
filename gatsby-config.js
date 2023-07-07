@@ -102,56 +102,54 @@ if (env.errors) {
               }
             }
             allSitePage {
-              edges {
-                node {
-                  path
-                }
+              nodes {
+                path
               }
             }
             allContentfulLayout(filter: {isPrivate: {eq: true}}) {
-              edges {
-                node {
-                  slug
-                }
+              nodes {
+                slug
               }
             }
             allContentfulNews(filter: {isPrivate: {eq: true}}) {
-              edges {
-                node {
-                  title
-                  categories {
-                    name
-                  }
+              nodes {
+                title
+                categories {
+                  name
                 }
               }
             }
           }`,
-          serialize: ({ site, allSitePage, allContentfulLayout, allContentfulNews }) => {
+          resolvePages: ({
+            allSitePage: { nodes: allSitePages },
+            allContentfulLayout: { nodes: allPrivateContentfulPages },
+            allContentfulNews: { nodes: allPrivateContentfulNews },
+          }) => {
             let privatePages = ['/preview/']
-            allContentfulLayout.edges.map(edge => {
-              privatePages.push(edge.node.slug)
+            allPrivateContentfulPages.forEach(page => {
+              privatePages.push(page.slug)
             })
-
-            allContentfulNews.edges.map((edge) => {
-              const newsUrl = getNewsUrl(edge.node)
+            allPrivateContentfulNews.forEach(page => {
+              const newsUrl = getNewsUrl(page)
               privatePages.push(newsUrl)
             });
 
-            let pages = []
-            const siteUrl =
-              activeEnv === 'development'
-                ? 'https://metamask.younetco.com'
-                : site.siteMetadata.siteUrl
-            allSitePage.edges.map(edge => {
-              if (privatePages.indexOf(edge.node.path) === -1) {
-                pages.push({
-                  url: siteUrl + edge.node.path,
-                  changefreq: `daily`,
-                  priority: edge.node.path === '' ? 1 : 0.8,
-                })
+            const allPages = [];
+            allSitePages.forEach(page => {
+              if (privatePages.indexOf(page.path) === -1) {
+                allPages.push(page)
               }
             })
-            return pages
+            return allPages.map(page => {
+              return { ...page }
+            })
+          },
+          serialize: ({ path }) => {
+            return {
+              url: path,
+              changefreq: 'daily',
+              priority: path === '' ? 1 : 0.8,
+            }
           },
         },
       },
@@ -170,15 +168,15 @@ if (env.errors) {
         options:
           activeEnv === 'production'
             ? {
-                host: 'https://metamask.io',
-                sitemap: 'https://metamask.io/sitemap.xml',
-                policy: [{ userAgent: '*', allow: '/' }],
-              }
+              host: 'https://metamask.io',
+              sitemap: 'https://metamask.io/sitemap-index.xml',
+              policy: [{ userAgent: '*', allow: '/' }],
+            }
             : {
-                host: 'https://metamask.younetco.com',
-                sitemap: 'https://metamask.younetco.com/sitemap.xml',
-                policy: [{ userAgent: '*', disallow: '/' }],
-              },
+              host: 'https://metamask.younetco.com',
+              sitemap: 'https://metamask.younetco.com/sitemap-index.xml',
+              policy: [{ userAgent: '*', disallow: '/' }],
+            },
       },
     ],
   }
