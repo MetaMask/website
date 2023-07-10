@@ -1,4 +1,7 @@
 {
+  "rules": {
+    "react-hooks/rules-of-hooks": false
+  },
   "processors": [
     "stylelint-processor-styled-components"
   ],
