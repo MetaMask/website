@@ -1,21 +1,19 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { gsap } from 'gsap'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import { useFrame } from '@studio-freight/hamo'
 import Lenis from '@studio-freight/lenis'
 import classnames from 'classnames'
 import { useMediaQuery } from 'react-responsive'
 import { useDeviceDetect } from '../../../../hooks/useDeviceDetect'
 
-import Image from '../../../Image'
-import Link from '../../../Link'
-import { pageData } from '../../Portfolio.data'
-import ButtonShadow from '../../Shared/ButtonShadow'
 import RiveIcon from './Elements/RiveIcon'
 import VideoModal from './Elements/VideoModal'
 import VideoButton from './Elements/VideoButton'
-import IconLink from '../../../../images/icons/icon-link.svg'
-import IconLinkBlack from '../../../../images/icons/icon-link-black.svg'
+import NetworksLogos from './Elements/NetworksLogos'
+import AdditionalResources from './Elements/AdditionalResources'
+import Buttons from './Elements/Buttons'
+import { pageData } from '../../Portfolio.data'
 
 /**
  * @name PortfolioMapSidebar
@@ -307,70 +305,23 @@ const PortfolioMapSidebar = props => {
 
                 {detailPageData?.detailPage?.logos && (
                   <>
-                    <Hr />
+                    {detailPageData?.detailPage?.logos.map(
+                      ({ title, list }) => {
+                        return (
+                          <>
+                            <Hr />
 
-                    {detailPageData?.detailPage?.logosTitle && (
-                      <>
-                        <Description
-                          dangerouslySetInnerHTML={{
-                            __html: detailPageData?.detailPage?.logosTitle,
-                          }}
-                        />
-                        <br />
-                      </>
+                            {title && (
+                              <Description>
+                                {title} <br /> <br />
+                              </Description>
+                            )}
+
+                            <NetworksLogos logosList={list} />
+                          </>
+                        )
+                      }
                     )}
-
-                    <Networks>
-                      {detailPageData?.detailPage?.logos.map(
-                        ({ label, icon }, i) => {
-                          return (
-                            <Network key={i}>
-                              <NetworkInner>
-                                <NetworkIconWrapper>
-                                  <NetworkIcon>
-                                    <NetworkIconImage src={icon} />
-                                  </NetworkIcon>
-                                </NetworkIconWrapper>
-                                <NetworkLabel>{label}</NetworkLabel>
-                              </NetworkInner>
-                            </Network>
-                          )
-                        }
-                      )}
-                    </Networks>
-                  </>
-                )}
-
-                {detailPageData?.detailPage?.extraLogos && (
-                  <>
-                    <br />
-
-                    {detailPageData?.detailPage?.extraLogos && (
-                      <>
-                        <Description
-                          dangerouslySetInnerHTML={{
-                            __html:
-                              detailPageData?.detailPage?.extraLogos.title,
-                          }}
-                        />
-                        <br />
-                      </>
-                    )}
-
-                    <Networks>
-                      {detailPageData?.detailPage?.extraLogos.logos.map(
-                        ({ label, icon }, i) => {
-                          return (
-                            <Network key={i}>
-                              <NetworkIcon>
-                                <NetworkIconImage src={icon} />
-                              </NetworkIcon>
-                              <NetworkLabel>{label}</NetworkLabel>
-                            </Network>
-                          )
-                        }
-                      )}
-                    </Networks>
                   </>
                 )}
 
@@ -399,26 +350,9 @@ const PortfolioMapSidebar = props => {
                       {detailPageData?.detailPage?.links?.title}
                     </SubHeading>
 
-                    <Resources>
-                      {detailPageData?.detailPage?.links?.list.map(
-                        ({ label, url, newTab, badge }, i) => {
-                          return (
-                            <Resource key={i}>
-                              <Link to={url} newTab={newTab}>
-                                {badge && <Badge>{badge}</Badge>}
-                                <ResourceInner>
-                                  {label}
-                                  <IconLinkWrapper>
-                                    <IconLink />
-                                    <IconLinkBlack />
-                                  </IconLinkWrapper>
-                                </ResourceInner>
-                              </Link>
-                            </Resource>
-                          )
-                        }
-                      )}
-                    </Resources>
+                    <AdditionalResources
+                      links={detailPageData?.detailPage?.links}
+                    />
                   </>
                 )}
               </ContentInner>
@@ -431,60 +365,15 @@ const PortfolioMapSidebar = props => {
         <VideoModal
           embedUrl={detailPageData?.detailPage?.video?.embedUrl}
           setShowVideo={setShowVideo}
-        ></VideoModal>
+        />
       )}
 
-      <ButtonsWrapper>
-        <CtaWrapper>
-          <ButtonShadow
-            as="a"
-            href="https://portfolio.metamask.io/"
-            target="_blank"
-            rel='"noopener noreferrer'
-            short
-            hoverCircle
-          >
-            Try Portfolio
-          </ButtonShadow>
-        </CtaWrapper>
-
-        <CloseBtnWrapper>
-          <CloseBtn
-            iconClose
-            isCircular={true}
-            onClick={handleClickClose}
-          ></CloseBtn>
-        </CloseBtnWrapper>
-      </ButtonsWrapper>
+      <Buttons handleClickClose={handleClickClose} />
     </Wrapper>
   )
 }
 
 export default PortfolioMapSidebar
-
-const PMSBtnFadeIn = keyframes`
-  0% {
-    scale: 0;
-    opacity: 0.4;
-  }
-
-  100% {
-    scale: 1;
-    opacity: 1;
-  }
-`
-
-const PMSBtnFadeOut = keyframes`
-  0% {
-    scale: 1;
-    opacity: 1;
-  }
-  
-  100% {
-    scale: 0.5;
-    opacity: 0;
-  }
-`
 
 const Wrapper = styled.div`
   position: absolute;
@@ -714,208 +603,5 @@ const Description = styled.p`
     &:hover {
       color: #7e7e7e;
     }
-  }
-`
-
-const Networks = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0;
-  gap: 37px;
-
-  @media (max-width: ${({ theme }) => theme.device.tablet}) {
-    gap: 37px 0;
-  }
-`
-
-const Network = styled.li`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  list-style: none;
-  width: 52px;
-  margin: 0;
-
-  @media (max-width: ${({ theme }) => theme.device.tablet}) {
-    gap: 0;
-    min-width: 33.33%;
-    max-width: 33.33%;
-    flex-basis: 33.33%;
-
-    &:nth-child(3n + 1) {
-      justify-content: flex-start;
-    }
-
-    &:nth-child(3n + 2) {
-      justify-content: center;
-    }
-
-    &:nth-child(3n) {
-      justify-content: flex-end;
-    }
-  }
-`
-
-const NetworkInner = styled.div`
-  position: relative;
-`
-
-const NetworkIconWrapper = styled.div`
-  position: relative;
-  width: 52px;
-  height: 45px;
-  display: flex;
-  justify-content: center;
-`
-
-const NetworkIcon = styled.div`
-  position: relative;
-  width: 45px;
-  height: 45px;
-`
-
-const NetworkIconImage = styled(Image)`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-`
-
-const NetworkLabel = styled.div`
-  margin-top: 10px;
-  font-weight: 500;
-  font-size: 10px;
-  line-height: 1;
-  text-align: center;
-
-  @media (max-width: ${({ theme }) => theme.device.tablet}) {
-    width: 52px;
-  }
-`
-
-const Resources = styled.ul`
-  margin: 12px 0 0;
-`
-const Resource = styled.li`
-  margin: 0;
-  border-bottom: 1px solid #ececec;
-  list-style: none;
-
-  a {
-    display: block;
-    width: 100%;
-    padding: 12px 0;
-    color: inherit;
-  }
-`
-const ResourceInner = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: inherit;
-
-  @media (max-width: ${({ theme }) => theme.device.tablet}) {
-    font-size: 14px;
-    line-height: 1.575;
-
-    svg {
-      min-width: 30px;
-      max-width: 30px;
-      min-height: 30px;
-      max-height: 30px;
-      margin-left: 12px;
-    }
-  }
-`
-const IconLinkWrapper = styled.div`
-  position: relative;
-  display: flex;
-
-  svg {
-    &:nth-child(2) {
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      stroke-dasharray: 110;
-      stroke-dashoffset: 110;
-      transition: stroke-dashoffset 0.4s ease-out;
-
-      ${Resource}:hover & {
-        stroke-dashoffset: 0;
-      }
-    }
-  }
-`
-
-const Badge = styled.span`
-  display: block;
-  width: max-content;
-  padding: 6px;
-  background: linear-gradient(85.33deg, #fcefe3 0%, #ffe466 100%);
-  border-radius: 4px;
-  font-weight: 500;
-  font-size: 8px;
-  line-height: 1;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #000000;
-`
-
-const ButtonsWrapper = styled.div`
-  display: flex;
-
-  @media (max-width: ${({ theme }) => theme.device.miniDesktop}) {
-    position: absolute;
-    top: auto;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 31;
-  }
-`
-
-const CloseBtn = styled(ButtonShadow)``
-
-const CloseBtnWrapper = styled.div`
-  position: absolute;
-  top: 50vh;
-  left: 630px;
-  z-index: 31;
-  transform: scale(1);
-  opacity: 0;
-  transition: all 0.3s;
-  animation: ${PMSBtnFadeOut} 0.35s ease-out forwards;
-
-  .show & {
-    animation: ${PMSBtnFadeIn} 0.35s ease-out 0.75s forwards;
-  }
-
-  @media (max-width: ${({ theme }) => theme.device.miniDesktop}) {
-    position: relative;
-    top: auto;
-    left: auto;
-  }
-`
-
-const CtaWrapper = styled.div`
-  position: relative;
-  pointer-events: all;
-  margin-right: 15px;
-  width: fit-content;
-  transform: scale(1);
-  opacity: 0;
-  transition: all 0.3s;
-  animation: ${PMSBtnFadeOut} 0.35s ease-out forwards;
-
-  .show & {
-    animation: ${PMSBtnFadeIn} 0.35s ease-out 0.75s forwards;
-  }
-
-  @media (max-width: ${({ theme }) => theme.device.tablet}) {
-    width: max-content;
-    margin-right: 10px;
   }
 `

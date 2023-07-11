@@ -152,6 +152,7 @@ export default IMOG.Component('Draggable', {
   methods: {
     moveTo({ x, y, immediate }) {
       this.dragOrigin = [0, 0]
+      this.props.pointerType = 'ui'
       const config = {
         ease: 'power4.inOut',
         duration: immediate ? 0 : 1,

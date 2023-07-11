@@ -11,7 +11,7 @@ import Magnetic from '../../../../lib/utils/magnetic'
  */
 
 const PortfolioMapMarkersButton = props => {
-  const { name, riveIcon, onClick, active } = props
+  const { name, riveIcon, onClick, active, markerMobileAlignement, id } = props
 
   const el = useRef()
 
@@ -41,6 +41,7 @@ const PortfolioMapMarkersButton = props => {
       <ButtonOuter
         className={classnames({
           buttonActive: active,
+          markerMobileRight: markerMobileAlignement === 'right',
         })}
       >
         <ButtonWrapper ref={el}>
@@ -72,12 +73,20 @@ export default PortfolioMapMarkersButton
 const ButtonOuter = styled.div`
   pointer-events: none;
   position: relative;
-  transform: scale(0.9) translate(-50%, -80px);
+  transform: translate(-50%, -80px);
   z-index: 2;
 
   &.buttonActive {
     pointer-events: all;
-    transform: scale(1) translate(-50%, -90px);
+    transform: translate(-50%, -90px);
+  }
+
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    &.markerMobileRight.buttonActive {
+      transform: translate(-75%, -80px) !important;
+      transition: transform 0.3s ease-out 1.2s;
+      will-change: transform;
+    }
   }
 `
 const ButtonWrapper = styled.div`
@@ -87,6 +96,12 @@ const ButtonWrapper = styled.div`
 const ButtonInner = styled.div`
   display: flex;
   justify-content: center;
+
+  @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+    .markerMobileRight.buttonActive & {
+      transform: translateY(-10px);
+    }
+  }
 `
 
 const Button = styled.button`

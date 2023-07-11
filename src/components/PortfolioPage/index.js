@@ -14,9 +14,9 @@ import PortfolioMapSidebar from './Map/Sidebar/PortfolioMapSidebar'
 export {
   PortfolioHelmet,
   PortfolioLoader,
+  PortfolioIntro,
   PortfolioHeader,
   PortfolioFooter,
-  PortfolioIntro,
   PortfolioInstructions,
   PortfolioMap,
   PortfolioMapNav,
