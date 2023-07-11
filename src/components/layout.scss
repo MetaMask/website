@@ -1644,7 +1644,7 @@ img.with-shadow {
   }
 }
 
-img[src$="#only-light"],
+img[src$='#only-light'],
 img.image-light {
   display: initial;
 }
@@ -1682,4 +1682,10 @@ body .acsb-trigger.acsb-ready {
 
 body.ascb-show .acsb-trigger.acsb-ready {
   display: block !important;
+}
+
+body.disable-scroll {
+  -ms-touch-action: none;
+  touch-action: none;
+  overflow: hidden;
 }

@@ -85,6 +85,10 @@ const theme = {
     desktopMediaMax: '1199px',
     twoKResolutionMax: '2048px',
   },
+  easeType: {
+    //defaultInOut: 'cubic-bezier(0.7, 0, 0.4, 0.9)',
+    defaultMM1: 'cubic-bezier(0.5,0.14,0,1.01)',
+  },
   spacingLRMobile: '16px',
   shadowSubMenu: 'rgba(0, 0, 0, 0.28)',
   shadowCard: 'rgba(0, 0, 0, 0.1)',

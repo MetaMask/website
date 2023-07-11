@@ -1,0 +1,69 @@
+{
+  "name": "@metamask/logo",
+  "version": "3.1.1",
+  "description": "A browserifyable 3d metamask logo. [Live demo](http://metamask.github.io/logo/).",
+  "homepage": "https://github.com/MetaMask/logo#readme",
+  "bugs": {
+    "url": "https://github.com/MetaMask/logo/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MetaMask/logo.git"
+  },
+  "license": "ISC",
+  "author": "MetaMask",
+  "main": "index.js",
+  "files": [
+    "fox.json",
+    "util.js"
+  ],
+  "scripts": {
+    "convert": "node convert.js",
+    "demo": "node demo/build.js",
+    "demo:all": "yarn demo --all",
+    "lint": "yarn lint:eslint && yarn lint:misc --check",
+    "lint:eslint": "eslint . --cache --ext js,ts",
+    "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write",
+    "lint:misc": "prettier '**/*.json' '**/*.md' '!CHANGELOG.md' '**/*.yml' --ignore-path .gitignore",
+    "setup": "yarn install && yarn allow-scripts"
+  },
+  "dependencies": {
+    "gl-mat4": "1.1.4",
+    "gl-vec3": "1.0.3"
+  },
+  "devDependencies": {
+    "@lavamoat/allow-scripts": "^1.0.6",
+    "@metamask/auto-changelog": "^2.5.0",
+    "@metamask/eslint-config": "^8.0.0",
+    "@metamask/eslint-config-nodejs": "^8.0.0",
+    "browserify": "^16.5.2",
+    "copy-to-clipboard": "^3.0.5",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "execa": "^5.1.1",
+    "mersenne-twister": "^1.1.0",
+    "obj-file-parser": "^0.5.0",
+    "obj-file-parser-ts": "^0.6.4",
+    "prettier": "^2.2.1",
+    "prettier-plugin-packagejson": "^2.2.11",
+    "rimraf": "^3.0.2",
+    "svg-parser": "^2.0.4",
+    "uglifyify": "^5.0.2",
+    "yargs": "^17.2.1"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "lavamoat": {
+    "allowScripts": {
+      "@lavamoat/preinstall-always-fail": false
+    }
+  }
+}
