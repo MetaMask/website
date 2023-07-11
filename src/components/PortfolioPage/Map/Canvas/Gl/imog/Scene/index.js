@@ -26,6 +26,10 @@ export default IMOG.Component('Scene', {
       enabled: true,
       focus: false,
       animationActive: false,
+      size: (props, { context }) => ({
+        width: context.$rendererProps.size.width,
+        height: context.$rendererProps.size.height,
+      }),
     }
   },
 
@@ -139,7 +143,16 @@ export default IMOG.Component('Scene', {
         },
       })
     },
-    // 'while:active'() {},
+    'set:size'() {
+      if (this.props.focus) {
+        this.focusHotspot({
+          mesh: this.lastFocusMesh,
+          id: this.lastFocusId,
+          immediate: true,
+          silent: true,
+        })
+      }
+    },
   },
 
   methods: {
@@ -151,12 +164,14 @@ export default IMOG.Component('Scene', {
       offset,
       id,
     }) {
+      this.lastFocusId = id
+      this.lasFocusMesh = mesh
       this.draggable.props.pointerType = 'ui'
       if (mesh || id) {
         const realMesh = this.hotspots.meshes.find(
           mesh => mesh.userData.id === id
         )
-        const wP = realMesh.getWorldPosition(v3)
+        const wP = (realMesh || mesh).getWorldPosition(v3)
 
         if (offset) {
           wP.x += offset[0] * window.innerWidth

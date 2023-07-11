@@ -62,46 +62,6 @@ export default IMOG.Component('Renderer', {
     })
     this.worldCamera = this.basicCamera.camera
     IMOG.inject('worldCamera', this.worldCamera)
-
-    if (this.$gui) {
-      // const fCameras = this.$gui.addFolder({
-      //   title: 'Cameras',
-      //   expanded: false,
-      // });
-      // fCameras
-      //   .addButton({ title: 'OrbitCamera' })
-      //   .on('click', () => (this.props.cameraType = 'orbit'));
-      // fCameras
-      //   .addButton({ title: 'BasicCamera' })
-      //   .on('click', () => (this.props.cameraType = 'basic'));
-      // fCameras
-      //   .addButton({ title: 'KeyboardCamera' })
-      //   .on('click', () => (this.props.cameraType = 'keyboard'));
-      const fGrading = this.$gui.addFolder({
-        title: 'ToneMapping',
-        expanded: true,
-      })
-      // fGrading.addInput(this.props, 'compositing', { min: 0, max: 2 });
-      fGrading
-        .addInput(this.props, 'levels', {
-          x: { step: 0.01 },
-          y: { step: 0.01 },
-          z: { step: 0.01 },
-        })
-        .on('change', () => {
-          const obj = { ...this.props.levels }
-          obj[Math.random()] = 0
-          this.props.levels = obj
-        })
-      fGrading.addInput(this.props, 'saturation', { min: 0, max: 2 })
-    }
-
-    setTimeout(() => {
-      if (this.$gui) this.$gui.refresh()
-    }, 0)
-
-    window.addEventListener('focus', this.handleWindowFocus)
-    window.addEventListener('blur', this.handleWindowBlur)
   },
 
   destroy() {

@@ -39,33 +39,39 @@ const PortfolioMapMarkers = props => {
     <Wrapper>
       <List>
         {featuresList
-          ? featuresList.map(({ markerLabel, color, riveIcon }, index) => {
-              const isActive = activeFeature === index
+          ? featuresList.map(
+              (
+                { markerLabel, color, riveIcon, markerMobileAlignement },
+                index
+              ) => {
+                const isActive = activeFeature === index
 
-              return (
-                <Marker
-                  key={index}
-                  $top={mapCoordY}
-                  $left={mapCoordX}
-                  style={
-                    isActive
-                      ? {
-                          '--color': color,
-                          '--x-pos': `${mapCoordX}px`,
-                          '--y-pos': `${mapCoordY}px`,
-                        }
-                      : {}
-                  }
-                >
-                  <PortfolioMapMarkersButton
-                    name={markerLabel}
-                    riveIcon={riveIcon}
-                    active={isActive}
-                    onClick={() => handleClick(index)}
-                  />
-                </Marker>
-              )
-            })
+                return (
+                  <Marker
+                    key={index}
+                    $top={mapCoordY}
+                    $left={mapCoordX}
+                    style={
+                      isActive
+                        ? {
+                            '--color': color,
+                            '--x-pos': `${mapCoordX}px`,
+                            '--y-pos': `${mapCoordY}px`,
+                          }
+                        : {}
+                    }
+                  >
+                    <PortfolioMapMarkersButton
+                      name={markerLabel}
+                      riveIcon={riveIcon}
+                      active={isActive}
+                      onClick={() => handleClick(index)}
+                      markerMobileAlignement={markerMobileAlignement}
+                    />
+                  </Marker>
+                )
+              }
+            )
           : null}
       </List>
     </Wrapper>

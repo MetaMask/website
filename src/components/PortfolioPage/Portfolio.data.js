@@ -35,47 +35,19 @@ export const pageData = {
     {
       name: 'Dashboard',
       markerLabel: 'Learn more about Dashboard',
+      markerMobileAlignement: 'center',
       color: '#ffe466',
       riveIcon: '/images/portfolio/rive-icons/dashboard-v2.riv',
       detailPage: {
         title: 'Dashboard',
         subtitle: `Finally, you won’t need 10 tabs open to manage web3 assets across networks and protocols. The MetaMask Portfolio dashboard allows you to track your crypto journey in one place.`,
         description: `The dashboard gives you a crystal clear view of everything you hold in your wallets, along with all your transactions. Stay one step ahead of trends and innovations so you can map your next move with insights into everything you own in your portfolio. Shift seamlessly between network views, track multiple wallets, and watch assets you’re interested in. Tap between tokens, NFTs, and transactions to get a clear view of everywhere you’ve been, and everything you’ve gathered along the way. Think of the dashboard as your own personal control panel of your web3 journey.`,
-        logos: [
-          {
-            label: 'Ethereum mainnet',
-            icon:
-              '/images/portfolio/sidebar-icons/ethereum-eth-logo-diamond-purple.svg',
-          },
-          {
-            label: 'Polygon',
-            icon: '/images/portfolio/sidebar-icons/polygon-matic-logo.svg',
-          },
-          {
-            label: 'BNB Smart Chain',
-            icon: '/images/portfolio/sidebar-icons/bnb-bnb-logo.svg',
-          },
-          {
-            label: 'Avalanche',
-            icon: '/images/portfolio/sidebar-icons/avalanche-avax-logo.svg',
-          },
-          {
-            label: 'Arbitrum',
-            icon: '/images/portfolio/sidebar-icons/arbitrum-arb-logo.svg',
-          },
-          {
-            label: 'Optimism',
-            icon:
-              '/images/portfolio/sidebar-icons/optimism-ethereum-op-logo.svg',
-          },
-        ],
-        /*
+        logos: null,
         video: {
-          title: 'Bridge Feature tutorial',
-          posterImage: '/images/portfolio/video-bridge-poster.jpg',
-          embedUrl: 'https://www.youtube.com/embed/MT75shhXybw',
+          title: 'Dashboard Feature tutorial',
+          posterImage: '/images/portfolio/video-poster.jpg',
+          embedUrl: 'https://www.youtube.com/embed/v8E2SHHyqms',
         },
-        */
         links: {
           title: 'Additional resources',
           list: [
@@ -111,6 +83,7 @@ export const pageData = {
     {
       name: 'Buy',
       markerLabel: 'Learn more about Buy',
+      markerMobileAlignement: 'right',
       color: '#75c4fd',
       riveIcon: '/images/portfolio/rive-icons/buy-v2.riv',
       detailPage: {
@@ -119,48 +92,50 @@ export const pageData = {
         description: `No matter your experience level, our instant fiat-to-crypto conversion feature opens up a world of possibilities, allowing you to swiftly enter the exciting realm of web3 and continue on your journey with confidence. Effortlessly convert your fiat currency into a diverse range of cryptocurrencies instantly, without leaving the dapp.
         <br /><br />
         The buy feature allows you to directly on-ramp your fiat onto 13 different networks, and multiple options of tokens to on-ramp into for each network. You can avoid the fees and wait times that come with bridging by purchasing tokens directly onto layer 2 networks.`,
-        logosTitle: 'Partner platforms:',
         logos: [
           {
-            label: 'Banxa',
-            icon: '/images/portfolio/sidebar-icons/banxa.svg',
-          },
-          {
-            label: 'MoonPay',
-            icon: '/images/portfolio/sidebar-icons/moonpay.svg',
-          },
-          {
-            label: 'Transak',
-            icon: '/images/portfolio/sidebar-icons/transak.svg',
-          },
-          {
-            label: 'PayPal',
-            icon: '/images/portfolio/sidebar-icons/paypal.svg',
-          },
-          {
-            label: 'CashApp',
-            icon: '/images/portfolio/sidebar-icons/cash-app.svg',
-          },
-          {
-            label: 'Sardine',
-            icon: '/images/portfolio/sidebar-icons/sardine.svg',
-          },
-          {
-            label: 'Mercuryo',
-            icon: '/images/portfolio/sidebar-icons/mercuryo.png',
-          },
-          {
-            label: 'Onramp.money',
-            icon: '/images/portfolio/sidebar-icons/onramp-money.png',
+            title: 'Partner platforms:',
+            list: [
+              {
+                label: 'Banxa',
+                icon: '/images/portfolio/sidebar-icons/banxa.svg',
+              },
+              {
+                label: 'MoonPay',
+                icon: '/images/portfolio/sidebar-icons/moonpay.svg',
+              },
+              {
+                label: 'Transak',
+                icon: '/images/portfolio/sidebar-icons/transak.svg',
+              },
+              {
+                label: 'PayPal',
+                icon: '/images/portfolio/sidebar-icons/paypal.svg',
+              },
+              {
+                label: 'CashApp',
+                icon: '/images/portfolio/sidebar-icons/cash-app.svg',
+              },
+              {
+                label: 'Sardine',
+                icon: '/images/portfolio/sidebar-icons/sardine.svg',
+              },
+              {
+                label: 'Mercuryo',
+                icon: '/images/portfolio/sidebar-icons/mercuryo.png',
+              },
+              {
+                label: 'Onramp.money',
+                icon: '/images/portfolio/sidebar-icons/onramp-money.png',
+              },
+            ],
           },
         ],
-        /*
         video: {
-          title: 'Bridge Feature tutorial',
-          posterImage: '/images/portfolio/video-bridge-poster.jpg',
+          title: 'Buy Feature tutorial',
+          posterImage: '/images/portfolio/video-poster.jpg',
           embedUrl: 'https://www.youtube.com/embed/v8E2SHHyqms',
         },
-        */
         links: {
           title: 'Additional resources',
           list: [
@@ -177,6 +152,7 @@ export const pageData = {
     {
       name: 'Swap',
       markerLabel: 'Learn more about Swap',
+      markerMobileAlignement: 'center',
       color: '#86e29b',
       riveIcon: '/images/portfolio/rive-icons/swap-v2.riv',
       detailPage: {
@@ -186,34 +162,40 @@ export const pageData = {
         <br /><br />
         Swap any token across six networks, including Ethereum, Optimism, Arbitrum, Polygon, and Avalanche Chain. Fine tune your swap to specify slippage, so you get the transaction tailored to your needs, every time, aggregated directly from trusted, decentralized providers. 
         `,
-        logosTitle: 'Supported networks:',
         logos: [
           {
-            label: 'Ethereum mainnet',
-            icon:
-              '/images/portfolio/sidebar-icons/ethereum-eth-logo-diamond-purple.svg',
-          },
-          {
-            label: 'Avalanche C-Chain',
-            icon: '/images/portfolio/sidebar-icons/avalanche-avax-logo.svg',
-          },
-          {
-            label: 'Polygon',
-            icon: '/images/portfolio/sidebar-icons/polygon-matic-logo.svg',
-          },
-          {
-            label: 'Optimism',
-            icon:
-              '/images/portfolio/sidebar-icons/optimism-ethereum-op-logo.svg',
-          },
-          {
-            label: 'Arbitrum',
-            icon: '/images/portfolio/sidebar-icons/arbitrum-arb-logo.svg',
+            title: 'Supported networks:',
+            list: [
+              {
+                label: 'Ethereum mainnet',
+                icon:
+                  '/images/portfolio/sidebar-icons/ethereum-eth-logo-diamond-purple.svg',
+              },
+              {
+                label: 'Avalanche C-Chain',
+                icon: '/images/portfolio/sidebar-icons/avalanche-avax-logo.svg',
+              },
+              {
+                label: 'Polygon',
+                icon: '/images/portfolio/sidebar-icons/polygon-matic-logo.svg',
+              },
+              {
+                label: 'Optimism',
+                icon:
+                  '/images/portfolio/sidebar-icons/optimism-ethereum-op-logo.svg',
+              },
+              {
+                label: 'Arbitrum',
+                icon: '/images/portfolio/sidebar-icons/arbitrum-arb-logo.svg',
+              },
+            ],
           },
         ],
-        /*
-        video: null,
-        */
+        video: {
+          title: 'Swap Feature tutorial',
+          posterImage: '/images/portfolio/video-poster.jpg',
+          embedUrl: 'https://www.youtube.com/embed/v8E2SHHyqms',
+        },
         links: {
           title: 'Additional resources',
           list: [
@@ -243,6 +225,7 @@ export const pageData = {
     {
       name: 'Bridge',
       markerLabel: 'Learn more about Bridge',
+      markerMobileAlignement: 'right',
       color: '#ffafea',
       riveIcon: '/images/portfolio/rive-icons/bridge-v2.riv',
       detailPage: {
@@ -252,63 +235,65 @@ export const pageData = {
         <br /><br />
         You can bridge between the six supported chains using native tokens or stablecoins like USDC, USDT, and DAI. Quotes are generated by aggregating results from four decentralized bridge protocols.
         `,
-        logosTitle: 'Supported networks:',
         logos: [
           {
-            label: 'Ethereum mainnet',
-            icon:
-              '/images/portfolio/sidebar-icons/ethereum-eth-logo-diamond-purple.svg',
+            title: 'Supported networks:',
+            list: [
+              {
+                label: 'Ethereum mainnet',
+                icon:
+                  '/images/portfolio/sidebar-icons/ethereum-eth-logo-diamond-purple.svg',
+              },
+              {
+                label: 'BNB Smart Chain',
+                icon: '/images/portfolio/sidebar-icons/bnb-bnb-logo.svg',
+              },
+              {
+                label: 'Avalanche C-Chain',
+                icon: '/images/portfolio/sidebar-icons/avalanche-avax-logo.svg',
+              },
+              {
+                label: 'Polygon',
+                icon: '/images/portfolio/sidebar-icons/polygon-matic-logo.svg',
+              },
+              {
+                label: 'Optimism',
+                icon:
+                  '/images/portfolio/sidebar-icons/optimism-ethereum-op-logo.svg',
+              },
+              {
+                label: 'Arbitrum',
+                icon: '/images/portfolio/sidebar-icons/arbitrum-arb-logo.svg',
+              },
+            ],
           },
           {
-            label: 'BNB Smart Chain',
-            icon: '/images/portfolio/sidebar-icons/bnb-bnb-logo.svg',
-          },
-          {
-            label: 'Avalanche C-Chain',
-            icon: '/images/portfolio/sidebar-icons/avalanche-avax-logo.svg',
-          },
-          {
-            label: 'Polygon',
-            icon: '/images/portfolio/sidebar-icons/polygon-matic-logo.svg',
-          },
-          {
-            label: 'Optimism',
-            icon:
-              '/images/portfolio/sidebar-icons/optimism-ethereum-op-logo.svg',
-          },
-          {
-            label: 'Arbitrum',
-            icon: '/images/portfolio/sidebar-icons/arbitrum-arb-logo.svg',
+            title: 'Bridge protocols:',
+            list: [
+              {
+                label: 'Hop',
+                icon: '/images/portfolio/sidebar-icons/hop.svg',
+              },
+              {
+                label: 'Celer cBridge',
+                icon: '/images/portfolio/sidebar-icons/celer.svg',
+              },
+              {
+                label: 'Polygon PoS Bridge',
+                icon: '/images/portfolio/sidebar-icons/polygon-matic-logo.svg',
+              },
+              {
+                label: 'Connext',
+                icon: '/images/portfolio/sidebar-icons/connext.svg',
+              },
+            ],
           },
         ],
-        extraLogos: {
-          title: 'Bridge protocols:',
-          logos: [
-            {
-              label: 'Hop',
-              icon: '/images/portfolio/sidebar-icons/hop.svg',
-            },
-            {
-              label: 'Celer cBridge',
-              icon: '/images/portfolio/sidebar-icons/celer.svg',
-            },
-            {
-              label: 'Polygon PoS Bridge',
-              icon: '/images/portfolio/sidebar-icons/polygon-matic-logo.svg',
-            },
-            {
-              label: 'Connext',
-              icon: '/images/portfolio/sidebar-icons/connext.svg',
-            },
-          ],
-        },
-        /*
         video: {
           title: 'Bridge Feature tutorial',
-          posterImage: '/images/portfolio/video-bridge-poster.jpg',
-          embedUrl: 'https://www.youtube.com/embed/CcEGzWTUXjQ',
+          posterImage: '/images/portfolio/video-poster.jpg',
+          embedUrl: 'https://www.youtube.com/embed/v8E2SHHyqms',
         },
-        */
         links: {
           title: 'Additional resources',
           list: [
@@ -334,7 +319,10 @@ export const pageData = {
               label: 'Connectivity with Blockchain Bridges',
               url:
                 'https://learn.metamask.io/lessons/bridging-blockchain-networks',
-              badge: 'MetaMask Learn',
+              badge: {
+                label: 'MetaMask Learn',
+                gradient: { from: '#FCEFE3', to: '#75C4FD' },
+              },
               newTab: true,
             },
           ],
@@ -345,6 +333,7 @@ export const pageData = {
     {
       name: 'Stake',
       markerLabel: 'Learn more about Stake',
+      markerMobileAlignement: 'center',
       color: '#f5841f',
       riveIcon: '/images/portfolio/rive-icons/stake-v2.riv',
       mapCoordX: '47%',
@@ -353,24 +342,26 @@ export const pageData = {
         title: 'Stake',
         subtitle: `The stake feature in MetaMask Portfolio gathers staking rates and rewards from various trusted providers, ensuring that you maximize your staking potential. In a few simple steps, you can stake your Ethereum securely and effortlessly, while benefiting from the most competitive staking rates available.`,
         description: `Since the Shapella upgrade of the Ethereum network to proof-of-stake, interest in staking has increased. Now, you can instantly stake your Ethereum using decentralized providers within MetaMask Portfolio. No longer limited to a single provider, you can diversify your staking strategy and optimize your rewards without the long wait times or complicated navigation of browsing through different providers. Stake and unstake with multiple providers, collect rewards, and browse rates and options, all in one place.`,
-        logosTitle: 'Staking providers:',
         logos: [
           {
-            label: 'Lido',
-            icon: '/images/portfolio/sidebar-icons/lido.svg',
-          },
-          {
-            label: 'Rocket Pool',
-            icon: '/images/portfolio/sidebar-icons/rocketpool.png',
+            title: 'Staking providers:',
+            list: [
+              {
+                label: 'Lido',
+                icon: '/images/portfolio/sidebar-icons/lido.svg',
+              },
+              {
+                label: 'Rocket Pool',
+                icon: '/images/portfolio/sidebar-icons/rocketpool.png',
+              },
+            ],
           },
         ],
-        /*
         video: {
-          title: 'Bridge Feature tutorial',
-          posterImage: '/images/portfolio/video-bridge-poster.jpg',
-          embedUrl: 'https://www.youtube.com/embed/OaemNOdhvqk',
+          title: 'Stake Feature tutorial',
+          posterImage: '/images/portfolio/video-poster.jpg',
+          embedUrl: 'https://www.youtube.com/embed/v8E2SHHyqms',
         },
-        */
         links: {
           title: 'Additional resources',
           list: [
@@ -401,7 +392,10 @@ export const pageData = {
             {
               label: 'Staking, a Public Good',
               url: 'https://learn.metamask.io/lessons/what-is-staking',
-              badge: 'MetaMask Learn',
+              badge: {
+                label: 'MetaMask Learn',
+                gradient: { from: '#E3FCE9', to: '#FCEFE3' },
+              },
               newTab: true,
             },
           ],
