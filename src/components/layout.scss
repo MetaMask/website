@@ -1675,3 +1675,15 @@ body.dark-mode {
     display: block;
   }
 }
+
+/* For Osano Consent Management */
+div.osano-cm-dialog__buttons.osano-cm-buttons {
+  @media (max-width: 370px) {
+    flex-direction: column;
+  }
+
+  button.osano-cm-button {
+    min-width: unset;
+    padding: 0.5em;
+  }
+}
