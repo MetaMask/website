@@ -32,7 +32,12 @@ function ContentfulNewsCategory(props) {
             file {
               url
             }
-            gatsbyImageData(layout: CONSTRAINED, width: 1024, quality: 80, formats: [AUTO, WEBP])
+            gatsbyImageData(
+              layout: CONSTRAINED
+              width: 1024
+              quality: 80
+              formats: [AUTO, WEBP]
+            )
           }
           isPrivate
         }

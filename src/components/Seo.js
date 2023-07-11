@@ -10,7 +10,7 @@ import { useLocation } from '@reach/router'
  * @description -
  * @prop -
  */
-const SEO = (props) => {
+const SEO = props => {
   const {
     title,
     description,
