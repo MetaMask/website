@@ -6,7 +6,6 @@ const FoxAnimation = props => {
   const [left, setLeft] = React.useState(24)
   const [distance, setDistance] = React.useState(1200)
   const handleWindowSizeChange = () => {
-    console.log(window.innerWidth)
     if (window.innerWidth < 480) {
       setLeft(0)
       setDistance(window.innerWidth * 1.5)

@@ -6,6 +6,7 @@ import classnames from 'classnames'
 import Link from '../Link'
 import CTAAngleIcon from './CTAAngleIcon'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
+import GatsbyBackgroundImage from '../GatsbyBackgroundImage'
 
 /**
  * @name Card
@@ -38,47 +39,54 @@ const StyledCard = props => {
       <CardInner
         to={link}
         newTab={newTab}
-        backgroundColor={backgroundColor}
-        image={backgroundImage}
-        imageMobile={backgroundImageMobile}
+        $backgroundColor={backgroundColor}
+        $image={backgroundImage}
         className={classnames('cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
           [customClass]: customClass,
         })}
       >
-        {image ? (
-          <ImageWrapper imageMargin={imageMargin} layoutSize={layoutSize}>
-            <ImageSrc
-              image={image}
-              darkImage={imageDarkMode}
-              previewMode={previewMode}
-            />
-          </ImageWrapper>
-        ) : null}
-        <Inner>
-          {title ? <Title>{title}</Title> : null}
-          {description ? (
-            <Description>
-              <div dangerouslySetInnerHTML={{ __html: description }}></div>
-            </Description>
+        <GatsbyBackgroundImage
+          image={backgroundImage}
+          imageMobile={backgroundImageMobile}
+          previewMode={previewMode}
+        >
+          {image ? (
+            <ImageWrapper $imageMargin={imageMargin} $layoutSize={layoutSize}>
+              <ImageSrc
+                image={image}
+                darkImage={imageDarkMode}
+                previewMode={previewMode}
+              />
+            </ImageWrapper>
           ) : null}
-          {linkText ? (
-            <CTAWrapper>
-              <CTAAngleIcon text={linkText} />
-            </CTAWrapper>
-          ) : null}
-          {hubSpotForm ? <>{contentfulModuleToComponent(hubSpotForm)}</> : null}
-          {cta ? (
-            <CTA>
-              {cta.map(cta =>
-                contentfulModuleToComponent({
-                  ...cta,
-                  buttonSize: 'hero',
-                })
-              )}
-            </CTA>
-          ) : null}
-        </Inner>
+          <Inner>
+            {title ? <Title>{title}</Title> : null}
+            {description ? (
+              <Description>
+                <div dangerouslySetInnerHTML={{ __html: description }}></div>
+              </Description>
+            ) : null}
+            {linkText ? (
+              <CTAWrapper>
+                <CTAAngleIcon text={linkText} />
+              </CTAWrapper>
+            ) : null}
+            {hubSpotForm ? (
+              <>{contentfulModuleToComponent(hubSpotForm)}</>
+            ) : null}
+            {cta ? (
+              <CTA>
+                {cta.map(cta =>
+                  contentfulModuleToComponent({
+                    ...cta,
+                    buttonSize: 'hero',
+                  })
+                )}
+              </CTA>
+            ) : null}
+          </Inner>
+        </GatsbyBackgroundImage>
       </CardInner>
     </Card>
   )
@@ -99,35 +107,33 @@ const Card = styled.div``
 
 const CardInner = styled(Link)`
   display: flex;
+  overflow: hidden;
   color: ${({ theme }) => theme.text.dark};
   &:hover {
     .arrowAnimation:after {
       margin-left: 6px;
     }
   }
-  ${({ theme }) =>
-    `
-  @media (max-width: ${theme.device.mobileMediaMax}){
-    flex-direction: column;
-    align-items: center;
-  }
+  ${({ theme }) => `
+    @media (max-width: ${theme.device.mobileMediaMax}){
+      flex-direction: column;
+      align-items: center;
+    }
   `}
-  
+
   ${({ image }) =>
     image
-      ? ` background-image: url(${image});
-      background-size: cover;
-      padding: 16px;
+      ? `
       border-radius: 12px;
-    `
-      : ''}
-  
-  ${({ imageMobile, theme }) =>
-    imageMobile
-      ? ` 
-      @media (max-width: ${theme.device.tabletMediaMax}){
-        background-image: url(${imageMobile});
-        background-position: center;
+      .gatsby-bg__content {
+        display: flex;
+        padding: 16px;
+        ${({ theme }) => `
+          @media (max-width: ${theme.device.mobileMediaMax}){
+            flex-direction: column;
+            align-items: center;
+          }
+        `}
       }
     `
       : ''}

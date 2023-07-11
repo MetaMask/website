@@ -1,21 +1,55 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
-import ContextClientSide from '../../Context/ContextClientSide'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
+import classnames from 'classnames'
 
-const LogoImage = ({ alt, src, width, height, srcDarkMode }) => {
-  const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
-  const { isDarkMode } = darkModeContextValue || {}
+const LogoImage = ({ alt, src, width, height, srcDarkMode, previewMode }) => {
   return (
     <StyledPartnerImageContainer className={'LogoImageWrapper'}>
-      <StyledPartnerImage
-        src={isDarkMode && srcDarkMode ? srcDarkMode : src}
-        alt={alt}
-        widthCustom={width}
-        width={width || 400}
-        height={height || 400}
-        loading="lazy"
-      />
+      {getImage(src) ? (
+        <StyledPartnerImage
+          image={getImage(src)}
+          alt={alt}
+          $widthCustom={width}
+          width={width || 400}
+          height={height || 400}
+          className={classnames({ 'image-light': srcDarkMode })}
+        />
+      ) : (
+        <StyledImage
+          src={parseContentfulAssetUrl(src, previewMode)}
+          alt={alt}
+          loading="lazy"
+          $widthCustom={width}
+          width={width || 400}
+          height={height || 400}
+          className={classnames({ 'image-light': srcDarkMode })}
+        />
+      )}
+      {getImage(srcDarkMode) ? (
+        <StyledPartnerImage
+          image={getImage(srcDarkMode)}
+          alt={alt}
+          $widthCustom={width}
+          width={width || 400}
+          height={height || 400}
+          className="image-dark"
+        />
+      ) : (
+        srcDarkMode && (
+          <StyledImage
+            src={parseContentfulAssetUrl(srcDarkMode, previewMode)}
+            alt={alt}
+            loading="lazy"
+            $widthCustom={width}
+            width={width || 400}
+            height={height || 400}
+            className="image-dark"
+          />
+        )
+      )}
     </StyledPartnerImageContainer>
   )
 }
@@ -31,22 +65,32 @@ const StyledPartnerImageContainer = styled.div`
   height: auto;
 `
 
-const StyledPartnerImage = styled.img`
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-
-  ${({ widthCustom }) =>
-    widthCustom
+const StyledPartnerImage = styled(GatsbyImage)`
+  ${({ $widthCustom }) =>
+    $widthCustom
       ? `
-    width: ${widthCustom};
+    width: ${$widthCustom};
     margin: 0 auto;
     height: auto !important;
   `
       : ''}
 `
 
+const StyledImage = styled.img`
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+
+  ${({ $widthCustom }) =>
+    $widthCustom
+      ? `
+    width: ${$widthCustom};
+    margin: 0 auto;
+    `
+      : ''}
+`
+
 LogoImage.propTypes = {
   alt: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired,
+  src: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
 }

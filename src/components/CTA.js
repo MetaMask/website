@@ -171,7 +171,7 @@ const CTA = props => {
         to={link}
         newTab={newTab}
         color={color}
-        typeLayout={typeLayout}
+        $typeLayout={typeLayout}
         onClick={handleCustomClick}
       >
         {socialLink ? <SocialIcon name={socialLink} /> : null}
@@ -294,7 +294,7 @@ const CTAContainer = styled.div`
     align
       ? `
     display: flex;
-    justify-content: ${alignMapping(align)}
+    justify-content: ${alignMapping(align)};
   `
       : ''}
   &.socialLink {
@@ -384,8 +384,8 @@ const ContentWrapper = styled(Link)`
     align-items: center;
     color: ${({ theme }) => theme.text.default};
   }
-  ${({ typeLayout, color, theme }) =>
-    typeLayout === ''
+  ${({ $typeLayout, color, theme }) =>
+    $typeLayout === ''
       ? `
       color: ${color};
       &:hover {
@@ -393,8 +393,8 @@ const ContentWrapper = styled(Link)`
       }
   `
       : ``}
-  ${({ typeLayout, theme }) =>
-    ['header', 'headerSingle'].includes(typeLayout)
+  ${({ $typeLayout, theme }) =>
+    ['header', 'headerSingle'].includes($typeLayout)
       ? `
     font-size: 16px;
     line-height: 22px;
@@ -409,7 +409,7 @@ const ContentWrapper = styled(Link)`
     font-weight: 400;
     height: auto;
     color: #222;
-    body.dark-mode & {
+    body.dark-mode && {
       color: #FFF;
     }
     &:hover {
@@ -418,8 +418,8 @@ const ContentWrapper = styled(Link)`
     }
   `
       : ``}
-    ${({ typeLayout }) =>
-      typeLayout === 'headerSingle'
+    ${({ $typeLayout }) =>
+      $typeLayout === 'headerSingle'
         ? `
     padding: 0;
     margin: 0;
@@ -428,11 +428,11 @@ const ContentWrapper = styled(Link)`
     }
   `
         : ``}
-  ${({ typeLayout, theme }) =>
-    typeLayout === 'footer'
+  ${({ $typeLayout, theme }) =>
+    $typeLayout === 'footer'
       ? `
     color: #000000bd;
-    body.dark-mode & {
+    body.dark-mode && {
       color: #FFF;
     }
     font-size: 12px;

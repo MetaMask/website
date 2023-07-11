@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Wrapper, Image } from '../Logo'
-import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
 const ContentfulLogo = props => {
@@ -20,8 +19,7 @@ const ContentfulLogo = props => {
     },
   } = props
   const { title: titleFile, description: descriptionFile } = logo || {}
-  const url = parseContentfulAssetUrl(logo, previewMode)
-  const urlDarkMode = parseContentfulAssetUrl(logoDarkMode, previewMode)
+
   return (
     <Wrapper
       link={link}
@@ -30,12 +28,13 @@ const ContentfulLogo = props => {
       cleanStyle={cleanStyle}
       backgroundColor={backgroundColor}
     >
-      {url ? (
+      {logo ? (
         <Image
-          src={url}
+          src={logo}
           alt={descriptionFile || titleFile || title}
           width={widthLogo}
-          srcDarkMode={urlDarkMode}
+          srcDarkMode={logoDarkMode}
+          previewMode={previewMode}
         />
       ) : null}
     </Wrapper>

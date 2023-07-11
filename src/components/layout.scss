@@ -1241,7 +1241,8 @@ body.dark-mode {
   }
 
   &.mobile-center {
-    dl, dt {
+    dl,
+    dt {
       @media (max-width: 767px) {
         text-align: left;
         justify-content: left;
@@ -1347,7 +1348,7 @@ body.dark-mode {
 }
 
 .text-white {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .show-toolip {
@@ -1608,7 +1609,7 @@ body.dark-mode {
 }
 
 .beta-text {
-  color: #037DD6;
+  color: #037dd6;
   font-weight: 600;
   font-size: 13px;
   line-height: 32px;
@@ -1629,11 +1630,12 @@ body.light-mode .hide-on-lightmode {
 }
 
 body.dark-mode .white-on-darkmode {
-  color: #FFF;
+  color: #fff;
 }
 
 img.with-shadow {
-  filter: drop-shadow(-16.1252px 16.1252px 25.8003px rgba(0, 0, 0, 0.05)) drop-shadow(-3.22503px 3.22503px 10.7501px rgba(0, 0, 0, 0.07));
+  filter: drop-shadow(-16.1252px 16.1252px 25.8003px rgba(0, 0, 0, 0.05))
+    drop-shadow(-3.22503px 3.22503px 10.7501px rgba(0, 0, 0, 0.07));
 }
 
 .mw-453-desktop {
@@ -1642,18 +1644,34 @@ img.with-shadow {
   }
 }
 
-img[src$="#only-light"] {
+img[src$="#only-light"],
+img.image-light {
   display: initial;
 }
-img[src$="#only-dark"] {
+
+div.image-light {
+  display: block;
+}
+
+img[src$='#only-dark'],
+div.image-dark.image-dark,
+img.image-dark.image-dark {
   display: none;
 }
 
 body.dark-mode {
-  img[src$="#only-light"] {
+  img[src$='#only-light'],
+  img.image-light,
+  div.image-light {
     display: none;
   }
-  img[src$="#only-dark"] {
+
+  img[src$='#only-dark'],
+  img.image-dark {
     display: initial;
+  }
+
+  div.image-dark {
+    display: block;
   }
 }

@@ -61,8 +61,12 @@ const ConsenSysResources = props => {
         <>
           {items && items.length ? (
             <Listing>
-              {items.map(item => (
-                <ConsenSysResourcesItem {...item} showDate={showDate} />
+              {items.map((item, index) => (
+                <ConsenSysResourcesItem
+                  key={index}
+                  {...item}
+                  showDate={showDate}
+                />
               ))}
             </Listing>
           ) : (

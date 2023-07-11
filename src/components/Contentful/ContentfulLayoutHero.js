@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
 import Hero from '../HeroContainer'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
@@ -37,16 +36,7 @@ const ContentfulLayoutHero = props => {
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
-  const bgUrl = parseContentfulAssetUrl(backgroundImage, previewMode)
-  const bgDarkModeUrl = parseContentfulAssetUrl(
-    backgroundImageDarkMode,
-    previewMode
-  )
-  const sideImageUrl = parseContentfulAssetUrl(sideImage, previewMode)
-  const sideImageDarkModeUrl = parseContentfulAssetUrl(
-    sideImageDarkMode,
-    previewMode
-  )
+
   return (
     <Hero
       sectionPadding={sectionPadding}
@@ -59,11 +49,9 @@ const ContentfulLayoutHero = props => {
       eyebrowMobileLogo={eyebrowMobileLogo}
       eyebrowLogoDarkMode={eyebrowLogoDarkMode}
       eyebrowMobileLogoDarkMode={eyebrowMobileLogoDarkMode}
-      backgroundImage={bgUrl || ''}
-      backgroundImageDarkMode={bgDarkModeUrl || ''}
+      backgroundImage={backgroundImage}
+      backgroundImageDarkMode={backgroundImageDarkMode}
       modules={modules}
-      sideImageUrl={sideImageUrl || ''}
-      sideImageDarkModeUrl={sideImageDarkModeUrl || ''}
       sideImage={sideImage}
       sideImageDarkMode={sideImageDarkMode}
       hideHeadline={hideHeadline}
