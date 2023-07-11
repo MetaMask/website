@@ -47,6 +47,7 @@ export default IMOG.Component('HotSpots', {
       active: true,
       focus: false,
       dragging: false,
+      draggingStarted: false,
       imageSize: [0, 0],
       containerOffset: [0, 0],
       containerScale: 1,
@@ -194,6 +195,12 @@ export default IMOG.Component('HotSpots', {
 
   hooks: {
     'while:active'() {
+      this.updateMeshes()
+
+      if (!this.props.draggingStarted && !this.props.focus) {
+        this.checkIntersects()
+      }
+
       ;[this.activeMesh, ...this.hoverMeshes, ...this.meshes].forEach(mesh => {
         mesh.material.uniforms.uPosition.value.set(
           this.options.ref.parent.position.x * this.props.windowSize.pr,
@@ -202,7 +209,42 @@ export default IMOG.Component('HotSpots', {
         mesh.material.uniforms.uScale.value = this.options.ref.parent.scale.x
       })
     },
-    'set:repeatData'(data) {
+    'set:windowSize'({ width, height, pr }) {
+      this.group.scale.setScalar(height / 1000)
+      ;[this.activeMesh, ...this.hoverMeshes, ...this.meshes].forEach(mesh => {
+        mesh.material.uniforms.uResolution.value.set(width * pr, height * pr)
+      })
+    },
+    'set:mouse'({ x, y }, more) {
+      if (!this.props.active) return
+      if (!this.mouseInitialized) {
+        this.mouseInitialized = true
+        return
+      }
+    },
+    'set:dragging'() {
+      this.meshes.forEach(mesh => {
+        mesh.material.visible = false
+      })
+    },
+    'set:focus'() {
+      this.meshes.forEach(mesh => {
+        if (mesh.material.visible) {
+          gsap.killTweensOf(mesh.material.uniforms.uOpacity)
+          gsap.to(mesh.material.uniforms.uOpacity, {
+            value: 0,
+            duration: 0.5,
+            onComplete: () => (mesh.material.visible = false),
+          })
+        }
+      })
+    },
+    // 'set:hoverName'(name) {
+    // },
+  },
+  methods: {
+    updateMeshes() {
+      const data = this.props.repeatData
       const scale = (data.windowHeight / data.imageHeight) * data.scale
 
       this.meshes.forEach(mesh => {
@@ -241,43 +283,6 @@ export default IMOG.Component('HotSpots', {
         }
       })
     },
-    'set:windowSize'({ width, height, pr }) {
-      this.group.scale.setScalar(height / 1000)
-      ;[this.activeMesh, ...this.hoverMeshes, ...this.meshes].forEach(mesh => {
-        mesh.material.uniforms.uResolution.value.set(width * pr, height * pr)
-      })
-    },
-    'set:mouse'({ x, y }, more) {
-      if (!this.props.active) return
-      if (!this.mouseInitialized) {
-        this.mouseInitialized = true
-        return
-      }
-      if (!this.props.dragging && !this.props.focus) {
-        this.checkIntersects()
-      }
-    },
-    'set:dragging'() {
-      this.meshes.forEach(mesh => {
-        mesh.material.visible = false
-      })
-    },
-    'set:focus'() {
-      this.meshes.forEach(mesh => {
-        if (mesh.material.visible) {
-          gsap.killTweensOf(mesh.material.uniforms.uOpacity)
-          gsap.to(mesh.material.uniforms.uOpacity, {
-            value: 0,
-            duration: 0.5,
-            onComplete: () => (mesh.material.visible = false),
-          })
-        }
-      })
-    },
-    // 'set:hoverName'(name) {
-    // },
-  },
-  methods: {
     focus({ mesh }) {
       this.activeMesh.position.copy(mesh.position)
       this.activeMesh.scale.copy(mesh.scale)
@@ -305,6 +310,8 @@ export default IMOG.Component('HotSpots', {
       raycaster.setFromCamera(pointer, this.$worldCamera)
       let hitFound = false
       this.meshes.forEach(mesh => {
+        mesh.updateMatrix()
+        mesh.updateMatrixWorld()
         const intersects = raycaster.intersectObjects([mesh])
         const intersect = intersects[0]
         if (intersect) {
@@ -385,8 +392,10 @@ export default IMOG.Component('HotSpots', {
 
               this.props.hoverName = intersect.object.userData.name
               this.hoverMesh = intersect.object
+              this.hoverId = intersect.object.userData.id
             }
             hitFound = true
+            // console.log(intersect.object.userData.id)
           }
         }
       })
@@ -417,11 +426,12 @@ export default IMOG.Component('HotSpots', {
     handleClick() {
       // if (this.props.dragging) return
       if (this.props.hoverName) {
+        // debugger
         this.props.hoverName = null
         this.$canvas.focusHotspot({
           name: this.props.hoverName,
           mesh: this.hoverMesh,
-          id: this.hoverMesh.userData.id,
+          id: this.hoverId,
         })
       }
     },

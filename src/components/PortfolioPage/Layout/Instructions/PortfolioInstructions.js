@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import Cookies from 'universal-cookie'
 import { useMediaQuery } from 'react-responsive'
 
-import CTA from '../../Shared/PortfolioCta'
+import Cta from '../../Shared/PortfolioCta'
 import DragAnimation from './Animations/DragAnimation'
 import DragMobileAnimation from './Animations/DragMobileAnimation'
 import ScrollAnimation from './Animations/ScrollAnimation'
@@ -170,7 +170,7 @@ const PortfolioInstructions = props => {
 
   useEffect(() => {
     instructionsCompleted && canvas.current.enable()
-  }, [instructionsCompleted])
+  }, [instructionsCompleted, canvas])
 
   return (
     <Wrapper
@@ -209,7 +209,7 @@ const PortfolioInstructions = props => {
                 />
 
                 <StepCtaWrapper>
-                  <CTA
+                  <Cta
                     backgroundColor="#86E29B"
                     textColor="#1E1F25"
                     onClick={handleNextBtnClick}
@@ -217,7 +217,7 @@ const PortfolioInstructions = props => {
                     animationDelay={0.8}
                   >
                     {pageData.instructions.step1.ctaLabel}
-                  </CTA>
+                  </Cta>
                 </StepCtaWrapper>
               </Step>
             </StepsContainer>
@@ -245,14 +245,14 @@ const PortfolioInstructions = props => {
                 </StepRiveWrapper>
 
                 <StepCtaWrapper>
-                  <CTA
+                  <Cta
                     backgroundColor="#FFAFEA"
                     textColor="#1E1F25"
                     onClick={handleNextBtnClick}
                     animationInit={true}
                   >
                     {pageData.instructions.step2.ctaLabel}
-                  </CTA>
+                  </Cta>
                 </StepCtaWrapper>
               </Step>
             </StepsContainer>
@@ -290,14 +290,14 @@ const PortfolioInstructions = props => {
                 </StepRiveWrapper>
 
                 <StepCtaWrapper>
-                  <CTA
+                  <Cta
                     backgroundColor="#FFE466"
                     textColor="#1E1F25"
                     onClick={handleNextBtnClick}
                     animationInit={true}
                   >
                     {pageData.instructions.step3.ctaLabel}
-                  </CTA>
+                  </Cta>
                 </StepCtaWrapper>
               </Step>
             </StepsContainer>

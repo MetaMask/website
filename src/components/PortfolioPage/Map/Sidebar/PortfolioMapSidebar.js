@@ -113,7 +113,6 @@ const PortfolioMapSidebar = props => {
   }
 
   const animationOut = onCompleteFn => {
-    const sidebar = q(`.${Sidebar.styledComponentId}`)
     const bgOverlay = q(`.${BgOverlay.styledComponentId}`)
     const contentOuter = q(`.${ContentOuter.styledComponentId}`)
     const scrollBarContainer = q(`.${ScrollBarContainer.styledComponentId}`)
@@ -298,7 +297,7 @@ const PortfolioMapSidebar = props => {
                   }}
                 />
 
-                <HR />
+                <Hr />
 
                 <Description
                   dangerouslySetInnerHTML={{
@@ -308,7 +307,7 @@ const PortfolioMapSidebar = props => {
 
                 {detailPageData?.detailPage?.logos && (
                   <>
-                    <HR />
+                    <Hr />
 
                     {detailPageData?.detailPage?.logosTitle && (
                       <>
@@ -377,7 +376,7 @@ const PortfolioMapSidebar = props => {
 
                 {detailPageData?.detailPage?.video && (
                   <>
-                    <HR $fullWidth={true} />
+                    <Hr $fullWidth={true} />
 
                     <SubHeading>
                       {detailPageData?.detailPage?.video.title}
@@ -394,7 +393,7 @@ const PortfolioMapSidebar = props => {
 
                 {detailPageData?.detailPage?.links && (
                   <>
-                    <HR $fullWidth={true} />
+                    <Hr $fullWidth={true} />
 
                     <SubHeading>
                       {detailPageData?.detailPage?.links?.title}
@@ -685,7 +684,7 @@ const SubHeading = styled.h3`
   }
 `
 
-const HR = styled.div`
+const Hr = styled.div`
   position: relative;
   padding: ${({ $fullWidth }) => ($fullWidth ? '50px 0' : '25px 0')};
   width: ${({ $fullWidth }) => ($fullWidth ? 'calc(100% + 100px)' : 'auto')};

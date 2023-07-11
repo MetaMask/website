@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import ButtonShadow from '../Shared/ButtonShadow'
 import { useRive } from '@rive-app/react-canvas'
@@ -14,20 +14,10 @@ import IconFooterMobile from '../../../images/icons/icon-footer-mobile.svg'
 const ButtonFooter = props => {
   const { onClick } = props
 
-  const intervalId = useRef()
   const { rive, RiveComponent } = useRive({
     src: '/images/portfolio/rive-icons/footer-1-hover-out.riv',
     autoplay: false,
   })
-
-  /*
-  const handleMouseEnter = () => {
-    if (rive) {
-      rive.reset()
-      rive.play()
-    }
-  }
-  */
 
   const handleMouseEnter = () => {
     if (rive) {
@@ -42,10 +32,6 @@ const ButtonFooter = props => {
       rive.play('Rollout')
     }
   }
-
-  useEffect(() => {
-    return () => clearInterval(intervalId.current)
-  }, [])
 
   return (
     <ButtonShadow

@@ -19,7 +19,6 @@ const PortfolioHeader = props => {
           file: { url: srcLogo },
           svg: svgLogo,
         },
-        widthLogo,
       },
     },
     showIntro,

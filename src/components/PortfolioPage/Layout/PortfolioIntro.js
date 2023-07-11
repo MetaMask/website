@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import styled from 'styled-components'
 import Cookies from 'universal-cookie'
 import Loadable from '@loadable/component'
 import { useMediaQuery } from 'react-responsive'
 
-import CTA from '../Shared/PortfolioCta'
+import Cta from '../Shared/PortfolioCta'
 import MMLogoSvg from '../../../images/metamask-logo-iso.svg'
 import { pageData } from '../Portfolio.data'
 
@@ -126,7 +126,7 @@ const PortfolioIntro = props => {
         />
 
         <CtaWrapper>
-          <CTA
+          <Cta
             backgroundColor="#ffffff"
             textColor="#1E1F25"
             onClick={handleClick}
@@ -135,7 +135,7 @@ const PortfolioIntro = props => {
             animationDelay={0.7}
           >
             {pageData.intro.ctaLabel}
-          </CTA>
+          </Cta>
         </CtaWrapper>
       </Content>
     </Wrapper>

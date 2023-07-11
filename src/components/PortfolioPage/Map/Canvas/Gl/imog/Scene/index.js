@@ -97,6 +97,7 @@ export default IMOG.Component('Scene', {
           !this.props.animationActive,
         focus: props => this.props.focus,
         dragging: props => this.draggable.props.dragging,
+        draggingStarted: props => this.draggable.props.draggingStarted,
         imageSize: props => this.mapImage.props.exposedSize,
         containerOffset: props => this.draggable.props.exposedPosition,
         containerScale: props => this.draggable.props.scaleSpring,
@@ -150,8 +151,8 @@ export default IMOG.Component('Scene', {
       offset,
       id,
     }) {
-      // console.log(id)
-      if (mesh) {
+      this.draggable.props.pointerType = 'ui'
+      if (mesh || id) {
         const realMesh = this.hotspots.meshes.find(
           mesh => mesh.userData.id === id
         )

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Image from '../../../../Image'
 import PlayButtonIcon from '../../../../../images/icons/icon-play.svg'

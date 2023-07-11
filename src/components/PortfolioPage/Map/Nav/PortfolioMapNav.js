@@ -218,12 +218,12 @@ const Item = styled.li`
   overflow: hidden;
   color: white;
   /* opacity: 0; */
-  transition: 0.25s cubic-bezier(0.5,0.14,0,1.01) max-width,
-    0.25s cubic-bezier(0.5,0.14,0,1.01) background,
-    0.25s cubic-bezier(0.5,0.14,0,1.01) color;
+  transition: 0.25s cubic-bezier(0.5, 0.14, 0, 1.01) max-width,
+    0.25s cubic-bezier(0.5, 0.14, 0, 1.01) background,
+    0.25s cubic-bezier(0.5, 0.14, 0, 1.01) color;
 
   canvas {
-    transition: 0.25s cubic-bezier(0.5,0.14,0,1.01) filter;
+    transition: 0.25s cubic-bezier(0.5, 0.14, 0, 1.01) filter;
   }
 
   @media (max-width: ${({ theme }) => theme.device.tablet}) {

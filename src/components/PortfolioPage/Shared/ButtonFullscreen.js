@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import ButtonShadow from '../Shared/ButtonShadow'
 import { useRive } from '@rive-app/react-canvas'
@@ -10,8 +10,7 @@ import toggleFullScreen from '../../../lib/utils/fullscreen'
  * @description - Portfolio page - Button Fullscreen
  */
 
-const ButtonFullscreen = props => {
-  const intervalId = useRef()
+const ButtonFullscreen = () => {
   const { rive, RiveComponent } = useRive({
     src: '/images/portfolio/rive-icons/fullscreen-1-hover-out.riv',
     autoplay: false,
@@ -20,15 +19,6 @@ const ButtonFullscreen = props => {
   const handleClick = () => {
     toggleFullScreen()
   }
-
-  /*
-  const handleMouseEnter = () => {
-    if (rive) {
-      rive.reset()
-      rive.play()
-    }
-  }
-  */
 
   const handleMouseEnter = () => {
     if (rive) {
@@ -43,10 +33,6 @@ const ButtonFullscreen = props => {
       rive.play('Rollout')
     }
   }
-
-  useEffect(() => {
-    return () => clearInterval(intervalId.current)
-  }, [])
 
   return (
     <Container>
