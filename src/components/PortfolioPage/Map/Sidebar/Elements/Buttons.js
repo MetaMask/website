@@ -15,22 +15,17 @@ const Buttons = props => {
 
   return (
     <ButtonsWrapper>
-      <CtaWrapper>
-        <ButtonShadow
-          as="a"
-          href={pageData.header.rightCta.href}
-          target="_blank"
-          rel='"noopener noreferrer'
-          short
-          hoverCircle
-        >
-          {pageData.header.rightCta.label}
-        </ButtonShadow>
-      </CtaWrapper>
+      <Cta
+        href={pageData.header.rightCta.href}
+        target="_blank"
+        rel='"noopener noreferrer'
+        short
+        hoverCircle
+      >
+        {pageData.header.rightCta.label}
+      </Cta>
 
-      <CloseBtnWrapper>
-        <CloseBtn iconClose isCircular={true} onClick={handleClickClose} />
-      </CloseBtnWrapper>
+      <CloseBtn iconClose isCircular={true} onClick={handleClickClose} />
     </ButtonsWrapper>
   )
 }
@@ -50,45 +45,13 @@ const ButtonsWrapper = styled.div`
   }
 `
 
-const CloseBtn = styled(ButtonShadow)``
-
-const PMSBtnFadeIn = keyframes`
-  0% {
-    scale: 0;
-    opacity: 0.4;
-  }
-
-  100% {
-    scale: 1;
-    opacity: 1;
-  }
-`
-
-const PMSBtnFadeOut = keyframes`
-  0% {
-    scale: 1;
-    opacity: 1;
-  }
-  
-  100% {
-    scale: 0.5;
-    opacity: 0;
-  }
-`
-
-const CloseBtnWrapper = styled.div`
+const CloseBtn = styled(ButtonShadow)`
   position: absolute;
   top: 50vh;
   left: 630px;
   z-index: 31;
   transform: scale(1);
   opacity: 0;
-  transition: all 0.3s;
-  animation: ${PMSBtnFadeOut} 0.35s ease-out forwards;
-
-  .show & {
-    animation: ${PMSBtnFadeIn} 0.35s ease-out 0.75s forwards;
-  }
 
   @media (max-width: ${({ theme }) => theme.device.miniDesktop}) {
     position: relative;
@@ -97,19 +60,13 @@ const CloseBtnWrapper = styled.div`
   }
 `
 
-const CtaWrapper = styled.div`
+const Cta = styled(ButtonShadow)`
   position: relative;
   pointer-events: all;
   margin-right: 15px;
   width: fit-content;
   transform: scale(1);
   opacity: 0;
-  transition: all 0.3s;
-  animation: ${PMSBtnFadeOut} 0.35s ease-out forwards;
-
-  .show & {
-    animation: ${PMSBtnFadeIn} 0.35s ease-out 0.75s forwards;
-  }
 
   @media (max-width: ${({ theme }) => theme.device.tablet}) {
     width: max-content;

@@ -35,7 +35,7 @@ export const pageData = {
     {
       name: 'Dashboard',
       markerLabel: 'Learn more about Dashboard',
-      markerMobileAlignement: 'center',
+      markerMobileAlignment: 'center',
       color: '#ffe466',
       riveIcon: '/images/portfolio/rive-icons/dashboard-v2.riv',
       detailPage: {
@@ -83,7 +83,7 @@ export const pageData = {
     {
       name: 'Buy',
       markerLabel: 'Learn more about Buy',
-      markerMobileAlignement: 'right',
+      markerMobileAlignment: 'right',
       color: '#75c4fd',
       riveIcon: '/images/portfolio/rive-icons/buy-v2.riv',
       detailPage: {
@@ -152,7 +152,7 @@ export const pageData = {
     {
       name: 'Swap',
       markerLabel: 'Learn more about Swap',
-      markerMobileAlignement: 'center',
+      markerMobileAlignment: 'center',
       color: '#86e29b',
       riveIcon: '/images/portfolio/rive-icons/swap-v2.riv',
       detailPage: {
@@ -225,7 +225,7 @@ export const pageData = {
     {
       name: 'Bridge',
       markerLabel: 'Learn more about Bridge',
-      markerMobileAlignement: 'right',
+      markerMobileAlignment: 'right',
       color: '#ffafea',
       riveIcon: '/images/portfolio/rive-icons/bridge-v2.riv',
       detailPage: {
@@ -333,7 +333,7 @@ export const pageData = {
     {
       name: 'Stake',
       markerLabel: 'Learn more about Stake',
-      markerMobileAlignement: 'center',
+      markerMobileAlignment: 'center',
       color: '#f5841f',
       riveIcon: '/images/portfolio/rive-icons/stake-v2.riv',
       mapCoordX: '47%',

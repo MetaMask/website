@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Link from '../../../../Link'
-import IconLink from '../../../../../images/icons/icon-link.svg'
 import IconLinkBlack from '../../../../../images/icons/icon-link-black.svg'
+import IconLink from '../../../../../images/icons/icon-link.svg'
 
 /**
  * @name AdditionalResources

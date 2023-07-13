@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import ButtonShadow from '../Shared/ButtonShadow'
 import { useRive } from '@rive-app/react-canvas'
-import IconFooterTablet from '../../../images/icons/icon-footer-tablet.svg'
 import IconFooterMobile from '../../../images/icons/icon-footer-mobile.svg'
+import IconFooterTablet from '../../../images/icons/icon-footer-tablet.svg'
 
 /**
  * @name ButtonFullscreen
