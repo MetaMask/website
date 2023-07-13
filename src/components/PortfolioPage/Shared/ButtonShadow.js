@@ -25,6 +25,7 @@ const ButtonShadow = props => {
     short = false,
     darkMobile = false,
     hoverCircle = false,
+    ...rest
   } = props
 
   return (
@@ -42,6 +43,7 @@ const ButtonShadow = props => {
       $isShort={short}
       $hoverCircle={hoverCircle}
       className={classnames({ darkMobile: darkMobile })}
+      {...rest}
     >
       {iconClose ? (
         <Cross>
@@ -78,6 +80,30 @@ const CrossBtnCloseFadeOut = keyframes`
   
   100% {
     transform: rotate(180deg);
+  }
+`
+
+const BtnFadeIn = keyframes`
+  0% {
+    scale: 0;
+    opacity: 0.4;
+  }
+
+  100% {
+    scale: 1;
+    opacity: 1;
+  }
+`
+
+const BtnFadeOut = keyframes`
+  0% {
+    scale: 1;
+    opacity: 1;
+  }
+  
+  100% {
+    scale: 0.5;
+    opacity: 0;
   }
 `
 
@@ -172,6 +198,14 @@ const ButtonElement = styled.button`
   text-align: center;
   overflow: hidden;
   pointer-events: all;
+
+  .show & {
+    animation: ${BtnFadeIn} 0.35s ease-out 0.75s forwards;
+  }
+
+  .hide & {
+    animation: ${BtnFadeOut} 0.35s ease-out forwards;
+  }
 
   @media (max-width: ${({ theme }) => theme.device.tablet}) {
     height: 38px;

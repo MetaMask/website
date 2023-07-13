@@ -147,13 +147,11 @@ const PortfolioFooter = props => {
     >
       <BgOverlay onClick={handleClickClose}></BgOverlay>
 
-      <CloseBtnWrapper>
-        <CloseBtn
-          iconClose
-          isCircular={true}
-          onClick={handleClickClose}
-        ></CloseBtn>
-      </CloseBtnWrapper>
+      <CloseBtn
+        iconClose
+        isCircular={true}
+        onClick={handleClickClose}
+      ></CloseBtn>
 
       <Content>
         <ContentOuter>
@@ -203,30 +201,6 @@ const PortfolioFooter = props => {
 
 export default PortfolioFooter
 
-const PFBtnFadeIn = keyframes`
-  0% {
-    scale: 0;
-    opacity: 0.4;
-  }
-
-  100% {
-    scale: 1;
-    opacity: 1;
-  }
-`
-
-const PFBtnFadeOut = keyframes`
-  0% {
-    scale: 1;
-    opacity: 1;
-  }
-  
-  100% {
-    scale: 0.5;
-    opacity: 0;
-  }
-`
-
 const Wrapper = styled.div`
   position: absolute;
   width: 100%;
@@ -265,8 +239,6 @@ const BgOverlay = styled.div`
   left: 0;
   background-color: rgba(30, 31, 37, 0.4);
 `
-
-const CloseBtn = styled(ButtonShadow)``
 
 const Content = styled.div`
   position: absolute;
@@ -475,7 +447,7 @@ const ItemLink = styled(Link)`
   }
 `
 
-const CloseBtnWrapper = styled.div`
+const CloseBtn = styled(ButtonShadow)`
   position: absolute;
   bottom: 390px;
   left: 50%;
@@ -483,14 +455,6 @@ const CloseBtnWrapper = styled.div`
   opacity: 0;
   z-index: 20;
   transition: all 0.3s;
-
-  .show & {
-    animation: ${PFBtnFadeIn} 0.35s ease-out 0.75s forwards;
-  }
-
-  .hide & {
-    animation: ${PFBtnFadeOut} 0.35s ease-out forwards;
-  }
 
   @media (max-width: ${({ theme }) => theme.device.miniDesktop}) {
     position: relative;

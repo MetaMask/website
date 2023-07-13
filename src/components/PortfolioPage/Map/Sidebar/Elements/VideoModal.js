@@ -17,25 +17,22 @@ const VideoModal = props => {
   const q = gsap.utils.selector(el)
 
   const [show, setShow] = useState(false)
+  const [hide, setHide] = useState(false)
 
   const handleClickClose = () => {
+    setHide(true)
     setShow(false)
     animationOut(onCompleteFn)
   }
 
   const onCompleteFn = () => {
-    const closeBtn = q(`.${CloseBtnWrapper.styledComponentId}`)
-
-    gsap.set(closeBtn, {
-      display: '',
-    })
     setShowVideo(false)
+    setHide(true)
   }
 
   const animationIn = () => {
     const bgOverlay = q(`.${BgOverlay.styledComponentId}`)
     const content = q(`.${Content.styledComponentId}`)
-    const closeBtn = q(`.${CloseBtnWrapper.styledComponentId}`)
 
     gsap
       .timeline({
@@ -44,13 +41,6 @@ const VideoModal = props => {
         },
       })
       .addLabel('start')
-      .set(
-        closeBtn,
-        {
-          display: 'block',
-        },
-        'start'
-      )
       .fromTo(
         content,
         {
@@ -123,7 +113,10 @@ const VideoModal = props => {
   }, [])
 
   return (
-    <Wrapper ref={el} className={classnames({ showVideo: show })}>
+    <Wrapper
+      ref={el}
+      className={classnames({ showVideo: show, hideVideo: hide })}
+    >
       <BgOverlay onClick={handleClickClose}></BgOverlay>
 
       <div>
@@ -140,13 +133,11 @@ const VideoModal = props => {
         </Content>
       </div>
 
-      <CloseBtnWrapper>
-        <CloseBtn
-          iconClose
-          isCircular={true}
-          onClick={handleClickClose}
-        ></CloseBtn>
-      </CloseBtnWrapper>
+      <CloseBtn
+        iconClose
+        isCircular={true}
+        onClick={handleClickClose}
+      ></CloseBtn>
     </Wrapper>
   )
 }
@@ -211,32 +202,21 @@ const VideoEmbed = styled.iframe`
   border: 0;
 `
 
-const VMBtnFadeIn = keyframes`
-  0% {
-    scale: 0;
-    opacity: 0.4;
-  }
-
-  100% {
-    scale: 1;
-    opacity: 1;
-  }
-`
-
 const VMBtnFadeOut = keyframes`
   0% {
     scale: 1;
     opacity: 1;
+    transform: rotate(0deg);
   }
   
   100% {
     scale: 0.5;
     opacity: 0;
+    transform: rotate(180deg);
   }
 `
 
-const CloseBtnWrapper = styled.div`
-  display: none;
+const CloseBtn = styled(ButtonShadow)`
   position: absolute;
   top: 3vh;
   left: 50%;
@@ -244,17 +224,14 @@ const CloseBtnWrapper = styled.div`
   transform: scale(1);
   transition: all 0.3s;
   transform-origin: center;
-  animation: ${VMBtnFadeOut} 0.35s ease-out 0.1s forwards;
   z-index: 10;
+  opacity: 0;
 
-  .showVideo > & {
-    opacity: 0;
-    animation: ${VMBtnFadeIn} 0.35s ease-out 0.75s forwards;
+  .hideVideo & {
+    animation: ${VMBtnFadeOut} 0.35s ease-out forwards;
   }
 
   @media (max-width: ${({ theme }) => theme.device.tablet}) {
     margin-left: -19px;
   }
 `
-
-const CloseBtn = styled(ButtonShadow)``

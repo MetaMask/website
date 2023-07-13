@@ -188,7 +188,7 @@ const PortfolioMapSidebar = props => {
     return () => {
       lenis.destroy()
     }
-  }, [])
+  }, [lerp, wheelMultiplier])
 
   useFrame(time => {
     lenis?.raf(time)
@@ -199,7 +199,7 @@ const PortfolioMapSidebar = props => {
       lenis?.scrollTo(0, { immediate: true })
       setReset(false)
     }
-  }, [reset])
+  }, [reset, lenis])
 
   const handleClickClose = () => {
     setDetailPage(null)
@@ -227,21 +227,21 @@ const PortfolioMapSidebar = props => {
     }
   }, [detailPage, setShow])
 
-  const updateScroll = event => {
-    if (barRef) {
-      if (event.scroll === 0) {
-        isDesktop
-          ? (barRef.current.style.transform = `scaleY(0)`)
-          : (barRef.current.style.transform = `scaleX(0)`)
-      } else {
-        isDesktop
-          ? (barRef.current.style.transform = `scaleY(${event.progress})`)
-          : (barRef.current.style.transform = `scaleX(${event.progress})`)
+  useEffect(() => {
+    const updateScroll = event => {
+      if (barRef) {
+        if (event.scroll === 0) {
+          isDesktop
+            ? (barRef.current.style.transform = `scaleY(0)`)
+            : (barRef.current.style.transform = `scaleX(0)`)
+        } else {
+          isDesktop
+            ? (barRef.current.style.transform = `scaleY(${event.progress})`)
+            : (barRef.current.style.transform = `scaleX(${event.progress})`)
+        }
       }
     }
-  }
 
-  useEffect(() => {
     if (show) {
       lenis?.on('scroll', updateScroll)
 
@@ -256,7 +256,7 @@ const PortfolioMapSidebar = props => {
     return () => {
       updateScroll && lenis?.off('scroll', updateScroll)
     }
-  }, [lenis, show, barRef, isDesktop])
+  }, [lenis, show, barRef, isDesktop, q])
 
   return (
     <Wrapper
@@ -264,6 +264,7 @@ const PortfolioMapSidebar = props => {
       $isVisible={show}
       className={classnames({
         show: detailPage !== null,
+        hide: detailPage === null,
         showVideo: showVideo,
       })}
     >
@@ -306,9 +307,9 @@ const PortfolioMapSidebar = props => {
                 {detailPageData?.detailPage?.logos && (
                   <>
                     {detailPageData?.detailPage?.logos.map(
-                      ({ title, list }) => {
+                      ({ title, list }, id) => {
                         return (
-                          <>
+                          <div key={id}>
                             <Hr />
 
                             {title && (
@@ -318,7 +319,7 @@ const PortfolioMapSidebar = props => {
                             )}
 
                             <NetworksLogos logosList={list} />
-                          </>
+                          </div>
                         )
                       }
                     )}
@@ -493,7 +494,7 @@ const BgOverlay = styled.div`
 const Content = styled.div`
   position: relative;
 
-  @media only screen and (max-device-width: 1024px) and (orientation: portrait) {
+  @media only screen and (min-device-width: 993px) and (max-device-width: 1024px) and (orientation: portrait) {
     -ms-touch-action: none;
     touch-action: none;
     overflow: hidden;

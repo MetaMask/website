@@ -41,7 +41,7 @@ const PortfolioMapMarkers = props => {
         {featuresList
           ? featuresList.map(
               (
-                { markerLabel, color, riveIcon, markerMobileAlignement },
+                { markerLabel, color, riveIcon, markerMobileAlignment },
                 index
               ) => {
                 const isActive = activeFeature === index
@@ -66,7 +66,7 @@ const PortfolioMapMarkers = props => {
                       riveIcon={riveIcon}
                       active={isActive}
                       onClick={() => handleClick(index)}
-                      markerMobileAlignement={markerMobileAlignement}
+                      markerMobileAlignment={markerMobileAlignment}
                     />
                   </Marker>
                 )

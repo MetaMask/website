@@ -11,7 +11,7 @@ import Magnetic from '../../../../lib/utils/magnetic'
  */
 
 const PortfolioMapMarkersButton = props => {
-  const { name, riveIcon, onClick, active, markerMobileAlignement, id } = props
+  const { name, riveIcon, onClick, active, markerMobileAlignment } = props
 
   const el = useRef()
 
@@ -41,7 +41,7 @@ const PortfolioMapMarkersButton = props => {
       <ButtonOuter
         className={classnames({
           buttonActive: active,
-          markerMobileRight: markerMobileAlignement === 'right',
+          markerMobileRight: markerMobileAlignment === 'right',
         })}
       >
         <ButtonWrapper ref={el}>
