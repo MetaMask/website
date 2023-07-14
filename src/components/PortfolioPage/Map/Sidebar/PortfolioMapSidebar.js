@@ -78,7 +78,6 @@ const PortfolioMapSidebar = props => {
           xPercent: () => (isDesktop ? 0 : 0),
           delay: isDesktop ? 0 : 0.25,
           duration: isDesktop ? 0.75 : 0.5,
-          ease: 'expo.out',
         },
         'start'
       )
@@ -118,7 +117,7 @@ const PortfolioMapSidebar = props => {
     gsap
       .timeline({
         defaults: {
-          ease: 'expo.inOut',
+          ease: 'expo.out',
         },
       })
       .addLabel('start')

@@ -58,7 +58,7 @@ const PortfolioMap = props => {
       gsap
         .timeline({
           defaults: {
-            ease: isOpening ? 'expo.out' : 'expo.inOut',
+            ease: isOpening ? 'expo.out' : 'expo.out',
           },
         })
         .fromTo(
@@ -90,7 +90,7 @@ const PortfolioMap = props => {
       gsap
         .timeline({
           defaults: {
-            ease: isOpening ? 'expo.out' : 'expo.inOut',
+            ease: isOpening ? 'expo.out' : 'expo.out',
           },
         })
         .fromTo(

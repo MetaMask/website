@@ -100,7 +100,7 @@ const PortfolioFooter = props => {
     gsap
       .timeline({
         defaults: {
-          ease: 'expo.inOut',
+          ease: 'expo.out',
         },
       })
       .addLabel('start')
@@ -454,7 +454,7 @@ const CloseBtn = styled(ButtonShadow)`
   transform: scale(1);
   opacity: 0;
   z-index: 20;
-  transition: all 0.3s;
+  //transition: all 0.3s;
 
   @media (max-width: ${({ theme }) => theme.device.miniDesktop}) {
     position: relative;

@@ -46,7 +46,7 @@ export const pageData = {
         video: {
           title: 'Dashboard Feature tutorial',
           posterImage: '/images/portfolio/video-poster.jpg',
-          embedUrl: 'https://www.youtube.com/embed/v8E2SHHyqms',
+          embedUrl: 'https://www.youtube.com/embed/XWPizSkhFp4',
         },
         links: {
           title: 'Additional resources',
@@ -134,7 +134,7 @@ export const pageData = {
         video: {
           title: 'Buy Feature tutorial',
           posterImage: '/images/portfolio/video-poster.jpg',
-          embedUrl: 'https://www.youtube.com/embed/v8E2SHHyqms',
+          embedUrl: 'https://www.youtube.com/embed/OtoymxLYQYU',
         },
         links: {
           title: 'Additional resources',
@@ -194,7 +194,7 @@ export const pageData = {
         video: {
           title: 'Swap Feature tutorial',
           posterImage: '/images/portfolio/video-poster.jpg',
-          embedUrl: 'https://www.youtube.com/embed/v8E2SHHyqms',
+          embedUrl: 'https://www.youtube.com/embed/q9uG6Ra-w54',
         },
         links: {
           title: 'Additional resources',
@@ -360,7 +360,7 @@ export const pageData = {
         video: {
           title: 'Stake Feature tutorial',
           posterImage: '/images/portfolio/video-poster.jpg',
-          embedUrl: 'https://www.youtube.com/embed/v8E2SHHyqms',
+          embedUrl: 'https://www.youtube.com/embed/r1rwvBWk5XU',
         },
         links: {
           title: 'Additional resources',
