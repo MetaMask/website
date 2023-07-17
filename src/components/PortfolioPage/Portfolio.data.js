@@ -315,16 +315,16 @@ export const pageData = {
                 'https://support.metamask.io/hc/en-us/articles/10055615871643-What-happens-when-I-initiate-a-transfer-on-a-bridge-',
               newTab: true,
             },
-            {
-              label: 'Connectivity with Blockchain Bridges',
-              url:
-                'https://learn.metamask.io/lessons/bridging-blockchain-networks',
-              badge: {
-                label: 'MetaMask Learn',
-                gradient: { from: '#FCEFE3', to: '#75C4FD' },
-              },
-              newTab: true,
-            },
+            // {
+            //   label: 'Connectivity with Blockchain Bridges',
+            //   url:
+            //     'https://learn.metamask.io/lessons/bridging-blockchain-networks',
+            //   badge: {
+            //     label: 'MetaMask Learn',
+            //     gradient: { from: '#FCEFE3', to: '#75C4FD' },
+            //   },
+            //   newTab: true,
+            // },
           ],
         },
       },
@@ -389,15 +389,15 @@ export const pageData = {
                 'hhttps://support.metamask.io/hc/en-us/articles/11834574786971-What-can-I-stake-with-MetaMask-Staking-',
               newTab: true,
             },
-            {
-              label: 'Staking, a Public Good',
-              url: 'https://learn.metamask.io/lessons/what-is-staking',
-              badge: {
-                label: 'MetaMask Learn',
-                gradient: { from: '#E3FCE9', to: '#FCEFE3' },
-              },
-              newTab: true,
-            },
+            // {
+            //   label: 'Staking, a Public Good',
+            //   url: 'https://learn.metamask.io/lessons/what-is-staking',
+            //   badge: {
+            //     label: 'MetaMask Learn',
+            //     gradient: { from: '#E3FCE9', to: '#FCEFE3' },
+            //   },
+            //   newTab: true,
+            // },
           ],
         },
       },
