@@ -44,7 +44,12 @@ const PortfolioPage = props => {
     <Layout>
       <PortfolioHelmet showLoader={showLoader} showIntro={showIntro} />
 
-      {seo && <Seo moduleConfig={{ ...seo, pagePath: location.pathname }} />}
+      {seo && <Seo moduleConfig={{
+        ...seo,
+        pagePath: location.pathname,
+        pageTitle: 'Discover MetaMask Portfolio',
+        pageDescription: 'Track, manage, buy, swap, bridge, and stake your web3 assets in one place.'
+      }} />}
 
       <Container className={classnames({ 'show-footer': showFooter })}>
         {showLoader && (
