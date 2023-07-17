@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import ButtonShadow from '../../../Shared/ButtonShadow'
 import { pageData } from '../../../Portfolio.data'
@@ -15,15 +15,17 @@ const Buttons = props => {
 
   return (
     <ButtonsWrapper>
-      <Cta
+      <ButtonShadow
+        as="a"
         href={pageData.header.rightCta.href}
         target="_blank"
-        rel='"noopener noreferrer'
+        rel="noopener noreferrer"
         short
         hoverCircle
+        styles={Cta}
       >
         {pageData.header.rightCta.label}
-      </Cta>
+      </ButtonShadow>
 
       <CloseBtn iconClose isCircular={true} onClick={handleClickClose} />
     </ButtonsWrapper>
@@ -60,7 +62,7 @@ const CloseBtn = styled(ButtonShadow)`
   }
 `
 
-const Cta = styled(ButtonShadow)`
+const Cta = css`
   position: relative;
   pointer-events: all;
   margin-right: 15px;

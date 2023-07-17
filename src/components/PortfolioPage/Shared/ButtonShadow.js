@@ -25,6 +25,7 @@ const ButtonShadow = props => {
     short = false,
     darkMobile = false,
     hoverCircle = false,
+    styles = '',
     ...rest
   } = props
 
@@ -43,6 +44,7 @@ const ButtonShadow = props => {
       $isShort={short}
       $hoverCircle={hoverCircle}
       className={classnames({ darkMobile: darkMobile })}
+      $styles={styles}
       {...rest}
     >
       {iconClose ? (
@@ -253,4 +255,6 @@ const ButtonElement = styled.button`
       transform: translate(-50%, -50%);
     }
   }
+
+  ${({ $styles }) => $styles || ''};
 `
