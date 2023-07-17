@@ -80,6 +80,7 @@ const HTML = props => {
       </head>
       <body {...bodyAttributes}>
         {/* <MetaMaskProvider> */}
+        <script src="https://cmp.osano.com/AzZMxHTbQDOQD8c1J/a2e89f0e-f467-4542-bfea-30ea2c1a6648/osano.js"></script>
         <script
           type="text/javascript"
           dangerouslySetInnerHTML={{ __html: checkThemeScript }}
