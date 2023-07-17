@@ -175,7 +175,7 @@ const CanvasWrapper = styled.div`
 
 const BottomWrapper = styled.div`
   position: absolute;
-  width: 100%;
+  width: 180px;
   height: 52px;
   bottom: 30px;
   padding: 0 30px;
@@ -185,6 +185,7 @@ const BottomWrapper = styled.div`
 
   @media (max-width: ${({ theme }) => theme.device.tablet}) {
     height: 36px;
+    width: 100%;
     bottom: auto;
     top: 30px;
     justify-content: flex-end;
