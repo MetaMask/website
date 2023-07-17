@@ -292,7 +292,7 @@ export const pageData = {
         video: {
           title: 'Bridge Feature tutorial',
           posterImage: '/images/portfolio/video-poster.jpg',
-          embedUrl: 'https://www.youtube.com/embed/v8E2SHHyqms',
+          embedUrl: 'https://www.youtube.com/embed/r1rwvBWk5XU',
         },
         links: {
           title: 'Additional resources',
@@ -360,7 +360,7 @@ export const pageData = {
         video: {
           title: 'Stake Feature tutorial',
           posterImage: '/images/portfolio/video-poster.jpg',
-          embedUrl: 'https://www.youtube.com/embed/r1rwvBWk5XU',
+          embedUrl: 'https://www.youtube.com/embed/xn8XX00T1E4',
         },
         links: {
           title: 'Additional resources',
