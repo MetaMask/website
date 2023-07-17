@@ -73,7 +73,37 @@ if (env.errors) {
       {
         resolve: `gatsby-plugin-manifest`,
         options: {
+          name: `MetaMask.io`,
+          short_name: `MM`,
+          description: `A crypto wallet & gateway to blockchain apps`,
+          start_url: `/`,
+          background_color: `#FFFFFF`,
+          theme_color: `#FFFFFF`,
+          display: `standalone`,
           icon: `${__dirname}/src/images/metamask-logo.png`,
+          icons: [
+            {
+              src: `${__dirname}/favicon/android-chrome-192x192.png`,
+              sizes: '192x192',
+              type: 'image/png',
+              purpose: 'any maskable',
+            },
+            {
+              src: `${__dirname}/favicon/android-chrome-256x256.png`,
+              sizes: '256x256',
+              type: 'image/png',
+            },
+            {
+              src: `${__dirname}/favicon/android-chrome-384x384.png`,
+              sizes: '384x384',
+              type: 'image/png',
+            },
+            {
+              src: `${__dirname}/favicon/icon-512x512.png`,
+              sizes: '512x512',
+              type: 'image/png',
+            },
+          ],
         },
       },
       {
