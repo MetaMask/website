@@ -16,6 +16,12 @@ export default IMOG.Component('Image', {
       scale: 1,
       computedScale: (props, { context }) =>
         (0.244 * context.$rendererProps.windowSize.height) / 1000,
+      positionY: (props, { context }) => {
+        return {
+          x: (-11 * context.$rendererProps.windowSize.height) / 1000,
+          y: (22 * context.$rendererProps.windowSize.height) / 1000,
+        }
+      },
       maskOut: 0,
     }
   },
@@ -49,6 +55,10 @@ export default IMOG.Component('Image', {
       this.mesh.material.transparent = v < 1
       this.mesh.material.opacity = 1 - v
       if (v === 1) this.mesh.visible = false
+    },
+    'set:positionY'({ x, y }) {
+      this.mesh.position.x = x
+      this.mesh.position.y = y
     },
   },
 })
