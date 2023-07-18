@@ -94,7 +94,7 @@ export const pageData = {
         The buy feature allows you to directly on-ramp your fiat onto 13 different networks, and multiple options of tokens to on-ramp into for each network. You can avoid the fees and wait times that come with bridging by purchasing tokens directly onto layer 2 networks.`,
         logos: [
           {
-            title: 'Partner platforms:',
+            title: 'Providers:',
             list: [
               {
                 label: 'Banxa',
@@ -111,10 +111,6 @@ export const pageData = {
               {
                 label: 'PayPal',
                 icon: '/images/portfolio/sidebar-icons/paypal.svg',
-              },
-              {
-                label: 'CashApp',
-                icon: '/images/portfolio/sidebar-icons/cash-app.svg',
               },
               {
                 label: 'Sardine',
