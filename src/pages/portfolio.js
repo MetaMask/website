@@ -44,7 +44,10 @@ const PortfolioPage = props => {
     <Layout>
       <PortfolioHelmet showLoader={showLoader} showIntro={showIntro} />
 
-      {seo && <Seo moduleConfig={{ ...seo, pagePath: location.pathname }} />}
+      {seo && <Seo moduleConfig={{
+        ...seo,
+        pagePath: location.pathname
+      }} />}
 
       <Container className={classnames({ 'show-footer': showFooter })}>
         {showLoader && (
@@ -106,7 +109,7 @@ export const PortfolioPageQuery = graphql`
       ...ContentfulLayoutFooterFields
     }
 
-    seo: contentfulSeo(contentful_id: { eq: "2d9sWm0RbmC5zSEsF8JkiS" }) {
+    seo: contentfulSeo(contentful_id: { eq: "5BzFUabvJ74HmBMaJoyzs" }) {
       ...ContentfulSeoFields
     }
   }
