@@ -46,9 +46,7 @@ const PortfolioPage = props => {
 
       {seo && <Seo moduleConfig={{
         ...seo,
-        pagePath: location.pathname,
-        pageTitle: 'Discover MetaMask Portfolio',
-        pageDescription: 'Track, manage, buy, swap, bridge, and stake your web3 assets in one place.'
+        pagePath: location.pathname
       }} />}
 
       <Container className={classnames({ 'show-footer': showFooter })}>
@@ -111,7 +109,7 @@ export const PortfolioPageQuery = graphql`
       ...ContentfulLayoutFooterFields
     }
 
-    seo: contentfulSeo(contentful_id: { eq: "2d9sWm0RbmC5zSEsF8JkiS" }) {
+    seo: contentfulSeo(contentful_id: { eq: "5BzFUabvJ74HmBMaJoyzs" }) {
       ...ContentfulSeoFields
     }
   }
