@@ -57,6 +57,7 @@ const SEO = props => {
     ...getMetaTags('title', seo.title),
     ...getMetaTags('description', seo.desc),
     ...getMetaTags('image', urlImageMetaClean),
+    ...getMetaTags('image:src', urlImageMetaClean),
     pathname !== pagePath
       ? {
           'http-equiv': 'refresh',
