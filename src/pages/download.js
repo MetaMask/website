@@ -147,27 +147,21 @@ export const DownloadPageQuery = graphql`
     ) {
       title
       description
-      file {
-        url
-      }
+      gatsbyImageData(width: 1920, quality: 80)
     }
     download_ios: contentfulAsset(
       contentful_id: { eq: "7Dwln6hVLXZJnOAHNlH2tT" }
     ) {
       title
       description
-      file {
-        url
-      }
+      gatsbyImageData(width: 1920, quality: 80)
     }
     download_android: contentfulAsset(
       contentful_id: { eq: "7CU9NE4jlL0XjKEerlEL16" }
     ) {
       title
       description
-      file {
-        url
-      }
+      gatsbyImageData(width: 1920, quality: 80)
     }
     browser_chrome: contentfulAsset(
       contentful_id: { eq: "5CEOSBaSKv43i0mNninl5G" }
