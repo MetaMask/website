@@ -33,7 +33,9 @@ const PortfolioHelmet = props => {
         class: 'disable-scroll',
       }}
       link={[{ rel: 'manifest', href: '/site.portfolio.webmanifest' }]}
-    />
+    >
+      <script src="https://www.youtube.com/iframe_api"></script>
+    </Helmet>
   )
 }
 
