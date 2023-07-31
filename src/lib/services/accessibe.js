@@ -3,8 +3,6 @@ export default `
   var s=document.createElement('script');
   e = !document.body ? document.querySelector('head'):document.body;
   s.src='https://acsbapp.com/apps/app/dist/js/app.js';
-  s.integrity='sha384-ka31qylN1P7I7ZbQuvHOeOFswNTWYUqRFjesxjZE+0mVyKUSCwEO5Ir7N2AHqYDu';
-  s.crossOrigin='anonymous';
   s.defer=true;
   s.onload=function(){
     acsbJS.init({
