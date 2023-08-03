@@ -548,14 +548,14 @@ $ npm install</code></pre>
 <br/> 
 <p>Navigate to the sub-folder containing the Truffle project and the form smart contracts:</p>
 <div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-bash">$ cd packages/form-XChange</code></pre>
-<p>In this folder, you will see a _contracts _sub-folder that contains two main contracts: a FeedbackForm and a FeedbackFormFactory.</p>
+<p>In this folder, you will see a <em>contracts</em> sub-folder that contains two main contracts: a FeedbackForm and a FeedbackFormFactory.</p>
 <p>The former implements an individual form that is capable of storing a list of questions and responses made to those questions.</p>
-<p>The latter is a _factory _contract that can be used to deploy customized versions of the former.</p>
+<p>The latter is a <em>factory</em> contract that can be used to deploy customized versions of the former.</p>
 <p>You can take a look at the source code and make modifications according to the kind of form that you want to create. For this tutorial, we’ll stick to the default configuration.</p>
 <p>In this step, we are going to deploy the FeedbackFormFactory contract. This will allow us, the creator, to create forms from our Next frontend.</p>
-<p>In order to do this, create a file named _.env _and add the following information:</p>
+<p>In order to do this, create a file named <em>.env</em> and add the following information:</p>
 <div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-javascript">MNEMONIC = &quot;&lt; YOUR WALLET RECOVERY PHRASE &gt;&quot;</code></pre>
-<p>Next, in the _truffle-config.js _file, replace the generic RPC endpoint with the Infura endpoint you generated in Step 3. The final config file should look something like this:</p>
+<p>Next, in the <em>truffle-config.js</em> file, replace the generic RPC endpoint with the Infura endpoint you generated in Step 3. The final config file should look something like this:</p>
 <div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-javascript">require(&quot;dotenv&quot;).config();
 const mnemonic = process.env[&quot;MNEMONIC&quot;];
 
@@ -646,9 +646,9 @@ Summary
 <h3 id="step-7-deploy-the-next-frontend-factory">Step 7: Deploy the Next frontend factory</h3>
 <p>With our feedback form factory contract live, let’s shift our attention to the Next frontend. Navigate to the Next app project by running the following command:</p>
 <div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-bash">$ cd ../../apps/web</code></pre>
-<p>We’ll need to connect our app with the contract we deployed in the previous step. We can do so by opening the _lib/contract.ts/config.ts _file and adding the contract address.</p>
+<p>We’ll need to connect our app with the contract we deployed in the previous step. We can do so by opening the <em>lib/contract.ts/config.ts</em> file and adding the contract address.</p>
 <div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-javascript">export const FEEDBACK_FACTORY_CONTRACT_ADDRESS = &quot;&lt; FEEDBACK FORM FACTORY CONTRACT ADDRESS &gt;&quot;;</code></pre>
-<p>In the apps/web folder, create another _.env _file and this time, add the Infura key associated with your project from Step 3.</p>
+<p>In the apps/web folder, create another <em>.env</em> file and this time, add the Infura key associated with your project from Step 3.</p>
 <div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-text">INFURA_KEY=&lt; YOUR INFURA API KEY &gt;</code></pre>
 <p>We’re all set! Let’s now deploy the app to localhost:</p>
 <div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-bash">$ npm run dev</code></pre>
