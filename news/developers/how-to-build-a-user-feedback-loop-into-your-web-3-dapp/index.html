@@ -515,8 +515,8 @@ If you choose to pay the bill on behalf of your customers, again the cost is a f
 <p>You first need a web3 wallet. In this tutorial we’ll use MetaMask — a free, easy to use wallet that comes automatically configured with Linea. You can install MetaMask <a href="https://metamask.io/download/">as an extension for your browser here</a>.</p>
 <p>Note: For this tutorial, we recommend using a browser other than Brave (for example, Edge, Chrome, Safari, etc.). At the time of writing, Form-xChange has known issues running on the Brave browser.</p>
 <p>Once you’ve added the extension, MetaMask will prompt you to complete a series of steps, including giving you your wallet recovery phrase. <em>Store this phrase carefully</em>. If lost, you can’t recover it. If stolen, someone else will have access to your funds.</p>
-<p>Once your wallet is set up, navigate to the network drop-down in the top left of the MetaMask extension and toggle <em>show test networks</em> on_. _From the new drop-down, select the _Linea Goerli _network. If all goes well, your wallet should look something like this:</p>
-<p><img src="//images.ctfassets.net/9sy2a0egs6zh/3IS7mG7vg4heLtUzP9brDe/772b05c1494f799ced5d9abefe5926f5/image2.png" alt="Image 2"/><img src="//images.ctfassets.net/9sy2a0egs6zh/3IS7mG7vg4heLtUzP9brDe/772b05c1494f799ced5d9abefe5926f5/image2.png" alt="Image 2"/></p>
+<p>Once your wallet is set up, navigate to the network drop-down in the top left of the MetaMask extension and toggle <em>show test networks</em> on. From the new drop-down, select the <em>Linea Goerli</em> network. If all goes well, your wallet should look something like this:</p>
+<p><img src="//images.ctfassets.net/9sy2a0egs6zh/3IS7mG7vg4heLtUzP9brDe/772b05c1494f799ced5d9abefe5926f5/image2.png" alt="Image 2"/></p>
 <h3 id="step-2-acquire-lineaeth-from-a-faucet">Step 2: Acquire LineaETH from a faucet</h3>
 <p>If this is your first time working with Linea, your wallet will (obviously) have a balance of 0 LineaETH.</p>
 <p>Let’s change that. <a href="https://www.infura.io/faucet/linea">Infura has a faucet</a> that gives you access to free 0.5 LineaETH every day. In order to access this faucet, you may be prompted to create a free Infura account.</p>
@@ -535,19 +535,19 @@ If you choose to pay the bill on behalf of your customers, again the cost is a f
 <p>The Form-xChange solution runs on a stack of Infura, Next.js, Truffle, and the Dapp API. In order to install and use these technologies, we’ll need node and npm on our local machine.</p>
 <p><a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm">You can download both for your operating system here</a>.</p>
 <p>Once done, check that it has been installed correctly by checking their version numbers on your terminal.</p>
-<div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-text">$ node -v
+<div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-bash">$ node -v
 $ npm -v</code></pre>
 <h3 id="step-5-clone-the-form-xchange-repository">Step 5: Clone the Form-xChange repository</h3>
 <p>As mentioned earlier, Form-xChange is an open-source repository whose source code is publicly <a href="https://github.com/Consensys/Form-XChange">available on GitHub</a>.</p>
 <p>Let’s clone this repository and install all required packages using the following commands:</p>
-<div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-javascript">$ git clone https://github.com/Consensys/Form-XChange
+<div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-bash">$ git clone https://github.com/Consensys/Form-XChange
 $ cd Form-XChange
 $ npm install</code></pre>
 <p>Open the Form-xChange repository in your favorite code editor (e.g. VS Code). This is a turn-key project, so we won’t need to write much code apart from configuring a few environment variables.</p>
 <h3 id="step-6-deploy-the-feedback-form">Step 6: Deploy the feedback form</h3>
 <br/> 
 <p>Navigate to the sub-folder containing the Truffle project and the form smart contracts:</p>
-<div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-text">$ cd packages/form-XChange</code></pre>
+<div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-bash">$ cd packages/form-XChange</code></pre>
 <p>In this folder, you will see a _contracts _sub-folder that contains two main contracts: a FeedbackForm and a FeedbackFormFactory.</p>
 <p>The former implements an individual form that is capable of storing a list of questions and responses made to those questions.</p>
 <p>The latter is a _factory _contract that can be used to deploy customized versions of the former.</p>
@@ -587,9 +587,9 @@ module.exports = {
 };
 </code></pre>
 <p>We’re all set! Deploy the feedback form factory contract by running the following command:</p>
-<div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-text">$ npm run linea</code></pre>
+<div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-bash">$ npm run linea</code></pre>
 <p>If all goes well you should see output that looks something like this:</p>
-<div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-css">&gt; form-xchange@0.0.0 linea
+<div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-bash">&gt; form-xchange@0.0.0 linea
 &gt; npm run compile &amp;&amp; npm run generate-types &amp;&amp; npm run migrate:linea
 
 &gt; form-xchange@0.0.0 compile
@@ -645,13 +645,13 @@ Summary
 <p>Take note of the contract address. We’ll need this in a later step.</p>
 <h3 id="step-7-deploy-the-next-frontend-factory">Step 7: Deploy the Next frontend factory</h3>
 <p>With our feedback form factory contract live, let’s shift our attention to the Next frontend. Navigate to the Next app project by running the following command:</p>
-<div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-text">$ cd ../../apps/web</code></pre>
+<div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-bash">$ cd ../../apps/web</code></pre>
 <p>We’ll need to connect our app with the contract we deployed in the previous step. We can do so by opening the _lib/contract.ts/config.ts _file and adding the contract address.</p>
 <div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-javascript">export const FEEDBACK_FACTORY_CONTRACT_ADDRESS = &quot;&lt; FEEDBACK FORM FACTORY CONTRACT ADDRESS &gt;&quot;;</code></pre>
 <p>In the apps/web folder, create another _.env _file and this time, add the Infura key associated with your project from Step 3.</p>
 <div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-text">INFURA_KEY=&lt; YOUR INFURA API KEY &gt;</code></pre>
 <p>We’re all set! Let’s now deploy the app to localhost:</p>
-<div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-text">$ npm run dev</code></pre>
+<div class="btn-copy "><button>Copy</button></div><pre class=""><code class="language-bash">$ npm run dev</code></pre>
 <p>You can now check out the app on localhost:3000. It should look something like this:</p>
 <p><img src="//images.ctfassets.net/9sy2a0egs6zh/792UlrKfIZDzDJyfAKnCVC/84a1f80de120aedbd3c0a60e3a3ec811/image4.png" alt="Image 5"/></p>
 <p>Let’s go ahead and create a new form!</p>
