@@ -121,90 +121,6 @@ if (env.errors) {
           },
         },
       },
-      {
-        resolve: `gatsby-plugin-sitemap`,
-        options: {
-          query: `
-          {
-            site {
-              siteMetadata {
-                siteUrl
-              }
-            }
-            allSitePage {
-              edges {
-                node {
-                  path
-                }
-              }
-            }
-            allContentfulLayout(filter: {isPrivate: {eq: true}}) {
-              edges {
-                node {
-                  slug
-                }
-              }
-            }
-            allContentfulNewsPrivate: allContentfulNews(filter: {isPrivate: {eq: true}}) {
-              edges {
-                node {
-                  title
-                  categories {
-                    name
-                  }
-                }
-              }
-            }
-            allContentfulNewsNonCanonical: allContentfulNews(filter: {canonicalUrl: {ne: null}}) {
-              edges {
-                node {
-                  title
-                  categories {
-                    name
-                  }
-                }
-              }
-            }
-          }`,
-          serialize: ({
-            site,
-            allSitePage,
-            allContentfulLayout,
-            allContentfulNewsPrivate,
-            allContentfulNewsNonCanonical,
-          }) => {
-            const allContentfulNews = {
-              ...allContentfulNewsPrivate,
-              ...allContentfulNewsNonCanonical,
-            }
-            let privatePages = ['/preview/', '/assets/']
-            allContentfulLayout.edges.map(edge => {
-              privatePages.push(edge.node.slug)
-            })
-
-            allContentfulNews.edges.map(edge => {
-              const newsUrl = getNewsUrl(edge.node)
-              privatePages.push(newsUrl)
-            })
-
-            let pages = []
-            const siteUrl =
-              activeEnv === 'development'
-                ? 'https://metamask.consensys.io'
-                : site.siteMetadata.siteUrl
-            allSitePage.edges.map(edge => {
-              if (privatePages.indexOf(edge.node.path) === -1) {
-                pages.push({
-                  url: siteUrl + edge.node.path,
-                  changefreq: `daily`,
-                  priority: edge.node.path === '' ? 1 : 0.8,
-                })
-              }
-            })
-            return pages
-          },
-        },
-      },
       'gatsby-plugin-well-known',
       'gatsby-plugin-image',
       {
@@ -221,12 +137,12 @@ if (env.errors) {
           activeEnv === 'production'
             ? {
                 host: 'https://metamask.io',
-                sitemap: 'https://metamask.io/sitemap.xml',
+                sitemap: 'https://metamask.io/sitemap-index.xml',
                 policy: [{ userAgent: '*', allow: '/' }],
               }
             : {
                 host: 'https://metamask.consensys.io',
-                sitemap: 'https://metamask.consensys.io/sitemap.xml',
+                sitemap: 'https://metamask.consensys.io/sitemap-index.xml',
                 policy: [{ userAgent: '*', disallow: '/' }],
               },
       },
