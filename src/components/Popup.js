@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import PopupModal from 'reactjs-popup'
 import { ModalInner, IconCloseModal } from './StyledGeneral'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
@@ -12,14 +12,19 @@ const Popup = props => {
     width,
     hideCloseIcon = false,
   } = props
-  React.useEffect(() => {
-    const body = document.querySelector('body')
+
+  const modalRef = useRef()
+
+  useEffect(() => {
     if (showPopup) {
-      disableBodyScroll(body)
+      disableBodyScroll(modalRef, {
+        allowTouchMove: el => (el.id = 'modalInner'),
+      })
     } else {
-      enableBodyScroll(body)
+      enableBodyScroll(modalRef)
     }
   }, [showPopup])
+
   return (
     <PopupModal
       open={showPopup}
@@ -39,7 +44,7 @@ const Popup = props => {
       closeOnDocumentClick
       closeOnEscape
     >
-      <ModalInner width={width}>
+      <ModalInner width={width} ref={modalRef} id="modalInner">
         {!hideCloseIcon ? (
           <IconCloseModal
             className={'w-icon w-icon-close'}

@@ -117,6 +117,7 @@ const Cta = styled.div`
     width: 12px;
     height: auto;
     margin-left: 4px;
+    flex-shrink: 0;
     path {
       fill: #fff;
     }
