@@ -215,10 +215,10 @@ const ImageWrapper = styled.div`
     @media (min-width: ${({ theme }) => theme.device.tablet}) {
       position: absolute;
       right: 0;
-
-      img {
-        width: 100%;
-      }
+    }
+    picture > img {
+      width: 100%;
+      height: 100%;
     }
   }
 
