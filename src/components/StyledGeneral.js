@@ -57,7 +57,8 @@ export const ModalInner = styled.div`
   padding: 30px;
   overflow: auto;
   position: relative;
-  max-width: 90vw;
+  max-width: 95vw;
+  -webkit-overflow-scrolling: touch;
 
   .popupTitle {
     padding-right: 40px;
