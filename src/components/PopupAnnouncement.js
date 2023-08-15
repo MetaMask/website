@@ -33,7 +33,7 @@ const PopupAnnouncement = props => {
             )}
           </Content>
         </WrapperInnerLink>
-        <CloseBtn type="button" onClick={onClosePopup} aria-label="close">
+        <CloseBtn role="button" onClick={onClosePopup} aria-label="close">
           <span className="w-icon w-icon-close"></span>
         </CloseBtn>
       </WrapperInner>
