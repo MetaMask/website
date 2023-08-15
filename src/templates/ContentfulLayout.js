@@ -102,6 +102,10 @@ const ContentfulLayout = props => {
     seoData.pageDescription = `${seoData.pageDescription} | ${category}`
   }
 
+  if (path === '/news/latest/') {
+    seoData.canonicalUrl = 'https://metamask.io/news/'
+  }
+
   return (
     <Context.Provider value={valueContext}>
       <Layout {...rest} themeColor={themeColor} h2FontSize={h2FontSize}>

@@ -22,7 +22,7 @@ if (env.errors) {
       description: `MetaMask is a ConsenSys Formation.`,
       siteUrl:
         activeEnv === 'development'
-          ? 'https://metamask.younetco.com'
+          ? 'https://metamask.consensys.io'
           : 'https://metamask.io',
     },
     plugins: [
@@ -141,7 +141,15 @@ if (env.errors) {
                 slug
               }
             }
-            allContentfulNews(filter: {isPrivate: {eq: true}}) {
+            allPrivateContentfulNews: allContentfulNews(filter: {isPrivate: {eq: true}}) {
+              nodes {
+                title
+                categories {
+                  name
+                }
+              }
+            }
+            allContentfulNewsNonCanonical: allContentfulNews(filter: {canonicalUrl: {ne: null}}) {
               nodes {
                 title
                 categories {
@@ -153,13 +161,18 @@ if (env.errors) {
           resolvePages: ({
             allSitePage: { nodes: allSitePages },
             allContentfulLayout: { nodes: allPrivateContentfulPages },
-            allContentfulNews: { nodes: allPrivateContentfulNews },
+            allPrivateContentfulNews: { nodes: allPrivateContentfulNews },
+            allContentfulNewsNonCanonical: { nodes: allContentfulNewsNonCanonical },
           }) => {
-            let privatePages = ['/preview/']
+            let privatePages = ['/preview/', '/news/latest/']
+            const totalExcludedNews = [
+              ...allPrivateContentfulNews,
+              ...allContentfulNewsNonCanonical
+            ]
             allPrivateContentfulPages.forEach(page => {
               privatePages.push(page.slug)
             })
-            allPrivateContentfulNews.forEach(page => {
+            totalExcludedNews.forEach(page => {
               const newsUrl = getNewsUrl(page)
               privatePages.push(newsUrl)
             });
@@ -203,8 +216,8 @@ if (env.errors) {
               policy: [{ userAgent: '*', allow: '/' }],
             }
             : {
-              host: 'https://metamask.younetco.com',
-              sitemap: 'https://metamask.younetco.com/sitemap-index.xml',
+              host: 'https://metamask.consensys.io',
+              sitemap: 'https://metamask.consensys.io/sitemap-index.xml',
               policy: [{ userAgent: '*', disallow: '/' }],
             },
       },

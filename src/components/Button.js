@@ -40,7 +40,7 @@ const Button = props => {
       <span>{text}</span>
       {iconPosition === 'end' && iconUrl ? (
         <Icon hasBg>
-          <Image src={iconUrl} />
+          <Image src={iconUrl} alt={text + className || ''} />
         </Icon>
       ) : null}
     </ButtonWrapper>

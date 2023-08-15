@@ -22,6 +22,7 @@ function NewsLayout(props) {
         image,
         content,
         canonicalUrl,
+        metaDescription,
         authors,
         publishDate,
       },
@@ -40,7 +41,7 @@ function NewsLayout(props) {
   const seoModuleConfig = {
     internal: { type: 'ContentfulSeo' },
     pageTitle: title,
-    pageDescription: subtitle,
+    pageDescription: metaDescription || subtitle,
     featuredImage: image,
     pagePath: pathBuild,
     canonicalUrl: canonicalUrl,
