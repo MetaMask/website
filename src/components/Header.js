@@ -91,7 +91,7 @@ const StyledHeader = props => {
       </Announcement>
       <HeaderContainer>
         <LogoContainer>
-          <Link to="/">
+          <Link to="/" aria-label="Go to home page">
             {srcLogo ? (
               <LogoWrapper
                 className={classnames({

@@ -8,17 +8,20 @@ const EmbedHtml = props => {
   const { html, playOnPopup, thumbnailUrl } = props
   // image filed is only for iframe image
   const [popupId, setPopupId] = React.useState('')
+  const [showOverlay, setShowOverlay] = React.useState(true)
   const contentRef = React.useRef(null)
   let htmlParse = html
   let iframePopupData
+  let youtubeId
   if (htmlParse?.includes('<iframe')) {
-    const { htmlString, iframeList } = parseIframe(
+    const { htmlString, iframeList, idYoutube } = parseIframe(
       htmlParse,
       playOnPopup,
       thumbnailUrl
     )
     htmlParse = htmlString
     iframePopupData = iframeList
+    youtubeId = idYoutube
   }
 
   const onClosePopup = () => {
@@ -42,14 +45,44 @@ const EmbedHtml = props => {
   }, [playOnPopup, iframePopupData?.length])
 
   return (
-    <>
+    <Wrapper $playOnPopup={playOnPopup}>
       <EmbedHtmlWrapper
         ref={contentRef}
-        playOnPopup={playOnPopup}
+        $playOnPopup={playOnPopup}
         dangerouslySetInnerHTML={{
           __html: htmlParse,
         }}
       />
+      {!playOnPopup && showOverlay && (
+        <>
+          <img
+            className="thumbnail-image"
+            src={
+              thumbnailUrl ||
+              `https://i.ytimg.com/vi_webp/${youtubeId}/sddefault.webp`
+            }
+            alt="Youtube overlay image"
+          />
+          <VideoOverlay onClick={() => setShowOverlay(false)}>
+            <span className="icon-play">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="23"
+                height="28"
+                viewBox="0 0 23 28"
+                fill="none"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M0.976562 13.7469V25.0549C0.976562 26.6431 2.73876 27.5977 4.0691 26.7301L21.4079 15.4222C22.6178 14.6331 22.6178 12.8608 21.4079 12.0717L4.0691 0.763819C2.73876 -0.103793 0.976562 0.850786 0.976562 2.43904V13.7469Z"
+                  fill="white"
+                />
+              </svg>
+            </span>
+          </VideoOverlay>
+        </>
+      )}
       {playOnPopup ? (
         <Popup
           width={'800px'}
@@ -62,11 +95,11 @@ const EmbedHtml = props => {
               dangerouslySetInnerHTML={{
                 __html: iframePopupData[popupId],
               }}
-            ></EmbedHtmlPopup>
+            />
           )}
         </Popup>
       ) : null}
-    </>
+    </Wrapper>
   )
 }
 
@@ -124,8 +157,8 @@ const EmbedHtmlWrapper = styled.div`
     }
   }
 
-  ${({ playOnPopup, theme }) =>
-    playOnPopup
+  ${({ $playOnPopup, theme }) =>
+    $playOnPopup
       ? `
     border-radius: 12px 12px 0 0;
   `
@@ -174,4 +207,63 @@ const EmbedHtmlPopup = styled.div`
     height: 100%;
     margin: 0 !important;
   }
+`
+
+const VideoOverlay = styled.div`
+  position: absolute;
+  width: 100%;
+  inset: 0;
+  margin: auto;
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  color: white;
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  transition: background 300ms ease;
+  cursor: pointer;
+
+  .icon-play {
+    width: 60px;
+    height: 60px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #037dd6;
+    transition: background 200ms ease;
+    border-radius: 100%;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+`
+
+const Wrapper = styled.div`
+  ${({ $playOnPopup, theme }) =>
+    $playOnPopup
+      ? ''
+      : `
+  position: relative;
+  overflow-y: hidden;
+  border-radius: 12px;
+  margin: 0 auto;
+  @media (min-width: ${theme.device.desktop}) {
+    width: fit-content;
+  }
+  .thumbnail-image {
+    position:absolute;
+    width:100%;
+    inset: 0;
+    margin:auto;
+    z-index: 3;
+  }`}
 `

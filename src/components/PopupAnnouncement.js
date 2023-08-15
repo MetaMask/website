@@ -20,8 +20,9 @@ const PopupAnnouncement = props => {
     <Wrapper backgroundColor={backgroundColor}>
       <WrapperInner>
         <WrapperInnerLink>
-          {ctaLink && <ClickArea to={ctaLink} newTab></ClickArea>}
-
+          {ctaLink && (
+            <ClickArea to={ctaLink} newTab aria-label={title || ctaText} />
+          )}
           <Content>
             {title && <Title>{title}</Title>}
             {ctaText && (

@@ -17,7 +17,7 @@ const StyledFooter = props => {
       >
         <FooterInner>
           <LogoContainer>
-            <Link to="/">
+            <Link to="/" aria-label="Go to the home page">
               <LogoWrapper>
                 {logoSvg?.content ? (
                   <div
@@ -122,7 +122,8 @@ const PolicyCopyLink = styled(Link)`
 const PolicyCopy = styled.div`
   margin: 20px 0 0 0;
 `
-const MenuItemHeading = styled.h5`
+const MenuItemHeading = styled.p`
+  font-size: 18px;
   color: ${({ theme }) => theme.orange} !important;
   text-transform: uppercase;
   line-height: 40px;

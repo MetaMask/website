@@ -355,7 +355,7 @@ const ImageSrc = styled(ImageItem)`
   width: auto;
   height: auto;
 
-  &.gatsby-image-wrapper, img& {
+  &.gatsby-image-wrapper {
     display: block;
     overflow: visible;
   }
