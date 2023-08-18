@@ -44,7 +44,6 @@
     "gatsby-plugin-robots-txt": "^1.5.5",
     "gatsby-plugin-sass": "^6.9.0",
     "gatsby-plugin-sharp": "^5.0.0",
-    "gatsby-plugin-sitemap": "^6.11.0",
     "gatsby-plugin-styled-components": "^6.9.0",
     "gatsby-plugin-well-known": "^1.0.0",
     "gatsby-source-contentful": "^8.9.1",
