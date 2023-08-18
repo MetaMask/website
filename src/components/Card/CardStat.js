@@ -1,14 +1,19 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import classnames from 'classnames'
 import Link from '../Link'
 
 const StyledCard = props => {
-  const { title, link, description, ...rest } = props
+  const { title, link, description, customClass, ...rest } = props
 
   return (
-    <Card className="moduleCardWrapper" {...rest}>
+    <Card
+      className={classnames('moduleCardWrapper', {
+        [customClass]: customClass,
+      })}
+      {...rest}
+    >
       <CardInner to={link} className={classnames('custom-card-bg cardLink')}>
         <ContentInner>
           {title ? <Title>{title}</Title> : null}
@@ -56,6 +61,12 @@ const Title = styled.div`
   margin-bottom: 4px;
 `
 
+const gradient = keyframes`
+	to {
+    background-position-x: -200%;
+  }
+`
+
 const Description = styled.div`
   color: #037dd6;
   font-weight: 600;
@@ -63,5 +74,18 @@ const Description = styled.div`
 
   p:last-child {
     margin-bottom: 0;
+  }
+
+  .blurry & {
+    position: relative;
+    &:after {
+      content: '';
+      background: linear-gradient(90deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+      position: absolute;
+      background-size: 200% 100%;
+      inset: 0;
+      border-radius: 6px;
+      animation: 1.5s ${gradient} linear infinite;
+    }
   }
 `
