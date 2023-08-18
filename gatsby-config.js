@@ -67,7 +67,7 @@ if (env.errors) {
           environment: process.env.GATSBY_CONTENTFUL_ENVIRONMENT,
           downloadLocal: process.env.GATSBY_CONTENTFUL_DOWNLOAD_LOCAL,
           host: process.env.GATSBY_CONTENTFUL_HOST,
-          localeFilter: locale => locale.code === 'en-US'
+          localeFilter: locale => locale.code === 'en-US',
         },
       },
       {
@@ -121,81 +121,6 @@ if (env.errors) {
           },
         },
       },
-      {
-        resolve: `gatsby-plugin-sitemap`,
-        options: {
-          query: `
-          {
-            site {
-              siteMetadata {
-                siteUrl
-              }
-            }
-            allSitePage {
-              nodes {
-                path
-              }
-            }
-            allContentfulLayout(filter: {isPrivate: {eq: true}}) {
-              nodes {
-                slug
-              }
-            }
-            allPrivateContentfulNews: allContentfulNews(filter: {isPrivate: {eq: true}}) {
-              nodes {
-                title
-                categories {
-                  name
-                }
-              }
-            }
-            allContentfulNewsNonCanonical: allContentfulNews(filter: {canonicalUrl: {ne: null}}) {
-              nodes {
-                title
-                categories {
-                  name
-                }
-              }
-            }
-          }`,
-          resolvePages: ({
-            allSitePage: { nodes: allSitePages },
-            allContentfulLayout: { nodes: allPrivateContentfulPages },
-            allPrivateContentfulNews: { nodes: allPrivateContentfulNews },
-            allContentfulNewsNonCanonical: { nodes: allContentfulNewsNonCanonical },
-          }) => {
-            let privatePages = ['/preview/', '/news/latest/']
-            const totalExcludedNews = [
-              ...allPrivateContentfulNews,
-              ...allContentfulNewsNonCanonical
-            ]
-            allPrivateContentfulPages.forEach(page => {
-              privatePages.push(page.slug)
-            })
-            totalExcludedNews.forEach(page => {
-              const newsUrl = getNewsUrl(page)
-              privatePages.push(newsUrl)
-            });
-
-            const allPages = [];
-            allSitePages.forEach(page => {
-              if (privatePages.indexOf(page.path) === -1) {
-                allPages.push(page)
-              }
-            })
-            return allPages.map(page => {
-              return { ...page }
-            })
-          },
-          serialize: ({ path }) => {
-            return {
-              url: path,
-              changefreq: 'daily',
-              priority: path === '' ? 1 : 0.8,
-            }
-          },
-        },
-      },
       'gatsby-plugin-well-known',
       'gatsby-plugin-image',
       {
@@ -211,15 +136,15 @@ if (env.errors) {
         options:
           activeEnv === 'production'
             ? {
-              host: 'https://metamask.io',
-              sitemap: 'https://metamask.io/sitemap-index.xml',
-              policy: [{ userAgent: '*', allow: '/' }],
-            }
+                host: 'https://metamask.io',
+                sitemap: 'https://metamask.io/sitemap-index.xml',
+                policy: [{ userAgent: '*', allow: '/' }],
+              }
             : {
-              host: 'https://metamask.consensys.io',
-              sitemap: 'https://metamask.consensys.io/sitemap-index.xml',
-              policy: [{ userAgent: '*', disallow: '/' }],
-            },
+                host: 'https://metamask.consensys.io',
+                sitemap: 'https://metamask.consensys.io/sitemap-index.xml',
+                policy: [{ userAgent: '*', disallow: '/' }],
+              },
       },
     ],
   }
