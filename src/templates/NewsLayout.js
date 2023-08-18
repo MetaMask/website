@@ -14,7 +14,6 @@ function NewsLayout(props) {
   const {
     data: {
       header,
-      hero,
       cta,
       news: {
         title,
@@ -40,7 +39,7 @@ function NewsLayout(props) {
 
   const seoModuleConfig = {
     internal: { type: 'ContentfulSeo' },
-    pageTitle: title,
+    pageTitle: title + ' | MetaMask News',
     pageDescription: metaDescription || subtitle,
     featuredImage: image,
     pagePath: pathBuild,
@@ -67,7 +66,6 @@ function NewsLayout(props) {
       {contentfulModuleToComponent(seoModuleConfig)}
       {contentfulModuleToComponent(header)}
       <div className="news-page-content">
-        {contentfulModuleToComponent(hero)}
         <NewsContainer>
           <ContentWrapper className="news-content">
             {contentfulModuleToComponent({
@@ -151,10 +149,14 @@ const NewsContentWrapper = styled.div`
   }
 `
 
-const Title = styled.h2`
+const Title = styled.h1`
   font-size: 40px;
   line-height: 40px;
-  padding-top: 64px;
+  padding-top: 32px;
+
+  @media (min-width: ${({ theme }) => theme.device.tablet}) {
+    padding-top: 64px;
+  }
 `
 
 const Subtitle = styled.p`
@@ -235,12 +237,6 @@ export const NewsLayoutQuery = graphql`
       contentful_id: { eq: "6I0knvqLf0DS5PB72DqUlM" }
     ) {
       ...ContentfulLayoutHeaderFields
-    }
-
-    hero: contentfulLayoutHero(
-      contentful_id: { eq: "4ZjPczvQn6fYgigGRFSQPf" }
-    ) {
-      ...ContentfulLayoutHeroFields
     }
 
     cta: contentfulCta(contentful_id: { eq: "6iOGB8Fiab9ilS0jfZ8N5I" }) {

@@ -344,11 +344,20 @@ const LinkTitle = styled.span`
 
   .news-content &,
   .storiesOnNewsDetail & {
+    color: ${({ theme }) => theme.textColor};
     svg {
       width: 24px;
       path {
         fill: none;
-        stroke: ${({ theme }) => theme.text.default};
+        stroke: ${({ theme }) => theme.textColor};
+      }
+    }
+
+    body.dark-mode & {
+      color: ${({ theme }) => theme.white};
+
+      svg > path {
+        stroke: ${({ theme }) => theme.white};
       }
     }
   }
@@ -453,7 +462,10 @@ const ContentWrapper = styled(Link)`
     .storiesOnNewsDetail & {
       path {
         fill: none;
-        stroke: ${({ theme }) => theme.primaryColor};
+        stroke: ${({ theme }) => theme.primaryColor} !important;
+      }
+      span {
+        color: ${({ theme }) => theme.primaryColor} !important;
       }
     }
   }
