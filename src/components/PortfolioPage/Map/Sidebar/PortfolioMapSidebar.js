@@ -27,7 +27,7 @@ const PortfolioMapSidebar = props => {
   const [show, setShow] = useState(false)
   const [reset, setReset] = useState(false)
   const [lenis, setLenis] = useState()
-  const [showVideo, setShowVideo] = useState(false)
+  const [videoEmbedUrl, setVideoEmbedUrl] = useState(null)
   const wrapperRef = useRef()
   const contentRef = useRef()
   const isDesktop = useMediaQuery({
@@ -226,6 +226,18 @@ const PortfolioMapSidebar = props => {
     }
   }, [detailPage, setShow])
 
+  const renderIcon = (icon, color) => {
+    const isRiv = icon?.includes('.riv')
+    if (isRiv) {
+      return <RiveIcon src={icon} color={color} />
+    }
+    return (
+      <div className="feature-icon" style={{ backgroundColor: color }}>
+        <img src={icon} alt="feature icon" />
+      </div>
+    )
+  }
+
   useEffect(() => {
     const updateScroll = event => {
       if (barRef) {
@@ -264,7 +276,7 @@ const PortfolioMapSidebar = props => {
       className={classnames({
         show: detailPage !== null,
         hide: detailPage === null,
-        showVideo: showVideo,
+        showVideo: videoEmbedUrl,
       })}
     >
       <ContentWrapper ref={wrapperRef}>
@@ -280,91 +292,92 @@ const PortfolioMapSidebar = props => {
 
             <ContentOuter>
               <ContentInner>
-                {show && (
-                  <RiveIcon
-                    src={detailPageData?.riveIcon}
-                    color={detailPageData?.color}
-                  />
-                )}
+                {detailPageData?.detailPage?.map((d, index) => {
+                  const {
+                    title,
+                    subtitle,
+                    description,
+                    logos,
+                    video,
+                    links,
+                    icon,
+                  } = d
+                  return (
+                    <div key={index}>
+                      {show &&
+                        renderIcon(
+                          icon || detailPageData?.riveIcon,
+                          detailPageData?.color
+                        )}
 
-                <Heading>{detailPageData?.detailPage?.title}</Heading>
+                      <Heading>{title}</Heading>
 
-                <SubHeading
-                  dangerouslySetInnerHTML={{
-                    __html: detailPageData?.detailPage?.subtitle,
-                  }}
-                />
+                      <SubHeading
+                        dangerouslySetInnerHTML={{
+                          __html: subtitle,
+                        }}
+                      />
 
-                <Hr />
+                      <Hr />
 
-                <Description
-                  dangerouslySetInnerHTML={{
-                    __html: detailPageData?.detailPage?.description,
-                  }}
-                />
+                      <Description
+                        dangerouslySetInnerHTML={{
+                          __html: description,
+                        }}
+                      />
 
-                {detailPageData?.detailPage?.logos && (
-                  <>
-                    {detailPageData?.detailPage?.logos.map(
-                      ({ title, list }, id) => {
+                      {logos?.map(({ title, list }, id) => {
                         return (
                           <div key={id}>
                             <Hr />
-
                             {title && (
                               <Description>
                                 {title} <br /> <br />
                               </Description>
                             )}
-
                             <NetworksLogos logosList={list} />
                           </div>
                         )
-                      }
-                    )}
-                  </>
-                )}
+                      })}
 
-                {detailPageData?.detailPage?.video && (
-                  <>
-                    <Hr $fullWidth={true} />
+                      {video && (
+                        <>
+                          <Hr $fullWidth={true} />
 
-                    <SubHeading>
-                      {detailPageData?.detailPage?.video.title}
-                    </SubHeading>
+                          <SubHeading>{video.title}</SubHeading>
 
-                    <VideoButton
-                      posterImage={
-                        detailPageData?.detailPage?.video.posterImage
-                      }
-                      onClick={() => setShowVideo(true)}
-                    />
-                  </>
-                )}
+                          <VideoButton
+                            posterImage={video.posterImage}
+                            onClick={() => setVideoEmbedUrl(video.embedUrl)}
+                          />
+                        </>
+                      )}
 
-                {detailPageData?.detailPage?.links && (
-                  <>
-                    <Hr $fullWidth={true} />
+                      {links && (
+                        <>
+                          <Hr $fullWidth={true} />
 
-                    <SubHeading>
-                      {detailPageData?.detailPage?.links?.title}
-                    </SubHeading>
+                          <SubHeading>{links?.title}</SubHeading>
 
-                    <AdditionalResources
-                      links={detailPageData?.detailPage?.links}
-                    />
-                  </>
-                )}
+                          <AdditionalResources links={links} />
+                        </>
+                      )}
+                      {index < detailPageData.detailPage.length - 1 && (
+                        <Hr $fullWidth={true} />
+                      )}
+                    </div>
+                  )
+                })}
               </ContentInner>
             </ContentOuter>
           </Sidebar>
         </Content>
       </ContentWrapper>
 
-      {showVideo && (
+      {videoEmbedUrl && (
         <VideoModal
-          embedUrl={detailPageData?.detailPage?.video?.embedUrl}
-          setShowVideo={setShowVideo}
+          embedUrl={videoEmbedUrl}
+          setVideoEmbedUrl={setVideoEmbedUrl}
         />
       )}
 
@@ -533,6 +546,21 @@ const ContentOuter = styled.div`
 const ContentInner = styled.div`
   position: relative;
   color: #161616;
+
+  .feature-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin: 0 auto;
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
+  }
 `
 
 const Heading = styled.h2`

@@ -133,27 +133,25 @@ const PortfolioMapNav = props => {
     <Wrapper ref={el}>
       <Nav>
         <List>
-          {featuresList
-            ? featuresList.map(({ name, color, riveIcon }, index) => {
-                return (
-                  <Item
-                    key={index}
-                    style={{
-                      '--color': color,
-                    }}
-                    className={classnames({
-                      active: activeFeature === index,
-                    })}
-                  >
-                    <PortfolioMapNavButton
-                      name={name}
-                      riveIcon={riveIcon}
-                      onClick={() => handleClick(index)}
-                    />
-                  </Item>
-                )
-              })
-            : null}
+          {featuresList?.map(({ name, color, riveIcon }, index) => {
+            return (
+              <Item
+                key={index}
+                style={{
+                  '--color': color,
+                }}
+                className={classnames({
+                  active: activeFeature === index,
+                })}
+              >
+                <PortfolioMapNavButton
+                  name={name}
+                  riveIcon={riveIcon}
+                  onClick={() => handleClick(index)}
+                />
+              </Item>
+            )
+          })}
         </List>
       </Nav>
     </Wrapper>
