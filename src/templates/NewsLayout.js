@@ -152,7 +152,7 @@ const Title = styled.h1`
   font-size: 40px;
   line-height: 40px;
   padding-top: 32px;
-  
+
   @media (min-width: ${({ theme }) => theme.device.tablet}) {
     padding-top: 64px;
   }

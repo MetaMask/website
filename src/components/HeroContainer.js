@@ -50,6 +50,8 @@ const HeroContainerComponent = props => {
   const { isDarkMode } = darkModeContextValue || {}
   const inspectorProps = useContentfulInspectorMode()
 
+  const isMetaMaskInstalled =
+    typeof window !== 'undefined' && window.ethereum?.isMetaMask
   const isHome = customClass?.includes('page-home')
   const isAbout = customClass?.includes('page-about')
   const isFlask = customClass?.includes('page-flask')
@@ -326,13 +328,7 @@ const HeroContainerComponent = props => {
                         : {})}
                     >
                       {contentfulModuleToComponent({
-                        ...ctas[
-                          ctas.length > 1 &&
-                          typeof window !== 'undefined' &&
-                          window.ethereum
-                            ? 1
-                            : 0
-                        ],
+                        ...ctas[ctas.length > 1 && isMetaMaskInstalled ? 1 : 0],
                         buttonSize: 'hero',
                         previewMode,
                       })}
