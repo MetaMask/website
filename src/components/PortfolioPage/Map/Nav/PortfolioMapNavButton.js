@@ -70,6 +70,7 @@ const Text = styled.div`
   overflow: hidden;
   max-width: 0;
   transition: 0.25s cubic-bezier(0.7, 0, 0.4, 0.9) max-width;
+  white-space: nowrap;
 
   span {
     padding: 0 10px 0 2px;

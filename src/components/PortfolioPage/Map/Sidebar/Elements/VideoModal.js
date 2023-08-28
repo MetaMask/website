@@ -12,7 +12,7 @@ import ButtonShadow from '../../../Shared/ButtonShadow'
  */
 
 const VideoModal = props => {
-  const { embedUrl, setShowVideo } = props
+  const { embedUrl, setVideoEmbedUrl } = props
   const el = useRef(null)
   const q = gsap.utils.selector(el)
 
@@ -26,7 +26,7 @@ const VideoModal = props => {
   }
 
   const onCompleteFn = () => {
-    setShowVideo(false)
+    setVideoEmbedUrl(null)
     setHide(true)
   }
 
@@ -109,7 +109,7 @@ const VideoModal = props => {
     setShow(true)
     animationIn()
 
-    return () => setShowVideo(false)
+    return () => setVideoEmbedUrl(null)
   }, [])
 
   return (

@@ -32,7 +32,7 @@ export default IMOG.Component('HotSpots', {
     // prettier-ignore
     data: [
       { name: 'Dashboard', maskChannel: [0, 0, 1], x: -340, y: -285, width: 340, height: 340, color: '#ffe466', pinPos: [10, 200] },
-      { name: 'Buy', maskChannel: [1, 0, 0], x: -430, y: 95, width: 420, height: 420, color: '#75c4fd', pinPos: [115, 220] },
+      { name: 'Buy & Sell', maskChannel: [1, 0, 0], x: -430, y: 95, width: 420, height: 420, color: '#75c4fd', pinPos: [115, 220] },
       { name: 'Swap', maskChannel: [0, 0, 1], x: 400, y: 310, width: 460, height: 360, color: '#86e29b', pinPos: [0, 200] },
       { name: 'Bridge', maskChannel: [0, 1, 0], x: -10, y: 110, width: 390, height: 450, color: '#ffafea', pinPos: [100, 100] },
       { name: 'Stake', maskChannel: [1, 0, 0], x: 270, y: -330, width: 400, height: 340, color: '#f5841f',  pinPos: [-5, 170] },
