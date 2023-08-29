@@ -2,6 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import queryString from 'query-string'
+import { navigate } from 'gatsby'
 
 function range(end) {
   return Array(end)
@@ -18,11 +19,7 @@ const PaginationWrapper = props => {
     }
     const paramsDefault = queryString.parse(window.location.search)
     const params = { ...paramsDefault, page: i }
-    window.history.pushState(
-      window.location.search,
-      '',
-      `?${queryString.stringify(params)}`
-    )
+    navigate(`?${queryString.stringify(params)}`)
   }
   return (
     <Wrapper>

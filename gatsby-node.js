@@ -1,6 +1,6 @@
 const path = require('path')
 const axios = require('axios')
-const download = require('download')
+const { download } = require('./src/lib/utils/download')
 const { getNewsUrl } = require(`./src/lib/utils/news`)
 const redirects = require('./redirects.json')
 const { buildSitemap } = require(`./src/lib/utils/sitemap`)
@@ -138,8 +138,8 @@ exports.createPages = async ({ graphql, actions }) => {
             if (assetUrls) {
               ;(async () => {
                 await Promise.all(
-                  assetUrls.map(url => download(url, 'public/assets'))
-                ).catch(() => {
+                  assetUrls.map(url => download(url, `public/assets/${path.parse(url).base}`))
+                ).catch((_) => {
                   return Promise.reject('Fetch MetaMask assets failed!')
                 })
               })()
