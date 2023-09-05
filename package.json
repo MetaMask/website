@@ -55,6 +55,7 @@
     "highlight.js": "^11.6.0",
     "light-event-bus": "^1.0.1",
     "lodash": "^4.17.21",
+    "minimatch": "^9.0.1",
     "node-html-parser": "^5.2.0",
     "path": "^0.12.7",
     "prismjs": "^1.29.0",
