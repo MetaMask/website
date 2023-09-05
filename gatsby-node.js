@@ -2,6 +2,7 @@ const path = require('path')
 const redirects = require('./redirects.json')
 const { getNewsUrl } = require(`./src/lib/utils/news`)
 const { buildSitemap } = require(`./src/lib/utils/sitemap`)
+const { minimatch } = require('minimatch')
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions
@@ -239,7 +240,9 @@ exports.onPostBuild = buildSitemap({
     children: [
       {
         fileName: 'sitemap-0.xml',
-        urlsetAnchorAttributes: 'xmlns:xhtml="http://www.w3.org/1999/xhtml"',
+        urlsetAnchorAttributes:
+          'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' +
+          ' xmlns:xhtml="http://www.w3.org/1999/xhtml"',
         resolvePages: ({
           allSitePage,
           allPrivateContentfulLayout,
@@ -269,8 +272,8 @@ exports.onPostBuild = buildSitemap({
           })
         },
         filterPages: ({ path }) => {
-          const excludePages = [`/dev-404-page`, `/404`, `/404.html`]
-          return !excludePages.some(exclude => path.startsWith(exclude))
+          const excludePages = [`/dev-404-page*`, `/404*`, `/news/*`]
+          return !excludePages.some(exclude => minimatch(path, exclude))
         },
         serializer: ({ path }) => ({
           loc: path,
