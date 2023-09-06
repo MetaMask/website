@@ -364,6 +364,17 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
         ...ContentfulCtaFields
       }
     }
+    bordered
+    backgroundImage {
+      file {
+        url
+      }
+    }
+    backgroundImageDarkMode {
+      file {
+        url
+      }
+    }
     backgroundColor
     sectionPadding
     customClass
@@ -595,6 +606,7 @@ export const ContentfulFaqFields = graphql`
       }
     }
     backgroundColor
+    bordered
   }
 `
 

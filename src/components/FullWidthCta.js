@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useContext } from 'react'
 import styled, { withTheme } from 'styled-components'
 import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import ContentWrapper from './ContentWrapper'
@@ -8,6 +8,8 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { Section, SectionTitle } from './StyledGeneral'
 import classnames from 'classnames'
 import ParseMD from './ParseMD'
+import getWebpImage from '../lib/utils/getWebpImage'
+import ContextClientSide from '../Context/ContextClientSide'
 
 const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
 
@@ -26,9 +28,22 @@ const FullWidthCta = props => {
     customClass,
     previewMode = false,
     contentfulId,
+    bordered,
+    backgroundImage,
+    backgroundImageDarkMode,
   } = props
 
+  const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
+  const { isDarkMode } = darkModeContextValue || {}
   const inspectorProps = useContentfulInspectorMode()
+  const backgroundImageUrl = getWebpImage(
+    previewMode ? backgroundImage?.url : backgroundImage?.file?.url
+  )
+  const backgroundImageDarkModeUrl = getWebpImage(
+    previewMode
+      ? backgroundImageDarkMode?.url
+      : backgroundImageDarkMode?.file?.url
+  )
 
   return (
     <Container
@@ -39,13 +54,20 @@ const FullWidthCta = props => {
       })}
     >
       <ContentWrapper>
-        <FullWidthCtaWrapper showLogoAnimation={showLogoAnimation}>
+        <FullWidthCtaWrapper
+          showLogoAnimation={showLogoAnimation}
+          $bordered={bordered}
+          $backgroundImage={
+            isDarkMode ? backgroundImageDarkModeUrl : backgroundImageUrl
+          }
+        >
           {showLogoAnimation && customClass !== 'metaMaskUninstalled' ? (
             <LogoAnimation logoType={logoType} />
           ) : null}
           <FullWidthCtaInner
             marginBottom={marginBottom}
             backgroundColor={backgroundColor}
+            className="fullwidth-cta-inner"
           >
             {headline ? (
               <Headline
@@ -157,6 +179,29 @@ const FullWidthCtaWrapper = styled.div`
   align-items: center;
   text-align: center;
 
+  ${({ $bordered }) =>
+    $bordered
+      ? `
+    border-radius: 16px;
+    border: 1px solid #BBC0C5;
+
+    .fullwidth-cta-inner {
+      margin: 32px 0;
+      h2, a {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+    `
+      : ''}
+
+  ${({ $backgroundImage }) =>
+    $backgroundImage
+      ? `
+      background-image: url(${$backgroundImage});
+    `
+      : ''}
+
   ${({ showLogoAnimation, theme }) =>
     showLogoAnimation
       ? `
@@ -180,6 +225,13 @@ const Headline = styled(SectionTitle)`
 
   ${({ hasDescription }) =>
     hasDescription ? 'font-size: 32px !important;' : ''}
+
+  .snaps-fullwidth-cta & {
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      font-size: 24px !important;
+      line-height: 1.2;
+    }
+  }
 `
 
 const FullWidthCtaInner = styled.div`
@@ -330,15 +382,21 @@ const FullWidthCtaInner = styled.div`
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     margin-bottom: 0;
   }
+
+  .snaps-fullwidth-cta & {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 `
 const CTAWrapper = styled.div`
   display: flex;
   flex-flow: wrap;
   margin-top: 32px;
   justify-content: center;
+  gap: 16px;
 
   .button {
-    margin: 0 8px 16px;
+    margin: 0 0 16px;
   }
 
   .metaMaskUninstalled & {
@@ -371,6 +429,9 @@ const CTAWrapper = styled.div`
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     .button {
       margin: 0 0 16px 0;
+    }
+    .snaps-fullwidth-cta & a {
+      width: 100%;
     }
   }
 `

@@ -685,6 +685,11 @@ const HeroContentContainer = styled.div`
     }
   `
       : ''}
+  .hero-snaps & {
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
+      flex-direction: column-reverse;
+    }
+  }
 `
 
 const HeroImageTextContainer = styled.div`
@@ -885,11 +890,6 @@ const HeroDescription = styled.div`
     }
   }
 
-  .contentMaxWidth480 & {
-    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
-      max-width: 480px;
-    }
-  }
   .mmi-fireblocks-hero & {
     @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
       width: 500px;
@@ -1067,6 +1067,9 @@ const HeroSideImage = styled.div`
     @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
       padding-left: 40px;
     }
+  }
+  .hero-snaps & {
+    width: 40%;
   }
 `
 
