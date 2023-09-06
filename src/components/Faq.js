@@ -15,6 +15,7 @@ const Faq = props => {
     backgroundColor,
     containerBgColor,
     previewMode = false,
+    bordered,
   } = props
   const { idFaqActive: activeId, setIdFaqActive: setActiveId } =
     faqContextValue || {}
@@ -23,9 +24,13 @@ const Faq = props => {
   return (
     <FaqItem active={isActive} onClick={() => setActiveId(!isActive ? id : '')}>
       <FaqItemInner>
-        <QuestionItem backgroundColor={backgroundColor} active={isActive}>
+        <QuestionItem
+          backgroundColor={backgroundColor}
+          active={isActive}
+          $bordered={bordered}
+        >
           {question}
-          <IconClose>
+          <IconClose className="icon">
             <IconCloseInner active={isActive}>
               <PlusIcon />
             </IconCloseInner>
@@ -36,7 +41,10 @@ const Faq = props => {
             duration={500}
             height={isActive ? 'auto' : 0} // see props documentation below
           >
-            <AnswerItemInner containerBgColor={containerBgColor}>
+            <AnswerItemInner
+              className="anwser-item-inner"
+              containerBgColor={containerBgColor}
+            >
               {previewMode ? (
                 <ParseMD>{answer}</ParseMD>
               ) : (
@@ -84,6 +92,7 @@ const QuestionItem = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   min-height: 80px;
   text-align: left;
+  transition: border 0.5s ease;
 
   ${({ backgroundColor, theme }) =>
     backgroundColor === 'gradient'
@@ -91,10 +100,41 @@ const QuestionItem = styled.div`
          font-weight: 400;`
       : ''}
 
+  ${({ backgroundColor }) =>
+    backgroundColor === 'white'
+      ? `
+        background-color: ${backgroundColor};
+        color: #000;
+        .icon svg > path {
+          fill: #000;
+        }
+      `
+      : ''}
+
+  ${({ $bordered }) =>
+    $bordered
+      ? `
+        border: 1px solid #BBC0C5;
+      `
+      : ''}
+
+  .snaps-faqs & {
+    border-radius: 16px;
+  }
+
   ${({ active }) =>
     active
       ? `
       border-radius: 4px 4px 0 0;
+    `
+      : ``}
+
+  ${({ active, $bordered }) =>
+    active && $bordered
+      ? `
+      border-bottom: 1px solid transparent;
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
     `
       : ``}
 
@@ -133,6 +173,16 @@ const AnswerItemInner = styled.div`
   
   a {
     color: ${({ theme }) => theme.linkColor};
+  }
+
+  .snaps-faqs & {
+    background-color: #fff;
+    border: 1px solid #bbc0c5;
+    border-top: 0;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    padding: 20px;
+    padding-top: 0;
   }
 `
 const IconClose = styled.div`

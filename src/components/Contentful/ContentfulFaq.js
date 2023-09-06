@@ -12,6 +12,7 @@ const ContentfulFaq = props => {
       backgroundColor,
       containerBgColor,
       previewMode = false,
+      bordered,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = answer || {}
@@ -22,6 +23,7 @@ const ContentfulFaq = props => {
       id={contentful_id}
       backgroundColor={backgroundColor}
       containerBgColor={containerBgColor}
+      bordered={bordered}
       previewMode={previewMode}
     />
   )

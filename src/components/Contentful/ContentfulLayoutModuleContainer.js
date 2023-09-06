@@ -475,6 +475,10 @@ const SubInfo = styled.div`
   .registerCustodyForm & {
     margin-bottom: 3.25rem !important;
   }
+
+  .snaps-categories & a {
+    color: ${({ theme }) => theme.lightBlue} !important;
+  }
 `
 
 const TabContent = styled.div`

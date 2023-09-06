@@ -19,6 +19,9 @@ const ContentfulLayoutFullWidthCta = props => {
       customClass,
       previewMode = false,
       contentful_id,
+      bordered,
+      backgroundImage,
+      backgroundImageDarkMode,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -37,6 +40,9 @@ const ContentfulLayoutFullWidthCta = props => {
       customClass={customClass}
       previewMode={previewMode}
       contentfulId={contentful_id}
+      bordered={bordered}
+      backgroundImage={backgroundImage}
+      backgroundImageDarkMode={backgroundImageDarkMode}
     />
   )
 }

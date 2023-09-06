@@ -11,6 +11,7 @@ import CardStat from './Card/CardStat'
 import CardFeatureHorizontal from './Card/CardFeatureHorizontal'
 import CardHorizontal from './Card/CardHorizontal'
 import CardHorizontalReverse from './Card/CardHorizontalReverse'
+import CardSnapsCategory from './Card/CardSnapsCategory'
 import CardNews from './Card/CardNews'
 import ContextClientSide from '../Context/ContextClientSide'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
@@ -75,6 +76,8 @@ const StyledCard = props => {
             : {})}
         />
       )
+    case 'snaps-category':
+      return <CardSnapsCategory {...props} isDarkMode={isDarkMode} />
     default:
     // code block
   }
