@@ -4,7 +4,6 @@ import { useMediaQuery } from 'react-responsive'
 import classnames from 'classnames'
 import styled, { useTheme } from 'styled-components'
 import PortfolioMapNavButton from './PortfolioMapNavButton'
-import { pageData } from '../../Portfolio.data'
 
 /**
  * @name PortfolioMapNav
@@ -13,14 +12,12 @@ import { pageData } from '../../Portfolio.data'
  */
 
 const PortfolioMapNav = props => {
-  const { canvas, activeFeature, setActiveFeature } = props
+  const { canvas, activeFeature, setActiveFeature, featuresList } = props
 
   const el = useRef(null)
   const q = gsap.utils.selector(el)
 
   const [activeLastFeature, setActiveLastFeature] = useState(activeFeature)
-
-  const featuresList = pageData.features
 
   const theme = useTheme()
 
@@ -29,7 +26,7 @@ const PortfolioMapNav = props => {
   })
 
   const handleClick = index => {
-    canvas.current.focusHotspot({ name: pageData.features[index].name })
+    canvas.current.focusHotspot({ name: featuresList[index].title })
   }
 
   const handleWindowSizeChange = useCallback(() => {
@@ -133,27 +130,25 @@ const PortfolioMapNav = props => {
     <Wrapper ref={el}>
       <Nav>
         <List>
-          {featuresList
-            ? featuresList.map(({ name, color, riveIcon }, index) => {
-                return (
-                  <Item
-                    key={index}
-                    style={{
-                      '--color': color,
-                    }}
-                    className={classnames({
-                      active: activeFeature === index,
-                    })}
-                  >
-                    <PortfolioMapNavButton
-                      name={name}
-                      riveIcon={riveIcon}
-                      onClick={() => handleClick(index)}
-                    />
-                  </Item>
-                )
-              })
-            : null}
+          {featuresList?.map(({ title, themeColor, icon }, index) => {
+            return (
+              <Item
+                key={index}
+                style={{
+                  '--color': themeColor,
+                }}
+                className={classnames({
+                  active: activeFeature === index,
+                })}
+              >
+                <PortfolioMapNavButton
+                  name={title}
+                  riveIcon={icon?.file.url}
+                  onClick={() => handleClick(index)}
+                />
+              </Item>
+            )
+          })}
         </List>
       </Nav>
     </Wrapper>

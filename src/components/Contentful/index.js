@@ -21,6 +21,9 @@ import ContentfulTimeline from './ContentfulTimeline'
 import ContentfulNewsLayout from './ContentfulNewsLayout'
 import ContentfulLayout from './ContentfulLayout'
 import ContentfulAssetStorage from './ContentfulAssetStorage'
+// import ContentfulPortfolioIntro from '../PortfolioPage/Layout/PortfolioIntro'
+// import ContentfulPortfolioInstructions from '../PortfolioPage/Layout/Instructions/PortfolioInstructions'
+// import ContentfulPortfolioMap from '../PortfolioPage/Map/PortfolioMap'
 
 export {
   ContentfulLayoutHeader,
@@ -46,4 +49,7 @@ export {
   ContentfulNewsLayout,
   ContentfulLayout,
   ContentfulAssetStorage,
+  // ContentfulPortfolioIntro,
+  // ContentfulPortfolioInstructions,
+  // ContentfulPortfolioMap,
 }

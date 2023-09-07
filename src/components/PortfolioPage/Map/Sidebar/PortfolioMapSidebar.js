@@ -13,7 +13,6 @@ import VideoButton from './Elements/VideoButton'
 import NetworksLogos from './Elements/NetworksLogos'
 import AdditionalResources from './Elements/AdditionalResources'
 import Buttons from './Elements/Buttons'
-import { pageData } from '../../Portfolio.data'
 
 /**
  * @name PortfolioMapSidebar
@@ -22,12 +21,12 @@ import { pageData } from '../../Portfolio.data'
  */
 
 const PortfolioMapSidebar = props => {
-  const { canvas, detailPage, setDetailPage, setHideNav } = props
+  const { canvas, detailPage, setDetailPage, setHideNav, featuresList } = props
   const [detailPageData, setDetailPageData] = useState(null)
   const [show, setShow] = useState(false)
   const [reset, setReset] = useState(false)
   const [lenis, setLenis] = useState()
-  const [showVideo, setShowVideo] = useState(false)
+  const [videoEmbedUrl, setVideoEmbedUrl] = useState(null)
   const wrapperRef = useRef()
   const contentRef = useRef()
   const isDesktop = useMediaQuery({
@@ -212,7 +211,7 @@ const PortfolioMapSidebar = props => {
 
   useEffect(() => {
     if (detailPage !== null) {
-      setDetailPageData(pageData?.features[detailPage])
+      setDetailPageData(featuresList[detailPage])
       setReset(true)
       setShow(true)
       animationIn()
@@ -225,6 +224,19 @@ const PortfolioMapSidebar = props => {
       }
     }
   }, [detailPage, setShow])
+
+  const renderIcon = (icon, color) => {
+    const url = icon?.file?.url
+    const isRiv = url?.includes('.riv')
+    if (isRiv) {
+      return <RiveIcon src={url} color={color} />
+    }
+    return (
+      <div className="feature-icon" style={{ backgroundColor: color }}>
+        <img src={url} alt="feature icon" />
+      </div>
+    )
+  }
 
   useEffect(() => {
     const updateScroll = event => {
@@ -264,110 +276,97 @@ const PortfolioMapSidebar = props => {
       className={classnames({
         show: detailPage !== null,
         hide: detailPage === null,
-        showVideo: showVideo,
+        showVideo: videoEmbedUrl,
       })}
     >
       <ContentWrapper ref={wrapperRef}>
         <Content ref={contentRef}>
           <BgOverlay onClick={handleClickClose}></BgOverlay>
-
           <Sidebar>
             <ScrollBarContainer>
               <ScrollBar>
-                <Bar ref={barRef} $color={detailPageData?.color}></Bar>
+                <Bar ref={barRef} $color={detailPageData?.themeColor}></Bar>
               </ScrollBar>
             </ScrollBarContainer>
-
             <ContentOuter>
               <ContentInner>
-                {show && (
-                  <RiveIcon
-                    src={detailPageData?.riveIcon}
-                    color={detailPageData?.color}
-                  />
-                )}
-
-                <Heading>{detailPageData?.detailPage?.title}</Heading>
-
-                <SubHeading
-                  dangerouslySetInnerHTML={{
-                    __html: detailPageData?.detailPage?.subtitle,
-                  }}
-                />
-
-                <Hr />
-
-                <Description
-                  dangerouslySetInnerHTML={{
-                    __html: detailPageData?.detailPage?.description,
-                  }}
-                />
-
-                {detailPageData?.detailPage?.logos && (
-                  <>
-                    {detailPageData?.detailPage?.logos.map(
-                      ({ title, list }, id) => {
+                {detailPageData?.detail?.map((d, index) => {
+                  const {
+                    title,
+                    subTitle,
+                    description,
+                    logos,
+                    video,
+                    links,
+                    icon,
+                  } = d
+                  console.log(d)
+                  return (
+                    <div key={index}>
+                      {show &&
+                        renderIcon(
+                          icon || detailPageData?.icon,
+                          detailPageData?.themeColor
+                        )}
+                      <Heading>{title}</Heading>
+                      <SubHeading
+                        dangerouslySetInnerHTML={{
+                          __html: subTitle?.childMarkdownRemark?.html,
+                        }}
+                      />
+                      <Hr />
+                      <Description
+                        dangerouslySetInnerHTML={{
+                          __html: description?.childMarkdownRemark?.html,
+                        }}
+                      />
+                      {logos?.map(({ title, logos }, id) => {
                         return (
                           <div key={id}>
                             <Hr />
-
                             {title && (
                               <Description>
                                 {title} <br /> <br />
                               </Description>
                             )}
-
-                            <NetworksLogos logosList={list} />
+                            <NetworksLogos logosList={logos} />
                           </div>
                         )
-                      }
-                    )}
-                  </>
-                )}
-
-                {detailPageData?.detailPage?.video && (
-                  <>
-                    <Hr $fullWidth={true} />
-
-                    <SubHeading>
-                      {detailPageData?.detailPage?.video.title}
-                    </SubHeading>
-
-                    <VideoButton
-                      posterImage={
-                        detailPageData?.detailPage?.video.posterImage
-                      }
-                      onClick={() => setShowVideo(true)}
-                    />
-                  </>
-                )}
-
-                {detailPageData?.detailPage?.links && (
-                  <>
-                    <Hr $fullWidth={true} />
-
-                    <SubHeading>
-                      {detailPageData?.detailPage?.links?.title}
-                    </SubHeading>
-
-                    <AdditionalResources
-                      links={detailPageData?.detailPage?.links}
-                    />
-                  </>
-                )}
+                      })}
+                      {video && (
+                        <>
+                          <Hr $fullWidth={true} />
+                          <SubHeading>{video.title}</SubHeading>
+                          <VideoButton
+                            posterImage={video.thumbnail?.file.url}
+                            onClick={() => setVideoEmbedUrl(video.embed?.embed)}
+                          />
+                        </>
+                      )}
+                      {links && (
+                        <>
+                          <Hr $fullWidth={true} />
+                          <SubHeading>{d.linkSectionTitle}</SubHeading>
+                          <AdditionalResources links={links} />
+                        </>
+                      )}
+                      {index < detailPageData.detail.length - 1 && (
+                        <Hr $fullWidth={true} />
+                      )}
+                    </div>
+                  )
+                })}
               </ContentInner>
             </ContentOuter>
           </Sidebar>
         </Content>
       </ContentWrapper>
-
-      {showVideo && (
+      {videoEmbedUrl && (
         <VideoModal
-          embedUrl={detailPageData?.detailPage?.video?.embedUrl}
-          setShowVideo={setShowVideo}
+          embedUrl={videoEmbedUrl}
+          setVideoEmbedUrl={setVideoEmbedUrl}
         />
       )}
-
       <Buttons handleClickClose={handleClickClose} />
     </Wrapper>
   )
@@ -533,6 +532,21 @@ const ContentOuter = styled.div`
 const ContentInner = styled.div`
   position: relative;
   color: #161616;
+
+  .feature-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin: 0 auto;
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
+  }
 `
 
 const Heading = styled.h2`
@@ -570,6 +584,9 @@ const SubHeading = styled.h3`
     &:hover {
       color: #7e7e7e;
     }
+  }
+  p:last-child {
+    margin-bottom: 0;
   }
 `
 

@@ -16,7 +16,6 @@ const PortfolioMapCanvas = props => {
     canvas.current = new Canvas({
       options: { domElement: canvasWrapper.current },
     })
-    // console.log(canvas)
     return () => {
       console.log('destroy')
       canvas.current.destroy()
@@ -25,10 +24,6 @@ const PortfolioMapCanvas = props => {
 
   return (
     <Wrapper>
-      {/* <TempMapImage
-        src={'/images/temp/portfolio-map-temp.jpg'}
-        alt={'Temporary map'}
-      /> */}
       <div ref={canvasWrapper}></div>
     </Wrapper>
   )
@@ -37,7 +32,6 @@ const PortfolioMapCanvas = props => {
 export default PortfolioMapCanvas
 
 const Wrapper = styled.div`
-  // position: relative;
   position: fixed;
   top: 0;
   width: 100%;

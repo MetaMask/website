@@ -95,6 +95,15 @@ exports.createPages = async ({ graphql, actions }) => {
                   filename
                 }
               }
+              ...on ContentfulPortfolioIntro {
+                contentful_id
+              }
+              ...on ContentfulPortfolioInstructions {
+                contentful_id
+              }
+              ...on ContentfulPortfolioMap {
+                contentful_id
+              }
             }
             themeColor
             isFaqLayout
@@ -203,6 +212,20 @@ exports.createPages = async ({ graphql, actions }) => {
                   isStandalone: index === 1,
                 },
               })
+            })
+            return
+          }
+          if (slug === "/portfolio/") {
+            createPage({
+              path: slug,
+              component: path.resolve(`./src/templates/ContentfulPortfolioLayout.js`),
+              context: {
+                headerId,
+                footerId,
+                seoId,
+                pathBuild: slug,
+                modules: moduleIds,
+              }
             })
             return
           }

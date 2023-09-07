@@ -724,3 +724,128 @@ export const ContentfulLayoutFields = gql`
     }
   }
 `
+
+export const ContentfulPortfolioIntroFields = gql`
+  fragment ContentfulPortfolioIntroFields on PortfolioIntro {
+    __typename
+    sys {
+      id
+    }
+    title
+    ctaLabel
+    description
+  }
+`
+
+export const ContentfulPortfolioInstructionsFields = gql`
+  fragment ContentfulPortfolioInstructionsFields on PortfolioInstructions {
+    __typename
+    sys {
+      id
+    }
+    steps {
+      title
+      ctaLabel
+      description
+    }
+  }
+`
+
+export const ContentfulPortfolioListLogoFields = gql`
+  ${ContentfulLogoFields}
+  fragment ContentfulPortfolioListLogoFields on PortfolioListLogo {
+    __typename
+    sys {
+      id
+    }
+    title
+    logosCollection(preview: true) {
+      items {
+        ...ContentfulLogoFields
+      }
+    }
+  }
+`
+
+export const ContentfulPortfolioFeatureDetailFields = gql`
+  ${ContentfulEmbedFields}
+  ${ContentfulPortfolioListLogoFields}
+  fragment ContentfulPortfolioFeatureDetailFields on PortfolioFeatureDetail {
+    __typename
+    sys {
+      id
+    }
+    description
+    title
+    subTitle
+    icon {
+      title
+      file {
+        url
+      }
+    }
+    linkSectionTitle
+    linksCollection(preview: true) {
+      items {
+        displayText
+        ctaLink
+        newTab
+        badge {
+          title
+          background
+        }
+      }
+    }
+    video {
+      ...ContentfulEmbedFields
+    }
+    logosCollection(preview: true) {
+      items {
+        ...ContentfulPortfolioListLogoFields
+      }
+    }
+  }
+`
+
+export const ContentfulPortfolioFeatureFields = gql`
+  ${ContentfulPortfolioFeatureDetailFields}
+  fragment ContentfulPortfolioFeatureFields on PortfolioFeature {
+    __typename
+    sys {
+      id
+    }
+    mapCoordX
+    mapCoordY
+    markerLabel
+    markerMobileAlignment
+    icon {
+      title
+      file {
+        url
+      }
+    }
+    title
+    themeColor
+    detailCollection {
+      items {
+        ...ContentfulPortfolioFeatureDetailFields
+      }
+    }
+  }
+`
+
+export const ContentfulPortfolioMapFields = gql`
+  ${ContentfulPortfolioFeatureFields}
+  fragment ContentfulPortfolioMapFields on PortfolioMap {
+    __typename
+    sys {
+      id
+    }
+    title
+    featuresCollection {
+      items {
+        ...ContentfulPortfolioFeatureFields
+      }
+    }
+  }
+`
