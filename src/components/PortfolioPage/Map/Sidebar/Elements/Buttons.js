@@ -1,8 +1,7 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
 import ButtonShadow from '../../../Shared/ButtonShadow'
-import { pageData } from '../../../Portfolio.data'
 
 /**
  * @name Buttons
@@ -15,16 +14,6 @@ const Buttons = props => {
 
   return (
     <ButtonsWrapper>
-      <Cta
-        href={pageData.header.rightCta.href}
-        target="_blank"
-        rel='"noopener noreferrer'
-        short
-        hoverCircle
-      >
-        {pageData.header.rightCta.label}
-      </Cta>
-
       <CloseBtn iconClose isCircular={true} onClick={handleClickClose} />
     </ButtonsWrapper>
   )
@@ -57,19 +46,5 @@ const CloseBtn = styled(ButtonShadow)`
     position: relative;
     top: auto;
     left: auto;
-  }
-`
-
-const Cta = styled(ButtonShadow)`
-  position: relative;
-  pointer-events: all;
-  margin-right: 15px;
-  width: fit-content;
-  transform: scale(1);
-  opacity: 0;
-
-  @media (max-width: ${({ theme }) => theme.device.tablet}) {
-    width: max-content;
-    margin-right: 10px;
   }
 `

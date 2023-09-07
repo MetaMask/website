@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import PortfolioMapMarkersButton from './PortfolioMapMarkersButton'
-import { pageData } from '../../Portfolio.data'
 
 /**
  * @name PortfolioMapMarkers
@@ -10,9 +9,8 @@ import { pageData } from '../../Portfolio.data'
  */
 
 const PortfolioMapMarkers = props => {
-  const { canvas, activeFeature, setDetailPage } = props
+  const { canvas, activeFeature, setDetailPage, featuresList } = props
   const rafRef = useRef()
-  const featuresList = pageData.features
   const [mapCoordX, setMapCoordX] = useState(0)
   const [mapCoordY, setMapCoordY] = useState(0)
 
@@ -38,41 +36,36 @@ const PortfolioMapMarkers = props => {
   return (
     <Wrapper>
       <List>
-        {featuresList
-          ? featuresList.map(
-              (
-                { markerLabel, color, riveIcon, markerMobileAlignment },
-                index
-              ) => {
-                const isActive = activeFeature === index
+        {featuresList?.map(
+          ({ markerLabel, themeColor, icon, markerMobileAlignment }, index) => {
+            const isActive = activeFeature === index
 
-                return (
-                  <Marker
-                    key={index}
-                    $top={mapCoordY}
-                    $left={mapCoordX}
-                    style={
-                      isActive
-                        ? {
-                            '--color': color,
-                            '--x-pos': `${mapCoordX}px`,
-                            '--y-pos': `${mapCoordY}px`,
-                          }
-                        : {}
-                    }
-                  >
-                    <PortfolioMapMarkersButton
-                      name={markerLabel}
-                      riveIcon={riveIcon}
-                      active={isActive}
-                      onClick={() => handleClick(index)}
-                      markerMobileAlignment={markerMobileAlignment}
-                    />
-                  </Marker>
-                )
-              }
+            return (
+              <Marker
+                key={index}
+                $top={mapCoordY}
+                $left={mapCoordX}
+                style={
+                  isActive
+                    ? {
+                        '--color': themeColor,
+                        '--x-pos': `${mapCoordX}px`,
+                        '--y-pos': `${mapCoordY}px`,
+                      }
+                    : {}
+                }
+              >
+                <PortfolioMapMarkersButton
+                  name={markerLabel}
+                  riveIcon={icon?.file.url}
+                  active={isActive}
+                  onClick={() => handleClick(index)}
+                  markerMobileAlignment={markerMobileAlignment}
+                />
+              </Marker>
             )
-          : null}
+          }
+        )}
       </List>
     </Wrapper>
   )

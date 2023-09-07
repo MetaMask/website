@@ -892,3 +892,128 @@ export const ContentfulSeoFields = graphql`
     }
   }
 `
+
+export const ContentfulPortfolioIntro = graphql`
+  fragment ContentfulPortfolioIntroFields on ContentfulPortfolioIntro {
+    contentful_id
+    internal {
+      type
+    }
+    title
+    ctaLabel
+    description {
+      childMarkdownRemark {
+        html
+      }
+    }
+  }
+`
+
+export const ContentfulPortfolioInstructions = graphql`
+  fragment ContentfulPortfolioInstructionsFields on ContentfulPortfolioInstructions {
+    contentful_id
+    internal {
+      type
+    }
+    steps {
+      title
+      ctaLabel
+      description {
+        childMarkdownRemark {
+          html
+        }
+      }
+    }
+  }
+`
+
+export const ContentfulPortfolioListLogo = graphql`
+  fragment ContentfulPortfolioListLogoFields on ContentfulPortfolioListLogo {
+    contentful_id
+    internal {
+      type
+    }
+    title
+    logos {
+      ...ContentfulLogoFields
+    }
+  }
+`
+
+export const ContentfulPortfolioFeatureDetail = graphql`
+  fragment ContentfulPortfolioFeatureDetailFields on ContentfulPortfolioFeatureDetail {
+    contentful_id
+    description {
+      childMarkdownRemark {
+        html
+      }
+    }
+    title
+    subTitle {
+      childMarkdownRemark {
+        html
+      }
+    }
+    icon {
+      title
+      file {
+        url
+      }
+    }
+    linkSectionTitle
+    links {
+      displayText
+      ctaLink
+      newTab
+      badge {
+        title
+        background
+      }
+    }
+    video {
+      ...ContentfulEmbedFields
+    }
+    logos {
+      ...ContentfulPortfolioListLogoFields
+    }
+  }
+`
+
+export const ContentfulPortfolioFeature = graphql`
+  fragment ContentfulPortfolioFeatureFields on ContentfulPortfolioFeature {
+    contentful_id
+    internal {
+      type
+    }
+    mapCoordX
+    mapCoordY
+    markerLabel
+    markerMobileAlignment
+    icon {
+      title
+      file {
+        url
+      }
+    }
+    title
+    themeColor
+    detail {
+      ... on ContentfulPortfolioFeatureDetail {
+        ...ContentfulPortfolioFeatureDetailFields
+      }
+    }
+  }
+`
+
+export const ContentfulPortfolioMap = graphql`
+  fragment ContentfulPortfolioMapFields on ContentfulPortfolioMap {
+    contentful_id
+    internal {
+      type
+    }
+    title
+    features {
+      ...ContentfulPortfolioFeatureFields
+    }
+  }
+`

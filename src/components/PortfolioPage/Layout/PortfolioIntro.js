@@ -7,7 +7,6 @@ import { useMediaQuery } from 'react-responsive'
 
 import Cta from '../Shared/PortfolioCta'
 import MMLogoSvg from '../../../images/metamask-logo-iso.svg'
-import { pageData } from '../Portfolio.data'
 
 const searchParams = new URLSearchParams(
   typeof window !== `undefined` && window.location.search
@@ -20,7 +19,8 @@ const searchParams = new URLSearchParams(
  */
 
 const PortfolioIntro = props => {
-  const { canvas, setShowIntro, setShowInstructions } = props
+  const { canvas, setShowIntro, setShowInstructions, data } = props
+  const { title, description, ctaLabel } = data
 
   const isDesktop = useMediaQuery({
     query: `(min-width: 993px)`,
@@ -117,12 +117,12 @@ const PortfolioIntro = props => {
           {isDesktop ? <LogoPortfolio lookAtCenter={true} /> : <MMLogoSvg />}
         </LogoContainer>
 
-        <Heading
-          dangerouslySetInnerHTML={{ __html: pageData.intro.headline }}
-        />
+        <Heading>{title}</Heading>
 
         <Description
-          dangerouslySetInnerHTML={{ __html: pageData.intro.description }}
+          dangerouslySetInnerHTML={{
+            __html: description.childMarkdownRemark.html,
+          }}
         />
 
         <CtaWrapper>
@@ -134,7 +134,7 @@ const PortfolioIntro = props => {
             animationInit={true}
             animationDelay={0.7}
           >
-            {pageData.intro.ctaLabel}
+            {ctaLabel}
           </Cta>
         </CtaWrapper>
       </Content>

@@ -10,7 +10,6 @@ import {
 } from '../index'
 import FullScreenBtn from '../Shared/ButtonFullscreen'
 import FooterBtn from '../Shared/ButtonFooter'
-import { pageData } from '../Portfolio.data'
 
 /**
  * @name PortfolioMap
@@ -26,6 +25,7 @@ const PortfolioMap = props => {
     showFooter,
     setShowFooter,
     showNav,
+    mapData,
   } = props
   const [activeFeature, setActiveFeature] = useState(null)
   const [detailPage, setDetailPage] = useState(null)
@@ -36,9 +36,9 @@ const PortfolioMap = props => {
   })
 
   const setActiveFeatureByName = name => {
-    const activeIndex = pageData.features.findIndex(feature => {
-      return feature.name === name
-    })
+    const activeIndex = mapData.features.findIndex(
+      feature => feature.title === name
+    )
     setActiveFeature(activeIndex)
   }
 
@@ -120,6 +120,7 @@ const PortfolioMap = props => {
           canvas={canvas}
           activeFeature={activeFeature}
           setDetailPage={setDetailPage}
+          featuresList={mapData.features}
         />
       </CanvasWrapper>
 
@@ -131,19 +132,21 @@ const PortfolioMap = props => {
         </BottomWrapper>
       )}
 
-      {showNav && !hideNav && (
+      {showNav && !hideNav ? (
         <Nav
           canvas={canvas}
           activeFeature={activeFeature}
           setActiveFeature={setActiveFeature}
+          featuresList={mapData.features}
         />
-      )}
+      ) : null}
 
       <Sidebar
         canvas={canvas}
         detailPage={detailPage}
         setDetailPage={setDetailPage}
         setHideNav={setHideNav}
+        featuresList={mapData.features}
       />
     </Wrapper>
   )
@@ -175,7 +178,7 @@ const CanvasWrapper = styled.div`
 
 const BottomWrapper = styled.div`
   position: absolute;
-  width: 100%;
+  width: 180px;
   height: 52px;
   bottom: 30px;
   padding: 0 30px;
@@ -185,6 +188,7 @@ const BottomWrapper = styled.div`
 
   @media (max-width: ${({ theme }) => theme.device.tablet}) {
     height: 36px;
+    width: 100%;
     bottom: auto;
     top: 30px;
     justify-content: flex-end;

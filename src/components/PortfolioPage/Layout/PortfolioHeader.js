@@ -2,7 +2,6 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Link } from 'gatsby'
 import ButtonShadow from '../Shared/ButtonShadow'
-import { pageData } from '../Portfolio.data'
 
 /**
  * @name PortfolioHeader
@@ -20,6 +19,7 @@ const PortfolioHeader = props => {
           svg: svgLogo,
         },
       },
+      downloadButton: rightCta,
     },
     showIntro,
   } = props
@@ -42,17 +42,17 @@ const PortfolioHeader = props => {
         </Link>
       </LogoWrapper>
 
-      {!showIntro && (
+      {!showIntro && rightCta && (
         <CtaWrapper>
           <ButtonShadow
             as="a"
-            href={pageData.header.rightCta.href}
+            href={rightCta.ctaLink}
             target="_blank"
             rel='"noopener noreferrer'
             short
             hoverCircle
           >
-            {pageData.header.rightCta.label}
+            {rightCta.displayText}
           </ButtonShadow>
         </CtaWrapper>
       )}
