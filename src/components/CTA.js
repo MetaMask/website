@@ -315,6 +315,13 @@ const CTAContainer = styled.div`
   .snapsLiveMetaMaskFlask & {
     justify-content: center;
   }
+
+  .snaps-faqs & {
+    padding-bottom: 0;
+    a {
+      color: ${({ theme }) => theme.lightBlue} !important;
+    }
+  }
 `
 
 const LinkTitle = styled.span`
