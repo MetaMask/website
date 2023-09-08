@@ -11,6 +11,7 @@ const Popup = props => {
     children,
     width,
     hideCloseIcon = false,
+    keepLightMode = false,
   } = props
 
   const modalRef = useRef()
@@ -44,7 +45,12 @@ const Popup = props => {
       closeOnDocumentClick
       closeOnEscape
     >
-      <ModalInner width={width} ref={modalRef} id="modalInner">
+      <ModalInner
+        width={width}
+        ref={modalRef}
+        id="modalInner"
+        $keepLightMode={keepLightMode}
+      >
         {!hideCloseIcon ? (
           <IconCloseModal
             className={'w-icon w-icon-close'}
