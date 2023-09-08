@@ -7,6 +7,7 @@ import Layout from './PageLayout'
 import Context from '../Context/ContextPage'
 import linkedInTrackingScript from '../lib/services/lintrk'
 import analyticsUninstalledScript from '../lib/services/analytics'
+import usabillaScript from '../lib/services/usabilla'
 import { useLocation } from '@reach/router'
 import Helmet from 'react-helmet'
 import capitalize from 'lodash/capitalize'
@@ -113,6 +114,16 @@ const ContentfulLayout = props => {
               {
                 type: 'text/javascript',
                 innerHTML: analyticsUninstalledScript,
+              },
+            ]}
+          />
+        )}
+        {pathname.includes('/snaps') && (
+          <Helmet
+            script={[
+              {
+                type: 'text/javascript',
+                innerHTML: usabillaScript,
               },
             ]}
           />

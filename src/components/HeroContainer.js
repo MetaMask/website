@@ -1098,15 +1098,15 @@ const HeroCTA = styled.div`
     .button {
       margin: 0 8px 16px;
     }
-    .theme-dark & {
-      flex-direction: column;
-    }
   }
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     display: inline-flex;
     flex-direction: column;
     a {
       padding: 8px 40px;
+    }
+    .ctaMobileFullWidth & {
+      display: flex;
     }
   }
 `
