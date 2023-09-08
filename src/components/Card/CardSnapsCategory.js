@@ -39,7 +39,6 @@ const StyledCard = props => {
       <CardInner
         to={link}
         newTab={newTab}
-        $backgroundColor={backgroundColor}
         $hasBackgroundImage={!!backgroundImage}
         className={classnames('cardLink', {
           [`bg-${backgroundColor}`]: backgroundColor,
@@ -52,7 +51,12 @@ const StyledCard = props => {
             previewMode={previewMode}
           />
         </div>
-        <Inner>
+        <Inner
+          $backgroundColor={backgroundColor}
+          className={classnames({
+            [`bg-${backgroundColor}`]: backgroundColor,
+          })}
+        >
           <InnerContent>
             <TitleWrapper>
               {image ? (
@@ -159,56 +163,15 @@ const Card = styled.div`
 const CardInner = styled(Link)`
   display: block;
   color: ${({ theme }) => theme.text.body} !important;
-  border: 1px solid #D6D9DC;
+  border: 1px solid #d6d9dc;
   border-radius: 16px;
   overflow: hidden;
-  
-  ${({ $backgroundColor, theme }) =>
-    $backgroundColor
-      ? `
-    border-radius: 10px;
-    height: 100%;
-    padding: 24px;
-    .gatsby-bg__content {
-      border-radius: 10px;
-      padding: 24px;
-    }
 
-    @media (max-width: ${theme.device.tabletMediaMax}){
-      .columnTypetag && {
-        padding: 12px;
-      }
-    }
-  `
-      : ''}
-
-  ${({ $backgroundColor }) =>
-    $backgroundColor === 'white'
-      ? `
-    box-shadow: 0 10px 30px 0 rgba(0,0,0,0.09);
-    transition: box-shadow 200ms ease;
-
-    &:hover {
-      box-shadow: 0 10px 30px 0 rgba(0,0,0,0.2);
-    }
-  `
-      : ''}
-  ${({ $backgroundColor }) =>
-    $backgroundColor === 'gray'
-      ? `
-    padding: 20px;
-  `
-      : ''}
-  ${({ $hasBackgroundImage, theme }) =>
+  ${({ $hasBackgroundImage }) =>
     $hasBackgroundImage
       ? `
       height: 100%;
       padding: 0;
-      @media (max-width: ${theme.device.tabletMediaMax}){
-        .columnTypetag & {
-          padding: 12px;
-        }
-      }
     `
       : ``}
   .card-thumbnail {
@@ -230,6 +193,26 @@ const ImageSrc = styled(Image)`
 
 const Inner = styled.div`
   display: flex;
+
+  ${({ $backgroundColor }) =>
+    $backgroundColor
+      ? `
+    border-radius: 10px;
+    height: 100%;
+  `
+      : ''}
+
+  ${({ $backgroundColor }) =>
+    $backgroundColor === 'white'
+      ? `
+    box-shadow: 0 10px 30px 0 rgba(0,0,0,0.09);
+    transition: box-shadow 200ms ease;
+
+    &:hover {
+      box-shadow: 0 10px 30px 0 rgba(0,0,0,0.2);
+    }
+  `
+      : ''}
 `
 const Title = styled.div`
   font-weight: 700;
@@ -266,4 +249,5 @@ const TitleWrapper = styled.div`
   align-items: center;
   gap: 8px;
   margin-bottom: 16px;
+  text-align: initial;
 `
