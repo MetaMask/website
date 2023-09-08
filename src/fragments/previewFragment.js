@@ -218,6 +218,9 @@ export const ContentfulCardFields = gql`
     backgroundImage(preview: true) {
       url
     }
+    backgroundImageDarkMode(preview: true) {
+      url
+    }
     backgroundImageMobile(preview: true) {
       url
     }

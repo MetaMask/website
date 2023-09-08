@@ -506,6 +506,14 @@ export const ContentfulCardFields = graphql`
       }
       gatsbyImageData(width: 1920, quality: 80)
     }
+    backgroundImageDarkMode {
+      title
+      description
+      file {
+        url
+      }
+      gatsbyImageData(width: 1920, quality: 80)
+    }
     backgroundImageMobile {
       title
       description

@@ -21,6 +21,7 @@ const StyledCard = props => {
     backgroundColor,
     backgroundImage,
     backgroundImageMobile,
+    backgroundImageDarkMode,
     customClass,
     imageMargin,
     hubSpotForm,
@@ -47,6 +48,7 @@ const StyledCard = props => {
         <div className="card-thumbnail">
           <GatsbyBackgroundImage
             image={backgroundImage}
+            imageDarkMode={backgroundImageDarkMode}
             imageMobile={backgroundImageMobile}
             previewMode={previewMode}
           />
