@@ -50,7 +50,8 @@ export const Section = styled.div`
 
 export const ModalInner = styled.div`
   border-radius: 24px;
-  background-color: ${({ theme }) => theme.background.white};
+  background-color: ${({ theme, $keepLightMode }) =>
+    $keepLightMode ? theme.white : theme.background.white};
   max-height: 80vh;
   margin-right: 10px;
   margin-left: 10px;

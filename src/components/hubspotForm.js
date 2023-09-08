@@ -76,7 +76,10 @@ export default withTheme(HubspotForm)
 const Title = styled.h2`
   display: block;
   margin-bottom: 40px;
-
+  color: #333;
+  body.dark-mode & {
+    color: #333;
+  }
   .registerEventForm & {
     margin-bottom: 0;
     font-size: 24px;
@@ -109,7 +112,8 @@ const Wrapper = styled.div`
   &.formMW510 {
     max-width: 510px;
   }
-
+  &.mobile-launch-form,
+  .newsletterOnNewsletterpage &,
   .registerEventForm &,
   .registerCustodyForm & {
     padding: 20px;
@@ -127,11 +131,6 @@ const Wrapper = styled.div`
       padding-left: 55px;
       padding-right: 55px;
     }
-  }
-
-  body.dark-mode .registerEventForm &,
-  body.dark-mode .registerCustodyForm & {
-    background-color: #121212;
   }
 `
 
@@ -157,10 +156,6 @@ const Content = styled.div`
     box-shadow: -15px 15px 24px rgba(0, 0, 0, 0.05),
       -3px 3px 10px rgba(0, 0, 0, 0.07);
     border-radius: 5px;
-
-    body.dark-mode & {
-      background-color: #24292e;
-    }
   }
 `
 
@@ -224,9 +219,6 @@ const Form = styled.div`
       padding-top: 0;
       margin-bottom: 4px;
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      .dark-mode & {
-        color: #fff;
-      }
     }
     .hs-video-form {
       label {
@@ -293,9 +285,6 @@ const Form = styled.div`
       font-weight: normal;
       line-height: 22px;
       color: #33475b;
-      .dark-mode & {
-        color: #000;
-      }
       border: 1px solid #cbd6e2;
       box-sizing: border-box;
       border-radius: 3px;
@@ -352,9 +341,6 @@ const Form = styled.div`
       color: #bfbfbf;
       &:focus {
         color: #33475b;
-        .dark-mode & {
-          color: #000;
-        }
       }
     }
     textarea.hs-input {
@@ -455,9 +441,6 @@ const Form = styled.div`
       line-height: 24px;
       font-size: 14px;
       color: #33475b;
-      .dark-mode & {
-        color: #fff;
-      }
       hr {
         margin-left: 0;
         width: 91%;
@@ -738,9 +721,6 @@ const Form = styled.div`
           font-family: helvetica;
           font-size: 13px;
           color: #33475b;
-          .dark-mode & {
-            color: #fff;
-          }
         }
       }
     }
@@ -749,18 +729,12 @@ const Form = styled.div`
         font-family: helvetica;
         color: #33475b;
         font-size: 14px;
-        .dark-mode & {
-          color: #fff;
-        }
       }
       label {
         &:not(.hs-error-msg) {
           font-family: helvetica;
           color: #33475b;
           font-size: 14px;
-          .dark-mode & {
-            color: #fff;
-          }
         }
       }
     }
@@ -777,9 +751,6 @@ const Form = styled.div`
       }
       &:visited {
         color: #551a8b;
-        .dark-mode & {
-          color: #DA70D6;
-        }
       }
       &:hover {
         color: #551a8b;
@@ -863,9 +834,6 @@ const Form = styled.div`
     .submitted-message {
       font-size: 16px;
       color: #33475b;
-      .dark-mode & {
-        color: #fff;
-      }
     }
     .fn-date-picker.pika-single {
       z-index: 9999;
