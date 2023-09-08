@@ -247,7 +247,7 @@ const CTA = props => {
     <>
       {ele}
       {hubSpotForm ? (
-        <Popup showPopup={showPopup} onClosePopup={onClosePopup}>
+        <Popup showPopup={showPopup} onClosePopup={onClosePopup} keepLightMode>
           {contentfulModuleToComponent({
             ...hubSpotForm,
             previewMode,
