@@ -132,6 +132,11 @@ const PageLayout = props => {
     } else {
       document.body.classList.add('ascb-show')
     }
+    if (pathname === '/snaps/') {
+      document.body.classList.add('usabilla-show')
+    } else {
+      document.body.classList.remove('usabilla-show')
+    }
   }, [])
 
   return (
