@@ -1708,3 +1708,13 @@ body.disable-scroll {
 body.dark-mode .snaps-color-secondary {
   color: #fff;
 }
+
+.usabilla_live_button_container {
+  display: none;
+}
+
+body.usabilla-show {
+  .usabilla_live_button_container {
+    display: block;
+  }
+}
