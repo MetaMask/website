@@ -315,6 +315,13 @@ const CTAContainer = styled.div`
   .snapsLiveMetaMaskFlask & {
     justify-content: center;
   }
+
+  .snaps-faqs & {
+    padding-bottom: 0;
+    a {
+      color: ${({ theme }) => theme.lightBlue} !important;
+    }
+  }
 `
 
 const LinkTitle = styled.span`
@@ -364,14 +371,14 @@ const LinkTitle = styled.span`
 
   .snapsLiveMetaMaskFlask & {
     color: #222;
-    background-color: #ffffffbf;
+    background-color: #fff;
     padding: 6px;
     gap: 6px;
     border-radius: 32px;
     font-weight: 700;
     transition: ease 0.3s all;
     span > span:first-child {
-      background: #bb2534;
+      background: #d73a49;
       border-radius: 16px;
       color: #fff;
       padding: 2px 10px;
@@ -380,6 +387,10 @@ const LinkTitle = styled.span`
     &:hover {
       background-color: white;
     }
+  }
+
+  .snaps-categories & {
+    color: ${({ theme }) => theme.lightBlue} !important;
   }
 `
 
@@ -427,16 +438,16 @@ const ContentWrapper = styled(Link)`
     }
   `
       : ``}
-    ${({ $typeLayout }) =>
-      $typeLayout === 'headerSingle'
-        ? `
+  ${({ $typeLayout }) =>
+    $typeLayout === 'headerSingle'
+      ? `
     padding: 0;
     margin: 0;
     &:hover {
       background-color: unset;
     }
   `
-        : ``}
+      : ``}
   ${({ $typeLayout, theme }) =>
     $typeLayout === 'footer'
       ? `

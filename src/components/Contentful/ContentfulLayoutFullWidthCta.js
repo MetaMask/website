@@ -16,8 +16,13 @@ const ContentfulLayoutFullWidthCta = props => {
       ctas,
       logoType,
       sectionPadding,
+      noPaddingTop,
+      noPaddingBottom,
       customClass,
       previewMode = false,
+      bordered,
+      backgroundImage,
+      backgroundImageDarkMode,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -33,8 +38,13 @@ const ContentfulLayoutFullWidthCta = props => {
       ctas={ctas}
       logoType={logoType}
       sectionPadding={sectionPadding}
+      noPaddingTop={noPaddingTop}
+      noPaddingBottom={noPaddingBottom}
       customClass={customClass}
       previewMode={previewMode}
+      bordered={bordered}
+      backgroundImage={backgroundImage}
+      backgroundImageDarkMode={backgroundImageDarkMode}
     />
   )
 }

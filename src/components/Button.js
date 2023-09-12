@@ -149,6 +149,10 @@ const ButtonWrapper = styled(Link)`
         color: ${theme.button.primary.bgHover};
       }
     }
+
+    body:not(.dark-mode) .theme-dark && {
+      background: #fff !important;
+    }
   `
       : ''}
 

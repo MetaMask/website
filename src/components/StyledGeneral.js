@@ -40,6 +40,9 @@ export const Section = styled.div`
   &.noPaddingBottom {
     padding-bottom: 0 !important;
   }
+  &.noPaddingTop {
+    padding-top: 0 !important;
+  }
 
   &.removeSectionPaddingBottomOnDesktop {
     @media (min-width: ${({ theme }) => theme.device.tablet}){

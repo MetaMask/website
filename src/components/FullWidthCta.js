@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useContext } from 'react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import Loadable from '@loadable/component'
@@ -7,6 +7,8 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { Section, SectionTitle } from './StyledGeneral'
 import classnames from 'classnames'
 import ParseMD from './ParseMD'
+import getWebpImage from '../lib/utils/getWebpImage'
+import ContextClientSide from '../Context/ContextClientSide'
 
 const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
 
@@ -22,26 +24,55 @@ const FullWidthCta = props => {
     marginBottom,
     logoType,
     sectionPadding,
+    noPaddingBottom,
+    noPaddingTop,
     customClass,
     previewMode = false,
+    bordered,
+    backgroundImage,
+    backgroundImageDarkMode,
   } = props
+
+  const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
+  const { isDarkMode } = darkModeContextValue || {}
+
+  const backgroundImageUrl = getWebpImage(
+    previewMode ? backgroundImage?.url : backgroundImage?.file?.url
+  )
+  const backgroundImageDarkModeUrl = getWebpImage(
+    previewMode
+      ? backgroundImageDarkMode?.url
+      : backgroundImageDarkMode?.file?.url
+  )
 
   return (
     <Container
       sectionPadding={sectionPadding}
       className={classnames({
+        noPaddingBottom: noPaddingBottom,
+        noPaddingTop: noPaddingTop,
         [`bg-${backgroundColor}`]: backgroundColor,
         [customClass]: customClass,
       })}
     >
       <ContentWrapper>
-        <FullWidthCtaWrapper showLogoAnimation={showLogoAnimation}>
+        <FullWidthCtaWrapper
+          showLogoAnimation={showLogoAnimation}
+          $bordered={bordered}
+          $backgroundImage={
+            isDarkMode ? backgroundImageDarkModeUrl : backgroundImageUrl
+          }
+        >
+          {' '}
           {showLogoAnimation && customClass !== 'metaMaskUninstalled' ? (
             <LogoAnimation logoType={logoType} />
           ) : null}
           <FullWidthCtaInner
+            noPaddingBottom={noPaddingBottom}
+            noPaddingTop={noPaddingTop}
             marginBottom={marginBottom}
             backgroundColor={backgroundColor}
+            className="fullwidth-cta-inner"
           >
             {headline ? (
               <Headline
@@ -118,6 +149,29 @@ const FullWidthCtaWrapper = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
+  
+  ${({ $bordered }) =>
+    $bordered
+      ? `
+    border-radius: 16px;
+    border: 1px solid #BBC0C5;
+
+    .fullwidth-cta-inner {
+      margin: 32px 0;
+      h2, a {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+    `
+      : ''}
+
+  ${({ $backgroundImage }) =>
+    $backgroundImage
+      ? `
+      background-image: url(${$backgroundImage});
+    `
+      : ''}
 
   ${({ showLogoAnimation, theme }) =>
     showLogoAnimation

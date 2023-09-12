@@ -187,6 +187,11 @@ const Wrapper = styled.div`
     @media (max-width: ${theme.device.tabletMediaMax}) {
       margin-bottom: 40px;
     }
+
+    .snaps-faqs & {
+      width: 100%;
+      margin-bottom: 0;
+    }
   `
       : ``}
 

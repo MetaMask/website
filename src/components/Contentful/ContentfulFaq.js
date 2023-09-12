@@ -11,6 +11,7 @@ const ContentfulFaq = props => {
       contentful_id,
       backgroundColor,
       containerBgColor,
+      bordered,
       previewMode = false,
     },
   } = props
@@ -22,6 +23,7 @@ const ContentfulFaq = props => {
       id={contentful_id}
       backgroundColor={backgroundColor}
       containerBgColor={containerBgColor}
+      bordered={bordered}
       previewMode={previewMode}
     />
   )
