@@ -16,6 +16,8 @@ const ContentfulLayoutFullWidthCta = props => {
       ctas,
       logoType,
       sectionPadding,
+      noPaddingBottom,
+      noPaddingTop,
       customClass,
       previewMode = false,
       contentful_id,
@@ -37,6 +39,8 @@ const ContentfulLayoutFullWidthCta = props => {
       ctas={ctas}
       logoType={logoType}
       sectionPadding={sectionPadding}
+      noPaddingTop={noPaddingTop}
+      noPaddingBottom={noPaddingBottom}
       customClass={customClass}
       previewMode={previewMode}
       contentfulId={contentful_id}

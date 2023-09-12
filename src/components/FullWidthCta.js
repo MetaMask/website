@@ -25,6 +25,8 @@ const FullWidthCta = props => {
     marginBottom,
     logoType,
     sectionPadding,
+    noPaddingTop,
+    noPaddingBottom,
     customClass,
     previewMode = false,
     contentfulId,
@@ -49,6 +51,8 @@ const FullWidthCta = props => {
     <Container
       sectionPadding={sectionPadding}
       className={classnames({
+        noPaddingBottom: noPaddingBottom,
+        noPaddingTop: noPaddingTop,
         [`bg-${backgroundColor}`]: backgroundColor,
         [customClass]: customClass,
       })}
