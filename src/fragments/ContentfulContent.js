@@ -364,8 +364,21 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
         ...ContentfulCtaFields
       }
     }
+    bordered
+    backgroundImage {
+      file {
+        url
+      }
+    }
+    backgroundImageDarkMode {
+      file {
+        url
+      }
+    }
     backgroundColor
     sectionPadding
+    noPaddingTop
+    noPaddingBottom
     customClass
   }
 `
@@ -508,6 +521,14 @@ export const ContentfulCardFields = graphql`
       }
       gatsbyImageData(width: 1920, quality: 80)
     }
+    backgroundImageDarkMode {
+      title
+      description
+      file {
+        url
+      }
+      gatsbyImageData(width: 1920, quality: 80)
+    }
     backgroundImageMobile {
       title
       description
@@ -608,6 +629,7 @@ export const ContentfulFaqFields = graphql`
       }
     }
     backgroundColor
+    bordered
   }
 `
 

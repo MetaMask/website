@@ -147,6 +147,15 @@ export const ContentfulLayoutFullWidthCtaFields = gql`
     }
     backgroundColor
     sectionPadding
+    noPaddingTop
+    noPaddingBottom
+    bordered
+    backgroundImage(preview: true) {
+      url
+    }
+    backgroundImageDarkMode(preview: true) {
+      url
+    }
     customClass
   }
 `
@@ -216,6 +225,9 @@ export const ContentfulCardFields = gql`
     backgroundImage(preview: true) {
       url
     }
+    backgroundImageDarkMode(preview: true) {
+      url
+    }
     backgroundImageMobile(preview: true) {
       url
     }
@@ -240,6 +252,7 @@ export const ContentfulFaqFields = gql`
     question
     answer
     backgroundColor
+    bordered
   }
 `
 

@@ -978,6 +978,9 @@ const HeroSideImage = styled.div`
       padding-left: 40px;
     }
   }
+  .hero-snaps & {
+    width: 40%;
+  }
 `
 
 const HeightSlide = styled.div`
@@ -1014,6 +1017,9 @@ const HeroCTA = styled.div`
     flex-direction: column;
     a {
       padding: 8px 40px;
+    }
+    .ctaMobileFullWidth & {
+      display: flex;
     }
   }
 `

@@ -1,7 +1,9 @@
 export default `
 (function () {
     function setTheme(newTheme) {
-        document.body.className = newTheme+'-mode';
+        document.body.classList.remove('light-mode');
+        document.body.classList.remove('dark-mode');
+        document.body.classList.add(newTheme+'-mode');
         window.__theme = newTheme;
         window.__onThemeChange(newTheme);
     }
