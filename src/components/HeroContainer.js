@@ -601,6 +601,11 @@ const HeroContentContainer = styled.div`
     }
   `
       : ''}
+  .hero-snaps & {
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
+      flex-direction: column-reverse;
+    }
+  }
 `
 
 const HeroImageTextContainer = styled.div`
@@ -1007,9 +1012,6 @@ const HeroCTA = styled.div`
 
     .button {
       margin: 0 8px 16px;
-    }
-    .theme-dark & {
-      flex-direction: column;
     }
   }
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
