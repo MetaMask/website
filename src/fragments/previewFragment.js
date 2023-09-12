@@ -147,6 +147,8 @@ export const ContentfulLayoutFullWidthCtaFields = gql`
     }
     backgroundColor
     sectionPadding
+    noPaddingBottom
+    noPaddingTop
     bordered
     backgroundImage(preview: true) {
       url
