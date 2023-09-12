@@ -97,6 +97,7 @@ export const Wrapper = styled.div`
     background-image: url(${background});
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
     `
       : ``}
   display: grid;
