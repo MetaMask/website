@@ -123,6 +123,10 @@ const StyledGatsbyImage = styled(GatsbyImage)`
     position: absolute;
     inset: 0;
   }
+
+  .snaps-security & img {
+    object-position: center bottom;
+  }
 `
 
 const Content = styled.div`
