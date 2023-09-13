@@ -183,6 +183,7 @@ const FeatureComponent = props => {
         previewMode={previewMode}
         mobileImageBreakpoint={'mobile'}
         absolute
+        className={customClass}
       >
         <ContentWrapper customClass={customClass}>
           <FeatureWrapper
