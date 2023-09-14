@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Link } from 'gatsby'
 import ButtonShadow from '../Shared/ButtonShadow'
+import withProcessPreviewData from '../../../lib/utils/withProcessPreviewData'
 
 /**
  * @name PortfolioHeader
@@ -12,16 +13,11 @@ import ButtonShadow from '../Shared/ButtonShadow'
 const PortfolioHeader = props => {
   const {
     header: {
-      logo: {
-        title: titleLogo,
-        logo: {
-          file: { url: srcLogo },
-          svg: svgLogo,
-        },
-      },
+      logo: { logo, title },
       downloadButton: rightCta,
     },
     showIntro,
+    previewMode,
   } = props
 
   return (
@@ -29,14 +25,17 @@ const PortfolioHeader = props => {
       <LogoWrapper>
         <Link to="/" aria-label="Go to Homepage">
           <ButtonShadow as="div" short>
-            {svgLogo?.content ? (
+            {logo?.svg?.content ? (
               <LogoSvgWrapper
                 dangerouslySetInnerHTML={{
-                  __html: svgLogo?.content,
+                  __html: logo.svg.content,
                 }}
               />
             ) : (
-              <Logo src={srcLogo} alt={titleLogo} />
+              <Logo
+                src={previewMode ? logo?.url : logo?.file?.url}
+                alt={title}
+              />
             )}
           </ButtonShadow>
         </Link>
@@ -60,7 +59,15 @@ const PortfolioHeader = props => {
   )
 }
 
-export default PortfolioHeader
+const parsePreviewData = data => {
+  const dataUpdate = {
+    previewMode: true,
+    ...data,
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(PortfolioHeader)
 
 const PHWrapperFadeIn = keyframes`
   0% {

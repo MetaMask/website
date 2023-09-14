@@ -13,6 +13,8 @@ import VideoButton from './Elements/VideoButton'
 import NetworksLogos from './Elements/NetworksLogos'
 import AdditionalResources from './Elements/AdditionalResources'
 import Buttons from './Elements/Buttons'
+import withProcessPreviewData from '../../../../lib/utils/withProcessPreviewData'
+import ParseMD from '../../../ParseMD'
 
 /**
  * @name PortfolioMapSidebar
@@ -21,7 +23,14 @@ import Buttons from './Elements/Buttons'
  */
 
 const PortfolioMapSidebar = props => {
-  const { canvas, detailPage, setDetailPage, setHideNav, featuresList } = props
+  const {
+    canvas,
+    detailPage,
+    setDetailPage,
+    setHideNav,
+    featuresList,
+    previewMode,
+  } = props
   const [detailPageData, setDetailPageData] = useState(null)
   const [show, setShow] = useState(false)
   const [reset, setReset] = useState(false)
@@ -226,7 +235,7 @@ const PortfolioMapSidebar = props => {
   }, [detailPage, setShow])
 
   const renderIcon = (icon, color) => {
-    const url = icon?.file?.url
+    const url = previewMode ? icon?.url : icon?.file?.url
     const isRiv = url?.includes('.riv')
     if (isRiv) {
       return <RiveIcon src={url} color={color} />
@@ -291,16 +300,22 @@ const PortfolioMapSidebar = props => {
             <ContentOuter>
               <ContentInner>
                 {detailPageData?.detail?.map((d, index) => {
-                  const {
+                  let {
                     title,
                     subTitle,
                     description,
                     logos,
                     video,
                     links,
+                    linksCollection,
+                    logosCollection,
                     icon,
                   } = d
-                  console.log(d)
+
+                  if (previewMode) {
+                    links = linksCollection?.items
+                    logos = logosCollection?.items
+                  }
                   return (
                     <div key={index}>
                       {show &&
@@ -309,18 +324,31 @@ const PortfolioMapSidebar = props => {
                           detailPageData?.themeColor
                         )}
                       <Heading>{title}</Heading>
-                      <SubHeading
-                        dangerouslySetInnerHTML={{
-                          __html: subTitle?.childMarkdownRemark?.html,
-                        }}
-                      />
+                      <SubHeading>
+                        {previewMode ? (
+                          <ParseMD>{subTitle}</ParseMD>
+                        ) : (
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: subTitle?.childMarkdownRemark?.html,
+                            }}
+                          />
+                        )}
+                      </SubHeading>
                       <Hr />
-                      <Description
-                        dangerouslySetInnerHTML={{
-                          __html: description?.childMarkdownRemark?.html,
-                        }}
-                      />
-                      {logos?.map(({ title, logos }, id) => {
+                      <Description>
+                        {previewMode ? (
+                          <ParseMD>{description}</ParseMD>
+                        ) : (
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: description?.childMarkdownRemark?.html,
+                            }}
+                          />
+                        )}
+                      </Description>
+                      {logos?.map((item, id) => {
+                        const { title, logos, logosCollection } = item
                         return (
                           <div key={id}>
                             <Hr />
@@ -329,7 +357,11 @@ const PortfolioMapSidebar = props => {
                                 {title} <br /> <br />
                               </Description>
                             )}
-                            <NetworksLogos logosList={logos} />
+                            <NetworksLogos
+                              logosList={
+                                previewMode ? logosCollection?.items : logos
+                              }
+                            />
                           </div>
                         )
                       })}
@@ -338,7 +370,11 @@ const PortfolioMapSidebar = props => {
                           <Hr $fullWidth={true} />
                           <SubHeading>{video.title}</SubHeading>
                           <VideoButton
-                            posterImage={video.thumbnail?.file.url}
+                            posterImage={
+                              previewMode
+                                ? video.thumbnail?.url
+                                : video.thumbnail?.file.url
+                            }
                             onClick={() => setVideoEmbedUrl(video.embed?.embed)}
                           />
                         </>
@@ -372,7 +408,21 @@ const PortfolioMapSidebar = props => {
   )
 }
 
-export default PortfolioMapSidebar
+const parsePreviewData = data => {
+  let { featuresList } = data
+  featuresList = featuresList.map(f => ({
+    ...f,
+    detail: f?.detailCollection?.items,
+  }))
+  const dataUpdate = {
+    previewMode: true,
+    ...data,
+    featuresList,
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(PortfolioMapSidebar)
 
 const Wrapper = styled.div`
   position: absolute;

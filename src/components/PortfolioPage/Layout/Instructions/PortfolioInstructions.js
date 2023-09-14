@@ -4,7 +4,6 @@ import styled, { keyframes } from 'styled-components'
 import classnames from 'classnames'
 import Cookies from 'universal-cookie'
 import { useMediaQuery } from 'react-responsive'
-
 import Cta from '../../Shared/PortfolioCta'
 import DragAnimation from './Animations/DragAnimation'
 import DragMobileAnimation from './Animations/DragMobileAnimation'
@@ -12,6 +11,8 @@ import ScrollAnimation from './Animations/ScrollAnimation'
 import PinchAnimation from './Animations/PinchAnimation'
 import PyramidTopInstructionsSvg from '../../../../images/portfolio/pyramid-top-instructions.svg'
 import PyramidBottomInstructionsSvg from '../../../../images/portfolio/pyramid-bottom-instructions.svg'
+import withProcessPreviewData from '../../../../lib/utils/withProcessPreviewData'
+import ParseMD from '../../../ParseMD'
 
 /**
  * @name PortfolioInstructions
@@ -26,7 +27,9 @@ const PortfolioInstructions = props => {
     setShowInstructions,
     instructionsCompleted,
     data: { steps },
+    previewMode,
   } = props
+
   const [exitInstructions, setExitInstructions] = useState(false)
   const cookies = new Cookies()
   const numOfStep = steps.length
@@ -204,11 +207,17 @@ const PortfolioInstructions = props => {
                   }}
                 />
 
-                <StepDescription
-                  dangerouslySetInnerHTML={{
-                    __html: steps[0].description?.childMarkdownRemark?.html,
-                  }}
-                />
+                <StepDescription>
+                  {previewMode ? (
+                    <ParseMD>{steps[0]?.description}</ParseMD>
+                  ) : (
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: steps[0].description?.childMarkdownRemark?.html,
+                      }}
+                    />
+                  )}
+                </StepDescription>
 
                 <StepCtaWrapper>
                   <Cta
@@ -276,7 +285,7 @@ const PortfolioInstructions = props => {
                 <StepPinch>
                   <StepTitle
                     dangerouslySetInnerHTML={{
-                      __html: steps[2].titleMobile,
+                      __html: steps[2].mobileTitle,
                     }}
                   />
                 </StepPinch>
@@ -310,7 +319,19 @@ const PortfolioInstructions = props => {
   )
 }
 
-export default PortfolioInstructions
+const parsePreviewData = data => {
+  const dataUpdate = {
+    previewMode: true,
+    ...data,
+    data: {
+      ...data.data,
+      steps: data?.data?.stepsCollection?.items,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(PortfolioInstructions)
 
 const PIWrapperFadeIn = keyframes`
   0% {

@@ -1,27 +1,5 @@
 import gql from 'graphql-tag'
 
-export const ContentfulNewsLayoutFields = gql`
-  fragment ContentfulNewsLayoutFields on NewsLayout {
-    __typename
-    sys {
-      id
-    }
-    title
-    subtitle
-    image(preview: true) {
-      url
-    }
-    publishDate
-    content
-    authorsCollection(preview: true) {
-      items {
-        name
-      }
-    }
-    publishDate
-  }
-`
-
 export const ContentfulLogoFields = gql`
   fragment ContentfulLogoFields on Logo {
     __typename
@@ -58,6 +36,152 @@ export const ContentfulEmbedFields = gql`
     layoutType
     playOnPopup
     displayTitle
+  }
+`
+
+export const ContentfulPortfolioIntroFields = gql`
+  fragment ContentfulPortfolioIntroFields on PortfolioIntro {
+    __typename
+    sys {
+      id
+    }
+    title
+    ctaLabel
+    description
+  }
+`
+
+export const ContentfulPortfolioInstructionsFields = gql`
+  fragment ContentfulPortfolioInstructionsFields on PortfolioInstructions {
+    __typename
+    sys {
+      id
+    }
+    stepsCollection(preview: true) {
+      items {
+        title
+        mobileTitle
+        ctaLabel
+        description
+      }
+    }
+  }
+`
+
+export const ContentfulPortfolioListLogoFields = gql`
+  ${ContentfulLogoFields}
+  fragment ContentfulPortfolioListLogoFields on PortfolioListLogo {
+    __typename
+    sys {
+      id
+    }
+    title
+    logosCollection(preview: true) {
+      items {
+        ...ContentfulLogoFields
+      }
+    }
+  }
+`
+
+export const ContentfulPortfolioFeatureDetailFields = gql`
+  ${ContentfulEmbedFields}
+  ${ContentfulPortfolioListLogoFields}
+  fragment ContentfulPortfolioFeatureDetailFields on PortfolioFeatureDetail {
+    __typename
+    sys {
+      id
+    }
+    description
+    title
+    subTitle
+    icon {
+      title
+      url
+    }
+    linkSectionTitle
+    linksCollection(preview: true) {
+      items {
+        displayText
+        ctaLink
+        newTab
+        badge {
+          title
+          background
+        }
+      }
+    }
+    video {
+      ...ContentfulEmbedFields
+    }
+    logosCollection(preview: true) {
+      items {
+        ...ContentfulPortfolioListLogoFields
+      }
+    }
+  }
+`
+
+export const ContentfulPortfolioFeatureFields = gql`
+  ${ContentfulPortfolioFeatureDetailFields}
+  fragment ContentfulPortfolioFeatureFields on PortfolioFeature {
+    __typename
+    sys {
+      id
+    }
+    mapCoordX
+    mapCoordY
+    markerLabel
+    markerMobileAlignment
+    icon {
+      title
+      url
+    }
+    title
+    themeColor
+    detailCollection {
+      items {
+        ...ContentfulPortfolioFeatureDetailFields
+      }
+    }
+  }
+`
+
+export const ContentfulPortfolioMapFields = gql`
+  ${ContentfulPortfolioFeatureFields}
+  fragment ContentfulPortfolioMapFields on PortfolioMap {
+    __typename
+    sys {
+      id
+    }
+    title
+    featuresCollection {
+      items {
+        ...ContentfulPortfolioFeatureFields
+      }
+    }
+  }
+`
+
+export const ContentfulNewsLayoutFields = gql`
+  fragment ContentfulNewsLayoutFields on NewsLayout {
+    __typename
+    sys {
+      id
+    }
+    title
+    subtitle
+    image(preview: true) {
+      url
+    }
+    publishDate
+    content
+    authorsCollection(preview: true) {
+      items {
+        name
+      }
+    }
+    publishDate
   }
 `
 
@@ -699,6 +823,9 @@ export const ContentfulLayoutFields = gql`
   ${ContentfulLayoutFooterFields}
   ${ContentfulLayoutFeatureFields}
   ${ContentfulLayoutFeatureSliderFields}
+  ${ContentfulPortfolioIntroFields}
+  ${ContentfulPortfolioInstructionsFields}
+  ${ContentfulPortfolioMapFields}
   fragment ContentfulLayoutFields on Layout {
     __typename
     sys {
@@ -707,6 +834,7 @@ export const ContentfulLayoutFields = gql`
     themeColor
     h2FontSize
     isFaqLayout
+    slug
     header(preview: true) {
       ...ContentfulLayoutHeaderFields
     }
@@ -717,135 +845,13 @@ export const ContentfulLayoutFields = gql`
         ...ContentfulLayoutHeroFields
         ...ContentfulLayoutModuleContainerFields
         ...ContentfulLayoutFeatureSliderFields
+        ...ContentfulPortfolioIntroFields
+        ...ContentfulPortfolioInstructionsFields
+        ...ContentfulPortfolioMapFields
       }
     }
     footer(preview: true) {
       ...ContentfulLayoutFooterFields
-    }
-  }
-`
-
-export const ContentfulPortfolioIntroFields = gql`
-  fragment ContentfulPortfolioIntroFields on PortfolioIntro {
-    __typename
-    sys {
-      id
-    }
-    title
-    ctaLabel
-    description
-  }
-`
-
-export const ContentfulPortfolioInstructionsFields = gql`
-  fragment ContentfulPortfolioInstructionsFields on PortfolioInstructions {
-    __typename
-    sys {
-      id
-    }
-    steps {
-      title
-      ctaLabel
-      description
-    }
-  }
-`
-
-export const ContentfulPortfolioListLogoFields = gql`
-  ${ContentfulLogoFields}
-  fragment ContentfulPortfolioListLogoFields on PortfolioListLogo {
-    __typename
-    sys {
-      id
-    }
-    title
-    logosCollection(preview: true) {
-      items {
-        ...ContentfulLogoFields
-      }
-    }
-  }
-`
-
-export const ContentfulPortfolioFeatureDetailFields = gql`
-  ${ContentfulEmbedFields}
-  ${ContentfulPortfolioListLogoFields}
-  fragment ContentfulPortfolioFeatureDetailFields on PortfolioFeatureDetail {
-    __typename
-    sys {
-      id
-    }
-    description
-    title
-    subTitle
-    icon {
-      title
-      file {
-        url
-      }
-    }
-    linkSectionTitle
-    linksCollection(preview: true) {
-      items {
-        displayText
-        ctaLink
-        newTab
-        badge {
-          title
-          background
-        }
-      }
-    }
-    video {
-      ...ContentfulEmbedFields
-    }
-    logosCollection(preview: true) {
-      items {
-        ...ContentfulPortfolioListLogoFields
-      }
-    }
-  }
-`
-
-export const ContentfulPortfolioFeatureFields = gql`
-  ${ContentfulPortfolioFeatureDetailFields}
-  fragment ContentfulPortfolioFeatureFields on PortfolioFeature {
-    __typename
-    sys {
-      id
-    }
-    mapCoordX
-    mapCoordY
-    markerLabel
-    markerMobileAlignment
-    icon {
-      title
-      file {
-        url
-      }
-    }
-    title
-    themeColor
-    detailCollection {
-      items {
-        ...ContentfulPortfolioFeatureDetailFields
-      }
-    }
-  }
-`
-
-export const ContentfulPortfolioMapFields = gql`
-  ${ContentfulPortfolioFeatureFields}
-  fragment ContentfulPortfolioMapFields on PortfolioMap {
-    __typename
-    sys {
-      id
-    }
-    title
-    featuresCollection {
-      items {
-        ...ContentfulPortfolioFeatureFields
-      }
     }
   }
 `

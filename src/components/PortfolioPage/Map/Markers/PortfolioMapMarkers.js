@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import PortfolioMapMarkersButton from './PortfolioMapMarkersButton'
+import withProcessPreviewData from '../../../../lib/utils/withProcessPreviewData'
 
 /**
  * @name PortfolioMapMarkers
@@ -9,7 +10,13 @@ import PortfolioMapMarkersButton from './PortfolioMapMarkersButton'
  */
 
 const PortfolioMapMarkers = props => {
-  const { canvas, activeFeature, setDetailPage, featuresList } = props
+  const {
+    canvas,
+    activeFeature,
+    setDetailPage,
+    featuresList,
+    previewMode,
+  } = props
   const rafRef = useRef()
   const [mapCoordX, setMapCoordX] = useState(0)
   const [mapCoordY, setMapCoordY] = useState(0)
@@ -57,7 +64,7 @@ const PortfolioMapMarkers = props => {
               >
                 <PortfolioMapMarkersButton
                   name={markerLabel}
-                  riveIcon={icon?.file.url}
+                  riveIcon={previewMode ? icon?.url : icon?.file.url}
                   active={isActive}
                   onClick={() => handleClick(index)}
                   markerMobileAlignment={markerMobileAlignment}
@@ -71,7 +78,15 @@ const PortfolioMapMarkers = props => {
   )
 }
 
-export default PortfolioMapMarkers
+const parsePreviewData = data => {
+  const dataUpdate = {
+    previewMode: true,
+    ...data,
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(PortfolioMapMarkers)
 
 const Wrapper = styled.nav`
   position: absolute;

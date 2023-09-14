@@ -10,6 +10,7 @@ import {
 } from '../index'
 import FullScreenBtn from '../Shared/ButtonFullscreen'
 import FooterBtn from '../Shared/ButtonFooter'
+import withProcessPreviewData from '../../../lib/utils/withProcessPreviewData'
 
 /**
  * @name PortfolioMap
@@ -27,6 +28,7 @@ const PortfolioMap = props => {
     showNav,
     mapData,
   } = props
+
   const [activeFeature, setActiveFeature] = useState(null)
   const [detailPage, setDetailPage] = useState(null)
   const [hideNav, setHideNav] = useState(false)
@@ -152,7 +154,19 @@ const PortfolioMap = props => {
   )
 }
 
-export default PortfolioMap
+const parsePreviewData = data => {
+  const dataUpdate = {
+    previewMode: true,
+    ...data,
+    mapData: {
+      ...data.mapData,
+      features: data.mapData?.featuresCollection?.items,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(PortfolioMap)
 
 const Wrapper = styled.div`
   position: relative;
