@@ -4,6 +4,7 @@ import { useMediaQuery } from 'react-responsive'
 import classnames from 'classnames'
 import styled, { useTheme } from 'styled-components'
 import PortfolioMapNavButton from './PortfolioMapNavButton'
+import withProcessPreviewData from '../../../../lib/utils/withProcessPreviewData'
 
 /**
  * @name PortfolioMapNav
@@ -12,7 +13,13 @@ import PortfolioMapNavButton from './PortfolioMapNavButton'
  */
 
 const PortfolioMapNav = props => {
-  const { canvas, activeFeature, setActiveFeature, featuresList } = props
+  const {
+    canvas,
+    activeFeature,
+    setActiveFeature,
+    featuresList,
+    previewMode,
+  } = props
 
   const el = useRef(null)
   const q = gsap.utils.selector(el)
@@ -143,7 +150,7 @@ const PortfolioMapNav = props => {
               >
                 <PortfolioMapNavButton
                   name={title}
-                  riveIcon={icon?.file.url}
+                  riveIcon={previewMode ? icon?.url : icon?.file.url}
                   onClick={() => handleClick(index)}
                 />
               </Item>
@@ -155,7 +162,15 @@ const PortfolioMapNav = props => {
   )
 }
 
-export default PortfolioMapNav
+const parsePreviewData = data => {
+  const dataUpdate = {
+    previewMode: true,
+    ...data,
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(PortfolioMapNav)
 
 const Wrapper = styled.div`
   position: absolute;

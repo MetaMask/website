@@ -6,6 +6,7 @@ import { useMediaQuery } from 'react-responsive'
 
 import ButtonShadow from '../Shared/ButtonShadow'
 import Link from '../../Link'
+import withProcessPreviewData from '../../../lib/utils/withProcessPreviewData'
 
 /**
  * @name PortfolioFooter
@@ -14,7 +15,7 @@ import Link from '../../Link'
  */
 
 const PortfolioFooter = props => {
-  const { showFooter, setShowFooter, footerData } = props
+  const { showFooter, setShowFooter, footerData, previewMode } = props
   const { logo, copyright, menuItems } = footerData
 
   const el = useRef(null)
@@ -148,9 +149,14 @@ const PortfolioFooter = props => {
           <ContentInner>
             <LeftColumn>
               <LeftColumnInner>
-                {logo.logo.svg?.content && (
+                {logo?.logo?.svg?.content ? (
                   <div
                     dangerouslySetInnerHTML={{ __html: logo.logo.svg.content }}
+                  />
+                ) : (
+                  <img
+                    src={previewMode ? logo?.logo?.url : logo?.file?.url}
+                    alt={logo.title}
                   />
                 )}
                 <PortfolioLinkWrapper>
@@ -191,7 +197,25 @@ const PortfolioFooter = props => {
   )
 }
 
-export default PortfolioFooter
+const parsePreviewData = data => {
+  let menuItems = data?.footerData?.menuItemsCollection?.items
+  menuItems = menuItems?.map(m => ({
+    ...m,
+    modules: m?.modulesCollection?.items,
+  }))
+
+  const dataUpdate = {
+    previewMode: true,
+    ...data,
+    footerData: {
+      ...data.footerData,
+      menuItems,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(PortfolioFooter)
 
 const Wrapper = styled.div`
   position: absolute;
@@ -294,6 +318,10 @@ const LeftColumnInner = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  img {
+    height: 27px;
   }
 `
 

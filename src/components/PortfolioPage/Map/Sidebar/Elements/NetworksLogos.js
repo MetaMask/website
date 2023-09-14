@@ -13,13 +13,13 @@ const NetworksLogos = props => {
 
   return (
     <Networks>
-      {logosList.map(({ title, logo }, i) => {
+      {logosList?.map(({ title, logo }, i) => {
         return (
           <Network key={i}>
             <NetworkInner>
               <NetworkIconWrapper>
                 <NetworkIcon>
-                  <NetworkIconImage src={logo?.file.url} />
+                  <NetworkIconImage src={logo?.url || logo?.file?.url} />
                 </NetworkIcon>
               </NetworkIconWrapper>
               <NetworkLabel>{title}</NetworkLabel>

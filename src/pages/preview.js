@@ -10,6 +10,7 @@ import {
 } from '../lib/utils/fetchContentfulData'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Layout from '../templates/PageLayout'
+import ContentfulPortfolioLayout from '../templates/ContentfulPortfolioLayout'
 
 const PreviewPage = () => {
   const [loading, setLoading] = useState(true)
@@ -78,6 +79,9 @@ const PreviewPage = () => {
   const resolvedModuleConfig = updatedEntries || moduleConfig
 
   if (loading) return <PreviewLoading />
+  if (resolvedModuleConfig?.slug === '/portfolio/') {
+    return <ContentfulPortfolioLayout data={resolvedModuleConfig} />
+  }
   if (resolvedModuleConfig) {
     return (
       <Layout

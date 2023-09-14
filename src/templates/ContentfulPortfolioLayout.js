@@ -14,6 +14,7 @@ import {
 } from '../components/PortfolioPage'
 import styled from 'styled-components'
 import { ContentfulSeo } from '../components/Contentful'
+import withProcessPreviewData from '../lib/utils/withProcessPreviewData'
 
 gsap.registerPlugin(CustomEase)
 const searchParams = new URLSearchParams(
@@ -21,17 +22,10 @@ const searchParams = new URLSearchParams(
 )
 
 const ContentfulPortfolioLayout = props => {
-  const {
-    data: {
-      seo,
-      header,
-      footer,
-      portfolioIntro,
-      portfolioInstructions,
-      portfolioMap,
-    },
-    pageContext: { pathBuild },
-  } = props
+  const { data, pageContext, previewMode } = props
+  const { seo, header, footer } = data || {}
+
+  let { portfolioIntro, portfolioInstructions, portfolioMap } = data || {}
 
   const canvas = useRef()
   const [showInstructions, setShowInstructions] = useState(false)
@@ -44,10 +38,20 @@ const ContentfulPortfolioLayout = props => {
 
   CustomEase.create('mm-ease-1', '0.5,0.14,0,1.01')
 
+  if (!previewMode) {
+    portfolioIntro = portfolioIntro.nodes[0]
+    portfolioInstructions = portfolioInstructions.nodes[0]
+    portfolioMap = portfolioMap.nodes[0]
+  }
+
   return (
     <Layout>
       <PortfolioHelmet showLoader={showLoader} showIntro={showIntro} />
-      {seo && <ContentfulSeo moduleConfig={{ ...seo, pagePath: pathBuild }} />}
+      {seo && (
+        <ContentfulSeo
+          moduleConfig={{ ...seo, pagePath: pageContext?.pathBuild }}
+        />
+      )}
       <Container>
         {showLoader && (
           <PortfolioLoader
@@ -64,7 +68,7 @@ const ContentfulPortfolioLayout = props => {
             canvas={canvas}
             setShowIntro={setShowIntro}
             setShowInstructions={setShowInstructions}
-            data={portfolioIntro.nodes[0]}
+            data={portfolioIntro}
           />
         )}
 
@@ -73,7 +77,7 @@ const ContentfulPortfolioLayout = props => {
             canvas={canvas}
             showInstructions={showInstructions}
             setShowInstructions={setShowInstructions}
-            data={portfolioInstructions.nodes[0]}
+            data={portfolioInstructions}
           />
         )}
 
@@ -84,7 +88,7 @@ const ContentfulPortfolioLayout = props => {
           showFooter={showFooter}
           setShowFooter={setShowFooter}
           showNav={!showFooter && !showInstructions && !showIntro}
-          mapData={portfolioMap.nodes[0]}
+          mapData={portfolioMap}
         />
 
         <PortfolioFooter
@@ -98,7 +102,36 @@ const ContentfulPortfolioLayout = props => {
   )
 }
 
-export default ContentfulPortfolioLayout
+const parsePreviewData = data => {
+  const {
+    header,
+    footer,
+    modulesCollection: { items },
+  } = data.data
+  const portfolioIntro = items.find(
+    item => item.__typename === 'PortfolioIntro'
+  )
+  const portfolioMap = items.find(item => item.__typename === 'PortfolioMap')
+  const portfolioInstructions = items.find(
+    item => item.__typename === 'PortfolioInstructions'
+  )
+
+  const dataUpdate = {
+    previewMode: true,
+    data: {
+      header,
+      footer,
+      portfolioIntro,
+      portfolioInstructions,
+      portfolioMap,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(
+  ContentfulPortfolioLayout
+)
 
 export const ContentfulQuery = graphql`
   query(

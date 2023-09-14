@@ -927,6 +927,7 @@ export const ContentfulPortfolioInstructions = graphql`
     }
     steps {
       title
+      mobileTitle
       ctaLabel
       description {
         childMarkdownRemark {
