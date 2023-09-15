@@ -1,9 +1,11 @@
 const path = require('path')
-const axios = require('axios')
 const { download } = require('./src/lib/utils/download')
 const { getNewsUrl } = require(`./src/lib/utils/news`)
 const redirects = require('./redirects.json')
 const { buildSitemap } = require(`./src/lib/utils/sitemap`)
+const { createRemoteFileNode } = require('gatsby-source-filesystem')
+const grayMatter = require('gray-matter')
+const { pipe, toArray, map, get } = require('lodash/fp')
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions
@@ -38,24 +40,37 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   }
 
-  let touData = undefined
-  try {
-    const touResult = await axios.get(
-      'https://content.consensys.net/wp-json/wp/v2/pages/?path=/terms-of-use/&_fields=id%2Ctitle%2Cmodules.rich-text%2Cheader_component'
-    )
-    if (touResult.data && touResult.data[0]) {
-      const { content } = touResult.data[0].modules[0].children[0].config
-      const {
-        title,
-        description,
-      } = touResult.data[0].header_component[0]?.config
-      if ((title, description, content)) {
-        touData = { title, description, content }
+  const legalsQuery = await graphql(`
+    {
+      tou: file(name: {eq: "terms-of-use"}) {
+        id
+        name
+        internal {
+          content
+        }
+      }
+      privacyPolicy: file(name: {eq: "privacy-policy"}) {
+        id
+        name
+        internal {
+          content
+        }
+      }
+      cookies: file(name: {eq: "cookies"}) {
+        id
+        name
+        internal {
+          content
+        }
       }
     }
-  } catch (error) {
-    console.log('Fetch ToU data failed: ', error)
-  }
+  `)
+  const legalData = pipe(
+    get('data'),
+    toArray,
+    map(get('internal.content')),
+    map(grayMatter),
+  )(legalsQuery)
 
   const contentfulLayouts = graphql(`
     {
@@ -190,23 +205,28 @@ exports.createPages = async ({ graphql, actions }) => {
             })
           }
 
-          if (slug === '/terms-of-use/') {
-            if (!touData)
-              return Promise.reject('Generate terms of use page error!')
-            const touUrls = [slug, `${slug}standalone/`]
-            touUrls.forEach((touUrl, index) => {
+          let legalMatch = -1
+          if ((legalMatch = ['/terms-of-use/', '/privacy-policy/', '/privacy-policy/cookies/'].indexOf(slug)) >= 0)
+          {
+            if (!legalData[legalMatch]) {
+              // Skip creating page
+              return;
+            }
+            const legalUrls = [slug]
+            if (legalMatch === 0) legalUrls.push(`${slug}standalone/`)
+            legalUrls.forEach((legalUrl, index) => {
               createPage({
-                path: touUrl,
+                path: legalUrl,
                 component: path.resolve(
-                  `./src/templates/ContentfulToULayout.js`
+                  `./src/templates/MarkdownPageLayout.js`
                 ),
                 context: {
                   headerId,
                   footerId,
                   seoId,
-                  touData,
+                  pageData: legalData[legalMatch],
                   themeColor,
-                  pathBuild: touUrl,
+                  pathBuild: legalUrl,
                   isFaqLayout,
                   h2FontSize,
                   isStandalone: index === 1,
@@ -415,3 +435,32 @@ exports.onPostBuild = buildSitemap({
     ],
   },
 })
+
+exports.sourceNodes = async ({
+  actions: { createNode },
+  createNodeId,
+  loadNodeContent,
+  getCache,
+  reporter
+}
+) => {
+  reporter.info('Retrieve legal pages from legal.consensys.io')
+  return Promise.all([
+    'https://legal.consensys.io/raw/terms-of-use.mdx',
+    'https://legal.consensys.io/raw/privacy-policy.mdx',
+    'https://legal.consensys.io/raw/cookies.mdx'
+  ].map(async legalPage => {
+    const fileNode = await createRemoteFileNode({
+      url: legalPage,
+      createNode,
+      createNodeId,
+      getCache,
+    })
+    
+    if (!fileNode.internal.content) {
+      const content = await loadNodeContent(fileNode)
+      fileNode.internal.content = content
+    }
+    return fileNode
+  }))
+}

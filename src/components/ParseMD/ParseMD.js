@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import rehypeSlug from 'rehype-slug'
+import remarkGfm from 'remark-gfm'
 
 const ParseMD = ({ children, ...props }) => {
   useEffect(() => {
@@ -22,7 +23,7 @@ const ParseMD = ({ children, ...props }) => {
   }, [])
 
   return (
-    <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSlug]} {...props}>
+    <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeSlug]} {...props}>
       {children}
     </ReactMarkdown>
   )
