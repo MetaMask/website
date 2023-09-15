@@ -144,6 +144,12 @@ export const ContentfulPortfolioFeatureFields = gql`
         ...ContentfulPortfolioFeatureDetailFields
       }
     }
+    maskChannel
+    pinPos
+    canvasX
+    canvasY
+    canvasWidth
+    canvasHeight
   }
 `
 

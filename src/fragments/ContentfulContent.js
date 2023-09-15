@@ -1013,6 +1013,12 @@ export const ContentfulPortfolioFeature = graphql`
         ...ContentfulPortfolioFeatureDetailFields
       }
     }
+    maskChannel
+    pinPos
+    canvasX
+    canvasY
+    canvasWidth
+    canvasHeight
   }
 `
 
