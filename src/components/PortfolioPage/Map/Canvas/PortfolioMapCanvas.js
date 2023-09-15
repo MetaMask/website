@@ -14,10 +14,24 @@ const PortfolioMapCanvas = props => {
     setCanvasHandleReady,
     setActiveFeatureByName,
     setActiveFeature,
+    mapData,
   } = props
   const canvasWrapper = useRef()
 
   useEffect(() => {
+    const resolvedData = mapData.reduce((acc, cur) => {
+      acc.push({
+        name: cur.title,
+        maskChannel: JSON.parse(cur.maskChannel),
+        x: cur.canvasX,
+        y: cur.canvasY,
+        width: cur.canvasWidth,
+        height: cur.canvasHeight,
+        color: cur.themeColor,
+        pinPos: JSON.parse(cur.pinPos),
+      })
+      return acc
+    }, [])
     canvas.current = new Canvas({
       options: {
         domElement: canvasWrapper.current,
@@ -30,6 +44,7 @@ const PortfolioMapCanvas = props => {
         handleHotspotUnfocus: () => {
           setActiveFeature(null)
         },
+        data: resolvedData,
       },
     })
     window.canvas = canvas.current

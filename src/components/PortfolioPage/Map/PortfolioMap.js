@@ -116,6 +116,7 @@ const PortfolioMap = props => {
           setCanvasHandleReady={setCanvasHandleReady}
           setActiveFeature={setActiveFeature}
           setActiveFeatureByName={setActiveFeatureByName}
+          mapData={mapData.features}
         />
 
         <Markers
