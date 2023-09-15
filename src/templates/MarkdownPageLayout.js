@@ -2,18 +2,18 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Layout from './PageLayout'
-import ConsenSysToU from '../components/ConsenSysToU'
+import MarkdownPageBody from '../components/MarkdownPageBody'
 
 /**
- * @name ContentfulToULayout
+ * @name MarkdownPageLayout
  * @summary -
  * @description -
  */
 
-const ContentfulToULayout = props => {
+const MarkdownPageLayout = props => {
   const {
     data: { header, footer, seo },
-    pageContext: { touData, pathBuild, themeColor, h2FontSize, isStandalone },
+    pageContext: { pageData, pathBuild, themeColor, h2FontSize, isStandalone },
     path,
     ...rest
   } = props
@@ -26,7 +26,7 @@ const ContentfulToULayout = props => {
         h2FontSize={h2FontSize}
         isStandalone={isStandalone}
       >
-        {touData && <ConsenSysToU touData={touData} />}
+        {pageData && <MarkdownPageBody pageData={pageData} />}
       </Layout>
     )
 
@@ -34,13 +34,13 @@ const ContentfulToULayout = props => {
     <Layout {...rest} themeColor={themeColor} h2FontSize={h2FontSize}>
       {seo && contentfulModuleToComponent({ ...seo, pagePath: pathBuild })}
       {header && contentfulModuleToComponent(header)}
-      {touData && <ConsenSysToU touData={touData} />}
+      {pageData && <MarkdownPageBody pageData={pageData} />}
       {footer && contentfulModuleToComponent(footer)}
     </Layout>
   )
 }
 
-export default ContentfulToULayout
+export default MarkdownPageLayout
 
 export const ContentfulQuery = graphql`
   query($headerId: String, $footerId: String, $seoId: String) {
