@@ -111,8 +111,8 @@ const List = styled.ul`
 
 const Marker = styled.li`
   position: absolute;
-  top: calc( 50% - var(--y-pos) );
-  left: calc( 50% + var(--x-pos) );
+  top: calc(50% - var(--y-pos));
+  left: calc(50% + var(--x-pos));
   list-style: none;
   margin: 0;
 `

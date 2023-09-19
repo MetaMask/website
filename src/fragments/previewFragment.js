@@ -841,6 +841,9 @@ export const ContentfulLayoutFields = gql`
   ${ContentfulLayoutFooterFields}
   ${ContentfulLayoutFeatureFields}
   ${ContentfulLayoutFeatureSliderFields}
+  ${ContentfulPortfolioIntroFields}
+  ${ContentfulPortfolioInstructionsFields}
+  ${ContentfulPortfolioMapFields}
   fragment ContentfulLayoutFields on Layout {
     __typename
     sys {
@@ -849,6 +852,7 @@ export const ContentfulLayoutFields = gql`
     themeColor
     h2FontSize
     isFaqLayout
+    slug
     header(preview: true) {
       ...ContentfulLayoutHeaderFields
     }
@@ -859,6 +863,9 @@ export const ContentfulLayoutFields = gql`
         ...ContentfulLayoutHeroFields
         ...ContentfulLayoutModuleContainerFields
         ...ContentfulLayoutFeatureSliderFields
+        ...ContentfulPortfolioIntroFields
+        ...ContentfulPortfolioInstructionsFields
+        ...ContentfulPortfolioMapFields
       }
     }
     footer(preview: true) {
