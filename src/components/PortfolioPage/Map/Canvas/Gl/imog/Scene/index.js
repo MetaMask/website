@@ -17,6 +17,7 @@ const v3 = new THREE.Vector3()
 export default IMOG.Component('Scene', {
   options: {
     addTo: null,
+    data: null,
   },
 
   props() {
@@ -93,6 +94,7 @@ export default IMOG.Component('Scene', {
         ref: this.dummy,
         picker: this.picker,
         colorMap: this.tiledTexture.texture,
+        data: this.options.data,
       },
       props: {
         active: props =>

@@ -13,7 +13,8 @@ import VideoButton from './Elements/VideoButton'
 import NetworksLogos from './Elements/NetworksLogos'
 import AdditionalResources from './Elements/AdditionalResources'
 import Buttons from './Elements/Buttons'
-import { pageData } from '../../Portfolio.data'
+import withProcessPreviewData from '../../../../lib/utils/withProcessPreviewData'
+import ParseMD from '../../../ParseMD'
 
 /**
  * @name PortfolioMapSidebar
@@ -22,7 +23,14 @@ import { pageData } from '../../Portfolio.data'
  */
 
 const PortfolioMapSidebar = props => {
-  const { canvas, detailPage, setDetailPage, setHideNav } = props
+  const {
+    canvas,
+    detailPage,
+    setDetailPage,
+    setHideNav,
+    featuresList,
+    previewMode,
+  } = props
   const [detailPageData, setDetailPageData] = useState(null)
   const [show, setShow] = useState(false)
   const [reset, setReset] = useState(false)
@@ -212,7 +220,7 @@ const PortfolioMapSidebar = props => {
 
   useEffect(() => {
     if (detailPage !== null) {
-      setDetailPageData(pageData?.features[detailPage])
+      setDetailPageData(featuresList[detailPage])
       setReset(true)
       setShow(true)
       animationIn()
@@ -227,13 +235,14 @@ const PortfolioMapSidebar = props => {
   }, [detailPage, setShow])
 
   const renderIcon = (icon, color) => {
-    const isRiv = icon?.includes('.riv')
+    const url = previewMode ? icon?.url : icon?.file?.url
+    const isRiv = url?.includes('.riv')
     if (isRiv) {
-      return <RiveIcon src={icon} color={color} />
+      return <RiveIcon src={url} color={color} />
     }
     return (
       <div className="feature-icon" style={{ backgroundColor: color }}>
-        <img src={icon} alt="feature icon" />
+        <img src={url} alt="feature icon" />
       </div>
     )
   }
@@ -282,51 +291,64 @@ const PortfolioMapSidebar = props => {
       <ContentWrapper ref={wrapperRef}>
         <Content ref={contentRef}>
           <BgOverlay onClick={handleClickClose}></BgOverlay>
-
           <Sidebar>
             <ScrollBarContainer>
               <ScrollBar>
-                <Bar ref={barRef} $color={detailPageData?.color}></Bar>
+                <Bar ref={barRef} $color={detailPageData?.themeColor}></Bar>
               </ScrollBar>
             </ScrollBarContainer>
-
             <ContentOuter>
               <ContentInner>
-                {detailPageData?.detailPage?.map((d, index) => {
-                  const {
+                {detailPageData?.detail?.map((d, index) => {
+                  let {
                     title,
-                    subtitle,
+                    subTitle,
                     description,
                     logos,
                     video,
                     links,
+                    linksCollection,
+                    logosCollection,
                     icon,
                   } = d
+
+                  if (previewMode) {
+                    links = linksCollection?.items
+                    logos = logosCollection?.items
+                  }
                   return (
                     <div key={index}>
                       {show &&
                         renderIcon(
-                          icon || detailPageData?.riveIcon,
-                          detailPageData?.color
+                          icon || detailPageData?.icon,
+                          detailPageData?.themeColor
                         )}
-
                       <Heading>{title}</Heading>
-
-                      <SubHeading
-                        dangerouslySetInnerHTML={{
-                          __html: subtitle,
-                        }}
-                      />
-
+                      <SubHeading>
+                        {previewMode ? (
+                          <ParseMD>{subTitle}</ParseMD>
+                        ) : (
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: subTitle?.childMarkdownRemark?.html,
+                            }}
+                          />
+                        )}
+                      </SubHeading>
                       <Hr />
-
-                      <Description
-                        dangerouslySetInnerHTML={{
-                          __html: description,
-                        }}
-                      />
-
-                      {logos?.map(({ title, list }, id) => {
+                      <Description>
+                        {previewMode ? (
+                          <ParseMD>{description}</ParseMD>
+                        ) : (
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: description?.childMarkdownRemark?.html,
+                            }}
+                          />
+                        )}
+                      </Description>
+                      {logos?.map((item, id) => {
+                        const { title, logos, logosCollection } = item
                         return (
                           <div key={id}>
                             <Hr />
@@ -335,34 +357,36 @@ const PortfolioMapSidebar = props => {
                                 {title} <br /> <br />
                               </Description>
                             )}
-                            <NetworksLogos logosList={list} />
+                            <NetworksLogos
+                              logosList={
+                                previewMode ? logosCollection?.items : logos
+                              }
+                            />
                           </div>
                         )
                       })}
-
                       {video && (
                         <>
                           <Hr $fullWidth={true} />
-
                           <SubHeading>{video.title}</SubHeading>
-
                           <VideoButton
-                            posterImage={video.posterImage}
-                            onClick={() => setVideoEmbedUrl(video.embedUrl)}
+                            posterImage={
+                              previewMode
+                                ? video.thumbnail?.url
+                                : video.thumbnail?.file.url
+                            }
+                            onClick={() => setVideoEmbedUrl(video.embed?.embed)}
                           />
                         </>
                       )}
-
                       {links && (
                         <>
                           <Hr $fullWidth={true} />
-
-                          <SubHeading>{links?.title}</SubHeading>
-
+                          <SubHeading>{d.linkSectionTitle}</SubHeading>
                           <AdditionalResources links={links} />
                         </>
                       )}
-                      {index < detailPageData.detailPage.length - 1 && (
+                      {index < detailPageData.detail.length - 1 && (
                         <Hr $fullWidth={true} />
                       )}
                     </div>
@@ -373,20 +397,32 @@ const PortfolioMapSidebar = props => {
           </Sidebar>
         </Content>
       </ContentWrapper>
-
       {videoEmbedUrl && (
         <VideoModal
           embedUrl={videoEmbedUrl}
           setVideoEmbedUrl={setVideoEmbedUrl}
         />
       )}
-
       <Buttons handleClickClose={handleClickClose} />
     </Wrapper>
   )
 }
 
-export default PortfolioMapSidebar
+const parsePreviewData = data => {
+  let { featuresList } = data
+  featuresList = featuresList.map(f => ({
+    ...f,
+    detail: f?.detailCollection?.items,
+  }))
+  const dataUpdate = {
+    previewMode: true,
+    ...data,
+    featuresList,
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(PortfolioMapSidebar)
 
 const Wrapper = styled.div`
   position: absolute;
@@ -598,6 +634,9 @@ const SubHeading = styled.h3`
     &:hover {
       color: #7e7e7e;
     }
+  }
+  p:last-child {
+    margin-bottom: 0;
   }
 `
 

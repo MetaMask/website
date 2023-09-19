@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import Link from '../../../../Link'
 import IconLinkBlack from '../../../../../images/icons/icon-link-black.svg'
 import IconLink from '../../../../../images/icons/icon-link.svg'
@@ -16,25 +15,17 @@ const AdditionalResources = props => {
 
   return (
     <Resources>
-      {links?.list.map(({ label, url, newTab, badge }, i) => {
+      {links?.map(({ displayText, ctaLink, newTab, badge }, i) => {
         return (
           <Resource key={i}>
-            <Link to={url} newTab={newTab}>
+            <Link to={ctaLink} newTab={newTab}>
               {badge && (
-                <Badge
-                  $gradientFrom={badge.gradient?.from}
-                  $gradientTo={badge.gradient?.to}
-                >
-                  {badge.label}
-                </Badge>
+                <Badge $background={badge.background}>{badge.title}</Badge>
               )}
-
               <ResourceInner>
-                {label}
-
+                {displayText}
                 <IconLinkWrapper>
                   <IconLink />
-
                   <IconLinkBlack />
                 </IconLinkWrapper>
               </ResourceInner>
@@ -109,11 +100,6 @@ const Badge = styled.span`
   display: block;
   width: max-content;
   padding: 6px;
-  background: linear-gradient(
-    85.33deg,
-    ${({ $gradientFrom }) => ($gradientFrom ? $gradientFrom : '#fcefe3')} 0%,
-    ${({ $gradientTo }) => ($gradientTo ? $gradientTo : '#ffe466')} 100%
-  );
   border-radius: 4px;
   font-weight: 500;
   font-size: 8px;
@@ -121,4 +107,6 @@ const Badge = styled.span`
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #000000;
+
+  ${({ $background }) => ($background ? ` background: ${$background};` : '')}
 `

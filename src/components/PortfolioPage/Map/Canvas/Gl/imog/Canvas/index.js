@@ -18,6 +18,7 @@ export default IMOG.Component('Canvas', {
     handleItemLoaded: () => {},
     handleHotspotFocus: () => {},
     handleHotspotUnfocus: () => {},
+    data: null,
   },
 
   props() {
@@ -41,6 +42,7 @@ export default IMOG.Component('Canvas', {
     this.scene = new Scene({
       options: {
         addTo: this.renderer.worldScene,
+        data: this.options.data,
       },
       props: {
         intro: props => this.props.intro,

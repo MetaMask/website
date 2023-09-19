@@ -4,7 +4,6 @@ import styled, { keyframes } from 'styled-components'
 import classnames from 'classnames'
 import Cookies from 'universal-cookie'
 import { useMediaQuery } from 'react-responsive'
-
 import Cta from '../../Shared/PortfolioCta'
 import DragAnimation from './Animations/DragAnimation'
 import DragMobileAnimation from './Animations/DragMobileAnimation'
@@ -12,7 +11,8 @@ import ScrollAnimation from './Animations/ScrollAnimation'
 import PinchAnimation from './Animations/PinchAnimation'
 import PyramidTopInstructionsSvg from '../../../../images/portfolio/pyramid-top-instructions.svg'
 import PyramidBottomInstructionsSvg from '../../../../images/portfolio/pyramid-bottom-instructions.svg'
-import { pageData } from '../../Portfolio.data'
+import withProcessPreviewData from '../../../../lib/utils/withProcessPreviewData'
+import ParseMD from '../../../ParseMD'
 
 /**
  * @name PortfolioInstructions
@@ -26,10 +26,13 @@ const PortfolioInstructions = props => {
     showInstructions,
     setShowInstructions,
     instructionsCompleted,
+    data: { steps },
+    previewMode,
   } = props
+
   const [exitInstructions, setExitInstructions] = useState(false)
   const cookies = new Cookies()
-
+  const numOfStep = steps.length
   const el = useRef(null)
   const q = gsap.utils.selector(el)
 
@@ -38,7 +41,7 @@ const PortfolioInstructions = props => {
   })
 
   const handleNextBtnClick = () => {
-    if (showInstructions !== 3) {
+    if (showInstructions !== numOfStep) {
       setExitInstructions(showInstructions + 1)
 
       setTimeout(() => {
@@ -163,7 +166,7 @@ const PortfolioInstructions = props => {
   }, [showInstructions])
 
   useEffect(() => {
-    if (exitInstructions === 4) {
+    if (exitInstructions === numOfStep + 1) {
       animationOut()
     }
   }, [exitInstructions])
@@ -189,7 +192,9 @@ const PortfolioInstructions = props => {
         </PyramidBottomContainer>
 
         <ContentInner>
-          <StepsCount>{showInstructions} / 3</StepsCount>
+          <StepsCount>
+            {showInstructions} / {numOfStep}
+          </StepsCount>
 
           {showInstructions === 1 && (
             <StepsContainer
@@ -198,15 +203,21 @@ const PortfolioInstructions = props => {
               <Step>
                 <StepTitle
                   dangerouslySetInnerHTML={{
-                    __html: pageData.instructions.step1.title,
+                    __html: steps[0].title,
                   }}
                 />
 
-                <StepDescription
-                  dangerouslySetInnerHTML={{
-                    __html: pageData.instructions.step1.description,
-                  }}
-                />
+                <StepDescription>
+                  {previewMode ? (
+                    <ParseMD>{steps[0]?.description}</ParseMD>
+                  ) : (
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: steps[0].description?.childMarkdownRemark?.html,
+                      }}
+                    />
+                  )}
+                </StepDescription>
 
                 <StepCtaWrapper>
                   <Cta
@@ -216,7 +227,7 @@ const PortfolioInstructions = props => {
                     animationInit={true}
                     animationDelay={0.8}
                   >
-                    {pageData.instructions.step1.ctaLabel}
+                    {steps[0].ctaLabel}
                   </Cta>
                 </StepCtaWrapper>
               </Step>
@@ -230,7 +241,7 @@ const PortfolioInstructions = props => {
               <Step>
                 <StepTitle
                   dangerouslySetInnerHTML={{
-                    __html: pageData.instructions.step2.title,
+                    __html: steps[1].title,
                   }}
                 />
 
@@ -251,7 +262,7 @@ const PortfolioInstructions = props => {
                     onClick={handleNextBtnClick}
                     animationInit={true}
                   >
-                    {pageData.instructions.step2.ctaLabel}
+                    {steps[1].ctaLabel}
                   </Cta>
                 </StepCtaWrapper>
               </Step>
@@ -266,7 +277,7 @@ const PortfolioInstructions = props => {
                 <StepScroll>
                   <StepTitle
                     dangerouslySetInnerHTML={{
-                      __html: pageData.instructions.step3.title,
+                      __html: steps[2].title,
                     }}
                   />
                 </StepScroll>
@@ -274,7 +285,7 @@ const PortfolioInstructions = props => {
                 <StepPinch>
                   <StepTitle
                     dangerouslySetInnerHTML={{
-                      __html: pageData.instructions.step3.titleMobile,
+                      __html: steps[2].mobileTitle,
                     }}
                   />
                 </StepPinch>
@@ -296,7 +307,7 @@ const PortfolioInstructions = props => {
                     onClick={handleNextBtnClick}
                     animationInit={true}
                   >
-                    {pageData.instructions.step3.ctaLabel}
+                    {steps[2].ctaLabel}
                   </Cta>
                 </StepCtaWrapper>
               </Step>
@@ -308,7 +319,19 @@ const PortfolioInstructions = props => {
   )
 }
 
-export default PortfolioInstructions
+const parsePreviewData = data => {
+  const dataUpdate = {
+    previewMode: true,
+    ...data,
+    data: {
+      ...data.data,
+      steps: data?.data?.stepsCollection?.items,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(PortfolioInstructions)
 
 const PIWrapperFadeIn = keyframes`
   0% {

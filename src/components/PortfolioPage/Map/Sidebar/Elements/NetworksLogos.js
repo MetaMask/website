@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import Image from '../../../../Image'
 
 /**
@@ -14,16 +13,16 @@ const NetworksLogos = props => {
 
   return (
     <Networks>
-      {logosList.map(({ label, icon }, i) => {
+      {logosList?.map(({ title, logo }, i) => {
         return (
           <Network key={i}>
             <NetworkInner>
               <NetworkIconWrapper>
                 <NetworkIcon>
-                  <NetworkIconImage src={icon} />
+                  <NetworkIconImage src={logo?.url || logo?.file?.url} />
                 </NetworkIcon>
               </NetworkIconWrapper>
-              <NetworkLabel>{label}</NetworkLabel>
+              <NetworkLabel>{title}</NetworkLabel>
             </NetworkInner>
           </Network>
         )
@@ -75,6 +74,9 @@ const Network = styled.li`
 
 const NetworkInner = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `
 
 const NetworkIconWrapper = styled.div`

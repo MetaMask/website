@@ -10,7 +10,7 @@ import {
 } from '../index'
 import FullScreenBtn from '../Shared/ButtonFullscreen'
 import FooterBtn from '../Shared/ButtonFooter'
-import { pageData } from '../Portfolio.data'
+import withProcessPreviewData from '../../../lib/utils/withProcessPreviewData'
 
 /**
  * @name PortfolioMap
@@ -26,7 +26,9 @@ const PortfolioMap = props => {
     showFooter,
     setShowFooter,
     showNav,
+    mapData,
   } = props
+
   const [activeFeature, setActiveFeature] = useState(null)
   const [detailPage, setDetailPage] = useState(null)
   const [hideNav, setHideNav] = useState(false)
@@ -36,9 +38,9 @@ const PortfolioMap = props => {
   })
 
   const setActiveFeatureByName = name => {
-    const activeIndex = pageData.features.findIndex(feature => {
-      return feature.name === name
-    })
+    const activeIndex = mapData.features.findIndex(
+      feature => feature.title === name
+    )
     setActiveFeature(activeIndex)
   }
 
@@ -114,12 +116,14 @@ const PortfolioMap = props => {
           setCanvasHandleReady={setCanvasHandleReady}
           setActiveFeature={setActiveFeature}
           setActiveFeatureByName={setActiveFeatureByName}
+          mapData={mapData.features}
         />
 
         <Markers
           canvas={canvas}
           activeFeature={activeFeature}
           setDetailPage={setDetailPage}
+          featuresList={mapData.features}
         />
       </CanvasWrapper>
 
@@ -131,25 +135,39 @@ const PortfolioMap = props => {
         </BottomWrapper>
       )}
 
-      {showNav && !hideNav && (
+      {showNav && !hideNav ? (
         <Nav
           canvas={canvas}
           activeFeature={activeFeature}
           setActiveFeature={setActiveFeature}
+          featuresList={mapData.features}
         />
-      )}
+      ) : null}
 
       <Sidebar
         canvas={canvas}
         detailPage={detailPage}
         setDetailPage={setDetailPage}
         setHideNav={setHideNav}
+        featuresList={mapData.features}
       />
     </Wrapper>
   )
 }
 
-export default PortfolioMap
+const parsePreviewData = data => {
+  const dataUpdate = {
+    previewMode: true,
+    ...data,
+    mapData: {
+      ...data.mapData,
+      features: data.mapData?.featuresCollection?.items,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(PortfolioMap)
 
 const Wrapper = styled.div`
   position: relative;
