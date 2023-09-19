@@ -7,7 +7,8 @@ import { useMediaQuery } from 'react-responsive'
 
 import Cta from '../Shared/PortfolioCta'
 import MMLogoSvg from '../../../images/metamask-logo-iso.svg'
-import { pageData } from '../Portfolio.data'
+import withProcessPreviewData from '../../../lib/utils/withProcessPreviewData'
+import ParseMD from '../../ParseMD'
 
 const searchParams = new URLSearchParams(
   typeof window !== `undefined` && window.location.search
@@ -20,7 +21,8 @@ const searchParams = new URLSearchParams(
  */
 
 const PortfolioIntro = props => {
-  const { canvas, setShowIntro, setShowInstructions } = props
+  const { canvas, setShowIntro, setShowInstructions, data, previewMode } = props
+  const { title, description, ctaLabel } = data
 
   const isDesktop = useMediaQuery({
     query: `(min-width: 993px)`,
@@ -117,14 +119,19 @@ const PortfolioIntro = props => {
           {isDesktop ? <LogoPortfolio lookAtCenter={true} /> : <MMLogoSvg />}
         </LogoContainer>
 
-        <Heading
-          dangerouslySetInnerHTML={{ __html: pageData.intro.headline }}
-        />
+        <Heading>{title}</Heading>
 
-        <Description
-          dangerouslySetInnerHTML={{ __html: pageData.intro.description }}
-        />
-
+        <Description>
+          {previewMode ? (
+            <ParseMD>{description}</ParseMD>
+          ) : (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: description.childMarkdownRemark.html,
+              }}
+            />
+          )}
+        </Description>
         <CtaWrapper>
           <Cta
             backgroundColor="#ffffff"
@@ -134,7 +141,7 @@ const PortfolioIntro = props => {
             animationInit={true}
             animationDelay={0.7}
           >
-            {pageData.intro.ctaLabel}
+            {ctaLabel}
           </Cta>
         </CtaWrapper>
       </Content>
@@ -142,7 +149,15 @@ const PortfolioIntro = props => {
   )
 }
 
-export default PortfolioIntro
+const parsePreviewData = data => {
+  const dataUpdate = {
+    previewMode: true,
+    ...data,
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(PortfolioIntro)
 
 const Wrapper = styled.div`
   position: absolute;

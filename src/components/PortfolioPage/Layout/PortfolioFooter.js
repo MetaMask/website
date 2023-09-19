@@ -1,13 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { gsap } from 'gsap'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import classnames from 'classnames'
 import { useMediaQuery } from 'react-responsive'
 
 import ButtonShadow from '../Shared/ButtonShadow'
 import Link from '../../Link'
-import PortfolioLogo from '../../../images/metamask-portfolio-logo.svg'
-import { pageData } from '../Portfolio.data'
+import withProcessPreviewData from '../../../lib/utils/withProcessPreviewData'
 
 /**
  * @name PortfolioFooter
@@ -16,7 +15,8 @@ import { pageData } from '../Portfolio.data'
  */
 
 const PortfolioFooter = props => {
-  const { showFooter, setShowFooter } = props
+  const { showFooter, setShowFooter, footerData, previewMode } = props
+  const { logo, copyright, menuItems } = footerData
 
   const el = useRef(null)
   const q = gsap.utils.selector(el)
@@ -24,10 +24,6 @@ const PortfolioFooter = props => {
   const [wrapperVisibility, setWrapperVisibility] = useState(false)
   const [show, setShow] = useState(false)
   const [hide, setHide] = useState(false)
-
-  const {
-    footer: { cta, copyright, navigation },
-  } = pageData
 
   const isDesktop = useMediaQuery({
     query: `(min-width: 993px)`,
@@ -147,51 +143,53 @@ const PortfolioFooter = props => {
     >
       <BgOverlay onClick={handleClickClose}></BgOverlay>
 
-      <CloseBtn
-        iconClose
-        isCircular={true}
-        onClick={handleClickClose}
-      ></CloseBtn>
-
+      <CloseBtn iconClose isCircular={true} onClick={handleClickClose} />
       <Content>
         <ContentOuter>
           <ContentInner>
             <LeftColumn>
               <LeftColumnInner>
-                <PortfolioLogo />
-
+                {logo?.logo?.svg?.content ? (
+                  <div
+                    dangerouslySetInnerHTML={{ __html: logo.logo.svg.content }}
+                  />
+                ) : (
+                  <img
+                    src={previewMode ? logo?.logo?.url : logo?.file?.url}
+                    alt={logo.title}
+                  />
+                )}
                 <PortfolioLinkWrapper>
-                  <PortfolioLink to={cta.link} newTab={true}>
-                    {cta.label}
+                  <PortfolioLink to={logo.link} newTab={logo.newTab}>
+                    {logo.title}
                   </PortfolioLink>
                 </PortfolioLinkWrapper>
               </LeftColumnInner>
-
               <Copyright>{copyright}</Copyright>
             </LeftColumn>
-
             <RightColumn>
-              {navigation.map(({ heading, items }, i) => {
+              {menuItems?.map((items, i) => {
                 return (
                   <Nav key={i}>
-                    <ListHeading>{heading}</ListHeading>
-
+                    <ListHeading>{items.title}</ListHeading>
                     <List>
-                      {items.map(({ label, link, newTab }, i) => {
-                        return (
-                          <Item key={i}>
-                            <ItemLink to={link} newTab={newTab}>
-                              {label}
-                            </ItemLink>
-                          </Item>
-                        )
-                      })}
+                      {items?.modules?.map(
+                        ({ displayText, ctaLink, newTab }, i) => {
+                          return (
+                            <Item key={i}>
+                              <ItemLink to={ctaLink} newTab={newTab}>
+                                {displayText}
+                              </ItemLink>
+                            </Item>
+                          )
+                        }
+                      )}
                     </List>
                   </Nav>
                 )
               })}
             </RightColumn>
-            <CopyrightBottom>{copyright}</CopyrightBottom>
+            {copyright && <CopyrightBottom>{copyright}</CopyrightBottom>}
           </ContentInner>
         </ContentOuter>
       </Content>
@@ -199,7 +197,25 @@ const PortfolioFooter = props => {
   )
 }
 
-export default PortfolioFooter
+const parsePreviewData = data => {
+  let menuItems = data?.footerData?.menuItemsCollection?.items
+  menuItems = menuItems?.map(m => ({
+    ...m,
+    modules: m?.modulesCollection?.items,
+  }))
+
+  const dataUpdate = {
+    previewMode: true,
+    ...data,
+    footerData: {
+      ...data.footerData,
+      menuItems,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(PortfolioFooter)
 
 const Wrapper = styled.div`
   position: absolute;
@@ -302,6 +318,10 @@ const LeftColumnInner = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  img {
+    height: 27px;
   }
 `
 
