@@ -2,7 +2,7 @@ name: Change Request
 description: Website Change Request
 #title: "[]: "
 #labels: [""]
-assignees: ["cuonglt-ync", "jlazoff", "BXChoppedCheese", "Abdelch89"]
+assignees: ["cuonglt-ync", "jlazoff", "BXChoppedCheese", "Abdelch89", "dcpnlau", "megand1as"]
 body:
  - type: markdown
    attributes:
