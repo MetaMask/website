@@ -1,0 +1,61 @@
+name: Change Request
+description: Website Change Request
+#title: "[]: "
+#labels: [""]
+assignees: ["cuonglt-ync", "jlazoff", "BXChoppedCheese", "Abdelch89"]
+body:
+ - type: markdown
+   attributes:
+     value: |
+       Thanks for taking the time to fill out this change request!
+
+       ## **Before Submitting:**
+       * Please search to make sure this issue belongs in the repositories listed
+     
+ - type: dropdown
+   id: ticket-type
+   attributes:
+     label: Ticket Type
+     description: How can we help you?
+     options:
+       - Bug / Hotfix
+       - Content Change
+       - Feature Request
+       - Other
+ - type: textarea
+   id: what-happened
+   attributes:
+     label: Description
+     description:  Please include screenshots/examples if applicable!
+     placeholder: Tell us how we can help you!
+ - type: textarea
+   id: reproduce
+   attributes:
+     label: Steps to reproduce
+     description: List all steps needed to reproduce 
+     value: |
+       1.
+ - type: dropdown
+   id: browsers
+   attributes:
+     label: Browser
+     description: Which browsers have you seen the problem on?
+     multiple: true
+     options:
+       - Chrome
+       - Firefox
+       - Microsoft Edge
+       - Brave
+       - Other (please elaborate in the "Additional Context" section)
+
+ - type: dropdown
+   id: os
+   attributes:
+     label: Operating system
+     description: Which operating systems have you seen the problem on?
+     multiple: true
+     options:
+       - Windows
+       - MacOS
+       - Linux
+       - Other (please elaborate in the "Additional Context" section)
