@@ -501,7 +501,7 @@ const StepTitle = styled.h2`
   font-size: 32px;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  color: #1e1f25;
+  color: #1e1f25 !important;
   opacity: 0;
 
   animation: ${PIStepsContainerFadeIn} 0s 0s
