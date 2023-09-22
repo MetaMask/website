@@ -606,7 +606,7 @@ const Heading = styled.h2`
   text-align: center;
   margin: 10px 0 50px;
   letter-spacing: -0.02em;
-  color: #161616;
+  color: #161616 !important;
 
   @media (max-width: ${({ theme }) => theme.device.tablet}) {
     font-size: 40px;
@@ -619,7 +619,7 @@ const SubHeading = styled.h3`
   font-weight: 400;
   font-size: 24px;
   line-height: 1.35;
-  color: #161616;
+  color: #161616 !important;
 
   @media (max-width: ${({ theme }) => theme.device.tablet}) {
     font-size: 16px;
