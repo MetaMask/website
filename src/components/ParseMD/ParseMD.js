@@ -23,7 +23,11 @@ const ParseMD = ({ children, ...props }) => {
   }, [])
 
   return (
-    <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeSlug]} {...props}>
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      rehypePlugins={[rehypeRaw, rehypeSlug]}
+      {...props}
+    >
       {children}
     </ReactMarkdown>
   )

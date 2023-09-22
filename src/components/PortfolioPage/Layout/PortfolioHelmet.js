@@ -17,10 +17,10 @@ const PortfolioHelmet = props => {
   }, [showIntro, showLoader])
 
   useEffect(() => {
-    document.body.classList.add('disable-scroll')
+    document.body.classList.add('disable-scroll', 'no-dark')
 
     return () => {
-      document.body.classList.remove('disable-scroll')
+      document.body.classList.remove('disable-scroll', 'no-dark')
     }
   }, [])
 
