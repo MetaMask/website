@@ -16,17 +16,15 @@ const MarkdownPageBody = ({ pageData }) => {
               __html: pageData.data?.title || 'Terms of use',
             }}
           />
-          { pageData.data?.date && 
+          {pageData.data?.date && (
             <h2
               className="description"
               dangerouslySetInnerHTML={{
                 __html: `Last Updated: ${pageData.data.date}`,
               }}
             />
-          }
-          <ParseMD>
-            {pageData.content}
-          </ParseMD>
+          )}
+          <ParseMD>{pageData.content}</ParseMD>
         </WrapperInner>
       </ContentWrapper>
     </Section>
@@ -38,7 +36,7 @@ export default MarkdownPageBody
 MarkdownPageBody.propTypes = {
   pageData: PropTypes.shape({
     data: PropTypes.object,
-    content: PropTypes.string.isRequired
+    content: PropTypes.string.isRequired,
   }).isRequired,
 }
 
@@ -62,7 +60,8 @@ const WrapperInner = styled.div`
     margin: 24px 0;
   }
 
-  th, td {
+  th,
+  td {
     border: 1px solid black;
     border-collapse: collapse;
     padding: 16px 32px;
@@ -83,7 +82,7 @@ const WrapperInner = styled.div`
   }
 
   td {
-    @media(min-width: 1024px) {
+    @media (min-width: 1024px) {
       min-width: 250px;
     }
   }

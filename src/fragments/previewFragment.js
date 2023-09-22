@@ -39,6 +39,52 @@ export const ContentfulEmbedFields = gql`
   }
 `
 
+export const ContentfulHubSpotFormFields = gql`
+  fragment ContentfulHubSpotFormFields on HubSpotForm {
+    __typename
+    sys {
+      id
+    }
+    title
+    portalId
+    formId
+    campaignId
+    displayTitle
+    width
+    customClass
+    customId
+  }
+`
+
+export const ContentfulCtaFields = gql`
+  ${ContentfulHubSpotFormFields}
+  ${ContentfulEmbedFields}
+  fragment ContentfulCtaFields on Cta {
+    __typename
+    sys {
+      id
+    }
+    name
+    displayText
+    ctaLink
+    socialLink
+    newTab
+    buttonDisplay
+    buttonGradient
+    buttonSecondary
+    fontSize
+    eventCategory
+    eventLabel
+    hubSpotForm(preview: true) {
+      ...ContentfulHubSpotFormFields
+    }
+    embedHtml(preview: true) {
+      ...ContentfulEmbedFields
+    }
+    downloadBrowsers
+  }
+`
+
 export const ContentfulPortfolioIntroFields = gql`
   fragment ContentfulPortfolioIntroFields on PortfolioIntro {
     __typename
@@ -110,6 +156,9 @@ export const ContentfulPortfolioFeatureDetailFields = gql`
           background
         }
       }
+    }
+    cta {
+      ...ContentfulCtaFields
     }
     video {
       ...ContentfulEmbedFields
@@ -188,52 +237,6 @@ export const ContentfulNewsLayoutFields = gql`
       }
     }
     publishDate
-  }
-`
-
-export const ContentfulHubSpotFormFields = gql`
-  fragment ContentfulHubSpotFormFields on HubSpotForm {
-    __typename
-    sys {
-      id
-    }
-    title
-    portalId
-    formId
-    campaignId
-    displayTitle
-    width
-    customClass
-    customId
-  }
-`
-
-export const ContentfulCtaFields = gql`
-  ${ContentfulHubSpotFormFields}
-  ${ContentfulEmbedFields}
-  fragment ContentfulCtaFields on Cta {
-    __typename
-    sys {
-      id
-    }
-    name
-    displayText
-    ctaLink
-    socialLink
-    newTab
-    buttonDisplay
-    buttonGradient
-    buttonSecondary
-    fontSize
-    eventCategory
-    eventLabel
-    hubSpotForm(preview: true) {
-      ...ContentfulHubSpotFormFields
-    }
-    embedHtml(preview: true) {
-      ...ContentfulEmbedFields
-    }
-    downloadBrowsers
   }
 `
 
