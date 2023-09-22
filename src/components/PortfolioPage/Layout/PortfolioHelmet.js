@@ -16,6 +16,14 @@ const PortfolioHelmet = props => {
     if (!showIntro && !showLoader) setViewportMeta(true)
   }, [showIntro, showLoader])
 
+  useEffect(() => {
+    document.body.classList.add('disable-scroll')
+
+    return () => {
+      document.body.classList.remove('disable-scroll')
+    }
+  }, [])
+
   return (
     <Helmet
       meta={
@@ -29,9 +37,6 @@ const PortfolioHelmet = props => {
             ]
           : []
       }
-      bodyAttributes={{
-        class: 'disable-scroll',
-      }}
       link={[{ rel: 'manifest', href: '/site.portfolio.webmanifest' }]}
     >
       <script src="https://www.youtube.com/iframe_api"></script>
