@@ -16,6 +16,7 @@ const PopupAnnouncement = props => {
   } = props
 
   const [isHidden, setIsHidden] = React.useState(false)
+  const onPage = ctaLink?.startsWith('/');
 
   const onClosePopup = () => {
     setIsHidden(true)
@@ -29,7 +30,7 @@ const PopupAnnouncement = props => {
       <WrapperInner>
         <WrapperInnerLink>
           {image ? <ImageSrc image={image} previewMode={previewMode} /> : null}
-          {ctaLink && <ClickArea to={ctaLink} newTab></ClickArea>}
+          {ctaLink && <ClickArea to={ctaLink} newTab={!onPage}></ClickArea>}
           <Content>
             {title && <Title>{title}</Title>}
             {ctaText && (
