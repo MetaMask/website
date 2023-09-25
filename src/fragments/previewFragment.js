@@ -157,9 +157,6 @@ export const ContentfulPortfolioFeatureDetailFields = gql`
         }
       }
     }
-    cta {
-      ...ContentfulCtaFields
-    }
     video {
       ...ContentfulEmbedFields
     }

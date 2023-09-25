@@ -152,6 +152,7 @@ const PortfolioMap = props => {
         setDetailPage={setDetailPage}
         setHideNav={setHideNav}
         featuresList={mapData.features}
+        portfolioCta={portfolioCta}
       />
     </Wrapper>
   )

@@ -30,6 +30,7 @@ const PortfolioMapSidebar = props => {
     setDetailPage,
     setHideNav,
     featuresList,
+    portfolioCta,
     previewMode,
   } = props
   const [detailPageData, setDetailPageData] = useState(null)
@@ -306,7 +307,6 @@ const PortfolioMapSidebar = props => {
                     subTitle,
                     description,
                     logos,
-                    cta,
                     video,
                     links,
                     linksCollection,
@@ -371,16 +371,16 @@ const PortfolioMapSidebar = props => {
                         <>
                           <CtaWrapper>
                             <Hr $fullWidth={true} />
-                            {cta && (
+                            {portfolioCta && (
                               <ButtonShadow
                                 as="a"
-                                href={cta.ctaLink}
-                                target={cta.newTab ? '_blank' : null}
-                                rel={cta.newTab ? 'noopener noreferrer' : null}
+                                href={portfolioCta.ctaLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 short
                                 hoverCircle
                               >
-                                {cta.displayText}
+                                {portfolioCta.displayText}
                               </ButtonShadow>
                             )}
                           </CtaWrapper>

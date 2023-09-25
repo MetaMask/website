@@ -981,9 +981,6 @@ export const ContentfulPortfolioFeatureDetail = graphql`
         background
       }
     }
-    cta {
-      ...ContentfulCtaFields
-    }
     video {
       ...ContentfulEmbedFields
     }
