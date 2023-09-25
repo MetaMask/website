@@ -24,6 +24,7 @@ const searchParams = new URLSearchParams(
 const ContentfulPortfolioLayout = props => {
   const { data, pageContext, previewMode } = props
   const { seo, header, footer } = data || {}
+  const portfolioCta = header?.downloadButton
 
   let { portfolioIntro, portfolioInstructions, portfolioMap } = data || {}
 
@@ -89,6 +90,7 @@ const ContentfulPortfolioLayout = props => {
           setShowFooter={setShowFooter}
           showNav={!showFooter && !showInstructions && !showIntro}
           mapData={portfolioMap}
+          portfolioCta={portfolioCta}
         />
 
         <PortfolioFooter

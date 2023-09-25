@@ -5,6 +5,7 @@ import classnames from 'classnames'
 import styled, { useTheme } from 'styled-components'
 import PortfolioMapNavButton from './PortfolioMapNavButton'
 import withProcessPreviewData from '../../../../lib/utils/withProcessPreviewData'
+import ButtonShadow from '../../Shared/ButtonShadow'
 
 /**
  * @name PortfolioMapNav
@@ -18,6 +19,7 @@ const PortfolioMapNav = props => {
     activeFeature,
     setActiveFeature,
     featuresList,
+    portfolioCta,
     previewMode,
   } = props
 
@@ -59,6 +61,7 @@ const PortfolioMapNav = props => {
   }, [el, handleWindowSizeChange])
 
   const animationInit = () => {
+    const cta = q(`.${CtaWrapper.styledComponentId}`)
     const nav = q(`.${Nav.styledComponentId}`)
     const item = q(`.${Item.styledComponentId}`)
 
@@ -69,6 +72,20 @@ const PortfolioMapNav = props => {
         },
       })
       .addLabel('start')
+      .fromTo(
+        cta,
+        {
+          yPercent: 200,
+          autoAlpha: 0,
+        },
+        {
+          delay: 0.55,
+          yPercent: 0,
+          autoAlpha: 1,
+          duration: 0.5,
+        },
+        'start'
+      )
       .fromTo(
         nav,
         {
@@ -158,6 +175,20 @@ const PortfolioMapNav = props => {
           })}
         </List>
       </Nav>
+      {portfolioCta && (
+        <CtaWrapper>
+          <ButtonShadow
+            as="a"
+            href={portfolioCta.ctaLink}
+            target="_blank"
+            rel='"noopener noreferrer'
+            short
+            hoverCircle
+          >
+            {portfolioCta.displayText}
+          </ButtonShadow>
+        </CtaWrapper>
+      )}
     </Wrapper>
   )
 }
@@ -177,6 +208,9 @@ const Wrapper = styled.div`
   width: 100%;
   bottom: 30px;
   display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  row-gap: 24px;
   justify-content: center;
   pointer-events: none;
 
@@ -260,5 +294,16 @@ const Item = styled.li`
     canvas {
       filter: invert(1);
     }
+  }
+`
+
+const CtaWrapper = styled.div`
+  display: none;
+  pointer-events: all;
+  z-index: 30;
+  opacity: 0;
+
+  @media (min-width: ${({ theme }) => theme.device.tablet}) {
+    display: inline-flex;
   }
 `
