@@ -15,6 +15,7 @@ import AdditionalResources from './Elements/AdditionalResources'
 import Buttons from './Elements/Buttons'
 import withProcessPreviewData from '../../../../lib/utils/withProcessPreviewData'
 import ParseMD from '../../../ParseMD'
+import ButtonShadow from '../../Shared/ButtonShadow'
 
 /**
  * @name PortfolioMapSidebar
@@ -29,6 +30,7 @@ const PortfolioMapSidebar = props => {
     setDetailPage,
     setHideNav,
     featuresList,
+    portfolioCta,
     previewMode,
   } = props
   const [detailPageData, setDetailPageData] = useState(null)
@@ -367,7 +369,21 @@ const PortfolioMapSidebar = props => {
                       })}
                       {video && (
                         <>
-                          <Hr $fullWidth={true} />
+                          <CtaWrapper>
+                            <Hr $fullWidth={true} />
+                            {portfolioCta && (
+                              <ButtonShadow
+                                as="a"
+                                href={portfolioCta.ctaLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                short
+                                hoverCircle
+                              >
+                                {portfolioCta.displayText}
+                              </ButtonShadow>
+                            )}
+                          </CtaWrapper>
                           <SubHeading>{video.title}</SubHeading>
                           <VideoButton
                             posterImage={
@@ -670,5 +686,16 @@ const Description = styled.p`
     &:hover {
       color: #7e7e7e;
     }
+  }
+`
+
+const CtaWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  a {
+    position: absolute;
   }
 `

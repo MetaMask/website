@@ -8,6 +8,7 @@ const PopupAnnouncement = props => {
   const { title, ctaText, ctaLink, backgroundColor } = props
 
   const [isHidden, setIsHidden] = React.useState(false)
+  const onPage = ctaLink?.startsWith('/')
 
   const onClosePopup = () => {
     setIsHidden(true)
@@ -21,7 +22,11 @@ const PopupAnnouncement = props => {
       <WrapperInner>
         <WrapperInnerLink>
           {ctaLink && (
-            <ClickArea to={ctaLink} newTab aria-label={title || ctaText} />
+            <ClickArea
+              to={ctaLink}
+              newTab={!onPage}
+              aria-label={title || ctaText}
+            />
           )}
           <Content>
             {title && <Title>{title}</Title>}
