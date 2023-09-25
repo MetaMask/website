@@ -27,6 +27,7 @@ const PortfolioMap = props => {
     setShowFooter,
     showNav,
     mapData,
+    portfolioCta,
   } = props
 
   const [activeFeature, setActiveFeature] = useState(null)
@@ -141,6 +142,7 @@ const PortfolioMap = props => {
           activeFeature={activeFeature}
           setActiveFeature={setActiveFeature}
           featuresList={mapData.features}
+          portfolioCta={portfolioCta}
         />
       ) : null}
 
@@ -150,6 +152,7 @@ const PortfolioMap = props => {
         setDetailPage={setDetailPage}
         setHideNav={setHideNav}
         featuresList={mapData.features}
+        portfolioCta={portfolioCta}
       />
     </Wrapper>
   )

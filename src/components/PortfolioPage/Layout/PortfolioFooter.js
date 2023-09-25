@@ -304,13 +304,6 @@ const LeftColumn = styled.div`
   @media (max-width: ${({ theme }) => theme.device.miniDesktop}) {
     justify-content: center;
   }
-
-  @media (max-width: ${({ theme }) => theme.device.tablet}) {
-    svg {
-      width: 160px;
-      height: 18px;
-    }
-  }
 `
 
 const LeftColumnInner = styled.div`
@@ -320,7 +313,8 @@ const LeftColumnInner = styled.div`
     align-items: center;
   }
 
-  img {
+  img,
+  svg {
     height: 27px;
   }
 `

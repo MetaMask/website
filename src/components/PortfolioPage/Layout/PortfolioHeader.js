@@ -100,9 +100,9 @@ const Wrapper = styled.div`
   pointer-events: none;
 
   @media (max-width: ${({ theme }) => theme.device.tablet}) {
-    justify-content: center;
+    justify-content: flex-start;
     animation: ${PHWrapperFadeIn} 0.35s
-      ${({ theme }) => theme.easeType.defaultInOut} forwards;
+      ${({ theme }) => theme.easeType.defaultInOut};
 
     .show-footer & {
       pointer-events: none;
@@ -124,6 +124,7 @@ const LogoWrapper = styled.div`
 
   @media (max-width: ${({ theme }) => theme.device.tablet}) {
     width: 116px;
+    display: none;
 
     .show-footer & {
       pointer-events: none;
@@ -155,13 +156,9 @@ const Logo = styled.img`
 const CtaWrapper = styled.div`
   position: relative;
   pointer-events: all;
-  z-index: 41;
+  z-index: 30;
 
-  @media (max-width: ${({ theme }) => theme.device.miniDesktop}) {
-    z-index: 30;
-  }
-
-  @media (max-width: ${({ theme }) => theme.device.tablet}) {
+  @media (min-width: ${({ theme }) => theme.device.tablet}) {
     display: none;
   }
 `
