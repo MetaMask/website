@@ -53,6 +53,8 @@ const HeroContainerComponent = props => {
   const isInstitutions = customClass?.includes('page-institutions')
   const isInstitutionalChild = customClass?.includes('page-institutional-child')
   const isThankYou = customClass?.includes('page-thank-you')
+  const isMetaMaskInstalled =
+    typeof window !== 'undefined' && window.ethereum?.isMetaMask
   let hubspotWrapper
   if (hubSpotForm) {
     hubspotWrapper = (
@@ -263,7 +265,7 @@ const HeroContainerComponent = props => {
                       )}
                     </HeroDescription>
                   )}
-                  {!isEmpty(ctas) && !isFlask ? (
+                  {!isEmpty(ctas) && !isFlask && !isHome ? (
                     <HeroCTA>
                       {ctas.map(cta =>
                         contentfulModuleToComponent({
@@ -272,6 +274,15 @@ const HeroContainerComponent = props => {
                           previewMode,
                         })
                       )}
+                    </HeroCTA>
+                  ) : null}
+                  {!isEmpty(ctas) && isHome ? (
+                    <HeroCTA>
+                      {contentfulModuleToComponent({
+                        ...ctas[ctas.length > 1 && isMetaMaskInstalled ? 1 : 0],
+                        buttonSize: 'hero',
+                        previewMode,
+                      })}
                     </HeroCTA>
                   ) : null}
                   {note && <HeroNote>{note}</HeroNote>}
