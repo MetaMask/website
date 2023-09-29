@@ -1,5 +1,5 @@
-name: Change Request
-description: Website Change Request
+name: Metamask.io Website Change Request
+description: Metamask.io Website Website Change Request
 #title: "[]: "
 #labels: [""]
 assignees: ["cuonglt-ync", "jlazoff", "BXChoppedCheese", "Abdelch89", "dcpnlau", "megand1as"]
@@ -35,27 +35,3 @@ body:
      description: List all steps needed to reproduce 
      value: |
        1.
- - type: dropdown
-   id: browsers
-   attributes:
-     label: Browser
-     description: Which browsers have you seen the problem on?
-     multiple: true
-     options:
-       - Chrome
-       - Firefox
-       - Microsoft Edge
-       - Brave
-       - Other (please elaborate in the "Additional Context" section)
-
- - type: dropdown
-   id: os
-   attributes:
-     label: Operating system
-     description: Which operating systems have you seen the problem on?
-     multiple: true
-     options:
-       - Windows
-       - MacOS
-       - Linux
-       - Other (please elaborate in the "Additional Context" section)

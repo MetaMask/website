@@ -1,23 +1,5 @@
 blank_issues_enabled: true
 contact_links:
-  - name: Consensys.io Website Request
-    url: https://github.com/Consensys/consensys-io/issues/new/choose
-    about: Consensys Website Change
-  - name: Metamask Website Request
-    url: https://github.com/Consensys/metamask-website/issues/new/choose
-    about: Metamask website change
-  - name: Metamask Learn Website Request
-    url: https://github.com/Consensys/mm-learn/issues/new/choose
-    about: Metamask Learn Website Change
-  - name: Linea Website Request
-    url: https://github.com/Consensys/linea.build/issues/new/choose
-    about: Linea Website Change
-  - name: Diligence Website Request
-    url: https://github.com/Consensys/diligence/issues/new/choose
-    about: Diligence Website Change
-  - name: Legal Website Request
-    url: https://github.com/Consensys/legal-pages/issues/new/choose
-    about: Legal Terms and Privacy Prolicy Website Change
-
-
-
+  - name: Website Team's Github Repo Directory
+    url: https://github.com/Consensys/dx-team/issues/new/choose
+    about: List of all Consensys websites and their respective Github Repos for submitting issues
