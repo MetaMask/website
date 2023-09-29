@@ -8,10 +8,7 @@ body:
    attributes:
      value: |
        Thanks for taking the time to fill out this change request!
-
-       ## **Before Submitting:**
-       * Please search to make sure this issue belongs in the repositories listed
-     
+    
  - type: dropdown
    id: ticket-type
    attributes:

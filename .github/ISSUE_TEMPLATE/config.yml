@@ -2,4 +2,4 @@ blank_issues_enabled: true
 contact_links:
   - name: Website Team's Github Repo Directory
     url: https://github.com/Consensys/dx-team/issues/new/choose
-    about: List of all Consensys websites and their respective Github Repos for submitting issues
+    about: List of Consensys websites and their respective Github Repos for submitting issues
