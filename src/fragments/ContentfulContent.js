@@ -796,6 +796,7 @@ export const ContentfulNewsFields = graphql`
       type
     }
     title
+    slug
     subtitle
     image {
       title

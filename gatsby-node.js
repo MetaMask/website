@@ -281,6 +281,7 @@ exports.createPages = async ({ graphql, actions }) => {
           node {
             contentful_id
             title
+            slug
             categories {
               name
             }
@@ -341,6 +342,7 @@ exports.onPostBuild = buildSitemap({
     allContentfulNews(filter: {isPrivate: {eq: false}}) {
       nodes {
         title
+        slug
         categories {
           name
         }
@@ -350,6 +352,7 @@ exports.onPostBuild = buildSitemap({
     allPrivateContentfulNews: allContentfulNews(filter: {isPrivate: {eq: true}}) {
       nodes {
         title
+        slug
         categories {
           name
         }
