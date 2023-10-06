@@ -17,6 +17,7 @@ function ContentfulNewsCategory(props) {
       ) {
         nodes {
           title
+          slug
           subtitle
           publishDate(formatString: "MMMM D, YYYY")
           authors {
