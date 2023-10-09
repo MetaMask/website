@@ -65,7 +65,7 @@ function NewsLayout(props) {
       {contentfulModuleToComponent(seoModuleConfig)}
       {contentfulModuleToComponent(header)}
       <div className="news-page-content">
-        <NewsContainer>
+        <NewsContainer className="noPaddingBottom">
           <ContentWrapper className="news-content">
             {contentfulModuleToComponent({
               ...cta,

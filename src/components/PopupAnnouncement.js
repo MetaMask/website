@@ -16,7 +16,7 @@ const PopupAnnouncement = props => {
   } = props
 
   const [isHidden, setIsHidden] = React.useState(false)
-  const onPage = ctaLink?.startsWith('/');
+  const onPage = ctaLink?.startsWith('/')
 
   const onClosePopup = () => {
     setIsHidden(true)
