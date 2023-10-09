@@ -11,7 +11,9 @@ const { kebabCase } = require('lodash')
  */
 let getNewsUrl = news => {
   let category = 'Uncategorized'
-  const slug = news?.slug ? news.slug : kebabCase(news.title.toLowerCase());
+  const slug = news?.slug
+    ? kebabCase(news.slug)
+    : kebabCase(news.title.toLowerCase())
   if (news.categories && news.categories.length)
     category = news.categories[0].name
   return `/news/${kebabCase(category)}/${slug}/`
