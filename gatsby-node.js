@@ -1,5 +1,4 @@
 const path = require('path')
-const redirects = require('./redirects.json')
 const { getNewsUrl } = require(`./src/lib/utils/news`)
 const { buildSitemap } = require(`./src/lib/utils/sitemap`)
 const { minimatch } = require('minimatch')
@@ -7,11 +6,21 @@ const { minimatch } = require('minimatch')
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions
 
-  // Generally you create redirects while creating pages.
-  redirects.forEach(redirect =>
+  const redirects = await graphql(`
+    {
+      allRedirects: allContentfulRedirectRedirectArrayJsonNode {
+        nodes {
+          fromPath
+          toPath
+        }
+      }
+    }
+  `)
+
+  redirects.data?.allRedirects.nodes.forEach(r =>
     createRedirect({
-      fromPath: redirect.fromPath,
-      toPath: redirect.toPath,
+      fromPath: r.fromPath,
+      toPath: r.toPath
     })
   )
 
