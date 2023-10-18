@@ -3,7 +3,7 @@ name: Metamask Request
 about: Request regarding Metamask.io for the Website Team
 title: "[Metamask]"
 labels: 'metamask,'
-assignees: cuonglt-ync, jlazoff, dcpnlau, SunnySian, SaraCheikh
+assignees: cuonglt-ync, jlazoff, dcpnlau, SunnySian, SaraCheikh, nkkurt
 
 ---
 **YNC:** (Internal Use Only - Ignore)
