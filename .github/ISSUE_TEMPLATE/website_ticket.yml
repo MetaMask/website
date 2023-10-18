@@ -2,7 +2,7 @@ name: Metamask.io Website Change Request
 description: Metamask.io Website Website Change Request
 #title: "[]: "
 #labels: [""]
-assignees: ["cuonglt-ync", "jlazoff", "BXChoppedCheese", "Abdelch89", "dcpnlau", "megand1as"]
+assignees: ["cuonglt-ync", "jlazoff", "BXChoppedCheese", "Abdelch89", "dcpnlau", "megand1as", "nkkurt"]
 body:
  - type: markdown
    attributes:
