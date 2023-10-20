@@ -23,7 +23,10 @@ const ContentfulLayoutFullWidthCta = props => {
       contentful_id,
       bordered,
       backgroundImage,
+      backgroundImageMobile,
       backgroundImageDarkMode,
+      backgroundImageMobileDarkMode,
+      fullWidthBackground,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -46,7 +49,10 @@ const ContentfulLayoutFullWidthCta = props => {
       contentfulId={contentful_id}
       bordered={bordered}
       backgroundImage={backgroundImage}
+      backgroundImageMobile={backgroundImageMobile}
       backgroundImageDarkMode={backgroundImageDarkMode}
+      backgroundImageMobileDarkMode={backgroundImageMobileDarkMode}
+      fullWidthBackground={fullWidthBackground}
     />
   )
 }

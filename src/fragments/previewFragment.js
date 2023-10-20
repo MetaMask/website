@@ -75,6 +75,7 @@ export const ContentfulCtaFields = gql`
     fontSize
     eventCategory
     eventLabel
+    showCaretRight
     hubSpotForm(preview: true) {
       ...ContentfulHubSpotFormFields
     }
@@ -286,7 +287,14 @@ export const ContentfulLayoutFullWidthCtaFields = gql`
     backgroundImageDarkMode(preview: true) {
       url
     }
+    backgroundImageMobile(preview: true) {
+      url
+    }
+    backgroundImageMobileDarkMode(preview: true) {
+      url
+    }
     customClass
+    fullWidthBackground
   }
 `
 
@@ -414,6 +422,7 @@ export const ContentfulTimelineFields = gql`
       description
       url
     }
+    layout
     customClass
   }
 `
@@ -448,6 +457,7 @@ export const ContentfulModuleContainerFields = gql`
     isLiquiditySection
     isTrustBar
     displayTitle
+    carouselMode
     modulesCollection(preview: true) {
       items {
         ...ContentfulCardFields
@@ -845,6 +855,7 @@ export const ContentfulLayoutFields = gql`
     themeColor
     h2FontSize
     isFaqLayout
+    widerContainer
     slug
     header(preview: true) {
       ...ContentfulLayoutHeaderFields

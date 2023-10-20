@@ -13,6 +13,7 @@ import CardHorizontal from './Card/CardHorizontal'
 import CardHorizontalReverse from './Card/CardHorizontalReverse'
 import CardSnapsCategory from './Card/CardSnapsCategory'
 import CardNews from './Card/CardNews'
+import CardDevBuilding from './Card/CardDevBuilding'
 import ContextClientSide from '../Context/ContextClientSide'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import GatsbyBackgroundImage from './GatsbyBackgroundImage'
@@ -78,11 +79,14 @@ const StyledCard = props => {
       )
     case 'snaps-category':
       return <CardSnapsCategory {...props} isDarkMode={isDarkMode} />
+    case 'dev-building':
+      return <CardDevBuilding {...props} isDarkMode={isDarkMode} />
     default:
     // code block
   }
   const isCtaType = layoutType === 'cta'
   const isEventType = layoutType === 'event'
+  const isUpcomingEventType = layoutType === 'upcoming-event'
   const isCardFlex =
     customClass?.includes('custody-integrate-card') ||
     customClass?.includes('custody-technical-card')
@@ -92,6 +96,7 @@ const StyledCard = props => {
       isCtaType={isCtaType}
       isCardFlex={isCardFlex}
       className={classnames('moduleCardWrapper', {
+        upcomingEvent: isUpcomingEventType,
         [customClass]: customClass,
       })}
     >
@@ -138,6 +143,7 @@ const StyledCard = props => {
                         fieldId: 'title',
                       })
                     : {})}
+                  className="title"
                 >
                   {title}
                 </Title>
@@ -244,6 +250,9 @@ const Card = styled.div`
       padding-bottom: 0 !important;
     }
   }
+  &.card-dev-tutorial {
+    height: 100%;
+  }
 `
 
 const CardInner = styled(Link)`
@@ -258,6 +267,28 @@ const CardInner = styled(Link)`
   }
   .borderBlue & {
     border: 2px solid #037DD6;
+  }
+
+  .card-dev-explore & {
+    border: 1px solid #e3e3e3;
+    border-radius: 12px;
+    padding: 20px;
+    height: 100%;
+    background-color: ${({ theme }) => theme.white};
+    body.dark-mode & {
+      background-color: ${({ theme }) => theme.dark};
+    }
+
+    .title {
+      margin-bottom: 8px;
+    }
+  }
+
+  .card-dev-tutorial & {
+    border: 1px solid #e3e3e3;
+    border-radius: 12px;
+    padding: 16px;
+    height: 100%;
   }
 
   .theme-dark & {
@@ -372,6 +403,21 @@ const CardInner = styled(Link)`
   body.dark-mode .bgDarkInDarkmode & {
     background-color: ${({ theme }) => theme.dark};
   }
+  .upcomingEvent & {
+    border: 1px solid #e3e3e3;
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    height: 100%;
+    column-gap: 32px;
+
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: center;
+      row-gap: 16px;
+    }
+  }
 `
 
 const ImageWrapper = styled.div`
@@ -380,6 +426,10 @@ const ImageWrapper = styled.div`
 
   .image-height-31 & {
     height: 31px;
+  }
+
+  .image-height-64 & {
+    height: 64px;
   }
 
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
@@ -398,6 +448,26 @@ const ImageWrapper = styled.div`
   }
 
   ${({ $imageMargin }) => ($imageMargin ? 'margin-left: -15px' : '')}
+
+  .upcomingEvent & {
+    margin-bottom: 0;
+    flex-shrink: 0;
+
+    height: 90px;
+    img {
+      height: 90px;
+    }
+
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      height: 150px;
+      img {
+        height: 150px;
+      }
+    }
+  }
+  .card-dev-tutorial & {
+    height: auto;
+  }
 `
 
 const ImageSrc = styled(Image)`
@@ -422,6 +492,9 @@ const Inner = styled.div`
     justify-content: space-between;
     height: 100%;
   `}
+  .upcomingEvent & {
+    height: unset;
+  }
 `
 const Title = styled.div`
   font-weight: 700;
@@ -444,6 +517,22 @@ const Title = styled.div`
       text-transform: uppercase;
       color: #F6851B;
   `}
+  .upcomingEvent & {
+    font-size: 18px;
+
+    @media (min-width: ${({ theme }) => theme.device.mobile}) {
+      font-size: 24px;
+    }
+  }
+  .card-dev-tutorial & {
+    font-size: 18px;
+    line-height: 1.4;
+    margin: 16px 0;
+
+    @media (min-width: ${({ theme }) => theme.device.mobile}) {
+      font-size: 24px;
+    }
+  }
 `
 
 const Description = styled.div`
@@ -501,6 +590,10 @@ const Description = styled.div`
       line-height: 32px;
       margin-top: 4px;
   `}
+  .upcomingEvent & {
+    font-size: 14px;
+    color: ${({ theme }) => theme.title};
+  }
 `
 const ArrowItem = styled.div`
   height: 35px;
@@ -523,6 +616,17 @@ const InnerContent = styled.div`
     text-align: left;
   `
       : ''}
+  .upcomingEvent & {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+
+    @media (min-width: ${({ theme }) => theme.device.mobile}) {
+      padding: 16px 0;
+    }
+  }
 `
 
 const CTAWrapper = styled.div`

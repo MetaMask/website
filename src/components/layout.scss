@@ -92,6 +92,12 @@ html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  --container-width: 992px;
+  --container-width-miniDesktop: 728px;
+}
+.wider-container {
+  --container-width: 1200px;
+  --container-width-miniDesktop: 100%;
 }
 body {
   margin: 0;
@@ -811,7 +817,7 @@ input[type='submit'].hs-button {
 .fz-28-res {
   font-size: 28px !important;
   line-height: 45px !important;
-  @media (max-width: 479px) {
+  @media (max-width: 767px) {
     font-size: 18px !important;
     line-height: 26px !important;
   }
@@ -819,6 +825,14 @@ input[type='submit'].hs-button {
 
 .fz-32-res {
   font-size: 32px !important;
+  line-height: 1.2 !important;
+  @media (max-width: 767px) {
+    font-size: 28px !important;
+  }
+}
+
+.fz-40-res {
+  font-size: 40px !important;
   line-height: 1.2 !important;
   @media (max-width: 767px) {
     font-size: 28px !important;
@@ -908,6 +922,15 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15;
 
 .btn-primary {
   background-color: #037dd6;
+}
+
+.btn-dark {
+  background-color: #121212;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .fullwidth-mobile {
@@ -1718,4 +1741,62 @@ body.usabilla-show {
   .usabilla_live_button_container {
     display: block;
   }
+}
+
+.developer-banner {
+  padding: 18px 18px 18px 30px;
+  font-weight: 500;
+  border-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+
+  a {
+    flex-shrink: 0;
+  }
+
+  @media(min-width: 480px) {
+    border-radius: 9999px;
+  }
+  @media(min-width: 768px) {
+    justify-content: space-between;
+  }
+}
+
+.cta-list {
+  display: flex;
+  column-gap: 16px;
+  row-gap: 8px;
+}
+
+.flex-mobile-center {
+  @media(max-width: 480px) {
+    display: flex !important;
+    justify-content: center !important;
+  }
+}
+
+a.link-with-caret {
+  position: relative;
+  padding-right: 20px;
+  &:after {
+    background: url('/images/mm-caret-right.svg');
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 4px;
+    right: 0;
+    content: '';
+
+    body.dark-mode & {
+      filter: brightness(0) invert(1);
+    }
+  }
+}
+a.link-bold {
+  font-weight: 600;
 }

@@ -8,6 +8,7 @@ import FaqList from '../FaqList'
 import kebabCase from 'lodash/kebabCase'
 import { EyebrowStyle } from '../StyledGeneral'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
+import Carousel from '../Carousel'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -32,6 +33,7 @@ const ContentfulModuleContainer = props => {
       containerBgColor,
       previewMode = false,
       columnType,
+      carouselMode = false,
       contentful_id,
     },
   } = props
@@ -40,25 +42,17 @@ const ContentfulModuleContainer = props => {
   const gridModulesGap = gridModulesGapDefault || '8px'
   const { childMarkdownRemark: { html } = {} } = description || {}
   const htmlData = previewMode ? description : html
-  const faqList =
-    modules && modules.length
-      ? modules.filter(modules =>
-          ['ContentfulFaq', 'Faq'].includes(
-            previewMode ? modules.__typename : modules.internal.type
-          )
-        )
-      : []
-  const modulesOther =
-    modules && modules.length
-      ? modules.filter(
-          modules =>
-            !['ContentfulFaq', 'Faq'].includes(
-              previewMode ? modules.__typename : modules.internal.type
-            )
-        )
-      : []
+  const faqList = []
+  const modulesOther = []
+  modules?.forEach(module => {
+    let typeName = module.__typename || module.internal?.type
+    if (['ContentfulFaq', 'Faq'].includes(typeName)) {
+      faqList.push(module)
+    } else {
+      modulesOther.push(module)
+    }
+  })
   const isFaq = faqList && faqList.length
-
   const [modulesRender, setModulesRender] = useState(modulesOther)
   const [shuffled, setShuffled] = useState(false)
 
@@ -133,7 +127,7 @@ const ContentfulModuleContainer = props => {
               previewMode={previewMode}
             />
           ) : null}
-          {modulesRender.length ? (
+          {!carouselMode && modulesRender.length ? (
             <Modules
               columnType={columnType}
               columns={columns}
@@ -159,6 +153,22 @@ const ContentfulModuleContainer = props => {
                 })
               )}
             </Modules>
+          ) : null}
+          {carouselMode && modulesRender.length ? (
+            <Carousel
+              itemsOnTablet={columnsOnTablet}
+              itemsOnMobile={columnsOnMobile}
+              items={columns}
+              gap={gridModulesGap}
+            >
+              {modulesRender.map(m =>
+                contentfulModuleToComponent({
+                  ...m,
+                  numberOfItem,
+                  previewMode,
+                })
+              )}
+            </Carousel>
           ) : null}
         </ModulesWrapper>
       </Inner>

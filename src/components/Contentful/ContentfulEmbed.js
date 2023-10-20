@@ -89,6 +89,14 @@ ContentfulEmbed.propTypes = {
 const Title = styled(SectionTitle)`
   text-align: center;
   margin-bottom: 32px;
+  .developer-community-calls & {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: initial;
+    margin-top: 8px;
+    margin-bottom: 0;
+    line-height: 1.2;
+  }
 `
 
 const Wrapper = styled.div`
@@ -113,5 +121,10 @@ const Wrapper = styled.div`
       : ``}
   .embed-mb-20 & {
     margin-bottom: 20px;
+  }
+  .developer-community-calls & {
+    display: flex;
+    flex-direction: column-reverse;
+    align-self: flex-start;
   }
 `

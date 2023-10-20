@@ -122,6 +122,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }
             themeColor
             isFaqLayout
+            widerContainer
             h2FontSize
           }
         }
@@ -144,6 +145,7 @@ exports.createPages = async ({ graphql, actions }) => {
             header,
             themeColor,
             isFaqLayout,
+            widerContainer,
             h2FontSize,
           } = p.node
           const { contentful_id: footerId = '' } = footer || {}
@@ -178,6 +180,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   assetData,
                   themeColor,
                   isFaqLayout,
+                  widerContainer,
                   h2FontSize,
                 },
               })
@@ -199,6 +202,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   themeColor,
                   pathBuild: categoryPath,
                   isFaqLayout,
+                  widerContainer,
                   h2FontSize,
                 },
               })
@@ -228,6 +232,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   themeColor,
                   pathBuild: legalUrl,
                   isFaqLayout,
+                  widerContainer,
                   h2FontSize,
                   isStandalone: index === 1,
                 },
@@ -261,6 +266,7 @@ exports.createPages = async ({ graphql, actions }) => {
               themeColor,
               pathBuild: slug,
               isFaqLayout,
+              widerContainer,
               h2FontSize,
             },
           })
@@ -307,6 +313,7 @@ exports.createPages = async ({ graphql, actions }) => {
               news_content_id: contentful_id,
               pathBuild: newsUrl,
             },
+            defer: true,
           })
         })
       }

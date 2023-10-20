@@ -33,10 +33,6 @@ const ParseMD = ({ children, ...props }) => {
   )
 }
 
-ParseMD.propTypes = {
-  children: PropTypes.node.isRequired,
-}
-
 ParseMD.defaultProps = {
   children: null,
 }

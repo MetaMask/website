@@ -410,6 +410,11 @@ const SideImage = styled.div`
   .sideImageMaxWidth667 & {
     max-width: 667px;
   }
+  .feature-meet-flask & {
+    padding-top: 0;
+    padding-bottom: 0;
+    align-self: center;
+  }
 `
 
 const SideEmbed = styled.div`
@@ -494,6 +499,10 @@ const Headline = styled.h2`
     padding-bottom: 0;
     padding-top: 0;
     text-align: center;
+  }
+
+  .feature-meet-flask & {
+    color: #fff;
   }
 `
 const Description = styled.div`
@@ -681,6 +690,16 @@ const FeatureInner = styled.div`
     width: 667px;
     max-width: 100%;
   }
+
+  .feature-meet-flask & {
+    color: #fff;
+
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      padding-top: 32px;
+      padding-bottom: 32px;
+      padding-left: 40px;
+    }
+  }
 `
 const CTAWrapper = styled.div`
   display: flex;
@@ -703,6 +722,18 @@ const CTAWrapper = styled.div`
   .ctaDesktopMt96 & {
     @media (min-width: ${({ theme }) => theme.device.tablet}) {
       margin-top: 96px;
+    }
+  }
+  .feature-meet-flask & {
+    a {
+      background: linear-gradient(180deg, #8a42ad 0%, #6762eb 100%) !important;
+      border: none;
+      &:hover {
+        color: #fff;
+      }
+    }
+    @media (max-width: ${({ theme }) => theme.device.tablet}) {
+      padding-bottom: 16px;
     }
   }
 

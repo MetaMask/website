@@ -28,6 +28,7 @@ const ContentfulCta = props => {
       embedHTML,
       buttonSecondary,
       socialLink,
+      showCaretRight,
       previewMode = false,
     },
   } = props
@@ -64,6 +65,7 @@ const ContentfulCta = props => {
       embedHTML={embedHTML}
       buttonSecondary={buttonSecondary}
       socialLink={socialLink}
+      showCaretRight={showCaretRight}
       previewMode={previewMode}
     />
   )

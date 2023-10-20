@@ -238,7 +238,7 @@ const Inner = styled.div`
       max-width: 100%;
       
       @media (max-width: ${theme.device.miniDesktopMediaMax}){
-        max-width: 728px;
+        max-width: var(--container-width-miniDesktop);
       }
       
       @media (min-width: ${theme.device.miniDesktop}) and (max-width: ${theme.device.twoKResolutionMax})  {
@@ -335,6 +335,10 @@ const Container = styled(Section)`
       padding-bottom: 0;
     }
   }
+
+  &.bg-light-blue-gradient {
+    background: linear-gradient(#037DD60A, #F7FBFE00);
+  }
 `
 
 const Title = styled(SectionTitle)`
@@ -393,6 +397,22 @@ const Modules = styled.div`
   > .ctaModuleContainer {
     padding: 22px;
     margin-bottom: 0;
+
+    .cta-blue-right & {
+      padding-right: 0;
+      padding-bottom: 0;
+      justify-content: right;
+
+      a {
+        color: ${({ theme }) => theme.linkColor};
+        font-weight: 600;
+      }
+    }
+  }
+  .dev-release-notes & {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
   }
 `
 
@@ -478,6 +498,24 @@ const SubInfo = styled.div`
 
   .snaps-categories & a {
     color: ${({ theme }) => theme.lightBlue} !important;
+  }
+
+  .developer-subnav {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 32px;
+    row-gap: 8px;
+    font-size: 18px;
+    .vertical-divider {
+      border-right: 1px solid #fff;
+    }
+    a {
+      color: inherit;
+      transition: color 0.15s;
+      &:hover {
+        color: #2196f3;
+      }
+    }
   }
 `
 

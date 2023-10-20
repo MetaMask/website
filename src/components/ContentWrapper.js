@@ -61,7 +61,7 @@ const Container = styled.div`
 const ContainerInner = styled.div`
   margin-left: auto;
   margin-right: auto;
-  max-width: 992px;
+  max-width: var(--container-width);
   width: 100%;
 
   .scrolled.custom-newsHero & {
@@ -69,7 +69,7 @@ const ContainerInner = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
-    max-width: 728px;
+    max-width: var(--container-width-miniDesktop);
 
     .news-page-content & {
       max-width: 784px;
@@ -82,14 +82,17 @@ const ContainerInner = styled.div`
         theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
         theme.device.twoKResolutionMax}) {
       max-width: 100% !important;
-      padding-left: max(calc((100vw - 992px) / 2), 20px);
+      padding-left: max(calc((100vw - var(--container-width)) / 2), 20px);
     }
 
     @media (min-width: ${({ theme }) =>
         theme.device.tablet}) and (max-width: ${({ theme }) =>
         theme.device.miniDesktopMediaMax}) {
       max-width: 100% !important;
-      padding-left: max(calc((100vw - 728px) / 2), 20px);
+      padding-left: max(
+        calc((100vw - var(--container-width-miniDesktop)) / 2),
+        20px
+      );
     }
   }
   .sideImageOverflowAll & {
@@ -123,5 +126,9 @@ const ContainerInner = styled.div`
       padding: 24px;
       margin-bottom: 8px;
     }
+  }
+  .feature-meet-flask & {
+    background-color: #24292e;
+    border-radius: 12px;
   }
 `
