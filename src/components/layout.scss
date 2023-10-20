@@ -1781,6 +1781,7 @@ body.usabilla-show {
 a.link-with-caret {
   position: relative;
   padding-right: 20px;
+  color: #2196f3;
   &:after {
     background: url('/images/mm-caret-right.svg');
     width: 16px;
@@ -1791,10 +1792,6 @@ a.link-with-caret {
     margin-left: 4px;
     right: 0;
     content: '';
-
-    body.dark-mode & {
-      filter: brightness(0) invert(1);
-    }
   }
 }
 a.link-bold {
