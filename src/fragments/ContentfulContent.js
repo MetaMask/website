@@ -334,6 +334,7 @@ export const ContentfulTimelineFields = graphql`
       }
       gatsbyImageData(width: 1920, quality: 80)
     }
+    layout
     customClass
   }
 `
@@ -370,7 +371,17 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
         url
       }
     }
+    backgroundImageMobile {
+      file {
+        url
+      }
+    }
     backgroundImageDarkMode {
+      file {
+        url
+      }
+    }
+    backgroundImageMobileDarkMode {
       file {
         url
       }
@@ -380,6 +391,7 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
     noPaddingTop
     noPaddingBottom
     customClass
+    fullWidthBackground
   }
 `
 
@@ -553,6 +565,7 @@ export const ContentfulCtaFields = graphql`
       ...ContentfulEmbedFields
     }
     socialLink
+    showCaretRight
     downloadBrowsers {
       internal {
         content
@@ -689,8 +702,12 @@ export const ContentfulModuleContainerFields = graphql`
     displayTitle
     isLiquiditySection
     isTrustBar
+    carouselMode
     gridModulesGap
     modules {
+      ... on ContentfulEmbed {
+        ...ContentfulEmbedFields
+      }
       ... on ContentfulLogo {
         ...ContentfulLogoFields
       }

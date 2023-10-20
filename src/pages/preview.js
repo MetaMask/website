@@ -87,6 +87,7 @@ const PreviewPage = () => {
       <Layout
         themeColor={resolvedModuleConfig?.themeColor}
         h2FontSize={resolvedModuleConfig?.h2FontSize}
+        widerContainer={resolvedModuleConfig?.widerContainer}
       >
         <PreviewInfo>Preview mode</PreviewInfo>
         {contentfulModuleToComponent(resolvedModuleConfig)}

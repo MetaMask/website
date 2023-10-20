@@ -40,6 +40,7 @@ const CTA = props => {
     embedHTML,
     buttonSecondary,
     socialLink,
+    showCaretRight,
     previewMode = false,
   } = props
 
@@ -173,6 +174,9 @@ const CTA = props => {
         color={color}
         $typeLayout={typeLayout}
         onClick={handleCustomClick}
+        className={classnames({
+          'link-with-caret': showCaretRight,
+        })}
       >
         {socialLink ? <SocialIcon name={socialLink} /> : null}
         <LinkTitle

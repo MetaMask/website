@@ -7,9 +7,9 @@ export default function parseYoutubeIframe(html, playOnPopup, imageIframe) {
   const parseHtml = parse(html)
   const iframes = parseHtml.querySelectorAll('iframe')
   const youtube_parser = url => {
-    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
-    var match = url.match(regExp)
-    return match && match[7].length === 11 ? match[7] : false
+    const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/
+    const match = url.match(regExp)
+    return match && match[2].length === 11 ? match[2] : false
   }
   if (iframes && iframes.length) {
     // parseYoutubeIframe for lazy load

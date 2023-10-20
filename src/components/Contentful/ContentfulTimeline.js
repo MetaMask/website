@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
+import classnames from 'classnames'
 import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import ContentWrapper from '../ContentWrapper'
 import ImageItem from '../Image'
@@ -16,6 +17,7 @@ const ContentfulTimeline = props => {
       description,
       image,
       imageDarkMode,
+      layout,
       customClass,
       previewMode = false,
       contentful_id,
@@ -28,11 +30,15 @@ const ContentfulTimeline = props => {
   const { childMarkdownRemark: { html: htmlHeadline } = {} } = headline || {}
 
   return (
-    <Container>
+    <Container
+      className={classnames({
+        'timeline-border-left': layout === 'border-left',
+      })}
+    >
       <ContentWrapper customClass={customClass}>
-        <div class="timeline">
-          <div class="container right">
-            <div class="content">
+        <div className="timeline">
+          <div className="container right">
+            <div className="content">
               {eyebrow ? (
                 <Eyebrow
                   {...(previewMode
@@ -129,6 +135,39 @@ ContentfulTimeline.propTypes = {
 
 const Container = styled.article`
   margin-bottom: 0 !important;
+  &.timeline-border-left {
+    &:nth-child(odd) {
+      .timeline {
+        &::after {
+          width: 2px;
+          background-color: #88e39d;
+        }
+      }
+    }
+    &:nth-child(even) {
+      .timeline {
+        &::after {
+          width: 2px;
+          background-color: #f5841f;
+        }
+      }
+    }
+    .container::after {
+      display: none;
+    }
+    .content {
+      padding: 0;
+      .text-content {
+        p:last-child {
+          margin-bottom: 0;
+        }
+        a {
+          font-size: 18px;
+          font-weight: 400;
+        }
+      }
+    }
+  }
   .timeline {
     position: relative;
     max-width: 1200px;

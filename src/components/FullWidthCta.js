@@ -10,6 +10,7 @@ import classnames from 'classnames'
 import ParseMD from './ParseMD'
 import getWebpImage from '../lib/utils/getWebpImage'
 import ContextClientSide from '../Context/ContextClientSide'
+import { useMediaQuery } from 'react-responsive'
 
 const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
 
@@ -32,21 +33,35 @@ const FullWidthCta = props => {
     contentfulId,
     bordered,
     backgroundImage,
+    backgroundImageMobile,
     backgroundImageDarkMode,
+    backgroundImageMobileDarkMode,
+    fullWidthBackground,
   } = props
 
+  const isMobile = useMediaQuery({
+    query: '(max-width: 768px)',
+  })
   const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
   const inspectorProps = useContentfulInspectorMode()
+  const resBgImage =
+    isMobile && backgroundImageMobile ? backgroundImageMobile : backgroundImage
+  const resBgImageDark =
+    isMobile && backgroundImageMobileDarkMode
+      ? backgroundImageMobileDarkMode
+      : backgroundImageDarkMode
   const backgroundImageUrl = getWebpImage(
-    previewMode ? backgroundImage?.url : backgroundImage?.file?.url
+    previewMode ? resBgImage?.url : resBgImage?.file?.url
   )
   const backgroundImageDarkModeUrl = getWebpImage(
-    previewMode
-      ? backgroundImageDarkMode?.url
-      : backgroundImageDarkMode?.file?.url
+    previewMode ? resBgImageDark?.url : resBgImageDark?.file?.url
   )
 
+  const bgImageUrl =
+    isDarkMode && backgroundImageDarkModeUrl
+      ? backgroundImageDarkModeUrl
+      : backgroundImageUrl
   return (
     <Container
       sectionPadding={sectionPadding}
@@ -56,14 +71,17 @@ const FullWidthCta = props => {
         [`bg-${backgroundColor}`]: backgroundColor,
         [customClass]: customClass,
       })}
+      style={
+        fullWidthBackground
+          ? { backgroundImage: `url(${bgImageUrl})`, backgroundSize: 'cover' }
+          : {}
+      }
     >
       <ContentWrapper>
         <FullWidthCtaWrapper
           showLogoAnimation={showLogoAnimation}
           $bordered={bordered}
-          $backgroundImage={
-            isDarkMode ? backgroundImageDarkModeUrl : backgroundImageUrl
-          }
+          $backgroundImage={!fullWidthBackground && bgImageUrl}
         >
           {showLogoAnimation && customClass !== 'metaMaskUninstalled' ? (
             <LogoAnimation logoType={logoType} />
@@ -401,6 +419,9 @@ const CTAWrapper = styled.div`
 
   .button {
     margin: 0 0 16px;
+  }
+  .button:last-child {
+    margin-bottom: 0;
   }
 
   .metaMaskUninstalled & {
