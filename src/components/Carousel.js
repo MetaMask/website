@@ -309,17 +309,19 @@ const Wrapper = styled.div`
   `
       : ``}
   position: relative;
+  padding-bottom: 60px;
   .nav-button {
     position: absolute;
     display: inline-block;
-    top: calc(50% - 20px);
-    left: -50px;
     cursor: pointer;
     height: 40px;
+    bottom: -60px;
+    left: calc(50% - 50px);
 
     &.right {
       transform: rotate(180deg);
-      right: -50px;
+      right: calc(50% - 50px);
+      left: unset;
     }
   }
   .slick-track {
@@ -330,6 +332,19 @@ const Wrapper = styled.div`
 
     & > div {
       height: 100%;
+    }
+  }
+  @media (min-width: 1300px) {
+    .nav-button {
+      top: calc(50% - 20px);
+      left: -50px;
+      bottom: unset;
+
+      &.right {
+        transform: rotate(180deg);
+        left: unset;
+        right: -50px;
+      }
     }
   }
 `
