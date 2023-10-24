@@ -14,6 +14,7 @@ import CardHorizontalReverse from './Card/CardHorizontalReverse'
 import CardSnapsCategory from './Card/CardSnapsCategory'
 import CardNews from './Card/CardNews'
 import CardDevBuilding from './Card/CardDevBuilding'
+import CardDevTutorial from './Card/CardDevTutorial'
 import ContextClientSide from '../Context/ContextClientSide'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import GatsbyBackgroundImage from './GatsbyBackgroundImage'
@@ -81,6 +82,8 @@ const StyledCard = props => {
       return <CardSnapsCategory {...props} isDarkMode={isDarkMode} />
     case 'dev-building':
       return <CardDevBuilding {...props} isDarkMode={isDarkMode} />
+    case 'dev-tutorial':
+      return <CardDevTutorial {...props} isDarkMode={isDarkMode} />
     default:
     // code block
   }
@@ -250,9 +253,6 @@ const Card = styled.div`
       padding-bottom: 0 !important;
     }
   }
-  &.card-dev-tutorial {
-    height: 100%;
-  }
 `
 
 const CardInner = styled(Link)`
@@ -282,13 +282,6 @@ const CardInner = styled(Link)`
     .title {
       margin-bottom: 8px;
     }
-  }
-
-  .card-dev-tutorial & {
-    border: 1px solid #e3e3e3;
-    border-radius: 12px;
-    padding: 16px;
-    height: 100%;
   }
 
   .theme-dark & {
@@ -412,10 +405,7 @@ const CardInner = styled(Link)`
     column-gap: 32px;
 
     @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
-      flex-wrap: wrap;
-      flex-direction: column;
-      justify-content: center;
-      row-gap: 16px;
+      column-gap: 16px;
     }
   }
 `
@@ -464,9 +454,6 @@ const ImageWrapper = styled.div`
         height: 150px;
       }
     }
-  }
-  .card-dev-tutorial & {
-    height: auto;
   }
 `
 
@@ -519,15 +506,7 @@ const Title = styled.div`
   `}
   .upcomingEvent & {
     font-size: 18px;
-
-    @media (min-width: ${({ theme }) => theme.device.mobile}) {
-      font-size: 24px;
-    }
-  }
-  .card-dev-tutorial & {
-    font-size: 18px;
-    line-height: 1.4;
-    margin: 16px 0;
+    text-align: left;
 
     @media (min-width: ${({ theme }) => theme.device.mobile}) {
       font-size: 24px;
@@ -592,6 +571,7 @@ const Description = styled.div`
   `}
   .upcomingEvent & {
     font-size: 14px;
+    text-align: left;
     color: ${({ theme }) => theme.title};
   }
 `

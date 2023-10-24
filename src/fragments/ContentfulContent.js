@@ -226,6 +226,7 @@ export const ContentfulLayoutFeatureFields = graphql`
     noPaddingBottom
     removeSectionPaddingBottomOnDesktop
     customClass
+    moduleId
     featureItems {
       ... on ContentfulLogo {
         ...ContentfulLogoFields
@@ -391,6 +392,7 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
     noPaddingTop
     noPaddingBottom
     customClass
+    moduleId
     fullWidthBackground
   }
 `
@@ -428,6 +430,9 @@ export const ContentfulLayoutModuleContainerFields = graphql`
         ...ContentfulTimelineFields
       }
     }
+    cta {
+      ...ContentfulCtaFields
+    }
     backgroundColor
     displayHeadline
     headlineAlignCenter
@@ -439,6 +444,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     modulesMargin
     isTab
     customClass
+    moduleId
     sideImage {
       title
       description

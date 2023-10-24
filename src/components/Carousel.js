@@ -3,11 +3,13 @@ import Slider from 'react-slick'
 import styled from 'styled-components'
 import classnames from 'classnames'
 
-function NavButton({ right, onClick }) {
+function NavButton({ right, onClick, className }) {
+  const isDisabled = className?.includes('slick-disabled')
   return (
     <div
       className={classnames('nav-button', {
         right: right,
+        disabled: isDisabled,
       })}
       onClick={onClick}
     >
@@ -18,7 +20,7 @@ function NavButton({ right, onClick }) {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <rect width="40" height="40" rx="20" fill="#037DD6" />
+        <rect width="40" height="40" rx="20" />
         <path
           d="M23 14.6665C23.0012 14.3376 22.9005 14.0159 22.7105 13.7419C22.5205 13.468 22.2498 13.2542 21.9329 13.1277C21.6159 13.0013 21.2668 12.9678 20.9299 13.0315C20.593 13.0952 20.2834 13.2533 20.0404 13.4856L14.5082 18.7891C14.3463 18.944 14.2182 19.1282 14.1311 19.3309C14.0441 19.5336 13.9999 19.7508 14.0011 19.9699C14.0011 19.9891 14.0011 20.0068 14.0011 20.0245C13.9927 20.2515 14.0333 20.4777 14.1203 20.689C14.2073 20.9003 14.3388 21.0922 14.5067 21.2526L20.042 26.5428C20.3698 26.8413 20.8066 27.0054 21.259 26.9999C21.7115 26.9944 22.1437 26.8197 22.4636 26.5133C22.7834 26.2068 22.9655 25.7928 22.971 25.3595C22.9764 24.9263 22.8049 24.5082 22.4929 24.1944L18.1306 20.0172L22.4929 15.8399C22.6538 15.6859 22.7814 15.5029 22.8684 15.3016C22.9555 15.1002 23.0002 14.8844 23 14.6665Z"
           fill="white"
@@ -36,7 +38,7 @@ const Carousel = ({
   infinite = true,
   dots = false,
   gap = '10px',
-  autoplay = true,
+  autoplay = false,
 }) => {
   const settings = {
     autoplay,
@@ -335,6 +337,7 @@ const Wrapper = styled.div`
     }
   }
   @media (min-width: 1300px) {
+    padding-bottom: 0;
     .nav-button {
       top: calc(50% - 20px);
       left: -50px;
@@ -344,6 +347,18 @@ const Wrapper = styled.div`
         transform: rotate(180deg);
         left: unset;
         right: -50px;
+      }
+    }
+  }
+  .nav-button {
+    svg > rect {
+      fill: #037dd6;
+      transition: fill 0.3s ease;
+    }
+    &.disabled {
+      cursor: not-allowed;
+      svg > rect {
+        fill: #d6d9dc;
       }
     }
   }

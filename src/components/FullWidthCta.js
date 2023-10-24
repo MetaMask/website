@@ -37,6 +37,7 @@ const FullWidthCta = props => {
     backgroundImageDarkMode,
     backgroundImageMobileDarkMode,
     fullWidthBackground,
+    moduleId,
   } = props
 
   const isMobile = useMediaQuery({
@@ -71,6 +72,7 @@ const FullWidthCta = props => {
         [`bg-${backgroundColor}`]: backgroundColor,
         [customClass]: customClass,
       })}
+      id={moduleId}
       style={
         fullWidthBackground
           ? { backgroundImage: `url(${bgImageUrl})`, backgroundSize: 'cover' }
