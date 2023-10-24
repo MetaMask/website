@@ -9,6 +9,8 @@ import kebabCase from 'lodash/kebabCase'
 import { EyebrowStyle } from '../StyledGeneral'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import Carousel from '../Carousel'
+import { useMediaQuery } from 'react-responsive'
+import { useMemo } from 'react'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -55,6 +57,21 @@ const ContentfulModuleContainer = props => {
   const isFaq = faqList && faqList.length
   const [modulesRender, setModulesRender] = useState(modulesOther)
   const [shuffled, setShuffled] = useState(false)
+
+  const isMobile = useMediaQuery({
+    query: '(max-width: 479px)',
+  })
+
+  const isTablet = useMediaQuery({
+    query: '(max-width: 767px)',
+  })
+
+  const shouldShowCarousel = useMemo(() => {
+    if (carouselMode === 'desktop') return true
+    if (carouselMode === 'tablet' && isTablet) return true
+    if (carouselMode === 'mobile' && isMobile) return true
+    return false
+  }, [isMobile, isTablet])
 
   useEffect(() => {
     if (columnType === 'randomize') {
@@ -127,7 +144,7 @@ const ContentfulModuleContainer = props => {
               previewMode={previewMode}
             />
           ) : null}
-          {!carouselMode && modulesRender.length ? (
+          {!shouldShowCarousel && modulesRender.length ? (
             <Modules
               columnType={columnType}
               columns={columns}
@@ -154,7 +171,7 @@ const ContentfulModuleContainer = props => {
               )}
             </Modules>
           ) : null}
-          {carouselMode && modulesRender.length ? (
+          {shouldShowCarousel && modulesRender.length ? (
             <Carousel
               itemsOnTablet={columnsOnTablet}
               itemsOnMobile={columnsOnMobile}

@@ -56,6 +56,11 @@ const Container = styled.div`
   }
 
   ${({ styleOverride }) => styleOverride}
+  &.feature-meet-flask {
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      padding: 0;
+    }
+  }
 `
 
 const ContainerInner = styled.div`
@@ -129,6 +134,10 @@ const ContainerInner = styled.div`
   }
   .feature-meet-flask & {
     background-color: #24292e;
-    border-radius: 12px;
+    overflow: hidden;
+
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      border-radius: 12px;
+    }
   }
 `

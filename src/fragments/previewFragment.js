@@ -294,6 +294,7 @@ export const ContentfulLayoutFullWidthCtaFields = gql`
       url
     }
     customClass
+    moduleId
     fullWidthBackground
   }
 `
@@ -717,6 +718,7 @@ export const ContentfulLayoutFeatureFields = gql`
     noPaddingBottom
     removeSectionPaddingBottomOnDesktop
     customClass
+    moduleId
     featureItemsCollection(preview: true) {
       items {
         ...ContentfulCardFields
@@ -811,6 +813,9 @@ export const ContentfulLayoutModuleContainerFields = gql`
         ...ContentfulModuleContainerFields
       }
     }
+    cta(preview: true) {
+      ...ContentfulCtaFields
+    }
     backgroundColor
     displayHeadline
     headlineAlignCenter
@@ -822,6 +827,7 @@ export const ContentfulLayoutModuleContainerFields = gql`
     modulesMargin
     isTab
     customClass
+    moduleID
     sideImage {
       title
       description

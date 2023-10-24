@@ -49,6 +49,7 @@ const FeatureComponent = props => {
     customClass,
     previewMode = false,
     contentfulId,
+    moduleId,
   } = props
 
   const inspectorProps = useContentfulInspectorMode()
@@ -57,6 +58,7 @@ const FeatureComponent = props => {
     ? contentAlignment
     : ''
   const isContentAlignVertical = contentAlignment === 'vertical'
+  const isDevMeetFlask = customClass?.includes('feature-meet-flask')
   const innerContent = (
     <>
       {eyebrow ? (
@@ -124,7 +126,9 @@ const FeatureComponent = props => {
       ) : null}
       {cta && !isContentAlignVertical ? (
         <CTAWrapper
-          className="hidden-mobile"
+          className={classnames({
+            'hidden-mobile': !isDevMeetFlask,
+          })}
           {...(previewMode
             ? inspectorProps({
                 entryId: contentfulId,
@@ -175,6 +179,7 @@ const FeatureComponent = props => {
         removeSectionPaddingBottomOnDesktop: removeSectionPaddingBottomOnDesktop,
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
+      id={moduleId}
     >
       <GatsbyBackgroundImage
         image={backgroundImage}
@@ -323,7 +328,9 @@ const FeatureComponent = props => {
           </FeatureWrapper>
           {cta && !isContentAlignVertical ? (
             <CTAWrapper
-              className="hidden-desktop"
+              className={classnames('hidden-desktop', {
+                'hidden-mobile': isDevMeetFlask,
+              })}
               {...(previewMode
                 ? inspectorProps({
                     entryId: contentfulId,
@@ -414,6 +421,10 @@ const SideImage = styled.div`
     padding-top: 0;
     padding-bottom: 0;
     align-self: center;
+
+    @media (max-width: 767px) {
+      padding: 0;
+    }
   }
 `
 
@@ -693,6 +704,7 @@ const FeatureInner = styled.div`
 
   .feature-meet-flask & {
     color: #fff;
+    padding-top: 24px;
 
     @media (min-width: ${({ theme }) => theme.device.tablet}) {
       padding-top: 32px;
@@ -732,8 +744,8 @@ const CTAWrapper = styled.div`
         color: #fff;
       }
     }
-    @media (max-width: ${({ theme }) => theme.device.tablet}) {
-      padding-bottom: 16px;
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      margin-top: 0;
     }
   }
 

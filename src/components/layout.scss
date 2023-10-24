@@ -1748,9 +1748,10 @@ body.usabilla-show {
   font-weight: 500;
   border-radius: 20px;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   gap: 16px;
 
   a {
@@ -1758,17 +1759,11 @@ body.usabilla-show {
   }
 
   @media(min-width: 480px) {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
     border-radius: 9999px;
   }
-  @media(min-width: 768px) {
-    justify-content: space-between;
-  }
-}
-
-.cta-list {
-  display: flex;
-  column-gap: 16px;
-  row-gap: 8px;
 }
 
 .flex-mobile-center {
@@ -1782,6 +1777,7 @@ a.link-with-caret {
   position: relative;
   padding-right: 20px;
   color: #2196f3;
+  font-weight: 600;
   &:after {
     background: url('/images/mm-caret-right.svg');
     width: 16px;
@@ -1793,7 +1789,4 @@ a.link-with-caret {
     right: 0;
     content: '';
   }
-}
-a.link-bold {
-  font-weight: 600;
 }

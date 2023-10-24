@@ -11,6 +11,7 @@ import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
 import TabWrapper from '../Tab/TabWrapper'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import ParseMD from '../ParseMD'
+import HeroSubNav from '../HeroSubNav'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -32,10 +33,12 @@ const ContentfulModuleContainer = props => {
       previewMode = false,
       isTab,
       customClass,
+      moduleId,
       eyebrow,
       sideImage,
       showLeftArrow,
       iconConfig,
+      cta,
       contentful_id,
     },
   } = props
@@ -47,6 +50,7 @@ const ContentfulModuleContainer = props => {
   const sideImageUrl = parseContentfulAssetUrl(sideImage, previewMode)
   const htmlData = previewMode ? description : html
   const isCategoryTab = customClass === 'newsCategoriesTab' && isTab
+  const isSubNav = customClass?.includes('heroSubNav')
   const isSecurityPage = pathname === '/security/'
   const tabs =
     isTab && modules && modules.length
@@ -64,8 +68,29 @@ const ContentfulModuleContainer = props => {
         }))
       : null
 
+  if (isSubNav)
+    return (
+      <Container
+        sectionPadding={sectionPadding}
+        className={classnames({
+          noPaddingBottom: noPaddingBottom,
+          [customClass]: customClass,
+          [`bg-${backgroundColor}`]: backgroundColor,
+        })}
+      >
+        <ContentWrapper>
+          <HeroSubNav
+            headline={headline}
+            modules={modules}
+            previewMode={previewMode}
+          />
+        </ContentWrapper>
+      </Container>
+    )
+
   return (
     <Container
+      id={moduleId}
       sectionPadding={sectionPadding}
       bgUrl={bgUrl}
       backgroundSize={backgroundSize}
@@ -98,19 +123,29 @@ const ContentfulModuleContainer = props => {
                   </EyebrowStyle>
                 ) : null}
                 {headline && displayHeadline ? (
-                  <Title
-                    headlineMarginTop0={headlineMarginTop0}
-                    className={classnames({
-                      'txt-center': headlineAlignCenter,
-                    })}
-                    dangerouslySetInnerHTML={{ __html: headline }}
-                    {...(previewMode
-                      ? inspectorProps({
-                          entryId: contentful_id,
-                          fieldId: 'headline',
-                        })
-                      : {})}
-                  />
+                  <div className="title-wrapper">
+                    <Title
+                      headlineMarginTop0={headlineMarginTop0}
+                      className={classnames({
+                        'txt-center': headlineAlignCenter,
+                      })}
+                      dangerouslySetInnerHTML={{ __html: headline }}
+                      {...(previewMode
+                        ? inspectorProps({
+                            entryId: contentful_id,
+                            fieldId: 'headline',
+                          })
+                        : {})}
+                    />
+                    {cta ? (
+                      <>
+                        {contentfulModuleToComponent({
+                          ...cta,
+                          previewMode,
+                        })}
+                      </>
+                    ) : null}
+                  </div>
                 ) : null}
                 {htmlData ? (
                   <>
@@ -176,6 +211,18 @@ const ContentfulModuleContainer = props => {
                 )}
               </Modules>
             )}
+            {cta ? (
+              <div
+                className={classnames('layout-cta', {
+                  'hidden-desktop': headline && displayHeadline,
+                })}
+              >
+                {contentfulModuleToComponent({
+                  ...cta,
+                  previewMode,
+                })}
+              </div>
+            ) : null}
           </MainContent>
           {sideImageUrl ? (
             <SideImage sectionPadding={sectionPadding}>
@@ -227,6 +274,20 @@ const MainContent = styled.div`
   .registerEventForm & {
     display: flex;
     flex-direction: column-reverse;
+  }
+
+  .layout-cta {
+    .ctaModuleContainer {
+      padding-top: 22px;
+      a {
+        font-weight: 600;
+      }
+    }
+    display: flex;
+    justify-content: flex-end;
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      justify-content: center;
+    }
   }
 `
 
@@ -399,6 +460,7 @@ const Modules = styled.div`
     margin-bottom: 0;
 
     .cta-blue-right & {
+      padding-left: 0;
       padding-right: 0;
       padding-bottom: 0;
       justify-content: right;
@@ -406,6 +468,11 @@ const Modules = styled.div`
       a {
         color: ${({ theme }) => theme.linkColor};
         font-weight: 600;
+      }
+    }
+    .cta-tablet-center & {
+      @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+        justify-content: center;
       }
     }
   }
@@ -477,6 +544,36 @@ const ContentInfo = styled.div`
     margin: 0 auto;
     padding-top: 0;
   }
+  .title-wrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    column-gap: 16px;
+    row-gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+
+    h2 {
+      margin-bottom: 0;
+    }
+
+    .ctaModuleContainer {
+      display: flex;
+      align-items: center;
+
+      a {
+        font-weight: 600;
+      }
+    }
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      .ctaModuleContainer {
+        display: none;
+      }
+    }
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      justify-content: center;
+    }
+  }
 `
 
 const SubInfo = styled.div`
@@ -498,24 +595,6 @@ const SubInfo = styled.div`
 
   .snaps-categories & a {
     color: ${({ theme }) => theme.lightBlue} !important;
-  }
-
-  .developer-subnav {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 32px;
-    row-gap: 8px;
-    font-size: 18px;
-    .vertical-divider {
-      border-right: 1px solid #fff;
-    }
-    a {
-      color: inherit;
-      transition: color 0.15s;
-      &:hover {
-        color: #2196f3;
-      }
-    }
   }
 `
 
