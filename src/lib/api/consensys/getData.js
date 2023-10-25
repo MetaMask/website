@@ -1,3 +1,4 @@
+import axios from 'axios'
 import axiosClient from './axiosClient'
 
 const consensysData = {
@@ -8,6 +9,9 @@ const consensysData = {
   getToU: (pageId, params) => {
     const url = `/pages/${pageId}`
     return axiosClient.get(url, { params })
+  },
+  getCommunityEvent: url => {
+    return axios.get(url)
   },
 }
 

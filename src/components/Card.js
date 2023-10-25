@@ -89,7 +89,6 @@ const StyledCard = props => {
   }
   const isCtaType = layoutType === 'cta'
   const isEventType = layoutType === 'event'
-  const isUpcomingEventType = layoutType === 'upcoming-event'
   const isCardFlex =
     customClass?.includes('custody-integrate-card') ||
     customClass?.includes('custody-technical-card')
@@ -99,7 +98,6 @@ const StyledCard = props => {
       isCtaType={isCtaType}
       isCardFlex={isCardFlex}
       className={classnames('moduleCardWrapper', {
-        upcomingEvent: isUpcomingEventType,
         [customClass]: customClass,
       })}
     >
@@ -396,18 +394,6 @@ const CardInner = styled(Link)`
   body.dark-mode .bgDarkInDarkmode & {
     background-color: ${({ theme }) => theme.dark};
   }
-  .upcomingEvent & {
-    border: 1px solid #e3e3e3;
-    border-radius: 12px;
-    padding: 18px;
-    display: flex;
-    height: 100%;
-    column-gap: 32px;
-
-    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
-      column-gap: 16px;
-    }
-  }
 `
 
 const ImageWrapper = styled.div`
@@ -438,23 +424,6 @@ const ImageWrapper = styled.div`
   }
 
   ${({ $imageMargin }) => ($imageMargin ? 'margin-left: -15px' : '')}
-
-  .upcomingEvent & {
-    margin-bottom: 0;
-    flex-shrink: 0;
-
-    height: 90px;
-    img {
-      height: 90px;
-    }
-
-    @media (min-width: ${({ theme }) => theme.device.tablet}) {
-      height: 150px;
-      img {
-        height: 150px;
-      }
-    }
-  }
 `
 
 const ImageSrc = styled(Image)`
@@ -479,9 +448,6 @@ const Inner = styled.div`
     justify-content: space-between;
     height: 100%;
   `}
-  .upcomingEvent & {
-    height: unset;
-  }
 `
 const Title = styled.div`
   font-weight: 700;
@@ -504,14 +470,6 @@ const Title = styled.div`
       text-transform: uppercase;
       color: #F6851B;
   `}
-  .upcomingEvent & {
-    font-size: 18px;
-    text-align: left;
-
-    @media (min-width: ${({ theme }) => theme.device.mobile}) {
-      font-size: 24px;
-    }
-  }
 `
 
 const Description = styled.div`
@@ -569,11 +527,6 @@ const Description = styled.div`
       line-height: 32px;
       margin-top: 4px;
   `}
-  .upcomingEvent & {
-    font-size: 14px;
-    text-align: left;
-    color: ${({ theme }) => theme.title};
-  }
 `
 const ArrowItem = styled.div`
   height: 35px;
@@ -596,17 +549,6 @@ const InnerContent = styled.div`
     text-align: left;
   `
       : ''}
-  .upcomingEvent & {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 8px;
-
-    @media (min-width: ${({ theme }) => theme.device.mobile}) {
-      padding: 16px 0;
-    }
-  }
 `
 
 const CTAWrapper = styled.div`
