@@ -123,12 +123,13 @@ const ContentfulModuleContainer = props => {
                   </EyebrowStyle>
                 ) : null}
                 {headline && displayHeadline ? (
-                  <div className="title-wrapper">
+                  <div
+                    className={classnames('title-wrapper', {
+                      'headline-center': headlineAlignCenter && !cta,
+                    })}
+                  >
                     <Title
                       headlineMarginTop0={headlineMarginTop0}
-                      className={classnames({
-                        'txt-center': headlineAlignCenter,
-                      })}
                       dangerouslySetInnerHTML={{ __html: headline }}
                       {...(previewMode
                         ? inspectorProps({
@@ -555,6 +556,10 @@ const ContentInfo = styled.div`
 
     h2 {
       margin-bottom: 0;
+    }
+
+    &.headline-center {
+      justify-content: center;
     }
 
     .ctaModuleContainer {
