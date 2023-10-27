@@ -21,6 +21,9 @@ const ConsensysCommunityEvent = props => {
       try {
         if (response && response.data?.count && response.data?.results) {
           let data = response.data.results
+          data = data.sort(
+            (a, b) => new Date(a.start_date_iso) - new Date(b.start_date_iso)
+          )
           if (numberOfItem) {
             data = data.slice(0, numberOfItem)
           }
