@@ -44,7 +44,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 16px;
   h2 {
-    font-size: 18px;
+    font-size: 18px !important;
     line-height: 1.2;
     font-weight: 500;
   }
