@@ -652,6 +652,16 @@ pre tt:after {
   font-display: swap;
 }
 
+/* Semi-bold */
+@font-face {
+  font-family: 'Euclid Circular B';
+  src: url('/fonts/EuclidCircularB-SemiBold-WebXL.woff2') format('woff2'),
+    url('/fonts/EuclidCircularB-SemiBold-WebXL.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Bold */
 @font-face {
   font-family: 'Euclid Circular B';

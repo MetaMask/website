@@ -6,6 +6,7 @@ const { buildSitemap } = require(`./src/lib/utils/sitemap`)
 const { createRemoteFileNode } = require('gatsby-source-filesystem')
 const grayMatter = require('gray-matter')
 const { pipe, toArray, map, get } = require('lodash/fp')
+const { fetchDevChangeLog } = require('./fetchDataSSR')
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions
@@ -39,7 +40,7 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     })
   }
-
+  const devChangelogData = await fetchDevChangeLog(process.env.GH_TOKEN)
   const legalsQuery = await graphql(`
     {
       tou: file(name: {eq: "terms-of-use"}) {
@@ -254,6 +255,7 @@ exports.createPages = async ({ graphql, actions }) => {
             })
             return
           }
+          const extraData = slug === "/developer/" ? devChangelogData : null
           createPage({
             path: slug, // slug validation in Contentful CMS
             component: path.resolve(`./src/templates/ContentfulLayout.js`),
@@ -268,6 +270,7 @@ exports.createPages = async ({ graphql, actions }) => {
               isFaqLayout,
               widerContainer,
               h2FontSize,
+              extraData,
             },
           })
         })

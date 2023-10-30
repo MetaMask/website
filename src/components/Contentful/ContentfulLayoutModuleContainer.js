@@ -12,6 +12,7 @@ import TabWrapper from '../Tab/TabWrapper'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import ParseMD from '../ParseMD'
 import HeroSubNav from '../HeroSubNav'
+import DevReleaseNotes from '../DevReleaseNotes'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -51,6 +52,7 @@ const ContentfulModuleContainer = props => {
   const htmlData = previewMode ? description : html
   const isCategoryTab = customClass === 'newsCategoriesTab' && isTab
   const isSubNav = customClass?.includes('heroSubNav')
+  const isDevReleaseNotes = customClass?.includes('dev-release-notes')
   const isSecurityPage = pathname === '/security/'
   const tabs =
     isTab && modules && modules.length
@@ -68,7 +70,7 @@ const ContentfulModuleContainer = props => {
         }))
       : null
 
-  if (isSubNav)
+  if (isSubNav || isDevReleaseNotes)
     return (
       <Container
         sectionPadding={sectionPadding}
@@ -79,11 +81,32 @@ const ContentfulModuleContainer = props => {
         })}
       >
         <ContentWrapper>
-          <HeroSubNav
-            headline={headline}
-            modules={modules}
-            previewMode={previewMode}
-          />
+          {isSubNav && (
+            <HeroSubNav
+              headline={headline}
+              modules={modules}
+              previewMode={previewMode}
+            />
+          )}
+          {isDevReleaseNotes && (
+            <>
+              <ContentInfo paddingTop={paddingTop}>
+                {headline && displayHeadline ? (
+                  <div
+                    className={classnames('title-wrapper', {
+                      'headline-center': headlineAlignCenter && !cta,
+                    })}
+                  >
+                    <Title
+                      headlineMarginTop0={headlineMarginTop0}
+                      dangerouslySetInnerHTML={{ __html: headline }}
+                    />
+                  </div>
+                ) : null}
+              </ContentInfo>
+              <DevReleaseNotes />
+            </>
+          )}
         </ContentWrapper>
       </Container>
     )

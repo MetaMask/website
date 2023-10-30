@@ -36,6 +36,7 @@ export const ContentfulEmbedFields = gql`
     layoutType
     playOnPopup
     displayTitle
+    clickToPlayOnWholeCard
   }
 `
 

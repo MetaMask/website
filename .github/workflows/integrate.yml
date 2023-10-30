@@ -32,6 +32,7 @@ jobs:
           echo GATSBY_CONSENSYS_HOST =${{ secrets.GATSBY_CONSENSYS_HOST }} >> gatsby.development.env
           echo GATSBY_CONTENTFUL_PREVIEW_HOST =${{ secrets.GATSBY_CONTENTFUL_PREVIEW_HOST }} >> gatsby.development.env
           echo GATSBY_CONTENTFUL_PREVIEW_API_KEY =${{ secrets.GATSBY_CONTENTFUL_PREVIEW_API_KEY }} >> gatsby.development.env
+          echo GH_TOKEN =${{ secrets.GH_TOKEN }} >> gatsby.development.env
 
       - name: Read .nvmrc
         run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"

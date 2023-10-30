@@ -4,7 +4,6 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import flatMapDeep from 'lodash/flatMapDeep'
 import isArray from 'lodash/isArray'
 import Layout from './PageLayout'
-import Context from '../Context/ContextPage'
 import linkedInTrackingScript from '../lib/services/lintrk'
 import analyticsUninstalledScript from '../lib/services/analytics'
 import { useLocation } from '@reach/router'
@@ -43,6 +42,7 @@ const ContentfulLayout = props => {
       isFaqLayout,
       h2FontSize,
       widerContainer,
+      extraData,
     },
     path,
     ...rest
@@ -62,19 +62,6 @@ const ContentfulLayout = props => {
     partnerId +
     (conversionId ? '&conversionId=' + conversionId : '') +
     '&fmt=gif"/>'
-
-  const [idFaqActive, setIdFaqActive] = React.useState('')
-  const [paginationPage, setPaginationPage] = React.useState(1)
-  const valueContext = {
-    faq: {
-      idFaqActive,
-      setIdFaqActive,
-    },
-    pagination: {
-      paginationPage,
-      setPaginationPage,
-    },
-  }
 
   // takes all modules single content type for a page and returns all instances
   const getNodes = mods => {
@@ -110,37 +97,35 @@ const ContentfulLayout = props => {
   }
 
   return (
-    <Context.Provider value={valueContext}>
-      <Layout
-        {...rest}
-        themeColor={themeColor}
-        h2FontSize={h2FontSize}
-        widerContainer={widerContainer}
-      >
-        {seo &&
-          contentfulModuleToComponent({ ...seoData, pagePath: pathBuild })}
-        {pathname.includes('/uninstalled') && (
-          <Helmet
-            script={[
-              {
-                type: 'text/javascript',
-                innerHTML: analyticsUninstalledScript,
-              },
-            ]}
-          />
-        )}
-        {allModules.map(module =>
-          contentfulModuleToComponent({ ...module, isFaq: isFaqLayout })
-        )}
-        <script
-          type="text/javascript"
-          dangerouslySetInnerHTML={{
-            __html: linkedInPartnerId + linkedInTrackingScript,
-          }}
+    <Layout
+      {...rest}
+      themeColor={themeColor}
+      h2FontSize={h2FontSize}
+      widerContainer={widerContainer}
+      extraData={extraData}
+    >
+      {seo && contentfulModuleToComponent({ ...seoData, pagePath: pathBuild })}
+      {pathname.includes('/uninstalled') && (
+        <Helmet
+          script={[
+            {
+              type: 'text/javascript',
+              innerHTML: analyticsUninstalledScript,
+            },
+          ]}
         />
-        <noscript dangerouslySetInnerHTML={{ __html: linkedInEventPixel }} />
-      </Layout>
-    </Context.Provider>
+      )}
+      {allModules.map(module =>
+        contentfulModuleToComponent({ ...module, isFaq: isFaqLayout })
+      )}
+      <script
+        type="text/javascript"
+        dangerouslySetInnerHTML={{
+          __html: linkedInPartnerId + linkedInTrackingScript,
+        }}
+      />
+      <noscript dangerouslySetInnerHTML={{ __html: linkedInEventPixel }} />
+    </Layout>
   )
 }
 
