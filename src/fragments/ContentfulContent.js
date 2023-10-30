@@ -619,6 +619,7 @@ export const ContentfulEmbedFields = graphql`
     displayTitle
     layoutType
     playOnPopup
+    clickToPlayOnWholeCard
   }
 `
 

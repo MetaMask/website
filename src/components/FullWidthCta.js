@@ -421,6 +421,7 @@ const CTAWrapper = styled.div`
 
   .button {
     margin: 0 0 16px;
+    min-width: 140px;
   }
   .button:last-child {
     margin-bottom: 0;

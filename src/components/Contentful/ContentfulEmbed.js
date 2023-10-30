@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useContentfulInspectorMode } from '@contentful/live-preview/react'
@@ -18,41 +18,49 @@ const ContentfulEmbed = props => {
       layoutType,
       playOnPopup,
       thumbnail,
+      clickToPlayOnWholeCard,
       contentful_id,
     },
   } = props
 
+  const cardRef = useRef(null)
   const inspectorProps = useContentfulInspectorMode()
   const thumbnailUrl = parseContentfulAssetUrl(thumbnail, previewMode)
 
   return (
     <Wrapper id={moduleId} layoutType={layoutType}>
-      {title && displayTitle ? (
-        <Title
+      <WrapperInner
+        $clickable={clickToPlayOnWholeCard}
+        ref={clickToPlayOnWholeCard ? cardRef : null}
+      >
+        {title && displayTitle ? (
+          <Title
+            {...(previewMode
+              ? inspectorProps({
+                  entryId: contentful_id,
+                  fieldId: 'title',
+                })
+              : {})}
+          >
+            {title}
+          </Title>
+        ) : null}
+        <div
           {...(previewMode
             ? inspectorProps({
                 entryId: contentful_id,
-                fieldId: 'title',
+                fieldId: 'embed',
               })
             : {})}
         >
-          {title}
-        </Title>
-      ) : null}
-      <div
-        {...(previewMode
-          ? inspectorProps({
-              entryId: contentful_id,
-              fieldId: 'embed',
-            })
-          : {})}
-      >
-        <Embed
-          playOnPopup={playOnPopup}
-          html={previewMode ? props.moduleConfig.embed : embed}
-          thumbnailUrl={thumbnailUrl}
-        />
-      </div>
+          <Embed
+            playOnPopup={playOnPopup}
+            html={previewMode ? props.moduleConfig.embed : embed}
+            thumbnailUrl={thumbnailUrl}
+            cardRef={cardRef}
+          />
+        </div>
+      </WrapperInner>
     </Wrapper>
   )
 }
@@ -122,6 +130,11 @@ const Wrapper = styled.div`
   .embed-mb-20 & {
     margin-bottom: 20px;
   }
+`
+
+const WrapperInner = styled.div`
+  ${({ $clickable }) => ($clickable ? `cursor: pointer;` : ``)}
+
   .developer-community-calls & {
     display: flex;
     flex-direction: column-reverse;

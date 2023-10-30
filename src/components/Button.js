@@ -126,7 +126,7 @@ const ButtonWrapper = styled(Link)`
       ? `
   background: transparent !important;
   color: #fff;
-  border: 2px solid #fff;
+  border: 1px solid #fff;
   transition: background-color 300ms ease, border 300ms ease, color 300ms ease;
   @media (min-width: ${theme.device.miniDesktop}){
     &:hover {
@@ -142,7 +142,7 @@ const ButtonWrapper = styled(Link)`
       ? `
     background: transparent !important;
     color: ${theme.button.primary.bg};
-    border: 2px solid ${theme.button.primary.bg};
+    border: 1px solid ${theme.button.primary.bg};
     @media (min-width: ${theme.device.miniDesktop}){
       &:hover {
         border-color: ${theme.button.primary.bgHover};

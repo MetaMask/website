@@ -27,6 +27,7 @@ const PageLayout = props => {
     themeColor,
     h2FontSize,
     isStandalone,
+    extraData,
     ...rest
   } = props
   const { pathname, search } = location || {}
@@ -68,6 +69,7 @@ const PageLayout = props => {
     heroContainer: {
       heroContainerRef,
     },
+    extraData,
   }
   const [dimensionScript, setDimensionScript] = React.useState('')
   const renderNotification = (state = {}) => {

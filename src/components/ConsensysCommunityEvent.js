@@ -12,7 +12,7 @@ const convertDate = dateString => {
 }
 
 const ConsensysCommunityEvent = props => {
-  const { numberOfItem, link, showDate } = props
+  const { numberOfItem, link } = props
   const [items, setItems] = useState(null)
   const [loading, setLoading] = useState(true)
 
