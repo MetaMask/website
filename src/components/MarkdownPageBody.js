@@ -6,6 +6,10 @@ import { Section } from './StyledGeneral'
 import ParseMD from './ParseMD'
 
 const MarkdownPageBody = ({ pageData }) => {
+  const {
+    body,
+    frontmatter: { date, title },
+  } = pageData || {}
   return (
     <Section>
       <ContentWrapper>
@@ -13,18 +17,18 @@ const MarkdownPageBody = ({ pageData }) => {
           <h1
             className="title"
             dangerouslySetInnerHTML={{
-              __html: pageData.data?.title || 'Terms of use',
+              __html: title || 'Terms of use',
             }}
           />
-          {pageData.data?.date && (
+          {date && (
             <h2
               className="description"
               dangerouslySetInnerHTML={{
-                __html: `Last Updated: ${pageData.data.date}`,
+                __html: `Last Updated: ${date}`,
               }}
             />
           )}
-          <ParseMD>{pageData.content}</ParseMD>
+          <ParseMD>{body}</ParseMD>
         </WrapperInner>
       </ContentWrapper>
     </Section>

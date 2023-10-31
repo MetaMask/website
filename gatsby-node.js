@@ -3,9 +3,6 @@ const { download } = require('./src/lib/utils/download')
 const { getNewsUrl } = require(`./src/lib/utils/news`)
 const redirects = require('./redirects.json')
 const { buildSitemap } = require(`./src/lib/utils/sitemap`)
-const { createRemoteFileNode } = require('gatsby-source-filesystem')
-const grayMatter = require('gray-matter')
-const { pipe, toArray, map, get } = require('lodash/fp')
 const { fetchDevChangeLog } = require('./fetchDataSSR')
 
 exports.createPages = async ({ graphql, actions }) => {
@@ -43,36 +40,20 @@ exports.createPages = async ({ graphql, actions }) => {
   const devChangelogData = await fetchDevChangeLog(process.env.GH_TOKEN)
   const legalsQuery = await graphql(`
     {
-      tou: file(name: {eq: "terms-of-use"}) {
-        id
-        name
-        internal {
-          content
-        }
-      }
-      privacyPolicy: file(name: {eq: "privacy-policy"}) {
-        id
-        name
-        internal {
-          content
-        }
-      }
-      cookies: file(name: {eq: "cookies"}) {
-        id
-        name
-        internal {
-          content
+      allMdx {
+        nodes {
+          id
+          frontmatter {
+            slug
+            title
+            date
+          }
+          body
         }
       }
     }
   `)
-  const legalData = pipe(
-    get('data'),
-    toArray,
-    map(get('internal.content')),
-    map(grayMatter),
-  )(legalsQuery)
-
+  const legalData = legalsQuery?.data?.allMdx?.nodes
   const contentfulLayouts = graphql(`
     {
       pages: allContentfulLayout(filter: { isPrivate: { eq: false } }) {
@@ -163,7 +144,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }))
 
             if (assetUrls) {
-              ;(async () => {
+              ; (async () => {
                 await Promise.all(
                   assetUrls.map(url => download(url, `public/assets/${path.parse(url).base}`))
                 ).catch((_) => {
@@ -211,9 +192,9 @@ exports.createPages = async ({ graphql, actions }) => {
           }
 
           let legalMatch = -1
-          if ((legalMatch = ['/terms-of-use/', '/privacy-policy/', '/privacy-policy/cookies/'].indexOf(slug)) >= 0)
-          {
-            if (!legalData[legalMatch]) {
+          if ((legalMatch = ['/terms-of-use/', '/privacy-policy/', '/privacy-policy/cookies/'].indexOf(slug)) >= 0) {
+            const resolvedData = legalData?.find(s => s?.frontmatter?.slug === slug)
+            if (!resolvedData) {
               // Skip creating page
               return;
             }
@@ -229,7 +210,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   headerId,
                   footerId,
                   seoId,
-                  pageData: legalData[legalMatch],
+                  pageData: resolvedData,
                   themeColor,
                   pathBuild: legalUrl,
                   isFaqLayout,
@@ -448,32 +429,3 @@ exports.onPostBuild = buildSitemap({
     ],
   },
 })
-
-exports.sourceNodes = async ({
-  actions: { createNode },
-  createNodeId,
-  loadNodeContent,
-  getCache,
-  reporter
-}
-) => {
-  reporter.info('Retrieve legal pages from legal.consensys.io')
-  return Promise.all([
-    'https://legal.consensys.io/raw/terms-of-use.mdx',
-    'https://legal.consensys.io/raw/privacy-policy.mdx',
-    'https://legal.consensys.io/raw/cookies.mdx'
-  ].map(async legalPage => {
-    const fileNode = await createRemoteFileNode({
-      url: legalPage,
-      createNode,
-      createNodeId,
-      getCache,
-    })
-    
-    if (!fileNode.internal.content) {
-      const content = await loadNodeContent(fileNode)
-      fileNode.internal.content = content
-    }
-    return fileNode
-  }))
-}
