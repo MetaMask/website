@@ -29,7 +29,7 @@ const ConsensysCommunityEvent = props => {
           }
           data = data.map(item => ({
             id: item.id,
-            thumbnail: item.picture_url,
+            thumbnail: encodeURI(item.picture_url),
             title: item.title,
             description: item.description_short,
             date: convertDate(item.start_date_iso),
