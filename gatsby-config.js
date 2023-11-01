@@ -107,6 +107,15 @@ if (env.errors) {
           path: `${__dirname}/src/images`,
         },
       },
+      'gatsby-plugin-mdx',
+      {
+        resolve: `gatsby-source-filesystem`,
+        options: {
+          name: `legal`,
+          path: `${__dirname}/legal`,
+        },
+        __key: "legal"
+      },
       {
         resolve: 'gatsby-plugin-react-svg',
         options: {
