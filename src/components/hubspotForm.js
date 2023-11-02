@@ -76,10 +76,8 @@ export default withTheme(HubspotForm)
 const Title = styled.h2`
   display: block;
   margin-bottom: 40px;
-  color: #333;
-  body.dark-mode & {
-    color: #333;
-  }
+  color: #333 !important;
+
   .registerEventForm & {
     margin-bottom: 0;
     font-size: 24px;
