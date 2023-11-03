@@ -16,7 +16,7 @@ const PreviewLoading = () => {
         viewBox="0 0 24 30"
         xmlSpace="preserve"
       >
-        <rect x="0" y="13" width="4" height="5" fill="#333">
+        <rect x="0" y="13" width="4" height="5" fill="#24292E">
           <animate
             attributeName="height"
             attributeType="XML"
@@ -34,7 +34,7 @@ const PreviewLoading = () => {
             repeatCount="indefinite"
           />
         </rect>
-        <rect x="10" y="13" width="4" height="5" fill="#333">
+        <rect x="10" y="13" width="4" height="5" fill="#24292E">
           <animate
             attributeName="height"
             attributeType="XML"
@@ -52,7 +52,7 @@ const PreviewLoading = () => {
             repeatCount="indefinite"
           />
         </rect>
-        <rect x="20" y="13" width="4" height="5" fill="#333">
+        <rect x="20" y="13" width="4" height="5" fill="#24292E">
           <animate
             attributeName="height"
             attributeType="XML"

@@ -76,10 +76,8 @@ export default withTheme(HubspotForm)
 const Title = styled.h2`
   display: block;
   margin-bottom: 40px;
-  color: #333;
-  body.dark-mode & {
-    color: #333;
-  }
+  color: #24292e !important;
+
   .registerEventForm & {
     margin-bottom: 0;
     font-size: 24px;
@@ -161,6 +159,20 @@ const Content = styled.div`
 
 const Form = styled.div`
   display: block;
+  body.dark-mode & {
+    color: #24292e;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    strong,
+    b {
+      color: #24292e;
+    }
+  }
   ${({ hasExternalStyles }) =>
     hasExternalStyles &&
     `
@@ -839,7 +851,7 @@ const Form = styled.div`
       z-index: 9999;
       display: block;
       position: relative;
-      color: #333;
+      color: #24292E;
       background: #fff;
       border: 1px solid #ccc;
       border-bottom-color: #bbb;

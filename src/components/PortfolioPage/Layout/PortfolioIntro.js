@@ -221,7 +221,7 @@ const Heading = styled.h1`
   font-size: 58px;
   line-height: 1.05;
   letter-spacing: -0.02em;
-  color: #ffffff;
+  color: #ffffff !important;
   opacity: 0;
 
   @media (max-width: ${({ theme }) => theme.device.tablet}) {
