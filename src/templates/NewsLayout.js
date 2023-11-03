@@ -66,7 +66,7 @@ function NewsLayout(props) {
       {contentfulModuleToComponent(seoModuleConfig)}
       {contentfulModuleToComponent(header)}
       <div className="news-page-content">
-        <NewsContainer className='noPaddingBottom'>
+        <NewsContainer className="noPaddingBottom">
           <ContentWrapper className="news-content">
             {contentfulModuleToComponent({
               ...cta,
@@ -183,7 +183,7 @@ const NewsInfo = styled.div`
   padding-top: 0.75rem;
 
   .separator {
-    background-color: #333;
+    background-color: #24292e;
     display: inline-flex;
     height: 1px;
     margin: 0 0.5rem;
@@ -198,7 +198,7 @@ const NewsInfo = styled.div`
   }
 
   &::before {
-    background-color: #333;
+    background-color: #24292e;
     content: '';
     height: 3px;
     left: 0;
