@@ -307,7 +307,7 @@ const SliderTitle = styled.dt`
       transition: all 0.3s ease;
     }
     &.active {
-      color: #333;
+      color: #24292E;
 
       body.dark-mode & {
         color: #fff;

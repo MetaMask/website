@@ -182,7 +182,7 @@ const NewsInfo = styled.div`
   padding-top: 0.75rem;
 
   .separator {
-    background-color: #333;
+    background-color: #24292E;
     display: inline-flex;
     height: 1px;
     margin: 0 0.5rem;
@@ -197,7 +197,7 @@ const NewsInfo = styled.div`
   }
 
   &::before {
-    background-color: #333;
+    background-color: #24292E;
     content: '';
     height: 3px;
     left: 0;

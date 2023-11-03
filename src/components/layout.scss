@@ -314,7 +314,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #333333;
+  color: #24292E;
 
   .theme-dark & {
     color: #222222;
@@ -674,7 +674,7 @@ pre tt:after {
 
 body {
   font-family: 'Euclid Circular B', sans-serif;
-  color: #333;
+  color: #24292E;
   font-size: 16px;
   line-height: 22px;
 }
@@ -686,7 +686,7 @@ body {
 .hs-form-field input {
   height: 40px;
   background-color: #ffffff;
-  border: 1px solid #333333;
+  border: 1px solid #24292E;
   border-radius: 10px;
   padding: 0 15px;
   width: 100%;
@@ -738,7 +738,7 @@ input[type='submit'].hs-button {
 
 .paragraph {
   font-family: 'Euclid Circular B', sans-serif;
-  color: #333;
+  color: #24292E;
   font-size: 16px;
   font-weight: 400;
 }
@@ -1082,7 +1082,7 @@ body {
   transition: background 300ms ease;
 }
 
-body.dark-mode:not(.no-dark) {
+body.dark-mode {
   background-color: #121212;
   color: #fff;
   h1,
@@ -1405,7 +1405,7 @@ body.dark-mode:not(.no-dark) {
     font-weight: 400;
     font-size: 14px;
     line-height: 152.16%;
-    color: #333333;
+    color: #24292E;
     width: 290px;
     position: absolute;
     left: 50%;

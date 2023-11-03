@@ -93,7 +93,7 @@ const Wrapper = styled.div`
       flex-basis: 70px;
       flex-shrink: 0;
       font-size: 14px;
-      
+
       @media (min-width: ${({ theme }) => theme.device.mobile}) {
         flex-basis: 100px;
       }

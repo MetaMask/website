@@ -179,4 +179,18 @@ const Container = styled.div`
   position: relative;
   width: 100%;
   height: 100vh;
+
+  body.dark-mode & {
+    color: #161616;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    strong,
+    b {
+      color: #161616;
+    }
+  }
 `

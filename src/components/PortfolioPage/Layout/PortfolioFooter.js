@@ -435,7 +435,7 @@ const ListHeading = styled.h2`
   line-height: 1;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #f6851b;
+  color: #f6851b !important;
 
   @media (max-width: ${({ theme }) => theme.device.tablet}) {
     font-size: 10px;
