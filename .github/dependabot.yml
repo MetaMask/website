@@ -1,0 +1,18 @@
+# Specify assignees for pull requests
+
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 0
+    # Add assignees
+    assignees:
+      - "jlazoff"
+      - "behroozreview"
+      - "cuonglt-ync"
+    # Add reviewers
+    reviewers:
+      - "tannn-younet"
+      - "viphan007"
