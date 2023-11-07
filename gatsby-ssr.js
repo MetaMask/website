@@ -52,7 +52,8 @@ const baseCSP = {
     'www.youtube.com',
     'analytics.tiktok.com',
     'analytics.pangle-ads.com',
-    'addons.mozilla.org'
+    'addons.mozilla.org',
+    '*.consensys.io'
   ],
   'img-src': [
     "'self'",
