@@ -72,7 +72,8 @@ const baseCSP = {
     '*.linkedin.com',
     '*.hubspotusercontent10.net',
     'www.facebook.com',
-    'analytics.pangle-ads.com'
+    'analytics.pangle-ads.com',
+    '*.cloudinary.com'
   ],
   'media-src': ["'self'", '*.ctfassets.net', 'www.googletagmanager.com'],
   'worker-src': ['blob:'],
@@ -140,7 +141,7 @@ exports.onPreRenderHTML = ({
     return `${acc}${key} ${value.join(' ')}; `
   }, '')
   
-  const cspComponent = <meta httpEquiv="Content-Security-Policy" content={cspString} />
+  const cspComponent = <meta key="gatsby-csp" httpEquiv="Content-Security-Policy" content={cspString} />
 
   let headComponentsWithCsp = [cspComponent, ...getHeadComponents()]
 
