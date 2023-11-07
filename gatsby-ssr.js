@@ -53,7 +53,8 @@ const baseCSP = {
     'analytics.tiktok.com',
     'analytics.pangle-ads.com',
     'addons.mozilla.org',
-    '*.consensys.io'
+    '*.consensys.io',
+    '*.contentful.com'
   ],
   'img-src': [
     "'self'",
