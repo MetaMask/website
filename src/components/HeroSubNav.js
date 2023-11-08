@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import classnames from 'classnames'
+import { useMediaQuery } from 'react-responsive'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 
 function HeroSubNav({ headline, modules, previewMode }) {
+  const isTablet = useMediaQuery({
+    query: '(max-width: 767px)',
+  })
   const [expanded, setExpanded] = useState(false)
+
   const handleHamburgerButton = () => {
+    if (!isTablet) return
     setExpanded(!expanded)
   }
   return (
@@ -79,6 +85,7 @@ const Container = styled.div`
     }
     .title-wrapper {
       padding-bottom: 0 !important;
+      cursor: initial;
     }
   }
   &.menu-expanded {
