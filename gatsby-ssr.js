@@ -21,18 +21,18 @@ const baseCSP = {
     'www.googletagmanager.com',
     'snap.licdn.com',
     'static.hotjar.com',
+    'metrics.hotjar.io',
     'analytics.tiktok.com',
     'connect.facebook.net',
-    "'sha256-mMdX8nDeLSt6DQzghYqiYdDQTLvrtk2ovsRZd8ToErk='",
-    "'sha256-p7GM5J06Df0tjLtIBRTRPfUlChlp2NEHuAVv5RURqhQ='",
-    "'sha256-Fqsr5OoR84c8MEgFdjaB6ZDxvRGKs9uVy+/j8LutFB8='",
-    "'sha256-FB2mCrrmxexqKmxViJPOJlH5WxZuRYopsLCvFr+ZUAU='",
-    "'sha256-icSxpu6YO8mXPRaPUbF2jZgrXiVcO5anCb7ta/+ddtc='",
-    "'sha256-Orye2Pc3+v1zYd11mB2LFpXOx8BTAn4iPQCtL18wAU8='",
-    "'sha256-JnKrP1bysURBOgFUGgsie7Dk5My55HND4EE3lGpvgsc='",
+    'cdn.segment.com',
+    "'sha256-p7GM5J06Df0tjLtIBRTRPfUlChlp2NEHuAVv5RURqhQ='", // redirect.js
+    "'sha256-Fqsr5OoR84c8MEgFdjaB6ZDxvRGKs9uVy+/j8LutFB8='", // thememode.js
     "'sha256-j9lLvRejv7s00QaLE2x0z6fJ/ThAaOR9VCotUXKA0F0='", // Accessibe
-    "'sha256-RKmL82YWJnVeZH4PEXSjw7hnErXwtsmJSpmYEq8C9B8='",
+    "'sha256-RKmL82YWJnVeZH4PEXSjw7hnErXwtsmJSpmYEq8C9B8='", // lintrk.js (_linkedin_partner_id = 451393)
     "'sha256-yZFBBEAhVR7+Ftx72ma6BMxZ0sAlz7DrJpEQjM6yvdk='", // gatsby-plugin-image
+    "'sha256-mBD8EjuSzfLnSyV/kf64G/OwWt1b2FkRNQ0coR4iRaw='", // react-helmet
+    "'sha256-8MQ2PLa7RW5LIHewJTDWrTnRig6sPfYwzJCuMnSDj+w='", // gtm.js
+    "'sha256-fsJSer+HnXWBI5coGhVg2IEC1owFqVBolfuAAs+pz9s='", // lintrk.js (_linkedin_data_partner_ids = 7714137)
   ],
   'style-src': ["'self'", "'unsafe-inline'"],
   'object-src': ["'self'"],
@@ -54,7 +54,9 @@ const baseCSP = {
     'analytics.pangle-ads.com',
     'addons.mozilla.org',
     '*.consensys.io',
-    '*.contentful.com'
+    '*.contentful.com',
+    'cdn.segment.com',
+    'api.segment.io'
   ],
   'img-src': [
     "'self'",
@@ -74,7 +76,8 @@ const baseCSP = {
     '*.hubspotusercontent10.net',
     'www.facebook.com',
     'analytics.pangle-ads.com',
-    '*.cloudinary.com'
+    '*.cloudinary.com',
+    'www.googletagmanager.com'
   ],
   'media-src': ["'self'", '*.ctfassets.net', 'www.googletagmanager.com'],
   'worker-src': ['blob:'],
