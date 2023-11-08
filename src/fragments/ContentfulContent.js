@@ -393,6 +393,7 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
     noPaddingBottom
     customClass
     moduleId
+    headlineMarginTop0
     fullWidthBackground
   }
 `

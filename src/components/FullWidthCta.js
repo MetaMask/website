@@ -37,6 +37,7 @@ const FullWidthCta = props => {
     backgroundImageDarkMode,
     backgroundImageMobileDarkMode,
     fullWidthBackground,
+    headlineMarginTop0,
     moduleId,
   } = props
 
@@ -98,6 +99,7 @@ const FullWidthCta = props => {
                 backgroundColor={backgroundColor}
                 showLogoAnimation={showLogoAnimation}
                 hasDescription={!!description}
+                headlineMarginTop0={headlineMarginTop0}
                 {...(previewMode
                   ? inspectorProps({
                       entryId: contentfulId,
@@ -246,6 +248,8 @@ const Headline = styled(SectionTitle)`
       : ``}
 
   ${({ showLogoAnimation }) => (showLogoAnimation ? 'padding-top: 0;' : '')}
+
+  ${({ headlineMarginTop0 }) => (headlineMarginTop0 ? 'margin-top: 0;' : ``)}
 
   ${({ hasDescription }) =>
     hasDescription ? 'font-size: 32px !important;' : ''}

@@ -28,6 +28,7 @@ const ContentfulLayoutFullWidthCta = props => {
       backgroundImageMobileDarkMode,
       fullWidthBackground,
       moduleId,
+      headlineMarginTop0,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -55,6 +56,7 @@ const ContentfulLayoutFullWidthCta = props => {
       backgroundImageDarkMode={backgroundImageDarkMode}
       backgroundImageMobileDarkMode={backgroundImageMobileDarkMode}
       fullWidthBackground={fullWidthBackground}
+      headlineMarginTop0={headlineMarginTop0}
     />
   )
 }

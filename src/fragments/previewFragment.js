@@ -297,6 +297,7 @@ export const ContentfulLayoutFullWidthCtaFields = gql`
     customClass
     moduleId
     fullWidthBackground
+    headlineMarginTop0
   }
 `
 
