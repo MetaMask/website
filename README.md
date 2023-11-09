@@ -6,80 +6,74 @@
   </a>
 </p>
 
-Built With:
+# 🦊 MetaMask Website (metamask.io)
+
+Welcome to the official MetaMask website codebase. It's built with :heart: from the ConsenSys Digital Experiences Circle.
+
+## 🛠️ Built With
+
 - [React](http://www.reactjs.org)
 - [Gatsby](https://gatsbyjs.org/)
-- :heart: from ConsenSys Digital Experiences Circle
 
-## 🚀 Quick start
+## 📋 Prerequisites
 
-### **Ask @davidnguyen88 or @jlazoff for config files**
+Before you begin, ensure you have met the following requirements:
 
-1.  **Start it up**
+- You have installed the latest version of [Node.js and Yarn](https://nodejs.org/en/download/)
 
-    ```sh
-    git clone https://github.com/ConsenSys/metamask-website.git
-    yarn
-    yarn develop
-    ```
+## 🚀 Quick Start
 
+### **Ask `@jlazoff` or `@kevin.chassagne` for the `gatsby.development.env` config file**
 
-1.  **View site**
+1. **Initial Setup**
 
-    MetaMask is now running at `http://localhost:8000`!
+   - Email helpdesk@consensys.net and request to be added to the Contentful via OKTA and 1Password.
+   - Once you have access to Contentful, create the environment file (gatsby.development.env). Ideally, use your own API secret key. The rest of the values can be gathered from the team.
+   - After finalizing your local environment file, upload it to your 1Password ConsenSys vault.
 
-    There is also a GraphQL API at `http://localhost:8000/___graphql`. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql).
+2) **Clone and Start the Project**
 
+   ```sh
+   git clone https://github.com/ConsenSys/metamask-website.git
+   yarn
+   yarn build:dev && yarn serve
+   ```
 
-## What's where?
-[Gatsby file structure documentation](https://www.gatsbyjs.org/docs/gatsby-project-structure/)
+   To start the project in development mode, run `yarn dev`. But remember to run `yarn build:dev` at least once before doing so.
+
+3) **View the Site**
+
+   The MetaMask website is now running at `http://localhost:8000`! 🎉
+
+   You can also access the GraphQL API at `http://localhost:8000/___graphql`. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql).
+
+## 📁 Project Structure
+
+Refer to the [Gatsby file structure documentation](https://www.gatsbyjs.org/docs/gatsby-project-structure/) for an in-depth explanation. Here's a brief overview:
 
     .
-    ├── public/
+    ├── public/                  # Automatically generated output of `gatsby build` process for production.
     ├── src/
-        ├── components/
-        ├── fonts/
-        ├── fragments/
-          ├──GraphQL_Documentation.md
-        ├── images/
-          ├── icons/
-          ├── social-icons/
-          ├── metamask-logo.svg
-          ├── ...
-        ├── lib/
-          ├── theme.js
-        ├── pages/
-          ├── index.js
-          ├── about.js
-          ├── ...
-        ├── html.js
-    ├── gatsby-config.js
-    ├── gatsby.[development].env]
-    ├── GraphQL_Query_Documentation.md
-    ├── package.json
-    └── README.md
+        ├── components/          # Reusable components.
+        ├── fonts/               # Font files.
+        ├── fragments/           # GraphQL query fragments.
+        ├── images/              # Image files.
+        ├── lib/                 # Contains styling constants.
+        ├── pages/               # Files within this directory are turned into routes.
+        ├── html.js              # Entry file used by Gatsby for all rendered pages html template.
+    ├── gatsby-config.js         # The main configuration file for a Gatsby site.
+    ├── gatsby.[development].env # Environment variables.
+    ├── package.json             # Lists the project's dependencies and scripts.
+    └── README.md                # This file.
 
-## Key Files
+## 🗂️ Key Files
 
-**`gatsby-config.js`**
+- **`gatsby-config.js`**: This is where you can specify information about your site like metadata, site title, and description, as well as which Gatsby plugins you're using.
 
-The main configuration file for a Gatsby site. This is where you can specify information about your site (metadata), site title ,and description, which Gatsby plugins we are using, etc. (Check out the [config docs](https://www.gatsbyjs.org/docs/gatsby-config/) for more detail).
+- **`src/fragments/`**: Contains GraphQL query fragments that create standard data requests across components.
 
-**`src/fragments/`**
-GraphQL query fragments that create standard data requests across componenets
+- **`src/lib/theme.js`**: Contains styling constants for font sizes and weights, device sizes for media queries, shadows, and colors.
 
-**`src/lib/theme.js`**
-Contains styling constants for font sizes and weights, device sizes for media queries, shadows, and colors.
+- **`src/pages`**: Files within this directory are turned into routes with the name of the file (e.g. `about.js` becomes `/about`). Only files within /pages are allowed to make dynamic GraphQL queries which cascade data down to components.
 
-**`public/`**
-
-Automatically generated output of `gatsby build` process for production.
-
-**`src/pages`**
-
-Files within this directory are turned into routes with the name of the file (e.g. `about.js` becomes `/about`).
-Only files within /pages are allowed to make dynamic GraphQL queries which cascade data down to components.
-
-
-**`src/html.js`**
-Entry file used by Gatsby for all rendered pages html template
+- **`src/html.js`**: Entry file used by Gatsby for all rendered pages HTML template.
