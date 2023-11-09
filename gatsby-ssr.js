@@ -13,6 +13,9 @@ const baseCSP = {
     '*.osano.com',
     'js.hsforms.net',
     'www.gstatic.com',
+    '*.hsforms.net',
+    '*.hsforms.com',
+    '*.hs-scripts.com',
     'www.redditstatic.com',
     'static.ads-twitter.com',
     '*.google-analytics.com',
@@ -37,13 +40,14 @@ const baseCSP = {
   'style-src': ["'self'", "'unsafe-inline'"],
   'object-src': ["'self'"],
   'manifest-src': ["'self'"],
-  'frame-src': ['www.youtube.com', '*.twitter.com', 'www.google.com'],
+  'frame-src': ['www.youtube.com', '*.twitter.com', 'www.google.com', '*.hsforms.net', '*.hsforms.com'],
   'font-src': ["'self'", 'data:'],
   'connect-src': [
     "'self'",
     '*.acsbapp.com',
     '*.osano.com',
     '*.hsforms.com',
+    '*.hubapi.com',
     '*.gstatic.com',
     '*.google-analytics.com',
     'content.consensys.net',
@@ -144,7 +148,7 @@ exports.onPreRenderHTML = ({
     const value = csp[key]
     return `${acc}${key} ${value.join(' ')}; `
   }, '')
-  
+
   const cspComponent = <meta key="gatsby-csp" httpEquiv="Content-Security-Policy" content={cspString} />
 
   let headComponentsWithCsp = [cspComponent, ...getHeadComponents()]
