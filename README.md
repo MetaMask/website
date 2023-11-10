@@ -36,10 +36,8 @@ Before you begin, ensure you have met the following requirements:
    ```sh
    git clone https://github.com/ConsenSys/metamask-website.git
    yarn
-   yarn build:dev && yarn serve
+   yarn dev
    ```
-
-   To start the project in development mode, run `yarn dev`. But remember to run `yarn build:dev` at least once before doing so.
 
 3) **View the Site**
 
