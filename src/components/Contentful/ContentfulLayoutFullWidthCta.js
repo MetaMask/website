@@ -22,12 +22,18 @@ const ContentfulLayoutFullWidthCta = props => {
       previewMode = false,
       bordered,
       backgroundImage,
+      backgroundImageMobile,
       backgroundImageDarkMode,
+      backgroundImageMobileDarkMode,
+      fullWidthBackground,
+      moduleId,
+      headlineMarginTop0,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
   return (
     <FullwidthCta
+      moduleId={moduleId}
       description={previewMode ? description : html}
       showLogoAnimation={showLogoAnimation}
       backgroundColor={backgroundColor}
@@ -44,7 +50,11 @@ const ContentfulLayoutFullWidthCta = props => {
       previewMode={previewMode}
       bordered={bordered}
       backgroundImage={backgroundImage}
+      backgroundImageMobile={backgroundImageMobile}
       backgroundImageDarkMode={backgroundImageDarkMode}
+      backgroundImageMobileDarkMode={backgroundImageMobileDarkMode}
+      fullWidthBackground={fullWidthBackground}
+      headlineMarginTop0={headlineMarginTop0}
     />
   )
 }

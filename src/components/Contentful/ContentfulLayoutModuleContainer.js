@@ -10,6 +10,8 @@ import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
 import TabWrapper from '../Tab/TabWrapper'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import ParseMD from '../ParseMD'
+import HeroSubNav from '../HeroSubNav'
+import DevReleaseNotes from '../DevReleaseNotes'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -31,10 +33,12 @@ const ContentfulModuleContainer = props => {
       previewMode = false,
       isTab,
       customClass,
+      moduleId,
       eyebrow,
       sideImage,
       showLeftArrow,
       iconConfig,
+      cta,
     },
   } = props
 
@@ -44,6 +48,8 @@ const ContentfulModuleContainer = props => {
   const sideImageUrl = parseContentfulAssetUrl(sideImage, previewMode)
   const htmlData = previewMode ? description : html
   const isCategoryTab = customClass === 'newsCategoriesTab' && isTab
+  const isSubNav = customClass?.includes('heroSubNav')
+  const isDevReleaseNotes = customClass?.includes('dev-release-notes')
   const isSecurityPage = pathname === '/security/'
   const tabs =
     isTab && modules && modules.length
@@ -61,8 +67,50 @@ const ContentfulModuleContainer = props => {
         }))
       : null
 
+  if (isSubNav || isDevReleaseNotes)
+    return (
+      <Container
+        sectionPadding={sectionPadding}
+        className={classnames({
+          noPaddingBottom: noPaddingBottom,
+          [customClass]: customClass,
+          [`bg-${backgroundColor}`]: backgroundColor,
+        })}
+      >
+        <ContentWrapper>
+          {isSubNav && (
+            <HeroSubNav
+              headline={headline}
+              modules={modules}
+              previewMode={previewMode}
+            />
+          )}
+          {isDevReleaseNotes && (
+            <>
+              <ContentInfo paddingTop={paddingTop}>
+                {headline && displayHeadline ? (
+                  <div
+                    className={classnames('title-wrapper', {
+                      'headline-center': headlineAlignCenter && !cta,
+                    })}
+                  >
+                    <Title
+                      headlineMarginTop0={headlineMarginTop0}
+                      dangerouslySetInnerHTML={{ __html: headline }}
+                    />
+                  </div>
+                ) : null}
+              </ContentInfo>
+              <DevReleaseNotes />
+            </>
+          )}
+        </ContentWrapper>
+      </Container>
+    )
+
   return (
     <Container
+      id={moduleId}
       sectionPadding={sectionPadding}
       bgUrl={bgUrl}
       backgroundSize={backgroundSize}
@@ -84,13 +132,24 @@ const ContentfulModuleContainer = props => {
               <ContentInfo paddingTop={paddingTop}>
                 {eyebrow ? <EyebrowStyle>{eyebrow}</EyebrowStyle> : null}
                 {headline && displayHeadline ? (
-                  <Title
-                    headlineMarginTop0={headlineMarginTop0}
-                    className={classnames({
-                      'txt-center': headlineAlignCenter,
+                  <div
+                    className={classnames('title-wrapper', {
+                      'headline-center': headlineAlignCenter && !cta,
                     })}
-                    dangerouslySetInnerHTML={{ __html: headline }}
-                  />
+                  >
+                    <Title
+                      headlineMarginTop0={headlineMarginTop0}
+                      dangerouslySetInnerHTML={{ __html: headline }}
+                    />
+                    {cta ? (
+                      <>
+                        {contentfulModuleToComponent({
+                          ...cta,
+                          previewMode,
+                        })}
+                      </>
+                    ) : null}
+                  </div>
                 ) : null}
                 {htmlData ? (
                   <>
@@ -144,6 +203,18 @@ const ContentfulModuleContainer = props => {
                 )}
               </Modules>
             )}
+            {cta ? (
+              <div
+                className={classnames('layout-cta', {
+                  'hidden-desktop': headline && displayHeadline,
+                })}
+              >
+                {contentfulModuleToComponent({
+                  ...cta,
+                  previewMode,
+                })}
+              </div>
+            ) : null}
           </MainContent>
           {sideImageUrl ? (
             <SideImage sectionPadding={sectionPadding}>
@@ -196,6 +267,20 @@ const MainContent = styled.div`
     display: flex;
     flex-direction: column-reverse;
   }
+
+  .layout-cta {
+    .ctaModuleContainer {
+      padding-top: 22px;
+      a {
+        font-weight: 600;
+      }
+    }
+    display: flex;
+    justify-content: flex-end;
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      justify-content: center;
+    }
+  }
 `
 
 const Inner = styled.div`
@@ -206,7 +291,7 @@ const Inner = styled.div`
       max-width: 100%;
       
       @media (max-width: ${theme.device.miniDesktopMediaMax}){
-        max-width: 728px;
+        max-width: var(--container-width-miniDesktop);
       }
       
       @media (min-width: ${theme.device.miniDesktop}) and (max-width: ${theme.device.twoKResolutionMax})  {
@@ -303,6 +388,10 @@ const Container = styled(Section)`
       padding-bottom: 0;
     }
   }
+
+  &.bg-light-blue-gradient {
+    background: linear-gradient(#037DD60A, #F7FBFE00);
+  }
 `
 
 const Title = styled(SectionTitle)`
@@ -361,6 +450,28 @@ const Modules = styled.div`
   > .ctaModuleContainer {
     padding: 22px;
     margin-bottom: 0;
+
+    .cta-blue-right & {
+      padding-left: 0;
+      padding-right: 0;
+      padding-bottom: 0;
+      justify-content: right;
+
+      a {
+        color: ${({ theme }) => theme.linkColor};
+        font-weight: 600;
+      }
+    }
+    .cta-tablet-center & {
+      @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+        justify-content: center;
+      }
+    }
+  }
+  .dev-release-notes & {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
   }
 `
 
@@ -424,6 +535,40 @@ const ContentInfo = styled.div`
     max-width: 100%;
     margin: 0 auto;
     padding-top: 0;
+  }
+  .title-wrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    column-gap: 16px;
+    row-gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+
+    h2 {
+      margin-bottom: 0;
+    }
+
+    &.headline-center {
+      justify-content: center;
+    }
+
+    .ctaModuleContainer {
+      display: flex;
+      align-items: center;
+
+      a {
+        font-weight: 600;
+      }
+    }
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      .ctaModuleContainer {
+        display: none;
+      }
+    }
+    @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
+      justify-content: center;
+    }
   }
 `
 

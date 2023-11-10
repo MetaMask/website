@@ -41,6 +41,7 @@ const CTA = props => {
     buttonSecondary,
     socialLink,
     previewMode = false,
+    showCaretRight,
   } = props
 
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
@@ -75,6 +76,7 @@ const CTA = props => {
   }
   const handleCustomClick = e => {
     if (hubSpotForm) {
+      e.preventDefault()
       setShowPopup(true)
       return
     }
@@ -173,6 +175,9 @@ const CTA = props => {
         color={color}
         $typeLayout={typeLayout}
         onClick={handleCustomClick}
+        className={classnames({
+          'link-with-caret': showCaretRight,
+        })}
       >
         {socialLink ? <SocialIcon name={socialLink} /> : null}
         <LinkTitle

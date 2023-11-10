@@ -264,12 +264,12 @@ const Announcement = styled.div`
 const HeaderContainer = styled.div`
   display: flex;
   margin: 0 auto;
-  max-width: 992px;
+  max-width: var(--container-width);
   width: 100%;
   align-items: center;
   justify-content: space-between;
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
-    max-width: 728px;
+    max-width: var(--container-width-miniDesktop);
   }
 `
 
@@ -308,7 +308,7 @@ const NavMainInner = styled.div`
   display: flex;
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     flex-direction: column;
-    max-width: 728px;
+    max-width: var(--container-width-miniDesktop);
     margin: 0 auto;
   }
 `

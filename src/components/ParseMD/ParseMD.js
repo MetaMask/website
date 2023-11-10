@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import rehypeSlug from 'rehype-slug'
@@ -26,10 +25,6 @@ const ParseMD = ({ children, ...props }) => {
       {children}
     </ReactMarkdown>
   )
-}
-
-ParseMD.propTypes = {
-  children: PropTypes.node.isRequired,
 }
 
 ParseMD.defaultProps = {

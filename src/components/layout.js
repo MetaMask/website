@@ -9,7 +9,7 @@ import './layout.scss'
 import './animate.css'
 
 const Layout = props => {
-  const { children, theme = {}, h2FontSize, themeColor } = props
+  const { children, theme = {}, h2FontSize, themeColor, widerContainer } = props
   const data = useStaticQuery(
     graphql`
       query {
@@ -29,6 +29,7 @@ const Layout = props => {
         h2FontSize={h2FontSize}
         className={classnames({
           [`theme-${themeColor}`]: themeColor,
+          'wider-container': widerContainer,
         })}
       >
         <Helmet

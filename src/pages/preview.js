@@ -74,8 +74,6 @@ const PreviewPage = () => {
     getModule()
   }, [])
 
-  console.log(moduleConfig)
-
   if (loading) return <PreviewLoading />
   if (moduleConfig?.slug === '/portfolio/') {
     return <ContentfulPortfolioLayout data={moduleConfig} />
@@ -85,6 +83,7 @@ const PreviewPage = () => {
       <Layout
         themeColor={moduleConfig?.themeColor}
         h2FontSize={moduleConfig?.h2FontSize}
+        widerContainer={moduleConfig?.widerContainer}
       >
         <PreviewInfo>Preview mode</PreviewInfo>
         {contentfulModuleToComponent(moduleConfig)}

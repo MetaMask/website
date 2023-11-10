@@ -170,7 +170,7 @@ const Form = styled.div`
     h6,
     strong,
     b {
-      color: #24292e;
+      color: inherit;
     }
   }
   ${({ hasExternalStyles }) =>
@@ -187,7 +187,7 @@ const Form = styled.div`
       max-width: 500px;
     }
     .hs-button {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Euclid Circular B';
       margin: 0;
       cursor: pointer;
       display: inline-block;
@@ -222,7 +222,7 @@ const Form = styled.div`
     label {
       font-size: 14px;
       width: 130px;
-      color: #33475b;
+      color: #24292E;
       display: block;
       float: none;
       width: auto;
@@ -230,7 +230,7 @@ const Form = styled.div`
       line-height: 20px;
       padding-top: 0;
       margin-bottom: 4px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Euclid Circular B';
     }
     .hs-video-form {
       label {
@@ -292,11 +292,11 @@ const Form = styled.div`
       max-width: 500px;
       height: 40px;
       padding: 9px 10px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Euclid Circular B';
       font-size: 16px;
       font-weight: normal;
       line-height: 22px;
-      color: #33475b;
+      color: #24292E;
       border: 1px solid #cbd6e2;
       box-sizing: border-box;
       border-radius: 3px;
@@ -352,7 +352,7 @@ const Form = styled.div`
     select.is-placeholder {
       color: #bfbfbf;
       &:focus {
-        color: #33475b;
+        color: #24292E;
       }
     }
     textarea.hs-input {
@@ -442,17 +442,17 @@ const Form = styled.div`
       color: #7c98b6;
       margin: 0px 0px 6px;
       font-size: 11px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Euclid Circular B';
     }
     .hs-form-required {
       color: red;
     }
     .hs-richtext {
       margin-bottom: 3px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Euclid Circular B';
       line-height: 24px;
       font-size: 14px;
-      color: #33475b;
+      color: #24292E;
       hr {
         margin-left: 0;
         width: 91%;
@@ -600,7 +600,7 @@ const Form = styled.div`
     .email-correction {
       padding-top: 3px;
       font-size: 12px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Euclid Circular B';
       a {
         cursor: pointer;
       }
@@ -608,7 +608,7 @@ const Form = styled.div`
     .email-validation {
       padding-top: 3px;
       font-size: 12px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Euclid Circular B';
       a {
         cursor: pointer;
       }
@@ -656,11 +656,11 @@ const Form = styled.div`
       }
     }
     .hs-default-font-element {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Euclid Circular B';
       line-height: normal;
     }
     .hs-main-font-element {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Euclid Circular B';
       line-height: normal;
     }
     .hs-form {
@@ -677,7 +677,7 @@ const Form = styled.div`
       color: #ffffff;
       font-size: 12px;
       line-height: 12px;
-      font-family: helvetica;
+      font-family: 'Euclid Circular B';
       white-space: pre-wrap;
       &:hover {
         background: #037dd6;
@@ -685,14 +685,14 @@ const Form = styled.div`
         color: #ffffff;
         font-size: 12px;
         line-height: 12px;
-        font-family: helvetica;
+        font-family: 'Euclid Circular B';
         &:not(.inactive) {
           background: #037dd6;
           border-color: #037dd6;
           color: #ffffff;
           font-size: 12px;
           line-height: 12px;
-          font-family: helvetica;
+          font-family: 'Euclid Circular B';
         }
       }
       &:focus {
@@ -701,7 +701,7 @@ const Form = styled.div`
         color: #ffffff;
         font-size: 12px;
         line-height: 12px;
-        font-family: helvetica;
+        font-family: 'Euclid Circular B';
       }
       &:active {
         background: #037dd6;
@@ -709,7 +709,7 @@ const Form = styled.div`
         color: #ffffff;
         font-size: 12px;
         line-height: 12px;
-        font-family: helvetica;
+        font-family: 'Euclid Circular B';
         &:not(.inactive) {
           &:not(.link) {
             background: #037dd6;
@@ -717,41 +717,41 @@ const Form = styled.div`
             color: #ffffff;
             font-size: 12px;
             line-height: 12px;
-            font-family: helvetica;
+            font-family: 'Euclid Circular B';
           }
         }
       }
     }
     legend.hs-field-desc {
-      font-family: helvetica;
+      font-family: 'Euclid Circular B';
       color: #7c98b6;
       font-size: 11px;
     }
     .hs-form-field {
       label {
         &:not(.hs-error-msg) {
-          font-family: helvetica;
+          font-family: 'Euclid Circular B';
           font-size: 13px;
-          color: #33475b;
+          color: #24292E;
         }
       }
     }
     .legal-consent-container {
       .hs-richtext {
-        font-family: helvetica;
-        color: #33475b;
+        font-family: 'Euclid Circular B';
+        color: #24292E;
         font-size: 14px;
       }
       label {
         &:not(.hs-error-msg) {
-          font-family: helvetica;
-          color: #33475b;
+          font-family: 'Euclid Circular B';
+          color: #24292E;
           font-size: 14px;
         }
       }
     }
     .hs-main-font-element {
-      font-family: helvetica;
+      font-family: 'Euclid Circular B';
     }
     a {
       text-decoration: underline;
@@ -841,11 +841,11 @@ const Form = styled.div`
       width: 100%;
     }
     .submitted-message.hs-main-font-element {
-      font-family: helvetica;
+      font-family: 'Euclid Circular B';
     }
     .submitted-message {
       font-size: 16px;
-      color: #33475b;
+      color: #24292E;
     }
     .fn-date-picker.pika-single {
       z-index: 9999;
@@ -855,7 +855,7 @@ const Form = styled.div`
       background: #fff;
       border: 1px solid #ccc;
       border-bottom-color: #bbb;
-      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-family: 'Euclid Circular B';
       *zoom: 1;
       &:after {
         content: ' ';
@@ -1128,7 +1128,7 @@ const Form = styled.div`
       padding-bottom: 40px;
       position: relative;
       color: #9fa0a2;
-      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-family: 'Euclid Circular B';
     }
     .hubspot-link-text {
       color: #00a4bd;

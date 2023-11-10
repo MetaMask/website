@@ -21,7 +21,14 @@ import queryString from 'query-string'
  * @description -
  */
 const PageLayout = props => {
-  const { location, children, themeColor, h2FontSize, ...rest } = props
+  const {
+    location,
+    children,
+    themeColor,
+    h2FontSize,
+    extraData,
+    ...rest
+  } = props
   const { pathname, search } = location || {}
   const [idFaqActive, setIdFaqActive] = React.useState('')
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
@@ -61,6 +68,7 @@ const PageLayout = props => {
     heroContainer: {
       heroContainerRef,
     },
+    extraData,
   }
   const [dimensionScript, setDimensionScript] = React.useState('')
   const renderNotification = (state = {}) => {

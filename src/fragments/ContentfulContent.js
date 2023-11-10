@@ -226,6 +226,7 @@ export const ContentfulLayoutFeatureFields = graphql`
     noPaddingBottom
     removeSectionPaddingBottomOnDesktop
     customClass
+    moduleId
     featureItems {
       ... on ContentfulLogo {
         ...ContentfulLogoFields
@@ -370,7 +371,17 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
         url
       }
     }
+    backgroundImageMobile {
+      file {
+        url
+      }
+    }
     backgroundImageDarkMode {
+      file {
+        url
+      }
+    }
+    backgroundImageMobileDarkMode {
       file {
         url
       }
@@ -379,6 +390,9 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
     sectionPadding
     noPaddingTop
     noPaddingBottom
+    fullWidthBackground
+    headlineMarginTop0
+    moduleId
     customClass
   }
 `
@@ -419,6 +433,9 @@ export const ContentfulLayoutModuleContainerFields = graphql`
         ...ContentfulConsenSysToUFields
       }
     }
+    cta {
+      ...ContentfulCtaFields
+    }
     backgroundColor
     displayHeadline
     headlineAlignCenter
@@ -429,6 +446,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     noPaddingBottom
     modulesMargin
     isTab
+    moduleId
     customClass
     sideImage {
       title
@@ -571,6 +589,7 @@ export const ContentfulCtaFields = graphql`
         content
       }
     }
+    showCaretRight
   }
 `
 
@@ -613,6 +632,7 @@ export const ContentfulEmbedFields = graphql`
     displayTitle
     layoutType
     playOnPopup
+    clickToPlayOnWholeCard
   }
 `
 
@@ -703,7 +723,11 @@ export const ContentfulModuleContainerFields = graphql`
     isLiquiditySection
     isTrustBar
     gridModulesGap
+    carouselMode
     modules {
+      ... on ContentfulEmbed {
+        ...ContentfulEmbedFields
+      }
       ... on ContentfulLogo {
         ...ContentfulLogoFields
       }

@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
+import { useMediaQuery } from 'react-responsive'
 import classnames from 'classnames'
-import FaqList from '../FaqList'
 import kebabCase from 'lodash/kebabCase'
+import FaqList from '../FaqList'
 import { EyebrowStyle } from '../StyledGeneral'
+import Carousel from '../Carousel'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
+import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -30,33 +32,42 @@ const ContentfulModuleContainer = props => {
       isTrustBar,
       containerBgColor,
       previewMode = false,
+      carouselMode = false,
       columnType,
     },
   } = props
   const gridModulesGap = gridModulesGapDefault || '8px'
   const { childMarkdownRemark: { html } = {} } = description || {}
   const htmlData = previewMode ? description : html
-  const faqList =
-    modules && modules.length
-      ? modules.filter(modules =>
-          ['ContentfulFaq', 'Faq'].includes(
-            previewMode ? modules.__typename : modules.internal.type
-          )
-        )
-      : []
-  const modulesOther =
-    modules && modules.length
-      ? modules.filter(
-          modules =>
-            !['ContentfulFaq', 'Faq'].includes(
-              previewMode ? modules.__typename : modules.internal.type
-            )
-        )
-      : []
+  const faqList = []
+  const modulesOther = []
+  modules?.forEach(module => {
+    let typeName = module.__typename || module.internal?.type
+    if (['ContentfulFaq', 'Faq'].includes(typeName)) {
+      faqList.push(module)
+    } else {
+      modulesOther.push(module)
+    }
+  })
   const isFaq = faqList && faqList.length
 
   const [modulesRender, setModulesRender] = useState(modulesOther)
   const [shuffled, setShuffled] = useState(false)
+
+  const isMobile = useMediaQuery({
+    query: '(max-width: 479px)',
+  })
+
+  const isTablet = useMediaQuery({
+    query: '(max-width: 767px)',
+  })
+
+  const shouldShowCarousel = useMemo(() => {
+    if (carouselMode === 'desktop') return true
+    if (carouselMode === 'tablet' && isTablet) return true
+    if (carouselMode === 'mobile' && isMobile) return true
+    return false
+  }, [isMobile, isTablet])
 
   useEffect(() => {
     if (columnType === 'randomize') {
@@ -102,7 +113,7 @@ const ContentfulModuleContainer = props => {
               previewMode={previewMode}
             />
           ) : null}
-          {modulesRender.length ? (
+          {!shouldShowCarousel && modulesRender.length ? (
             <Modules
               columnType={columnType}
               columns={columns}
@@ -128,6 +139,22 @@ const ContentfulModuleContainer = props => {
                 })
               )}
             </Modules>
+          ) : null}
+          {shouldShowCarousel && modulesRender.length ? (
+            <Carousel
+              itemsOnTablet={columnsOnTablet}
+              itemsOnMobile={columnsOnMobile}
+              items={columns}
+              gap={gridModulesGap}
+            >
+              {modulesRender.map(m =>
+                contentfulModuleToComponent({
+                  ...m,
+                  numberOfItem,
+                  previewMode,
+                })
+              )}
+            </Carousel>
           ) : null}
         </ModulesWrapper>
       </Inner>

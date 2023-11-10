@@ -137,7 +137,8 @@ const HeroContainerComponent = props => {
               <Image
                 alt={headline}
                 image={backgroundImage}
-                imageDarkMode={backgroundImageDarkMode}
+                darkImage={backgroundImageDarkMode}
+                previewMode
               />
             </BackgroundImageContain>
           ) : null}
@@ -612,7 +613,8 @@ const HeroContentContainer = styled.div`
     }
   `
       : ''}
-  .hero-snaps & {
+  .hero-snaps & ,
+  .hero-developer & {
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
       flex-direction: column-reverse;
     }

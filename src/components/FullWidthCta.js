@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useContext } from 'react'
 import styled, { withTheme } from 'styled-components'
+import { useMediaQuery } from 'react-responsive'
 import ContentWrapper from './ContentWrapper'
 import Loadable from '@loadable/component'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
@@ -31,19 +32,36 @@ const FullWidthCta = props => {
     bordered,
     backgroundImage,
     backgroundImageDarkMode,
+    backgroundImageMobile,
+    backgroundImageMobileDarkMode,
+    fullWidthBackground,
+    moduleId,
+    headlineMarginTop0,
   } = props
 
   const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
 
+  const isMobile = useMediaQuery({
+    query: '(max-width: 767px)',
+  })
+
+  const resBgImage =
+    isMobile && backgroundImageMobile ? backgroundImageMobile : backgroundImage
+  const resBgImageDark =
+    isMobile && backgroundImageMobileDarkMode
+      ? backgroundImageMobileDarkMode
+      : backgroundImageDarkMode
   const backgroundImageUrl = getWebpImage(
-    previewMode ? backgroundImage?.url : backgroundImage?.file?.url
+    previewMode ? resBgImage?.url : resBgImage?.file?.url
   )
   const backgroundImageDarkModeUrl = getWebpImage(
-    previewMode
-      ? backgroundImageDarkMode?.url
-      : backgroundImageDarkMode?.file?.url
+    previewMode ? resBgImageDark?.url : resBgImageDark?.file?.url
   )
+  const bgImageUrl =
+    isDarkMode && backgroundImageDarkModeUrl
+      ? backgroundImageDarkModeUrl
+      : backgroundImageUrl
 
   return (
     <Container
@@ -54,14 +72,18 @@ const FullWidthCta = props => {
         [`bg-${backgroundColor}`]: backgroundColor,
         [customClass]: customClass,
       })}
+      id={moduleId}
+      style={
+        fullWidthBackground
+          ? { backgroundImage: `url(${bgImageUrl})`, backgroundSize: 'cover' }
+          : {}
+      }
     >
       <ContentWrapper>
         <FullWidthCtaWrapper
           showLogoAnimation={showLogoAnimation}
           $bordered={bordered}
-          $backgroundImage={
-            isDarkMode ? backgroundImageDarkModeUrl : backgroundImageUrl
-          }
+          $backgroundImage={!fullWidthBackground && bgImageUrl}
         >
           {' '}
           {showLogoAnimation && customClass !== 'metaMaskUninstalled' ? (
@@ -79,6 +101,7 @@ const FullWidthCta = props => {
                 backgroundColor={backgroundColor}
                 showLogoAnimation={showLogoAnimation}
                 hasDescription={!!description}
+                headlineMarginTop0={headlineMarginTop0}
               >
                 <div dangerouslySetInnerHTML={{ __html: headline }} />
               </Headline>
@@ -193,6 +216,8 @@ const Headline = styled(SectionTitle)`
       : ``}
 
   ${({ showLogoAnimation }) => (showLogoAnimation ? 'padding-top: 0;' : '')}
+
+  ${({ headlineMarginTop0 }) => (headlineMarginTop0 ? 'margin-top: 0;' : ``)}
 
   ${({ hasDescription }) =>
     hasDescription ? 'font-size: 32px !important;' : ''}
@@ -352,9 +377,14 @@ const CTAWrapper = styled.div`
   flex-flow: wrap;
   margin-top: 32px;
   justify-content: center;
+  gap: 16px;
 
   .button {
-    margin: 0 8px 16px;
+    min-width: 140px;
+  }
+
+  .button:last-child {
+    margin-bottom: 0;
   }
 
   .metaMaskUninstalled & {

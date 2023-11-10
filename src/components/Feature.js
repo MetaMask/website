@@ -47,12 +47,14 @@ const FeatureComponent = props => {
     imageLink,
     customClass,
     previewMode = false,
+    moduleId,
   } = props
 
   const contentAlignLR = ['left', 'right'].includes(contentAlignment)
     ? contentAlignment
     : ''
   const isContentAlignVertical = contentAlignment === 'vertical'
+  const isDevMeetFlask = customClass?.includes('feature-meet-flask')
   const innerContent = (
     <>
       {eyebrow ? (
@@ -90,7 +92,11 @@ const FeatureComponent = props => {
         </FeatureItems>
       ) : null}
       {cta && !isContentAlignVertical ? (
-        <CTAWrapper className="hidden-mobile">
+        <CTAWrapper
+          className={classnames({
+            'hidden-mobile': !isDevMeetFlask,
+          })}
+        >
           {contentfulModuleToComponent({
             ...cta,
             color: ['white', 'gray', 'default'].includes(backgroundColor)
@@ -134,6 +140,7 @@ const FeatureComponent = props => {
         removeSectionPaddingBottomOnDesktop: removeSectionPaddingBottomOnDesktop,
         [`bg-${backgroundColor}`]: backgroundColor,
       })}
+      id={moduleId}
     >
       <GatsbyBackgroundImage
         image={backgroundImage}
@@ -253,7 +260,11 @@ const FeatureComponent = props => {
             ) : null}
           </FeatureWrapper>
           {cta && !isContentAlignVertical ? (
-            <CTAWrapper className="hidden-desktop">
+            <CTAWrapper
+              className={classnames('hidden-desktop', {
+                'hidden-mobile': isDevMeetFlask,
+              })}
+            >
               {contentfulModuleToComponent({
                 ...cta,
                 color: ['white', 'gray', 'default'].includes(backgroundColor)
@@ -331,6 +342,15 @@ const SideImage = styled.div`
 
   .sideImageMaxWidth667 & {
     max-width: 667px;
+  }
+  .feature-meet-flask & {
+    padding-top: 0;
+    padding-bottom: 0;
+    align-self: center;
+
+    @media (max-width: 767px) {
+      padding: 0;
+    }
   }
 `
 
@@ -416,6 +436,10 @@ const Headline = styled.h2`
     padding-bottom: 0;
     padding-top: 0;
     text-align: center;
+  }
+
+  .feature-meet-flask & {
+    color: #fff;
   }
 `
 const Description = styled.div`
@@ -603,6 +627,17 @@ const FeatureInner = styled.div`
     width: 667px;
     max-width: 100%;
   }
+
+  .feature-meet-flask & {
+    color: #fff;
+    padding-top: 24px;
+
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      padding-top: 32px;
+      padding-bottom: 32px;
+      padding-left: 40px;
+    }
+  }
 `
 const CTAWrapper = styled.div`
   display: flex;
@@ -625,6 +660,18 @@ const CTAWrapper = styled.div`
   .ctaDesktopMt96 & {
     @media (min-width: ${({ theme }) => theme.device.tablet}) {
       margin-top: 96px;
+    }
+  }
+  .feature-meet-flask & {
+    a {
+      background: linear-gradient(180deg, #8a42ad 0%, #6762eb 100%) !important;
+      border: none;
+      &:hover {
+        color: #fff;
+      }
+    }
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      margin-top: 0;
     }
   }
 
