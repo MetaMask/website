@@ -111,7 +111,11 @@ const getHashes = (components, type) => {
 }
 
 const getHashesCodeSplitting = () => {
-  const data = fs.readFileSync('public/_gatsby/slices/_gatsby-scripts-1.html').toString()
+  const filePath = 'public/_gatsby/slices/_gatsby-scripts-1.html'
+  if (!fs.existsSync(filePath)) {
+    return []
+  }
+  const data = fs.readFileSync(filePath).toString()
   const hashes = []
   const scriptRegex = /<script[^>]*?>(.*?)<\/script>/gms
   let match = null
@@ -141,7 +145,6 @@ exports.onPreRenderHTML = ({
   let csp = {
     ...baseCSP,
     'script-src': [...baseCSP['script-src'], ...getHashes(components, 'script'), ...getHashesCodeSplitting()],
-    // 'style-src': [...baseCSP['style-src'], ...getHashes(components, 'style')],
   }
 
   const cspString = Object.keys(csp).reduce((acc, key) => {

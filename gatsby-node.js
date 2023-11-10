@@ -297,7 +297,6 @@ exports.createPages = async ({ graphql, actions }) => {
               news_content_id: contentful_id,
               pathBuild: newsUrl,
             },
-            defer: true,
           })
         })
       }
