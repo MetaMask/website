@@ -11,6 +11,8 @@ import CardFeatureHorizontal from './Card/CardFeatureHorizontal'
 import CardHorizontal from './Card/CardHorizontal'
 import CardHorizontalReverse from './Card/CardHorizontalReverse'
 import CardSnapsCategory from './Card/CardSnapsCategory'
+import CardDevBuilding from './Card/CardDevBuilding'
+import CardDevTutorial from './Card/CardDevTutorial'
 import CardNews from './Card/CardNews'
 import ContextClientSide from '../Context/ContextClientSide'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
@@ -65,6 +67,10 @@ const StyledCard = props => {
     case 'snaps-category':
       // code block
       return <CardSnapsCategory {...props} isDarkMode={isDarkMode} />
+    case 'dev-building':
+      return <CardDevBuilding {...props} isDarkMode={isDarkMode} />
+    case 'dev-tutorial':
+      return <CardDevTutorial {...props} isDarkMode={isDarkMode} />
     default:
     // code block
   }
@@ -108,7 +114,11 @@ const StyledCard = props => {
           <Inner isCtaType={isCtaType}>
             <InnerContent isCtaType={isCtaType}>
               {title ? (
-                <Title isCtaType={isCtaType} isEventType={isEventType}>
+                <Title
+                  isCtaType={isCtaType}
+                  isEventType={isEventType}
+                  className="title"
+                >
                   {title}
                 </Title>
               ) : null}
@@ -206,6 +216,21 @@ const CardInner = styled(Link)`
   }
   .borderBlue & {
     border: 2px solid #037DD6;
+  }
+
+  .card-dev-explore & {
+    border: 1px solid #e3e3e3;
+    border-radius: 12px;
+    padding: 20px;
+    height: 100%;
+    background-color: ${({ theme }) => theme.white};
+    body.dark-mode & {
+      background-color: ${({ theme }) => theme.dark};
+    }
+
+    .title {
+      margin-bottom: 8px;
+    }
   }
 
   .theme-dark & {
@@ -328,6 +353,10 @@ const ImageWrapper = styled.div`
 
   .image-height-31 & {
     height: 31px;
+  }
+
+  .image-height-64 & {
+    height: 64px;
   }
 
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {

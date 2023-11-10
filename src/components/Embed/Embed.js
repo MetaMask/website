@@ -5,7 +5,7 @@ import parseIframe from './parseIframe'
 import Popup from '../Popup'
 
 const EmbedHtml = props => {
-  const { html, playOnPopup, thumbnailUrl } = props
+  const { html, playOnPopup, thumbnailUrl, cardRef } = props
   // image filed is only for iframe image
   const [popupId, setPopupId] = React.useState('')
   const [showOverlay, setShowOverlay] = React.useState(true)
@@ -30,16 +30,22 @@ const EmbedHtml = props => {
 
   useEffect(() => {
     if (playOnPopup && iframePopupData?.length) {
-      const popupTargets = contentRef.current.querySelectorAll(
-        '.embed-popup-target'
-      )
-      if (popupTargets && popupTargets.length) {
-        popupTargets.forEach(e => {
-          e.onclick = () => {
-            const id = e.dataset.id
-            setPopupId(id)
-          }
-        })
+      if (cardRef?.current) {
+        cardRef.current.onclick = () => {
+          setPopupId('0')
+        }
+      } else {
+        const popupTargets = contentRef.current.querySelectorAll(
+          '.embed-popup-target'
+        )
+        if (popupTargets && popupTargets.length) {
+          popupTargets.forEach(e => {
+            e.onclick = () => {
+              const id = e.dataset.id
+              setPopupId(id)
+            }
+          })
+        }
       }
     }
   }, [playOnPopup, iframePopupData?.length])

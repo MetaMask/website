@@ -2,6 +2,7 @@ const path = require('path')
 const { getNewsUrl } = require(`./src/lib/utils/news`)
 const { buildSitemap } = require(`./src/lib/utils/sitemap`)
 const { minimatch } = require('minimatch')
+const { fetchDevChangeLog } = require('./fetchDataSSR')
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions
@@ -16,6 +17,7 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `)
+  const devChangelogData = await fetchDevChangeLog(process.env.GH_TOKEN)
 
   redirects.data?.allRedirects.nodes.forEach(r =>
     createRedirect({
@@ -90,6 +92,7 @@ exports.createPages = async ({ graphql, actions }) => {
             themeColor
             isFaqLayout
             h2FontSize
+            widerContainer
           }
         }
       }
@@ -111,6 +114,7 @@ exports.createPages = async ({ graphql, actions }) => {
             header,
             themeColor,
             isFaqLayout,
+            widerContainer,
             h2FontSize,
           } = p.node
           const { contentful_id: footerId = '' } = footer || {}
@@ -153,6 +157,7 @@ exports.createPages = async ({ graphql, actions }) => {
             return
           }
 
+          const extraData = slug === "/developer/" ? devChangelogData : null
           createPage({
             path: slug, // slug validation in Contentful CMS
             component: path.resolve(`./src/templates/ContentfulLayout.js`),
@@ -166,6 +171,8 @@ exports.createPages = async ({ graphql, actions }) => {
               pathBuild: slug,
               isFaqLayout,
               h2FontSize,
+              widerContainer,
+              extraData,
             },
           })
         })

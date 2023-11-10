@@ -36,6 +36,7 @@ export const ContentfulEmbedFields = gql`
     layoutType
     playOnPopup
     displayTitle
+    clickToPlayOnWholeCard
   }
 `
 
@@ -234,6 +235,7 @@ export const ContentfulCtaFields = gql`
       ...ContentfulEmbedFields
     }
     downloadBrowsers
+    showCaretRight
   }
 `
 
@@ -286,6 +288,15 @@ export const ContentfulLayoutFullWidthCtaFields = gql`
     backgroundImageDarkMode(preview: true) {
       url
     }
+    backgroundImageMobile(preview: true) {
+      url
+    }
+    backgroundImageMobileDarkMode(preview: true) {
+      url
+    }
+    headlineMarginTop0
+    fullWidthBackground
+    moduleId
     customClass
   }
 `
@@ -453,6 +464,7 @@ export const ContentfulModuleContainerFields = gql`
     isLiquiditySection
     isTrustBar
     displayTitle
+    carouselMode
     modulesCollection(preview: true) {
       items {
         ...ContentfulCardFields
@@ -711,6 +723,7 @@ export const ContentfulLayoutFeatureFields = gql`
     sectionPadding
     noPaddingBottom
     removeSectionPaddingBottomOnDesktop
+    moduleId
     customClass
     featureItemsCollection(preview: true) {
       items {
@@ -808,6 +821,9 @@ export const ContentfulLayoutModuleContainerFields = gql`
         ...ContentfulConsenSysToUFields
       }
     }
+    cta(preview: true) {
+      ...ContentfulCtaFields
+    }
     backgroundColor
     displayHeadline
     headlineAlignCenter
@@ -818,6 +834,7 @@ export const ContentfulLayoutModuleContainerFields = gql`
     noPaddingBottom
     modulesMargin
     isTab
+    moduleId
     customClass
     sideImage {
       title
@@ -852,6 +869,7 @@ export const ContentfulLayoutFields = gql`
     themeColor
     h2FontSize
     isFaqLayout
+    widerContainer
     slug
     header(preview: true) {
       ...ContentfulLayoutHeaderFields

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { SectionTitle } from '../StyledGeneral'
@@ -17,17 +17,29 @@ const ContentfulEmbed = props => {
       layoutType,
       playOnPopup,
       thumbnail,
+      clickToPlayOnWholeCard,
     },
   } = props
+
+  const cardRef = useRef(null)
   const thumbnailUrl = parseContentfulAssetUrl(thumbnail, previewMode)
+
   return (
     <Wrapper id={moduleId} layoutType={layoutType}>
-      {title && displayTitle ? <Title>{title}</Title> : null}
-      <Embed
-        playOnPopup={playOnPopup}
-        html={previewMode ? props.moduleConfig.embed : embed}
-        thumbnailUrl={thumbnailUrl}
-      />
+      <WrapperInner
+        $clickable={clickToPlayOnWholeCard}
+        ref={clickToPlayOnWholeCard ? cardRef : null}
+      >
+        {title && displayTitle ? <Title>{title}</Title> : null}
+        <div>
+          <Embed
+            playOnPopup={playOnPopup}
+            html={previewMode ? props.moduleConfig.embed : embed}
+            thumbnailUrl={thumbnailUrl}
+            cardRef={cardRef}
+          />
+        </div>
+      </WrapperInner>
     </Wrapper>
   )
 }
@@ -64,6 +76,14 @@ ContentfulEmbed.propTypes = {
 const Title = styled(SectionTitle)`
   text-align: center;
   margin-bottom: 32px;
+  .developer-community-calls & {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: initial;
+    margin-top: 8px;
+    margin-bottom: 0;
+    line-height: 1.2;
+  }
 `
 
 const Wrapper = styled.div`
@@ -88,5 +108,15 @@ const Wrapper = styled.div`
       : ``}
   .embed-mb-20 & {
     margin-bottom: 20px;
+  }
+`
+
+const WrapperInner = styled.div`
+  ${({ $clickable }) => ($clickable ? `cursor: pointer;` : ``)}
+
+  .developer-community-calls & {
+    display: flex;
+    flex-direction: column-reverse;
+    align-self: flex-start;
   }
 `
