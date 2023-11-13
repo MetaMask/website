@@ -1,4 +1,5 @@
 const path = require('path')
+const { download } = require('./src/lib/utils/download')
 const { getNewsUrl } = require(`./src/lib/utils/news`)
 const { buildSitemap } = require(`./src/lib/utils/sitemap`)
 const { minimatch } = require('minimatch')
@@ -79,6 +80,13 @@ exports.createPages = async ({ graphql, actions }) => {
               ... on ContentfulLayoutFullWidthCta {
                 contentful_id
               }
+              ... on ContentfulAssetStorage {
+                contentful_id
+                assets {
+                  url
+                  filename
+                }
+              }
               ...on ContentfulPortfolioIntro {
                 contentful_id
               }
@@ -121,6 +129,41 @@ exports.createPages = async ({ graphql, actions }) => {
           const { contentful_id: headerId = '' } = header || {}
           const moduleIds = modules.map(m => m.contentful_id)
           const seoId = seo ? seo.contentful_id : ''
+
+          if (slug === '/assets/') {
+            const assetResponseData = modules[0]?.assets
+            const assetUrls = assetResponseData?.map(el => el.url)
+            const assetData = assetResponseData?.map(el => ({
+              filename: el.filename,
+              url: `/assets/${path.parse(el.url).base}`,
+            }))
+
+            if (assetUrls) {
+              ; (async () => {
+                await Promise.all(
+                  assetUrls.map(url => download(url, `public/assets/${path.parse(url).base}`))
+                ).catch((_) => {
+                  return Promise.reject('Fetch MetaMask assets failed!')
+                })
+              })()
+              createPage({
+                path: slug,
+                component: path.resolve(
+                  `./src/templates/ContentfulAssetLayout.js`
+                ),
+                context: {
+                  headerId,
+                  footerId,
+                  assetData,
+                  themeColor,
+                  isFaqLayout,
+                  widerContainer,
+                  h2FontSize,
+                },
+              })
+              return
+            }
+          }
 
           if (slug === '/news/') {
             const categoriesPath = newsCategories.map(cat => `/news/${cat}/`)
