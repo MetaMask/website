@@ -36,6 +36,7 @@ jobs:
           echo GATSBY_CONTENTFUL_PREVIEW_API_KEY =${{ secrets.GATSBY_CONTENTFUL_PREVIEW_API_KEY }} >> gatsby.production.env
           echo GATSBY_OSANO_CUSTOMER_ID =${{ secrets.GATSBY_OSANO_CUSTOMER_ID }} >> gatsby.production.env
           echo GATSBY_OSANO_CCID_ID =${{ secrets.GATSBY_OSANO_CCID_ID }} >> gatsby.production.env
+          echo GH_TOKEN =${{ secrets.GH_TOKEN }} >> gatsby.production.env
 
       - name: Read .nvmrc
         run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
