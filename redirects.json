@@ -166,5 +166,9 @@
   {
     "fromPath": "/news/security/meta-mask-security-april-team-report/",
     "toPath": "/news/security/metamask-security-april-team-report/"
+  },
+  {
+    "fromPath": "/news/latest/",
+    "toPath": "/news/"
   }
 ]
