@@ -46,7 +46,22 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     })
   }
-
+  const legalsQuery = await graphql(`
+    {
+      allMdx {
+        nodes {
+          id
+          frontmatter {
+            slug
+            title
+            date
+          }
+          body
+        }
+      }
+    }
+  `)
+  const legalData = legalsQuery?.data?.allMdx?.nodes
   const contentfulLayouts = graphql(`
     {
       pages: allContentfulLayout(filter: { isPrivate: { eq: false } }) {
@@ -181,6 +196,32 @@ exports.createPages = async ({ graphql, actions }) => {
                 },
               })
             })
+          }
+
+          let legalPages = ['/terms-of-use/', '/privacy-policy/', '/privacy-policy/cookies/']
+          if (legalPages.includes(slug)) {
+            const resolvedData = legalData?.find(s => s?.frontmatter?.slug === slug)
+            if (!resolvedData) {
+              // Skip creating page
+              return;
+            }
+            createPage({
+              path: slug,
+              component: path.resolve(
+                `./src/templates/MarkdownPageLayout.js`
+              ),
+              context: {
+                headerId,
+                footerId,
+                seoId,
+                pageData: resolvedData,
+                themeColor,
+                pathBuild: slug,
+                isFaqLayout,
+                h2FontSize,
+              },
+            })
+            return
           }
 
           if (slug === "/portfolio/") {
