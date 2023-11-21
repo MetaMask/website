@@ -2,7 +2,6 @@ import gql from 'graphql-tag'
 import {
   ContentfulCardFields,
   ContentfulConsenSysResourcesFields,
-  ContentfulConsenSysToUFields,
   ContentfulCtaFields,
   ContentfulEmbedFields,
   ContentfulFaqFields,
@@ -102,15 +101,6 @@ export const ContentfulConsenSysResourcesQuery = gql`
   query($id: String!) {
     previewContent: consenSysResources(id: $id) {
       ...ContentfulConsenSysResourcesFields
-    }
-  }
-`
-
-export const ContentfulConsenSysToUQuery = gql`
-  ${ContentfulConsenSysToUFields}
-  query($id: String!) {
-    previewContent: consenSysResources(id: $id) {
-      ...ContentfulConsenSysToUFields
     }
   }
 `
