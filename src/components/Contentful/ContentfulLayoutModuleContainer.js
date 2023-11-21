@@ -181,7 +181,7 @@ const ContentfulModuleContainer = props => {
                   previewMode ? modules[0].title : modules[0].contentful_id
                 }
                 isTabParam={isCategoryTab}
-              ></TabWrapper>
+              />
             ) : null}
             {!isTab && modules && modules.length && (
               <Modules
