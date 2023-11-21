@@ -31,20 +31,18 @@ exports.createPages = async ({ graphql, actions }) => {
   const newsCategories = []
   const result = await graphql(`
     {
-      allCategories: allContentfulNewsCategory {
-        edges {
-          node {
-            contentful_id
-            name
-          }
+      allCategories: allContentfulNewsCategory(filter: {name: {regex: "/^(?!.*(?:Latest|example)).*$/"}}) {
+        nodes {
+          contentful_id
+          name
         }
       }
     }
   `)
   if (result.data && result.data.allCategories) {
-    result.data.allCategories.edges.forEach(cat => {
-      if (cat.node.name && !cat.node.name.includes('example')) {
-        newsCategories.push(cat.node.name.toLowerCase())
+    result.data.allCategories.nodes.forEach(cat => {
+      if (cat.name) {
+        newsCategories.push(cat.name.toLowerCase())
       }
     })
   }

@@ -22,8 +22,13 @@ const TabHeaderItem = props => {
   }
 
   if (isTabParam) {
+    const newsCategory = encodeURIComponent(lowerCase(label))
+    let newsCategoryUrl = `/news/${newsCategory}/`
+    if (newsCategory === 'latest') {
+      newsCategoryUrl = '/news/'
+    }
     return (
-      <Link to={`/news/${encodeURIComponent(lowerCase(label))}/`}>
+      <Link to={newsCategoryUrl}>
         <Item typeLayout={typeLayout} active={activeId === id}>
           {label}
         </Item>
