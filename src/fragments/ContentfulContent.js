@@ -429,9 +429,6 @@ export const ContentfulLayoutModuleContainerFields = graphql`
       ... on ContentfulTimeline {
         ...ContentfulTimelineFields
       }
-      ... on ContentfulConsenSysToU {
-        ...ContentfulConsenSysToUFields
-      }
     }
     cta {
       ...ContentfulCtaFields
@@ -479,16 +476,6 @@ export const ContentfulConsenSysResourcesFields = graphql`
     linkText
     link
     showDate
-  }
-`
-
-export const ContentfulConsenSysToUFields = graphql`
-  fragment ContentfulConsenSysToUFields on ContentfulConsenSysToU {
-    contentful_id
-    internal {
-      type
-    }
-    pageId
   }
 `
 
