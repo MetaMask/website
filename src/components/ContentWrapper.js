@@ -61,6 +61,16 @@ const Container = styled.div`
       padding: 0;
     }
   }
+  &.feature-infura-gas {
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      padding: 0;
+      background-color: #24292e;
+      h2,
+      p {
+        color: #fff;
+      }
+    }
+  }
 `
 
 const ContainerInner = styled.div`
