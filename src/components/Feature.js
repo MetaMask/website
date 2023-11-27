@@ -59,6 +59,7 @@ const FeatureComponent = props => {
     : ''
   const isContentAlignVertical = contentAlignment === 'vertical'
   const isDevMeetFlask = customClass?.includes('feature-meet-flask')
+  const isInfuraGas = customClass?.includes('feature-infura-gas')
   const innerContent = (
     <>
       {eyebrow ? (
@@ -127,7 +128,7 @@ const FeatureComponent = props => {
       {cta && !isContentAlignVertical ? (
         <CTAWrapper
           className={classnames({
-            'hidden-mobile': !isDevMeetFlask,
+            'hidden-mobile': !(isDevMeetFlask || isInfuraGas),
           })}
           {...(previewMode
             ? inspectorProps({
@@ -329,7 +330,7 @@ const FeatureComponent = props => {
           {cta && !isContentAlignVertical ? (
             <CTAWrapper
               className={classnames('hidden-desktop', {
-                'hidden-mobile': isDevMeetFlask,
+                'hidden-mobile': isDevMeetFlask || isInfuraGas,
               })}
               {...(previewMode
                 ? inspectorProps({
@@ -560,6 +561,11 @@ const Description = styled.div`
 const FeatureWrapper = styled.div`
   display: flex;
   margin: -10px;
+
+  .feature-infura-gas & {
+    align-items: center;
+  }
+
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     flex-direction: column-reverse;
     margin: 0;
@@ -710,6 +716,11 @@ const FeatureInner = styled.div`
       padding-top: 32px;
       padding-bottom: 32px;
       padding-left: 40px;
+    }
+  }
+  .feature-infura-gas & {
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      padding-top: 24px;
     }
   }
 `
