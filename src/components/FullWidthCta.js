@@ -11,6 +11,7 @@ import ParseMD from './ParseMD'
 import getWebpImage from '../lib/utils/getWebpImage'
 import ContextClientSide from '../Context/ContextClientSide'
 import { useMediaQuery } from 'react-responsive'
+import isEmpty from 'lodash/isEmpty'
 
 const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
 
@@ -59,11 +60,13 @@ const FullWidthCta = props => {
   const backgroundImageDarkModeUrl = getWebpImage(
     previewMode ? resBgImageDark?.url : resBgImageDark?.file?.url
   )
-
+  const isMetaMaskInstalled =
+    typeof window !== 'undefined' && window.ethereum?.isMetaMask
   const bgImageUrl =
     isDarkMode && backgroundImageDarkModeUrl
       ? backgroundImageDarkModeUrl
       : backgroundImageUrl
+
   return (
     <Container
       sectionPadding={sectionPadding}
@@ -155,19 +158,17 @@ const FullWidthCta = props => {
                 {contentfulModuleToComponent({ ...embedHtml, previewMode })}
               </div>
             ) : null}
-            {ctas ? (
+            {!isEmpty(ctas) ? (
               <CTAWrapper
                 {...inspectorProps({
                   entryId: contentfulId,
                   fieldId: 'ctas',
                 })}
               >
-                {ctas.map(cta =>
-                  contentfulModuleToComponent({
-                    ...cta,
-                    previewMode,
-                  })
-                )}
+                {contentfulModuleToComponent({
+                  ...ctas[ctas.length > 1 && isMetaMaskInstalled ? 1 : 0],
+                  previewMode,
+                })}
               </CTAWrapper>
             ) : null}
           </FullWidthCtaInner>
@@ -270,7 +271,7 @@ const FullWidthCtaInner = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    
+
     #logo-container{
       width: 30%;
       padding: 24px 0 8px 0;
@@ -279,18 +280,18 @@ const FullWidthCtaInner = styled.div`
         display: none;
       }
     }
-    
+
     #html-container {
       width: 60%;
       background-color: #F2F4F6;
       border-radius: 8px;
       padding-bottom: 32px;
       margin-left: auto;
-      
+
       .dark-mode & {
         background-color: #24292E;
       }
-      
+
       .uninstallSurvey {
         padding: 32px;
         border-radius: 8px;
@@ -330,7 +331,7 @@ const FullWidthCtaInner = styled.div`
             margin-top: 2px;
           }
         }
-        input:checked + label:before { 
+        input:checked + label:before {
           background-color: #037DD6;
           border-color: #037DD6;
         }
@@ -350,12 +351,12 @@ const FullWidthCtaInner = styled.div`
           display: none;
         }
       }
-      
+
       .buttonSurvey > button {
         width: calc(100% - 64px);
         cursor: pointer;
         transition: all 0.3s ease;
-        
+
         &:disabled {
           background-color: #6A737D;
           cursor: not-allowed;
@@ -364,7 +365,7 @@ const FullWidthCtaInner = styled.div`
           opacity: 0.8;
         }
       }
-      
+
       @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
         width: 100%;
         background-color: transparent;
@@ -372,19 +373,19 @@ const FullWidthCtaInner = styled.div`
         .dark-mode & {
           background-color: transparent;
         }
-        
+
         .uninstallSurvey {
           padding: 24px 42px;
           h6 {
             text-align: center;
           }
         }
-        
+
         .buttonSurvey {
           padding: 40px 0 20px 0;
         }
       }
-      
+
       @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
         .uninstallSurvey {
           padding: 24px;
@@ -456,7 +457,7 @@ const CTAWrapper = styled.div`
       }
   `
       : ``}
-  
+
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     .button {
       margin: 0 0 16px 0;
