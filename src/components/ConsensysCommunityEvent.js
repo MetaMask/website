@@ -39,8 +39,8 @@ const ConsensysCommunityEvent = props => {
               : null,
           }))
           setItems(data)
-          setLoading(false)
         }
+        setLoading(false)
       } catch (error) {
         setLoading(false)
       }
@@ -82,7 +82,7 @@ const ConsensysCommunityEvent = props => {
               ))}
             </Listing>
           ) : (
-            <div>No upcoming events</div>
+            <div>No events found</div>
           )}
         </>
       )}
