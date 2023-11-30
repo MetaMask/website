@@ -105,9 +105,7 @@ const HeroContainerComponent = props => {
     setHeight(sdkRef.current.clientHeight + 48)
   }
 
-  let isMetaMaskInstalled = useMetamaskDetect(
-    typeof window !== 'undefined' && window.ethereum?.isMetaMask
-  )
+  const isMetaMaskInstalled = useMetamaskDetect()
 
   return (
     <>

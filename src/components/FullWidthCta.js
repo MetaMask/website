@@ -66,9 +66,7 @@ const FullWidthCta = props => {
       ? backgroundImageDarkModeUrl
       : backgroundImageUrl
 
-  let isMetaMaskInstalled = useMetamaskDetect(
-    typeof window !== 'undefined' && window.ethereum?.isMetaMask
-  )
+  const isMetaMaskInstalled = useMetamaskDetect()
 
   return (
     <Container

@@ -1,13 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { MetaMaskSDK } from '@metamask/sdk'
 
-export function useMetamaskDetect(initialState = false) {
+export function useMetamaskDetect() {
   const MMSDK = new MetaMaskSDK()
-  const [isMetaMaskInstalled, setIsMetaMaskInstalled] = useState(initialState)
+  const [isMetaMaskInstalled, _setIsMetaMaskInstalled] = useState(false)
+  const isMetaMaskInstalledRef = useRef(isMetaMaskInstalled)
+
+  const setIsMetaMaskInstalled = v => {
+    isMetaMaskInstalledRef.current = v
+    _setIsMetaMaskInstalled(v)
+  }
 
   useEffect(() => {
     const checkMetaMask = ({ detail }) => {
-      if (isMetaMaskInstalled) return
+      if (isMetaMaskInstalledRef.current) return
       setIsMetaMaskInstalled(detail?.info?.name === 'MetaMask')
     }
 
@@ -16,7 +22,7 @@ export function useMetamaskDetect(initialState = false) {
     return () => {
       window.removeEventListener('eip6963:announceProvider', checkMetaMask)
     }
-  }, [isMetaMaskInstalled])
+  }, [])
 
   return isMetaMaskInstalled
 }
