@@ -12,6 +12,7 @@ import getWebpImage from '../lib/utils/getWebpImage'
 import ContextClientSide from '../Context/ContextClientSide'
 import { useMediaQuery } from 'react-responsive'
 import isEmpty from 'lodash/isEmpty'
+import { useMetamaskDetect } from '../hooks/useMetamaskDetect'
 
 const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
 
@@ -60,12 +61,14 @@ const FullWidthCta = props => {
   const backgroundImageDarkModeUrl = getWebpImage(
     previewMode ? resBgImageDark?.url : resBgImageDark?.file?.url
   )
-  const isMetaMaskInstalled =
-    typeof window !== 'undefined' && window.ethereum?.isMetaMask
   const bgImageUrl =
     isDarkMode && backgroundImageDarkModeUrl
       ? backgroundImageDarkModeUrl
       : backgroundImageUrl
+
+  let isMetaMaskInstalled = useMetamaskDetect(
+    typeof window !== 'undefined' && window.ethereum?.isMetaMask
+  )
 
   return (
     <Container

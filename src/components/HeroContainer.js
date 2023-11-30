@@ -13,6 +13,7 @@ import Context from '../Context/ContextPage'
 import Loadable from '@loadable/component'
 import ParseMD from './ParseMD'
 import GatsbyBackgroundImage from './GatsbyBackgroundImage'
+import { useMetamaskDetect } from '../hooks/useMetamaskDetect'
 
 const FoxAnimation = Loadable(() => import('./FoxAnimation/'))
 
@@ -46,12 +47,11 @@ const HeroContainerComponent = props => {
     customClass,
     previewMode = false,
   } = props
+
   const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
   const inspectorProps = useContentfulInspectorMode()
 
-  const isMetaMaskInstalled =
-    typeof window !== 'undefined' && window.ethereum?.isMetaMask
   const isHome = customClass?.includes('page-home')
   const isAbout = customClass?.includes('page-about')
   const isFlask = customClass?.includes('page-flask')
@@ -59,6 +59,7 @@ const HeroContainerComponent = props => {
   const isInstitutions = customClass?.includes('page-institutions')
   const isInstitutionalChild = customClass?.includes('page-institutional-child')
   const isThankYou = customClass?.includes('page-thank-you')
+
   let hubspotWrapper
   if (hubSpotForm) {
     hubspotWrapper = (
@@ -70,8 +71,10 @@ const HeroContainerComponent = props => {
       </HubSpotDefault>
     )
   }
+
   const isStyleHubspot = hubSpotForm
   const isStyleCenterSimple = contentAlignment === 'center' && !sideImage
+
   let heroTitleFontsize = ''
   if (isStyleHubspot) {
     heroTitleFontsize = '16px'
@@ -81,6 +84,7 @@ const HeroContainerComponent = props => {
   ) {
     heroTitleFontsize = '30px'
   }
+
   const { heroContainer: heroContainerREF } = useContext(Context)
   const { heroContainerRef } = heroContainerREF || {}
 
@@ -100,6 +104,10 @@ const HeroContainerComponent = props => {
   const handleWindowSizeChange = () => {
     setHeight(sdkRef.current.clientHeight + 48)
   }
+
+  let isMetaMaskInstalled = useMetamaskDetect(
+    typeof window !== 'undefined' && window.ethereum?.isMetaMask
+  )
 
   return (
     <>
@@ -477,7 +485,7 @@ const HeroContainer = styled(Section)`
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
     padding-top: 0;
     &.custom-newsHero.bg-default:not(.noPaddingBottom) + div{
-      padding-top: 64px !important; 
+      padding-top: 64px !important;
     }
   }
 
@@ -499,7 +507,7 @@ const HeroContainer = styled(Section)`
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}){
       padding-bottom: 0;
     }
-  }  
+  }
 `
 
 const HeroContentContainer = styled.div`
@@ -643,7 +651,7 @@ const HeroContentContainer = styled.div`
         }
       }
     }
-    
+
     @media (max-width: ${theme.device.tabletMediaMax}){
       ${EyebrowWrapper} {
         img {
@@ -663,7 +671,7 @@ const HeroContentContainer = styled.div`
       ? `
     max-width: 500px;
     margin: 0 auto!important;
-    
+
      @media (min-width: ${theme.device.mobile}){
       ${EyebrowWrapper} {
         img {
@@ -785,7 +793,7 @@ const HeroTitle = styled.h1`
       padding-bottom: 8px;
     }
   }
-  
+
   ${({ hideHeadline }) =>
     hideHeadline
       ? `
@@ -808,7 +816,7 @@ const HeroTitle = styled.h1`
     margin-right: auto;
   `
       : ''}
-  
+
   ${({ isFlask, isSDK }) =>
     isFlask || isSDK
       ? `
@@ -830,13 +838,13 @@ const HeroTitle = styled.h1`
       text-align: left;
   `
       : ''}
-  
+
   .titleFontSize64 & {
     @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
       font-size: 64px;
     }
   }
-  
+
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     font-size: 46px;
   }
@@ -936,7 +944,7 @@ const HeroSideImage = styled.div`
     height: auto;
     width: 100%;
     max-width: 960px;
-    
+
   `
       : ''}
 
@@ -951,14 +959,14 @@ const HeroSideImage = styled.div`
     left: 0;
   `
       : ''}
-  
+
   .sideImageOverflow &,
   .sideImageOverflowRight & {
     img {
       filter: drop-shadow(-15px 15px 24px rgba(0, 0, 0, 0.05)) drop-shadow(-3px 3px 10px rgba(0, 0, 0, 0.07));
       border-radius: 5px;
     }
-    
+
     @media (min-width: ${({ theme }) =>
       theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
   theme.device.twoKResolutionMax}) {
@@ -983,7 +991,7 @@ const HeroSideImage = styled.div`
         margin-right: unset;
         width: 100%;
       }
-    } 
+    }
   }
   .sideImageMobileOverflowHiddenBottom100 & {
     @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
@@ -1004,19 +1012,19 @@ const HeroSideImage = styled.div`
     filter: none;
     border-radius: 0;
   }
-  
+
   .sideImageFlex45 & {
     @media (min-width: ${({ theme }) => theme.device.desktop}) {
       width: 45%;
     }
   }
-  
+
   .sideImageFlex40 & {
     @media (min-width: ${({ theme }) => theme.device.desktop}) {
       width: 40%;
     }
   }
-  
+
   .sideImageFlex35 & {
     @media (min-width: ${({ theme }) => theme.device.desktop}) {
       width: 35%;
@@ -1028,11 +1036,11 @@ const HeroSideImage = styled.div`
       width: 100%;
     }
   }
-  
+
   @media (min-width: ${({ theme }) => theme.device.desktop}) {
     padding: 0 !important;
   }
-  
+
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     height: 220px;
     margin-bottom: 10px;
