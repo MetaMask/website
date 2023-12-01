@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: /
-Sitemap: https://metamask.consensys.io/sitemap-index.xml
-Host: https://metamask.consensys.io
+Allow: /
+Sitemap: https://metamask.io/sitemap-index.xml
+Host: https://metamask.io
