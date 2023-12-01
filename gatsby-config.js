@@ -114,7 +114,7 @@ if (env.errors) {
           name: `legal`,
           path: `${__dirname}/legal`,
         },
-        __key: "legal"
+        __key: 'legal',
       },
       {
         resolve: 'gatsby-plugin-react-svg',
@@ -148,6 +148,15 @@ if (env.errors) {
                 sitemap: 'https://metamask.consensys.io/sitemap-index.xml',
                 policy: [{ userAgent: '*', disallow: '/' }],
               },
+      },
+      {
+        resolve: 'gatsby-plugin-launchdarkly',
+        options: {
+          clientSideID: '655b78d71cea7812f535fa90',
+          options: {
+            // bootstrap: 'localStorage', // caches flag values in localStorage
+          },
+        },
       },
     ],
   }
