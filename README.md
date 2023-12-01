@@ -54,7 +54,7 @@ Built With:
           ├── ...
         ├── html.js
     ├── gatsby-config.js
-    ├── gatsby.[development].env]
+    ├── .env
     ├── GraphQL_Query_Documentation.md
     ├── package.json
     └── README.md
