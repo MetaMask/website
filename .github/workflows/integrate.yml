@@ -48,11 +48,7 @@ jobs:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
       - run: |
           yarn
-          if [ ${{ vars.IS_STAGING == 'true' }} ]; then
-            yarn deploy:dev
-          else
-            yarn deploy
-          fi
+          yarn deploy
 
         env:
           CI: true
