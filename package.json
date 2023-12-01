@@ -23,6 +23,7 @@
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@metamask/logo": "^3.1.0",
+    "@metamask/sdk": "^0.14.1",
     "@nx-js/observer-util": "^4.2.2",
     "@rive-app/react-canvas": "^3.0.53",
     "@studio-freight/hamo": "^0.6.18",
