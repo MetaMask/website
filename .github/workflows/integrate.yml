@@ -43,7 +43,7 @@ jobs:
         id: nvm
 
       - name: Install and Build for staging 🔧
-        if: vars.IS_STAGING 
+        if: vars.IS_STAGING == 'true'
         uses: actions/setup-node@f1f314fca9dfce2769ece7d933488f076716723e
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
@@ -52,7 +52,7 @@ jobs:
           yarn deploy:dev
 
       - name: Install and Build for production 🔧
-        if: !vars.IS_STAGING 
+        if: ${{ !vars.IS_STAGING }}
         uses: actions/setup-node@f1f314fca9dfce2769ece7d933488f076716723e
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
