@@ -42,21 +42,20 @@ jobs:
         run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
         id: nvm
 
-      - name: Install and Build for staging 🔧
-        if: vars.IS_STAGING == 'true'
+      - name: Setup Node
         uses: actions/setup-node@f1f314fca9dfce2769ece7d933488f076716723e
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
-      - run: |
+
+      - name: Build for staging 🔧
+        if: vars.IS_STAGING == 'true'
+        run: |
           yarn
           yarn deploy:dev
 
-      - name: Install and Build for production 🔧
+      - name: Build for production 🔧
         if: ${{ !vars.IS_STAGING }}
-        uses: actions/setup-node@f1f314fca9dfce2769ece7d933488f076716723e
-        with:
-          node-version: "${{ steps.nvm.outputs.NVMRC }}"
-      - run: |
+        run: |
           yarn
           yarn deploy
 
