@@ -1,7 +1,7 @@
 const activeEnv =
   process.env.ACTIVE_ENV || process.env.NODE_ENV || 'development'
 const envConfig = {
-  path: `${__dirname}/gatsby.${activeEnv}.env`,
+  path: `${__dirname}/.env`,
 }
 
 const env = require('dotenv').config(envConfig)
@@ -13,7 +13,7 @@ if (env.errors) {
   module.exports = {
     siteMetadata: {
       title: 'MetaMask',
-      description: `MetaMask is a ConsenSys Formation.`,
+      description: `MetaMask is a Consensys Formation.`,
       siteUrl:
         activeEnv === 'development'
           ? 'https://metamask.consensys.io'

@@ -21,22 +21,22 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Create production env file
+      - name: Create env file
         run: |
-          touch gatsby.production.env
-          echo GATSBY_CONTENTFUL_API_KEY =${{ secrets.GATSBY_CONTENTFUL_API_KEY }} >> gatsby.production.env
-          echo GATSBY_CONTENTFUL_DOWNLOAD_LOCAL =${{ secrets.GATSBY_CONTENTFUL_DOWNLOAD_LOCAL }} >> gatsby.production.env
-          echo GATSBY_CONTENTFUL_ENVIRONMENT =${{ secrets.GATSBY_CONTENTFUL_ENVIRONMENT }} >> gatsby.production.env
-          echo GATSBY_CONTENTFUL_HOST =${{ secrets.GATSBY_CONTENTFUL_HOST }} >> gatsby.production.env
-          echo GATSBY_CONTENTFUL_SPACE_ID =${{ secrets.GATSBY_CONTENTFUL_SPACE_ID }} >> gatsby.production.env
-          echo GATSBY_GA_ID =${{ secrets.GATSBY_GA_ID }} >> gatsby.production.env
-          echo GATSBY_GTM_ID =${{ secrets.GATSBY_GTM_ID }} >> gatsby.production.env
-          echo GATSBY_CONSENSYS_HOST =${{ secrets.GATSBY_CONSENSYS_HOST }} >> gatsby.production.env
-          echo GATSBY_CONTENTFUL_PREVIEW_HOST =${{ secrets.GATSBY_CONTENTFUL_PREVIEW_HOST }} >> gatsby.production.env
-          echo GATSBY_CONTENTFUL_PREVIEW_API_KEY =${{ secrets.GATSBY_CONTENTFUL_PREVIEW_API_KEY }} >> gatsby.production.env
-          echo GATSBY_OSANO_CUSTOMER_ID =${{ secrets.GATSBY_OSANO_CUSTOMER_ID }} >> gatsby.production.env
-          echo GATSBY_OSANO_CCID_ID =${{ secrets.GATSBY_OSANO_CCID_ID }} >> gatsby.production.env
-          echo GH_TOKEN =${{ secrets.GH_TOKEN }} >> gatsby.production.env
+          touch .env
+          echo GATSBY_CONTENTFUL_API_KEY=${{ secrets.GATSBY_CONTENTFUL_API_KEY }} >> .env
+          echo GATSBY_CONTENTFUL_DOWNLOAD_LOCAL=${{ secrets.GATSBY_CONTENTFUL_DOWNLOAD_LOCAL }} >> .env
+          echo GATSBY_CONTENTFUL_ENVIRONMENT=${{ secrets.GATSBY_CONTENTFUL_ENVIRONMENT }} >> .env
+          echo GATSBY_CONTENTFUL_HOST=${{ secrets.GATSBY_CONTENTFUL_HOST }} >> .env
+          echo GATSBY_CONTENTFUL_SPACE_ID=${{ secrets.GATSBY_CONTENTFUL_SPACE_ID }} >> .env
+          echo GATSBY_GA_ID=${{ secrets.GATSBY_GA_ID }} >> .env
+          echo GATSBY_GTM_ID=${{ secrets.GATSBY_GTM_ID }} >> .env
+          echo GATSBY_CONSENSYS_HOST=${{ secrets.GATSBY_CONSENSYS_HOST }} >> .env
+          echo GATSBY_CONTENTFUL_PREVIEW_HOST=${{ secrets.GATSBY_CONTENTFUL_PREVIEW_HOST }} >> .env
+          echo GATSBY_CONTENTFUL_PREVIEW_API_KEY=${{ secrets.GATSBY_CONTENTFUL_PREVIEW_API_KEY }} >> .env
+          echo GATSBY_OSANO_CUSTOMER_ID=${{ secrets.GATSBY_OSANO_CUSTOMER_ID }} >> .env
+          echo GATSBY_OSANO_CCID_ID=${{ secrets.GATSBY_OSANO_CCID_ID }} >> .env
+          echo GH_TOKEN=${{ secrets.GH_TOKEN }} >> .env
 
       - name: Read .nvmrc
         run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
@@ -48,7 +48,12 @@ jobs:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
       - run: |
           yarn
-          yarn deploy
+          if [ ${{ vars.IS_STAGING == 'true' }} ]; then
+            yarn deploy:dev
+          else
+            yarn deploy
+          fi
+
         env:
           CI: true
 
@@ -56,5 +61,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@068dc23d9710f1ba62e86896f84735d869951305
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages # The branch the action should deploy to.
-          publish_dir: ./public # The folder the action should deploy.
+          publish_branch: gh-pages
+          publish_dir: ./public
