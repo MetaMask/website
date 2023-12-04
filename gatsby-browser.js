@@ -7,13 +7,18 @@ import ClientSideWrapper from './src/components/ClientSideWrapper'
 require('prismjs/themes/prism.css')
 require('prismjs/plugins/line-numbers/prism-line-numbers.css')
 
-const wrapPageElement = ({ element, props }) => (
-  <ClientSideWrapper {...props}>{element}</ClientSideWrapper>
-)
+export const wrapPageElement = ({ element, props }) => {
+  return <ClientSideWrapper {...props}>{element}</ClientSideWrapper>
+}
 
-export default withLDProvider({
-  clientSideID: process.env.GATSBY_LD_CLIENT_ID,
-  context: {
-    kind: 'user',
-  },
-})(wrapPageElement)
+export const wrapRootElement = ({ element }) => {
+  const LDProvider = withLDProvider({
+    clientSideID: process.env.GATSBY_LD_CLIENT_ID,
+    context: {
+      kind: 'user',
+      key: 'metamask-user',
+    },
+  })(({ children }) => <>{children}</>)
+
+  return <LDProvider>{element}</LDProvider>
+}

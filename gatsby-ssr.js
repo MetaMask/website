@@ -40,7 +40,13 @@ const baseCSP = {
   'style-src': ["'self'", "'unsafe-inline'"],
   'object-src': ["'self'"],
   'manifest-src': ["'self'"],
-  'frame-src': ['www.youtube.com', '*.twitter.com', 'www.google.com', '*.hsforms.net', '*.hsforms.com'],
+  'frame-src': [
+    'www.youtube.com',
+    '*.twitter.com',
+    'www.google.com',
+    '*.hsforms.net',
+    '*.hsforms.com',
+  ],
   'font-src': ["'self'", 'data:'],
   'connect-src': [
     "'self'",
@@ -60,7 +66,8 @@ const baseCSP = {
     '*.consensys.io',
     '*.contentful.com',
     'cdn.segment.com',
-    'api.segment.io'
+    'api.segment.io',
+    'app.launchdarkly.com',
   ],
   'img-src': [
     "'self'",
@@ -81,7 +88,7 @@ const baseCSP = {
     'www.facebook.com',
     'analytics.pangle-ads.com',
     '*.cloudinary.com',
-    'www.googletagmanager.com'
+    'www.googletagmanager.com',
   ],
   'media-src': ["'self'", '*.ctfassets.net', 'www.googletagmanager.com'],
   'worker-src': ['blob:'],
@@ -121,7 +128,8 @@ const getHashesCodeSplitting = () => {
   let match = null
   while ((match = scriptRegex.exec(data)) !== null) {
     if (match[1]) {
-      const hash = crypto.createHash('sha256')
+      const hash = crypto
+        .createHash('sha256')
         .update(match[1])
         .digest('base64')
       hashes.push(`'sha256-${hash}'`)
@@ -144,7 +152,11 @@ exports.onPreRenderHTML = ({
 
   let csp = {
     ...baseCSP,
-    'script-src': [...baseCSP['script-src'], ...getHashes(components, 'script'), ...getHashesCodeSplitting()],
+    'script-src': [
+      ...baseCSP['script-src'],
+      ...getHashes(components, 'script'),
+      ...getHashesCodeSplitting(),
+    ],
   }
 
   const cspString = Object.keys(csp).reduce((acc, key) => {
@@ -152,7 +164,13 @@ exports.onPreRenderHTML = ({
     return `${acc}${key} ${value.join(' ')}; `
   }, '')
 
-  const cspComponent = <meta key="gatsby-csp" httpEquiv="Content-Security-Policy" content={cspString} />
+  const cspComponent = (
+    <meta
+      key="gatsby-csp"
+      httpEquiv="Content-Security-Policy"
+      content={cspString}
+    />
+  )
 
   let headComponentsWithCsp = [cspComponent, ...getHeadComponents()]
 
