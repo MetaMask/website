@@ -9,6 +9,7 @@ import ToggleDarkMode from './ToggleDarkMode'
 import ContextClientSide from '../Context/ContextClientSide'
 import Context from '../Context/ContextPage'
 import classnames from 'classnames'
+import { useFlags } from 'gatsby-plugin-launchdarkly'
 
 const StyledHeader = props => {
   const {
@@ -30,6 +31,9 @@ const StyledHeader = props => {
     contentfulId,
   } = props
 
+  const flag = useFlags()
+
+  console.log('flags', flag.testFlag)
   const inspectorProps = useContentfulInspectorMode()
   const isDesktop = useMediaQuery({
     query: '(min-width: 1025px)',
@@ -428,7 +432,7 @@ const NavMenuMain = styled.div`
   &:hover {
     color: ${({ theme }) => theme.text.menuHover};
   }
-  
+
   ${({ hasChild }) =>
     hasChild
       ? `

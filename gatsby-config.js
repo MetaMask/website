@@ -114,7 +114,7 @@ if (env.errors) {
           name: `legal`,
           path: `${__dirname}/legal`,
         },
-        __key: "legal"
+        __key: 'legal',
       },
       {
         resolve: 'gatsby-plugin-react-svg',
@@ -148,6 +148,15 @@ if (env.errors) {
                 sitemap: 'https://metamask.consensys.io/sitemap-index.xml',
                 policy: [{ userAgent: '*', disallow: '/' }],
               },
+      },
+      {
+        resolve: 'gatsby-plugin-launchdarkly',
+        options: {
+          clientSideID: process.env.GATSBY_LAUNCHDARKLY_CLIENT_ID,
+          options: {
+            // bootstrap: 'localStorage', // caches flag values in localStorage
+          },
+        },
       },
       // this (optional) plugin enables Progressive Web App + Offline functionality
       // To learn more, visit: https://gatsby.app/offline
