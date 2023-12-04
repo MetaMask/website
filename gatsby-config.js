@@ -149,15 +149,6 @@ if (env.errors) {
                 policy: [{ userAgent: '*', disallow: '/' }],
               },
       },
-      {
-        resolve: 'gatsby-plugin-launchdarkly',
-        options: {
-          clientSideID: process.env.GATSBY_LAUNCHDARKLY_CLIENT_ID,
-          options: {
-            // bootstrap: 'localStorage', // caches flag values in localStorage
-          },
-        },
-      },
       // this (optional) plugin enables Progressive Web App + Offline functionality
       // To learn more, visit: https://gatsby.app/offline
       // 'gatsby-plugin-offline',

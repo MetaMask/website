@@ -7258,13 +7258,6 @@ gatsby-plugin-image@^3.0.0:
     objectFitPolyfill "^2.3.5"
     prop-types "^15.8.1"
 
-gatsby-plugin-launchdarkly@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-launchdarkly/-/gatsby-plugin-launchdarkly-1.0.0.tgz#caf6e436ee237bd2482356a57e86358bbf9c5312"
-  integrity sha512-9PUtlncpRKQxm+laT1AH+ohviu9fm3X15J/b8rvMFcZTQamlTF3ADy0X/xrZXoB6sS0w566RMmRjBLTNKb2jBg==
-  dependencies:
-    launchdarkly-react-client-sdk "^3.0.6"
-
 gatsby-plugin-manifest@^5.0.0:
   version "5.10.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-5.10.0.tgz#27e479ac82b5c776e849155c0d62cc23d6947b5b"
@@ -9617,7 +9610,7 @@ launchdarkly-js-sdk-common@5.0.3:
     fast-deep-equal "^2.0.1"
     uuid "^8.0.0"
 
-launchdarkly-react-client-sdk@^3.0.6:
+launchdarkly-react-client-sdk@^3.0.9:
   version "3.0.9"
   resolved "https://registry.yarnpkg.com/launchdarkly-react-client-sdk/-/launchdarkly-react-client-sdk-3.0.9.tgz#a914175e5bdde9cb49a9d4d25d1197b69ac61d4a"
   integrity sha512-U7STCSINfL698jI7tpUnvWc7iqsnkAdCV8rAGz3oeQB+BMn4SJ0yjpf5OA9I2pKdh7u+SlWJST/gz657tSUdVA==

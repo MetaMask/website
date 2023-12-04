@@ -9,7 +9,7 @@ import ToggleDarkMode from './ToggleDarkMode'
 import ContextClientSide from '../Context/ContextClientSide'
 import Context from '../Context/ContextPage'
 import classnames from 'classnames'
-import { useFlags } from 'gatsby-plugin-launchdarkly'
+import { withLDConsumer } from 'launchdarkly-react-client-sdk'
 
 const StyledHeader = props => {
   const {
@@ -29,11 +29,13 @@ const StyledHeader = props => {
     isSticky,
     previewMode = false,
     contentfulId,
+    flags,
   } = props
 
-  const flag = useFlags()
+  useEffect(() => {
+    console.log('check test flags', flags)
+  }, [flags])
 
-  console.log('flags', flag.testFlag)
   const inspectorProps = useContentfulInspectorMode()
   const isDesktop = useMediaQuery({
     query: '(min-width: 1025px)',
@@ -252,7 +254,7 @@ const StyledHeader = props => {
   )
 }
 
-export default withTheme(StyledHeader)
+export default withTheme(withLDConsumer()(StyledHeader))
 
 StyledHeader.propTypes = {
   logo: PropTypes.object,
