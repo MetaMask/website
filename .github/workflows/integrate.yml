@@ -50,7 +50,7 @@ jobs:
       - name: Install and Build 🔧
         run: |
           yarn install --frozen-lockfile
-          yarn build
+          yarn deploy:dev
         env:
           CI: true
 
