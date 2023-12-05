@@ -40,12 +40,14 @@ jobs:
         run: echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_ENV
         id: nvm
 
-      - name: Install and Build 🔧
+      - name: Setup Node.js 🔧
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NVMRC }}
           cache: 'yarn'
           cache-dependency-path: 'yarn.lock'
+
+        name: Install and Build 🔧
         run: |
           yarn install --frozen-lockfile
           yarn build
