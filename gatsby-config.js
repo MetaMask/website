@@ -114,7 +114,7 @@ if (env.errors) {
           name: `legal`,
           path: `${__dirname}/legal`,
         },
-        __key: "legal"
+        __key: 'legal',
       },
       {
         resolve: 'gatsby-plugin-react-svg',

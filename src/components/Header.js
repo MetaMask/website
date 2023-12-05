@@ -9,6 +9,7 @@ import ToggleDarkMode from './ToggleDarkMode'
 import ContextClientSide from '../Context/ContextClientSide'
 import Context from '../Context/ContextPage'
 import classnames from 'classnames'
+import { withLDConsumer } from 'launchdarkly-react-client-sdk'
 
 const StyledHeader = props => {
   const {
@@ -28,7 +29,12 @@ const StyledHeader = props => {
     isSticky,
     previewMode = false,
     contentfulId,
+    flags,
   } = props
+
+  useEffect(() => {
+    console.log('check test flags', flags)
+  }, [flags])
 
   const inspectorProps = useContentfulInspectorMode()
   const isDesktop = useMediaQuery({
@@ -248,7 +254,7 @@ const StyledHeader = props => {
   )
 }
 
-export default withTheme(StyledHeader)
+export default withTheme(withLDConsumer()(StyledHeader))
 
 StyledHeader.propTypes = {
   logo: PropTypes.object,
@@ -428,7 +434,7 @@ const NavMenuMain = styled.div`
   &:hover {
     color: ${({ theme }) => theme.text.menuHover};
   }
-  
+
   ${({ hasChild }) =>
     hasChild
       ? `
