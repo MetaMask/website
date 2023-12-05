@@ -99,7 +99,7 @@ const HeroContainerComponent = props => {
         window.removeEventListener('resize', handleWindowSizeChange)
       }
     }
-  }, [sdkRef.current])
+  }, [isSDK, sdkRef])
 
   const handleWindowSizeChange = () => {
     setHeight(sdkRef.current.clientHeight + 48)

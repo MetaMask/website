@@ -51,6 +51,7 @@ const FeatureSlider = props => {
         resetTimeout()
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeItem])
 
   const ctaContent = (

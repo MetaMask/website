@@ -43,6 +43,7 @@ const ContentfulCta = props => {
     {}
   )
   return (
+    // eslint-disable-next-line react/jsx-pascal-case
     <CTA
       link={ctaLink}
       text={displayText || ctaText}

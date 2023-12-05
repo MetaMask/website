@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { MetaMaskSDK } from '@metamask/sdk'
 
 export function useMetamaskDetect() {
+  // eslint-disable-next-line no-unused-vars
   const MMSDK = new MetaMaskSDK({
     dappMetadata: {
       name: 'MetaMask',

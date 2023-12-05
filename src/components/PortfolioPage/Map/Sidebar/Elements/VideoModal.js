@@ -110,6 +110,7 @@ const VideoModal = props => {
     animationIn()
 
     return () => setVideoEmbedUrl(null)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -208,7 +209,7 @@ const VMBtnFadeOut = keyframes`
     opacity: 1;
     transform: rotate(0deg);
   }
-  
+
   100% {
     scale: 0.5;
     opacity: 0;

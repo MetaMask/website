@@ -186,6 +186,7 @@ const StyledCard = props => {
               </CTAWrapper>
             ) : null}
             {cta ? (
+              // eslint-disable-next-line react/jsx-pascal-case
               <CTA
                 {...(previewMode
                   ? inspectorProps({
@@ -256,7 +257,7 @@ const Card = styled.div`
 const CardInner = styled(Link)`
   display: block;
   color: ${({ theme }) => theme.text.body} !important;
-  
+
   .borderPink & {
     border: 2px solid #FFB0EB;
   }
@@ -289,17 +290,17 @@ const CardInner = styled(Link)`
       background-color: #1b1b1b;
     }
   }
-  
+
   .columnTypetag & {
     padding: 15px 24px;
   }
-  
+
   &:hover {
     .arrowAnimation:after {
       margin-left: 6px;
     }
   }
-  
+
   ${({ $backgroundColor, theme }) =>
     $backgroundColor
       ? `
@@ -356,7 +357,7 @@ const CardInner = styled(Link)`
   .dark-mode .cardContentWhiteOnDark & {
     color: white !important;
   }
-  
+
   .cardBoxShadowNone &:not(:hover) {
     box-shadow: none;
   }
@@ -364,7 +365,7 @@ const CardInner = styled(Link)`
   .cardHoverBoxShadowNone &:hover {
     box-shadow: none;
   }
-  
+
   ${({ to }) =>
     !to
       ? `

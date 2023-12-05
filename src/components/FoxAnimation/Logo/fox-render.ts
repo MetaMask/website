@@ -199,7 +199,6 @@ export class FoxRenderer {
   }
 
   public foxLookAt(x: number, y: number) {
-    console.log('bound2', x, y, this.gl)
     const pick = vec4.fromValues(
       (2 * x * window.devicePixelRatio) / this.gl.drawingBufferWidth - 1,
       1 - (2 * y * window.devicePixelRatio) / this.gl.drawingBufferHeight,

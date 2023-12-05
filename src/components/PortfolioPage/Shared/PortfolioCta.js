@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useCallback } from 'react'
 import { gsap } from 'gsap'
 import classnames from 'classnames'
 
@@ -23,9 +23,9 @@ const PortfolioCta = props => {
   } = props
 
   const el = useRef()
-  const q = gsap.utils.selector(el)
 
-  const animationIn = () => {
+  const animationIn = useCallback(() => {
+    const q = gsap.utils.selector(el)
     const label = q(`.${Label.styledComponentId}`)
 
     gsap
@@ -71,11 +71,11 @@ const PortfolioCta = props => {
         },
         'start'
       )
-  }
+  }, [animationDelay, width])
 
   useEffect(() => {
     el && animationInit && animationIn()
-  }, [el, animationInit])
+  }, [el, animationInit, animationIn])
 
   return (
     <Button

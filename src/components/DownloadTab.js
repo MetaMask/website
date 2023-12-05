@@ -20,8 +20,10 @@ const TabContentDownload = props => {
     ctaFirefoxBrowser,
     id,
   } = props
+
   const [downloadForFirefox, setDownloadForFirefox] = useState(ctaFirefox)
   const isChromium = useIsChromium()
+
   useEffect(() => {
     ;(async () => {
       if (id === 'browser' && browserName === 'Firefox') {
@@ -41,7 +43,9 @@ const TabContentDownload = props => {
         } catch (e) {}
       }
     })()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
   let ctasDownload = ctas,
     ctasHeading = ctaHeading
   if (id === 'browser') {
@@ -70,6 +74,7 @@ const TabContentDownload = props => {
       ctasDownload = [ctaChromeBrowser, ctaFirefoxBrowser]
     }
   }
+
   return (
     <>
       {title ? <Heading>{title}</Heading> : null}

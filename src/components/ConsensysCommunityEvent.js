@@ -45,7 +45,8 @@ const ConsensysCommunityEvent = props => {
         setLoading(false)
       }
     })
-  }, [])
+  }, [link, numberOfItem])
+
   return (
     <Wrapper>
       {loading ? (
@@ -57,6 +58,7 @@ const ConsensysCommunityEvent = props => {
               {items.map((item, index) => (
                 <CardEvent key={index}>
                   {item.url ? (
+                    // eslint-disable-next-line jsx-a11y/control-has-associated-label, jsx-a11y/anchor-has-content
                     <a
                       href={item.url}
                       target="blank"

@@ -134,7 +134,7 @@ const PageLayout = props => {
     } else {
       document.body.classList.add('ascb-show')
     }
-  }, [])
+  }, [isStandalone])
 
   return (
     <Context.Provider value={valueContext}>

@@ -71,7 +71,7 @@ const ContentfulModuleContainer = props => {
     if (carouselMode === 'tablet' && isTablet) return true
     if (carouselMode === 'mobile' && isMobile) return true
     return false
-  }, [isMobile, isTablet])
+  }, [isMobile, isTablet, carouselMode])
 
   useEffect(() => {
     if (columnType === 'randomize') {
@@ -84,6 +84,7 @@ const ContentfulModuleContainer = props => {
       setModulesRender(modulesShuffled)
       setShuffled(true)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shuffled])
 
   return (
@@ -270,8 +271,8 @@ const Inner = styled.div`
     @media (max-width: ${theme.device.tabletMediaMax}) {
       flex-direction: column;
     }
-    
-    
+
+
   `
       : ``}
 
@@ -376,7 +377,7 @@ const Modules = styled.div`
         padding: 16px;
       }
     }
-    
+
     body.dark-mode && {
       background-color: #3c444b;
     }
@@ -396,7 +397,7 @@ const Modules = styled.div`
     columns && gridModules && columnType !== 'tag' && !isTrustBar
       ? `
       margin: -${gridModulesGap} !important;
-      
+
       @media (max-width: ${theme.device.tabletMediaMax}){
         .mobileCardGridModulesGap12 && {
           margin: -12px !important;
@@ -499,7 +500,7 @@ const Modules = styled.div`
       width: auto !important;
       margin-right: 20px;
       margin-bottom: 20px;
-      
+
     }
   `
       : ``}

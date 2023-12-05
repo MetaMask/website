@@ -4,7 +4,9 @@ import loadTexture from 'src/components/PortfolioPage/Map/Canvas/Gl/lib/three/lo
 
 const g = new THREE.PlaneGeometry(2048, 2048)
 
+// eslint-disable-next-line no-unused-vars
 const mapWidth = 5246
+// eslint-disable-next-line no-unused-vars
 const mapHeight = 4096
 
 export default IMOG.Component('Image', {

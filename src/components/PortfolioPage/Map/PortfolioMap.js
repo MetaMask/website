@@ -75,7 +75,7 @@ const PortfolioMap = props => {
           }
         )
     }
-  }, [detailPage])
+  }, [detailPage, canvas, isDesktop])
 
   useEffect(() => {
     if (showFooter) {
@@ -107,7 +107,7 @@ const PortfolioMap = props => {
           }
         )
     }
-  }, [showFooter])
+  }, [showFooter, canvas, isDesktop])
 
   return (
     <Wrapper>

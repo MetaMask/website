@@ -12,6 +12,7 @@ const CTAAngleIcon = props => {
   const { text, styleOverride } = props
 
   return (
+    // eslint-disable-next-line react/jsx-pascal-case
     <CTA styleOverride={styleOverride}>
       {text}
       <AngleRight />

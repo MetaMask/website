@@ -78,6 +78,7 @@ const StyledCard = props => {
               </CTAWrapper>
             ) : null}
             {cta ? (
+              // eslint-disable-next-line react/jsx-pascal-case
               <CTA>
                 {cta.map(cta =>
                   contentfulModuleToComponent({

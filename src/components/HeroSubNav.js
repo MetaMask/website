@@ -14,8 +14,10 @@ function HeroSubNav({ headline, modules, previewMode }) {
     if (!isTablet) return
     setExpanded(!expanded)
   }
+
   return (
     <Container className={classnames({ 'menu-expanded': expanded })}>
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
       <div className="title-wrapper" onClick={handleHamburgerButton}>
         <span>{headline}</span>
         <HamburgerButton className="w-icon w-icon-nav-menu" />

@@ -133,6 +133,7 @@ const PortfolioFooter = props => {
     } else {
       setShow(false)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showFooter])
 
   return (

@@ -163,12 +163,14 @@ const PortfolioInstructions = props => {
     if (showInstructions === 1) {
       animationIn()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showInstructions])
 
   useEffect(() => {
     if (exitInstructions === numOfStep + 1) {
       animationOut()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exitInstructions])
 
   useEffect(() => {
