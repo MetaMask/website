@@ -12,6 +12,12 @@ export const wrapPageElement = ({ element, props }) => {
 }
 
 export const wrapRootElement = ({ element }) => {
+  // Check if the LaunchDarkly client ID is defined
+  if (!process.env.GATSBY_LD_CLIENT_ID) {
+    console.error('GATSBY_LD_CLIENT_ID is not defined')
+    return element
+  }
+
   const LDProvider = withLDProvider({
     clientSideID: process.env.GATSBY_LD_CLIENT_ID,
     context: {

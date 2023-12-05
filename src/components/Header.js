@@ -1,15 +1,15 @@
-import PropTypes from 'prop-types'
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import styled, { withTheme } from 'styled-components'
-import { useContentfulInspectorMode } from '@contentful/live-preview/react'
-import Link from './Link'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
+import { useContentfulInspectorMode } from '@contentful/live-preview/react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { withLDConsumer } from 'launchdarkly-react-client-sdk'
+import ContextClientSide from '../Context/ContextClientSide'
+import styled, { withTheme } from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 import ToggleDarkMode from './ToggleDarkMode'
-import ContextClientSide from '../Context/ContextClientSide'
 import Context from '../Context/ContextPage'
 import classnames from 'classnames'
-import { withLDConsumer } from 'launchdarkly-react-client-sdk'
+import PropTypes from 'prop-types'
+import Link from './Link'
 
 const StyledHeader = props => {
   const {
@@ -32,10 +32,6 @@ const StyledHeader = props => {
     flags,
   } = props
 
-  useEffect(() => {
-    console.log('check test flags', flags)
-  }, [flags])
-
   const inspectorProps = useContentfulInspectorMode()
   const isDesktop = useMediaQuery({
     query: '(min-width: 1025px)',
@@ -54,16 +50,20 @@ const StyledHeader = props => {
     if (!menus && isDarkMode) {
       toggleTheme()
     }
+
     const handleOuterClick = e => {
       const ref = menuRef?.current
       const btnRef = buttonRef?.current
+
       if (hamburgerActive && ref && btnRef) {
         if (!ref.contains(e.target) && !btnRef.contains(e.target)) {
           setHamburgerActive(false)
         }
       }
     }
+
     document.addEventListener('click', handleOuterClick)
+
     return () => document.removeEventListener('click', handleOuterClick)
   }, [hamburgerActive])
 
@@ -74,16 +74,19 @@ const StyledHeader = props => {
       setMenuActive(id)
     }
   }
+
   const handleMenuMouseEnter = id => {
     if (isDesktop) {
       setMenuActive(id)
     }
   }
+
   const handleMenuMouseLeave = () => {
     if (isDesktop) {
       setMenuActive('')
     }
   }
+
   const handleHamburgerButton = () => {
     if (headerRef && popupAnnouncement) {
       const h = headerRef?.current.getBoundingClientRect().height
@@ -91,6 +94,7 @@ const StyledHeader = props => {
     }
     setHamburgerActive(!hamburgerActive)
   }
+
   return (
     <HeaderElement ref={headerRef} className={classnames({ sticky: isSticky })}>
       <Announcement
@@ -174,6 +178,7 @@ const StyledHeader = props => {
                 {menus.map((menu, index) => {
                   const { title, modules, ctaLink } = menu
                   const active = menuActive === index
+
                   return (
                     <NavMenu
                       key={index}
@@ -199,7 +204,7 @@ const StyledHeader = props => {
                           })
                         ) : (
                           <>
-                            {title}
+                            {title === 'Docs' ? flags?.testDoc ?? title : title}
                             <Icon className="w-icon w-icon-dropdown-toggle" />
                           </>
                         )}
