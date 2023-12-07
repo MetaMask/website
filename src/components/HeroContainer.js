@@ -441,7 +441,7 @@ const HeroContainerComponent = props => {
           </ContentWrapper>
         </GatsbyBackgroundImage>
       </HeroContainer>
-      {showLearnMore ? (
+      {showLearnMore && !loading ? (
         <div>
           <ContentWrapper>
             <LearnMoreWrapper>
