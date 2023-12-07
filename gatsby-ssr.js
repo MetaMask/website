@@ -67,7 +67,7 @@ const baseCSP = {
     '*.contentful.com',
     'cdn.segment.com',
     'api.segment.io',
-    'app.launchdarkly.com',
+    '*.launchdarkly.com',
   ],
   'img-src': [
     "'self'",

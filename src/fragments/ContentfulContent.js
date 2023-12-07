@@ -67,8 +67,14 @@ export const ContentfulLayoutHeroFields = graphql`
       type
     }
     headline
+    headlinePortfolio
     hideHeadline
     description {
+      childMarkdownRemark {
+        html
+      }
+    }
+    descriptionPortfolio {
       childMarkdownRemark {
         html
       }
@@ -97,7 +103,23 @@ export const ContentfulLayoutHeroFields = graphql`
       }
       gatsbyImageData(width: 1920, quality: 80)
     }
+    sideImagePortfolio {
+      title
+      description
+      file {
+        url
+      }
+      gatsbyImageData(width: 1920, quality: 80)
+    }
     sideImageDarkMode {
+      title
+      description
+      file {
+        url
+      }
+      gatsbyImageData(width: 1920, quality: 80)
+    }
+    sideImagePortfolioDarkMode {
       title
       description
       file {

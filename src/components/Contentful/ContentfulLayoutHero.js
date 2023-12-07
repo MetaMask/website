@@ -42,8 +42,7 @@ const ContentfulLayoutHero = props => {
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
-  const { childMarkdownRemark: { htmlPortfolio } = {} } =
-    descriptionPortfolio || {}
+  const htmlPortfolio = descriptionPortfolio?.childMarkdownRemark?.html || {}
 
   return (
     <Hero
@@ -67,7 +66,7 @@ const ContentfulLayoutHero = props => {
       backgroundImageDarkMode={backgroundImageDarkMode}
       modules={modules}
       sideImage={sideImage}
-      sideImagePortfolio={sideImagePortfolio ?? sideImage}
+      sideImagePortfolio={sideImagePortfolio}
       sideImageDarkMode={sideImageDarkMode}
       sideImagePortfolioDarkMode={sideImagePortfolioDarkMode}
       hideHeadline={hideHeadline}
