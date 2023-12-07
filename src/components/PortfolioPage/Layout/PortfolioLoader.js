@@ -66,6 +66,7 @@ const PortfolioLoader = props => {
 
   useEffect(() => {
     canvasHandleReady && animateOut(onCompleteFn)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [canvasHandleReady])
 
   return (

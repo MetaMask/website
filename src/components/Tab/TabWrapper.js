@@ -45,7 +45,7 @@ const TabWrapper = props => {
         return
       }
     }
-  }, [])
+  }, [activeStateId, activeTabDefault, isTabParam, tabs])
 
   return (
     <Wrapper>

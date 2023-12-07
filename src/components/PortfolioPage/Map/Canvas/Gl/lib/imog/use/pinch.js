@@ -1,4 +1,4 @@
-import _, { isFunction, last } from 'underscore'
+import { isFunction } from 'underscore'
 import { observable, observe, unobserve } from '@nx-js/observer-util'
 import IMOG from 'src/components/PortfolioPage/Map/Canvas/Gl/lib/imog'
 import {
@@ -7,7 +7,7 @@ import {
   map,
 } from 'src/components/PortfolioPage/Map/Canvas/Gl/lib/math'
 
-export default ({
+const pinch = ({
   normalized = false,
   active = true,
   domElement = null,
@@ -136,3 +136,5 @@ export default ({
 
   return result
 }
+
+export default pinch

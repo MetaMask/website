@@ -1,8 +1,8 @@
-import _, { isFunction } from 'underscore'
+import { isFunction } from 'underscore'
 import { observable, observe, unobserve } from '@nx-js/observer-util'
 import IMOG from 'src/components/PortfolioPage/Map/Canvas/Gl/lib/imog'
 
-export default ({ normalized = false, active = true } = {}) => {
+const mouse = ({ normalized = false, active = true } = {}) => {
   const reactions = []
   const result = observable({ x: 0, y: 0 })
   const context = IMOG.getContext()
@@ -44,3 +44,5 @@ export default ({ normalized = false, active = true } = {}) => {
 
   return result
 }
+
+export default mouse

@@ -50,7 +50,7 @@ const LogoPortfolio = props => {
     return () => {
       window.removeEventListener('resize', handleWindowSizeChange)
     }
-  }, [isSmallScreen])
+  }, [isSmallScreen, lookAtCenter])
   return <div id="logo-container"></div>
 }
 

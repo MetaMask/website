@@ -7,6 +7,7 @@ export default function parseYoutubeIframe(html, playOnPopup, imageIframe) {
   const parseHtml = parse(html)
   const iframes = parseHtml.querySelectorAll('iframe')
   const youtube_parser = url => {
+    // eslint-disable-next-line no-useless-escape
     const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/
     const match = url.match(regExp)
     return match && match[2].length === 11 ? match[2] : false

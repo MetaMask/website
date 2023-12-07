@@ -6,6 +6,7 @@ import classnames from 'classnames'
 function NavButton({ right, onClick, className }) {
   const isDisabled = className?.includes('slick-disabled')
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
       className={classnames('nav-button', {
         right: right,

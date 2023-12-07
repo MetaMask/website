@@ -65,6 +65,7 @@ const StyledHeader = props => {
     document.addEventListener('click', handleOuterClick)
 
     return () => document.removeEventListener('click', handleOuterClick)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hamburgerActive])
 
   const handleMenuClick = id => {

@@ -1,7 +1,7 @@
-import { observable } from '@nx-js/observer-util'
 import IMOG from 'src/components/PortfolioPage/Map/Canvas/Gl/lib/imog'
+import { observable } from '@nx-js/observer-util'
 
-export default () => {
+const windowSize = () => {
   const result = observable({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -21,3 +21,5 @@ export default () => {
 
   return result
 }
+
+export default windowSize

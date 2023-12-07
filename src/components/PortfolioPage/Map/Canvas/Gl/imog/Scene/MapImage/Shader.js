@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 
-export default ({ position = new THREE.Vector3(0, 0, 0) } = {}) => ({
+const shader = ({ position = new THREE.Vector3(0, 0, 0) } = {}) => ({
   uniforms: {
     uPosition: { value: position },
     uScale: { value: 1 },
@@ -48,13 +48,13 @@ export default ({ position = new THREE.Vector3(0, 0, 0) } = {}) => ({
         uv += 0.5;
         uv -= (uPosition.xy / uResolution / uScale) / scale * vec2(aspect, 1.0);
         uv.x += floor(uv.y) * -0.4079;
-        
+
         uv = fract(uv);
 
         vec2 dx = dFdx(uv);
         vec2 dy = dFdy(uv);
         vec4 color = textureGrad(uTexture, uv, dx, dy);
-        
+
         // vec4 color = texture2D(uTexture, uv);
 
         gl_FragColor = vec4(color.rgb, 1.0);
@@ -67,6 +67,8 @@ export default ({ position = new THREE.Vector3(0, 0, 0) } = {}) => ({
         gl_FragColor.a *= 1.0 - uMaskOut;
 
         #include <encodings_fragment>
-    } 
+    }
   `,
 })
+
+export default shader

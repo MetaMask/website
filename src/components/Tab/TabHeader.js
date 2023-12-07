@@ -45,7 +45,13 @@ const TabHeader = props => {
         }, 100)
       }
     }
-  }, [params.category, params.page, paginationPage])
+  }, [
+    headerRef,
+    heroContainerRef,
+    params.category,
+    params.page,
+    paginationPage,
+  ])
 
   return (
     <Header ref={ref} centerAlign={centerAlign} typeLayout={typeLayout}>

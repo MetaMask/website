@@ -4,7 +4,7 @@ import IMOG from 'src/components/PortfolioPage/Map/Canvas/Gl/lib/imog'
 import Ticker from 'src/components/PortfolioPage/Map/Canvas/Gl/lib/imog/ticker'
 import { clamp } from 'src/components/PortfolioPage/Map/Canvas/Gl/lib/math'
 
-export default (...args) => {
+const lerp = (...args) => {
   let { friction } = args[0]
   friction = friction || 0.2
   const context = IMOG.getContext()
@@ -57,3 +57,5 @@ export default (...args) => {
 
   return results
 }
+
+export default lerp

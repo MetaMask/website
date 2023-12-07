@@ -44,7 +44,7 @@ const PortfolioMapNav = props => {
       const Texts = q(`li span`)
 
       items.forEach((item, id) => {
-        gsap.set(item, { ['--width']: `${Texts[id].offsetWidth}px` })
+        gsap.set(item, { '--width': `${Texts[id].offsetWidth}px` })
       })
     }
   }, [q, isDesktop])
@@ -139,7 +139,7 @@ const PortfolioMapNav = props => {
       const Texts = q(`li span`)
 
       items.forEach((item, id) => {
-        gsap.set(item, { ['--width']: `${Texts[id].offsetWidth}px` })
+        gsap.set(item, { '--width': `${Texts[id].offsetWidth}px` })
       })
     }
   }, [isDesktop, q])
@@ -148,6 +148,7 @@ const PortfolioMapNav = props => {
     setActiveLastFeature(activeFeature)
     setActiveFeature(null)
     animationInit()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

@@ -34,7 +34,6 @@ class Ticker {
       this._requestId =
         typeof window !== `undefined` &&
         window.requestAnimationFrame(this._tickHandler)
-      const time = this.time
 
       accum += dt
       let i = 0

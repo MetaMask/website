@@ -45,7 +45,7 @@ const EmbedHtml = props => {
         }
       }
     }
-  }, [playOnPopup, iframePopupData?.length])
+  }, [cardRef, playOnPopup, iframePopupData?.length])
 
   return (
     <>

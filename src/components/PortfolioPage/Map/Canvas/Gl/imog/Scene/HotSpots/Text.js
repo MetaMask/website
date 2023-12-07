@@ -1,5 +1,4 @@
 import IMOG from 'src/components/PortfolioPage/Map/Canvas/Gl/lib/imog'
-import * as THREE from 'three'
 import { Text } from 'troika-three-text'
 
 export default IMOG.Component('Text', {

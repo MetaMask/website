@@ -76,6 +76,7 @@ const StyledCard = props => {
               <>{contentfulModuleToComponent(hubSpotForm)}</>
             ) : null}
             {cta ? (
+              // eslint-disable-next-line react/jsx-pascal-case
               <CTA>
                 {cta.map(cta =>
                   contentfulModuleToComponent({

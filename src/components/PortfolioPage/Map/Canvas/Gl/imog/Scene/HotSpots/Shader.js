@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 
-export default ({ position = new THREE.Vector3(0, 0, 0) } = {}) => ({
+const shader = ({ position = new THREE.Vector3(0, 0, 0) } = {}) => ({
   uniforms: {
     uPosition: { value: position },
     uScale: { value: 1 },
@@ -102,6 +102,8 @@ export default ({ position = new THREE.Vector3(0, 0, 0) } = {}) => ({
         // gl_FragColor.a = 1.0;
 
         #include <encodings_fragment>
-    } 
+    }
   `,
 })
+
+export default shader

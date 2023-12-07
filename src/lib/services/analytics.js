@@ -1,4 +1,4 @@
-export default `
+const analytics = `
 const DEV_WRITE_KEY = "PZkSwsTBxW1BrbyIYEUjFBEumGvTyjcz", PROD_WRITE_KEY = "MHae0tTVRqyHDim9qQ9ablSZpvm3Tvzc";
 const params = new Proxy(new URLSearchParams(window.location.search), { get: (searchParams, prop) => searchParams.get(prop), });
 const WRITE_KEY = (params.env == "production") ? PROD_WRITE_KEY : DEV_WRITE_KEY;
@@ -26,7 +26,7 @@ window.addEventListener('load', function () {
       }
       document.getElementById('submitSurvey').disabled = !count;
     };
-  
+
     const submitSurvey = function() {
       let reasons = [];
       const checkboxes = document.getElementsByName('reasons');
@@ -49,12 +49,14 @@ window.addEventListener('load', function () {
     for (let i=0; i<checkboxes.length; i++) {
       checkboxes[i].onchange = checkReasons;
     }
-    
+
     const submitSurveyButton = document.getElementById('submitSurvey');
     if(submitSurveyButton) {
       submitSurveyButton.addEventListener('click', function () {
         submitSurvey()
-      })      
+      })
     }
 });
 `
+
+export default analytics

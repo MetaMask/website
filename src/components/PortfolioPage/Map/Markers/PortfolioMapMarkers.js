@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import styled from 'styled-components'
 import PortfolioMapMarkersButton from './PortfolioMapMarkersButton'
 import withProcessPreviewData from '../../../../lib/utils/withProcessPreviewData'
@@ -25,12 +25,12 @@ const PortfolioMapMarkers = props => {
     setDetailPage(index)
   }
 
-  const startRaf = () => {
+  const startRaf = useCallback(() => {
     const pos = canvas.current.getActiveHotspotPinPosition()
     setMapCoordX(Math.round(pos.x))
     setMapCoordY(Math.round(pos.y))
     if (activeFeature !== null) rafRef.current = requestAnimationFrame(startRaf)
-  }
+  }, [activeFeature, canvas])
 
   useEffect(() => {
     if (activeFeature !== null) {
@@ -38,7 +38,7 @@ const PortfolioMapMarkers = props => {
     } else {
       cancelAnimationFrame(rafRef.current)
     }
-  }, [activeFeature])
+  }, [activeFeature, startRaf])
 
   return (
     <Wrapper>

@@ -79,6 +79,7 @@ const StyledCard = props => {
               </CTAWrapper>
             ) : null}
             {cta ? (
+              // eslint-disable-next-line react/jsx-pascal-case
               <CTA>
                 {cta.map(cta =>
                   contentfulModuleToComponent({
@@ -139,7 +140,7 @@ const CardInner = styled(Link)`
       background-color: #1b1b1b;
     }
   }
-  
+
   &:hover {
     .arrowAnimation:after {
       margin-left: 6px;
@@ -164,7 +165,7 @@ const CardInner = styled(Link)`
       background-position: center;
   `
       : null}
-  
+
   ${({ $image }) =>
     $image
       ? `

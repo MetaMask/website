@@ -234,6 +234,7 @@ const PortfolioMapSidebar = props => {
         animationOut(onCompleteFn)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [detailPage, setShow])
 
   const renderIcon = (icon, color) => {

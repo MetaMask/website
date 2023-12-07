@@ -1,9 +1,9 @@
 import { isFunction } from 'underscore'
-import { observable, observe, unobserve } from '@nx-js/observer-util'
+import { observable, observe } from '@nx-js/observer-util'
 import { clamp } from 'src/components/PortfolioPage/Map/Canvas/Gl/lib/math'
 import IMOG from 'src/components/PortfolioPage/Map/Canvas/Gl/lib/imog'
 
-export default ({
+const wheel = ({
   active = true,
   min = -Infinity,
   max = +Infinity,
@@ -50,3 +50,5 @@ export default ({
 
   return result
 }
+
+export default wheel

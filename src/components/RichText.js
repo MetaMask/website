@@ -10,6 +10,7 @@ const RichText = props => {
     <RichTextWrapper id={moduleId || kebabCase(title || '')}>
       {displayTitle && <RichTextTitle> {title} </RichTextTitle>}
       {html && (
+        // eslint-disable-next-line react/jsx-pascal-case
         <HTML className="richText" dangerouslySetInnerHTML={{ __html: html }} />
       )}
       {!html && content && <Markdown content={content} />}

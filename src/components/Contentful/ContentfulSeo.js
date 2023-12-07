@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import SEO from '../Seo'
 
 const ContentfulSeo = props => {
@@ -22,6 +21,7 @@ const ContentfulSeo = props => {
   const [ex_metaTags, ex_linkTags] = [metaTags, linkTags].map(extractTags)
 
   return (
+    // eslint-disable-next-line react/jsx-pascal-case
     <SEO
       title={pageTitle}
       description={pageDescription}

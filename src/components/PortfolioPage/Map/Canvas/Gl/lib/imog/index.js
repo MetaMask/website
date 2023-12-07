@@ -1,4 +1,4 @@
-import _, {
+import {
   difference,
   each,
   isArray,

@@ -11,7 +11,7 @@ const springConfig = {
   mass: 1,
 }
 
-export default ({
+const drag = ({
   active = true,
   bounds = { x: null, y: null },
   domElement = null,
@@ -196,3 +196,5 @@ export default ({
 
   return { result, api }
 }
+
+export default drag
