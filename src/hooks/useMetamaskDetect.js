@@ -1,15 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import { MetaMaskSDK } from '@metamask/sdk'
 
 export function useMetamaskDetect() {
-  // eslint-disable-next-line no-unused-vars
-  const MMSDK = new MetaMaskSDK({
-    dappMetadata: {
-      name: 'MetaMask',
-      url: 'https://metamask.io',
-    },
-  })
-
   const [isMetaMaskInstalled, _setIsMetaMaskInstalled] = useState(false)
   const isMetaMaskInstalledRef = useRef(isMetaMaskInstalled)
 
@@ -26,9 +17,8 @@ export function useMetamaskDetect() {
 
     window.addEventListener('eip6963:announceProvider', checkMetaMask)
 
-    return () => {
+    return () =>
       window.removeEventListener('eip6963:announceProvider', checkMetaMask)
-    }
   }, [])
 
   return isMetaMaskInstalled

@@ -15,13 +15,14 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v3 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        uses: actions/checkout@v4 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
         with:
           persist-credentials: false
 
       - name: Create development env file
         run: |
           touch gatsby.development.env
+          echo GATSBY_LD_CLIENT_ID =${{ secrets.GATSBY_LD_CLIENT_ID }} >> gatsby.development.env
           echo GATSBY_CONTENTFUL_API_KEY =${{ secrets.GATSBY_CONTENTFUL_API_KEY }} >> gatsby.development.env
           echo GATSBY_CONTENTFUL_DOWNLOAD_LOCAL =${{ secrets.GATSBY_CONTENTFUL_DOWNLOAD_LOCAL }} >> gatsby.development.env
           echo GATSBY_CONTENTFUL_ENVIRONMENT =${{ secrets.GATSBY_CONTENTFUL_ENVIRONMENT }} >> gatsby.development.env
@@ -35,23 +36,25 @@ jobs:
           echo GH_TOKEN =${{ secrets.GH_TOKEN }} >> gatsby.development.env
 
       - name: Read .nvmrc
-        run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
+        run: echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_ENV
         id: nvm
 
-      - name: Install and Build 🔧
-        uses: actions/setup-node@v1
+      - name: Setup Node.js 🔧
+        uses: actions/setup-node@v4
         with:
-          node-version: "${{ steps.nvm.outputs.NVMRC }}"
-      - run: |
-          yarn
+          node-version: ${{ env.NVMRC }}
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
+
+      - name: Install and Build 🔧
+        run: |
+          yarn install --frozen-lockfile
           yarn deploy:dev
         env:
           CI: true
 
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.6.2
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: public # The folder the action should deploy.
-          CLEAN: true # Automatically remove deleted files from the deploy branch
+          folder: public # The folder the action should deploy.
+          clean: true # Automatically remove deleted files from the deploy branch

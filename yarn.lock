@@ -2025,7 +2025,7 @@
   resolved "https://registry.yarnpkg.com/@metamask/safe-event-emitter/-/safe-event-emitter-3.0.0.tgz#8c2b9073fe0722d48693143b0dc8448840daa3bd"
   integrity sha512-j6Z47VOmVyGMlnKXZmL0fyvWfEYtKWCA9yGZkU3FCsGZUT5lHGmvaV9JA5F2Y+010y7+ROtR3WMXIkvl/nVzqQ==
 
-"@metamask/sdk-communication-layer@0.14.1":
+"@metamask/sdk-communication-layer@0.14.1", "@metamask/sdk-communication-layer@^0.14.1":
   version "0.14.1"
   resolved "https://registry.yarnpkg.com/@metamask/sdk-communication-layer/-/sdk-communication-layer-0.14.1.tgz#44068259a8bdfee7c4bb43519173985d96c3dfbe"
   integrity sha512-K1KhkKMdAAPi079G/bX/cIazqT6qnkRnykrs7nA1sU2BouG7BYD4qPgv7ridc3BNIewnFg9eMzzYIgOgfXzJKw==
@@ -2051,6 +2051,16 @@
     react "^18.2.0"
     react-dom "^18.2.0"
     react-i18next "^13.2.2"
+
+"@metamask/sdk-react@^0.14.1":
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/@metamask/sdk-react/-/sdk-react-0.14.1.tgz#94ebe58de973519afed928493659fd2f34eb452a"
+  integrity sha512-7tckYuLPqBciHZdBR+1BrfJFH4Qu6PTilyGttY7qD8T1hk4Jj2otWvXAKZwGAFcRRuMUBQiZUCfJ4iPRRnYNuA==
+  dependencies:
+    "@metamask/sdk" "^0.14.1"
+    "@metamask/sdk-communication-layer" "^0.14.1"
+    "@react-native-async-storage/async-storage" "^1.19.6"
+    eth-rpc-errors "^4.0.3"
 
 "@metamask/sdk@^0.14.1":
   version "0.14.1"
@@ -2548,7 +2558,7 @@
     "@pnpm/network.ca-file" "^1.0.1"
     config-chain "^1.1.11"
 
-"@react-native-async-storage/async-storage@^1.17.11":
+"@react-native-async-storage/async-storage@^1.17.11", "@react-native-async-storage/async-storage@^1.19.6":
   version "1.21.0"
   resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.21.0.tgz#d7e370028e228ab84637016ceeb495878b7a44c8"
   integrity sha512-JL0w36KuFHFCvnbOXRekqVAUplmOyT/OuCQkogo6X98MtpSaJOKEAeZnYO8JB0U/RIEixZaGI5px73YbRm/oag==
