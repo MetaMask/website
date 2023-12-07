@@ -10,11 +10,15 @@ const ContentfulLayoutHero = props => {
       backgroundImageDarkMode,
       ctas,
       description,
+      descriptionPortfolio,
       note,
       headline,
+      headlinePortfolio,
       modules,
       sideImage = {},
+      sideImagePortfolio = {},
       sideImageDarkMode = {},
+      sideImagePortfolioDarkMode = {},
       sideImageFlex = false,
       sideImageFoxAnimation = false,
       eyebrow,
@@ -36,14 +40,23 @@ const ContentfulLayoutHero = props => {
       customClass,
     },
   } = props
+
   const { childMarkdownRemark: { html } = {} } = description || {}
+  const { childMarkdownRemark: { htmlPortfolio } = {} } =
+    descriptionPortfolio || {}
 
   return (
     <Hero
       sectionPadding={sectionPadding}
       isFaq={isFaq}
       headline={headline}
+      headlinePortfolio={headlinePortfolio ?? headline}
       description={previewMode ? description : html}
+      descriptionPortfolio={
+        previewMode
+          ? descriptionPortfolio ?? description
+          : htmlPortfolio ?? html
+      }
       note={note}
       eyebrow={eyebrow}
       eyebrowLogo={eyebrowLogo}
@@ -54,7 +67,9 @@ const ContentfulLayoutHero = props => {
       backgroundImageDarkMode={backgroundImageDarkMode}
       modules={modules}
       sideImage={sideImage}
+      sideImagePortfolio={sideImagePortfolio ?? sideImage}
       sideImageDarkMode={sideImageDarkMode}
+      sideImagePortfolioDarkMode={sideImagePortfolioDarkMode}
       hideHeadline={hideHeadline}
       showLearnMore={showLearnMore}
       showFavIcon={showFavIcon}
@@ -93,6 +108,9 @@ ContentfulLayoutHero.propTypes = {
     eyebrowLogo: PropTypes.object,
     eyebrowMobileLogo: PropTypes.object,
     sideImage: PropTypes.object,
+    sideImageDarkMode: PropTypes.object,
+    sideImagePortfolio: PropTypes.object,
+    sideImagePortfolioDarkMode: PropTypes.object,
     backgroundImage: PropTypes.object,
     backgroundImageDarkMode: PropTypes.object,
     ctaLink: PropTypes.string,
@@ -100,8 +118,13 @@ ContentfulLayoutHero.propTypes = {
     backgroundColor: PropTypes.string,
     layout: PropTypes.string,
     description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    descriptionPortfolio: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.string,
+    ]),
     note: PropTypes.string,
     headline: PropTypes.string,
+    headlinePortfolio: PropTypes.string,
     hideHeadline: PropTypes.bool,
     headlineBorderBottom: PropTypes.bool,
     sideImageFlex: PropTypes.bool,

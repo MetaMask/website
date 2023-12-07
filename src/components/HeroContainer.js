@@ -22,11 +22,15 @@ const HeroContainerComponent = props => {
     backgroundImage,
     backgroundImageDarkMode,
     headline,
+    headlinePortfolio,
     hideHeadline,
     description,
+    descriptionPortfolio,
     note,
     sideImage,
+    sideImagePortfolio,
     sideImageDarkMode,
+    sideImagePortfolioDarkMode,
     showLearnMore,
     eyebrow,
     eyebrowLogo,
@@ -262,7 +266,11 @@ const HeroContainerComponent = props => {
                           entryId: contentfulId,
                           fieldId: 'headline',
                         })}
-                        dangerouslySetInnerHTML={{ __html: headline }}
+                        dangerouslySetInnerHTML={{
+                          __html: isMetaMaskInstalled
+                            ? headlinePortfolio
+                            : headline,
+                        }}
                       />
                     </HeroTitle>
                   )}
@@ -298,10 +306,18 @@ const HeroContainerComponent = props => {
                         : {})}
                     >
                       {previewMode ? (
-                        <ParseMD>{description}</ParseMD>
+                        <ParseMD>
+                          {isMetaMaskInstalled
+                            ? descriptionPortfolio
+                            : description}
+                        </ParseMD>
                       ) : (
                         <div
-                          dangerouslySetInnerHTML={{ __html: description }}
+                          dangerouslySetInnerHTML={{
+                            __html: isMetaMaskInstalled
+                              ? descriptionPortfolio
+                              : description,
+                          }}
                         />
                       )}
                     </HeroDescription>
@@ -371,8 +387,14 @@ const HeroContainerComponent = props => {
                     {!sideImageFoxAnimation &&
                     (isStyleHubspot || sideImageFlex || isFlask) ? (
                       <Image
-                        image={sideImage}
-                        darkImage={sideImageDarkMode}
+                        image={
+                          isMetaMaskInstalled ? sideImagePortfolio : sideImage
+                        }
+                        darkImage={
+                          isMetaMaskInstalled
+                            ? sideImagePortfolioDarkMode
+                            : sideImageDarkMode
+                        }
                         lazyLoad={!isInstitutions}
                         previewMode={previewMode}
                       />
