@@ -32,7 +32,7 @@ export const wrapRootElement = ({ element }) => {
         sdkOptions={{
           dappMetadata: {
             name: 'MetaMask',
-            url: window.location.host,
+            url: window.location.origin,
           },
         }}
       >

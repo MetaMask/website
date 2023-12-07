@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 
 export function useMetamaskDetect() {
-  const [isMetaMaskInstalled, _setIsMetaMaskInstalled] = useState(false)
+  const [isMetaMaskInstalled, _setIsMetaMaskInstalled] = useState()
   const isMetaMaskInstalledRef = useRef(isMetaMaskInstalled)
 
   const setIsMetaMaskInstalled = v => {

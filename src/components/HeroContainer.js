@@ -110,6 +110,11 @@ const HeroContainerComponent = props => {
   }
 
   const isMetaMaskInstalled = useMetamaskDetect()
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (loading && typeof isMetaMaskInstalled === 'boolean') setLoading(false)
+  }, [isMetaMaskInstalled])
 
   return (
     <>
@@ -267,7 +272,9 @@ const HeroContainerComponent = props => {
                           fieldId: 'headline',
                         })}
                         dangerouslySetInnerHTML={{
-                          __html: isMetaMaskInstalled
+                          __html: loading
+                            ? '&nbsp;'
+                            : isMetaMaskInstalled
                             ? headlinePortfolio
                             : headline,
                         }}
@@ -307,14 +314,18 @@ const HeroContainerComponent = props => {
                     >
                       {previewMode ? (
                         <ParseMD>
-                          {isMetaMaskInstalled
+                          {loading
+                            ? '&nbsp;'
+                            : isMetaMaskInstalled
                             ? descriptionPortfolio
                             : description}
                         </ParseMD>
                       ) : (
                         <div
                           dangerouslySetInnerHTML={{
-                            __html: isMetaMaskInstalled
+                            __html: loading
+                              ? '&nbsp;'
+                              : isMetaMaskInstalled
                               ? descriptionPortfolio
                               : description,
                           }}
@@ -349,11 +360,15 @@ const HeroContainerComponent = props => {
                           })
                         : {})}
                     >
-                      {contentfulModuleToComponent({
-                        ...ctas[ctas.length > 1 && isMetaMaskInstalled ? 1 : 0],
-                        buttonSize: 'hero',
-                        previewMode,
-                      })}
+                      {loading
+                        ? null
+                        : contentfulModuleToComponent({
+                            ...ctas[
+                              ctas.length > 1 && isMetaMaskInstalled ? 1 : 0
+                            ],
+                            buttonSize: 'hero',
+                            previewMode,
+                          })}
                     </HeroCTA>
                   ) : null}
                   {note && (
@@ -386,18 +401,20 @@ const HeroContainerComponent = props => {
                     {sideImageFoxAnimation ? <FoxAnimation /> : null}
                     {!sideImageFoxAnimation &&
                     (isStyleHubspot || sideImageFlex || isFlask) ? (
-                      <Image
-                        image={
-                          isMetaMaskInstalled ? sideImagePortfolio : sideImage
-                        }
-                        darkImage={
-                          isMetaMaskInstalled
-                            ? sideImagePortfolioDarkMode
-                            : sideImageDarkMode
-                        }
-                        lazyLoad={!isInstitutions}
-                        previewMode={previewMode}
-                      />
+                      loading ? null : (
+                        <Image
+                          image={
+                            isMetaMaskInstalled ? sideImagePortfolio : sideImage
+                          }
+                          darkImage={
+                            isMetaMaskInstalled
+                              ? sideImagePortfolioDarkMode
+                              : sideImageDarkMode
+                          }
+                          lazyLoad={!isInstitutions}
+                          previewMode={previewMode}
+                        />
+                      )
                     ) : null}
                   </HeroSideImage>
                 ) : null}
