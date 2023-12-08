@@ -110,11 +110,6 @@ const HeroContainerComponent = props => {
   }
 
   const isMetaMaskInstalled = useMetamaskDetect()
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    if (loading && typeof isMetaMaskInstalled === 'boolean') setLoading(false)
-  }, [isMetaMaskInstalled])
 
   return (
     <>
@@ -272,9 +267,7 @@ const HeroContainerComponent = props => {
                           fieldId: 'headline',
                         })}
                         dangerouslySetInnerHTML={{
-                          __html: loading
-                            ? '&nbsp;'
-                            : isMetaMaskInstalled
+                          __html: isMetaMaskInstalled
                             ? headlinePortfolio
                             : headline,
                         }}
@@ -314,18 +307,14 @@ const HeroContainerComponent = props => {
                     >
                       {previewMode ? (
                         <ParseMD>
-                          {loading
-                            ? '&nbsp;'
-                            : isMetaMaskInstalled
+                          {isMetaMaskInstalled
                             ? descriptionPortfolio
                             : description}
                         </ParseMD>
                       ) : (
                         <div
                           dangerouslySetInnerHTML={{
-                            __html: loading
-                              ? '&nbsp;'
-                              : isMetaMaskInstalled
+                            __html: isMetaMaskInstalled
                               ? descriptionPortfolio
                               : description,
                           }}
@@ -360,15 +349,11 @@ const HeroContainerComponent = props => {
                           })
                         : {})}
                     >
-                      {loading
-                        ? null
-                        : contentfulModuleToComponent({
-                            ...ctas[
-                              ctas.length > 1 && isMetaMaskInstalled ? 1 : 0
-                            ],
-                            buttonSize: 'hero',
-                            previewMode,
-                          })}
+                      {contentfulModuleToComponent({
+                        ...ctas[ctas.length > 1 && isMetaMaskInstalled ? 1 : 0],
+                        buttonSize: 'hero',
+                        previewMode,
+                      })}
                     </HeroCTA>
                   ) : null}
                   {note && (
@@ -401,20 +386,18 @@ const HeroContainerComponent = props => {
                     {sideImageFoxAnimation ? <FoxAnimation /> : null}
                     {!sideImageFoxAnimation &&
                     (isStyleHubspot || sideImageFlex || isFlask) ? (
-                      loading ? null : (
-                        <Image
-                          image={
-                            isMetaMaskInstalled ? sideImagePortfolio : sideImage
-                          }
-                          darkImage={
-                            isMetaMaskInstalled
-                              ? sideImagePortfolioDarkMode
-                              : sideImageDarkMode
-                          }
-                          lazyLoad={!isInstitutions}
-                          previewMode={previewMode}
-                        />
-                      )
+                      <Image
+                        image={
+                          isMetaMaskInstalled ? sideImagePortfolio : sideImage
+                        }
+                        darkImage={
+                          isMetaMaskInstalled
+                            ? sideImagePortfolioDarkMode
+                            : sideImageDarkMode
+                        }
+                        lazyLoad={!isInstitutions}
+                        previewMode={previewMode}
+                      />
                     ) : null}
                   </HeroSideImage>
                 ) : null}
@@ -441,7 +424,7 @@ const HeroContainerComponent = props => {
           </ContentWrapper>
         </GatsbyBackgroundImage>
       </HeroContainer>
-      {showLearnMore && !loading ? (
+      {showLearnMore ? (
         <div>
           <ContentWrapper>
             <LearnMoreWrapper>
