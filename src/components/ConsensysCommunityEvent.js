@@ -4,6 +4,9 @@ import styled, { withTheme } from 'styled-components'
 import consensysData from '../lib/api/consensys/getData'
 import Loading from './Loading'
 
+const defaultThumbnail =
+  'https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-consensys/contentbuilder/event_THB.png'
+
 const convertDate = dateString => {
   if (!dateString) return
   const options = { month: 'short', day: 'numeric' }
@@ -29,7 +32,7 @@ const ConsensysCommunityEvent = props => {
           }
           data = data.map(item => ({
             id: item.id,
-            thumbnail: encodeURI(item.picture_url),
+            thumbnail: encodeURI(item.picture_url || defaultThumbnail),
             title: item.title,
             description: item.description_short,
             date: convertDate(item.start_date_iso),
