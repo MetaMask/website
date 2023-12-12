@@ -588,8 +588,10 @@ export const ContentfulLayoutHeroFields = gql`
     }
     title
     headline
+    headlinePortfolio
     hideHeadline
     description
+    descriptionPortfolio
     note
     eyebrow
     eyebrowLogo(preview: true) {
@@ -611,7 +613,17 @@ export const ContentfulLayoutHeroFields = gql`
       description
       url
     }
+    sideImagePortfolio(preview: true) {
+      title
+      description
+      url
+    }
     sideImageDarkMode(preview: true) {
+      title
+      description
+      url
+    }
+    sideImagePortfolioDarkMode(preview: true) {
       title
       description
       url
