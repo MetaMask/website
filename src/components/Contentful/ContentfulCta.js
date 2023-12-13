@@ -7,7 +7,7 @@ import CTA from '../CTA'
 
 const ContentfulCta = props => {
   const isMetaMaskInstalled = useMetamaskDetect()
-  console.log(props.moduleConfig.alternativeCta)
+
   const activeCta =
     isMetaMaskInstalled && !isEmpty(props.moduleConfig.alternativeCta)
       ? props.moduleConfig.alternativeCta
