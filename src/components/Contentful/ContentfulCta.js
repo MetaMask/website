@@ -1,12 +1,12 @@
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
-import { useMetamaskDetect } from '../../hooks/useMetamaskDetect'
+import { MetaMaskContext } from '../../Context/MetaMaskContextProvider'
+import React, { useContext } from 'react'
 import isEmpty from 'lodash/isEmpty'
 import PropTypes from 'prop-types'
-import React from 'react'
 import CTA from '../CTA'
 
 const ContentfulCta = props => {
-  const isMetaMaskInstalled = useMetamaskDetect()
+  const { isMetaMaskInstalled } = useContext(MetaMaskContext)
 
   const activeCta =
     isMetaMaskInstalled && !isEmpty(props.moduleConfig.alternativeCta)
