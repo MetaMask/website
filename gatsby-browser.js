@@ -8,13 +8,9 @@ import MetaMaskContextProvider from './src/Context/MetaMaskContextProvider'
 require('prismjs/themes/prism.css')
 require('prismjs/plugins/line-numbers/prism-line-numbers.css')
 
-export const wrapPageElement = ({ element, props }) => {
-  return (
-    <ClientSideWrapper {...props}>
-      <MetaMaskContextProvider>{element}</MetaMaskContextProvider>
-    </ClientSideWrapper>
-  )
-}
+export const wrapPageElement = ({ element, props }) => (
+  <ClientSideWrapper {...props}>{element}</ClientSideWrapper>
+)
 
 export const wrapRootElement = ({ element }) => {
   // Check if the LaunchDarkly client ID is defined
@@ -41,7 +37,7 @@ export const wrapRootElement = ({ element }) => {
           },
         }}
       >
-        {element}
+        <MetaMaskContextProvider>{element}</MetaMaskContextProvider>
       </MetaMaskProvider>
     </LDProvider>
   )
