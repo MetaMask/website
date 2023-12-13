@@ -71,9 +71,15 @@ const ContentfulLayoutHero = props => {
       backgroundImageDarkMode={backgroundImageDarkMode}
       modules={modules}
       sideImage={sideImage}
-      sideImagePortfolio={sideImagePortfolio}
+      sideImagePortfolio={
+        !isEmpty(sideImagePortfolio) ? sideImagePortfolio : sideImage
+      }
       sideImageDarkMode={sideImageDarkMode}
-      sideImagePortfolioDarkMode={sideImagePortfolioDarkMode}
+      sideImagePortfolioDarkMode={
+        !isEmpty(sideImagePortfolioDarkMode)
+          ? sideImagePortfolioDarkMode
+          : sideImageDarkMode
+      }
       hideHeadline={hideHeadline}
       showLearnMore={showLearnMore}
       showFavIcon={showFavIcon}
