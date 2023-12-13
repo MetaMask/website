@@ -11,7 +11,6 @@ import ParseMD from './ParseMD'
 import getWebpImage from '../lib/utils/getWebpImage'
 import ContextClientSide from '../Context/ContextClientSide'
 import isEmpty from 'lodash/isEmpty'
-import { useMetamaskDetect } from '../hooks/useMetamaskDetect'
 
 const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
 
@@ -43,7 +42,6 @@ const FullWidthCta = props => {
 
   const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
-  const isMetaMaskInstalled = useMetamaskDetect()
 
   const isMobile = useMediaQuery({
     query: '(max-width: 767px)',
@@ -132,10 +130,12 @@ const FullWidthCta = props => {
             ) : null}
             {!isEmpty(ctas) ? (
               <CTAWrapper>
-                {contentfulModuleToComponent({
-                  ...ctas[ctas.length > 1 && isMetaMaskInstalled ? 1 : 0],
-                  previewMode,
-                })}
+                {ctas.map(cta =>
+                  contentfulModuleToComponent({
+                    ...cta,
+                    previewMode,
+                  })
+                )}
               </CTAWrapper>
             ) : null}
           </FullWidthCtaInner>

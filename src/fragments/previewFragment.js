@@ -236,6 +236,9 @@ export const ContentfulCtaFields = gql`
     }
     downloadBrowsers
     showCaretRight
+    alternativeCta {
+      ...ContentfulCtaFields
+    }
   }
 `
 

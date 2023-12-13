@@ -290,7 +290,7 @@ const HeroContainerComponent = props => {
                       )}
                     </HeroDescription>
                   )}
-                  {!isEmpty(ctas) && !isFlask && !isHome ? (
+                  {!isEmpty(ctas) && !isFlask ? (
                     <HeroCTA>
                       {ctas.map(cta =>
                         contentfulModuleToComponent({
@@ -299,15 +299,6 @@ const HeroContainerComponent = props => {
                           previewMode,
                         })
                       )}
-                    </HeroCTA>
-                  ) : null}
-                  {!isEmpty(ctas) && isHome ? (
-                    <HeroCTA>
-                      {contentfulModuleToComponent({
-                        ...ctas[ctas.length > 1 && isMetaMaskInstalled ? 1 : 0],
-                        buttonSize: 'hero',
-                        previewMode,
-                      })}
                     </HeroCTA>
                   ) : null}
                   {note && <HeroNote>{note}</HeroNote>}
