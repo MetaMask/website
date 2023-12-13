@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Hero from '../HeroContainer'
+import isEmpty from 'lodash/isEmpty'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
 const ContentfulLayoutHero = props => {
@@ -53,8 +54,12 @@ const ContentfulLayoutHero = props => {
       description={previewMode ? description : html}
       descriptionPortfolio={
         previewMode
-          ? descriptionPortfolio ?? description
-          : htmlPortfolio ?? html
+          ? !isEmpty(descriptionPortfolio)
+            ? descriptionPortfolio
+            : description
+          : !isEmpty(htmlPortfolio)
+          ? htmlPortfolio
+          : html
       }
       note={note}
       eyebrow={eyebrow}
