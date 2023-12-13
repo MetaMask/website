@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Hero from '../HeroContainer'
+import isEmpty from 'lodash/isEmpty'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
 const ContentfulLayoutHero = props => {
