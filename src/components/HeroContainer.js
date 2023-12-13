@@ -13,7 +13,7 @@ import Context from '../Context/ContextPage'
 import Loadable from '@loadable/component'
 import ParseMD from './ParseMD'
 import GatsbyBackgroundImage from './GatsbyBackgroundImage'
-import { useMetamaskDetect } from '../hooks/useMetamaskDetect'
+import { MetaMaskContext } from '../Context/MetaMaskContextProvider'
 
 const FoxAnimation = Loadable(() => import('./FoxAnimation/'))
 
@@ -53,6 +53,7 @@ const HeroContainerComponent = props => {
   } = props
 
   const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
+  const { isMetaMaskInstalled } = useContext(MetaMaskContext)
   const { isDarkMode } = darkModeContextValue || {}
   const inspectorProps = useContentfulInspectorMode()
 
@@ -63,7 +64,6 @@ const HeroContainerComponent = props => {
   const isInstitutions = customClass?.includes('page-institutions')
   const isInstitutionalChild = customClass?.includes('page-institutional-child')
   const isThankYou = customClass?.includes('page-thank-you')
-  const isMetaMaskInstalled = useMetamaskDetect()
 
   let hubspotWrapper
   if (hubSpotForm) {
