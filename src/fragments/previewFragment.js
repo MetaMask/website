@@ -57,10 +57,10 @@ export const ContentfulHubSpotFormFields = gql`
   }
 `
 
-export const ContentfulCtaBaseFields = gql`
+export const ContentfulCtaFields = gql`
   ${ContentfulHubSpotFormFields}
   ${ContentfulEmbedFields}
-  fragment ContentfulCtaBaseFields on Cta {
+  fragment ContentfulCtaFields on Cta {
     __typename
     sys {
       id
@@ -84,14 +84,8 @@ export const ContentfulCtaBaseFields = gql`
       ...ContentfulEmbedFields
     }
     downloadBrowsers
-  }
-`
-
-export const ContentfulCtaFields = gql`
-  fragment ContentfulCtaFields on ContentfulCta {
-    ...ContentfulCtaBaseFields
     alternativeCta {
-      ...ContentfulCtaBaseFields
+      ...ContentfulCtaFields
     }
   }
 `

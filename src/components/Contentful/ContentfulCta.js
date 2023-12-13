@@ -5,72 +5,20 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import CTA from '../CTA'
 
-const ContentfulCta = ({
-  moduleConfig: {
-    ctaLink,
-    ctaText,
-    newTab,
-    buttonDisplay,
-    iconConfig,
-    ctaAlignment,
-    displayText,
-    typeLayout = '',
-    showRightArrow = false,
-    showLeftArrow = false,
-    color = 'primary',
-    buttonSize,
-    customClick,
-    fontSize,
-    buttonGradient,
-    downloadBrowsers,
-    eventCategory,
-    eventLabel,
-    hubSpotForm,
-    embedHTML,
-    buttonSecondary,
-    socialLink,
-    showCaretRight,
-    alternativeCta,
-    previewMode = false,
-  },
-}) => {
+const ContentfulCta = props => {
   const isMetaMaskInstalled = useMetamaskDetect()
-
-  if (isMetaMaskInstalled && !isEmpty(alternativeCta)) {
-    var {
-      ctaLink,
-      ctaText,
-      newTab,
-      buttonDisplay,
-      iconConfig,
-      ctaAlignment,
-      displayText,
-      typeLayout = '',
-      showRightArrow = false,
-      showLeftArrow = false,
-      color = 'primary',
-      buttonSize,
-      customClick,
-      fontSize,
-      buttonGradient,
-      downloadBrowsers,
-      eventCategory,
-      eventLabel,
-      hubSpotForm,
-      embedHTML,
-      buttonSecondary,
-      socialLink,
-      showCaretRight,
-      previewMode = false,
-    } = alternativeCta
-  }
+  console.log(props.moduleConfig.alternativeCta)
+  const activeCta =
+    isMetaMaskInstalled && !isEmpty(props.moduleConfig.alternativeCta)
+      ? props.moduleConfig.alternativeCta
+      : props.moduleConfig
 
   // check work with preview
   const extractBrowsers = item =>
     item?.internal?.content ? JSON.parse(item.internal.content) : item
 
-  const arrayBrowsers = downloadBrowsers
-    ? downloadBrowsers.map(extractBrowsers)
+  const arrayBrowsers = activeCta.downloadBrowsers
+    ? activeCta.downloadBrowsers.map(extractBrowsers)
     : []
 
   const browsers = arrayBrowsers.reduce(
@@ -81,29 +29,29 @@ const ContentfulCta = ({
   return (
     // eslint-disable-next-line react/jsx-pascal-case
     <CTA
-      link={ctaLink}
-      text={displayText || ctaText}
-      newTab={newTab}
-      iconConfig={iconConfig}
-      button={buttonDisplay}
-      align={ctaAlignment}
-      color={color}
-      typeLayout={typeLayout}
-      showRightArrow={showRightArrow}
-      showLeftArrow={showLeftArrow}
-      buttonSize={buttonSize}
-      customClick={customClick}
-      fontSize={fontSize}
-      buttonGradient={buttonGradient}
+      link={activeCta.ctaLink}
+      text={activeCta.displayText || activeCta.ctaText}
+      newTab={activeCta.newTab}
+      iconConfig={activeCta.iconConfig}
+      button={activeCta.buttonDisplay}
+      align={activeCta.ctaAlignment}
+      color={activeCta.color}
+      typeLayout={activeCta.typeLayout}
+      showRightArrow={activeCta.showRightArrow}
+      showLeftArrow={activeCta.showLeftArrow}
+      buttonSize={activeCta.buttonSize}
+      customClick={activeCta.customClick}
+      fontSize={activeCta.fontSize}
+      buttonGradient={activeCta.buttonGradient}
       downloadBrowsers={browsers}
-      eventCategory={eventCategory}
-      eventLabel={eventLabel}
-      hubSpotForm={hubSpotForm}
-      embedHTML={embedHTML}
-      buttonSecondary={buttonSecondary}
-      socialLink={socialLink}
-      showCaretRight={showCaretRight}
-      previewMode={previewMode}
+      eventCategory={activeCta.eventCategory}
+      eventLabel={activeCta.eventLabel}
+      hubSpotForm={activeCta.hubSpotForm}
+      embedHTML={activeCta.embedHTML}
+      buttonSecondary={activeCta.buttonSecondary}
+      socialLink={activeCta.socialLink}
+      showCaretRight={activeCta.showCaretRight}
+      previewMode={activeCta.previewMode}
     />
   )
 }

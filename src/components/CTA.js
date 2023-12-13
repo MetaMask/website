@@ -53,11 +53,9 @@ const CTA = props => {
   const [showPopup, setShowPopup] = React.useState(false)
   let text = textDefault,
     ctaLink = linkDefault,
-    label = eventLabel,
     lowerBrowserName = lowerCase(browserName),
     iconBrowser = ''
   if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
-    label = eventLabel?.replace('$browser', downloadBrowsers[keyBrowser]?.text)
     text = textDefault?.replace('$browser', downloadBrowsers[keyBrowser]?.text)
     if (
       ['ios', 'android', 'not-supported'].includes(keyBrowser) &&
