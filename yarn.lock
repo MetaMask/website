@@ -7231,15 +7231,6 @@ gatsby-parcel-config@1.12.1:
     "@parcel/transformer-js" "2.8.3"
     "@parcel/transformer-json" "2.8.3"
 
-gatsby-plugin-google-analytics@^5.0.0:
-  version "5.10.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-analytics/-/gatsby-plugin-google-analytics-5.10.0.tgz#a3744a323b400448be1bb0397879eabe994950d0"
-  integrity sha512-zMvqqOVyTx2IB3i3ObDL7mAAwyLW0ehniKeXj1oxx2gHF6hea0QxJ5GWl6+vtvCiBqI1/ZCwrS6zGwsxkMYd9w==
-  dependencies:
-    "@babel/runtime" "^7.20.13"
-    minimatch "^3.1.2"
-    web-vitals "^1.1.2"
-
 gatsby-plugin-google-tagmanager@^5.11.0:
   version "5.11.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-google-tagmanager/-/gatsby-plugin-google-tagmanager-5.11.0.tgz#48b61d5539ce0c90f95b2433c80ca64142f3a558"
