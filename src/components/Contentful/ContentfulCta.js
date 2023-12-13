@@ -1,11 +1,43 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import CTA from '../CTA'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
+import { useMetamaskDetect } from '../../hooks/useMetamaskDetect'
+import isEmpty from 'lodash/isEmpty'
+import PropTypes from 'prop-types'
+import React from 'react'
+import CTA from '../CTA'
 
-const ContentfulCta = props => {
-  const {
-    moduleConfig: {
+const ContentfulCta = ({
+  moduleConfig: {
+    ctaLink,
+    ctaText,
+    newTab,
+    buttonDisplay,
+    iconConfig,
+    ctaAlignment,
+    displayText,
+    typeLayout = '',
+    showRightArrow = false,
+    showLeftArrow = false,
+    color = 'primary',
+    buttonSize,
+    customClick,
+    fontSize,
+    buttonGradient,
+    downloadBrowsers,
+    eventCategory,
+    eventLabel,
+    hubSpotForm,
+    embedHTML,
+    buttonSecondary,
+    socialLink,
+    showCaretRight,
+    alternativeCta,
+    previewMode = false,
+  },
+}) => {
+  const isMetaMaskInstalled = useMetamaskDetect()
+
+  if (isMetaMaskInstalled && !isEmpty(alternativeCta)) {
+    var {
       ctaLink,
       ctaText,
       newTab,
@@ -30,18 +62,22 @@ const ContentfulCta = props => {
       socialLink,
       showCaretRight,
       previewMode = false,
-    },
-  } = props
+    } = alternativeCta
+  }
+
   // check work with preview
   const extractBrowsers = item =>
     item?.internal?.content ? JSON.parse(item.internal.content) : item
+
   const arrayBrowsers = downloadBrowsers
     ? downloadBrowsers.map(extractBrowsers)
     : []
+
   const browsers = arrayBrowsers.reduce(
     (obj, cur) => ({ ...obj, [cur.name]: cur }),
     {}
   )
+
   return (
     // eslint-disable-next-line react/jsx-pascal-case
     <CTA

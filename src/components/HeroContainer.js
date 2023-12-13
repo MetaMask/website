@@ -63,6 +63,7 @@ const HeroContainerComponent = props => {
   const isInstitutions = customClass?.includes('page-institutions')
   const isInstitutionalChild = customClass?.includes('page-institutional-child')
   const isThankYou = customClass?.includes('page-thank-you')
+  const isMetaMaskInstalled = useMetamaskDetect()
 
   let hubspotWrapper
   if (hubSpotForm) {
@@ -108,8 +109,6 @@ const HeroContainerComponent = props => {
   const handleWindowSizeChange = () => {
     setHeight(sdkRef.current.clientHeight + 48)
   }
-
-  const isMetaMaskInstalled = useMetamaskDetect()
 
   return (
     <>
@@ -322,7 +321,7 @@ const HeroContainerComponent = props => {
                       )}
                     </HeroDescription>
                   )}
-                  {!isEmpty(ctas) && !isFlask && !isHome ? (
+                  {!isEmpty(ctas) && !isFlask ? (
                     <HeroCTA
                       {...(previewMode
                         ? inspectorProps({
@@ -338,22 +337,6 @@ const HeroContainerComponent = props => {
                           previewMode,
                         })
                       )}
-                    </HeroCTA>
-                  ) : null}
-                  {!isEmpty(ctas) && isHome ? (
-                    <HeroCTA
-                      {...(previewMode
-                        ? inspectorProps({
-                            entryId: contentfulId,
-                            fieldId: 'ctas',
-                          })
-                        : {})}
-                    >
-                      {contentfulModuleToComponent({
-                        ...ctas[ctas.length > 1 && isMetaMaskInstalled ? 1 : 0],
-                        buttonSize: 'hero',
-                        previewMode,
-                      })}
                     </HeroCTA>
                   ) : null}
                   {note && (

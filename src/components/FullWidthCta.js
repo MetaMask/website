@@ -12,7 +12,6 @@ import getWebpImage from '../lib/utils/getWebpImage'
 import ContextClientSide from '../Context/ContextClientSide'
 import { useMediaQuery } from 'react-responsive'
 import isEmpty from 'lodash/isEmpty'
-import { useMetamaskDetect } from '../hooks/useMetamaskDetect'
 
 const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
 
@@ -65,8 +64,6 @@ const FullWidthCta = props => {
     isDarkMode && backgroundImageDarkModeUrl
       ? backgroundImageDarkModeUrl
       : backgroundImageUrl
-
-  const isMetaMaskInstalled = useMetamaskDetect()
 
   return (
     <Container
@@ -166,10 +163,12 @@ const FullWidthCta = props => {
                   fieldId: 'ctas',
                 })}
               >
-                {contentfulModuleToComponent({
-                  ...ctas[ctas.length > 1 && isMetaMaskInstalled ? 1 : 0],
-                  previewMode,
-                })}
+                {ctas.map(cta =>
+                  contentfulModuleToComponent({
+                    ...cta,
+                    previewMode,
+                  })
+                )}
               </CTAWrapper>
             ) : null}
           </FullWidthCtaInner>

@@ -84,6 +84,9 @@ export const ContentfulCtaFields = gql`
       ...ContentfulEmbedFields
     }
     downloadBrowsers
+    alternativeCta {
+      ...ContentfulCtaFields
+    }
   }
 `
 

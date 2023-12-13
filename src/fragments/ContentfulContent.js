@@ -600,6 +600,9 @@ export const ContentfulCtaFields = graphql`
         content
       }
     }
+    alternativeCta {
+      ...ContentfulCtaFields
+    }
   }
 `
 
