@@ -29,7 +29,6 @@ jobs:
           echo GATSBY_CONTENTFUL_ENVIRONMENT=${{ secrets.GATSBY_CONTENTFUL_ENVIRONMENT }} >> .env
           echo GATSBY_CONTENTFUL_HOST=${{ secrets.GATSBY_CONTENTFUL_HOST }} >> .env
           echo GATSBY_CONTENTFUL_SPACE_ID=${{ secrets.GATSBY_CONTENTFUL_SPACE_ID }} >> .env
-          echo GATSBY_GA_ID=${{ secrets.GATSBY_GA_ID }} >> .env
           echo GATSBY_GTM_ID=${{ secrets.GATSBY_GTM_ID }} >> .env
           echo GATSBY_CONSENSYS_HOST=${{ secrets.GATSBY_CONSENSYS_HOST }} >> .env
           echo GATSBY_CONTENTFUL_PREVIEW_HOST=${{ secrets.GATSBY_CONTENTFUL_PREVIEW_HOST }} >> .env
@@ -47,14 +46,7 @@ jobs:
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
 
-      - name: Build for staging 🔧
-        if: vars.IS_STAGING == 'true'
-        run: |
-          yarn
-          yarn deploy:dev
-
-      - name: Build for production 🔧
-        if: ${{ !vars.IS_STAGING }}
+      - name: Build 🔧
         run: |
           yarn
           yarn deploy

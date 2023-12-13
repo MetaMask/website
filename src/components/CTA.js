@@ -8,7 +8,6 @@ import { isAndroid, isIOS, isMobile, browserName } from 'react-device-detect'
 import Link from './Link'
 import SocialIcon from './SocialIcon'
 import styled from 'styled-components'
-import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
 import Popup from './Popup'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Image from './Image'
@@ -87,13 +86,6 @@ const CTA = props => {
     if (customClick) {
       e.preventDefault()
       customClick()
-    }
-    if (eventCategory && eventLabel) {
-      trackCustomEvent({
-        category: eventCategory,
-        action: 'Click',
-        label: label,
-      })
     }
   }
   React.useEffect(() => {
