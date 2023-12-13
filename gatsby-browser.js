@@ -9,7 +9,11 @@ require('prismjs/themes/prism.css')
 require('prismjs/plugins/line-numbers/prism-line-numbers.css')
 
 export const wrapPageElement = ({ element, props }) => {
-  return <ClientSideWrapper {...props}>{element}</ClientSideWrapper>
+  return (
+    <ClientSideWrapper {...props}>
+      <MetaMaskContextProvider>{element}</MetaMaskContextProvider>
+    </ClientSideWrapper>
+  )
 }
 
 export const wrapRootElement = ({ element }) => {
@@ -37,7 +41,7 @@ export const wrapRootElement = ({ element }) => {
           },
         }}
       >
-        <MetaMaskContextProvider>{element}</MetaMaskContextProvider>
+        {element}
       </MetaMaskProvider>
     </LDProvider>
   )
