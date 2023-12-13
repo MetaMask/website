@@ -572,8 +572,8 @@ export const ContentfulCardFields = graphql`
   }
 `
 
-export const ContentfulCtaFields = graphql`
-  fragment ContentfulCtaFields on ContentfulCta {
+export const ContentfulCtaBaseFields = graphql`
+  fragment ContentfulCtaBaseFields on ContentfulCta {
     contentful_id
     internal {
       type
@@ -600,8 +600,14 @@ export const ContentfulCtaFields = graphql`
         content
       }
     }
+  }
+`
+
+export const ContentfulCtaFields = graphql`
+  fragment ContentfulCtaFields on ContentfulCta {
+    ...ContentfulCtaBaseFields
     alternativeCta {
-      ...ContentfulCtaFields
+      ...ContentfulCtaBaseFields
     }
   }
 `
