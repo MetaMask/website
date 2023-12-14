@@ -572,7 +572,7 @@ export const ContentfulCardFields = graphql`
 `
 
 export const ContentfulCtaBaseFields = graphql`
-  fragment ContentfulCtaFields on ContentfulCta {
+  fragment ContentfulCtaBaseFields on ContentfulCta {
     contentful_id
     internal {
       type
