@@ -43,7 +43,8 @@ const ContentfulLayoutHero = props => {
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
-  const htmlPortfolio = descriptionPortfolio?.childMarkdownRemark?.html || {}
+  const { childMarkdownRemark: { html: htmlPortfolio } = {} } =
+    descriptionPortfolio || {}
 
   return (
     <Hero
@@ -54,12 +55,8 @@ const ContentfulLayoutHero = props => {
       description={previewMode ? description : html}
       descriptionPortfolio={
         previewMode
-          ? !isEmpty(descriptionPortfolio)
-            ? descriptionPortfolio
-            : description
-          : !isEmpty(htmlPortfolio)
-          ? htmlPortfolio
-          : html
+          ? descriptionPortfolio ?? description
+          : htmlPortfolio ?? html
       }
       note={note}
       eyebrow={eyebrow}
