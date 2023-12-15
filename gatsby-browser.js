@@ -1,6 +1,5 @@
 // gatsby-browser.js
 import React from 'react'
-import { MetaMaskProvider } from '@metamask/sdk-react'
 import { withLDProvider } from 'launchdarkly-react-client-sdk'
 import ClientSideWrapper from './src/components/ClientSideWrapper'
 import MetaMaskContextProvider from './src/Context/MetaMaskContextProvider'
@@ -29,16 +28,7 @@ export const wrapRootElement = ({ element }) => {
 
   return (
     <LDProvider>
-      <MetaMaskProvider
-        sdkOptions={{
-          dappMetadata: {
-            name: 'MetaMask',
-            url: window.location.origin,
-          },
-        }}
-      >
-        <MetaMaskContextProvider>{element}</MetaMaskContextProvider>
-      </MetaMaskProvider>
+      <MetaMaskContextProvider>{element}</MetaMaskContextProvider>
     </LDProvider>
   )
 }

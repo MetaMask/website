@@ -3,36 +3,36 @@ import PropTypes from 'prop-types'
 import FullwidthCta from '../FullWidthCta'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
-const ContentfulLayoutFullWidthCta = props => {
-  const {
-    moduleConfig: {
-      headline,
-      headlinePortfolio,
-      showLogoAnimation,
-      backgroundColor,
-      description,
-      hubSpotForm,
-      embedHtml,
-      marginBottom = '',
-      ctas,
-      logoType,
-      sectionPadding,
-      noPaddingBottom,
-      noPaddingTop,
-      customClass,
-      previewMode = false,
-      contentful_id,
-      bordered,
-      backgroundImage,
-      backgroundImageMobile,
-      backgroundImageDarkMode,
-      backgroundImageMobileDarkMode,
-      fullWidthBackground,
-      moduleId,
-      headlineMarginTop0,
-    },
-  } = props
+const ContentfulLayoutFullWidthCta = ({
+  moduleConfig: {
+    headline,
+    headlinePortfolio,
+    showLogoAnimation,
+    backgroundColor,
+    description,
+    hubSpotForm,
+    embedHtml,
+    marginBottom = '',
+    ctas,
+    logoType,
+    sectionPadding,
+    noPaddingBottom,
+    noPaddingTop,
+    customClass,
+    previewMode = false,
+    contentful_id,
+    bordered,
+    backgroundImage,
+    backgroundImageMobile,
+    backgroundImageDarkMode,
+    backgroundImageMobileDarkMode,
+    fullWidthBackground,
+    moduleId,
+    headlineMarginTop0,
+  },
+}) => {
   const { childMarkdownRemark: { html } = {} } = description || {}
+
   return (
     <FullwidthCta
       moduleId={moduleId}
