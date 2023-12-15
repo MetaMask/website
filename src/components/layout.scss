@@ -314,7 +314,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #24292E;
+  color: #24292e;
 
   .theme-dark & {
     color: #222222;
@@ -674,7 +674,7 @@ pre tt:after {
 
 body {
   font-family: 'Euclid Circular B', sans-serif;
-  color: #24292E;
+  color: #24292e;
   font-size: 16px;
   line-height: 22px;
 }
@@ -686,7 +686,7 @@ body {
 .hs-form-field input {
   height: 40px;
   background-color: #ffffff;
-  border: 1px solid #24292E;
+  border: 1px solid #24292e;
   border-radius: 10px;
   padding: 0 15px;
   width: 100%;
@@ -738,7 +738,7 @@ input[type='submit'].hs-button {
 
 .paragraph {
   font-family: 'Euclid Circular B', sans-serif;
-  color: #24292E;
+  color: #24292e;
   font-size: 16px;
   font-weight: 400;
 }
@@ -1079,7 +1079,12 @@ figcaption {
 }
 
 body {
-  transition: background 300ms ease;
+  opacity: 0;
+  transition: background 0.3s ease, opacity 0.1s ease;
+
+  &.visible {
+    opacity: 1;
+  }
 }
 
 body.dark-mode {
@@ -1405,7 +1410,7 @@ body.dark-mode {
     font-weight: 400;
     font-size: 14px;
     line-height: 152.16%;
-    color: #24292E;
+    color: #24292e;
     width: 290px;
     position: absolute;
     left: 50%;
@@ -1730,8 +1735,9 @@ body.disable-scroll {
   overflow: hidden;
 }
 
-.snaps-color-secondary, .snaps-faq-answer {
-  color: #535A61;
+.snaps-color-secondary,
+.snaps-faq-answer {
+  color: #535a61;
 
   a {
     color: inherit !important;
@@ -1768,7 +1774,7 @@ body.usabilla-show {
     flex-shrink: 0;
   }
 
-  @media(min-width: 480px) {
+  @media (min-width: 480px) {
     flex-direction: row;
     justify-content: space-between;
     text-align: left;
@@ -1777,7 +1783,7 @@ body.usabilla-show {
 }
 
 .flex-mobile-center {
-  @media(max-width: 480px) {
+  @media (max-width: 480px) {
     display: flex !important;
     justify-content: center !important;
   }

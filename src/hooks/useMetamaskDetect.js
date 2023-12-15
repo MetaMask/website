@@ -1,15 +1,10 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 
 export const useMetamaskDetect = () => {
-  const [isMetaMaskInstalled, _setIsMetaMaskInstalled] = useState()
-  const isMetaMaskInstalledRef = useRef(isMetaMaskInstalled)
-
-  const setIsMetaMaskInstalled = v => {
-    isMetaMaskInstalledRef.current = v
-    _setIsMetaMaskInstalled(v)
-  }
+  const [isMetaMaskInstalled, setIsMetaMaskInstalled] = useState(null)
 
   useEffect(() => {
+    // eip6963RequestProvider timed out
     const timeoutId = setTimeout(() => {
       setIsMetaMaskInstalled(false)
     }, 500)
