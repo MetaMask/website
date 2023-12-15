@@ -16,10 +16,10 @@ const ContentfulLayoutHero = props => {
       headline,
       headlinePortfolio,
       modules,
-      sideImage = {},
-      sideImagePortfolio = {},
-      sideImageDarkMode = {},
-      sideImagePortfolioDarkMode = {},
+      sideImage,
+      sideImagePortfolio,
+      sideImageDarkMode,
+      sideImagePortfolioDarkMode,
       sideImageFlex = false,
       sideImageFoxAnimation = false,
       eyebrow,
@@ -68,14 +68,10 @@ const ContentfulLayoutHero = props => {
       backgroundImageDarkMode={backgroundImageDarkMode}
       modules={modules}
       sideImage={sideImage}
-      sideImagePortfolio={
-        !isEmpty(sideImagePortfolio) ? sideImagePortfolio : sideImage
-      }
+      sideImagePortfolio={sideImagePortfolio || sideImage}
       sideImageDarkMode={sideImageDarkMode}
       sideImagePortfolioDarkMode={
-        !isEmpty(sideImagePortfolioDarkMode)
-          ? sideImagePortfolioDarkMode
-          : sideImageDarkMode
+        sideImagePortfolioDarkMode || sideImageDarkMode
       }
       hideHeadline={hideHeadline}
       showLearnMore={showLearnMore}
