@@ -267,6 +267,7 @@ export const ContentfulLayoutFullWidthCtaFields = gql`
     showLogoAnimation
     logoType
     headline
+    headlinePortfolio
     description
     marginBottom
     hubSpotForm(preview: true) {

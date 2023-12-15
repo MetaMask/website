@@ -12,6 +12,7 @@ import getWebpImage from '../lib/utils/getWebpImage'
 import ContextClientSide from '../Context/ContextClientSide'
 import { useMediaQuery } from 'react-responsive'
 import isEmpty from 'lodash/isEmpty'
+import { MetaMaskContext } from '../Context/MetaMaskContextProvider'
 
 const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
 
@@ -24,6 +25,7 @@ const FullWidthCta = props => {
     showLogoAnimation,
     backgroundColor,
     headline,
+    headlinePortfolio,
     marginBottom,
     logoType,
     sectionPadding,
@@ -45,9 +47,13 @@ const FullWidthCta = props => {
   const isMobile = useMediaQuery({
     query: '(max-width: 768px)',
   })
+
   const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
+  const { isMetaMaskInstalled } = useContext(MetaMaskContext)
   const { isDarkMode } = darkModeContextValue || {}
+
   const inspectorProps = useContentfulInspectorMode()
+
   const resBgImage =
     isMobile && backgroundImageMobile ? backgroundImageMobile : backgroundImage
   const resBgImageDark =
@@ -108,7 +114,13 @@ const FullWidthCta = props => {
                     })
                   : {})}
               >
-                <div dangerouslySetInnerHTML={{ __html: headline }} />
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: isMetaMaskInstalled
+                      ? headlinePortfolio ?? headline
+                      : headline,
+                  }}
+                />
               </Headline>
             ) : null}
             {description ? (
@@ -184,6 +196,7 @@ FullWidthCta.propTypes = {
   hubSpotForm: PropTypes.object,
   embedHtml: PropTypes.object,
   headline: PropTypes.string,
+  headlinePortfolio: PropTypes.string,
   description: PropTypes.string,
   ctas: PropTypes.arrayOf(PropTypes.object),
   sectionPadding: PropTypes.string,

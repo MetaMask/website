@@ -371,6 +371,7 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
     showLogoAnimation
     logoType
     headline
+    headlinePortfolio
     description {
       childMarkdownRemark {
         html

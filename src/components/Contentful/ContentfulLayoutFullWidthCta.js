@@ -7,6 +7,7 @@ const ContentfulLayoutFullWidthCta = props => {
   const {
     moduleConfig: {
       headline,
+      headlinePortfolio,
       showLogoAnimation,
       backgroundColor,
       description,
@@ -39,6 +40,7 @@ const ContentfulLayoutFullWidthCta = props => {
       showLogoAnimation={showLogoAnimation}
       backgroundColor={backgroundColor}
       headline={headline}
+      headlinePortfolio={headlinePortfolio}
       hubSpotForm={hubSpotForm}
       embedHtml={embedHtml}
       marginBottom={marginBottom}
@@ -83,6 +85,7 @@ ContentfulLayoutFullWidthCta.propTypes = {
   moduleConfig: PropTypes.shape({
     description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     headline: PropTypes.string,
+    headlinePortfolio: PropTypes.string,
     hubSpotForm: PropTypes.object,
     embedHtml: PropTypes.object,
     ctaLink: PropTypes.string,
