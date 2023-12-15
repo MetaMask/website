@@ -8,6 +8,8 @@ export const MetaMaskContext = createContext({
 const MetaMaskContextProvider = ({ children }) => {
   const isMetaMaskInstalled = useMetamaskDetect()
 
+  if (typeof isMetaMaskInstalled !== 'boolean') return
+
   return (
     <MetaMaskContext.Provider value={{ isMetaMaskInstalled }}>
       {children}
