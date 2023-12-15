@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Hero from '../HeroContainer'
+import isEmpty from 'lodash/isEmpty'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
 const ContentfulLayoutHero = props => {
@@ -15,10 +16,10 @@ const ContentfulLayoutHero = props => {
       headline,
       headlinePortfolio,
       modules,
-      sideImage,
-      sideImagePortfolio,
-      sideImageDarkMode,
-      sideImagePortfolioDarkMode,
+      sideImage = {},
+      sideImagePortfolio = {},
+      sideImageDarkMode = {},
+      sideImagePortfolioDarkMode = {},
       sideImageFlex = false,
       sideImageFoxAnimation = false,
       eyebrow,
@@ -42,8 +43,7 @@ const ContentfulLayoutHero = props => {
   } = props
 
   const { childMarkdownRemark: { html } = {} } = description || {}
-  const { childMarkdownRemark: { html: htmlPortfolio } = {} } =
-    descriptionPortfolio || {}
+  const htmlPortfolio = descriptionPortfolio?.childMarkdownRemark?.html || {}
 
   return (
     <Hero
@@ -54,8 +54,12 @@ const ContentfulLayoutHero = props => {
       description={previewMode ? description : html}
       descriptionPortfolio={
         previewMode
-          ? descriptionPortfolio ?? description
-          : htmlPortfolio ?? html
+          ? !isEmpty(descriptionPortfolio)
+            ? descriptionPortfolio
+            : description
+          : !isEmpty(htmlPortfolio)
+          ? htmlPortfolio
+          : html
       }
       note={note}
       eyebrow={eyebrow}
@@ -67,10 +71,14 @@ const ContentfulLayoutHero = props => {
       backgroundImageDarkMode={backgroundImageDarkMode}
       modules={modules}
       sideImage={sideImage}
-      sideImagePortfolio={sideImagePortfolio || sideImage}
+      sideImagePortfolio={
+        !isEmpty(sideImagePortfolio) ? sideImagePortfolio : sideImage
+      }
       sideImageDarkMode={sideImageDarkMode}
       sideImagePortfolioDarkMode={
-        sideImagePortfolioDarkMode || sideImageDarkMode
+        !isEmpty(sideImagePortfolioDarkMode)
+          ? sideImagePortfolioDarkMode
+          : sideImageDarkMode
       }
       hideHeadline={hideHeadline}
       showLearnMore={showLearnMore}
