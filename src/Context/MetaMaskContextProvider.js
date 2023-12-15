@@ -2,7 +2,7 @@ import React, { createContext } from 'react'
 import { useMetamaskDetect } from '../hooks/useMetamaskDetect'
 
 export const MetaMaskContext = createContext({
-  isMetaMaskInstalled: false,
+  isMetaMaskInstalled: undefined,
 })
 
 const MetaMaskContextProvider = ({ children }) => {
