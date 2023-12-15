@@ -1206,7 +1206,12 @@ figcaption {
 }
 
 body {
-  transition: background 300ms ease;
+  opacity: 0;
+  transition: background 0.3s ease, opacity 0.1s ease;
+
+  &.visible {
+    opacity: 1;
+  }
 }
 
 body.dark-mode {
