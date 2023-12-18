@@ -3,34 +3,35 @@ import PropTypes from 'prop-types'
 import FullwidthCta from '../FullWidthCta'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
-const ContentfulLayoutFullWidthCta = props => {
-  const {
-    moduleConfig: {
-      headline,
-      showLogoAnimation,
-      backgroundColor,
-      description,
-      hubSpotForm,
-      embedHtml,
-      marginBottom = '',
-      ctas,
-      logoType,
-      sectionPadding,
-      noPaddingTop,
-      noPaddingBottom,
-      customClass,
-      previewMode = false,
-      bordered,
-      backgroundImage,
-      backgroundImageMobile,
-      backgroundImageDarkMode,
-      backgroundImageMobileDarkMode,
-      fullWidthBackground,
-      moduleId,
-      headlineMarginTop0,
-    },
-  } = props
+const ContentfulLayoutFullWidthCta = ({
+  moduleConfig: {
+    headline,
+    headlinePortfolio,
+    showLogoAnimation,
+    backgroundColor,
+    description,
+    hubSpotForm,
+    embedHtml,
+    marginBottom = '',
+    ctas,
+    logoType,
+    sectionPadding,
+    noPaddingBottom,
+    noPaddingTop,
+    customClass,
+    previewMode = false,
+    bordered,
+    backgroundImage,
+    backgroundImageMobile,
+    backgroundImageDarkMode,
+    backgroundImageMobileDarkMode,
+    fullWidthBackground,
+    moduleId,
+    headlineMarginTop0,
+  },
+}) => {
   const { childMarkdownRemark: { html } = {} } = description || {}
+
   return (
     <FullwidthCta
       moduleId={moduleId}
@@ -38,6 +39,7 @@ const ContentfulLayoutFullWidthCta = props => {
       showLogoAnimation={showLogoAnimation}
       backgroundColor={backgroundColor}
       headline={headline}
+      headlinePortfolio={headlinePortfolio}
       hubSpotForm={hubSpotForm}
       embedHtml={embedHtml}
       marginBottom={marginBottom}
@@ -81,6 +83,7 @@ ContentfulLayoutFullWidthCta.propTypes = {
   moduleConfig: PropTypes.shape({
     description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     headline: PropTypes.string,
+    headlinePortfolio: PropTypes.string,
     hubSpotForm: PropTypes.object,
     embedHtml: PropTypes.object,
     ctaLink: PropTypes.string,

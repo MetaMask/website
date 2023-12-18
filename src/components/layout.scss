@@ -48,7 +48,8 @@
 
 @font-face {
   font-family: 'old-icons';
-  src: url('data:application/x-font-ttf;charset=utf-8;base64,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') format('truetype');
+  src: url('data:application/x-font-ttf;charset=utf-8;base64,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')
+    format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -368,7 +369,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #24292E;
+  color: #24292e;
 
   .theme-dark & {
     color: #222222;
@@ -622,13 +623,13 @@ ul li {
   padding-left: 0;
 }
 
-li>ol {
+li > ol {
   margin-left: 1.45rem;
   margin-bottom: calc(1.45rem / 2);
   margin-top: calc(1.45rem / 2);
 }
 
-li>ul {
+li > ul {
   margin-left: 1.45rem;
   margin-bottom: calc(1.45rem / 2);
   margin-top: calc(1.45rem / 2);
@@ -646,7 +647,7 @@ p *:last-child {
   margin-bottom: 0;
 }
 
-li>p {
+li > p {
   margin-bottom: calc(1.45rem / 2);
 }
 
@@ -773,7 +774,7 @@ pre tt:after {
 
 body {
   font-family: 'Euclid Circular B', sans-serif;
-  color: #24292E;
+  color: #24292e;
   font-size: 16px;
   line-height: 22px;
 }
@@ -785,7 +786,7 @@ body {
 .hs-form-field input {
   height: 40px;
   background-color: #ffffff;
-  border: 1px solid #24292E;
+  border: 1px solid #24292e;
   border-radius: 10px;
   padding: 0 15px;
   width: 100%;
@@ -837,7 +838,7 @@ input[type='submit'].hs-button {
 
 .paragraph {
   font-family: 'Euclid Circular B', sans-serif;
-  color: #24292E;
+  color: #24292e;
   font-size: 16px;
   font-weight: 400;
 }
@@ -1103,7 +1104,7 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15;
   background-color: #fff;
 
   @media (max-width: 767px) {
-    &:not(.noPaddingBottom)+.bg-default:not(.noPaddingBottom) {
+    &:not(.noPaddingBottom) + .bg-default:not(.noPaddingBottom) {
       padding-top: 0 !important;
     }
   }
@@ -1170,7 +1171,6 @@ figcaption {
 }
 
 .richText {
-
   h1,
   h2,
   h3,
@@ -1190,7 +1190,7 @@ figcaption {
 }
 
 #liquidity-logos .moduleContainerListModules {
-  &>* {
+  & > * {
     width: 33.33% !important;
   }
 }
@@ -1206,12 +1206,40 @@ figcaption {
 }
 
 body {
-  transition: background 300ms ease;
+  transition: background 0.3s ease;
+
+  &::before {
+    content: '';
+    opacity: 1;
+    visibility: visible;
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    transition: opacity 0.1s linear, visibility 0.1s linear;
+  }
+
+  &.visible {
+    &::before {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
 }
 
 body.dark-mode {
   background-color: #121212;
   color: #fff;
+
+  &::before {
+    background-color: #121212;
+  }
 
   h1,
   h2,
@@ -1417,7 +1445,6 @@ body.dark-mode {
   }
 
   &.mobile-center {
-
     dl,
     dt {
       @media (max-width: 767px) {
@@ -1432,11 +1459,11 @@ body.dark-mode {
     }
   }
 
-  &.dt-normal>dt {
+  &.dt-normal > dt {
     font-weight: 400;
   }
 
-  &.dt-align-start>dt {
+  &.dt-align-start > dt {
     align-items: flex-start;
 
     @media (max-width: 767px) {
@@ -1454,7 +1481,7 @@ body.dark-mode {
   }
 
   &.keep-on-tablet {
-    &>dt {
+    & > dt {
       @media (max-width: 767px) {
         flex-direction: row;
         text-align: left;
@@ -1475,7 +1502,7 @@ body.dark-mode {
       }
     }
 
-    &.dt-align-start>dt {
+    &.dt-align-start > dt {
       @media (max-width: 767px) {
         align-items: flex-start;
       }
@@ -1555,7 +1582,7 @@ body.dark-mode {
     font-weight: 400;
     font-size: 14px;
     line-height: 152.16%;
-    color: #24292E;
+    color: #24292e;
     width: 290px;
     position: absolute;
     left: 50%;
@@ -1578,7 +1605,6 @@ body.dark-mode {
 }
 
 .newsletterOnInstitutional {
-
   .legal-consent-container,
   .hs-form-field label:not(.hs-error-msg) {
     display: none;
@@ -1773,7 +1799,6 @@ body.dark-mode {
   }
 
   .hs-form-field.hs-email {
-
     input,
     input:focus-visible {
       border-color: #cdd6e1;
@@ -1791,7 +1816,7 @@ body.dark-mode {
       border-color: #037dd6;
     }
 
-    >label {
+    > label {
       display: none;
     }
   }
@@ -1801,7 +1826,7 @@ body.dark-mode {
     background-color: #037dd6;
   }
 
-  .hs-fieldtype-checkbox.hs-form-field>label {
+  .hs-fieldtype-checkbox.hs-form-field > label {
     margin-bottom: 32px;
     color: #24272a;
     font-weight: normal;
@@ -1867,7 +1892,8 @@ body.dark-mode .white-on-darkmode {
 }
 
 img.with-shadow {
-  filter: drop-shadow(-16.1252px 16.1252px 25.8003px rgba(0, 0, 0, 0.05)) drop-shadow(-3.22503px 3.22503px 10.7501px rgba(0, 0, 0, 0.07));
+  filter: drop-shadow(-16.1252px 16.1252px 25.8003px rgba(0, 0, 0, 0.05))
+    drop-shadow(-3.22503px 3.22503px 10.7501px rgba(0, 0, 0, 0.07));
 }
 
 .mw-453-desktop {
@@ -1892,7 +1918,6 @@ img.image-dark.image-dark {
 }
 
 body.dark-mode {
-
   img[src$='#only-light'],
   img.image-light,
   div.image-light {
@@ -1925,7 +1950,7 @@ body.disable-scroll {
 
 .snaps-color-secondary,
 .snaps-faq-answer {
-  color: #535A61;
+  color: #535a61;
 
   a {
     color: inherit !important;
@@ -1956,7 +1981,7 @@ body.dark-mode .snaps-color-secondary {
     flex-shrink: 0;
   }
 
-  @media(min-width: 480px) {
+  @media (min-width: 480px) {
     flex-direction: row;
     justify-content: space-between;
     text-align: left;
@@ -1971,7 +1996,7 @@ body.dark-mode .snaps-color-secondary {
 }
 
 .flex-mobile-center {
-  @media(max-width: 479px) {
+  @media (max-width: 479px) {
     display: flex !important;
     justify-content: center !important;
   }

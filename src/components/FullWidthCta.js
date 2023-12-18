@@ -10,6 +10,8 @@ import classnames from 'classnames'
 import ParseMD from './ParseMD'
 import getWebpImage from '../lib/utils/getWebpImage'
 import ContextClientSide from '../Context/ContextClientSide'
+import isEmpty from 'lodash/isEmpty'
+import { MetaMaskContext } from '../Context/MetaMaskContextProvider'
 
 const LogoAnimation = Loadable(() => import('./LogoAnimation/'))
 
@@ -22,6 +24,7 @@ const FullWidthCta = props => {
     showLogoAnimation,
     backgroundColor,
     headline,
+    headlinePortfolio,
     marginBottom,
     logoType,
     sectionPadding,
@@ -40,6 +43,7 @@ const FullWidthCta = props => {
   } = props
 
   const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
+  const { isMetaMaskInstalled } = useContext(MetaMaskContext)
   const { isDarkMode } = darkModeContextValue || {}
 
   const isMobile = useMediaQuery({
@@ -85,7 +89,6 @@ const FullWidthCta = props => {
           $bordered={bordered}
           $backgroundImage={!fullWidthBackground && bgImageUrl}
         >
-          {' '}
           {showLogoAnimation && customClass !== 'metaMaskUninstalled' ? (
             <LogoAnimation logoType={logoType} />
           ) : null}
@@ -103,7 +106,13 @@ const FullWidthCta = props => {
                 hasDescription={!!description}
                 headlineMarginTop0={headlineMarginTop0}
               >
-                <div dangerouslySetInnerHTML={{ __html: headline }} />
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: isMetaMaskInstalled
+                      ? headlinePortfolio ?? headline
+                      : headline,
+                  }}
+                />
               </Headline>
             ) : null}
             {description ? (
@@ -128,7 +137,7 @@ const FullWidthCta = props => {
                 {contentfulModuleToComponent({ ...embedHtml, previewMode })}
               </div>
             ) : null}
-            {ctas ? (
+            {!isEmpty(ctas) ? (
               <CTAWrapper>
                 {ctas.map(cta =>
                   contentfulModuleToComponent({
@@ -151,6 +160,7 @@ FullWidthCta.propTypes = {
   hubSpotForm: PropTypes.object,
   embedHtml: PropTypes.object,
   headline: PropTypes.string,
+  headlinePortfolio: PropTypes.string,
   description: PropTypes.string,
   ctas: PropTypes.arrayOf(PropTypes.object),
   sectionPadding: PropTypes.string,
@@ -172,7 +182,7 @@ const FullWidthCtaWrapper = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  
+
   ${({ $bordered }) =>
     $bordered
       ? `
@@ -231,7 +241,7 @@ const FullWidthCtaInner = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    
+
     #logo-container{
       width: 30%;
       padding: 24px 0 8px 0;
@@ -240,18 +250,18 @@ const FullWidthCtaInner = styled.div`
         display: none;
       }
     }
-    
+
     #html-container {
       width: 60%;
       background-color: #F2F4F6;
       border-radius: 8px;
       padding-bottom: 32px;
       margin-left: auto;
-      
+
       .dark-mode & {
         background-color: #24292E;
       }
-      
+
       .uninstallSurvey {
         padding: 32px;
         border-radius: 8px;
@@ -291,7 +301,7 @@ const FullWidthCtaInner = styled.div`
             margin-top: 2px;
           }
         }
-        input:checked + label:before { 
+        input:checked + label:before {
           background-color: #037DD6;
           border-color: #037DD6;
         }
@@ -311,12 +321,12 @@ const FullWidthCtaInner = styled.div`
           display: none;
         }
       }
-      
+
       .buttonSurvey > button {
         width: calc(100% - 64px);
         cursor: pointer;
         transition: all 0.3s ease;
-        
+
         &:disabled {
           background-color: #6A737D;
           cursor: not-allowed;
@@ -325,7 +335,7 @@ const FullWidthCtaInner = styled.div`
           opacity: 0.8;
         }
       }
-      
+
       @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
         width: 100%;
         background-color: transparent;
@@ -333,19 +343,19 @@ const FullWidthCtaInner = styled.div`
         .dark-mode & {
           background-color: transparent;
         }
-        
+
         .uninstallSurvey {
           padding: 24px 42px;
           h6 {
             text-align: center;
           }
         }
-        
+
         .buttonSurvey {
           padding: 40px 0 20px 0;
         }
       }
-      
+
       @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
         .uninstallSurvey {
           padding: 24px;
@@ -382,7 +392,6 @@ const CTAWrapper = styled.div`
   .button {
     min-width: 140px;
   }
-
   .button:last-child {
     margin-bottom: 0;
   }
@@ -413,7 +422,7 @@ const CTAWrapper = styled.div`
       }
   `
       : ``}
-  
+
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     .button {
       margin: 0 0 16px 0;

@@ -67,8 +67,14 @@ export const ContentfulLayoutHeroFields = graphql`
       type
     }
     headline
+    headlinePortfolio
     hideHeadline
     description {
+      childMarkdownRemark {
+        html
+      }
+    }
+    descriptionPortfolio {
       childMarkdownRemark {
         html
       }
@@ -97,7 +103,23 @@ export const ContentfulLayoutHeroFields = graphql`
       }
       gatsbyImageData(width: 1920, quality: 80)
     }
+    sideImagePortfolio {
+      title
+      description
+      file {
+        url
+      }
+      gatsbyImageData(width: 1920, quality: 80)
+    }
     sideImageDarkMode {
+      title
+      description
+      file {
+        url
+      }
+      gatsbyImageData(width: 1920, quality: 80)
+    }
+    sideImagePortfolioDarkMode {
       title
       description
       file {
@@ -348,6 +370,7 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
     showLogoAnimation
     logoType
     headline
+    headlinePortfolio
     description {
       childMarkdownRemark {
         html
@@ -549,8 +572,8 @@ export const ContentfulCardFields = graphql`
   }
 `
 
-export const ContentfulCtaFields = graphql`
-  fragment ContentfulCtaFields on ContentfulCta {
+export const ContentfulCtaBaseFields = graphql`
+  fragment ContentfulCtaBaseFields on ContentfulCta {
     contentful_id
     internal {
       type
@@ -577,6 +600,15 @@ export const ContentfulCtaFields = graphql`
       }
     }
     showCaretRight
+  }
+`
+
+export const ContentfulCtaFields = graphql`
+  fragment ContentfulCtaFields on ContentfulCta {
+    ...ContentfulCtaBaseFields
+    alternativeCta {
+      ...ContentfulCtaBaseFields
+    }
   }
 `
 
