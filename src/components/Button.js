@@ -95,7 +95,7 @@ const ButtonWrapper = styled(Link)`
       margin-left: 6px;
     }
   }
-  
+
   ${({ $gradient, color, theme }) =>
     color && theme['button'] && theme['button'][color]
       ? `
@@ -158,7 +158,7 @@ const ButtonWrapper = styled(Link)`
 
   cursor: pointer;
   text-align: center;
-  transition: all 300ms ease;
+  transition: background-color 300ms ease, border 300ms ease, color 300ms ease;
   min-height: 52px;
   display: inline-flex;
   align-items: center;
