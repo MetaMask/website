@@ -1079,17 +1079,41 @@ figcaption {
 }
 
 body {
-  opacity: 0;
-  transition: background 0.3s ease, opacity 0.1s ease;
+  transition: background 0.3s ease;
+
+  &::before {
+    content: '';
+    opacity: 1;
+    visibility: visible;
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    transition: opacity 0.1s linear, visibility 0.1s linear;
+  }
 
   &.visible {
-    opacity: 1;
+    &::before {
+      opacity: 0;
+      visibility: hidden;
+    }
   }
 }
 
 body.dark-mode {
   background-color: #121212;
   color: #fff;
+
+  &::before {
+    background-color: #121212;
+  }
+
   h1,
   h2,
   h3,
