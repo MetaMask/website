@@ -7,7 +7,7 @@ export const useMetamaskDetect = () => {
     // eip6963RequestProvider timed out
     const timeoutId = setTimeout(() => {
       setIsMetaMaskInstalled(false)
-    }, 500)
+    }, 50)
 
     const checkMetaMask = ({ detail }) => {
       const isMetaMask = detail?.info?.name === 'MetaMask'

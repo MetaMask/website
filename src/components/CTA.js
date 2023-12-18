@@ -371,7 +371,7 @@ const LinkTitle = styled.span`
     gap: 6px;
     border-radius: 32px;
     font-weight: 700;
-    transition: ease 0.3s all;
+    transition: color 0.3s, background-color 0.3s;
     span > span:first-child {
       background: #d73a49;
       border-radius: 16px;
@@ -390,7 +390,7 @@ const LinkTitle = styled.span`
 `
 
 const ContentWrapper = styled(Link)`
-  transition: all 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease;
   text-decoration: none;
   position: relative;
   .news-content &,
