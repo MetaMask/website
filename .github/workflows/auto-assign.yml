@@ -1,0 +1,58 @@
+name: Auto assign on PR and issue created
+
+on:
+  issues:
+    types: [opened, reopened]
+  pull_request:
+    types: [opened, reopened]
+    branches: [main]
+
+jobs:
+  assign-pr-and-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+      repository-projects: read
+    steps:
+      - name: Generate a token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+
+      - name: Assign PR
+        if: github.event.pull_request.number
+        run: |
+          gh pr edit "$NUMBER" --add-assignee jlazoff,cuonglt-ync,kevin-chassagne --add-reviewer tannn-younet,viphan007
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+          NUMBER: ${{ github.event.pull_request.number }}
+          GH_REPO: ${{ github.repository }}
+
+      - name: Assign ISSUE
+        if: github.event.issue.number
+        run: |
+          # Edit issue assignees
+          gh issue edit "$NUMBER" --add-assignee jlazoff,nkkurt,cuonglt-ync,kevin-chassagne
+          # Get issue body
+          issue_body=$(gh issue view ${{ github.event.issue.number }} --json body -q '.body')
+          # Temporarily replace "*Growth Marketing Intake*" with a placeholder
+          issue_body=$(echo "$issue_body" | sed 's/\*Growth Marketing Intake\*/TEMP_PLACEHOLDER/g')
+          # Add two line breaks before each sentence enclosed in "*"
+          issue_body=$(echo "$issue_body" | sed 's/\*\([^*]*\)\*/\n\n---\n*\1*/g')
+          # Replace everything between "*" with a h3
+          issue_body=$(echo "$issue_body" | sed 's/\*\([^*]*\)\*/### \1 ###/g')
+          # Replace the placeholder with "*Growth Marketing Intake*"
+          issue_body=$(echo "$issue_body" | sed 's/TEMP_PLACEHOLDER/**Growth Marketing Intake**/g')
+          # Detect each image URL and format it using Markdown
+          issue_body=$(echo "$issue_body" | sed -E 's/<(https?:\/\/[^>]+\.(jpg\>|png\>|gif\>|jpeg\>))/![Image](\1)/g')
+          # Edit issue body
+          echo "$issue_body" | gh issue edit ${{ github.event.issue.number }} --body-file -
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+          NUMBER: ${{ github.event.issue.number }}
+          GH_REPO: ${{ github.repository }}
