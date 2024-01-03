@@ -9,6 +9,7 @@ import { Section } from '../components/StyledGeneral'
 import ContentWrapper from '../components/ContentWrapper'
 import Image from '../components/Image'
 import SocialButtonList from '../components/SocialButtonList'
+import NewsAuthor from '../components/NewsAuthor'
 
 function NewsLayout(props) {
   const {
@@ -52,14 +53,6 @@ function NewsLayout(props) {
     displayTitle: false,
   }
 
-  const hasAuthors = authors && authors.length > 0
-  const authorsName =
-    hasAuthors &&
-    authors.reduce((acc, cur) => {
-      acc.push(cur.name)
-      return acc
-    }, [])
-
   return (
     <Layout {...props}>
       {contentfulModuleToComponent(seoModuleConfig)}
@@ -76,9 +69,7 @@ function NewsLayout(props) {
             <Subtitle>{subtitle}</Subtitle>
             <NewsInfo>
               <span>by&nbsp;</span>
-              <span className="author">
-                {hasAuthors ? authorsName.join(', ') : 'MetaMask'}
-              </span>
+              <NewsAuthor listAuthors={authors} />
               <span className="separator" />
               <span className="publishDate">{publishDate}</span>
             </NewsInfo>
@@ -105,6 +96,11 @@ function NewsLayout(props) {
 
 const NewsContainer = styled(Section)`
   position: relative;
+
+  .gatsby-image-wrapper img {
+    width: 100%;
+    height: 100%;
+  }
 `
 const SocialShare = styled.div`
   margin: 32px 0;
