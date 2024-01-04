@@ -22,6 +22,8 @@ function ContentfulNewsCategory(props) {
           publishDate(formatString: "MMMM D, YYYY")
           authors {
             name
+            createProfilePage
+            profileUrl
           }
           categories {
             name

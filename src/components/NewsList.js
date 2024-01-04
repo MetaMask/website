@@ -3,13 +3,9 @@ import React from 'react'
 import Card from './Card'
 import { getNewsUrl } from '../lib/utils/news'
 import styled from 'styled-components'
+import Link from './Link'
+import NewsAuthor from './NewsAuthor'
 
-/**
- * @name -
- * @summary -
- * @description -
- * @prop -
- */
 function NewsList(props) {
   const { data } = props
 
@@ -18,13 +14,6 @@ function NewsList(props) {
       {data.map((news, index) => {
         const { title, subtitle, image, publishDate, authors } = news
         const newsUrl = getNewsUrl(news)
-        const hasAuthors = authors && authors.length > 0
-        const authorsName =
-          hasAuthors &&
-          authors.reduce((acc, cur) => {
-            acc.push(cur.name)
-            return acc
-          }, [])
         return (
           <NewsListWrapper key={index}>
             <Card
@@ -36,9 +25,7 @@ function NewsList(props) {
             />
             <NewsInfo hasMt={!!subtitle}>
               <span>by&nbsp;</span>
-              <span className="author">
-                {hasAuthors ? authorsName.join(', ') : 'MetaMask'}
-              </span>
+              <NewsAuthor listAuthors={authors} />
               <span className="separator" />
               <span className="publishDate">{publishDate}</span>
             </NewsInfo>
