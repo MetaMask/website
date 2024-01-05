@@ -3,5 +3,5 @@ Expires: 2023-10-26T13:00:00.000Z
 Encryption: https://metamask.io/pgp-key.txt
 Preferred-Languages: en, es, fr
 Canonical: https://metamask.io/.well-known/security.txt
-Policy: https://consensys.net/security/
-Hiring: https://consensys.net/careers/
+Policy: https://consensys.io/security
+Hiring: https://consensys.io/careers/
