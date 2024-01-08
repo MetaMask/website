@@ -36,9 +36,10 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Run tests 🧪
+        id: tests
         run: |
-          yarn test > test_output.txt
-          echo "TEST_OUTPUT=$(cat test_output.txt)" >> $GITHUB_ENV
+          TEST_OUTPUT=$(yarn test 2>&1)
+          echo "::set-output name=test_output::$TEST_OUTPUT"
 
       - name: Send test results to Slack workflow 📬
         id: slack
@@ -46,7 +47,7 @@ jobs:
         with:
           payload: |
             {
-                "msg": "SEO tests: \n$TEST_OUTPUT"
+                "msg": "SEO tests: \n${{ steps.tests.outputs.test_output }}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
