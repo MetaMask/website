@@ -10,7 +10,7 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    container: jonasbuettner/puppeteer-curl
+    container: chimbosonic/puppeteer:latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
@@ -36,17 +36,15 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Run tests 🧪
+        id: tests
         run: |
           TEST_OUTPUT=$(yarn test 2>&1 || true)
-          curl -X POST -H 'Content-type: application/json' --data "{'msg':'$TEST_OUTPUT'}" ${{ secrets.SLACK_WEBHOOK_URL }}
+          echo "{\"msg\": \"$TEST_OUTPUT\"}" > payload-test-results.json
 
-      # - name: Send test results to Slack workflow 📬
-      #   id: slack
-      #   uses: slackapi/slack-github-action@v1.24.0
-      #   with:
-      #     payload: |
-      #       {
-      #           "msg": "SEO tests: \n${{ steps.tests.outputs.test_output | base64decode }}"
-      #       }
-      #   env:
-      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: Send test results to Slack workflow 📬
+        id: slack
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload-file-path: "./payload-test-results.json"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
