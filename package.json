@@ -14,7 +14,7 @@
     "clean": "rm -rf node_modules; rm -rf .cache; rm -rf public; yarn install;",
     "start": "yarn develop",
     "format": "prettier --write \"src/**/*.js\"",
-    "test": "jest",
+    "test": "jest --json --outputFile=payload-results.json",
     "lint:css": "stylelint './src/**/*.js'"
   },
   "dependencies": {

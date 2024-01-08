@@ -62,3 +62,4 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 /test_output.txt
+/payload-results.json
