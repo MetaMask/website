@@ -41,9 +41,8 @@ jobs:
           npx puppeteer browsers install chrome
           yarn test
           URL="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          echo $URL
           sed -i "2i\\\"action_url\\\": \\\"$URL\\\"" payload-results.json
-          echo (cat payload-results.json)
+          cat payload-results.json
 
       - name: Send test results to Slack workflow 📬
         id: slack
