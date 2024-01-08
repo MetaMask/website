@@ -38,7 +38,7 @@ jobs:
       - name: Run tests 🧪
         id: tests
         run: |
-          TEST_OUTPUT=$(yarn test 2>&1)
+          TEST_OUTPUT=$(yarn test 2>&1 || true)
           echo "::set-output name=test_output::$TEST_OUTPUT"
 
       - name: Send test results to Slack workflow 📬
