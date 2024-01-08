@@ -39,7 +39,7 @@ jobs:
         id: tests
         run: |
           TEST_OUTPUT=$(yarn test 2>&1 || true)
-          echo "::set-output name=test_output::$TEST_OUTPUT"
+          echo "TEST_OUTPUT=$TEST_OUTPUT" >> $GITHUB_OUTPUT
 
       - name: Send test results to Slack workflow 📬
         id: slack
@@ -47,7 +47,7 @@ jobs:
         with:
           payload: |
             {
-                "msg": "SEO tests: \n${{ steps.tests.outputs.test_output }}"
+                "msg": "SEO tests: \n${{ steps.tests.outputs.TEST_OUTPUT }}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
