@@ -7,8 +7,9 @@ describe('SEO Metadata', () => {
 
   beforeAll(async () => {
     browser = await puppeteer.launch({
-      headless: 'new',
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      args: ['--no-sandbox'],
+      executablePath: process.env.PUPPETEER_EXEC_PATH, // set by docker container
+      headless: false,
     })
 
     page = await browser.newPage()
@@ -30,8 +31,6 @@ describe('SEO Metadata', () => {
   //   test(
   //     'each page has a title and a meta description',
   //     async () => {
-  //       //   await page.waitForTimeout(1)
-
   //       for (const url of urls) {
   //         console.log('->', url)
   //         await page.goto(url)
