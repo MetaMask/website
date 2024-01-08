@@ -37,7 +37,9 @@ jobs:
 
       - name: Run tests 🧪
         run: |
+          echo "::stop-commands::`echo -n disable-log-commands | sha256sum | head -c 64`"
           TEST_OUTPUT=$(yarn test 2>&1)
+          echo "::${{ steps.tests.outputs.disable-log-commands }}::"
           echo "TEST_OUTPUT=$TEST_OUTPUT" >> $GITHUB_OUTPUT
 
       - name: Send test results to Slack workflow 📬
