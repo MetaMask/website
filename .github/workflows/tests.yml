@@ -42,6 +42,7 @@ jobs:
           yarn test
           URL="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
           echo $(echo -n '{"action_url": "'$URL'", '; cat payload-results.json | tail -c +2) > payload-results.json
+          cat payload-results.json
 
       - name: Send test results to Slack workflow 📬
         id: slack
