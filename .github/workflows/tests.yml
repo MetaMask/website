@@ -1,0 +1,43 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    container: buildkite/puppeteer:latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Setup git in container 🛠
+        uses: actions/checkout@v4
+
+      - name: Cache dependencies 📦
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: node_modules-${{ hashFiles('**/package-lock.json')}}
+
+      - name: Install dependencies 🔧
+        run: yarn install --frozen-lockfile
+
+      - name: Test 🚀
+        run: |
+          TEST_OUTPUT=$(yarn test)
+          echo "TEST_OUTPUT=$TEST_OUTPUT" >> $GITHUB_OUTPUT
+
+      - name: Send test results to Slack workflow 📬
+        id: slack
+        uses: slackapi/slack-github-action@v1.24.0
+        payload: |
+          {
+            "msg": "SEO tests: \n${{ steps.test.outputs.TEST_OUTPUT }}"
+          }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
