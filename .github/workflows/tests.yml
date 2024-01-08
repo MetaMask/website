@@ -37,10 +37,9 @@ jobs:
 
       - name: Run tests 🧪
         id: tests
-        run: yarn test 2>&1 | tee test_output.txt
-
-      - name: Read test output 📖
-        run: echo "TEST_OUTPUT=$(cat test_output.txt)" >> $GITHUB_OUTPUT
+        run: |
+          TEST_OUTPUT=$(yarn test 2>&1 || true)
+          echo "::set-output name=test_output::$(echo "$TEST_OUTPUT" | base64 --wrap=0)"
 
       - name: Send test results to Slack workflow 📬
         id: slack
@@ -48,7 +47,7 @@ jobs:
         with:
           payload: |
             {
-                "msg": "SEO tests: \n${{ steps.tests.outputs.TEST_OUTPUT }}"
+                "msg": "SEO tests: \n${{ steps.tests.outputs.test_output | base64decode }}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
