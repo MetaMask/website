@@ -37,7 +37,7 @@ jobs:
 
       - name: Run tests 🧪
         run: |
-          TEST_OUTPUT=$(yarn test 2>&1 >/dev/null)
+          TEST_OUTPUT=$(yarn test 2>&1)
           echo "TEST_OUTPUT=$TEST_OUTPUT" >> $GITHUB_OUTPUT
 
       - name: Send test results to Slack workflow 📬
