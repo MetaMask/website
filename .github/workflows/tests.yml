@@ -39,15 +39,15 @@ jobs:
         id: tests
         run: |
           TEST_OUTPUT=$(yarn test 2>&1 || true)
-          echo "::set-output name=test_output::$(echo "$TEST_OUTPUT" | base64 --wrap=0)"
+          curl -X POST -H 'Content-type: application/json' --data "{'msg':'$TEST_OUTPUT'}" ${{ secrets.SLACK_WEBHOOK_URL }}
 
-      - name: Send test results to Slack workflow 📬
-        id: slack
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
-          payload: |
-            {
-                "msg": "SEO tests: \n${{ steps.tests.outputs.test_output | base64decode }}"
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      # - name: Send test results to Slack workflow 📬
+      #   id: slack
+      #   uses: slackapi/slack-github-action@v1.24.0
+      #   with:
+      #     payload: |
+      #       {
+      #           "msg": "SEO tests: \n${{ steps.tests.outputs.test_output | base64decode }}"
+      #       }
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
