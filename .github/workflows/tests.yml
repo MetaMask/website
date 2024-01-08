@@ -3,7 +3,7 @@ name: Tests
 on:
   push:
     branches:
-      - main
+      - 1706-jest-testing-seo-meta
 
   workflow_dispatch:
 
@@ -18,26 +18,36 @@ jobs:
       - name: Setup git in container 🛠
         uses: actions/checkout@v4
 
+      - name: Setup node in container 🪢
+        uses: actions/setup-node@v4
+        with:
+            node-version: 18
+            cache: 'yarn'
+
       - name: Cache dependencies 📦
+        id: cache-nodemodules
         uses: actions/cache@v3
         with:
           path: '**/node_modules'
-          key: node_modules-${{ hashFiles('**/package-lock.json')}}
+          key: node_modules-${{ hashFiles('**/yarn.lock')}}
 
-      - name: Install dependencies 🔧
+      - name: Install Dependencies ⏳
+        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
-      - name: Test 🚀
+      - name: Run tests 🧪
+        id: tests
         run: |
-          TEST_OUTPUT=$(yarn test)
-          echo "TEST_OUTPUT=$TEST_OUTPUT" >> $GITHUB_OUTPUT
+          npx puppeteer browsers install chrome
+          yarn test
+          URL="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          echo $(echo -n '{"action_url": "'$URL'", '; cat payload-results.json | tail -c +2) > payload-results.json
+          cat payload-results.json
 
       - name: Send test results to Slack workflow 📬
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
-        payload: |
-          {
-            "msg": "SEO tests: \n${{ steps.test.outputs.TEST_OUTPUT }}"
-          }
+        with:
+          payload-file-path: "./payload-results.json"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
