@@ -23,6 +23,8 @@ jobs:
         with:
             node-version: 16
             cache: 'npm'
+
+      - name: Install dependencies and run tests 🧪
         run: |
           npm ci
           TEST_OUTPUT=$(npm test)
