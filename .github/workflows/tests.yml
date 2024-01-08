@@ -10,7 +10,7 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    container: tj-actions/puppeteer@v5.0.1
+    container: ianwalter/puppeteer-container:latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true

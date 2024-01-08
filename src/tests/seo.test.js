@@ -7,9 +7,8 @@ describe('SEO Metadata', () => {
 
   beforeAll(async () => {
     browser = await puppeteer.launch({
+      headless: 'new',
       args: ['--no-sandbox'],
-      executablePath: process.env.PUPPETEER_EXEC_PATH, // set by docker container
-      headless: false,
     })
 
     page = await browser.newPage()
@@ -28,24 +27,24 @@ describe('SEO Metadata', () => {
     expect(urls.length).toBeGreaterThan(0)
   })
 
-  //   test(
-  //     'each page has a title and a meta description',
-  //     async () => {
-  //       for (const url of urls) {
-  //         console.log('->', url)
-  //         await page.goto(url)
-  //         await page.waitForSelector('meta[name="description"]')
+//   test(
+//     'each page has a title and a meta description',
+//     async () => {
+//       for (const url of urls) {
+//         console.log('->', url)
+//         await page.goto(url)
+//         await page.waitForSelector('meta[name="description"]')
 
-  //         const title = await page.title()
-  //         expect(title).toBeTruthy()
+//         const title = await page.title()
+//         expect(title).toBeTruthy()
 
-  //         const metaDescriptionContent = await page.$eval(
-  //           'meta[name="description"]',
-  //           element => element.content
-  //         )
-  //         expect(metaDescriptionContent).toBeTruthy()
-  //       }
-  //     },
-  //     300 * 1000
-  //   )
+//         const metaDescriptionContent = await page.$eval(
+//           'meta[name="description"]',
+//           element => element.content
+//         )
+//         expect(metaDescriptionContent).toBeTruthy()
+//       }
+//     },
+//     300 * 1000
+  )
 })
