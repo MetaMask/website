@@ -10,7 +10,7 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    container: mujo-code/puppeteer-headful@18.9.0
+    container: tj-actions/puppeteer:latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
@@ -23,9 +23,6 @@ jobs:
         with:
             node-version: 18
             cache: 'yarn'
-        env:
-          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
-          CI: "true"
 
       - name: Cache dependencies 📦
         id: cache-nodemodules
