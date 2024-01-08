@@ -18,18 +18,16 @@ jobs:
       - name: Setup git in container 🛠
         uses: actions/checkout@v4
 
-      - name: Cache dependencies 📦
-        uses: actions/cache@v3
+      - name: Setup node in container 🪢
+        uses: actions/setup-node@v4
         with:
-          path: '**/node_modules'
-          key: node_modules-${{ hashFiles('**/package-lock.json')}}
+            node-version: 16
+            cache: 'npm'
 
-      - name: Install dependencies 🔧
-        run: yarn install --frozen-lockfile
-
-      - name: Test 🚀
+      - name: Install dependencies and run tests 🧪
         run: |
-          TEST_OUTPUT=$(yarn test)
+          npm ci
+          TEST_OUTPUT=$(npm test)
           echo "TEST_OUTPUT=$TEST_OUTPUT" >> $GITHUB_OUTPUT
 
       - name: Send test results to Slack workflow 📬
