@@ -37,10 +37,8 @@ jobs:
 
       - name: Run tests 🧪
         run: |
-          echo "::stop-commands::`echo -n disable-log-commands | sha256sum | head -c 64`"
-          TEST_OUTPUT=$(yarn test 2>&1)
-          echo "::${{ steps.tests.outputs.disable-log-commands }}::"
-          echo "TEST_OUTPUT=$TEST_OUTPUT" >> $GITHUB_OUTPUT
+          yarn test > test_output.txt
+          echo "TEST_OUTPUT=$(cat test_output.txt)" >> $GITHUB_ENV
 
       - name: Send test results to Slack workflow 📬
         id: slack
@@ -48,7 +46,7 @@ jobs:
         with:
           payload: |
             {
-              "msg": "SEO tests: \n${{ steps.test.outputs.TEST_OUTPUT }}"
+                "msg": "SEO tests: \n$TEST_OUTPUT"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
