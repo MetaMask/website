@@ -10,7 +10,7 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    container: mujo-code/puppeteer-headful:latest
+    container: mujo-code/puppeteer-headful@18.9.0
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
