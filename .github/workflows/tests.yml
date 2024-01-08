@@ -10,7 +10,6 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    container: buildkite/puppeteer:latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
@@ -36,10 +35,13 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Run tests 🧪
-        id: tests
+        uses: ianwalter/playwright-container@v3.0.0
         run: |
           TEST_OUTPUT=$(yarn test 2>&1 || true)
           curl -X POST -H 'Content-type: application/json' --data "{'msg':'$TEST_OUTPUT'}" ${{ secrets.SLACK_WEBHOOK_URL }}
+        env:
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+          PUPPETEER_EXECUTABLE_PATH=/opt/playwright-browsers/chromium-857950/chrome-linux/chrome
 
       # - name: Send test results to Slack workflow 📬
       #   id: slack
