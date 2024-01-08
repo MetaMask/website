@@ -3,7 +3,7 @@ name: Tests
 on:
   push:
     branches:
-      - 1706-jest-testing-seo-meta
+      - main
 
   workflow_dispatch:
 
@@ -21,13 +21,13 @@ jobs:
       - name: Setup node in container 🪢
         uses: actions/setup-node@v4
         with:
-            node-version: 16
-            cache: 'npm'
+            node-version: 18
+            cache: 'yarn'
 
       - name: Install dependencies and run tests 🧪
         run: |
-          npm ci
-          TEST_OUTPUT=$(npm test)
+          yarn install --frozen-lockfile
+          TEST_OUTPUT=$(yarn test)
           echo "TEST_OUTPUT=$TEST_OUTPUT" >> $GITHUB_OUTPUT
 
       - name: Send test results to Slack workflow 📬
