@@ -35,9 +35,10 @@ jobs:
       - name: Send test results to Slack workflow 📬
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
-        payload: |
-          {
-            "msg": "SEO tests: \n${{ steps.test.outputs.TEST_OUTPUT }}"
-          }
+        with:
+          payload: |
+            {
+              "msg": "SEO tests: \n${{ steps.test.outputs.TEST_OUTPUT }}"
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
