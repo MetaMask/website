@@ -14,7 +14,7 @@
     "clean": "rm -rf node_modules; rm -rf .cache; rm -rf public; yarn install;",
     "start": "yarn develop",
     "format": "prettier --write \"src/**/*.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "lint:css": "stylelint './src/**/*.js'"
   },
   "dependencies": {
@@ -89,11 +89,14 @@
     "gatsby"
   ],
   "devDependencies": {
+    "babel-jest": "^29.7.0",
     "babel-plugin-inline-react-svg": "^2.0.2",
     "fs-extra": "^8.0.0",
     "gatsby-plugin-root-import": "^2.0.8",
+    "jest": "^29.7.0",
     "p-whilst": "^2.0.0",
     "prettier": "^1.15.2",
+    "puppeteer": "^21.7.0",
     "retext": "^6.0.1",
     "retext-english": "^3.0.2",
     "retext-smartypants": "^3.0.2",
