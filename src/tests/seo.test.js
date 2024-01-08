@@ -8,6 +8,7 @@ describe('SEO Metadata', () => {
   beforeAll(async () => {
     browser = await puppeteer.launch({
       headless: 'new',
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
     })
 
     page = await browser.newPage()
