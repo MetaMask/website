@@ -19,7 +19,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Create development env file
+      - name: Create development env file 🗃️
         run: |
           touch gatsby.development.env
           echo GATSBY_LD_CLIENT_ID =${{ secrets.GATSBY_LD_CLIENT_ID }} >> gatsby.development.env
@@ -34,7 +34,7 @@ jobs:
           echo GATSBY_CONTENTFUL_PREVIEW_API_KEY =${{ secrets.GATSBY_CONTENTFUL_PREVIEW_API_KEY }} >> gatsby.development.env
           echo GH_TOKEN =${{ secrets.GH_TOKEN }} >> gatsby.development.env
 
-      - name: Read .nvmrc
+      - name: Read .nvmrc 🧑‍🏫
         run: echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_ENV
         id: nvm
 
@@ -43,12 +43,20 @@ jobs:
         with:
           node-version: ${{ env.NVMRC }}
           cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
 
-      - name: Install and Build 🔧
-        run: |
-          yarn install --frozen-lockfile
-          yarn deploy:dev
+      - name: Cache dependencies 📦
+        id: cache-nodemodules
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: node_modules-${{ hashFiles('**/yarn.lock')}}
+
+      - name: Install Dependencies ⏳
+        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+
+      - name: Build 🏀
+        run: yarn deploy:dev
         env:
           CI: true
 
