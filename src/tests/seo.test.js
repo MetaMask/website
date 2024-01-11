@@ -24,7 +24,13 @@ describe('SEO Metadata', () => {
     // Extract the URLs
     urls = await page.$$eval('loc', nodes => nodes.map(n => n.textContent))
 
+    // Check that there are URLs
     expect(urls.length).toBeGreaterThan(0)
+
+    // Check for valid URLs
+    urls.forEach(url => {
+      expect(url).toMatch(/^(http|https):\/\/[^ "]+$/)
+    })
   })
 
   test(
@@ -32,8 +38,11 @@ describe('SEO Metadata', () => {
     async () => {
       for (const url of urls) {
         console.log('->', url)
-        await page.goto(url)
+        const response = await page.goto(url)
         await page.waitForSelector('meta[name="description"]')
+
+        // Check for 200 status code
+        expect(response.status()).toBe(200)
 
         const title = await page.title()
         expect(title).toBeTruthy()
