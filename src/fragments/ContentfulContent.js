@@ -863,7 +863,11 @@ export const ContentfulNewsAuthorFields = graphql`
       gatsbyImageData(width: 200, quality: 80)
     }
     expertise
-    education
+    education {
+      childMarkdownRemark {
+        html
+      }
+    }
     description {
       childMarkdownRemark {
         html
