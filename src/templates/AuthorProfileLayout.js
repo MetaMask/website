@@ -8,7 +8,6 @@ import ContentWrapper from '../components/ContentWrapper'
 import Image from '../components/Image'
 import Link from '../components/Link'
 import NewsList from '../components/NewsList'
-import ParseMD from '../components/ParseMD'
 import SocialIcon from '../components/SocialIcon'
 import { Section } from '../components/StyledGeneral'
 import getWebpImage from '../lib/utils/getWebpImage'
@@ -46,6 +45,8 @@ function AuthorProfileLayout(props) {
   const bgImageDarkUrl = getWebpImage(bgImageDark?.file?.url)
   const { childMarkdownRemark: { html: descriptionHtml } = {} } =
     description || {}
+  const { childMarkdownRemark: { html: educationHtml } = {} } =
+    education || {}
   const relatedNews = news.nodes
   const twRegex = /(?:https?:\/\/)?(?:www\.)?twitter\.com\/(?:#!\/)?@?([^\/]+)/
   const liRegex = /(?:https?:\/\/)?(?:www\.)?linkedin\.com\/in\/([^\/]+)/
@@ -112,14 +113,14 @@ function AuthorProfileLayout(props) {
                   {education && (
                     <div className="content-item">
                       <strong>Education</strong>
-                      <p>{education}</p>
+                      <div dangerouslySetInnerHTML={{__html: educationHtml}} />
                     </div>
                   )}
                   <hr />
                   {descriptionHtml && (
                     <>
                       <h3>Experience</h3>
-                      <ParseMD>{descriptionHtml}</ParseMD>
+                      <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
                     </>
                   )}
                 </div>
@@ -317,6 +318,7 @@ const BodyContentWrapper = styled.div`
         color: #bbc0c5;
 
         :hover {
+          color: ${({ theme }) => theme.lightBlue};
           text-decoration: underline;
           text-underline-offset: 4px;
         }
@@ -334,6 +336,9 @@ const BodyContentWrapper = styled.div`
         font-weight: 500;
         margin-bottom: 12px;
       }
+      a:hover {
+        text-decoration: underline;
+      } 
       &:not(:last-child) {
         margin-bottom: 30px;
       }
