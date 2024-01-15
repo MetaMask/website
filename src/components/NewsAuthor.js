@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from '../components/Link'
+import isEmpty from 'lodash/isEmpty'
 
 function NewsAuthor({ listAuthors }) {
   const generateAuthor = authors =>
@@ -17,7 +18,7 @@ function NewsAuthor({ listAuthors }) {
 
   return (
     <span className="author">
-      {listAuthors ? generateAuthor(listAuthors) : 'MetaMask'}
+      {!isEmpty(listAuthors) ? generateAuthor(listAuthors) : 'MetaMask'}
     </span>
   )
 }

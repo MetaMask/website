@@ -55,12 +55,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gatsby-build-
 
-      - name: Install Dependencies ⏳
-        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
-
-      - name: Build 🏀
-        run: yarn deploy:dev
+      - name: Install & Build 🏀
+        run: |
+          yarn install --frozen-lockfile
+          yarn deploy:dev
         env:
           CI: true
 

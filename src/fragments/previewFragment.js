@@ -220,6 +220,27 @@ export const ContentfulPortfolioMapFields = gql`
   }
 `
 
+export const ContentfulNewsAuthorFields = gql`
+  fragment ContentfulNewsAuthorFields on NewsAuthor {
+    __typename
+    sys {
+      id
+    }
+    name
+    position
+    image(preview: true) {
+      title
+      description
+      url
+    }
+    expertise
+    education
+    description
+    twitter
+    linkedin
+  }
+`
+
 export const ContentfulNewsLayoutFields = gql`
   fragment ContentfulNewsLayoutFields on NewsLayout {
     __typename
@@ -236,6 +257,8 @@ export const ContentfulNewsLayoutFields = gql`
     authorsCollection(preview: true) {
       items {
         name
+        createProfilePage
+        profileUrl
       }
     }
     publishDate
