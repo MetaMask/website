@@ -905,7 +905,9 @@ export const ContentfulNewsFields = graphql`
       profileUrl
     }
     content {
-      content
+      childMarkdownRemark {
+        html
+      }
     }
     categories {
       ... on ContentfulNewsCategory {

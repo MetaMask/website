@@ -83,6 +83,7 @@ const baseCSP = {
     '*.google-analytics.com',
     'images.contentful.com',
     'cdn.consensys.net',
+    'cdn.consensys.io',
     '*.linkedin.com',
     '*.hubspotusercontent10.net',
     'www.facebook.com',
