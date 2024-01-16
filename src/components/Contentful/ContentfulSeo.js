@@ -36,7 +36,6 @@ const ContentfulSeo = props => {
 }
 
 ContentfulSeo.propTypes = {
-  seoPage: PropTypes.object,
   pageTitle: PropTypes.string,
   pageDescription: PropTypes.string,
   metaTags: PropTypes.arrayOf(PropTypes.object),

@@ -844,6 +844,41 @@ export const ContentfulModuleContainerFields = graphql`
   }
 `
 
+export const ContentfulNewsAuthorFields = graphql`
+  fragment ContentfulNewsAuthorFields on ContentfulNewsAuthor {
+    contentful_id
+    internal {
+      type
+    }
+    name
+    position
+    image {
+      title
+      description
+      file {
+        url
+      }
+      gatsbyImageData(width: 200, quality: 80)
+    }
+    expertise
+    education {
+      childMarkdownRemark {
+        html
+      }
+    }
+    description {
+      childMarkdownRemark {
+        html
+      }
+    }
+    twitter
+    linkedin
+    seo {
+      ...ContentfulSeoFields
+    }
+  }
+`
+
 export const ContentfulNewsFields = graphql`
   fragment ContentfulNewsFields on ContentfulNews {
     contentful_id
@@ -864,9 +899,13 @@ export const ContentfulNewsFields = graphql`
     publishDate(formatString: "MMMM D, YYYY")
     authors {
       name
+      createProfilePage
+      profileUrl
     }
     content {
-      content
+      childMarkdownRemark {
+        html
+      }
     }
     categories {
       ... on ContentfulNewsCategory {

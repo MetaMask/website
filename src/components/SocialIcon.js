@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Twitter from '../images/icons/twitter.svg'
+import TwitterX from '../images/icons/twitter-x.svg'
 import Facebook from '../images/icons/facebook.svg'
 import Linkedin from '../images/icons/linkedin.svg'
 import Copy from '../images/icons/icon-copy.svg'
@@ -12,6 +13,7 @@ const SocialIcon = props => {
     <Icon customColor={customColor}>
       {'copy' === name && <Copy />}
       {'twitter' === name && <Twitter />}
+      {'twitter-x' === name && <TwitterX />}
       {'facebook' === name && <Facebook />}
       {'linkedin' === name && <Linkedin />}
       {text ? <span>{text}</span> : null}
