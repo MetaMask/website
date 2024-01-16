@@ -4,6 +4,8 @@ import React from 'react'
 import getWebpImage from '../lib/utils/getWebpImage'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Layout from './PageLayout'
+import orderBy from 'lodash/orderBy'
+import takeRight from 'lodash/takeRight'
 import AuthorProfileContent from '../components/AuthorProfileContent'
 
 function AuthorProfileLayout(props) {
@@ -21,8 +23,8 @@ function AuthorProfileLayout(props) {
         twitter,
         linkedin,
         seo,
+        news,
       },
-      news,
       heroBg,
       heroBgDark,
       bgImage,
@@ -38,7 +40,8 @@ function AuthorProfileLayout(props) {
   const { childMarkdownRemark: { html: descriptionHtml } = {} } =
     description || {}
   const { childMarkdownRemark: { html: educationHtml } = {} } = education || {}
-  const relatedNews = news.nodes
+  let relatedNews = orderBy(news, el => new Date(el.publishDate), 'asc')
+  relatedNews = takeRight(relatedNews, 3)
 
   return (
     <Layout>
@@ -80,13 +83,7 @@ export const AuthorProfileLayoutQuery = graphql`
     }
     author: contentfulNewsAuthor(contentful_id: { eq: $author_id }) {
       ...ContentfulNewsAuthorFields
-    }
-    news: allContentfulNews(
-      filter: { authors: { elemMatch: { contentful_id: { eq: $author_id } } } }
-      sort: { publishDate: DESC }
-      limit: 3
-    ) {
-      nodes {
+      news {
         ...ContentfulNewsFields
       }
     }
