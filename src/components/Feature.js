@@ -12,6 +12,7 @@ import Embed from './Embed'
 import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
 import ParseMD from './ParseMD'
 import GatsbyBackgroundImage from './GatsbyBackgroundImage'
+import { withLDConsumer } from 'launchdarkly-react-client-sdk'
 
 const FeatureComponent = props => {
   const {
@@ -50,6 +51,7 @@ const FeatureComponent = props => {
     previewMode = false,
     contentfulId,
     moduleId,
+    flags,
   } = props
 
   const inspectorProps = useContentfulInspectorMode()
@@ -61,6 +63,14 @@ const FeatureComponent = props => {
   const isAPIPlayground = customClass?.includes('feature-api-playground')
   const isDevMeetFlask = customClass?.includes('feature-meet-flask')
   const isInfuraGas = customClass?.includes('feature-infura-gas')
+
+  if (
+    (flags.showApiPlayground && isDevMeetFlask) ||
+    (!flags.showApiPlayground && isAPIPlayground)
+  ) {
+    return null
+  }
+
   const innerContent = (
     <>
       {eyebrow ? (
@@ -164,6 +174,7 @@ const FeatureComponent = props => {
       ) : null}
     </>
   )
+
   const imageContent = (
     <ImageSrc
       image={image}
@@ -373,7 +384,7 @@ const FeatureComponent = props => {
   )
 }
 
-export default withTheme(FeatureComponent)
+export default withTheme(withLDConsumer()(FeatureComponent))
 
 FeatureComponent.propTypes = {
   image: PropTypes.object,
@@ -453,6 +464,7 @@ const SideEmbed = styled.div`
     padding: 0;
   }
 `
+
 const ImageSrc = styled(ImageItem)`
   margin: 0 auto;
   max-width: 100%;
@@ -488,6 +500,7 @@ const ImageSrc = styled(ImageItem)`
   `
       : ''}
 `
+
 const Headline = styled.h2`
   padding-bottom: 20px;
   font-weight: 700;
@@ -525,6 +538,7 @@ const Headline = styled.h2`
     color: #fff;
   }
 `
+
 const Description = styled.div`
   display: block;
 
@@ -566,6 +580,7 @@ const Description = styled.div`
     }
   }
 `
+
 const FeatureWrapper = styled.div`
   display: flex;
   margin: -10px;
@@ -692,6 +707,7 @@ const FeatureWrapper = styled.div`
     }
   }
 `
+
 const FeatureInner = styled.div`
   display: block;
   ${({ contentPaddingTop }) =>
@@ -733,6 +749,7 @@ const FeatureInner = styled.div`
     }
   }
 `
+
 const CTAWrapper = styled.div`
   display: flex;
   row-gap: 8px;
@@ -808,6 +825,7 @@ const FeatureItems = styled.div`
     margin: 32px 0 auto auto;
   }
 `
+
 const FeatureItem = styled.div`
   &:not(:last-child) {
     margin-bottom: 48px;
