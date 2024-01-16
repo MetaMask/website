@@ -1790,10 +1790,6 @@ body.dark-mode {
       span {
         color: #24272a;
         font-weight: normal;
-
-        .dark-mode & {
-          color: #fff;
-        }
       }
     }
   }
@@ -1830,10 +1826,6 @@ body.dark-mode {
     margin-bottom: 32px;
     color: #24272a;
     font-weight: normal;
-
-    .dark-mode & {
-      color: #fff;
-    }
   }
 }
 

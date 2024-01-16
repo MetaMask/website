@@ -16,6 +16,7 @@ import {
   ContentfulLogoFields,
   ContentfulModuleContainerFields,
   ContentfulNewsCategoryFields,
+  ContentfulNewsAuthorFields,
   ContentfulNewsLayoutFields,
   ContentfulPopupAnnouncementFields,
   ContentfulRichTextFields,
@@ -164,6 +165,15 @@ export const ContentfulNewsLayoutQuery = gql`
   query($id: String!) {
     previewContent: newsLayout(id: $id) {
       ...ContentfulNewsLayoutFields
+    }
+  }
+`
+
+export const ContentfulNewsAuthorQuery = gql`
+  ${ContentfulNewsAuthorFields}
+  query($id: String!) {
+    previewContent: newsAuthor(id: $id) {
+      ...ContentfulNewsAuthorFields
     }
   }
 `

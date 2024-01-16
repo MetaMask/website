@@ -134,16 +134,13 @@ const Wrapper = styled.div`
 
 const Content = styled.div`
   .newsletterOnNewsDetail & {
-    background: ${({ theme }) => theme.background.white};
+    background: #fff;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 7px 29px 0px;
     border-radius: 24px;
     padding: 32px;
     position: absolute;
     z-index: 1;
     width: calc(100% - 40px);
-    .dark-mode & {
-      box-shadow: 0 10px 30px 0 rgba(255, 255, 255, 0.2);
-    }
   }
   .accessFireBlockForm & {
     padding: 40px;

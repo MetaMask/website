@@ -25,6 +25,7 @@ import {
   ContentfulLogoQuery,
   ContentfulModuleContainerQuery,
   ContentfulNewsCategoryQuery,
+  ContentfulNewsAuthorQuery,
   ContentfulNewsLayoutQuery,
   ContentfulPopupAnnouncementQuery,
   ContentfulRichTextQuery,
@@ -105,6 +106,9 @@ const mapTypeToQuery = type => {
       break
     case 'ContentfulModuleContainer':
       query = ContentfulModuleContainerQuery
+      break
+    case 'ContentfulNewsAuthor':
+      query = ContentfulNewsAuthorQuery
       break
     case 'ContentfulNewsLayout':
       query = ContentfulNewsLayoutQuery

@@ -23,7 +23,7 @@ exports.createPages = async ({ graphql, actions }) => {
   redirects.data?.allRedirects.nodes.forEach(r =>
     createRedirect({
       fromPath: r.fromPath,
-      toPath: r.toPath
+      toPath: r.toPath,
     })
   )
 
@@ -31,7 +31,9 @@ exports.createPages = async ({ graphql, actions }) => {
   const newsCategories = []
   const result = await graphql(`
     {
-      allCategories: allContentfulNewsCategory(filter: {name: {regex: "/^(?!.*(?:Latest|example)).*$/"}}) {
+      allCategories: allContentfulNewsCategory(
+        filter: { name: { regex: "/^(?!.*(?:Latest|example)).*$/" } }
+      ) {
         nodes {
           contentful_id
           name
@@ -100,13 +102,13 @@ exports.createPages = async ({ graphql, actions }) => {
                   filename
                 }
               }
-              ...on ContentfulPortfolioIntro {
+              ... on ContentfulPortfolioIntro {
                 contentful_id
               }
-              ...on ContentfulPortfolioInstructions {
+              ... on ContentfulPortfolioInstructions {
                 contentful_id
               }
-              ...on ContentfulPortfolioMap {
+              ... on ContentfulPortfolioMap {
                 contentful_id
               }
             }
@@ -152,10 +154,12 @@ exports.createPages = async ({ graphql, actions }) => {
             }))
 
             if (assetUrls) {
-              ; (async () => {
+              ;(async () => {
                 await Promise.all(
-                  assetUrls.map(url => download(url, `public/assets/${path.parse(url).base}`))
-                ).catch((_) => {
+                  assetUrls.map(url =>
+                    download(url, `public/assets/${path.parse(url).base}`)
+                  )
+                ).catch(_ => {
                   return Promise.reject('Fetch MetaMask assets failed!')
                 })
               })()
@@ -198,18 +202,22 @@ exports.createPages = async ({ graphql, actions }) => {
             })
           }
 
-          let legalPages = ['/terms-of-use/', '/privacy-policy/', '/privacy-policy/cookies/']
+          let legalPages = [
+            '/terms-of-use/',
+            '/privacy-policy/',
+            '/privacy-policy/cookies/',
+          ]
           if (legalPages.includes(slug)) {
-            const resolvedData = legalData?.find(s => s?.frontmatter?.slug === slug)
+            const resolvedData = legalData?.find(
+              s => s?.frontmatter?.slug === slug
+            )
             if (!resolvedData) {
               // Skip creating page
-              return;
+              return
             }
             createPage({
               path: slug,
-              component: path.resolve(
-                `./src/templates/MarkdownPageLayout.js`
-              ),
+              component: path.resolve(`./src/templates/MarkdownPageLayout.js`),
               context: {
                 headerId,
                 footerId,
@@ -224,22 +232,24 @@ exports.createPages = async ({ graphql, actions }) => {
             return
           }
 
-          if (slug === "/portfolio/") {
+          if (slug === '/portfolio/') {
             createPage({
               path: slug,
-              component: path.resolve(`./src/templates/ContentfulPortfolioLayout.js`),
+              component: path.resolve(
+                `./src/templates/ContentfulPortfolioLayout.js`
+              ),
               context: {
                 headerId,
                 footerId,
                 seoId,
                 pathBuild: slug,
                 modules: moduleIds,
-              }
+              },
             })
             return
           }
 
-          const extraData = slug === "/developer/" ? devChangelogData : null
+          const extraData = slug === '/developer/' ? devChangelogData : null
           createPage({
             path: slug, // slug validation in Contentful CMS
             component: path.resolve(`./src/templates/ContentfulLayout.js`),
@@ -307,8 +317,46 @@ exports.createPages = async ({ graphql, actions }) => {
     .catch(error => {
       console.log(' Error generating News Page: ', error)
     })
+  // Author profile page
+  const contentfulAuthorProfile = graphql(`
+    {
+      authors: allContentfulNewsAuthor(
+        filter: { createProfilePage: { eq: true } }
+      ) {
+        nodes {
+          contentful_id
+          name
+          profileUrl
+        }
+      }
+    }
+  `)
+    .then(result => {
+      if (result.data && result.data.authors) {
+        const authors = result.data.authors.nodes
+        return authors.map(author => {
+          const { contentful_id, profileUrl } = author
+          const slug = '/author/' + profileUrl + '/'
+          createPage({
+            path: slug,
+            component: path.resolve('./src/templates/AuthorProfileLayout.js'),
+            context: {
+              author_id: contentful_id,
+              pathBuild: slug,
+            },
+          })
+        })
+      }
+    })
+    .catch(error => {
+      console.log(' Error generating author profile page: ', error)
+    })
 
-  const autoGeneratedPages = [contentfulLayouts, contentfulNews]
+  const autoGeneratedPages = [
+    contentfulLayouts,
+    contentfulNews,
+    contentfulAuthorProfile,
+  ]
 
   return Promise.all(autoGeneratedPages)
 }
