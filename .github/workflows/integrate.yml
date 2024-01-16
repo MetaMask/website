@@ -45,7 +45,6 @@ jobs:
         uses: actions/setup-node@f1f314fca9dfce2769ece7d933488f076716723e
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
-          cache: "yarn"
 
       - name: Build 🔧
         run: |
