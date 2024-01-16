@@ -58,6 +58,7 @@ const FeatureComponent = props => {
     ? contentAlignment
     : ''
   const isContentAlignVertical = contentAlignment === 'vertical'
+  const isAPIPlayground = customClass?.includes('feature-api-playground')
   const isDevMeetFlask = customClass?.includes('feature-meet-flask')
   const isInfuraGas = customClass?.includes('feature-infura-gas')
   const innerContent = (
@@ -128,7 +129,11 @@ const FeatureComponent = props => {
       {cta && !isContentAlignVertical ? (
         <CTAWrapper
           className={classnames({
-            'hidden-mobile': !(isDevMeetFlask || isInfuraGas),
+            'hidden-mobile': !(
+              isDevMeetFlask ||
+              isInfuraGas ||
+              isAPIPlayground
+            ),
           })}
           {...(previewMode
             ? inspectorProps({
@@ -330,7 +335,8 @@ const FeatureComponent = props => {
           {cta && !isContentAlignVertical ? (
             <CTAWrapper
               className={classnames('hidden-desktop', {
-                'hidden-mobile': isDevMeetFlask || isInfuraGas,
+                'hidden-mobile':
+                  isDevMeetFlask || isInfuraGas || isAPIPlayground,
               })}
               {...(previewMode
                 ? inspectorProps({
@@ -418,7 +424,9 @@ const SideImage = styled.div`
   .sideImageMaxWidth667 & {
     max-width: 667px;
   }
-  .feature-meet-flask & {
+
+  .feature-meet-flask &,
+  .feature-api-playground & {
     padding-top: 0;
     padding-bottom: 0;
     align-self: center;
@@ -465,14 +473,14 @@ const ImageSrc = styled(ImageItem)`
     }
   `
       : ''}
-  
+
   ${({ imageAlignment }) =>
     imageAlignment === 'left'
       ? `
     margin: 0 auto 0 0;
   `
       : ''}
-  
+
   ${({ imageAlignment }) =>
     imageAlignment === 'right'
       ? `
@@ -489,7 +497,7 @@ const Headline = styled.h2`
     display: none;
   `
       : ''}
-  
+
   ${({ headlineMarginTop0 }) =>
     headlineMarginTop0 ? 'margin-top: 0;' : 'margin-top: 40px;'}
 
@@ -513,7 +521,7 @@ const Headline = styled.h2`
     text-align: center;
   }
 
-  .feature-meet-flask & {
+  .feature-meet-flask &, .feature-api-playground & {
     color: #fff;
   }
 `
@@ -591,7 +599,7 @@ const FeatureWrapper = styled.div`
       }
   `
       : ''}
-  
+
   ${({ imageShadow }) =>
     imageShadow
       ? `
@@ -600,7 +608,7 @@ const FeatureWrapper = styled.div`
       }
   `
       : ''}
-  
+
   ${({ contentAlignLR, theme }) =>
     contentAlignLR === 'left'
       ? `
@@ -630,7 +638,7 @@ const FeatureWrapper = styled.div`
       }
   `
       : ''}
-  
+
   ${({ alignItemsCenter }) =>
     alignItemsCenter
       ? `
@@ -638,21 +646,21 @@ const FeatureWrapper = styled.div`
     justify-content: center;
   `
       : ''}
-  
+
   ${({ alignItemsCenter, isContentAlignVertical }) =>
     alignItemsCenter && isContentAlignVertical
       ? `
     text-align: center;
   `
       : ''}
-  
+
   & > * {
     padding: 10px;
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       padding: 0 10px;
     }
   }
-  
+
   ${({ sectionPadding }) =>
     sectionPadding === '0px'
       ? `
@@ -661,7 +669,7 @@ const FeatureWrapper = styled.div`
     }
                 `
       : ''}
-  
+
   h1.feature-hero-title {
     font-weight: ${({ theme }) => theme.font.weight.bold};
     font-size: ${({ theme }) => theme.font.size.xxxl}rem;
@@ -708,7 +716,7 @@ const FeatureInner = styled.div`
     max-width: 100%;
   }
 
-  .feature-meet-flask & {
+  .feature-meet-flask &, .feature-api-playground & {
     color: #fff;
     padding-top: 24px;
 
@@ -718,6 +726,7 @@ const FeatureInner = styled.div`
       padding-left: 40px;
     }
   }
+
   .feature-infura-gas & {
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       padding-top: 24px;
@@ -729,32 +738,53 @@ const CTAWrapper = styled.div`
   row-gap: 8px;
   column-gap: 16px;
   margin-top: 40px;
+
   a {
     min-width: 160px;
   }
+
   .snapsLiveMetaMaskFlask & {
     order: 1;
     margin-top: 0;
+
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       margin-bottom: 16px;
     }
   }
+
   .ctaMt10 & {
     margin-top: 10px;
   }
+
   .ctaDesktopMt96 & {
     @media (min-width: ${({ theme }) => theme.device.tablet}) {
       margin-top: 96px;
     }
   }
+
   .feature-meet-flask & {
     a {
       background: linear-gradient(180deg, #8a42ad 0%, #6762eb 100%) !important;
-      border: none;
+
       &:hover {
         color: #fff;
       }
     }
+  }
+
+  .feature-api-playground & {
+    a {
+      color: #121212;
+      background: linear-gradient(90deg, #ffe566 0%, #ffb0eb 100%);
+    }
+  }
+
+  .feature-meet-flask &,
+  .feature-api-playground & {
+    a {
+      border: none;
+    }
+
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       margin-top: 0;
     }
@@ -763,6 +793,7 @@ const CTAWrapper = styled.div`
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     justify-content: center;
   }
+
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
     flex-wrap: wrap;
   }
@@ -772,6 +803,7 @@ const FeatureItems = styled.div`
   display: block;
   margin-top: 32px;
   margin-right: 32px;
+
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     margin: 32px 0 auto auto;
   }
@@ -797,24 +829,30 @@ const SlideFeatureItemInner = styled.div`
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
     justify-content: center;
   }
+
   @media (min-width: ${({ theme }) => theme.device.tablet}) {
     .slideFeatureMt52 & {
       margin-top: 52px;
     }
+
     .slideFeatureMt56 & {
       margin-top: 56px;
     }
+
     .slideFeatureMt59 & {
       margin-top: 59px;
     }
+
     .slideFeatureMW520 & {
       position: absolute;
       max-width: 520px;
     }
+
     .slideFeatureMW545 & {
       position: absolute;
       max-width: 545px;
     }
+
     .slideFeatureMW400 & {
       position: absolute;
       max-width: 400px;
