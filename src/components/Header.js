@@ -1,8 +1,8 @@
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { withLDConsumer } from 'launchdarkly-react-client-sdk'
 import ContextClientSide from '../Context/ContextClientSide'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 import styled, { withTheme } from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 import ToggleDarkMode from './ToggleDarkMode'
@@ -29,9 +29,9 @@ const StyledHeader = props => {
     isSticky,
     previewMode = false,
     contentfulId,
-    flags,
   } = props
 
+  const flags = useFlags()
   const inspectorProps = useContentfulInspectorMode()
   const isDesktop = useMediaQuery({
     query: '(min-width: 1025px)',
@@ -260,7 +260,7 @@ const StyledHeader = props => {
   )
 }
 
-export default withTheme(withLDConsumer()(StyledHeader))
+export default withTheme(StyledHeader)
 
 StyledHeader.propTypes = {
   logo: PropTypes.object,

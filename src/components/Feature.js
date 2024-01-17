@@ -12,7 +12,7 @@ import Embed from './Embed'
 import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
 import ParseMD from './ParseMD'
 import GatsbyBackgroundImage from './GatsbyBackgroundImage'
-import { withLDConsumer } from 'launchdarkly-react-client-sdk'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 
 const FeatureComponent = props => {
   const {
@@ -51,14 +51,15 @@ const FeatureComponent = props => {
     previewMode = false,
     contentfulId,
     moduleId,
-    flags,
   } = props
 
+  const flags = useFlags()
   const inspectorProps = useContentfulInspectorMode()
 
   const contentAlignLR = ['left', 'right'].includes(contentAlignment)
     ? contentAlignment
     : ''
+
   const isContentAlignVertical = contentAlignment === 'vertical'
   const isAPIPlayground = customClass?.includes('feature-api-playground')
   const isDevMeetFlask = customClass?.includes('feature-meet-flask')
@@ -384,7 +385,7 @@ const FeatureComponent = props => {
   )
 }
 
-export default withTheme(withLDConsumer()(FeatureComponent))
+export default withTheme(FeatureComponent)
 
 FeatureComponent.propTypes = {
   image: PropTypes.object,
