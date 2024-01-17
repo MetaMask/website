@@ -20,7 +20,7 @@ jobs:
       - name: Setup node in container 🪢
         uses: actions/setup-node@v4
         with:
-            node-version: ${{ env.NVMRC }}
+            node-version: 18
             cache: 'yarn'
 
       - name: Cache dependencies 📦
