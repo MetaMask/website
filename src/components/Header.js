@@ -2,7 +2,6 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import ContextClientSide from '../Context/ContextClientSide'
-import { useFlags } from 'launchdarkly-react-client-sdk'
 import styled, { withTheme } from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 import ToggleDarkMode from './ToggleDarkMode'
@@ -31,7 +30,6 @@ const StyledHeader = props => {
     contentfulId,
   } = props
 
-  const flags = useFlags()
   const inspectorProps = useContentfulInspectorMode()
   const isDesktop = useMediaQuery({
     query: '(min-width: 1025px)',
@@ -205,7 +203,7 @@ const StyledHeader = props => {
                           })
                         ) : (
                           <>
-                            {title === 'Docs' ? flags?.testDoc ?? title : title}
+                            {title}
                             <Icon className="w-icon w-icon-dropdown-toggle" />
                           </>
                         )}
@@ -276,9 +274,6 @@ StyledHeader.propTypes = {
 
 const HeaderElement = styled.header`
   background-color: #fff;
-  body.dark-mode & {
-    background-color: #121212;
-  }
   bottom: 20px;
   display: block;
   left: 0;
@@ -291,6 +286,10 @@ const HeaderElement = styled.header`
   top: 0;
   z-index: 999;
   transition: background 300ms ease;
+
+  body.dark-mode & {
+    background-color: #121212;
+  }
 
   &.sticky {
     position: sticky;
@@ -311,6 +310,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: space-between;
+
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     max-width: var(--container-width-miniDesktop);
   }
@@ -324,6 +324,7 @@ const NavMain = styled.nav`
   display: block;
   font-size: 16px;
   line-height: 22px;
+
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     opacity: 0;
     visibility: hidden;
@@ -347,14 +348,17 @@ const NavMain = styled.nav`
         : ''}
   }
 `
+
 const NavMainInner = styled.div`
   display: flex;
+
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     flex-direction: column;
     max-width: var(--container-width-miniDesktop);
     margin: 0 auto;
   }
 `
+
 const LogoWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -376,6 +380,7 @@ const Logo = styled.img`
     `
       : ''}
 `
+
 const NavMenu = styled.div`
   display: inline-flex;
   position: relative;
@@ -396,6 +401,7 @@ const NavMenuChild = styled.div`
   min-width: 100%;
   position: absolute;
   top: 100%;
+
   a {
     white-space: nowrap;
     width: 100%;
@@ -413,6 +419,7 @@ const NavMenuChild = styled.div`
     `
         : ''}
   }
+
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     width: 100%;
     position: static;
@@ -428,6 +435,7 @@ const NavMenuChild = styled.div`
         : ''}
   }
 `
+
 const NavMenuMain = styled.div`
   display: flex;
   align-items: center;
@@ -437,6 +445,7 @@ const NavMenuMain = styled.div`
   body.dark-mode & {
     color: #FFF;
   }
+
   &:hover {
     color: ${({ theme }) => theme.text.menuHover};
   }
@@ -453,6 +462,7 @@ const NavMenuMain = styled.div`
     justify-content: space-between;
   }
 `
+
 const Icon = styled.span`
   display: inline-block;
   margin-left: 4px;
@@ -468,6 +478,7 @@ const HamburgerButton = styled.div`
   cursor: pointer;
   border-radius: 10px;
   color: ${({ theme }) => theme.text.default};
+
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     display: inline-flex;
   }
@@ -487,11 +498,14 @@ const ButtonsWrapper = styled.div`
     min-height: 40px !important;
     height: 40px !important;
   }
+
   a {
     padding: 8px 32px !important;
   }
+
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     margin-top: 12px;
+
     a {
       width: 100%;
     }
