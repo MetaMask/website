@@ -425,9 +425,11 @@ const SideImage = styled.div`
     .noPaddingBottom & {
       margin-bottom: 0 !important;
     }
+
     .sideImageOverflowRight & {
       margin-right: -40px;
     }
+
     .removeOverflowBelowMd & {
       margin-right: unset;
     }
@@ -435,6 +437,12 @@ const SideImage = styled.div`
 
   .sideImageMaxWidth667 & {
     max-width: 667px;
+  }
+
+  .feature-api-playground & {
+    img {
+      width: 100%;
+    }
   }
 
   .feature-meet-flask &,
