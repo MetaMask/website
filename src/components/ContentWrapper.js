@@ -56,11 +56,12 @@ const Container = styled.div`
   }
 
   ${({ styleOverride }) => styleOverride}
-  &.feature-meet-flask {
+  &.feature-meet-flask, &.feature-api-playground {
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       padding: 0;
     }
   }
+
   &.feature-infura-gas {
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       padding: 0;
@@ -110,6 +111,7 @@ const ContainerInner = styled.div`
       );
     }
   }
+
   .sideImageOverflowAll & {
     @media (min-width: ${({ theme }) =>
         theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
@@ -142,7 +144,9 @@ const ContainerInner = styled.div`
       margin-bottom: 8px;
     }
   }
-  .feature-meet-flask & {
+
+  .feature-meet-flask &,
+  .feature-api-playground & {
     background-color: #24292e;
     overflow: hidden;
 
