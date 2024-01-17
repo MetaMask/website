@@ -51,14 +51,17 @@ jobs:
           path: |
             public
             .cache
-          key: ${{ runner.os }}-gatsby-build-${{ github.run_id }}
+            node_modules
+          key: ${{ runner.os }}-gatsby-build-${{ github.run_id }}-node_modules-${{ hashFiles('**/yarn.lock')}}
           restore-keys: |
             ${{ runner.os }}-gatsby-build-
 
-      - name: Install & Build 🏀
-        run: |
-          yarn install --frozen-lockfile
-          yarn deploy:dev
+	    - name: Install Dependencies ⏳
+        if: steps.gatsby-cache-build.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+
+      - name: Build 🏗️
+        run: yarn deploy:dev
         env:
           CI: true
 
