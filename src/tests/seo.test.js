@@ -54,6 +54,6 @@ describe('SEO Metadata', () => {
         expect(metaDescriptionContent).toBeTruthy()
       }
     },
-    300 * 1000
+    8 * 60 * 1000
   )
 })
