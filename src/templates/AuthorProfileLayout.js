@@ -37,6 +37,8 @@ function AuthorProfileLayout(props) {
   const heroBgDarkUrl = getWebpImage(heroBgDark?.file?.url)
   const bgImageUrl = getWebpImage(bgImage?.file?.url)
   const bgImageDarkUrl = getWebpImage(bgImageDark?.file?.url)
+
+  //   console.log(heroBgUrl, heroBgDarkUrl, bgImageUrl, bgImageDarkUrl)
   const { childMarkdownRemark: { html: descriptionHtml } = {} } =
     description || {}
   const { childMarkdownRemark: { html: educationHtml } = {} } = education || {}
@@ -93,7 +95,7 @@ export const AuthorProfileLayoutQuery = graphql`
       }
     }
     heroBgDark: contentfulAsset(
-      contentful_id: { eq: "6UanQYPkBrOZaZ2wQKrjkn" }
+      contentful_id: { eq: "RjpEbmeL6vLPeiSjePDpy" }
     ) {
       file {
         url
@@ -105,7 +107,7 @@ export const AuthorProfileLayoutQuery = graphql`
       }
     }
     bgImageDark: contentfulAsset(
-      contentful_id: { eq: "7jkrYvvMuFweNJ4KL2yhRP" }
+      contentful_id: { eq: "2StKLJf0XE38EyT9GlzQuO" }
     ) {
       file {
         url
