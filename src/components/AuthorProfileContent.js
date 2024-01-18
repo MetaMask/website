@@ -145,11 +145,11 @@ const BgImageWrapper = styled.div`
       ? ` background-image: url(${bgUrl});
   `
       : ''}
-  
+
   ${({ darkBgUrl }) =>
     darkBgUrl
-      ? ` 
-      body.dark-mode && {
+      ? `
+      body.dark-mode & {
         background-image: url(${darkBgUrl});
       }
    `
@@ -157,7 +157,7 @@ const BgImageWrapper = styled.div`
 
   ${({ cover }) =>
     cover
-      ? ` 
+      ? `
       background-size: cover;
    `
       : ''}

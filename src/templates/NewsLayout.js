@@ -128,11 +128,11 @@ const NewsContentWrapper = styled.div`
       ? ` background-image: url(${bgUrl});
   `
       : ''}
-  
+
   ${({ darkBgUrl }) =>
     darkBgUrl
-      ? ` 
-      body.dark-mode && {
+      ? `
+      body.dark-mode & {
         background-image: url(${darkBgUrl});
       }
    `
