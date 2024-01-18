@@ -424,7 +424,7 @@ const ContentWrapper = styled(Link)`
     font-weight: 400;
     height: auto;
     color: #222;
-    body.dark-mode & {
+    body.dark-mode && {
       color: #FFF;
     }
     &:hover {
@@ -447,7 +447,7 @@ const ContentWrapper = styled(Link)`
     $typeLayout === 'footer'
       ? `
     color: #000000bd;
-    body.dark-mode & {
+    body.dark-mode && {
       color: #FFF;
     }
     font-size: 12px;

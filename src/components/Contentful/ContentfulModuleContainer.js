@@ -239,8 +239,8 @@ const Inner = styled.div`
     @media (max-width: ${theme.device.tabletMediaMax}) {
       flex-direction: column;
     }
-
-
+    
+    
   `
       : ``}
 
@@ -346,8 +346,8 @@ const Modules = styled.div`
         padding: 16px;
       }
     }
-
-    body.dark-mode & {
+    
+    body.dark-mode && {
       background-color: #3c444b;
     }
   `
@@ -366,7 +366,7 @@ const Modules = styled.div`
     columns && gridModules && columnType !== 'tag' && !isTrustBar
       ? `
       margin: -${gridModulesGap} !important;
-
+      
       @media (max-width: ${theme.device.tabletMediaMax}){
         .mobileCardGridModulesGap12 && {
           margin: -12px !important;
@@ -469,7 +469,7 @@ ${({ centerOnMobile, theme }) =>
       width: auto !important;
       margin-right: 20px;
       margin-bottom: 20px;
-
+      
     }
   `
       : ``}
