@@ -62,9 +62,6 @@ export const ContentfulCtaFields = gql`
   ${ContentfulEmbedFields}
   fragment ContentfulCtaFields on Cta {
     __typename
-    sys {
-      id
-    }
     name
     displayText
     ctaLink
@@ -77,13 +74,17 @@ export const ContentfulCtaFields = gql`
     eventCategory
     eventLabel
     showCaretRight
+    launchDarklyFlag
+    downloadBrowsers
+    sys {
+      id
+    }
     hubSpotForm(preview: true) {
       ...ContentfulHubSpotFormFields
     }
     embedHtml(preview: true) {
       ...ContentfulEmbedFields
     }
-    downloadBrowsers
     alternativeCta {
       ...ContentfulCtaFields
     }

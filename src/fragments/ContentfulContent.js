@@ -576,9 +576,6 @@ export const ContentfulCardFields = graphql`
 export const ContentfulCtaBaseFields = graphql`
   fragment ContentfulCtaBaseFields on ContentfulCta {
     contentful_id
-    internal {
-      type
-    }
     fontSize
     ctaLink
     displayText
@@ -588,14 +585,18 @@ export const ContentfulCtaBaseFields = graphql`
     buttonSecondary
     eventLabel
     eventCategory
+    socialLink
+    showCaretRight
+    launchDarklyFlag
+    internal {
+      type
+    }
     hubSpotForm {
       ...ContentfulHubSpotFormFields
     }
     embedHTML {
       ...ContentfulEmbedFields
     }
-    socialLink
-    showCaretRight
     downloadBrowsers {
       internal {
         content
