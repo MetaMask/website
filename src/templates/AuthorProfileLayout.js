@@ -37,8 +37,6 @@ function AuthorProfileLayout(props) {
   const heroBgDarkUrl = getWebpImage(heroBgDark?.file?.url)
   const bgImageUrl = getWebpImage(bgImage?.file?.url)
   const bgImageDarkUrl = getWebpImage(bgImageDark?.file?.url)
-
-  //   console.log(heroBgUrl, heroBgDarkUrl, bgImageUrl, bgImageDarkUrl)
   const { childMarkdownRemark: { html: descriptionHtml } = {} } =
     description || {}
   const { childMarkdownRemark: { html: educationHtml } = {} } = education || {}
