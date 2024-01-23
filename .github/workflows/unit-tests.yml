@@ -38,10 +38,9 @@ jobs:
         id: tests
         continue-on-error: true
         run: |
+          trap 'URL="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"; echo $(echo -n "{\"action_url\": \"$URL\", "; cat payload-results.json | tail -c +2) > payload-results.json' EXIT
           npx puppeteer browsers install chrome
           yarn test
-          URL="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          echo $(echo -n '{"action_url": "'$URL'", '; cat payload-results.json | tail -c +2) > payload-results.json
 
       - name: Send test results to Slack workflow 📬
         id: slack
