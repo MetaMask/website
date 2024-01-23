@@ -40,18 +40,34 @@ describe('SEO Metadata', () => {
         console.log('->', url)
         const response = await page.goto(url)
         await page.waitForSelector('meta[name="description"]')
+        await page.waitForSelector('img[alt]')
 
         // Check for 200 status code
         expect(response.status()).toBe(200)
 
+        // Check for title
         const title = await page.title()
         expect(title).toBeTruthy()
+        expect(title.length).toBeGreaterThanOrEqual(4)
+        expect(title.length).toBeLessThanOrEqual(60)
 
+        // Check for meta description
         const metaDescriptionContent = await page.$eval(
           'meta[name="description"]',
           element => element.content
         )
         expect(metaDescriptionContent).toBeTruthy()
+        expect(metaDescriptionContent.length).toBeGreaterThanOrEqual(4)
+        expect(metaDescriptionContent.length).toBeLessThanOrEqual(160)
+
+        // Check for alt text
+        const altTextContent = await page.$eval(
+          'img[alt]',
+          element => element.alt
+        )
+        expect(altTextContent).toBeTruthy()
+        expect(altTextContent.length).toBeGreaterThanOrEqual(4)
+        expect(altTextContent.length).toBeLessThanOrEqual(125)
       }
     },
     8 * 60 * 1000
