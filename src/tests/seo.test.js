@@ -37,37 +37,58 @@ describe('SEO Metadata', () => {
     'each page has a title and a meta description',
     async () => {
       for (const url of urls) {
-        console.log('->', url)
         const response = await page.goto(url)
         await page.waitForSelector('meta[name="description"]')
         await page.waitForSelector('img[alt]')
 
         // Check for 200 status code
-        expect(response.status()).toBe(200)
+        try {
+          expect(response.status()).toBe(200)
+        } catch (error) {
+          throw new Error(`❌: ${url}\n\n ${error.message}`)
+        }
 
         // Check for title
         const title = await page.title()
-        expect(title).toBeTruthy()
-        expect(title.length).toBeGreaterThanOrEqual(4)
-        expect(title.length).toBeLessThanOrEqual(60)
+
+        try {
+          expect(title).toBeTruthy()
+          expect(title.length).toBeGreaterThanOrEqual(4)
+          expect(title.length).toBeLessThanOrEqual(60)
+        } catch (error) {
+          throw new Error(`❌ Title: ${title}\n- ${url}\n\n ${error.message}`)
+        }
 
         // Check for meta description
         const metaDescriptionContent = await page.$eval(
           'meta[name="description"]',
           element => element.content
         )
-        expect(metaDescriptionContent).toBeTruthy()
-        expect(metaDescriptionContent.length).toBeGreaterThanOrEqual(4)
-        expect(metaDescriptionContent.length).toBeLessThanOrEqual(160)
+
+        try {
+          expect(metaDescriptionContent).toBeTruthy()
+          expect(metaDescriptionContent.length).toBeGreaterThanOrEqual(4)
+          expect(metaDescriptionContent.length).toBeLessThanOrEqual(160)
+        } catch (error) {
+          throw new Error(
+            `❌ Meta description: ${metaDescriptionContent}\n- ${url}\n\n ${error.message}`
+          )
+        }
 
         // Check for alt text
-        const altTextContent = await page.$eval(
-          'img[alt]',
-          element => element.alt
-        )
-        expect(altTextContent).toBeTruthy()
-        expect(altTextContent.length).toBeGreaterThanOrEqual(4)
-        expect(altTextContent.length).toBeLessThanOrEqual(125)
+        const imgElement = await page.$eval('img[alt]', element => {
+          return { alt: element.alt, src: element.src }
+        })
+
+        try {
+          expect(imgElement.alt).toBeTruthy()
+          expect(imgElement.alt.length).toBeGreaterThanOrEqual(4)
+          expect(imgElement.alt.length).toBeLessThanOrEqual(125)
+        } catch (error) {
+          throw new Error(
+            `❌ Alt text: ${imgElement.alt}\n- ${imgElement.src}\n\n${url}\n\n ${error.message}`
+          )
+        }
       }
     },
     8 * 60 * 1000

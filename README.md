@@ -1,5 +1,3 @@
-![Workflow badge](https://github.com/Consensys/metamask-website/actions/workflows/tests.yml/badge.svg)
-
 <p align="center" style="background-color: #151C24; height: 15vh;">
   <a href="https://metamask.io">
     <img alt="MetaMask Logo"
