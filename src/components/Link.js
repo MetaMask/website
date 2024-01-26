@@ -1,12 +1,16 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-
 import { Link } from 'gatsby'
 
 const DefaultLink = props => {
-  const { activeStyle, newTab, children, styleOverride, to, ...rest } = props
+  const { activeStyle, children, styleOverride, to, ...rest } = props
+  let { newTab } = props
   if (!to) {
     return <div {...rest}>{children}</div>
+  }
+  const isAnchorLink = to.startsWith('#')
+  if (isAnchorLink) {
+    newTab = false
   }
 
   // checks if relative url "about/" or "/about/"
@@ -25,6 +29,7 @@ const DefaultLink = props => {
     <a
       style={{ textDecoration: 'none' }}
       href={to}
+      {...(isAnchorLink ? { 'data-anchor': to } : {})}
       {...newTabHtmlAttributes}
       {...rest}
     >

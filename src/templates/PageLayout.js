@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../components/layout'
+import { gsap } from 'gsap'
+import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin'
 import { ToastContainer as Notifications, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import {
@@ -90,33 +92,8 @@ const PageLayout = props => {
     renderNotification(navigationState.notification)
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (document) {
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        if (anchor.getAttribute('href').length === 1) {
-          return
-        }
-        anchor.addEventListener('click', function(e) {
-          e.preventDefault()
-          const hash = this.getAttribute('href')
-          const ele = document.getElementById(hash.replace('#', ''))
-          const vpTop = ele.getBoundingClientRect().top
-          const windowY =
-            window.pageYOffset ||
-            document.documentElement.scrollTop ||
-            document.body.scrollTop ||
-            0
-          const y = vpTop + windowY - 100
-          const speed = Math.min(Math.max(parseInt(vpTop), 500), 2500)
-          scrollTo(y, speed)
-          window.history.pushState(
-            '',
-            '',
-            `${pathname.replace(/\/?$/, '/')}${hash}`
-          )
-        })
-      })
-
       // Detect Web3 Wallet
       if (typeof window.ethereum !== 'undefined') {
         setDimensionScript(
@@ -128,13 +105,27 @@ const PageLayout = props => {
     }
   }, [pathname])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isStandalone) {
       document.body.classList.remove('ascb-show')
     } else {
       document.body.classList.add('ascb-show')
     }
   }, [isStandalone])
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash
+      if (hash) {
+        const targetElement = document.getElementById(hash.replace('#', ''))
+        const targetPosition = targetElement.getBoundingClientRect().top;
+        if (targetElement) {
+          window.scrollTo({top: targetPosition + window.scrollY - 100})
+        }
+      }
+      gsap.registerPlugin(ScrollToPlugin)
+    }
+  }, [])
 
   return (
     <Context.Provider value={valueContext}>
