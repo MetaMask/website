@@ -13,6 +13,7 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Image from './Image'
 import classnames from 'classnames'
 import get from 'lodash/get'
+import { gsap } from 'gsap'
 import useIsChromium from '../lib/utils/isChromium'
 
 const CTA = props => {
@@ -84,6 +85,18 @@ const CTA = props => {
     if (customClick) {
       e.preventDefault()
       customClick()
+    }
+    if (link.startsWith('#')) {
+      e.preventDefault()
+      const target = e.currentTarget
+      const href = target.dataset.anchor
+      gsap.to(window, {
+        duration: 0.7,
+        scrollTo: { y: href, offsetY: 100, autoKill: true },
+        onComplete: () => {
+          window.history.replaceState(null, null, link)
+        },
+      })
     }
   }
   React.useEffect(() => {
