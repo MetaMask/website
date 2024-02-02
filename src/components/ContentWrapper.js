@@ -57,11 +57,12 @@ const Container = styled.div`
 
   ${({ styleOverride }) => styleOverride}
 
-  &.feature-meet-flask {
+  &.feature-meet-flask, &.feature-api-playground {
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       padding: 0;
     }
   }
+
   &.feature-infura-gas {
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       padding: 0;
@@ -138,6 +139,7 @@ const ContainerInner = styled.div`
       padding: 40px 102px;
       margin-bottom: 80px;
     }
+
     @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
       max-width: 416px;
       padding: 24px;
@@ -145,7 +147,8 @@ const ContainerInner = styled.div`
     }
   }
 
-  .feature-meet-flask & {
+  .feature-meet-flask &,
+  .feature-api-playground & {
     background-color: #24292e;
     overflow: hidden;
 
