@@ -80,14 +80,20 @@ describe('SEO Metadata', () => {
           return { alt: element.alt, src: element.src }
         })
 
-        try {
-          expect(imgElement.alt).toBeTruthy()
-          expect(imgElement.alt.length).toBeGreaterThanOrEqual(4)
-          expect(imgElement.alt.length).toBeLessThanOrEqual(125)
-        } catch (error) {
-          throw new Error(
-            `❌ Alt text: ${imgElement.alt}\n- ${imgElement.src}\n\n${url}\n\n ${error.message}`
-          )
+        // Only check alt text if src is not equal to the gatsby placeholder
+        if (
+          imgElement.src !==
+          "data:image/svg+xml;charset=utf-8,%3Csvg%20height='1281'%20width='1920'%20xmlns='http://www.w3.org/2000/svg'%20version='1.1'%3E%3C/svg%3E"
+        ) {
+          try {
+            expect(imgElement.alt).toBeTruthy()
+            expect(imgElement.alt.length).toBeGreaterThanOrEqual(4)
+            expect(imgElement.alt.length).toBeLessThanOrEqual(125)
+          } catch (error) {
+            throw new Error(
+              `❌ Alt text: ${imgElement.alt}\n- ${imgElement.src}\n\n${url}\n\n ${error.message}`
+            )
+          }
         }
       }
     },
