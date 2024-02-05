@@ -81,10 +81,9 @@ describe('SEO Metadata', () => {
         })
 
         // Only check alt text if src is not equal to the gatsby placeholder
-        if (
-          imgElement.src !==
-          "data:image/svg+xml;charset=utf-8,%3Csvg%20height='1281'%20width='1920'%20xmlns='http://www.w3.org/2000/svg'%20version='1.1'%3E%3C/svg%3E"
-        ) {
+        const regex = /^data:image\/svg\+xml;charset=utf-8,%3Csvg%20height='(\d+)'%20width='(\d+)'%20xmlns='http:\/\/www.w3.org\/2000\/svg'%20version='1.1'%3E%3C\/svg%3E$/
+
+        if (!regex.test(imgElement.src)) {
           try {
             expect(imgElement.alt).toBeTruthy()
             expect(imgElement.alt.length).toBeGreaterThanOrEqual(4)
