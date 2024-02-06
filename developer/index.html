@@ -834,63 +834,170 @@ data-styled.g302[id="sc-keyframes-caSHIZ"]{content:"caSHIZ,"}/*!sc*/
 <h3 id="added-1">Added</h3>
 <ul>
 <li>feat: new socket code (<a href="https://github.com/MetaMask/metamask-sdk/pull/609">#609</a>)</li>
-</ul><a class="view-full-changelog" href="https://github.com/MetaMask/metamask-sdk/releases" target="_blank" rel="noopener noreferrer">View full changelog</a></div></div><div class="release-wrapper metamask"><div class="release-info"><div class="release-name">MetaMask Snaps</div></div><div class="release-content"><span>v30.0.0<!-- --> </span><span class="release-date">(<!-- -->Jan 18, 2024<!-- -->)</span><h2 id="metamasksnaps-controllers-410">@metamask/snaps-controllers 4.1.0</h2>
-<h3 id="added">Added</h3>
-<ul>
-<li>Add support for signature insights (<a href="https://github.com/MetaMask/snaps/pull/2074">#2074</a>)</li>
-<li>Add support for initial connections (<a href="https://github.com/MetaMask/snaps/pull/2048">#2048</a>)</li>
-<li>Add support for preinstalled snaps (<a href="https://github.com/MetaMask/snaps/pull/2008">#2008</a>)</li>
-<li>Add additional install events (<a href="https://github.com/MetaMask/snaps/pull/2087">#2087</a>)</li>
-</ul>
+</ul><a class="view-full-changelog" href="https://github.com/MetaMask/metamask-sdk/releases" target="_blank" rel="noopener noreferrer">View full changelog</a></div></div><div class="release-wrapper metamask"><div class="release-info"><div class="release-name">MetaMask Snaps</div></div><div class="release-content"><span>v31.0.0<!-- --> </span><span class="release-date">(<!-- -->Feb 6, 2024<!-- -->)</span><h2 id="metamasksnaps-cli-500">@metamask/snaps-cli 5.0.0</h2>
 <h3 id="changed">Changed</h3>
 <ul>
-<li>Bump several MetaMask dependencies (<a href="https://github.com/MetaMask/snaps/pull/2086">#2086</a>, <a href="https://github.com/MetaMask/snaps/pull/2100">#2100</a>)</li>
-</ul>
-<h2 id="metamasksnaps-execution-environments-350">@metamask/snaps-execution-environments 3.5.0</h2>
-<h3 id="added-1">Added</h3>
+<li><strong>BREAKING:</strong> Disable source maps by default (<a href="https://github.com/MetaMask/snaps/pull/2166">#2166</a>)
 <ul>
-<li>Add support for signature insights (<a href="https://github.com/MetaMask/snaps/pull/2074">#2074</a>)</li>
+<li>This slightly speeds up the build process.</li>
+<li>You can enable source maps again by setting <code>sourceMap: true</code> in your Snap config.</li>
+</ul>
+</li>
+<li>Set <code>output.chunkFormat</code> to <code>commonjs</code> by default (<a href="https://github.com/MetaMask/snaps/pull/2136">#2136</a>)</li>
+</ul>
+<h2 id="metamasksnaps-controllers-500">@metamask/snaps-controllers 5.0.0</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Add support for dynamic user interfaces (<a href="https://github.com/MetaMask/snaps/pull/1465">#1465</a>, <a href="https://github.com/MetaMask/snaps/pull/2126">#2126</a>, <a href="https://github.com/MetaMask/snaps/pull/2144">#2144</a>, <a href="https://github.com/MetaMask/snaps/pull/2152">#2152</a>, <a href="https://github.com/MetaMask/snaps/pull/2143">#2143</a>)</li>
+<li>Add support for Snap defined execution timeouts (<a href="https://github.com/MetaMask/snaps/pull/2098">#2098</a>)
+<ul>
+<li>A Snap can now define <code>maxRequestTime</code> to extend or shorten its execution timeout.</li>
+</ul>
+</li>
+<li>Add <code>WebViewExecutionService</code> for mobile execution (<a href="https://github.com/MetaMask/snaps/pull/2005">#2005</a>)</li>
 </ul>
 <h3 id="changed-1">Changed</h3>
 <ul>
-<li>Bump SES and LavaMoat (<a href="https://github.com/MetaMask/snaps/pull/2105">#2105</a>)</li>
-<li>Bump several MetaMask dependencies (<a href="https://github.com/MetaMask/snaps/pull/2054">#2054</a>, <a href="https://github.com/MetaMask/snaps/pull/2100">#2100</a>)</li>
-</ul>
-<h2 id="metamasksnaps-rpc-methods-500">@metamask/snaps-rpc-methods 5.0.0</h2>
-<h3 id="added-2">Added</h3>
+<li>Loosen allowlist requirements (<a href="https://github.com/MetaMask/snaps/pull/1672">#1672</a>)
 <ul>
-<li>Add <code>snap_getClientStatus</code> (<a href="https://github.com/MetaMask/snaps/pull/2051">#2051</a>)</li>
+<li>Snaps with certain permissions can now be installed without being allowlisted.</li>
+</ul>
+</li>
+<li>Reintroduce <code>DecompressionStream</code> for improved installation performance (<a href="https://github.com/MetaMask/snaps/pull/2110">#2110</a>)</li>
+<li>Bump <code>tar-stream</code> (<a href="https://github.com/MetaMask/snaps/pull/2116">#2116</a>)
+<ul>
+<li>This fixes a problem where Snaps would sometimes fail to download from NPM.</li>
+</ul>
+</li>
+<li>Bump several MetaMask dependencies (<a href="https://github.com/MetaMask/snaps/pull/2129">#2129</a>, <a href="https://github.com/MetaMask/snaps/pull/2132">#2132</a>, <a href="https://github.com/MetaMask/snaps/pull/2130">#2130</a>, <a href="https://github.com/MetaMask/snaps/pull/2139">#2139</a>, <a href="https://github.com/MetaMask/snaps/pull/2142">#2142</a>)</li>
+<li>Pass localized snap name to SubjectMetadataController (<a href="https://github.com/MetaMask/snaps/pull/2157">#2157</a>)</li>
+</ul>
+<h3 id="removed">Removed</h3>
+<ul>
+<li><strong>BREAKING:</strong> Remove endowment permission specifications from this package (<a href="https://github.com/MetaMask/snaps/pull/2155">#2155</a>)
+<ul>
+<li>They can now be found in <code>snaps-rpc-methods</code>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="metamasksnaps-execution-environments-400">@metamask/snaps-execution-environments 4.0.0</h2>
+<h3 id="added-1">Added</h3>
+<ul>
+<li>Add WebView execution environment (<a href="https://github.com/MetaMask/snaps/pull/2005">#2005</a>)</li>
+<li>Add support for dynamic user interfaces (<a href="https://github.com/MetaMask/snaps/pull/1465">#1465</a>)</li>
 </ul>
 <h3 id="changed-2">Changed</h3>
 <ul>
-<li><strong>BREAKING:</strong> Use origin bound hooks for <code>invokeKeyring</code> (<a href="https://github.com/MetaMask/snaps/pull/2090">#2090</a>)</li>
-<li>Bump several MetaMask dependencies (<a href="https://github.com/MetaMask/snaps/pull/2069">#2069</a>, <a href="https://github.com/MetaMask/snaps/pull/2100">#2100</a>)</li>
-</ul>
-<h2 id="metamasksnaps-sdk-140">@metamask/snaps-sdk 1.4.0</h2>
-<h3 id="added-3">Added</h3>
+<li><strong>BREAKING:</strong> Stop bundling offscreen execution environment (<a href="https://github.com/MetaMask/snaps/pull/2154">#2154</a>)</li>
+<li><strong>BREAKING:</strong> Deploy multiple bundles to AWS (<a href="https://github.com/MetaMask/snaps/pull/2150">#2150</a>)
 <ul>
-<li>Add support for signature insights (<a href="https://github.com/MetaMask/snaps/pull/2074">#2074</a>, <a href="https://github.com/MetaMask/snaps/pull/2079">#2079</a>)</li>
-<li>Add types for <code>snap_getClientStatus</code> (<a href="https://github.com/MetaMask/snaps/pull/2051">#2051</a>)</li>
+<li>From now on the bundles will be served at <code>https://execution.metamask.io/%BUILD_TYPE%/%VERSION%/index.html</code>.</li>
+</ul>
+</li>
+<li>Export <code>ProxySnapExecutor</code> (<a href="https://github.com/MetaMask/snaps/pull/2153">#2153</a>)</li>
+<li>Reduce executor bundle sizes (<a href="https://github.com/MetaMask/snaps/pull/2160">#2160</a>)</li>
+<li>Bump MetaMask dependencies (<a href="https://github.com/MetaMask/snaps/pull/2129">#2129</a>, <a href="https://github.com/MetaMask/snaps/pull/2132">#2132</a>)</li>
+</ul>
+<h2 id="metamasksnaps-jest-500">@metamask/snaps-jest 5.0.0</h2>
+<h3 id="added-2">Added</h3>
+<ul>
+<li><strong>BREAKING:</strong> Implement testing framework using Node.js executor (<a href="https://github.com/MetaMask/snaps/pull/1982">#1982</a>, <a href="https://github.com/MetaMask/snaps/pull/2118">#2118</a>)
+<ul>
+<li>The network mocking functionality was removed, but may be reintroduced in a future version.</li>
+<li><code>mockJsonRpc</code> no longer returns a <code>Promise</code>.</li>
+<li><code>runCronjob</code> was renamed to <code>onCronjob</code>, and <code>sendTransaction</code> was renamed to <code>onTransaction</code>.
+<ul>
+<li>For backwards compatibility, the old methods are still available, but will be removed in a future version.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Add <code>onHomePage</code> support (<a href="https://github.com/MetaMask/snaps/pull/2104">#2104</a>)</li>
+<li>Add <code>onSignature</code> support (<a href="https://github.com/MetaMask/snaps/pull/2114">#2114</a>)</li>
+<li>Add <code>snap_getClientStatus</code> support (<a href="https://github.com/MetaMask/snaps/pull/2159">#2159</a>)</li>
 </ul>
 <h3 id="changed-3">Changed</h3>
 <ul>
-<li>Bump @metamask/utils from 8.2.1 to 8.3.0 (<a href="https://github.com/MetaMask/snaps/pull/2100">#2100</a>)</li>
+<li>Bump several MetaMask dependencies (<a href="https://github.com/MetaMask/snaps/pull/2101">#2101</a>, <a href="https://github.com/MetaMask/snaps/pull/2100">#2100</a>, <a href="https://github.com/MetaMask/snaps/pull/2129">#2129</a>, <a href="https://github.com/MetaMask/snaps/pull/2140">#2140</a>, <a href="https://github.com/MetaMask/snaps/pull/2141">#2141</a>, <a href="https://github.com/MetaMask/snaps/pull/2142">#2142</a>)</li>
 </ul>
-<h2 id="metamasksnaps-simulator-243">@metamask/snaps-simulator 2.4.3</h2>
+<h2 id="metamasksnaps-rpc-methods-600">@metamask/snaps-rpc-methods 6.0.0</h2>
+<h3 id="added-3">Added</h3>
+<ul>
+<li><strong>BREAKING:</strong> Add support for dynamic user interfaces (<a href="https://github.com/MetaMask/snaps/pull/1465">#1465</a>, <a href="https://github.com/MetaMask/snaps/pull/2144">#2144</a>, <a href="https://github.com/MetaMask/snaps/pull/2143">#2143</a>)
+<ul>
+<li>This adds the <code>snap_createInterface</code>, <code>snap_updateInterface</code>, and <code>snap_getInterfaceState</code> methods.</li>
+<li>This is breaking because it changes the expected type of the <code>showDialog</code> RPC method hook.</li>
+</ul>
+</li>
+<li><strong>BREAKING:</strong> Update the permission format for the name lookup endowment (<a href="https://github.com/MetaMask/snaps/pull/2113">#2113</a>)
+<ul>
+<li>The new format is documented in <a href="https://metamask.github.io/SIPs/SIPS/sip-12">SIP-12</a>.</li>
+</ul>
+</li>
+<li>Add endowment permission specifications to this package (<a href="https://github.com/MetaMask/snaps/pull/2155">#2155</a>)</li>
+</ul>
 <h3 id="changed-4">Changed</h3>
 <ul>
-<li>Bump several MetaMask dependencies (<a href="https://github.com/MetaMask/snaps/pull/1999">#1999</a>, <a href="https://github.com/MetaMask/snaps/pull/2065">#2065</a>, <a href="https://github.com/MetaMask/snaps/pull/2064">#2064</a>, <a href="https://github.com/MetaMask/snaps/pull/2069">#2069</a>, <a href="https://github.com/MetaMask/snaps/pull/2054">#2054</a>, <a href="https://github.com/MetaMask/snaps/pull/2086">#2086</a>, <a href="https://github.com/MetaMask/snaps/pull/2100">#2100</a>)</li>
+<li>Bump MetaMask dependencies (<a href="https://github.com/MetaMask/snaps/pull/2129">#2129</a>, <a href="https://github.com/MetaMask/snaps/pull/2142">#2142</a>)</li>
 </ul>
-<h2 id="metamasksnaps-utils-520">@metamask/snaps-utils 5.2.0</h2>
-<h3 id="added-4">Added</h3>
-<ul>
-<li>Add support for initial connections (<a href="https://github.com/MetaMask/snaps/pull/2048">#2048</a>)</li>
-<li>Add support for preinstalled snaps (<a href="https://github.com/MetaMask/snaps/pull/2008">#2008</a>)</li>
-<li>Add support for signature insights (<a href="https://github.com/MetaMask/snaps/pull/2074">#2074</a>)</li>
-</ul>
+<h2 id="metamasksnaps-sdk-200">@metamask/snaps-sdk 2.0.0</h2>
 <h3 id="changed-5">Changed</h3>
 <ul>
-<li>Bump several MetaMask dependencies (<a href="https://github.com/MetaMask/snaps/pull/2086">#2086</a>, <a href="https://github.com/MetaMask/snaps/pull/2100">#2100</a>)</li>
+<li><strong>BREAKING:</strong> Update name lookup API types (<a href="https://github.com/MetaMask/snaps/pull/2113">#2113</a>)
+<ul>
+<li>The return value and the permission format has changed, see <a href="https://metamask.github.io/SIPs/SIPS/sip-12">SIP-12</a> for more details.</li>
+</ul>
+</li>
+<li>Add support for dynamic user interfaces (<a href="https://github.com/MetaMask/snaps/pull/1465">#1465</a>, <a href="https://github.com/MetaMask/snaps/pull/2126">#2126</a>, <a href="https://github.com/MetaMask/snaps/pull/2143">#2143</a>)</li>
+<li>Add support for snap defined execution timeouts (<a href="https://github.com/MetaMask/snaps/pull/2098">#2098</a>)</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Fix initial permissions types (<a href="https://github.com/MetaMask/snaps/pull/2111">#2111</a>)</li>
+</ul>
+<h2 id="metamasksnaps-utils-600">@metamask/snaps-utils 6.0.0</h2>
+<h3 id="added-4">Added</h3>
+<ul>
+<li>Add support for dynamic user interfaces (<a href="https://github.com/MetaMask/snaps/pull/1465">#1465</a>, <a href="https://github.com/MetaMask/snaps/pull/2126">#2126</a>)</li>
+<li>Add support for snap defined execution timeouts (<a href="https://github.com/MetaMask/snaps/pull/2098">#2098</a>)</li>
+</ul>
+<h3 id="changed-6">Changed</h3>
+<ul>
+<li><strong>BREAKING:</strong> Update name lookup type validation (<a href="https://github.com/MetaMask/snaps/pull/2113">#2113</a>)
+<ul>
+<li>The return value and the permission format has changed, see <a href="https://metamask.github.io/SIPs/SIPS/sip-12">SIP-12</a> for more details.</li>
+</ul>
+</li>
+<li>Speed up eval-worker for improved CLI performance (<a href="https://github.com/MetaMask/snaps/pull/2147">#2147</a>)</li>
+<li>Update MetaMask dependencies (<a href="https://github.com/MetaMask/snaps/pull/2132">#2132</a>, <a href="https://github.com/MetaMask/snaps/pull/2142">#2142</a>)</li>
+</ul>
+<h3 id="fixed-1">Fixed</h3>
+<ul>
+<li>Fix initial permissions types (<a href="https://github.com/MetaMask/snaps/pull/2111">#2111</a>)</li>
+</ul>
+<h2 id="metamaskclient-status-example-snap-100">@metamask/client-status-example-snap 1.0.0</h2>
+<h3 id="added-5">Added</h3>
+<ul>
+<li>Add <code>snap_getClientStatus</code> example snap (<a href="https://github.com/MetaMask/snaps/pull/2159">#2159</a>)</li>
+</ul>
+<h2 id="metamaskcronjob-example-snap-211">@metamask/cronjob-example-snap 2.1.1</h2>
+<h3 id="changed-7">Changed</h3>
+<ul>
+<li>Change cronjob interval to run more often (<a href="https://github.com/MetaMask/snaps/pull/2164">#2164</a>)</li>
+</ul>
+<h2 id="metamaskname-lookup-example-snap-300">@metamask/name-lookup-example-snap 3.0.0</h2>
+<h3 id="changed-8">Changed</h3>
+<ul>
+<li><strong>BREAKING:</strong> Update snap to match new API (<a href="https://github.com/MetaMask/snaps/pull/2113">#2113</a>)
+<ul>
+<li>This includes updating the permission format in the manifest as well as adjusting the return values.</li>
+</ul>
+</li>
+</ul>
+<h2 id="metamasksignature-insights-example-snap-100">@metamask/signature-insights-example-snap 1.0.0</h2>
+<h3 id="added-6">Added</h3>
+<ul>
+<li>Add signature insights example (<a href="https://github.com/MetaMask/snaps/pull/2079">#2114</a>)</li>
 </ul><a class="view-full-changelog" href="https://github.com/MetaMask/snaps/releases" target="_blank" rel="noopener noreferrer">View full changelog</a></div></div><div class="release-wrapper linea"><div class="release-info"><div class="release-name">Linea</div></div><div class="release-content"><p>Alpha v0.2.3 (June 22, 2023)</p>
 <h3 id="summary">Summary</h3>
 <p>This release focuses on optimizing the prover&#x27;s hashing strategy to increase its computational efficiency.</p><a class="view-full-changelog" href="https://docs.linea.build/build-on-linea/linea-version" target="_blank" rel="noopener noreferrer">View full changelog</a></div></div><div class="release-wrapper infura-sdk"><div class="release-info"><div class="release-name">Infura SDK</div></div><div class="release-content"><h4 id="v243"><a href="https://github.com/ConsenSys/infura-sdk/compare/v2.4.1...v2.4.3">v2.4.3</a></h4>
