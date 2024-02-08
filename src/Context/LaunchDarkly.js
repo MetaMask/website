@@ -8,7 +8,6 @@ export const withLaunchDarkly = Component => {
 
   return props => {
     const [isLDReady, setLDReady] = useState(false)
-    const id = Math.floor(Date.now() * Math.random()).toString(36)
 
     useEffect(() => {
       const fetchLDProvider = async () => {
@@ -16,7 +15,7 @@ export const withLaunchDarkly = Component => {
           clientSideID: process.env.GATSBY_LD_CLIENT_ID,
           context: {
             kind: 'user',
-            key: `metamask-user-${id}`,
+            anonymous: true,
           },
         })
 
