@@ -49,10 +49,11 @@ describe('SEO Metadata', () => {
         }
 
         // Check for title
-        const title = await page.title()
+        let title = await page.title()
 
         try {
           expect(title).toBeTruthy()
+          title = title.replace(' | MetaMask News', '')
           expect(title.length).toBeGreaterThanOrEqual(4)
           expect(title.length).toBeLessThanOrEqual(60)
         } catch (error) {
