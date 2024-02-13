@@ -1,13 +1,17 @@
+import { useLDClient } from 'launchdarkly-react-client-sdk'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { Link } from 'gatsby'
 
 const DefaultLink = props => {
-  const { activeStyle, children, styleOverride, to, ...rest } = props
+  const { activeStyle, children, styleOverride, to, onClick, ...rest } = props
+  const ldClient = useLDClient()
+
   let { newTab } = props
   if (!to) {
     return <div {...rest}>{children}</div>
   }
+
   const isAnchorLink = to.startsWith('#')
   if (isAnchorLink) {
     newTab = false
@@ -21,14 +25,32 @@ const DefaultLink = props => {
     rel: newTab ? 'noopener' : null,
   }
 
+  const handleClick = () => {
+    // Immediately flush the event
+    if (ldClient) {
+      ldClient.flush()
+    }
+
+    if (onClick) {
+      onClick()
+    }
+  }
+
   return isInternal ? (
-    <Link to={to} activeStyle={activeStyle} {...newTabHtmlAttributes} {...rest}>
+    <Link
+      to={to}
+      activeStyle={activeStyle}
+      onClick={handleClick}
+      {...newTabHtmlAttributes}
+      {...rest}
+    >
       {children}
     </Link>
   ) : (
     <a
       style={{ textDecoration: 'none' }}
       href={to}
+      onClick={handleClick}
       {...(isAnchorLink ? { 'data-anchor': to } : {})}
       {...newTabHtmlAttributes}
       {...rest}
