@@ -28,10 +28,12 @@ const DefaultLink = props => {
   const handleClick = () => {
     // Immediately flush the event
     if (ldClient) {
+      ldClient.track('handle-click-link')
+
       ldClient.flush()
     }
 
-    if (onClick) {
+    if (onClick && typeof onClick === 'function') {
       onClick()
     }
   }
