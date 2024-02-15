@@ -30,6 +30,7 @@ const PageLayout = props => {
     extraData,
     ...rest
   } = props
+
   const { pathname, search } = location || {}
   const [idFaqActive, setIdFaqActive] = React.useState('')
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
@@ -52,8 +53,10 @@ const PageLayout = props => {
   const [paginationPage, setPaginationPage] = React.useState(
     parseInt(page || 1, 10)
   )
+
   const headerRef = React.useRef()
   const heroContainerRef = React.useRef(null)
+
   const valueContext = {
     faq: {
       idFaqActive,
@@ -71,7 +74,9 @@ const PageLayout = props => {
     },
     extraData,
   }
+
   const [dimensionScript, setDimensionScript] = React.useState('')
+
   const renderNotification = (state = {}) => {
     if (state.error) {
       const { type, description } = state.error
@@ -106,13 +111,16 @@ const PageLayout = props => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const hash = window.location.hash
+
       if (hash) {
         const targetElement = document.getElementById(hash.replace('#', ''))
-        const targetPosition = targetElement.getBoundingClientRect().top
+
         if (targetElement) {
+          const targetPosition = targetElement.getBoundingClientRect().top
           window.scrollTo({ top: targetPosition + window.scrollY - 100 })
         }
       }
+
       gsap.registerPlugin(ScrollToPlugin)
     }
   }, [])
