@@ -12,7 +12,6 @@ import {
   darkDarkTheme,
   defaultDarkTheme,
 } from '../lib/theme'
-import scrollTo from '../lib/utils/scrollToElement'
 import Context from '../Context/ContextPage'
 import ContextClientSide from '../Context/ContextClientSide'
 import queryString from 'query-string'
@@ -116,13 +115,16 @@ const PageLayout = props => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const hash = window.location.hash
+
       if (hash) {
         const targetElement = document.getElementById(hash.replace('#', ''))
-        const targetPosition = targetElement.getBoundingClientRect().top;
+
         if (targetElement) {
-          window.scrollTo({top: targetPosition + window.scrollY - 100})
+          const targetPosition = targetElement.getBoundingClientRect().top
+          window.scrollTo({ top: targetPosition + window.scrollY - 100 })
         }
       }
+
       gsap.registerPlugin(ScrollToPlugin)
     }
   }, [])
