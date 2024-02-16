@@ -22,7 +22,7 @@ const Freedom = ({ title, text, btnLabel, btnLink }) => {
         <Btn
           href={btnLink}
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
           className={styles.btn}
         >
           {btnLabel}

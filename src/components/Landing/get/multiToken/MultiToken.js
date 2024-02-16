@@ -21,7 +21,7 @@ const MultiToken = ({ title, text, btnLabel, btnLink }) => {
       <Btn
         href={btnLink}
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         white={true}
         className={styles.btn}
       >

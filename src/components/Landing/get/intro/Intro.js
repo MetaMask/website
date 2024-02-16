@@ -20,7 +20,7 @@ const Intro = ({
           <Btn
             href={firstBtnLink}
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             className={styles.connect}
           >
             {firstBtnLabel}
@@ -31,7 +31,7 @@ const Intro = ({
             <Btn
               href={secondBtnLink}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               className={styles.download}
               stroke={true}
             >

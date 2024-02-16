@@ -9,7 +9,12 @@ const Leading = ({ title, text, btnLabel, btnLink }) => {
 
       <h2>{title}</h2>
 
-      <Btn href={btnLink} target="_blank" rel="noopener" className={styles.btn}>
+      <Btn
+        href={btnLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.btn}
+      >
         {btnLabel}
       </Btn>
     </section>
