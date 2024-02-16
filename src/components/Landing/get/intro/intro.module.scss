@@ -1,0 +1,47 @@
+.intro {
+  justify-content: space-between;
+  padding: 4.3rem 0 1.4rem;
+  background: var(--green);
+
+  div.wrapper {
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .left {
+    flex-shrink: 0;
+    width: 45rem;
+    margin-top: 3.6rem;
+
+    h2 {
+      font-size: 5rem;
+      line-height: 1.1;
+      width: 110%;
+      margin-bottom: 3.2rem;
+    }
+
+    .connect {
+      font-size: 2rem;
+      padding: 0 4.1rem;
+      margin-bottom: 2.8rem;
+    }
+
+    p {
+      font-size: 2rem;
+      line-height: 1.825;
+      width: 70%;
+    }
+
+    .download {
+      margin-left: 1rem;
+    }
+  }
+
+  .right {
+    flex-shrink: 0;
+    width: 82.5rem;
+    height: 64.3rem;
+    margin: 0 -3rem 0 0;
+  }
+}

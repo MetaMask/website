@@ -1,0 +1,58 @@
+.multi-token {
+  position: relative;
+  text-align: center;
+  flex-flow: column nowrap;
+  padding: 4rem 0 5rem;
+  background: var(--purple);
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+  }
+
+  &::before {
+    left: 0;
+    width: 23.3rem;
+    height: 46.2rem;
+    background: url('/images/landing/get/multi-token-r.png') center/100% auto
+      no-repeat;
+  }
+
+  &::after {
+    right: 0;
+    width: 23.2rem;
+    height: 60.2rem;
+    background: url('/images/landing/get/multi-token-l.png') center/100% auto
+      no-repeat;
+  }
+
+  .img {
+    width: 82rem;
+    height: 46.3rem;
+    margin: 0 auto 3.2rem;
+  }
+
+  h2 {
+    color: #fff;
+    font-size: 5rem;
+    line-height: 1.1;
+    width: 81.5rem;
+    margin: 0 auto 2.7rem;
+  }
+
+  p {
+    color: #fff;
+    font-size: 1.6rem;
+    line-height: 1.25;
+    width: 65.3rem;
+    margin: 0 auto 3rem;
+  }
+
+  .btn {
+    padding: 0 6.9rem;
+  }
+}

@@ -1,0 +1,46 @@
+.btn {
+  color: #fff;
+  font-size: 2.5rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 6.2rem;
+  padding: 0 6.5rem;
+  background: #000;
+  border-radius: 10.2rem;
+  border: 1px solid #000;
+  transition: color 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95),
+    background 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+
+  &:hover {
+    color: #000;
+    background: transparent;
+  }
+
+  &.stroke {
+    color: #000;
+    font-size: 1.8rem;
+    display: inline-flex;
+    height: 3.3rem;
+    padding: 0 2.6rem;
+    background: transparent;
+    border: 1px solid #000;
+
+    &:hover {
+      color: #fff;
+      background: #000;
+    }
+  }
+
+  &.white {
+    color: #000;
+    background: #fff;
+    border-color: #fff;
+
+    &:hover {
+      color: #fff;
+      background: transparent;
+    }
+  }
+}

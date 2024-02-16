@@ -1,0 +1,52 @@
+.leading {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  padding: 7.3rem 0 9rem;
+  background: var(--yellow);
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+  }
+
+  &::before {
+    left: 0;
+    width: 27.2rem;
+    height: 48rem;
+    background: url('/images/landing/get/leading-l.png') bottom/100% auto
+      no-repeat;
+  }
+
+  &::after {
+    right: 0;
+    width: 48.5rem;
+    height: 47.5rem;
+    background: url('/images/landing/get/leading-r.png') bottom/100% auto
+      no-repeat;
+  }
+
+  p {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    width: 75rem;
+    margin-bottom: 4rem;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 5rem;
+    line-height: 1.1;
+    width: 48.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .btn {
+    height: 7.5rem;
+    padding: 0 9.7rem;
+  }
+}
