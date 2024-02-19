@@ -1,22 +1,23 @@
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
-import MultiToken from '../../components/Landing/get/multiToken'
-import Freedom from '../../components/Landing/get/freedom'
-import Leading from '../../components/Landing/get/leading'
-import Header from '../../components/Landing/get/header'
-import Intro from '../../components/Landing/get/intro'
+import MultiToken from '../../components/Landing/token-swap/multiToken'
+import Freedom from '../../components/Landing/token-swap/freedom'
+import Leading from '../../components/Landing/token-swap/leading'
+import Header from '../../components/Landing/token-swap/header'
+import Intro from '../../components/Landing/token-swap/intro'
 import Layout from '../../templates/PageLayout'
+import './token-swap.module.scss'
 import { graphql } from 'gatsby'
-import './get.module.scss'
 import React from 'react'
 
-const SwapsGetPage = ({ data }) => {
+const TokenSwapPage = ({ data }) => {
   const { seo, footer } = data
 
   return (
     <Layout>
-      {seo && contentfulModuleToComponent({ ...seo, pagePath: '/swaps/get/' })}
+      {seo &&
+        contentfulModuleToComponent({ ...seo, pagePath: '/swaps/token-swap/' })}
 
-      <article className="page-swaps-get">
+      <article className="page-token-swap">
         <Header
           title="Metamask | Portfolio"
           btnLabel="Launch app"
@@ -54,7 +55,10 @@ const SwapsGetPage = ({ data }) => {
         />
 
         {footer &&
-          contentfulModuleToComponent({ ...footer, pagePath: '/swaps/get/' })}
+          contentfulModuleToComponent({
+            ...footer,
+            pagePath: '/swaps/token-swap/',
+          })}
       </article>
     </Layout>
   )
@@ -71,4 +75,4 @@ export const query = graphql`
   }
 `
 
-export default SwapsGetPage
+export default TokenSwapPage
