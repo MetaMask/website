@@ -1,3 +1,5 @@
+@import '../../../../styles/mixins';
+
 .leading {
   position: relative;
   text-align: center;
@@ -10,6 +12,7 @@
   &::before,
   &::after {
     content: '';
+    z-index: 5;
     position: absolute;
     bottom: 0;
   }
@@ -30,6 +33,13 @@
       no-repeat;
   }
 
+  p,
+  h2,
+  .btn {
+    z-index: 10;
+    position: relative;
+  }
+
   p {
     font-size: 2.5rem;
     line-height: 1.2;
@@ -48,5 +58,36 @@
   .btn {
     height: 7.5rem;
     padding: 0 9.7rem;
+  }
+
+  @include mobile {
+    padding: 4rem 0 5rem;
+
+    &::before {
+      width: 13rem;
+      height: 23rem;
+    }
+
+    &::after {
+      width: 23rem;
+      height: 23rem;
+    }
+
+    p {
+      font-size: 2rem;
+      width: 81.5%;
+      margin-bottom: 2.7rem;
+    }
+
+    h2 {
+      font-size: 3.6rem;
+      width: 65%;
+      margin-bottom: 2.7rem;
+    }
+
+    .btn {
+      height: 5.5rem;
+      padding: 0 4.5rem;
+    }
   }
 }

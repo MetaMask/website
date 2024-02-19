@@ -1,20 +1,9 @@
 @use 'sass:math';
+@import '../../styles/mixins';
 
 // GENERAL
 $desktop-mockup-width: 1400 !default;
 $mobile-mockup-width: 750 !default;
-
-@mixin desktop {
-  @media screen and (min-width: 1920px) {
-    @content;
-  }
-}
-
-@mixin mobile {
-  @media screen and (max-width: 750px) {
-    @content;
-  }
-}
 
 :root {
   --green: #80dc95;
@@ -76,6 +65,10 @@ body {
       align-items: center;
       max-width: 127.5rem;
       margin: 0 auto;
+
+      @include mobile {
+        max-width: 69rem;
+      }
     }
   }
 }

@@ -1,3 +1,5 @@
+@import '../../../../styles/mixins';
+
 .intro {
   justify-content: space-between;
   padding: 4.3rem 0 1.4rem;
@@ -41,7 +43,42 @@
   .right {
     flex-shrink: 0;
     width: 82.5rem;
-    height: 64.3rem;
     margin: 0 -3rem 0 0;
+  }
+
+  @include mobile {
+    padding: 3.2rem 0;
+
+    div.wrapper {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .left {
+      width: 100%;
+      margin-top: 0;
+
+      h2 {
+        font-size: 4.6rem;
+        margin-bottom: 2.4rem;
+      }
+
+      .connect {
+        font-size: 1.8rem;
+        padding: 0 2.4rem;
+        margin-bottom: 1.6rem;
+      }
+
+      p {
+        font-size: 2rem;
+        width: 100%;
+      }
+    }
+
+    .right {
+      width: 100%;
+      margin: 3.2rem 0 0;
+    }
   }
 }

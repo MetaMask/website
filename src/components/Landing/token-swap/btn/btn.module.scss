@@ -1,3 +1,5 @@
+@import '../../../../styles/mixins';
+
 .btn {
   color: #fff;
   font-size: 2.5rem;
@@ -42,5 +44,11 @@
       color: #fff;
       background: transparent;
     }
+  }
+
+  @include mobile {
+    font-size: 1.8rem;
+    height: 4.5rem;
+    padding: 0 4.5rem;
   }
 }
