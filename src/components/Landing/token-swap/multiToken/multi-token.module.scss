@@ -1,6 +1,7 @@
 @import '../../../../styles/mixins';
 
 .multi-token {
+  color: #fff;
   position: relative;
   text-align: center;
   flex-flow: column nowrap;
@@ -47,7 +48,6 @@
   }
 
   h2 {
-    color: #fff;
     font-size: 5rem;
     line-height: 1.1;
     width: 81.5rem;
@@ -55,7 +55,6 @@
   }
 
   p {
-    color: #fff;
     font-size: 1.6rem;
     line-height: 1.25;
     width: 65.3rem;

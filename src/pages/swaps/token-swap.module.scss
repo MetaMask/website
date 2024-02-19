@@ -59,6 +59,21 @@ body {
 }
 
 :global {
+  body {
+    &.dark-mode {
+      color: #000;
+      background: #fff;
+
+      h2 {
+        color: inherit;
+      }
+
+      &::before {
+        content: none;
+      }
+    }
+  }
+
   .page-token-swap {
     .wrapper {
       display: flex;
