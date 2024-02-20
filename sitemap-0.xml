@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<url><loc>https://metamask.io/privacy-policy/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/developer/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/custody/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/your-metamask-account/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
@@ -47,13 +48,12 @@
 <url><loc>https://metamask.io/updates/password-required/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/faqs/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/about/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
-<url><loc>https://metamask.io/privacy-policy/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>https://metamask.io/author/megan-dias/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>https://metamask.io/author/alex-jupiter/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/author/ian-wallis/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/author/christian-montoya/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/author/clarissa-watson/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/author/simran-jagdev/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
-<url><loc>https://metamask.io/author/megan-dias/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
-<url><loc>https://metamask.io/author/alex-jupiter/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/author/kingsley-okonkwo/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/download/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 </urlset>
