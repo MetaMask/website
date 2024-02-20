@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { Fragment } from 'react'
+import React, { Fragment, useRef, useEffect } from 'react'
 import styled, { withTheme } from 'styled-components'
 import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import ContentWrapper from './ContentWrapper'
@@ -54,6 +54,7 @@ const FeatureComponent = props => {
   } = props
 
   const flags = useFlags()
+  const elementRef = useRef(null)
   const inspectorProps = useContentfulInspectorMode()
 
   const contentAlignLR = ['left', 'right'].includes(contentAlignment)
@@ -64,6 +65,48 @@ const FeatureComponent = props => {
   const isAPIPlayground = customClass?.includes('feature-api-playground')
   const isDevMeetFlask = customClass?.includes('feature-meet-flask')
   const isInfuraGas = customClass?.includes('feature-infura-gas')
+
+  const datalayerPush = data => {
+    if (typeof window !== 'undefined') {
+      window.dataLayer = window.dataLayer || []
+      window.dataLayer.push(data)
+    }
+  }
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        const [entry] = entries
+
+        if (
+          !entry.target._isDataLayerUpdated &&
+          (isDevMeetFlask || isAPIPlayground)
+        ) {
+          datalayerPush({
+            event: 'featureVisibility',
+            featureName: isDevMeetFlask ? 'meetMetamask' : 'apiPlayground',
+            pagePath: window.location.pathname,
+            inViewport: entry.isIntersecting,
+            flagValue: flags.showApiPlayground,
+          })
+
+          if (entry.isIntersecting) {
+            entry.target._isDataLayerUpdated = true
+          }
+        }
+      })
+
+      if (elementRef.current) {
+        observer.observe(elementRef.current)
+      }
+
+      return () => {
+        if (elementRef.current) {
+          observer.unobserve(elementRef.current)
+        }
+      }
+    }
+  }, [])
 
   if (
     (flags.showApiPlayground && isDevMeetFlask) ||
@@ -191,6 +234,7 @@ const FeatureComponent = props => {
 
   return (
     <Container
+      ref={elementRef}
       sectionPadding={sectionPadding}
       className={classnames({
         noPaddingBottom: noPaddingBottom,
