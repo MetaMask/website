@@ -39,8 +39,11 @@ export default MarkdownPageBody
 
 MarkdownPageBody.propTypes = {
   pageData: PropTypes.shape({
-    data: PropTypes.object,
-    content: PropTypes.string.isRequired,
+    frontmatter: PropTypes.shape({
+      date: PropTypes.string,
+      title: PropTypes.string,
+    }),
+    body: PropTypes.string.isRequired,
   }).isRequired,
 }
 
