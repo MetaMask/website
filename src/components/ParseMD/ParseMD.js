@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import rehypeSlug from 'rehype-slug'
+import remarkGfm from 'remark-gfm'
 
 const ParseMD = ({ children, ...props }) => {
   useEffect(() => {
@@ -21,7 +22,17 @@ const ParseMD = ({ children, ...props }) => {
   }, [])
 
   return (
-    <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSlug]} {...props}>
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      rehypePlugins={[rehypeRaw, rehypeSlug]}
+      linkTarget={url => {
+        if (url.startsWith('http')) {
+          return '_blank'
+        }
+        return undefined
+      }}
+      {...props}
+    >
       {children}
     </ReactMarkdown>
   )
