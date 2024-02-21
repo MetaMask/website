@@ -43,14 +43,14 @@ const TokenSwapPage = ({ data }) => {
         <Freedom
           title="The freedom of <br />self-custody meets the safety of MetaMask"
           text="Track and manage your web3 everything, all in one place."
-          btnLabel="Connect your wallet"
+          btnLabel="Try Portfolio"
           btnLink="https://portfolio.metamask.io/"
         />
 
         <Leading
           text="MetaMask is the leading self-custodial wallet. The safe and simple way to access blockchain applications and web3."
           title="Connect your wallet and start swapping"
-          btnLabel="Try Portfolio"
+          btnLabel="Connect Your Wallet"
           btnLink="https://portfolio.metamask.io/"
         />
 

@@ -7,7 +7,7 @@ const Freedom = ({ title, text, btnLabel, btnLink }) => {
   return (
     <section className={styles.freedom}>
       <Picture
-        src="/images/landing/get/freedom.png"
+        src="/images/landing/token-swap/freedom.png"
         alt="The freedom ofself-custody meets the safety of MetaMask"
         width={652}
         height={593}
