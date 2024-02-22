@@ -1788,6 +1788,13 @@ body.usabilla-show {
   text-align: center;
   gap: 16px;
 
+  .cta-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+
   a {
     flex-shrink: 0;
   }
