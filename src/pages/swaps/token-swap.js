@@ -4,13 +4,19 @@ import Freedom from '../../components/Landing/token-swap/freedom'
 import Leading from '../../components/Landing/token-swap/leading'
 import Header from '../../components/Landing/token-swap/header'
 import Intro from '../../components/Landing/token-swap/intro'
+import * as styles from './token-swap.module.scss'
 import Layout from '../../templates/PageLayout'
-import './token-swap.module.scss'
+import React, { useEffect } from 'react'
 import { graphql } from 'gatsby'
-import React from 'react'
 
 const TokenSwapPage = ({ data }) => {
   const { seo, footer } = data
+
+  useEffect(() => {
+    document.documentElement.classList.add(styles.isLanding)
+
+    return () => document.documentElement.classList.remove(styles.isLanding)
+  })
 
   return (
     <Layout>
