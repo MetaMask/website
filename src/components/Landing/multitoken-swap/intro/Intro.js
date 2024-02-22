@@ -41,7 +41,7 @@ const Intro = ({
         </div>
 
         <Picture
-          src="/images/landing/token-swap/intro.png"
+          src="/images/landing/multitoken-swap/intro.png"
           alt="Metamask Portfolio | Swaps"
           width={825}
           height={643}

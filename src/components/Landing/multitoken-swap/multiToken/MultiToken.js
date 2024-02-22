@@ -7,7 +7,7 @@ const MultiToken = ({ title, text, btnLabel, btnLink }) => {
   return (
     <section className={styles.multiToken}>
       <Picture
-        src="/images/landing/token-swap/multi-token.png"
+        src="/images/landing/multitoken-swap/multi-token.png"
         alt="Swap multiple tokens to one, in a single transaction"
         width={820}
         height={463}
