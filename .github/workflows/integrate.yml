@@ -53,8 +53,6 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            public
-            .cache
             node_modules
           key: ${{ runner.os }}-gatsby-build-${{ github.run_id }}-node_modules-${{ hashFiles('**/yarn.lock')}}
           restore-keys: |
