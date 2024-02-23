@@ -1959,7 +1959,7 @@ body.dark-mode .snaps-color-secondary {
 }
 
 .developer-banner {
-  padding: 18px 18px 18px 30px;
+  padding: 18px;
   font-weight: 500;
   border-radius: 20px;
   display: flex;
@@ -1968,6 +1968,13 @@ body.dark-mode .snaps-color-secondary {
   align-items: center;
   text-align: center;
   gap: 16px;
+
+  .cta-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
 
   a {
     flex-shrink: 0;
@@ -1978,6 +1985,7 @@ body.dark-mode .snaps-color-secondary {
     justify-content: space-between;
     text-align: left;
     border-radius: 9999px;
+    padding: 18px 18px 18px 30px;
   }
 }
 
