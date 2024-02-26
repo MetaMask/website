@@ -915,6 +915,8 @@ export const ContentfulNewsFields = graphql`
         ...ContentfulNewsCategoryFields
       }
     }
+    metaTitle
+    metaDescription
     canonicalUrl
     isPrivate
   }

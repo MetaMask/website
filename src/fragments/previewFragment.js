@@ -263,6 +263,8 @@ export const ContentfulNewsLayoutFields = gql`
       }
     }
     publishDate
+    metaTitle
+    metaDescription
   }
 `
 

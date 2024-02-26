@@ -22,6 +22,8 @@ function NewsLayout(props) {
         image,
         content,
         canonicalUrl,
+        metaTitle,
+        metaDescription,
         authors,
         publishDate,
       },
@@ -39,8 +41,8 @@ function NewsLayout(props) {
 
   const seoModuleConfig = {
     internal: { type: 'ContentfulSeo' },
-    pageTitle: title + ' | MetaMask News',
-    pageDescription: subtitle,
+    pageTitle: (metaTitle || title) + ' | MetaMask News',
+    pageDescription: metaDescription || subtitle,
     featuredImage: image,
     pagePath: pathBuild,
     canonicalUrl: canonicalUrl,
@@ -127,10 +129,10 @@ const NewsContentWrapper = styled.div`
       ? ` background-image: url(${bgUrl});
   `
       : ''}
-  
+
   ${({ darkBgUrl }) =>
     darkBgUrl
-      ? ` 
+      ? `
       body.dark-mode && {
         background-image: url(${darkBgUrl});
       }
@@ -216,6 +218,8 @@ NewsLayout.propTypes = {
       title: PropTypes.string.isRequired,
       subtitle: PropTypes.string,
       publishDate: PropTypes.string,
+      metaTitle: PropTypes.string,
+      metaDescription: PropTypes.string,
       categories: PropTypes.arrayOf(categoryProps),
       author: PropTypes.arrayOf(PropTypes.shape(PropTypes.string.isRequired)),
     }),
