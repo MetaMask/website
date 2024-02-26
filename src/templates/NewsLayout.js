@@ -22,6 +22,7 @@ function NewsLayout(props) {
         image,
         content,
         canonicalUrl,
+        metaTitle,
         metaDescription,
         authors,
         publishDate,
