@@ -6,6 +6,10 @@
   padding: 10.4rem 0 10rem;
   background: var(--blue);
 
+  &.green {
+    background: var(--green);
+  }
+
   .left {
     width: 65.2rem;
     margin-right: 4.8rem;

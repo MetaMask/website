@@ -7,6 +7,7 @@
   flex-flow: column nowrap;
   padding: 4rem 0 5rem;
   background: var(--purple);
+  overflow: hidden;
 
   &::before,
   &::after {
@@ -36,6 +37,7 @@
 
   .img,
   h2,
+  h3,
   p,
   .btn {
     color: inherit;
@@ -55,6 +57,10 @@
     margin: 0 auto 2.7rem;
   }
 
+  h3 {
+    margin-bottom: 4rem;
+  }
+
   p {
     font-size: 1.6rem;
     line-height: 1.25;
@@ -64,6 +70,26 @@
 
   .btn {
     padding: 0 6.9rem;
+  }
+
+  .videoButton {
+    max-width: 70rem;
+    margin: 3rem auto;
+  }
+
+  .sideImageLeft,
+  .sideImageRight {
+    position: absolute;
+    max-width: 300px;
+  }
+  .sideImageLeft {
+    left: 0;
+    bottom: 10rem;
+  }
+
+  .sideImageRight {
+    right: 0;
+    bottom: 6rem;
   }
 
   @include mobile {
@@ -98,6 +124,11 @@
 
     .btn {
       padding: 0 4.5rem;
+    }
+
+    .sideImageLeft,
+    .sideImageRight {
+      display: none;
     }
   }
 }

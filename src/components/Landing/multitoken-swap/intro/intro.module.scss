@@ -5,6 +5,10 @@
   padding: 4.3rem 0 1.4rem;
   background: var(--green);
 
+  &.blue {
+    background: var(--blue);
+  }
+
   div.wrapper {
     align-items: flex-start;
     justify-content: space-between;
@@ -16,11 +20,18 @@
     width: 45rem;
     margin-top: 3.6rem;
 
+    .titleWrapper {
+      margin-bottom: 3.2rem;
+    }
+
     h2 {
       font-size: 5rem;
       line-height: 1.1;
       width: 110%;
-      margin-bottom: 3.2rem;
+    }
+
+    .subTitle {
+      font-size: 1.875rem;
     }
 
     .connect {
@@ -37,6 +48,15 @@
 
     .download {
       margin-left: 1rem;
+    }
+
+    .description {
+      font-size: 1.5rem;
+      
+      a {
+        color: var(--black);
+        text-decoration: underline;
+      }
     }
   }
 
@@ -79,6 +99,35 @@
     .right {
       width: 100%;
       margin: 3.2rem 0 0;
+    }
+  }
+}
+
+:global(#swap-with-portfolio) {
+  &.intro {
+    padding: 4.3rem 0;
+    .wrapper {
+      column-gap: 4rem;
+      .left, .right {
+        flex-shrink: unset;
+        flex-basis: 50%;
+      }
+      .left {
+        margin-top: 0;
+        h2 {
+          font-weight: 500;
+          font-size: 4rem;
+          max-width: 600px;
+          margin-bottom: 1rem;
+        }
+        .description {
+          max-width: 600px;
+        }
+        .connect {
+          margin-bottom: 0;
+          margin-top: 2.8rem;
+        }
+      }
     }
   }
 }

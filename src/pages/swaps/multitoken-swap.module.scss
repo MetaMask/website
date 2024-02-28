@@ -23,6 +23,10 @@ html.is-landing {
   --blue: #75bff8;
   --yellow: #f9e37a;
   --pink: #ff62e6;
+  --light-pink: #f1b3e7;
+  --black: #000;
+  --white: #fff;
+  --orange: #FF7B00;
 
   @include mobile {
     font-size: math.div(1000vw, $mobile-mockup-width);
@@ -68,7 +72,8 @@ html.is-landing {
       }
     }
 
-    .page-multitoken-swap {
+    .page-multitoken-swap,
+    .page-swap-with-portfolio {
       .wrapper {
         display: flex;
         align-items: center;
