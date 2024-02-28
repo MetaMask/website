@@ -1,0 +1,34 @@
+@import '../../../styles/mixins';
+
+.supportedNetwork {
+  background: var(--white);
+  padding: 8rem 0;
+
+  .wrapper {
+    .title {
+      text-align: center;
+      width: 100%;
+      font-size: 3rem;
+      margin-bottom: 4rem;
+    }
+    .listLogoWrapper {
+      display: flex;
+      justify-content: center;   
+    }
+    .listLogo {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      column-gap: 8rem;
+      row-gap: 4rem;
+      width: 75%;
+    }
+    .logo {
+      height: 3rem;
+
+      &.large {
+        height: 4rem;
+      }
+    }
+  }
+}

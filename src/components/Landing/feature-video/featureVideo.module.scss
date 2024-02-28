@@ -1,0 +1,30 @@
+@import '../../../styles/mixins';
+
+.featureVideo {
+  background: var(--light-pink);
+  padding: 8rem 0;
+
+  .wrapper {
+    display: flex;
+    column-gap: 4.5rem;
+
+    & > * {
+      flex-basis: 50%;
+    }
+
+    .title {
+      font-size: 2.5rem;
+      margin-bottom: 3.25rem;
+      line-height: 1.1;
+    }
+
+    @include mobile {
+      flex-direction: column-reverse;
+      text-align: center;
+
+      & > * {
+        width: 100%;
+      }
+    }
+  }
+}

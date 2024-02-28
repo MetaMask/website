@@ -1,0 +1,73 @@
+@import '../../../styles/mixins';
+
+.whySwap {
+  padding: 8rem 0;
+  position: relative;
+  overflow: hidden;
+
+  &.yellow {
+    background: var(--yellow);
+  }
+
+  .wrapper {
+    .title {
+      text-align: center;
+      width: 100%;
+      font-size: 2.5rem;
+      margin-bottom: 3.25rem;
+      font-weight: 500;
+    }
+    .featureListWrapper {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+    .featureList {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      width: 75%;
+      & > * {
+        flex-basis: calc(50% - 1.5rem);
+      }
+      .featureCard {
+        background: var(--white);
+        border-radius: 1.5rem;
+        border: 1px solid var(--black);
+        padding: 2rem;
+
+        .cardTitle {
+          font-size: 2rem;
+          font-weight: 500;
+        }
+        .cardDescription {
+          font-size: 1.375rem;
+        }
+      }
+    }
+  }
+
+  .sideImageLeft,
+  .sideImageRight {
+    position: absolute;
+    bottom: 2rem;
+    z-index: 0;
+  }
+
+  .sideImageLeft {
+    max-width: 200px;
+    left: 0;
+    bottom: 0;
+  }
+  .sideImageRight {
+    max-width: 300px;
+    right: 0;
+  }
+  @include mobile {
+    .sideImageLeft,
+    .sideImageRight {
+      display: none;
+    }
+  }
+}

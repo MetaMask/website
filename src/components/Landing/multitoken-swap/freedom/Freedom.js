@@ -2,10 +2,11 @@ import * as styles from './freedom.module.scss'
 import Picture from '../picture'
 import React from 'react'
 import Btn from '../btn'
+import clsx from 'clsx'
 
-const Freedom = ({ title, text, btnLabel, btnLink }) => {
+const Freedom = ({ title, text, btnLabel, btnLink, bgColor, image }) => {
   return (
-    <section className={styles.freedom}>
+    <section className={clsx(styles.freedom, [styles[bgColor]])}>
       <Picture
         src="/images/landing/multitoken-swap/freedom.png"
         alt="The freedom ofself-custody meets the safety of MetaMask"
