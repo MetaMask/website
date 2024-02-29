@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { Fragment, useRef, useEffect } from 'react'
+import React, { Fragment, useRef } from 'react'
 import styled, { withTheme } from 'styled-components'
 import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import ContentWrapper from './ContentWrapper'
@@ -12,7 +12,7 @@ import Embed from './Embed'
 import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
 import ParseMD from './ParseMD'
 import GatsbyBackgroundImage from './GatsbyBackgroundImage'
-import { useFlags } from 'launchdarkly-react-client-sdk'
+import { useFeatureFlag } from '../hooks/useFeatureFlag'
 
 const FeatureComponent = props => {
   const {
@@ -51,11 +51,12 @@ const FeatureComponent = props => {
     previewMode = false,
     contentfulId,
     moduleId,
+    launchDarklyFlag,
   } = props
 
-  const flags = useFlags()
-  const elementRef = useRef(null)
+  const elementRef = useRef()
   const inspectorProps = useContentfulInspectorMode()
+  const showApiPlayground = useFeatureFlag(launchDarklyFlag, elementRef)
 
   const contentAlignLR = ['left', 'right'].includes(contentAlignment)
     ? contentAlignment
@@ -66,51 +67,9 @@ const FeatureComponent = props => {
   const isDevMeetFlask = customClass?.includes('feature-meet-flask')
   const isInfuraGas = customClass?.includes('feature-infura-gas')
 
-  const datalayerPush = data => {
-    if (typeof window !== 'undefined') {
-      window.dataLayer = window.dataLayer || []
-      window.dataLayer.push(data)
-    }
-  }
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
-      const observer = new IntersectionObserver(entries => {
-        const [entry] = entries
-
-        if (
-          !entry.target._isDataLayerUpdated &&
-          (isDevMeetFlask || isAPIPlayground)
-        ) {
-          datalayerPush({
-            event: 'featureVisibility',
-            featureName: isDevMeetFlask ? 'meetMetamask' : 'apiPlayground',
-            pagePath: window.location.pathname,
-            inViewport: entry.isIntersecting,
-            flagValue: flags.showApiPlayground,
-          })
-
-          if (entry.isIntersecting) {
-            entry.target._isDataLayerUpdated = true
-          }
-        }
-      })
-
-      if (elementRef.current) {
-        observer.observe(elementRef.current)
-      }
-
-      return () => {
-        if (elementRef.current) {
-          observer.unobserve(elementRef.current)
-        }
-      }
-    }
-  }, [])
-
   if (
-    (flags.showApiPlayground && isDevMeetFlask) ||
-    (!flags.showApiPlayground && isAPIPlayground)
+    (showApiPlayground && isDevMeetFlask) ||
+    (!showApiPlayground && isAPIPlayground)
   ) {
     return null
   }

@@ -763,6 +763,7 @@ export const ContentfulLayoutFeatureFields = gql`
     removeSectionPaddingBottomOnDesktop
     customClass
     moduleId
+    launchDarklyFlag
     featureItemsCollection(preview: true) {
       items {
         ...ContentfulCardFields

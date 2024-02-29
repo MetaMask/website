@@ -249,6 +249,7 @@ export const ContentfulLayoutFeatureFields = graphql`
     removeSectionPaddingBottomOnDesktop
     customClass
     moduleId
+    launchDarklyFlag
     featureItems {
       ... on ContentfulLogo {
         ...ContentfulLogoFields

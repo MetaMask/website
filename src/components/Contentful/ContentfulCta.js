@@ -1,6 +1,6 @@
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import { MetaMaskContext } from '../../Context/MetaMaskContextProvider'
-import { useFlags } from 'launchdarkly-react-client-sdk'
+import { useFeatureFlag } from '../../hooks/useFeatureFlag'
 import React, { useContext } from 'react'
 import isEmpty from 'lodash/isEmpty'
 import PropTypes from 'prop-types'
@@ -9,9 +9,9 @@ import CTA from '../CTA'
 const ContentfulCta = props => {
   const { isMetaMaskInstalled } = useContext(MetaMaskContext)
 
-  const flags = useFlags()
-
-  const headerAlwaysShowDownload = flags?.[props.moduleConfig?.launchDarklyFlag]
+  const headerAlwaysShowDownload = useFeatureFlag(
+    props.moduleConfig?.launchDarklyFlag
+  )
 
   const activeCta =
     !headerAlwaysShowDownload &&

@@ -41,6 +41,7 @@ const ContentfulLayoutFeature = props => {
       customClass,
       contentful_id,
       moduleId,
+      launchDarklyFlag,
     },
   } = props
 
@@ -83,6 +84,7 @@ const ContentfulLayoutFeature = props => {
       previewMode={previewMode}
       contentfulId={contentful_id}
       moduleId={moduleId}
+      launchDarklyFlag={launchDarklyFlag}
     />
   )
 }
