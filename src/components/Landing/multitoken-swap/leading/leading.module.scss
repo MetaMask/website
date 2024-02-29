@@ -1,0 +1,93 @@
+@import '../../../../styles/mixins';
+
+.leading {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  padding: 7.3rem 0 9rem;
+  background: var(--yellow);
+
+  &::before,
+  &::after {
+    content: '';
+    z-index: 5;
+    position: absolute;
+    bottom: 0;
+  }
+
+  &::before {
+    left: 0;
+    width: 27.2rem;
+    height: 48rem;
+    background: url('/images/landing/get/leading-l.png') bottom/100% auto
+      no-repeat;
+  }
+
+  &::after {
+    right: 0;
+    width: 48.5rem;
+    height: 47.5rem;
+    background: url('/images/landing/get/leading-r.png') bottom/100% auto
+      no-repeat;
+  }
+
+  p,
+  h2,
+  .btn {
+    z-index: 10;
+    position: relative;
+  }
+
+  p {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    width: 75rem;
+    margin-bottom: 4rem;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 5rem;
+    line-height: 1.1;
+    width: 48.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .btn {
+    height: 7.5rem;
+    padding: 0 9.7rem;
+  }
+
+  @include mobile {
+    padding: 4rem 0 5rem;
+
+    &::before {
+      width: 13rem;
+      height: 23rem;
+    }
+
+    &::after {
+      width: 23rem;
+      height: 23rem;
+    }
+
+    p {
+      font-size: 2rem;
+      width: 81.5%;
+      margin-bottom: 2.7rem;
+    }
+
+    h2 {
+      font-size: 3.6rem;
+      width: 65%;
+      margin-bottom: 2.7rem;
+    }
+
+    .btn {
+      height: 5.5rem;
+      padding: 0 4.5rem;
+    }
+  }
+}
