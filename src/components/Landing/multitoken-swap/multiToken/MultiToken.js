@@ -1,9 +1,9 @@
-import * as styles from './multi-token.module.scss'
-import Picture from '../picture'
-import React, { useState } from 'react'
-import Btn from '../btn'
 import VideoButton from '../../../PortfolioPage/Map/Sidebar/Elements/VideoButton'
 import VideoModal from '../../../PortfolioPage/Map/Sidebar/Elements/VideoModal'
+import * as styles from './multi-token.module.scss'
+import React, { useState } from 'react'
+import Picture from '../picture'
+import Btn from '../btn'
 import clsx from 'clsx'
 
 const MultiToken = ({
@@ -15,8 +15,9 @@ const MultiToken = ({
   disableImage,
   youtubeCode,
   hasSideImage,
+  videoFirst,
 }) => {
-  const videoUrl = 'https://www.youtube.com/embed/' + youtubeCode
+  const videoUrl = 'https://www.youtube-nocookie.com/embed/' + youtubeCode
   const thumbnailUrl = `https://i3.ytimg.com/vi/${youtubeCode}/maxresdefault.jpg`
   const [videoEmbedUrl, setVideoEmbedUrl] = useState(null)
 
@@ -31,6 +32,7 @@ const MultiToken = ({
           className={styles.img}
         />
       )}
+
       {hasSideImage && (
         <>
           <Picture
@@ -50,12 +52,21 @@ const MultiToken = ({
         </>
       )}
 
-      <h2>{title}</h2>
-      <h3>{subTitle}</h3>
+      {videoFirst && youtubeCode && (
+        <div className={clsx(styles.videoButton, styles.img)}>
+          <VideoButton
+            posterImage={thumbnailUrl}
+            onClick={() => setVideoEmbedUrl(videoUrl)}
+          />
+        </div>
+      )}
 
-      <p>{text}</p>
+      {title && <h2>{title}</h2>}
+      {subTitle && <h3>{subTitle}</h3>}
 
-      {youtubeCode && (
+      {text && <p>{text}</p>}
+
+      {!videoFirst && youtubeCode && (
         <div className={styles.videoButton}>
           <VideoButton
             posterImage={thumbnailUrl}
@@ -64,22 +75,24 @@ const MultiToken = ({
         </div>
       )}
 
+      {btnLink && btnLabel && (
+        <Btn
+          href={btnLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          white={true}
+          className={styles.btn}
+        >
+          {btnLabel}
+        </Btn>
+      )}
+
       {videoEmbedUrl && (
         <VideoModal
           embedUrl={videoEmbedUrl}
           setVideoEmbedUrl={setVideoEmbedUrl}
         />
       )}
-
-      <Btn
-        href={btnLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        white={true}
-        className={styles.btn}
-      >
-        {btnLabel}
-      </Btn>
     </section>
   )
 }

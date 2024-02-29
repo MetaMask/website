@@ -43,6 +43,9 @@ const TokenSwapPage = ({ data }) => {
         />
 
         <MultiToken
+          videoFirst={true}
+          disableImage={true}
+          youtubeCode="4ecgDYmt36U"
           title="Multiple tokens. A single swap. Save gas with multi-token swaps."
           text="The Swaps feature combines data from decentralized exchange aggregators, market makers, and DEXs, to ensure you get the very best price with the lowest network fees."
           btnLabel="Take a look"
