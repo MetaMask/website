@@ -20,6 +20,7 @@ const baseCSP = {
     'static.ads-twitter.com',
     '*.google-analytics.com',
     'www.youtube.com',
+    'www.youtube-nocookie.com',
     'www.google.com',
     'www.googletagmanager.com',
     'snap.licdn.com',
@@ -42,6 +43,7 @@ const baseCSP = {
   'manifest-src': ["'self'"],
   'frame-src': [
     'www.youtube.com',
+    'www.youtube-nocookie.com',
     '*.twitter.com',
     'www.google.com',
     '*.hsforms.net',
@@ -60,6 +62,7 @@ const baseCSP = {
     'unpkg.com',
     '*.ctfassets.net',
     'www.youtube.com',
+    'www.youtube-nocookie.com',
     'analytics.tiktok.com',
     'analytics.pangle-ads.com',
     'addons.mozilla.org',
