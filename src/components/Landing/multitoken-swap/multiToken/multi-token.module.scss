@@ -23,16 +23,16 @@
     left: 0;
     width: 23.3rem;
     height: 46.2rem;
-    background: url('/images/landing/get/multi-token-r.png') center/100% auto
-      no-repeat;
+    background: url('/images/landing/multitoken-swap/multi-token-r.png')
+      center/100% auto no-repeat;
   }
 
   &::after {
     right: 0;
     width: 23.2rem;
     height: 60.2rem;
-    background: url('/images/landing/get/multi-token-l.png') center/100% auto
-      no-repeat;
+    background: url('/images/landing/multitoken-swap/multi-token-l.png')
+      center/100% auto no-repeat;
   }
 
   .img,
@@ -45,9 +45,19 @@
     position: relative;
   }
 
-  .img {
+  .img,
+  .img.videoButton {
     width: 82rem;
     margin: 0 auto 3.2rem;
+
+    button {
+      border-radius: 0;
+
+      & > div > div {
+        width: 10rem;
+        height: 10rem;
+      }
+    }
   }
 
   h2 {
@@ -73,7 +83,7 @@
   }
 
   .videoButton {
-    max-width: 70rem;
+    width: 70rem;
     margin: 3rem auto;
   }
 
@@ -82,6 +92,7 @@
     position: absolute;
     max-width: 300px;
   }
+
   .sideImageLeft {
     left: 0;
     bottom: 10rem;
@@ -107,8 +118,21 @@
       bottom: 13rem;
     }
 
-    .img {
+    .img,
+    .img.videoButton {
       width: 60%;
+
+      button {
+        & > div > div {
+          width: 8rem;
+          height: 8rem;
+
+          svg:first-of-type {
+            width: 1.5rem;
+            height: auto;
+          }
+        }
+      }
     }
 
     h2 {
