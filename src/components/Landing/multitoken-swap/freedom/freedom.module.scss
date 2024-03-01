@@ -18,16 +18,16 @@
   .right {
     width: 54.6rem;
     margin-bottom: 3.6rem;
+    line-height: 1.21;
 
     h2 {
-      font-size: 5rem;
-      line-height: 1.1;
+      font-size: max(3.5rem, 28px);
       margin-bottom: 4rem;
+      line-height: inherit;
     }
 
     p {
-      font-size: 2.5rem;
-      line-height: 1.2;
+      font-size: max(2.5rem, 14px);
       width: 95%;
       margin-bottom: 4rem;
     }
@@ -41,7 +41,7 @@
   @include mobile {
     flex-direction: column;
     align-items: flex-start;
-    padding: 6.4rem 0 6rem;
+    padding: max(3rem, 48px) 0;
 
     .left {
       width: 64rem;
@@ -51,26 +51,6 @@
     .right {
       width: 69rem;
       margin: 0 auto;
-
-      h2 {
-        font-size: 3.6rem;
-        margin-bottom: 2.4rem;
-        width: 80%;
-
-        br {
-          display: none;
-        }
-      }
-
-      p {
-        font-size: 2rem;
-        margin-bottom: 2.4rem;
-      }
-
-      .btn {
-        height: 5.6rem;
-        padding: 0 3.6rem;
-      }
     }
   }
 }

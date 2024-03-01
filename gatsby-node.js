@@ -249,7 +249,36 @@ exports.createPages = async ({ graphql, actions }) => {
             })
             return
           }
-
+          if (slug === '/swaps/swap-with-portfolio/') {
+            createPage({
+              path: slug,
+              component: path.resolve(
+                `./src/templates/SwapWithPortfolioLayout.js`
+              ),
+              context: {
+                footerId,
+                seoId,
+                pathBuild: slug,
+                widerContainer
+              },
+            })
+            return
+          }
+          if (slug === '/swaps/multitoken-swap/') {
+            createPage({
+              path: slug,
+              component: path.resolve(
+                `./src/templates/MultiTokenSwapLayout.js`
+              ),
+              context: {
+                footerId,
+                seoId,
+                pathBuild: slug,
+                widerContainer
+              },
+            })
+            return
+          }
           const extraData = slug === '/developer/' ? devChangelogData : null
           createPage({
             path: slug, // slug validation in Contentful CMS

@@ -44,7 +44,7 @@ const Intro = ({
             {firstBtnLabel}
           </Btn>
 
-          <p>
+          <p className={styles.downloadNow}>
             {text}
             {secondBtnLabel && (
               <Btn

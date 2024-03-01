@@ -1,0 +1,49 @@
+@import '../../../styles/mixins';
+
+.swapFooter {
+  background: var(--black);
+  padding: 3rem 0 5.5rem;
+
+  .wrapper {
+    .navigationWrapper {
+      display: flex;
+      column-gap: 10rem;
+
+      .title {
+        color: var(--orange);
+        font-weight: 700;
+        font-size: 1.25rem;
+      }
+
+      a {
+        color: var(--white);
+        font-size: 1.25rem;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      ul {
+        margin: 0;
+        li {
+          list-style: none;
+        }
+      }
+
+    }
+    .logo {
+      img {
+        width: 16.25rem;
+      }
+      margin-bottom: 2rem;
+    }
+    p {
+      color: var(--white);
+    }
+    .copyright {
+      margin-top: 2rem;
+      font-size: 1.25rem;
+    }
+  }
+}

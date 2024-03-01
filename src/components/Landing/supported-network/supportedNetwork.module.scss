@@ -1,0 +1,46 @@
+@import '../../../styles/mixins';
+
+.supportedNetwork {
+  background: var(--white);
+  padding: 6rem 0;
+
+  .wrapper {
+    justify-content: center;
+    .title {
+      text-align: center;
+      width: 100%;
+      font-size: max(3.5rem, 28px);
+      margin-bottom: max(5rem, 40px);
+      color: inherit;
+    }
+    .listLogoWrapper {
+      display: flex;
+      justify-content: center;   
+    }
+    .listLogo {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      column-gap: 8rem;
+      row-gap: 4rem;
+      width: 75%;
+    }
+    .logo {
+      height: max(2.5rem, 16px);
+
+      &.large {
+        height: max(4rem, 32px);
+      }
+    }
+  }
+
+  @include mobile {
+    padding: max(3rem, 48px) 0;
+    .wrapper {
+      .listLogo {
+        flex-direction: column;
+      }
+    }
+  }
+}

@@ -1,0 +1,87 @@
+@import '../../../styles/mixins';
+
+.whySwap {
+  padding: 4.3rem 0;
+  position: relative;
+  overflow: hidden;
+
+  &.yellow {
+    background: var(--yellow);
+  }
+
+  .wrapper {
+    .title {
+      text-align: center;
+      width: 100%;
+      font-size: max(3.5rem, 28px);
+      line-height: 1.21;
+      margin-bottom: max(5rem, 40px);
+      font-weight: 500;
+      color: inherit;
+    }
+    .featureListWrapper {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+    .featureList {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      width: 75%;
+      & > * {
+        flex-basis: calc(50% - 1.5rem);
+      }
+      .featureCard {
+        background: var(--white);
+        border-radius: 1.5rem;
+        border: 1px solid var(--black);
+        padding: max(2rem, 24px);
+        line-height: 1.21;
+
+        .cardTitle {
+          font-size: max(2.25rem, 16px);
+          font-weight: 500;
+          margin-bottom: max(1.5rem, 16px);
+        }
+        .cardDescription {
+          font-size: max(1.5rem, 14px);
+        }
+      }
+    }
+  }
+
+  .sideImageLeft,
+  .sideImageRight {
+    position: absolute;
+    bottom: 2rem;
+    z-index: 0;
+  }
+
+  .sideImageLeft {
+    max-width: 200px;
+    left: 0;
+    bottom: 0;
+  }
+  .sideImageRight {
+    max-width: 300px;
+    right: 0;
+  }
+  @include mobile {
+    padding: max(3rem, 48px) 0;
+    .sideImageLeft,
+    .sideImageRight {
+      display: none;
+    }
+    .wrapper {
+      .featureList {
+        width: 100%;
+
+        & > * {
+          flex-basis: 100%;
+        }
+      }
+    }
+  }
+}

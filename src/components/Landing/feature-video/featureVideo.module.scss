@@ -1,0 +1,44 @@
+@import '../../../styles/mixins';
+
+.featureVideo {
+  background: var(--light-pink);
+  padding: 4.3rem 0;
+
+  .wrapper {
+    display: flex;
+    gap: 4.5rem;
+
+    & > * {
+      flex-basis: 50%;
+    }
+
+    .title {
+      font-size: max(3.5rem, 28px);
+      margin-bottom: max(5rem, 40px);
+      line-height: 1.21;
+      color: inherit;
+    }
+
+    .description {
+      font-size: max(2rem, 16px);
+      line-height: 1.21;
+    }
+
+    button {
+      margin-top: 0;
+      border-radius: 0;
+    }
+  }
+  @include mobile {
+    padding: max(3rem, 48px) 0;
+
+    .wrapper {
+      flex-direction: column-reverse;
+      text-align: center;
+
+      & > * {
+        width: 100%;
+      }
+    }
+  }
+}
