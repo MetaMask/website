@@ -1,0 +1,56 @@
+@import '../../../../styles/mixins';
+
+.freedom {
+  display: flex;
+  align-items: center;
+  padding: 10.4rem 0 10rem;
+  background: var(--blue);
+
+  &.green {
+    background: var(--green);
+  }
+
+  .left {
+    width: 65.2rem;
+    margin-right: 4.8rem;
+  }
+
+  .right {
+    width: 54.6rem;
+    margin-bottom: 3.6rem;
+    line-height: 1.21;
+
+    h2 {
+      font-size: max(3.5rem, 28px);
+      margin-bottom: 4rem;
+      line-height: inherit;
+    }
+
+    p {
+      font-size: max(2.5rem, 14px);
+      width: 95%;
+      margin-bottom: 4rem;
+    }
+
+    .btn {
+      height: 7.5rem;
+      padding: 0 4.9rem;
+    }
+  }
+
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: max(3rem, 48px) 0;
+
+    .left {
+      width: 64rem;
+      margin: 0 0 4.8rem;
+    }
+
+    .right {
+      width: 69rem;
+      margin: 0 auto;
+    }
+  }
+}

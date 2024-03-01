@@ -1,0 +1,152 @@
+@import '../../../../styles/mixins';
+
+.multi-token {
+  color: #fff;
+  position: relative;
+  text-align: center;
+  flex-flow: column nowrap;
+  padding: 4rem 0 5rem;
+  background: var(--purple);
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: '';
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+  }
+
+  &::before {
+    left: 0;
+    width: 23.3rem;
+    height: 46.2rem;
+    background: url('/images/landing/multitoken-swap/multi-token-r.png')
+      center/100% auto no-repeat;
+  }
+
+  &::after {
+    right: 0;
+    width: 23.2rem;
+    height: 60.2rem;
+    background: url('/images/landing/multitoken-swap/multi-token-l.png')
+      center/100% auto no-repeat;
+  }
+
+  .img,
+  h2,
+  h3,
+  p {
+    color: inherit;
+    z-index: 10;
+    position: relative;
+  }
+
+  button {
+    margin-top: 0;
+  }
+
+  .img,
+  .img.videoButton {
+    width: 82rem;
+    margin: 0 auto 3.2rem;
+
+    button {
+      border-radius: 0;
+
+      & > div > div {
+        width: 10rem;
+        height: 10rem;
+      }
+    }
+  }
+
+  h2 {
+    font-size: 5rem;
+    line-height: 1.21;
+    width: 81.5rem;
+    margin: 0 auto max(4rem, 30px);
+  }
+
+  h3 {
+    margin-bottom: 4rem;
+  }
+
+  p {
+    font-size: max(1.6rem, 14px);
+    line-height: 1.21;
+    width: 65.3rem;
+    margin: 0 auto 3rem;
+  }
+
+  .btn {
+    padding: 0 6.9rem;
+  }
+
+  .videoButton {
+    width: 70rem;
+    margin: 3rem auto;
+  }
+
+  .sideImageLeft,
+  .sideImageRight {
+    position: absolute;
+    max-width: 300px;
+  }
+
+  .sideImageLeft {
+    left: 0;
+    bottom: 10rem;
+  }
+
+  .sideImageRight {
+    right: 0;
+    bottom: 6rem;
+  }
+
+  @include mobile {
+    padding: max(3rem, 48px) 0;
+
+    &::before, &::after {
+      display: none;
+    }
+
+    .img,
+    .img.videoButton {
+      width: 85%;
+
+      button {
+        & > div > div {
+          width: 8rem;
+          height: 8rem;
+
+          svg:first-of-type {
+            width: 1.5rem;
+            height: auto;
+          }
+        }
+      }
+    }
+
+    h2 {
+      font-size: 3.6rem;
+      width: 80%;
+    }
+
+    p {
+      width: 70%;
+      margin: 0 auto 2rem;
+    }
+
+    .btn {
+      padding: 0 4.5rem;
+    }
+
+    .sideImageLeft,
+    .sideImageRight {
+      display: none;
+    }
+  }
+}
