@@ -2,7 +2,7 @@
 
 .intro {
   justify-content: space-between;
-  padding: 4.3rem 0 1.4rem;
+  padding: 4.3rem 0;
   background: var(--green);
 
   &.blue {
@@ -25,25 +25,25 @@
     }
 
     h2 {
-      font-size: 5rem;
-      line-height: 1.1;
-      width: 110%;
+      line-height: 1.21;
+      font-weight: 500;
+      margin-bottom: max(1rem, 16px);
+      font-size: max(4rem, 32px);
     }
 
     .subTitle {
-      font-size: 1.875rem;
+      font-size: max(1.875rem, 16px);
+      color: inherit;
     }
 
     .connect {
-      font-size: 2rem;
-      padding: 0 4.1rem;
       margin-bottom: 2.8rem;
     }
 
-    p {
+    .downloadNow {
       font-size: 2rem;
       line-height: 1.825;
-      width: 70%;
+      width: 80%;
     }
 
     .download {
@@ -67,7 +67,7 @@
   }
 
   @include mobile {
-    padding: 3.2rem 0;
+    padding: max(3rem, 48px) 0;
 
     div.wrapper {
       flex-direction: column;
@@ -79,19 +79,12 @@
       width: 100%;
       margin-top: 0;
 
-      h2 {
-        font-size: 4.6rem;
-        margin-bottom: 2.4rem;
-      }
-
       .connect {
-        font-size: 1.8rem;
-        padding: 0 2.4rem;
         margin-bottom: 1.6rem;
       }
 
-      p {
-        font-size: 2rem;
+      .downloadNow {
+        font-size: max(2rem, 14px);
         width: 100%;
       }
     }
@@ -105,7 +98,6 @@
 
 :global(#swap-with-portfolio) {
   &.intro {
-    padding: 4.3rem 0;
     .wrapper {
       column-gap: 4rem;
       .left, .right {
@@ -115,13 +107,12 @@
       .left {
         margin-top: 0;
         h2 {
-          font-weight: 500;
-          font-size: 4rem;
           max-width: 600px;
-          margin-bottom: 1rem;
         }
         .description {
           max-width: 600px;
+          font-size: max(1.75rem, 16px);
+          line-height: 1.21;
         }
         .connect {
           margin-bottom: 0;

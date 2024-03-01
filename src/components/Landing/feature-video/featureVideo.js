@@ -29,7 +29,7 @@ const FeatureVideo = ({
             onClick={() => setVideoEmbedUrl(videoUrl)}
           />
         </div>
-        <div className={styles.content}>
+        <div>
           <h3
             className={styles.title}
             dangerouslySetInnerHTML={{ __html: title }}

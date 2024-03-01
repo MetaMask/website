@@ -1,7 +1,7 @@
 @import '../../../styles/mixins';
 
 .whySwap {
-  padding: 8rem 0;
+  padding: 4.3rem 0;
   position: relative;
   overflow: hidden;
 
@@ -13,9 +13,11 @@
     .title {
       text-align: center;
       width: 100%;
-      font-size: 2.5rem;
-      margin-bottom: 3.25rem;
+      font-size: max(3.5rem, 28px);
+      line-height: 1.21;
+      margin-bottom: max(5rem, 40px);
       font-weight: 500;
+      color: inherit;
     }
     .featureListWrapper {
       display: flex;
@@ -35,14 +37,16 @@
         background: var(--white);
         border-radius: 1.5rem;
         border: 1px solid var(--black);
-        padding: 2rem;
+        padding: max(2rem, 24px);
+        line-height: 1.21;
 
         .cardTitle {
-          font-size: 2rem;
+          font-size: max(2.25rem, 16px);
           font-weight: 500;
+          margin-bottom: max(1.5rem, 16px);
         }
         .cardDescription {
-          font-size: 1.375rem;
+          font-size: max(1.5rem, 14px);
         }
       }
     }
@@ -65,9 +69,19 @@
     right: 0;
   }
   @include mobile {
+    padding: max(3rem, 48px) 0;
     .sideImageLeft,
     .sideImageRight {
       display: none;
+    }
+    .wrapper {
+      .featureList {
+        width: 100%;
+
+        & > * {
+          flex-basis: 100%;
+        }
+      }
     }
   }
 }

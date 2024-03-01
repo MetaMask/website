@@ -2,12 +2,12 @@
 
 .btn {
   color: #fff;
-  font-size: 2.5rem;
+  font-size: max(2.5rem, 14px);
   line-height: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 6.2rem;
+  height: max(6.2rem, 40px);
   padding: 0 6.5rem;
   background: #000;
   border-radius: 10.2rem;
@@ -22,9 +22,9 @@
 
   &.stroke {
     color: #000;
-    font-size: 1.8rem;
+    font-size: max(2.5rem, 12px);
     display: inline-flex;
-    height: 3.3rem;
+    height: max(3.3rem, 20px);
     padding: 0 2.6rem;
     background: transparent;
     border: 1px solid #000;
@@ -47,8 +47,6 @@
   }
 
   @include mobile {
-    font-size: 1.8rem;
-    height: 4.5rem;
-    padding: 0 4.5rem;
+    padding: 0 max(4.5rem, 16px);
   }
 }

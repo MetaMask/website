@@ -1,32 +1,30 @@
-import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
-import MultiToken from '../../components/Landing/multitoken-swap/multiToken'
-import Freedom from '../../components/Landing/multitoken-swap/freedom'
-import Header from '../../components/Landing/multitoken-swap/header'
-import Intro from '../../components/Landing/multitoken-swap/intro'
-import * as styles from './multitoken-swap.module.scss'
-import Layout from '../../templates/PageLayout'
-import React, { useEffect } from 'react'
 import { graphql } from 'gatsby'
-import FeatureVideo from '../../components/Landing/feature-video'
-import SwapFooter from '../../components/Landing/swap-footer'
-import WhySwap from '../../components/Landing/why-swap'
-import SupportedNetwork from '../../components/Landing/supported-network/supportedNetwork'
+import React, { useEffect } from 'react'
+import FeatureVideo from '../components/Landing/feature-video'
+import Freedom from '../components/Landing/multitoken-swap/freedom'
+import Header from '../components/Landing/multitoken-swap/header'
+import Intro from '../components/Landing/multitoken-swap/intro'
+import SupportedNetwork from '../components/Landing/supported-network'
+import WhySwap from '../components/Landing/why-swap'
+import Layout from './PageLayout'
+import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
+import * as styles from '../styles/swap.module.scss'
 
-const TokenSwapPage = ({ data }) => {
-  const { seo } = data
+const SwapWithPortfolio = ({ data, pageContext }) => {
+  const { seo, footer } = data
+  const { pathBuild, widerContainer } = pageContext
 
   useEffect(() => {
     document.documentElement.classList.add(styles.isLanding)
-
     return () => document.documentElement.classList.remove(styles.isLanding)
   })
 
   return (
-    <Layout>
+    <Layout widerContainer={widerContainer}>
       {seo &&
         contentfulModuleToComponent({
           ...seo,
-          pagePath: '/swaps/swap-with-portfolio/',
+          pagePath: pathBuild,
         })}
 
       <article className="page-swap-with-portfolio">
@@ -54,17 +52,6 @@ const TokenSwapPage = ({ data }) => {
 
         <WhySwap bgColor="yellow" />
 
-        <MultiToken
-          title="Introducing multi-token swap. Save gas. Save time."
-          subTitle="Swap multiple tokens to one, in a single transaction."
-          text="The swap feature combines data from decentralized exchange aggregators, market makers, and DEXs to ensure you get competitive rates with the lowest network fees."
-          btnLabel="Try Portfolio"
-          btnLink="https://portfolio.metamask.io/swaps"
-          youtubeCode="q9uG6Ra-w54"
-          disableImage
-          hasSideImage
-        />
-
         <SupportedNetwork />
 
         <Freedom
@@ -76,7 +63,7 @@ const TokenSwapPage = ({ data }) => {
           image="/images/landing/multitoken-swap/freedom-v2.svg"
         />
 
-        <SwapFooter />
+        {footer && contentfulModuleToComponent(footer)}
       </article>
     </Layout>
   )
@@ -93,4 +80,4 @@ export const query = graphql`
   }
 `
 
-export default TokenSwapPage
+export default SwapWithPortfolio

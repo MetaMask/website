@@ -249,6 +249,36 @@ exports.createPages = async ({ graphql, actions }) => {
             })
             return
           }
+          if (slug === '/swaps/swap-with-portfolio/') {
+            createPage({
+              path: slug,
+              component: path.resolve(
+                `./src/templates/SwapWithPortfolioLayout.js`
+              ),
+              context: {
+                footerId,
+                seoId,
+                pathBuild: slug,
+                widerContainer
+              },
+            })
+            return
+          }
+          if (slug === '/swaps/multitoken-swap/') {
+            createPage({
+              path: slug,
+              component: path.resolve(
+                `./src/templates/MultiTokenSwapLayout.js`
+              ),
+              context: {
+                footerId,
+                seoId,
+                pathBuild: slug,
+                widerContainer
+              },
+            })
+            return
+          }
           const extraData = slug === '/developer/' ? devChangelogData : null
           createPage({
             path: slug, // slug validation in Contentful CMS
@@ -487,4 +517,20 @@ exports.onPostBuild = ({ graphql, store, pathPrefix, reporter }) => {
   }
   const folder = path.join(program.directory, 'public')
   return writeRedirectsFile(redirects, folder, prefix)
+}
+
+exports.onCreateWebpackConfig = ({ stage, actions, getConfig, plugins }) => {
+  if (stage === 'build-javascript' || stage === 'develop') {
+    const config = getConfig();
+    const miniCss = config.plugins.find(
+      (plugin) => plugin.constructor.name === 'MiniCssExtractPlugin'
+    );
+    if (miniCss) {
+      miniCss.options.ignoreOrder = true;
+    }
+    actions.replaceWebpackConfig(config);
+    actions.setWebpackConfig({
+      plugins: [plugins.provide({ process: 'process/browser' })],
+    });
+  }
 }

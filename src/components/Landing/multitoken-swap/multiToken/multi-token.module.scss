@@ -38,11 +38,14 @@
   .img,
   h2,
   h3,
-  p,
-  .btn {
+  p {
     color: inherit;
     z-index: 10;
     position: relative;
+  }
+
+  button {
+    margin-top: 0;
   }
 
   .img,
@@ -62,9 +65,9 @@
 
   h2 {
     font-size: 5rem;
-    line-height: 1.1;
+    line-height: 1.21;
     width: 81.5rem;
-    margin: 0 auto 2.7rem;
+    margin: 0 auto max(4rem, 30px);
   }
 
   h3 {
@@ -72,8 +75,8 @@
   }
 
   p {
-    font-size: 1.6rem;
-    line-height: 1.25;
+    font-size: max(1.6rem, 14px);
+    line-height: 1.21;
     width: 65.3rem;
     margin: 0 auto 3rem;
   }
@@ -104,23 +107,15 @@
   }
 
   @include mobile {
-    padding: 4rem 0;
+    padding: max(3rem, 48px) 0;
 
-    &::before {
-      width: 13.3rem;
-      height: 26.2rem;
-      bottom: 17rem;
-    }
-
-    &::after {
-      width: 13.2rem;
-      height: 34.2rem;
-      bottom: 13rem;
+    &::before, &::after {
+      display: none;
     }
 
     .img,
     .img.videoButton {
-      width: 60%;
+      width: 85%;
 
       button {
         & > div > div {
@@ -138,7 +133,6 @@
     h2 {
       font-size: 3.6rem;
       width: 80%;
-      margin: 0 auto 1.5rem;
     }
 
     p {
