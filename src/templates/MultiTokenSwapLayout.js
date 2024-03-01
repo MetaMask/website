@@ -1,29 +1,29 @@
-import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
-import MultiToken from '../../components/Landing/multitoken-swap/multiToken'
-import Freedom from '../../components/Landing/multitoken-swap/freedom'
-import Leading from '../../components/Landing/multitoken-swap/leading'
-import Header from '../../components/Landing/multitoken-swap/header'
-import Intro from '../../components/Landing/multitoken-swap/intro'
-import * as styles from './multitoken-swap.module.scss'
-import Layout from '../../templates/PageLayout'
 import React, { useEffect } from 'react'
+import Freedom from '../components/Landing/multitoken-swap/freedom'
+import Header from '../components/Landing/multitoken-swap/header'
+import Intro from '../components/Landing/multitoken-swap/intro'
+import Leading from '../components/Landing/multitoken-swap/leading'
+import MultiToken from '../components/Landing/multitoken-swap/multiToken'
+import Layout from './PageLayout'
+import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
+import * as styles from '../styles/swap.module.scss'
 import { graphql } from 'gatsby'
 
-const TokenSwapPage = ({ data }) => {
+const MultiTokenSwap = ({ data, pageContext }) => {
   const { seo, footer } = data
+  const { pathBuild, widerContainer } = pageContext
 
   useEffect(() => {
     document.documentElement.classList.add(styles.isLanding)
-
     return () => document.documentElement.classList.remove(styles.isLanding)
   })
 
   return (
-    <Layout>
+    <Layout widerContainer={widerContainer}>
       {seo &&
         contentfulModuleToComponent({
           ...seo,
-          pagePath: '/swaps/multitoken-swap/',
+          pagePath: pathBuild,
         })}
 
       <article className="page-multitoken-swap">
@@ -66,11 +66,7 @@ const TokenSwapPage = ({ data }) => {
           btnLink="https://portfolio.metamask.io/"
         />
 
-        {footer &&
-          contentfulModuleToComponent({
-            ...footer,
-            pagePath: '/swaps/multitoken-swap/',
-          })}
+        {footer && contentfulModuleToComponent(footer)}
       </article>
     </Layout>
   )
@@ -87,4 +83,4 @@ export const query = graphql`
   }
 `
 
-export default TokenSwapPage
+export default MultiTokenSwap
