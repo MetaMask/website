@@ -78,6 +78,10 @@ const Background = styled.div`
     }
   }
 
+  .logoShadow & {
+    box-shadow: 0px 4px 12px 0px #037DD61A;
+  }
+
   ${({ backgroundColor, theme }) =>
     backgroundColor === 'blue'
       ? `
