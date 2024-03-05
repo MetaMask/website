@@ -39,6 +39,10 @@ Wrapper.propTypes = {
 const Item = styled.div`
   display: block;
 
+  .logoMH45 & img {
+    max-height: 45px;
+  }
+
   ${({ backgroundColor }) =>
     backgroundColor
       ? `
@@ -47,11 +51,32 @@ const Item = styled.div`
       : null}
 `
 const Background = styled.div`
+  position: relative;
   padding: 32px 64px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 12px;
+  width: 100%;
+
+  .usOnlyLabel &:before {
+    position: absolute;
+    content: 'US ONLY';
+    right: 12px;
+    top: 12px;
+    background-color: #1098fc;
+    color: #fff;
+    font-size: 8px;
+    font-weight: 600;
+    padding: 0 6px;
+    border-radius: 6px;
+  }
+
+  .desktopLogoLeft & {
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      justify-content: flex-start;
+    }
+  }
 
   ${({ backgroundColor, theme }) =>
     backgroundColor === 'blue'

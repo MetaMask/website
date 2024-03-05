@@ -27,6 +27,7 @@ const ContentfulModuleContainer = props => {
       headlineAlignCenter,
       contentAlignCenter,
       headlineMarginTop0,
+      noPaddingTop,
       noPaddingBottom,
       modules,
       sectionPadding,
@@ -75,6 +76,7 @@ const ContentfulModuleContainer = props => {
       <Container
         sectionPadding={sectionPadding}
         className={classnames({
+          noPaddingTop: noPaddingTop,
           noPaddingBottom: noPaddingBottom,
           [customClass]: customClass,
           [`bg-${backgroundColor}`]: backgroundColor,
@@ -118,6 +120,7 @@ const ContentfulModuleContainer = props => {
       bgUrl={bgUrl}
       backgroundSize={backgroundSize}
       className={classnames({
+        noPaddingTop: noPaddingTop,
         noPaddingBottom: noPaddingBottom,
         [customClass]: customClass,
         [`bg-${backgroundColor}`]: backgroundColor,
@@ -288,6 +291,7 @@ ContentfulModuleContainer.propTypes = {
     contentAlignCenter: PropTypes.bool,
     headlineMarginTop0: PropTypes.bool,
     displayHeadline: PropTypes.bool,
+    noPaddingTop: PropTypes.bool,
     noPaddingBottom: PropTypes.bool,
   }),
 }

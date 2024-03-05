@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import { Wrapper, Image } from '../Logo'
+import classnames from 'classnames'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
 const ContentfulLogo = props => {
@@ -16,12 +16,11 @@ const ContentfulLogo = props => {
       cleanStyle,
       widthLogo,
       backgroundColor,
+      customClass,
       previewMode = false,
-      contentful_id,
     },
   } = props
   const { title: titleFile, description: descriptionFile } = logo || {}
-  const inspectorProps = useContentfulInspectorMode()
 
   return (
     <Wrapper
@@ -30,12 +29,9 @@ const ContentfulLogo = props => {
       child={hasModuleContainer}
       cleanStyle={cleanStyle}
       backgroundColor={backgroundColor}
-      {...(previewMode
-        ? inspectorProps({
-            entryId: contentful_id,
-            fieldId: 'logo',
-          })
-        : {})}
+      className={classnames({
+        [customClass]: customClass,
+      })}
     >
       {logo ? (
         <Image

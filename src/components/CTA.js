@@ -41,6 +41,7 @@ const CTA = props => {
     buttonSecondary,
     socialLink,
     showCaretRight,
+    hideButtonIcon,
     previewMode = false,
   } = props
 
@@ -211,7 +212,7 @@ const CTA = props => {
         buttonGradient={buttonGradient}
         eventCategory={eventCategory}
         eventLabel={eventLabel}
-        iconUrl={!delayShow ? iconBrowser : ''}
+        iconUrl={!delayShow && !hideButtonIcon ? iconBrowser : ''}
         iconPosition={['ios', 'android'].includes(keyBrowser) ? 'start' : 'end'}
         hide={delayShow}
       />
