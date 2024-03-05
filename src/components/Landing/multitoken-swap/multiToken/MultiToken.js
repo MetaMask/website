@@ -2,7 +2,7 @@ import VideoButton from '../../../PortfolioPage/Map/Sidebar/Elements/VideoButton
 import VideoModal from '../../../PortfolioPage/Map/Sidebar/Elements/VideoModal'
 import * as styles from './multi-token.module.scss'
 import React, { useState } from 'react'
-import Picture from '../picture'
+import Picture from '../../picture'
 import Btn from '../btn'
 import clsx from 'clsx'
 

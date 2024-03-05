@@ -1,7 +1,7 @@
-import React from 'react'
 import * as styles from './whySwap.module.scss'
+import Picture from '../picture'
+import React from 'react'
 import clsx from 'clsx'
-import Picture from '../multitoken-swap/picture'
 
 const whySwap = ({ bgColor }) => {
   const featureList = [
@@ -30,6 +30,7 @@ const whySwap = ({ bgColor }) => {
         'Large swaps are often subject to wild price swings when there is insufficient liquidity available on a particular DEX. When swapping with MetaMask Portfolio, orders are spread across virtually all DEXs to reduce slippage impact on the final price.',
     },
   ]
+
   return (
     <section className={clsx(styles.whySwap, [styles[bgColor]])}>
       <div className={clsx(styles.wrapper, 'wrapper')}>
@@ -50,6 +51,7 @@ const whySwap = ({ bgColor }) => {
           </div>
         </div>
       </div>
+
       <Picture
         src="/images/landing/multitoken-swap/why-swap-left.png"
         alt="Swap multiple tokens to one, in a single transaction"
@@ -57,6 +59,7 @@ const whySwap = ({ bgColor }) => {
         height={2076}
         className={styles.sideImageLeft}
       />
+
       <Picture
         src="/images/landing/multitoken-swap/why-swap-right.png"
         alt="Swap multiple tokens to one, in a single transaction"

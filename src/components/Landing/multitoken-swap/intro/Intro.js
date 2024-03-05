@@ -1,5 +1,5 @@
 import * as styles from './intro.module.scss'
-import Picture from '../picture'
+import Picture from '../../picture'
 import React from 'react'
 import Btn from '../btn'
 import clsx from 'clsx'

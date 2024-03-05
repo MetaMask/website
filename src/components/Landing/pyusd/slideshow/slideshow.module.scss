@@ -1,0 +1,103 @@
+@import '../../../../styles/mixins';
+
+.slideshow {
+  color: #24292e;
+  z-index: 10;
+  position: relative;
+  max-width: 96.3rem;
+  margin: 3.7rem auto 10.1rem;
+
+  h2 {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 80%;
+    margin-bottom: 1.6rem;
+  }
+
+  span,
+  p {
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 137.5%;
+
+    a {
+      color: #037dd6;
+      font-size: 1.6rem;
+      font-weight: 500;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .list {
+    position: relative;
+    list-style: none;
+    margin-top: 4.8rem;
+
+    .item {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+
+      &:not(:first-of-type) {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+
+    .left {
+      flex-shrink: 0;
+      width: 16.7rem;
+      margin-right: 4rem;
+    }
+
+    .right {
+      .steps {
+        font-size: 2.4rem;
+        font-weight: 700;
+        line-height: 133.333%;
+      }
+
+      p {
+        margin: 1.6rem 0;
+      }
+
+      .btn-wrapper {
+        display: flex;
+        gap: 0.6rem;
+
+        .prev,
+        .next {
+          font-size: 0;
+          color: transparent;
+          width: 9.4rem;
+          height: 3.2rem;
+
+          &.disabled {
+            cursor: default;
+            opacity: 0.7;
+          }
+        }
+
+        .prev {
+          background: url('/images/landing/pyusd/arrow-l.svg') center/1.4rem
+              auto no-repeat,
+            #037dd6;
+        }
+
+        .next {
+          background: url('/images/landing/pyusd/arrow-r.svg') center/1.4rem
+              auto no-repeat,
+            #037dd6;
+        }
+      }
+    }
+  }
+
+  @include mobile {
+  }
+}

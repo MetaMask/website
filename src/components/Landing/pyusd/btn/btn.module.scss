@@ -1,0 +1,24 @@
+@import '../../../../styles/mixins';
+
+.btn {
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.4rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
+  padding: 0 2.5rem;
+  border: 0;
+  background: #037dd6;
+  border-radius: 5rem;
+  transition: background 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+
+  &:hover {
+    background: #1565c0;
+  }
+
+  @include mobile {
+  }
+}

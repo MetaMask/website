@@ -259,7 +259,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 footerId,
                 seoId,
                 pathBuild: slug,
-                widerContainer
+                widerContainer,
               },
             })
             return
@@ -274,7 +274,20 @@ exports.createPages = async ({ graphql, actions }) => {
                 footerId,
                 seoId,
                 pathBuild: slug,
-                widerContainer
+                widerContainer,
+              },
+            })
+            return
+          }
+          if (slug === '/pyusd/') {
+            createPage({
+              path: slug,
+              component: path.resolve(`./src/templates/PYUSDLayout.js`),
+              context: {
+                footerId,
+                seoId,
+                pathBuild: slug,
+                widerContainer,
               },
             })
             return
@@ -521,16 +534,16 @@ exports.onPostBuild = ({ graphql, store, pathPrefix, reporter }) => {
 
 exports.onCreateWebpackConfig = ({ stage, actions, getConfig, plugins }) => {
   if (stage === 'build-javascript' || stage === 'develop') {
-    const config = getConfig();
+    const config = getConfig()
     const miniCss = config.plugins.find(
-      (plugin) => plugin.constructor.name === 'MiniCssExtractPlugin'
-    );
+      plugin => plugin.constructor.name === 'MiniCssExtractPlugin'
+    )
     if (miniCss) {
-      miniCss.options.ignoreOrder = true;
+      miniCss.options.ignoreOrder = true
     }
-    actions.replaceWebpackConfig(config);
+    actions.replaceWebpackConfig(config)
     actions.setWebpackConfig({
       plugins: [plugins.provide({ process: 'process/browser' })],
-    });
+    })
   }
 }
