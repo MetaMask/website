@@ -983,6 +983,7 @@ export const ContentfulSeoFields = graphql`
         content
       }
     }
+    canonicalUrl
     featuredImage {
       file {
         url
