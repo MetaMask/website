@@ -997,6 +997,10 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15;
   background-color: #f9f9f9;
 }
 
+.bg-blue {
+  background-color: #75BFF8;
+}
+
 .bg-darkGray {
   background-color: #6a737d;
   color: #fff;
@@ -1148,6 +1152,9 @@ body.dark-mode {
   }
   .bg-ghostWhite {
     background-color: #121212;
+  }
+  .bg-blue {
+    background-color: #393e46;
   }
   .bg-dark {
     background-color: #393e46;
@@ -1322,8 +1329,20 @@ body.dark-mode {
       }
     }
   }
+  &.black-check > dt:before {
+    background-color: #fff;
+    color: #000;
+  }
   &.dt-normal > dt {
     font-weight: 400;
+  }
+  &.dl-sell-crypto > dt {
+    font-size: 12px;
+    line-height: 2.0;
+
+    &:before {
+      margin-top: 5px;
+    }
   }
   &.dt-align-start > dt {
     align-items: flex-start;

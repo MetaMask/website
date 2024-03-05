@@ -21,6 +21,7 @@ const ContentfulCard = props => {
       layoutType,
       layoutSize,
       hubSpotForm,
+      video,
       contentful_id,
     },
   } = props
@@ -43,6 +44,7 @@ const ContentfulCard = props => {
       layoutSize={layoutSize}
       cta={cta}
       hubSpotForm={hubSpotForm}
+      embed={video}
       previewMode={previewMode}
       contentfulId={contentful_id}
     />

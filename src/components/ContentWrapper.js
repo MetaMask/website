@@ -80,6 +80,10 @@ const ContainerInner = styled.div`
   max-width: var(--container-width);
   width: 100%;
 
+  .normalContainer & {
+    max-width: 992px;
+  }
+
   .scrolled.custom-newsHero & {
     max-width: calc(992px + 200px);
   }

@@ -37,6 +37,13 @@ export const Section = styled.div`
     padding-bottom: 48px;
   }
 
+  &.sectionPb48 {
+    padding-bottom: 48px;
+  }
+  &.sectionPt48 {
+    padding-top: 48px;
+  }
+
   &.noPaddingBottom, &.custom-noPaddingBottom {
     padding-bottom: 0 !important;
   }
