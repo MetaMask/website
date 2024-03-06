@@ -3,11 +3,6 @@
 .intro {
   margin-top: 4rem;
 
-  .left,
-  .right {
-    flex-shrink: 0;
-  }
-
   .left {
     color: #6a737d;
     line-height: 140.625%;
@@ -15,7 +10,7 @@
 
     h2 {
       color: #272727;
-      font-size: 5rem;
+      font-size: 4rem;
       font-weight: 700;
       line-height: 125.6%;
     }
@@ -54,8 +49,8 @@
   }
 
   .right {
-    width: 72rem;
-    margin-left: 2rem;
+    width: 76.5rem;
+    margin-left: 10.7rem;
   }
 
   @include mobile {
