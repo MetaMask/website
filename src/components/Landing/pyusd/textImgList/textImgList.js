@@ -5,11 +5,17 @@ import React from 'react'
 const TextImgList = ({ items, sectionId }) => {
   return (
     <section id={sectionId} className={styles.textImgList}>
-      <img
-        src="/images/landing/pyusd/background.svg"
-        alt="background"
-        className={styles.background}
-      />
+      <picture>
+        <source
+          media="(max-width: 750px)"
+          srcset="/images/landing/pyusd/background-mobile.svg"
+        ></source>
+        <img
+          src="/images/landing/pyusd/background.svg"
+          alt="background"
+          className={styles.background}
+        />
+      </picture>
 
       <ul className={`${styles.list} wrapper`}>
         {items.map(({ title, text, img }, index) => (

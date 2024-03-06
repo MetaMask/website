@@ -11,7 +11,9 @@ const Header = ({ title, btnLabel, btnLink }) => {
         </a>
       </h1>
 
-      <Btn href={btnLink}>{btnLabel}</Btn>
+      <Btn href={btnLink} className={styles.btn}>
+        {btnLabel}
+      </Btn>
     </header>
   )
 }

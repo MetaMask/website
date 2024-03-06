@@ -16,7 +16,7 @@ const PYUSDLayout = ({ data, pageContext }) => {
 
   useEffect(() => {
     document.documentElement.classList.add(styles.isLanding)
-    // document.documentElement.style.setProperty('--desktop-mockup-width', '1920')
+    document.documentElement.style.setProperty('--mobile-mockup-width', '375')
     return () => document.documentElement.classList.remove(styles.isLanding)
   })
 

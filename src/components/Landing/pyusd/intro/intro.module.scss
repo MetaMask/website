@@ -54,5 +54,31 @@
   }
 
   @include mobile {
+    margin-top: 0.5rem;
+
+    :global(.wrapper) {
+      flex-flow: column-reverse nowrap;
+    }
+
+    .left {
+      width: 100%;
+      margin-top: 1.7rem;
+
+      .btn-wrapper {
+        text-align: center;
+        align-items: stretch;
+        width: 100%;
+        margin-top: 3.2rem;
+
+        .terms-link {
+          margin-top: 1.2rem;
+        }
+      }
+    }
+
+    .right {
+      width: 100%;
+      margin-left: 0;
+    }
   }
 }

@@ -12,7 +12,7 @@ const TitleBtn = ({ title, btnLabel, btnLink, alternativeLink, sectionId }) => {
         hrefMMinstalled={alternativeLink}
         target="_blank"
         rel="noopener noreferrer"
-        className={styles.connect}
+        className={styles.btn}
       >
         {btnLabel}
       </Btn>

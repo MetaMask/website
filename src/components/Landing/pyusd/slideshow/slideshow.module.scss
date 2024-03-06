@@ -87,17 +87,64 @@
           background: url('/images/landing/pyusd/arrow-l.svg') center/1.4rem
               auto no-repeat,
             #037dd6;
+
+          &:hover {
+            background: url('/images/landing/pyusd/arrow-l.svg') center/1.4rem
+                auto no-repeat,
+              #1565c0;
+          }
         }
 
         .next {
           background: url('/images/landing/pyusd/arrow-r.svg') center/1.4rem
               auto no-repeat,
             #037dd6;
+
+          &:hover {
+            background: url('/images/landing/pyusd/arrow-r.svg') center/1.4rem
+                auto no-repeat,
+              #1565c0;
+          }
         }
       }
     }
   }
 
   @include mobile {
+    max-width: 34.3rem;
+    margin: 0 auto 10rem;
+
+    h2 {
+      font-size: 3rem;
+      line-height: 106.667%;
+    }
+
+    .list {
+      margin-top: 3.2rem;
+
+      .item {
+        flex-flow: column nowrap;
+        align-items: center;
+      }
+
+      .left {
+        margin-right: 0;
+      }
+
+      .right {
+        margin-top: 3.2rem;
+
+        .btn-wrapper {
+          justify-content: space-between;
+          gap: 0.8rem;
+
+          .prev,
+          .next {
+            width: 16.8rem;
+            height: 4.5rem;
+          }
+        }
+      }
+    }
   }
 }

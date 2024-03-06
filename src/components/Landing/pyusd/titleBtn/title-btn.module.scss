@@ -19,5 +19,15 @@
   }
 
   @include mobile {
+    width: 34.3rem;
+    margin: 10rem auto;
+
+    h2 {
+      font-size: 4rem;
+    }
+
+    .btn {
+      width: 100%;
+    }
   }
 }

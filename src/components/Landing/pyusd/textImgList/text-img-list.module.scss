@@ -92,5 +92,63 @@
   }
 
   @include mobile {
+    margin-top: 0;
+    padding: 10rem 0;
+
+    .list {
+      width: 34.3rem;
+
+      li {
+        flex-flow: column-reverse nowrap;
+
+        &:nth-of-type(1) {
+          .right {
+            width: 16.5rem;
+            margin-right: 0;
+          }
+        }
+
+        &:nth-of-type(2) {
+          flex-flow: column-reverse nowrap;
+          margin-top: 8rem;
+
+          .left {
+            h3 {
+              width: 100%;
+            }
+          }
+
+          .right {
+            margin-right: 14.8rem;
+          }
+        }
+
+        &:nth-of-type(3) {
+          margin-top: 4.4rem;
+
+          .left {
+            h3 {
+              width: 100%;
+            }
+          }
+
+          .right {
+            width: 17.6rem;
+            margin-right: 0;
+          }
+        }
+
+        .left {
+          width: 100%;
+
+          h3 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            line-height: 133.333%;
+            margin-top: 4.8rem;
+          }
+        }
+      }
+    }
   }
 }

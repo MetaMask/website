@@ -88,5 +88,13 @@ html.is-landing {
         }
       }
     }
+
+    .page-pyusd {
+      .wrapper {
+        @include mobile {
+          max-width: 34.3rem;
+        }
+      }
+    }
   }
 }

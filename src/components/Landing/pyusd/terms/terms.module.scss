@@ -23,5 +23,7 @@
   }
 
   @include mobile {
+    max-width: 34.3rem;
+    margin: 10rem auto;
   }
 }

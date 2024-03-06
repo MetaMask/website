@@ -1,6 +1,7 @@
 @import '../../../../styles/mixins';
 
 .header {
+  align-items: center;
   justify-content: space-between;
   height: 10rem;
 
@@ -21,12 +22,10 @@
   }
 
   @include mobile {
-    // TODO
-    height: 10rem;
+    justify-content: center;
 
-    h1 {
-      width: 17rem;
-      height: 3.1rem;
+    .btn {
+      display: none;
     }
   }
 }
