@@ -41,6 +41,7 @@ const Item = styled.div`
 
   .logoMH45 & img {
     max-height: 45px;
+    width: auto;
   }
 
   ${({ backgroundColor }) =>
@@ -72,8 +73,9 @@ const Background = styled.div`
     border-radius: 6px;
   }
 
-  .desktopLogoLeft & {
-    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+  .cashOutMethod & {
+    padding: 32px 24px;
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
       justify-content: flex-start;
     }
   }
