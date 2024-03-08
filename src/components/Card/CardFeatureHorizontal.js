@@ -7,6 +7,7 @@ import Link from '../Link'
 import CTAAngleIcon from './CTAAngleIcon'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import GatsbyBackgroundImage from '../GatsbyBackgroundImage'
+import ParseMD from '../ParseMD'
 
 /**
  * @name Card
@@ -31,6 +32,7 @@ const StyledCard = props => {
     contentAlignment,
     hubSpotForm,
     cta,
+    embed,
     customClass,
     previewMode = false,
   } = props
@@ -62,11 +64,16 @@ const StyledCard = props => {
               />
             </ImageWrapper>
           ) : null}
+          {embed ? (
+            <EmbedWrapper>
+              {contentfulModuleToComponent({ ...embed, previewMode })}
+            </EmbedWrapper>
+          ) : null}
           <Inner>
             {title ? <Title>{title}</Title> : null}
             {description ? (
               <Description>
-                <div dangerouslySetInnerHTML={{ __html: description }}></div>
+                <ParseMD>{description}</ParseMD>
               </Description>
             ) : null}
             {hubSpotForm ? (
@@ -121,6 +128,15 @@ const CardInner = styled(Link)`
   `
       : null}
 
+  &.tabletBreak {
+    ${({ theme }) =>
+      `
+      @media (max-width: ${theme.device.tabletMediaMax}){
+        flex-direction: column;
+      }
+    `}
+  }
+
   ${({ theme }) =>
     `
   @media (max-width: ${theme.device.mobileMediaMax}){
@@ -166,6 +182,10 @@ const Inner = styled.div`
   width: 100%;
   padding: 44px 32px;
 
+  .cardPadding24 & {
+    padding: 24px;
+  }
+
   ${({ theme }) =>
     `
   @media (max-width: ${theme.device.mobileMediaMax}){
@@ -194,6 +214,10 @@ const Title = styled.div`
 
 const Description = styled.div`
   display: block;
+
+  ul {
+    text-align: left;
+  }
 
   p:last-child {
     margin-bottom: 0;
@@ -236,5 +260,17 @@ const CTA = styled.div`
       width: 100%;
       margin: 0 0 16px 0;
     }
+  }
+`
+
+const EmbedWrapper = styled.div`
+  flex-grow: 1;
+  background-color: #f2f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: centers;
+
+  & > div {
+    padding: 24px;
   }
 `

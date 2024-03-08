@@ -18,6 +18,7 @@ export const ContentfulLogoFields = gql`
     newTab
     displayTitle
     backgroundColor
+    customClass
   }
 `
 
@@ -247,6 +248,7 @@ export const ContentfulCtaFields = gql`
     newTab
     buttonDisplay
     buttonGradient
+    hideButtonIcon
     buttonSecondary
     fontSize
     eventCategory
@@ -259,6 +261,9 @@ export const ContentfulCtaFields = gql`
     }
     downloadBrowsers
     showCaretRight
+    mobileCta {
+      ...ContentfulCtaFields
+    }
     alternativeCta {
       ...ContentfulCtaFields
     }
@@ -392,6 +397,9 @@ export const ContentfulCardFields = gql`
     customClass
     hubSpotForm(preview: true) {
       ...ContentfulHubSpotFormFields
+    }
+    video(preview: true) {
+      ...ContentfulEmbedFields
     }
     ctaCollection(preview: true) {
       items {
@@ -858,6 +866,7 @@ export const ContentfulLayoutModuleContainerFields = gql`
     headlineMarginTop0
     paddingTop
     sectionPadding
+    noPaddingTop
     noPaddingBottom
     modulesMargin
     isTab

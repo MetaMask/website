@@ -42,6 +42,7 @@ const CTA = props => {
     socialLink,
     previewMode = false,
     showCaretRight,
+    hideButtonIcon,
   } = props
 
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
@@ -211,7 +212,7 @@ const CTA = props => {
         buttonGradient={buttonGradient}
         eventCategory={eventCategory}
         eventLabel={eventLabel}
-        iconUrl={!delayShow ? iconBrowser : ''}
+        iconUrl={!delayShow && !hideButtonIcon ? iconBrowser : ''}
         iconPosition={['ios', 'android'].includes(keyBrowser) ? 'start' : 'end'}
         hide={delayShow}
       />

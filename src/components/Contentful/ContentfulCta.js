@@ -2,16 +2,22 @@ import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import { MetaMaskContext } from '../../Context/MetaMaskContextProvider'
 import React, { useContext } from 'react'
 import isEmpty from 'lodash/isEmpty'
+import { isMobile } from 'react-device-detect'
 import PropTypes from 'prop-types'
 import CTA from '../CTA'
 
 const ContentfulCta = props => {
   const { isMetaMaskInstalled } = useContext(MetaMaskContext)
 
-  const activeCta =
+  const selectedCta =
     isMetaMaskInstalled && !isEmpty(props.moduleConfig.alternativeCta)
       ? props.moduleConfig.alternativeCta
       : props.moduleConfig
+
+  let activeCta = selectedCta
+  if (isMobile && selectedCta.mobileCta) {
+    activeCta = selectedCta.mobileCta
+  }
 
   // check work with preview
   const extractBrowsers = item =>
@@ -51,6 +57,7 @@ const ContentfulCta = props => {
       buttonSecondary={activeCta.buttonSecondary}
       socialLink={activeCta.socialLink}
       showCaretRight={activeCta.showCaretRight}
+      hideButtonIcon={activeCta.hideButtonIcon}
       previewMode={activeCta.previewMode}
     />
   )
@@ -84,6 +91,7 @@ ContentfulCta.propTypes = {
     hubSpotForm: PropTypes.object,
     embedHTML: PropTypes.object,
     buttonSecondary: PropTypes.bool,
+    hideButtonIcon: PropTypes.bool,
     previewMode: PropTypes.bool,
   }),
 }

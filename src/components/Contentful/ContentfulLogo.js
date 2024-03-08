@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 import { Wrapper, Image } from '../Logo'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
@@ -16,6 +17,7 @@ const ContentfulLogo = props => {
       widthLogo,
       backgroundColor,
       previewMode = false,
+      customClass,
     },
   } = props
   const { title: titleFile, description: descriptionFile } = logo || {}
@@ -27,6 +29,9 @@ const ContentfulLogo = props => {
       child={hasModuleContainer}
       cleanStyle={cleanStyle}
       backgroundColor={backgroundColor}
+      className={classnames({
+        [customClass]: customClass,
+      })}
     >
       {logo ? (
         <Image
