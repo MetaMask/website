@@ -228,6 +228,12 @@ const Wrapper = styled.div`
     margin: 0 auto 40px;
     line-height: 24px;
   }
+
+  &#sell-crypto-transact-providers {
+    @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+      padding-top: 0 !important;
+    }
+  }
 `
 const Inner = styled.div`
   display: block;
