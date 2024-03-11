@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import flatMapDeep from 'lodash/flatMapDeep'
@@ -48,6 +48,7 @@ const ContentfulLayout = props => {
     ...rest
   } = props
 
+  const [locale, setLocale] = useState('en-US')
   const location = useLocation()
   const pathname = location.pathname
   let partnerId = '451393'
@@ -70,16 +71,26 @@ const ContentfulLayout = props => {
     return isArray(mods) ? mods.map(n => n.node) : mods
   }
 
+  // filter modules by locale
+  const filterModulesByLocale = (modules, locale) => {
+    return modules.filter(module => {
+      if (!module || !module.node_locale) return true // Keep modules without locale
+      return module.node_locale === locale
+    })
+  }
+
   // extract all top-level page modules from GraphQL and return in a flat array for rendering
   const pageModules = flatMapDeep(
     [H, F, FS, RT, LMC, MC, C, CTA, FAQ, HTML, L, HF, FWC],
     getNodes
   )
 
+  const filteredPageModules = filterModulesByLocale(pageModules, locale)
+
   // Take unordered list of data from pageModules and reorder
   // based on contentful_id sequence in pageContext.modules
   // returned by CMS to maintain page structure
-  const orderedPageModules = pageModules.reduce((acc, node) => {
+  const orderedPageModules = filteredPageModules.reduce((acc, node) => {
     if (!node || !node.contentful_id) return acc
     const positionInPage = modules.indexOf(node.contentful_id)
     acc.splice(positionInPage, 1, node) // remove empty element and replace with module data
@@ -94,6 +105,10 @@ const ContentfulLayout = props => {
     category = category ? capitalize(category[1]) : 'Latest'
     seoData.pageTitle = `${seoData.pageTitle} | ${category} | MetaMask`
     seoData.pageDescription = `${seoData.pageDescription} | ${category}`
+  }
+
+  const handleLocaleChange = newLocale => {
+    setLocale(newLocale)
   }
 
   return (
@@ -115,8 +130,16 @@ const ContentfulLayout = props => {
           ]}
         />
       )}
+
+      <select value={locale} onChange={e => handleLocaleChange(e.target.value)}>
+        <option value="en-US">English</option>
+        <option value="de">DE</option>
+        <option value="es">ES</option>
+        <option value="ar">AR</option>
+      </select>
+
       {allModules.map(module =>
-        contentfulModuleToComponent({ ...module, isFaq: isFaqLayout })
+        contentfulModuleToComponent({ ...module, isFaq: isFaqLayout }, locale)
       )}
       <script
         type="text/javascript"

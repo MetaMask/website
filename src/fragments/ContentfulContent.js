@@ -62,6 +62,7 @@ export const ContentfulLayoutFooterFields = graphql`
 
 export const ContentfulLayoutHeroFields = graphql`
   fragment ContentfulLayoutHeroFields on ContentfulLayoutHero {
+    node_locale
     contentful_id
     internal {
       type
@@ -162,6 +163,7 @@ export const ContentfulLayoutHeroFields = graphql`
 
 export const ContentfulLayoutFeatureFields = graphql`
   fragment ContentfulLayoutFeatureFields on ContentfulLayoutFeature {
+    node_locale
     contentful_id
     internal {
       type
@@ -270,6 +272,7 @@ export const ContentfulLayoutFeatureFields = graphql`
 
 export const ContentfulLayoutFeatureSliderFields = graphql`
   fragment ContentfulLayoutFeatureSliderFields on ContentfulLayoutFeatureSlider {
+    node_locale
     contentful_id
     internal {
       type
@@ -302,6 +305,7 @@ export const ContentfulLayoutFeatureSliderFields = graphql`
 
 export const ContentfulFeatureSliderItemFields = graphql`
   fragment ContentfulFeatureSliderItemFields on ContentfulFeatureSliderItem {
+    node_locale
     contentful_id
     internal {
       type
@@ -335,6 +339,7 @@ export const ContentfulFeatureSliderItemFields = graphql`
 
 export const ContentfulTimelineFields = graphql`
   fragment ContentfulTimelineFields on ContentfulTimeline {
+    node_locale
     contentful_id
     internal {
       type
@@ -365,6 +370,7 @@ export const ContentfulTimelineFields = graphql`
 
 export const ContentfulLayoutFullWidthCtaFields = graphql`
   fragment ContentfulLayoutFullWidthCtaFields on ContentfulLayoutFullWidthCta {
+    node_locale
     contentful_id
     internal {
       type
@@ -424,6 +430,7 @@ export const ContentfulLayoutFullWidthCtaFields = graphql`
 
 export const ContentfulLayoutModuleContainerFields = graphql`
   fragment ContentfulLayoutModuleContainerFields on ContentfulLayoutModuleContainer {
+    node_locale
     internal {
       type
     }
@@ -493,6 +500,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
 
 export const ContentfulConsenSysResourcesFields = graphql`
   fragment ContentfulConsenSysResourcesFields on ContentfulConsenSysResources {
+    node_locale
     contentful_id
     internal {
       type
@@ -507,6 +515,7 @@ export const ContentfulConsenSysResourcesFields = graphql`
 
 export const ContentfulCardFields = graphql`
   fragment ContentfulCardFields on ContentfulCard {
+    node_locale
     contentful_id
     internal {
       type
@@ -580,6 +589,7 @@ export const ContentfulCardFields = graphql`
 
 export const ContentfulCtaBaseFields = graphql`
   fragment ContentfulCtaBaseFields on ContentfulCta {
+    node_locale
     contentful_id
     fontSize
     ctaLink
@@ -625,6 +635,7 @@ export const ContentfulCtaFields = graphql`
 
 export const ContentfulHubSpotFormFields = graphql`
   fragment ContentfulHubSpotFormFields on ContentfulHubSpotForm {
+    node_locale
     contentful_id
     internal {
       type
@@ -642,6 +653,7 @@ export const ContentfulHubSpotFormFields = graphql`
 
 export const ContentfulEmbedFields = graphql`
   fragment ContentfulEmbedFields on ContentfulEmbed {
+    node_locale
     contentful_id
     internal {
       type
@@ -668,6 +680,7 @@ export const ContentfulEmbedFields = graphql`
 
 export const ContentfulFaqFields = graphql`
   fragment ContentfulFaqFields on ContentfulFaq {
+    node_locale
     contentful_id
     internal {
       type
@@ -685,6 +698,7 @@ export const ContentfulFaqFields = graphql`
 
 export const ContentfulLogoFields = graphql`
   fragment ContentfulLogoFields on ContentfulLogo {
+    node_locale
     contentful_id
     internal {
       type
@@ -731,6 +745,7 @@ export const ContentfulLogoFields = graphql`
 
 export const ContentfulModuleContainerFields = graphql`
   fragment ContentfulModuleContainerFields on ContentfulModuleContainer {
+    node_locale
     contentful_id
     internal {
       type
@@ -859,6 +874,7 @@ export const ContentfulModuleContainerFields = graphql`
 
 export const ContentfulNewsAuthorFields = graphql`
   fragment ContentfulNewsAuthorFields on ContentfulNewsAuthor {
+    node_locale
     contentful_id
     internal {
       type
@@ -894,6 +910,7 @@ export const ContentfulNewsAuthorFields = graphql`
 
 export const ContentfulNewsFields = graphql`
   fragment ContentfulNewsFields on ContentfulNews {
+    node_locale
     contentful_id
     internal {
       type
@@ -950,6 +967,7 @@ export const ContentfulNewsCategoryFields = graphql`
 
 export const ContentfulPopupAnnouncementFields = graphql`
   fragment ContentfulPopupAnnouncementFields on ContentfulPopupAnnouncement {
+    node_locale
     contentful_id
     internal {
       type
@@ -971,6 +989,7 @@ export const ContentfulPopupAnnouncementFields = graphql`
 
 export const ContentfulRichTextFields = graphql`
   fragment ContentfulRichTextFields on ContentfulRichText {
+    node_locale
     contentful_id
     internal {
       type
@@ -988,6 +1007,7 @@ export const ContentfulRichTextFields = graphql`
 
 export const ContentfulSeoFields = graphql`
   fragment ContentfulSeoFields on ContentfulSeo {
+    node_locale
     contentful_id
     internal {
       type
