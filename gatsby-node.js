@@ -479,7 +479,12 @@ exports.onPostBuild = ({ graphql, store, pathPrefix, reporter }) => {
             })
           },
           filterPages: ({ path }) => {
-            const excludePages = [`/dev-404-page`, `/404`, `/404.html`]
+            const excludePages = [
+              `/pyusd`,
+              `/dev-404-page`,
+              `/404`,
+              `/404.html`,
+            ]
             return !excludePages.some(exclude => path.startsWith(exclude))
           },
           serializer: ({ path }) => ({

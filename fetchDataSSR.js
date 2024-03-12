@@ -50,6 +50,7 @@ async function fetchDevChangeLog(token) {
       if (site.status === 'fulfilled' && site.value?.status === 200) {
         switch (index) {
           case 0:
+            break;
           case 1:
             data.push({
               title: siteData[index].title,
