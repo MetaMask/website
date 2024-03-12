@@ -463,6 +463,7 @@ export const ContentfulLayoutModuleContainerFields = graphql`
     headlineMarginTop0
     paddingTop
     sectionPadding
+    noPaddingTop
     noPaddingBottom
     modulesMargin
     isTab
@@ -540,6 +541,9 @@ export const ContentfulCardFields = graphql`
     hubSpotForm {
       ...ContentfulHubSpotFormFields
     }
+    video {
+      ...ContentfulEmbedFields
+    }
     backgroundColor
     backgroundImage {
       title
@@ -585,6 +589,7 @@ export const ContentfulCtaBaseFields = graphql`
     buttonDisplay
     buttonGradient
     buttonSecondary
+    hideButtonIcon
     eventLabel
     eventCategory
     hubSpotForm {
@@ -606,6 +611,9 @@ export const ContentfulCtaBaseFields = graphql`
 export const ContentfulCtaFields = graphql`
   fragment ContentfulCtaFields on ContentfulCta {
     ...ContentfulCtaBaseFields
+    mobileCta {
+      ...ContentfulCtaBaseFields
+    }
     alternativeCta {
       ...ContentfulCtaBaseFields
     }
@@ -714,6 +722,7 @@ export const ContentfulLogoFields = graphql`
     displayTitle
     widthLogo
     backgroundColor
+    customClass
   }
 `
 
@@ -983,6 +992,7 @@ export const ContentfulSeoFields = graphql`
         content
       }
     }
+    canonicalUrl
     featuredImage {
       file {
         url

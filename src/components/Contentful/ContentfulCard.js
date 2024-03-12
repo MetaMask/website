@@ -21,6 +21,7 @@ const ContentfulCard = props => {
       layoutType,
       layoutSize,
       hubSpotForm,
+      video,
     },
   } = props
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -41,6 +42,7 @@ const ContentfulCard = props => {
       layoutType={layoutType}
       layoutSize={layoutSize}
       cta={cta}
+      embed={video}
       hubSpotForm={hubSpotForm}
       previewMode={previewMode}
     />

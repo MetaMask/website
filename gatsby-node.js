@@ -425,6 +425,11 @@ exports.onPostBuild = ({ graphql, store, pathPrefix, reporter }) => {
         slug
       }
     }
+    allContentfulLayoutNonCanonical: allContentfulLayout(filter: {seo: {canonicalUrl: {ne: null}}}) {
+      nodes {
+        slug
+      }
+    }
     allContentfulNews(filter: {isPrivate: {eq: false}}) {
       nodes {
         title
@@ -464,11 +469,15 @@ exports.onPostBuild = ({ graphql, store, pathPrefix, reporter }) => {
           resolvePages: ({
             allSitePage,
             allPrivateContentfulLayout,
+            allContentfulLayoutNonCanonical,
             allPrivateContentfulNews,
             allContentfulNews,
           }) => {
             let privatePages = ['/preview/', '/news/latest/']
             allPrivateContentfulLayout.nodes.forEach(page => {
+              privatePages.push(page.slug)
+            })
+            allContentfulLayoutNonCanonical.nodes.forEach(page => {
               privatePages.push(page.slug)
             })
             allContentfulNews.nodes.forEach(page => {
