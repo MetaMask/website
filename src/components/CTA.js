@@ -15,6 +15,7 @@ import classnames from 'classnames'
 import get from 'lodash/get'
 import { gsap } from 'gsap'
 import useIsChromium from '../lib/utils/isChromium'
+import generateUUID from '../lib/utils/helpers'
 
 const CTA = props => {
   const {
@@ -74,6 +75,16 @@ const CTA = props => {
     setShowPopup(false)
   }
   const handleCustomClick = e => {
+    if (link.includes('metamask.app.link')) {
+      e.preventDefault()
+      const uuid = generateUUID()
+      window.dataLayer.push({
+        event: 'all_clicks',
+        unique_attribution_id: uuid,
+      })
+      window.open(`${link}?unique_attribution_id=${uuid}`, '_blank')
+      return
+    }
     if (hubSpotForm) {
       e.preventDefault()
       setShowPopup(true)

@@ -81,7 +81,7 @@ const Background = styled.div`
   }
 
   .logoShadow & {
-    box-shadow: 0px 4px 12px 0px #037DD61A;
+    box-shadow: 0px 4px 12px 0px #037dd61a;
   }
 
   ${({ backgroundColor, theme }) =>
