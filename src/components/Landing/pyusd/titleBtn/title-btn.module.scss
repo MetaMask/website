@@ -1,0 +1,33 @@
+@import '../../../../styles/mixins';
+
+.title-btn {
+  z-index: 10;
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 74.3rem;
+  margin: 20rem auto 16rem;
+
+  h2 {
+    color: #272727;
+    font-size: 5rem;
+    font-weight: 700;
+    line-height: 125.6%;
+    margin-bottom: 3.2rem;
+  }
+
+  @include mobile {
+    width: 34.3rem;
+    margin: 10rem auto;
+
+    h2 {
+      font-size: 4rem;
+    }
+
+    .btn {
+      width: 100%;
+    }
+  }
+}

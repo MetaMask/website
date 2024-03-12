@@ -6,7 +6,7 @@ $desktop-mockup-width: 1400 !default;
 $mobile-mockup-width: 750 !default;
 
 html.is-landing {
-  font-size: math.div(1000vw, $desktop-mockup-width);
+  font-size: calc(1000vw / var(--desktop-mockup-width, $desktop-mockup-width));
   font-family: 'Euclid Circular B', sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -26,14 +26,16 @@ html.is-landing {
   --light-pink: #f1b3e7;
   --black: #000;
   --white: #fff;
-  --orange: #FF7B00;
+  --orange: #ff7b00;
 
   @include mobile {
-    font-size: math.div(1000vw, $mobile-mockup-width);
+    font-size: calc(1000vw / var(--mobile-mockup-width, $mobile-mockup-width));
   }
 
   @include desktop {
-    font-size: math.div(10px * 1920, $desktop-mockup-width);
+    font-size: calc(
+      (10px * 1920) / var(--desktop-mockup-width, $desktop-mockup-width)
+    );
   }
 
   * {
@@ -72,16 +74,25 @@ html.is-landing {
       }
     }
 
+    .page-pyusd,
     .page-multitoken-swap,
     .page-swap-with-portfolio {
       .wrapper {
         display: flex;
         align-items: center;
-        max-width: 127.5rem;
+        max-width: 128rem;
         margin: 0 auto;
 
         @include mobile {
           max-width: 69rem;
+        }
+      }
+    }
+
+    .page-pyusd {
+      .wrapper {
+        @include mobile {
+          max-width: 34.3rem;
         }
       }
     }

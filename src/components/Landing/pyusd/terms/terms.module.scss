@@ -1,0 +1,29 @@
+@import '../../../../styles/mixins';
+
+.terms {
+  z-index: 10;
+  position: relative;
+  max-width: 96.3rem;
+  margin: 16rem auto;
+
+  p {
+    color: #24292e;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 130%;
+
+    a {
+      color: currentColor;
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  @include mobile {
+    max-width: 34.3rem;
+    margin: 10rem auto;
+  }
+}

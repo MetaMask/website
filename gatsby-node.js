@@ -259,7 +259,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 footerId,
                 seoId,
                 pathBuild: slug,
-                widerContainer
+                widerContainer,
               },
             })
             return
@@ -274,7 +274,20 @@ exports.createPages = async ({ graphql, actions }) => {
                 footerId,
                 seoId,
                 pathBuild: slug,
-                widerContainer
+                widerContainer,
+              },
+            })
+            return
+          }
+          if (slug === '/pyusd/') {
+            createPage({
+              path: slug,
+              component: path.resolve(`./src/templates/PYUSDLayout.js`),
+              context: {
+                footerId,
+                seoId,
+                pathBuild: slug,
+                widerContainer,
               },
             })
             return
@@ -477,7 +490,12 @@ exports.onPostBuild = ({ graphql, store, pathPrefix, reporter }) => {
             })
           },
           filterPages: ({ path }) => {
-            const excludePages = [`/dev-404-page*`, `/404*`, `/news/*`]
+            const excludePages = [
+              `/pyusd`,
+              `/dev-404-page*`,
+              `/404*`,
+              `/news/*`,
+            ]
             return !excludePages.some(exclude => minimatch(path, exclude))
           },
           serializer: ({ path }) => ({
