@@ -11,7 +11,7 @@ const FeatureVideo = ({
   title,
   description,
 }) => {
-  const videoUrl = 'https://www.youtube.com/embed/' + youtubeCode
+  const videoUrl = 'https://www.youtube-nocookie.com/embed/' + youtubeCode
   const thumbnailUrl = `https://i3.ytimg.com/vi/${youtubeCode}/maxresdefault.jpg`
   const [videoEmbedUrl, setVideoEmbedUrl] = useState(null)
 
