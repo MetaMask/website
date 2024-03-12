@@ -63,7 +63,7 @@ const PYUSDLayout = ({ data, pageContext }) => {
               title:
                 'PayPal USD is designed to maintain a stable $1 USD value.',
               text:
-                'It’s backed by dollar deposits, US treasuries, and cash equivalents. Send it to friends in the US on PayPal without fees. Or send to Ethereum wallet addresses that accept PYUSD. Check out with crypto at millions of online stores.',
+                'It’s backed by dollar deposits, US treasuries, and cash equivalents. PYUSD adopts existing blockchain token standards and is compatible with the web3 ecosystem.',
               img: {
                 src: '/images/landing/pyusd/list-2.png',
                 width: 829,
