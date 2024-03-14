@@ -294,6 +294,14 @@ const HeaderElement = styled.header`
   &.sticky {
     position: sticky;
   }
+
+  html:lang(ar) & {
+    direction: ltr;
+
+    * {
+      direction: ltr;
+    }
+  }
 `
 const Announcement = styled.div`
   margin: -24px -20px 16px -20px;

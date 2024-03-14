@@ -108,6 +108,14 @@ const ContentfulLayout = props => {
   }
 
   const handleLocaleChange = newLocale => {
+    document.documentElement.lang = newLocale
+
+    if (newLocale === 'ar') {
+      document.documentElement.dir = 'rtl'
+    } else {
+      document.documentElement.dir = 'ltr'
+    }
+
     setLocale(newLocale)
   }
 
@@ -131,11 +139,16 @@ const ContentfulLayout = props => {
         />
       )}
 
-      <select value={locale} onChange={e => handleLocaleChange(e.target.value)}>
+      <select
+        value={locale}
+        onChange={e => handleLocaleChange(e.target.value)}
+        style={{ zIndex: 9999, position: 'fixed', top: 0, right: 0 }}
+      >
         <option value="en-US">English</option>
-        <option value="de">DE</option>
-        <option value="es">ES</option>
-        <option value="ar">AR</option>
+        <option value="ar">Arabic</option>
+        <option value="de">German</option>
+        <option value="es">Spanish</option>
+        <option value="zh-CN">Chinese</option>
       </select>
 
       {allModules.map(module =>

@@ -1,3 +1,13 @@
+html {
+  &:lang(ar) {
+    direction: rtl;
+
+    * {
+      direction: rtl;
+    }
+  }
+}
+
 @font-face {
   font-family: 'icomoon';
   src: url('/fonts/icon/icomoon.eot?araoaz');
@@ -998,7 +1008,7 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15;
 }
 
 .bg-blue {
-  background-color: #75BFF8;
+  background-color: #75bff8;
 }
 
 .bg-darkGray {
