@@ -123,8 +123,17 @@ StyledFooter.propTypes = {
 const FooterContainer = styled.div`
   width: 100%;
   background-color: #e9ebee;
+
   body.dark-mode & {
     background-color: #3c444b;
+  }
+
+  html:lang(ar) & {
+    direction: ltr;
+
+    * {
+      direction: ltr;
+    }
   }
 `
 
