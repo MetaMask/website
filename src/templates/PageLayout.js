@@ -15,6 +15,7 @@ import {
 import Context from '../Context/ContextPage'
 import ContextClientSide from '../Context/ContextClientSide'
 import queryString from 'query-string'
+import generateUUID from '../lib/utils/helpers'
 
 /**
  * @name PageLayout
@@ -126,6 +127,23 @@ const PageLayout = props => {
       }
 
       gsap.registerPlugin(ScrollToPlugin)
+    }
+  }, [])
+
+  useEffect(() => {
+    const handleClickDl = event => {
+      if (event.target.closest('.deeplink')) {
+        const uuid = generateUUID()
+        window.dataLayer = window.dataLayer || []
+        window.dataLayer.push({
+          event: 'all_clicks',
+          unique_attribution_id: uuid,
+        })
+      }
+    }
+    document.addEventListener('click', handleClickDl, true)
+    return () => {
+      document.removeEventListener('click', handleClickDl, true)
     }
   }, [])
 
