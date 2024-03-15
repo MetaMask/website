@@ -75,16 +75,6 @@ const CTA = props => {
     setShowPopup(false)
   }
   const handleCustomClick = e => {
-    if (link.includes('metamask.app.link')) {
-      e.preventDefault()
-      const uuid = generateUUID()
-      window.dataLayer.push({
-        event: 'all_clicks',
-        unique_attribution_id: uuid,
-      })
-      window.open(`${link}?unique_attribution_id=${uuid}`, '_blank')
-      return
-    }
     if (hubSpotForm) {
       e.preventDefault()
       setShowPopup(true)
@@ -215,7 +205,9 @@ const CTA = props => {
         size={buttonSize}
         link={link}
         text={text}
-        className={keyBrowser}
+        className={classnames(keyBrowser, {
+          deeplink: link.includes('metamask.app.link'),
+        })}
         newTab={newTab}
         color={buttonSecondary ? 'secondary' : color}
         customClick={handleCustomClick}
