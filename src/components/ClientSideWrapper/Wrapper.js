@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react'
+import MetaMaskContextProvider from '../../Context/MetaMaskContextProvider'
 import ContextClientSide from '../../Context/ContextClientSide'
 import '@contentful/live-preview/style.css'
 
@@ -36,9 +37,11 @@ const ClientSideWrapper = ({ children }) => {
       enableLiveUpdates
       locale="en-US"
     >
-      <ContextClientSide.Provider value={valueContext}>
-        {children}
-      </ContextClientSide.Provider>
+      <MetaMaskContextProvider>
+        <ContextClientSide.Provider value={valueContext}>
+          {children}
+        </ContextClientSide.Provider>
+      </MetaMaskContextProvider>
     </ContentfulLivePreviewProvider>
   )
 }
