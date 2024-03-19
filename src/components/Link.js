@@ -3,7 +3,14 @@ import React from 'react'
 import { Link } from 'gatsby'
 
 const DefaultLink = props => {
-  const { activeStyle, children, styleOverride, to, ...rest } = props
+  const {
+    activeStyle,
+    children,
+    styleOverride,
+    to,
+    newTab: omitNewTab,
+    ...rest
+  } = props
 
   let { newTab } = props
   if (!to) {

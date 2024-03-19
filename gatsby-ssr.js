@@ -37,6 +37,8 @@ const baseCSP = {
     "'sha256-mBD8EjuSzfLnSyV/kf64G/OwWt1b2FkRNQ0coR4iRaw='", // react-helmet
     "'sha256-8MQ2PLa7RW5LIHewJTDWrTnRig6sPfYwzJCuMnSDj+w='", // gtm.js
     "'sha256-fsJSer+HnXWBI5coGhVg2IEC1owFqVBolfuAAs+pz9s='", // lintrk.js (_linkedin_data_partner_ids = 7714137)
+    "'sha256-yoMdr24pHub35XtfE0g+KKJ/3jgt9wO6A41+++BPn2w='", // checkLocale.js
+    "'sha256-JHVwSufIF23Bmdl9HFL0FyPKDhAB10ZlcUJ8qdYOdr0='",
   ],
   'style-src': ["'self'", "'unsafe-inline'"],
   'object-src': ["'self'"],

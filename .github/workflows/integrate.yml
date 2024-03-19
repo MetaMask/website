@@ -42,15 +42,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NVMRC }}
-          cache: 'yarn'
 
       - name: Cache Gatsby 📦
         id: gatsby-cache-build
         uses: actions/cache@v3
         with:
           path: |
-            public
-            .cache
             node_modules
           key: ${{ runner.os }}-gatsby-build-${{ github.run_id }}-node_modules-${{ hashFiles('**/yarn.lock')}}
           restore-keys: |
