@@ -131,6 +131,7 @@ const PageLayout = props => {
   }, [])
 
   useEffect(() => {
+    let timer
     const handleClickDl = event => {
       if (event.target.closest('.deeplink')) {
         const uuid = generateUUID()
@@ -139,11 +140,17 @@ const PageLayout = props => {
           event: 'all_clicks',
           unique_attribution_id: uuid,
         })
+        timer = setTimeout(() => {
+          window.dataLayer.push({
+            unique_attribution_id: undefined,
+          })
+        }, 500)
       }
     }
     document.addEventListener('click', handleClickDl, true)
     return () => {
       document.removeEventListener('click', handleClickDl, true)
+      timer && clearTimeout(timer)
     }
   }, [])
 
