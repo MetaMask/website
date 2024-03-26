@@ -49,6 +49,11 @@ const StyledHeader = props => {
   const { isDarkMode, toggleTheme } = darkModeContextValue || {}
   const { locale, setLocale } = localization || {}
   const [topMenuMobile, setTopMenuMobile] = useState('88px')
+  const [isBrowser, setIsBrowser] = useState(false)
+
+  useEffect(() => {
+    setIsBrowser(true)
+  }, [])
 
   useEffect(() => {
     if (!menus && isDarkMode) {
@@ -263,7 +268,7 @@ const StyledHeader = props => {
                         hasChild
                         onClick={() => handleMenuClick('language-selector')}
                       >
-                        {locale?.shortName}
+                        {isBrowser && locale?.shortName}
                         <Icon className="w-icon w-icon-dropdown-toggle" />
                       </NavMenuMain>
                       <NavMenuChild active={menuActive === 'language-selector'}>
