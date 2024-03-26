@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'gatsby'
+import { DEFAULT_LOCALE_CODE, LOCALIZED_PAGES } from '../lib/config.mjs'
+import ContextClientSide from '../Context/ContextClientSide'
 
 const DefaultLink = props => {
   const {
@@ -13,32 +15,47 @@ const DefaultLink = props => {
   } = props
 
   let { newTab } = props
+  const { localization } = useContext(ContextClientSide)
+  const { locale } = localization || {}
   if (!to) {
     return <div {...rest}>{children}</div>
   }
 
-  const isAnchorLink = to.startsWith('#')
+  let href = to
+  const isAnchorLink = href.startsWith('#')
   if (isAnchorLink) {
     newTab = false
   }
 
   // checks if relative url "about/" or "/about/"
   // otherwise treats as external link
-  const isInternal = /^\/(?!\/)/.test(to)
+  const isInternal = /^\/(?!\/)/.test(href)
   const newTabHtmlAttributes = {
     target: newTab ? '_blank' : null,
     rel: newTab ? 'noopener' : null,
   }
 
+  if (LOCALIZED_PAGES.includes(href)) {
+    const localeCode = locale?.code
+    if (localeCode !== DEFAULT_LOCALE_CODE) {
+      href = `/${localeCode}${to}`
+    }
+  }
+
   return isInternal ? (
-    <Link to={to} activeStyle={activeStyle} {...newTabHtmlAttributes} {...rest}>
+    <Link
+      to={href}
+      activeStyle={activeStyle}
+      {...newTabHtmlAttributes}
+      {...rest}
+    >
       {children}
     </Link>
   ) : (
     <a
       style={{ textDecoration: 'none' }}
-      href={to}
-      {...(isAnchorLink ? { 'data-anchor': to } : {})}
+      href={href}
+      {...(isAnchorLink ? { 'data-anchor': href } : {})}
       {...newTabHtmlAttributes}
       {...rest}
     >

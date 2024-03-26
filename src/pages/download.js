@@ -94,7 +94,7 @@ const DownloadPage = props => {
   return (
     <Layout>
       {seo && <Seo moduleConfig={{ ...seo, pagePath: location.pathname }} />}
-      <Header moduleConfig={header} hideDownloadBtn />
+      <Header moduleConfig={{ ...header, translation: true }} hideDownloadBtn />
       <Container>
         <DownloadTitle>Install MetaMask</DownloadTitle>
         <DownloadContainer appExtensions={appExtensions} />

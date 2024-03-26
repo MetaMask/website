@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { graphql } from 'gatsby'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import flatMapDeep from 'lodash/flatMapDeep'
@@ -9,6 +9,7 @@ import analyticsUninstalledScript from '../lib/services/analytics'
 import { useLocation } from '@reach/router'
 import Helmet from 'react-helmet'
 import capitalize from 'lodash/capitalize'
+import { DEFAULT_LOCALE_CODE } from '../lib/config.mjs'
 
 /**
  * @name ContentfulLayout
@@ -43,12 +44,13 @@ const ContentfulLayout = props => {
       h2FontSize,
       widerContainer,
       extraData,
+      locale = DEFAULT_LOCALE_CODE,
+      translation,
     },
     path,
     ...rest
   } = props
 
-  const [locale, setLocale] = useState('en-US')
   const location = useLocation()
   const pathname = location.pathname
   let partnerId = '451393'
@@ -107,18 +109,6 @@ const ContentfulLayout = props => {
     seoData.pageDescription = `${seoData.pageDescription} | ${category}`
   }
 
-  const handleLocaleChange = newLocale => {
-    document.documentElement.lang = newLocale
-
-    if (newLocale === 'ar') {
-      document.documentElement.dir = 'rtl'
-    } else {
-      document.documentElement.dir = 'ltr'
-    }
-
-    setLocale(newLocale)
-  }
-
   return (
     <Layout
       {...rest}
@@ -126,8 +116,14 @@ const ContentfulLayout = props => {
       h2FontSize={h2FontSize}
       widerContainer={widerContainer}
       extraData={extraData}
+      locale={locale}
     >
-      {seo && contentfulModuleToComponent({ ...seoData, pagePath: pathBuild })}
+      {seo &&
+        contentfulModuleToComponent({
+          ...seoData,
+          pagePath: pathBuild,
+          translation,
+        })}
       {pathname.includes('/uninstalled') && (
         <Helmet
           script={[
@@ -138,21 +134,11 @@ const ContentfulLayout = props => {
           ]}
         />
       )}
-
-      <select
-        value={locale}
-        onChange={e => handleLocaleChange(e.target.value)}
-        style={{ zIndex: 9999, position: 'fixed', top: 0, right: 0 }}
-      >
-        <option value="en-US">English</option>
-        <option value="ar">Arabic</option>
-        <option value="de">German</option>
-        <option value="es">Spanish</option>
-        <option value="zh-CN">Chinese</option>
-      </select>
-
       {allModules.map(module =>
-        contentfulModuleToComponent({ ...module, isFaq: isFaqLayout }, locale)
+        contentfulModuleToComponent(
+          { ...module, isFaq: isFaqLayout, translation },
+          locale
+        )
       )}
       <script
         type="text/javascript"

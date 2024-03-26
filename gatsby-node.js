@@ -9,6 +9,8 @@ const { writeRedirectsFile } = require('./src/lib/utils/redirect')
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions
 
+  const { LOCALES_TRANSLATE, mapTemplateLayout, DEFAULT_LOCALE_CODE } = await import('./src/lib/config.mjs')
+
   // Generally you create redirects while creating pages.
   redirects.forEach(redirect =>
     createRedirect({
@@ -57,7 +59,9 @@ exports.createPages = async ({ graphql, actions }) => {
   const legalData = legalsQuery?.data?.allMdx?.nodes
   const contentfulLayouts = graphql(`
     {
-      pages: allContentfulLayout(filter: { isPrivate: { eq: false } }) {
+      pages: allContentfulLayout(
+        filter: { isPrivate: { eq: false }, node_locale: { eq: "${DEFAULT_LOCALE_CODE}" } }
+      ) {
         edges {
           node {
             slug
@@ -107,6 +111,8 @@ exports.createPages = async ({ graphql, actions }) => {
             isFaqLayout
             widerContainer
             h2FontSize
+            translation
+            pageType
           }
         }
       }
@@ -130,13 +136,15 @@ exports.createPages = async ({ graphql, actions }) => {
             isFaqLayout,
             widerContainer,
             h2FontSize,
+            translation,
+            pageType,
           } = p.node
           const { contentful_id: footerId = '' } = footer || {}
           const { contentful_id: headerId = '' } = header || {}
           const moduleIds = modules.map(m => m.contentful_id)
           const seoId = seo ? seo.contentful_id : ''
 
-          if (slug === '/assets/') {
+          if (pageType === 'Asset') {
             const assetResponseData = modules[0]?.assets
             const assetUrls = assetResponseData?.map(el => el.url)
             const assetData = assetResponseData?.map(el => ({
@@ -156,9 +164,7 @@ exports.createPages = async ({ graphql, actions }) => {
               })()
               createPage({
                 path: slug,
-                component: path.resolve(
-                  `./src/templates/ContentfulAssetLayout.js`
-                ),
+                component: path.resolve(mapTemplateLayout(pageType)),
                 context: {
                   headerId,
                   footerId,
@@ -178,7 +184,7 @@ exports.createPages = async ({ graphql, actions }) => {
             categoriesPath.forEach(categoryPath => {
               createPage({
                 path: categoryPath, // slug validation in Contentful CMS
-                component: path.resolve(`./src/templates/ContentfulLayout.js`),
+                component: path.resolve(mapTemplateLayout(pageType)),
                 context: {
                   headerId,
                   footerId,
@@ -214,9 +220,7 @@ exports.createPages = async ({ graphql, actions }) => {
             legalUrls.forEach((legalUrl, index) => {
               createPage({
                 path: legalUrl,
-                component: path.resolve(
-                  `./src/templates/MarkdownPageLayout.js`
-                ),
+                component: path.resolve(mapTemplateLayout(pageType)),
                 context: {
                   headerId,
                   footerId,
@@ -233,69 +237,33 @@ exports.createPages = async ({ graphql, actions }) => {
             })
             return
           }
-          if (slug === '/portfolio/') {
-            createPage({
-              path: slug,
-              component: path.resolve(
-                `./src/templates/ContentfulPortfolioLayout.js`
-              ),
-              context: {
-                headerId,
-                footerId,
-                seoId,
-                pathBuild: slug,
-                modules: moduleIds,
-              },
+          const extraData = pageType === 'Developer' ? devChangelogData : null
+          if (translation) {
+            LOCALES_TRANSLATE.forEach(locale => {
+              const localeSlug = `/${locale.code}${slug}`
+              createPage({
+                path: localeSlug,
+                component: path.resolve(mapTemplateLayout(pageType)),
+                context: {
+                  headerId,
+                  footerId,
+                  seoId,
+                  modules: moduleIds,
+                  themeColor,
+                  pathBuild: localeSlug,
+                  isFaqLayout,
+                  widerContainer,
+                  h2FontSize,
+                  extraData,
+                  translation,
+                  locale: locale.code,
+                },
+              })
             })
-            return
           }
-          if (slug === '/swaps/swap-with-portfolio/') {
-            createPage({
-              path: slug,
-              component: path.resolve(
-                `./src/templates/SwapWithPortfolioLayout.js`
-              ),
-              context: {
-                footerId,
-                seoId,
-                pathBuild: slug,
-                widerContainer,
-              },
-            })
-            return
-          }
-          if (slug === '/swaps/multitoken-swap/') {
-            createPage({
-              path: slug,
-              component: path.resolve(
-                `./src/templates/MultiTokenSwapLayout.js`
-              ),
-              context: {
-                footerId,
-                seoId,
-                pathBuild: slug,
-                widerContainer,
-              },
-            })
-            return
-          }
-          if (slug === '/pyusd/') {
-            createPage({
-              path: slug,
-              component: path.resolve(`./src/templates/PYUSDLayout.js`),
-              context: {
-                footerId,
-                seoId,
-                pathBuild: slug,
-                widerContainer,
-              },
-            })
-            return
-          }
-          const extraData = slug === '/developer/' ? devChangelogData : null
           createPage({
             path: slug, // slug validation in Contentful CMS
-            component: path.resolve(`./src/templates/ContentfulLayout.js`),
+            component: path.resolve(mapTemplateLayout(pageType)),
             context: {
               // pass data to page template for configuration and populating modules
               headerId,
@@ -308,6 +276,8 @@ exports.createPages = async ({ graphql, actions }) => {
               widerContainer,
               h2FontSize,
               extraData,
+              locale: DEFAULT_LOCALE_CODE,
+              translation,
             },
           })
         })
@@ -322,7 +292,10 @@ exports.createPages = async ({ graphql, actions }) => {
   /* News Pages */
   const contentfulNews = graphql(`
     {
-      stories: allContentfulNews(sort: { publishDate: DESC }) {
+      stories: allContentfulNews(
+        sort: { publishDate: DESC }
+        filter: { node_locale: { eq: "${DEFAULT_LOCALE_CODE}" } }
+      ) {
         edges {
           node {
             contentful_id
@@ -383,7 +356,7 @@ exports.createPages = async ({ graphql, actions }) => {
           const slug = '/author/' + profileUrl + '/'
           createPage({
             path: slug,
-            component: path.resolve('./src/templates/AuthorProfileLayout.js'),
+            component: path.resolve(mapTemplateLayout('Author')),
             context: {
               author_id: contentful_id,
               pathBuild: slug,
@@ -403,7 +376,8 @@ exports.createPages = async ({ graphql, actions }) => {
   return Promise.all(autoGeneratedPages)
 }
 
-exports.onPostBuild = ({ graphql, store, pathPrefix, reporter }) => {
+exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
+  const { DEFAULT_LOCALE_CODE } = await import('./src/lib/config.mjs')
   const { redirects, program, config } = store.getState()
   buildSitemap({
     query: `
@@ -424,7 +398,7 @@ exports.onPostBuild = ({ graphql, store, pathPrefix, reporter }) => {
           slug
         }
       }
-      allContentfulNews(filter: {isPrivate: {eq: false}}) {
+      allContentfulNews(filter: {isPrivate: {eq: false}, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"}}) {
         nodes {
           title
           slug
@@ -535,20 +509,4 @@ exports.onPostBuild = ({ graphql, store, pathPrefix, reporter }) => {
   }
   const folder = path.join(program.directory, 'public')
   return writeRedirectsFile(redirects, folder, prefix)
-}
-
-exports.onCreateWebpackConfig = ({ stage, actions, getConfig, plugins }) => {
-  if (stage === 'build-javascript' || stage === 'develop') {
-    const config = getConfig()
-    const miniCss = config.plugins.find(
-      plugin => plugin.constructor.name === 'MiniCssExtractPlugin'
-    )
-    if (miniCss) {
-      miniCss.options.ignoreOrder = true
-    }
-    actions.replaceWebpackConfig(config)
-    actions.setWebpackConfig({
-      plugins: [plugins.provide({ process: 'process/browser' })],
-    })
-  }
 }

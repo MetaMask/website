@@ -16,6 +16,7 @@ const ContentfulLayoutHeader = props => {
       popupAnnouncement,
       isSticky,
       contentful_id,
+      translation,
     },
     hideDownloadBtn,
   } = props
@@ -31,6 +32,7 @@ const ContentfulLayoutHeader = props => {
       isSticky={isSticky}
       previewMode={previewMode}
       contentfulId={contentful_id}
+      translation={translation}
     />
   )
 }

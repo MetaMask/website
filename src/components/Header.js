@@ -1,5 +1,4 @@
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
-import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import ContextClientSide from '../Context/ContextClientSide'
 import styled, { withTheme } from 'styled-components'
@@ -9,6 +8,9 @@ import Context from '../Context/ContextPage'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import Link from './Link'
+import { DEFAULT_LOCALE_CODE, LOCALES } from '../lib/config.mjs'
+import { navigate } from 'gatsby-link'
+import { useLocation } from '@reach/router'
 
 const StyledHeader = props => {
   const {
@@ -27,21 +29,25 @@ const StyledHeader = props => {
     hideDownloadBtn,
     isSticky,
     previewMode = false,
-    contentfulId,
+    translation,
   } = props
 
-  const inspectorProps = useContentfulInspectorMode()
   const isDesktop = useMediaQuery({
     query: '(min-width: 1025px)',
   })
   const [menuActive, setMenuActive] = useState('')
   const [hamburgerActive, setHamburgerActive] = useState(false)
-  const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
+  const { darkMode: darkModeContextValue, localization } = useContext(
+    ContextClientSide
+  )
+  const location = useLocation()
+  const { pathname } = location
   const menuRef = useRef()
   const buttonRef = useRef()
   const { header: headerREF } = useContext(Context)
   const { headerRef } = headerREF || {}
   const { isDarkMode, toggleTheme } = darkModeContextValue || {}
+  const { locale, setLocale } = localization || {}
   const [topMenuMobile, setTopMenuMobile] = useState('88px')
 
   useEffect(() => {
@@ -94,16 +100,25 @@ const StyledHeader = props => {
     setHamburgerActive(!hamburgerActive)
   }
 
+  const onChangeLocale = locale => {
+    setMenuActive('')
+    setLocale(locale)
+    let localizedPath
+    if (locale.code === DEFAULT_LOCALE_CODE) {
+      localizedPath = pathname.replace(/^\/(ar|zh-CN|de|es)/, '')
+    } else {
+      const newLocale = locale.code === DEFAULT_LOCALE_CODE ? '' : locale.code
+      localizedPath = `/${newLocale}${pathname.replace(
+        /^\/(ar|zh-CN|de|es)\//,
+        '/'
+      )}`
+    }
+    navigate(localizedPath)
+  }
+
   return (
     <HeaderElement ref={headerRef} className={classnames({ sticky: isSticky })}>
-      <Announcement
-        {...(previewMode
-          ? inspectorProps({
-              entryId: contentfulId,
-              fieldId: 'popupAnnouncement',
-            })
-          : {})}
-      >
+      <Announcement>
         {contentfulModuleToComponent({
           ...popupAnnouncement,
           previewMode,
@@ -117,12 +132,6 @@ const StyledHeader = props => {
                 className={classnames({
                   'hidden-mobile': logoMobile,
                 })}
-                {...(previewMode
-                  ? inspectorProps({
-                      entryId: contentfulId,
-                      fieldId: 'logo',
-                    })
-                  : {})}
               >
                 {svgLogo?.content ? (
                   <div
@@ -184,12 +193,6 @@ const StyledHeader = props => {
                       active={active}
                       onMouseEnter={() => handleMenuMouseEnter(index)}
                       onMouseLeave={() => handleMenuMouseLeave(index)}
-                      {...(previewMode
-                        ? inspectorProps({
-                            entryId: contentfulId,
-                            fieldId: 'menuItems',
-                          })
-                        : {})}
                     >
                       <NavMenuMain
                         hasChild={ctaLink ? false : true}
@@ -225,13 +228,8 @@ const StyledHeader = props => {
                 })}
                 {downloadButton ? (
                   <ButtonsWrapper
+                    className="download-btn-desktop"
                     hideDownloadBtn={hideDownloadBtn}
-                    {...(previewMode
-                      ? inspectorProps({
-                          entryId: contentfulId,
-                          fieldId: 'downloadButton',
-                        })
-                      : {})}
                   >
                     {contentfulModuleToComponent({
                       ...downloadButton,
@@ -241,14 +239,60 @@ const StyledHeader = props => {
                     })}
                   </ButtonsWrapper>
                 ) : null}
-                <DarkModeWrapper>
-                  <ToggleDarkMode
-                    onChange={toggleTheme}
-                    checked={isDarkMode}
-                    name="darkMode"
-                    value="dark"
-                  />
-                </DarkModeWrapper>
+                <ToggleWrapper>
+                  <DarkModeWrapper>
+                    <ToggleDarkMode
+                      onChange={toggleTheme}
+                      checked={isDarkMode}
+                      name="darkMode"
+                      value="dark"
+                    />
+                  </DarkModeWrapper>
+                  {translation && (
+                    <NavMenu
+                      key="language-selector"
+                      active={menuActive === 'language-selector'}
+                      onMouseEnter={() =>
+                        handleMenuMouseEnter('language-selector')
+                      }
+                      onMouseLeave={() =>
+                        handleMenuMouseLeave('language-selector')
+                      }
+                    >
+                      <NavMenuMain
+                        hasChild
+                        onClick={() => handleMenuClick('language-selector')}
+                      >
+                        {locale?.shortName}
+                        <Icon className="w-icon w-icon-dropdown-toggle" />
+                      </NavMenuMain>
+                      <NavMenuChild active={menuActive === 'language-selector'}>
+                        {LOCALES.map(locale => (
+                          <span
+                            key={locale.code}
+                            onClick={() => onChangeLocale(locale)}
+                            className="locale-item"
+                          >
+                            {locale.name}
+                          </span>
+                        ))}
+                      </NavMenuChild>
+                    </NavMenu>
+                  )}
+                </ToggleWrapper>
+                {downloadButton ? (
+                  <ButtonsWrapper
+                    className="download-btn-mobile"
+                    hideDownloadBtn={hideDownloadBtn}
+                  >
+                    {contentfulModuleToComponent({
+                      ...downloadButton,
+                      hasModuleContainer: true,
+                      isHeaderMenu: true,
+                      previewMode,
+                    })}
+                  </ButtonsWrapper>
+                ) : null}
               </NavMainInner>
             </NavMain>
           </>
@@ -314,7 +358,7 @@ const Announcement = styled.div`
 const HeaderContainer = styled.div`
   display: flex;
   margin: 0 auto;
-  max-width: var(--container-width);
+  max-width: 1200px;
   width: 100%;
   align-items: center;
   justify-content: space-between;
@@ -416,6 +460,26 @@ const NavMenuChild = styled.div`
     justify-content: flex-start;
   }
 
+  .locale-item {
+    font-size: 16px;
+    line-height: 22px;
+    cursor: pointer;
+    margin: 4px;
+    padding: 8px;
+    border-radius: 4px;
+    transition: color 0.15s ease, background-color 0.15s ease;
+
+    &:hover {
+      background-color: #e6eaee;
+      color: #037dd6;
+
+      .dark-mode & {
+        background-color: #24292e;
+        color: #fff;
+      }
+    }
+  }
+
   @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
     opacity: 0;
     visibility: hidden;
@@ -511,6 +575,21 @@ const ButtonsWrapper = styled.div`
     padding: 8px 32px !important;
   }
 
+  &.download-btn-desktop {
+    display: none;
+
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      display: block;
+    }
+  }
+
+  &.download-btn-mobile {
+    display: block;
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      display: none;
+    }
+  }
+
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     margin-top: 12px;
 
@@ -537,5 +616,14 @@ const DarkModeWrapper = styled.div`
     margin-top: 16px;
     margin-left: 0;
     justify-content: center;
+  }
+`
+
+const ToggleWrapper = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+
+  @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+    flex-direction: row;
   }
 `

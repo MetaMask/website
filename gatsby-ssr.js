@@ -145,8 +145,8 @@ const getHashesCodeSplitting = () => {
   }
   return hashes
 }
-
-exports.onPreRenderHTML = ({
+// temporary disable csp
+exports._onPreRenderHTML = ({
   getHeadComponents,
   replaceHeadComponents,
   getPreBodyComponents,

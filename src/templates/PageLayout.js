@@ -30,6 +30,7 @@ const PageLayout = props => {
     h2FontSize,
     isStandalone,
     extraData,
+    locale,
     ...rest
   } = props
   const { pathname, search } = location || {}
@@ -160,6 +161,7 @@ const PageLayout = props => {
         theme={pageTheme}
         themeColor={themeColor}
         h2FontSize={h2FontSize}
+        locale={locale}
         {...rest}
       >
         <Notifications />

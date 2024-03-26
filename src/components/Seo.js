@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql, useStaticQuery } from 'gatsby'
 import Helmet from 'react-helmet'
 import { useLocation } from '@reach/router'
+import { DEFAULT_LOCALE_CODE, LOCALES } from '../lib/config.mjs'
 
 /**
  * @name - SEO
@@ -20,6 +21,7 @@ const SEO = props => {
     pageType,
     pagePath,
     canonicalUrl,
+    translation,
   } = props
 
   const location = useLocation()
@@ -76,6 +78,19 @@ const SEO = props => {
     { rel: 'canonical', href: seo.canonicalUrl },
     ...(linkTags || []),
   ]
+
+  const localeUrl = locale =>
+    locale === DEFAULT_LOCALE_CODE ? '' : `/${locale}`
+  if (translation) {
+    LOCALES.forEach(l => {
+      const localeHref = siteUrl + localeUrl(l.code) + pagePath
+      link.push({
+        rel: 'alternate',
+        hrefLang: l.code,
+        href: localeHref,
+      })
+    })
+  }
 
   return <Helmet meta={meta} link={link} title={seo.title} />
 }
