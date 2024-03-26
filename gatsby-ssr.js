@@ -146,41 +146,41 @@ const getHashesCodeSplitting = () => {
   return hashes
 }
 // temporary disable csp
-exports._onPreRenderHTML = ({
-  getHeadComponents,
-  replaceHeadComponents,
-  getPreBodyComponents,
-  getPostBodyComponents,
-}) => {
-  let components = [
-    ...flatten(getHeadComponents()),
-    ...flatten(getPostBodyComponents()),
-    ...flatten(getPreBodyComponents()),
-  ]
+// exports._onPreRenderHTML = ({
+//   getHeadComponents,
+//   replaceHeadComponents,
+//   getPreBodyComponents,
+//   getPostBodyComponents,
+// }) => {
+//   let components = [
+//     ...flatten(getHeadComponents()),
+//     ...flatten(getPostBodyComponents()),
+//     ...flatten(getPreBodyComponents()),
+//   ]
 
-  let csp = {
-    ...baseCSP,
-    'script-src': [
-      ...baseCSP['script-src'],
-      ...getHashes(components, 'script'),
-      ...getHashesCodeSplitting(),
-    ],
-  }
+//   let csp = {
+//     ...baseCSP,
+//     'script-src': [
+//       ...baseCSP['script-src'],
+//       ...getHashes(components, 'script'),
+//       ...getHashesCodeSplitting(),
+//     ],
+//   }
 
-  const cspString = Object.keys(csp).reduce((acc, key) => {
-    const value = csp[key]
-    return `${acc}${key} ${value.join(' ')}; `
-  }, '')
+//   const cspString = Object.keys(csp).reduce((acc, key) => {
+//     const value = csp[key]
+//     return `${acc}${key} ${value.join(' ')}; `
+//   }, '')
 
-  const cspComponent = (
-    <meta
-      key="gatsby-csp"
-      httpEquiv="Content-Security-Policy"
-      content={cspString}
-    />
-  )
+//   const cspComponent = (
+//     <meta
+//       key="gatsby-csp"
+//       httpEquiv="Content-Security-Policy"
+//       content={cspString}
+//     />
+//   )
 
-  let headComponentsWithCsp = [cspComponent, ...getHeadComponents()]
+//   let headComponentsWithCsp = [cspComponent, ...getHeadComponents()]
 
-  replaceHeadComponents(headComponentsWithCsp)
-}
+//   replaceHeadComponents(headComponentsWithCsp)
+// }
