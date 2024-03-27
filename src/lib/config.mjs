@@ -15,10 +15,10 @@ export const TEMPLATE_LAYOUT_LIST = [
     name: 'Defaut',
     path: './src/templates/ContentfulLayout.js',
   },
-  {
-    name: 'Download',
-    path: './src/templates/ContentfulDownloadLayout.js',
-  },
+  // {
+  //   name: 'Download',
+  //   path: './src/templates/ContentfulDownloadLayout.js',
+  // },
   {
     name: 'Asset',
     path: './src/templates/ContentfulAssetLayout.js',
@@ -65,6 +65,7 @@ export const mapTemplateLayout = name => {
 export const LOCALES = [
   {
     name: 'English',
+    localizedName: "English",
     code: 'en-US',
     shortName: 'EN',
     htmlLang: 'en',
@@ -72,24 +73,28 @@ export const LOCALES = [
   },
   {
     name: 'Arabic',
+    localizedName: 'عربي',
     shortName: 'AR',
     code: 'ar',
     htmlLang: 'ar',
   },
   {
     name: 'Chinese',
+    localizedName: '日本語',
     shortName: 'CN',
     code: 'zh-CN',
     htmlLang: 'zh',
   },
   {
     name: 'German',
+    localizedName: 'Deutsch',
     shortName: 'DE',
     code: 'de',
     htmlLang: 'de',
   },
   {
     name: 'Spanish',
+    localizedName: 'Español',
     shortName: 'ES',
     code: 'es',
     htmlLang: 'es',

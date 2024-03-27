@@ -127,14 +127,6 @@ const FooterContainer = styled.div`
   body.dark-mode & {
     background-color: #3c444b;
   }
-
-  html:lang(ar) & {
-    direction: ltr;
-
-    * {
-      direction: ltr;
-    }
-  }
 `
 
 const FooterInner = styled.div`

@@ -257,6 +257,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   extraData,
                   translation,
                   locale: locale.code,
+                  node_locale: locale.code
                 },
               })
             })
@@ -278,6 +279,7 @@ exports.createPages = async ({ graphql, actions }) => {
               extraData,
               locale: DEFAULT_LOCALE_CODE,
               translation,
+              node_locale: DEFAULT_LOCALE_CODE,
             },
           })
         })
@@ -315,7 +317,7 @@ exports.createPages = async ({ graphql, actions }) => {
         const stories = result.data.stories.edges.filter(
           item => !item.node.isPrivate
         )
-        return stories.map(({ node: news }, index) => {
+        return stories.map(({ node: news }) => {
           const { contentful_id } = news
           const newsUrl = getNewsUrl(news)
 
