@@ -37,7 +37,7 @@ const DefaultLink = props => {
 
   if (LOCALIZED_PAGES.includes(href)) {
     const localeCode = locale?.code
-    if (localeCode !== DEFAULT_LOCALE_CODE) {
+    if (localeCode && localeCode !== DEFAULT_LOCALE_CODE) {
       href = `/${localeCode}${to}`
     }
   }

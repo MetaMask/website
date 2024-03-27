@@ -527,7 +527,7 @@ export const ContentfulCardFields = graphql`
       file {
         url
       }
-      gatsbyImageData(width: 1024, quality: 80)
+      gatsbyImageData(width: 1920, quality: 80)
     }
     imageDarkMode {
       title
@@ -535,7 +535,7 @@ export const ContentfulCardFields = graphql`
       file {
         url
       }
-      gatsbyImageData(width: 1024, quality: 80)
+      gatsbyImageData(width: 1920, quality: 80)
     }
     imageMargin
     description {

@@ -15,10 +15,10 @@ export const TEMPLATE_LAYOUT_LIST = [
     name: 'Defaut',
     path: './src/templates/ContentfulLayout.js',
   },
-  // {
-  //   name: 'Download',
-  //   path: './src/templates/ContentfulDownloadLayout.js',
-  // },
+  {
+    name: 'Download',
+    path: './src/templates/ContentfulDownloadLayout.js',
+  },
   {
     name: 'Asset',
     path: './src/templates/ContentfulAssetLayout.js',
