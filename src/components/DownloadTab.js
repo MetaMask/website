@@ -5,24 +5,34 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { browserName, isMobile } from 'react-device-detect'
 import get from 'lodash/get'
 import useIsChromium from '../lib/utils/isChromium'
+import ParseMD from './ParseMD'
 
 const TabContentDownload = props => {
-  const {
-    image,
-    title,
-    ctas,
-    ctaHeading,
+  const { item, id } = props
+  const { image, description } = item
+  const { childMarkdownRemark: { html: title } = {} } = description || {}
+
+  const isChromium = useIsChromium()
+
+  let ctas = get(item, 'cta[0].downloadBrowsers')
+  let ctaFirefox,
     ctaChrome,
-    ctaFirefox,
-    ctaEdge,
     ctaOpera,
+    ctaEdge,
     ctaChromeBrowser,
-    ctaFirefoxBrowser,
-    id,
-  } = props
+    ctaFirefoxBrowser
+  if (ctas) {
+    ctas = ctas.map(cta => JSON.parse(cta.internal.content))
+    ctaFirefox = ctas.find(c => c.name === 'ctaFirefox')
+    ctaChrome = ctas.find(c => c.name === 'ctaChrome')
+    ctaOpera = ctas.find(c => c.name === 'ctaOpera')
+    ctaEdge = ctas.find(c => c.name === 'ctaEdge')
+    ctaChromeBrowser = ctas.find(c => c.name === 'ctaChromeBrowser')
+    ctaFirefoxBrowser = ctas.find(c => c.name === 'ctaFirefoxBrowser')
+  }
+  const mobileCta = item.cta
 
   const [downloadForFirefox, setDownloadForFirefox] = useState(ctaFirefox)
-  const isChromium = useIsChromium()
 
   useEffect(() => {
     ;(async () => {
@@ -46,8 +56,7 @@ const TabContentDownload = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  let ctasDownload = ctas,
-    ctasHeading = ctaHeading
+  let ctasDownload, ctasHeading
   if (id === 'browser') {
     const isChrome = browserName === 'Chrome' || browserName === 'Brave'
     const isFirefox = browserName === 'Firefox'
@@ -73,11 +82,26 @@ const TabContentDownload = props => {
       ctasHeading = `${browserName} is not supported. Please download a browser that supports MetaMask.`
       ctasDownload = [ctaChromeBrowser, ctaFirefoxBrowser]
     }
+    ctasDownload = ctasDownload.map(c => ({
+      displayText: c.text,
+      internal: {
+        type: 'ContentfulCta',
+      },
+      ctaLink: c.link,
+      buttonDisplay: true,
+      fontSize: '20px',
+    }))
+  } else {
+    ctasDownload = mobileCta
   }
 
   return (
     <>
-      {title ? <Heading>{title}</Heading> : null}
+      {title ? (
+        <Heading>
+          <ParseMD>{title}</ParseMD>
+        </Heading>
+      ) : null}
       {image ? (
         <ImageWrapper>
           <Image image={image} />
