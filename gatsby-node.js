@@ -251,6 +251,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   modules: moduleIds,
                   themeColor,
                   pathBuild: localeSlug,
+                  slug,
                   isFaqLayout,
                   widerContainer,
                   h2FontSize,

@@ -20,6 +20,7 @@ const SEO = props => {
     linkTags,
     pageType,
     pagePath,
+    originalSlug,
     canonicalUrl,
     translation,
   } = props
@@ -37,7 +38,7 @@ const SEO = props => {
   const seo = {
     title: title || defaultTitle,
     desc: description || defaultDescription,
-    canonicalUrl: canonicalUrl || `${siteUrl}${pagePath}`,
+    canonicalUrl: canonicalUrl || `${siteUrl}${originalSlug || pagePath}`,
   }
   const getMetaTags = (name, value) =>
     name && value
@@ -83,7 +84,7 @@ const SEO = props => {
     locale === DEFAULT_LOCALE_CODE ? '' : `/${locale}`
   if (translation) {
     LOCALES.forEach(l => {
-      const localeHref = siteUrl + localeUrl(l.code) + pagePath
+      const localeHref = siteUrl + localeUrl(l.code) + originalSlug
       link.push({
         rel: 'alternate',
         hrefLang: l.code,
