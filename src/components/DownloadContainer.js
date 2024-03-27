@@ -1,18 +1,19 @@
-import PropTypes from 'prop-types'
-import { isAndroid, isIOS, isMobile } from 'react-device-detect'
-import React from 'react'
+import { browserName, isAndroid, isIOS, isMobile } from 'react-device-detect'
+import React, { Suspense, lazy, useEffect, useState } from 'react'
 import styled, { withTheme } from 'styled-components'
 import { Section } from './StyledGeneral'
 import ContentWrapper from './ContentWrapper'
 import Loading from './Loading'
-import isEmpty from 'lodash/isEmpty'
-const TabWrapper = React.lazy(() => import('./Tab/TabWrapper'))
-const TabContentDownload = React.lazy(() => import('./DownloadTab'))
+import get from 'lodash/get'
+import useIsChromium from '../lib/utils/isChromium'
+const TabWrapper = lazy(() => import('./Tab/TabWrapper'))
+const TabContentDownload = lazy(() => import('./DownloadTab'))
 
-const DownloadContainer = props => {
-  const [device, setDevice] = React.useState('')
-  const { appExtensions } = props
-  React.useEffect(() => {
+const DownloadContainer = ({ data }) => {
+  const [device, setDevice] = useState('')
+  const isChromium = useIsChromium()
+
+  useEffect(() => {
     if (isMobile) {
       if (isAndroid) {
         setDevice('android')
@@ -25,15 +26,24 @@ const DownloadContainer = props => {
       setDevice('browser')
     }
   }, [])
-  if (isEmpty(appExtensions)) return null
+
   const isSSR = typeof window === 'undefined'
-  const tabs = Object.keys(appExtensions).map(item => ({
-    label: appExtensions[item]['label'],
-    id: item,
+  const appExtensions = get(data, 'modules[0].modules')
+
+  if (!appExtensions) return null
+
+  const defaultTitle = isMobile
+    ? 'Chrome'
+    : isChromium
+    ? 'Chromium'
+    : browserName
+  const tabs = appExtensions.map(item => ({
+    label: item.title || defaultTitle,
+    id: item.title?.toLowerCase() || 'browser',
     content: !isSSR && (
-      <React.Suspense fallback={<Loading />}>
-        <TabContentDownload {...appExtensions[item]} id={item} />
-      </React.Suspense>
+      <Suspense fallback={<Loading />}>
+        <TabContentDownload item={item} id={item.title || 'browser'} />
+      </Suspense>
     ),
   }))
 
@@ -41,9 +51,9 @@ const DownloadContainer = props => {
     <Container>
       <ContentWrapper>
         {!isSSR && device ? (
-          <React.Suspense fallback={<div />}>
-            <TabWrapper tabs={tabs} activeTabDefault={device}></TabWrapper>
-          </React.Suspense>
+          <Suspense fallback={<div />}>
+            <TabWrapper tabs={tabs} activeTabDefault={device} />
+          </Suspense>
         ) : null}
       </ContentWrapper>
     </Container>
@@ -51,9 +61,5 @@ const DownloadContainer = props => {
 }
 
 export default withTheme(DownloadContainer)
-
-DownloadContainer.propTypes = {
-  appExtensions: PropTypes.object,
-}
 
 const Container = styled(Section)``
