@@ -73,26 +73,16 @@ const ContentfulLayout = props => {
     return isArray(mods) ? mods.map(n => n.node) : mods
   }
 
-  // filter modules by locale
-  const filterModulesByLocale = (modules, locale) => {
-    return modules.filter(module => {
-      if (!module || !module.node_locale) return true // Keep modules without locale
-      return module.node_locale === locale
-    })
-  }
-
   // extract all top-level page modules from GraphQL and return in a flat array for rendering
   const pageModules = flatMapDeep(
     [H, F, FS, RT, LMC, MC, C, CTA, FAQ, HTML, L, HF, FWC],
     getNodes
   )
 
-  const filteredPageModules = filterModulesByLocale(pageModules, locale)
-
   // Take unordered list of data from pageModules and reorder
   // based on contentful_id sequence in pageContext.modules
   // returned by CMS to maintain page structure
-  const orderedPageModules = filteredPageModules.reduce((acc, node) => {
+  const orderedPageModules = pageModules.reduce((acc, node) => {
     if (!node || !node.contentful_id) return acc
     const positionInPage = modules.indexOf(node.contentful_id)
     acc.splice(positionInPage, 1, node) // remove empty element and replace with module data
@@ -159,21 +149,22 @@ export const ContentfulQuery = graphql`
     $headerId: String
     $footerId: String
     $seoId: String
+    $node_locale: String
   ) {
-    header: contentfulLayoutHeader(contentful_id: { eq: $headerId }) {
+    header: contentfulLayoutHeader(contentful_id: { eq: $headerId }, node_locale: { eq: $node_locale }) {
       ...ContentfulLayoutHeaderFields
     }
 
-    footer: contentfulLayoutFooter(contentful_id: { eq: $footerId }) {
+    footer: contentfulLayoutFooter(contentful_id: { eq: $footerId }, node_locale: { eq: $node_locale }) {
       ...ContentfulLayoutFooterFields
     }
 
-    seo: contentfulSeo(contentful_id: { eq: $seoId }) {
+    seo: contentfulSeo(contentful_id: { eq: $seoId }, node_locale: { eq: $node_locale }) {
       ...ContentfulSeoFields
     }
 
     heroes: allContentfulLayoutHero(
-      filter: { contentful_id: { in: $modules } }
+      filter: { contentful_id: { in: $modules }, node_locale: { eq: $node_locale } }
     ) {
       edges {
         node {
@@ -183,7 +174,7 @@ export const ContentfulQuery = graphql`
     }
 
     layoutModuleContainers: allContentfulLayoutModuleContainer(
-      filter: { contentful_id: { in: $modules } }
+      filter: { contentful_id: { in: $modules }, node_locale: { eq: $node_locale } }
     ) {
       edges {
         node {
@@ -193,7 +184,7 @@ export const ContentfulQuery = graphql`
     }
 
     features: allContentfulLayoutFeature(
-      filter: { contentful_id: { in: $modules } }
+      filter: { contentful_id: { in: $modules }, node_locale: { eq: $node_locale } }
     ) {
       edges {
         node {
@@ -203,7 +194,7 @@ export const ContentfulQuery = graphql`
     }
 
     featureSliders: allContentfulLayoutFeatureSlider(
-      filter: { contentful_id: { in: $modules } }
+      filter: { contentful_id: { in: $modules }, node_locale: { eq: $node_locale } }
     ) {
       edges {
         node {
@@ -213,7 +204,7 @@ export const ContentfulQuery = graphql`
     }
 
     fullWidthCtas: allContentfulLayoutFullWidthCta(
-      filter: { contentful_id: { in: $modules } }
+      filter: { contentful_id: { in: $modules }, node_locale: { eq: $node_locale } }
     ) {
       edges {
         node {
@@ -223,7 +214,7 @@ export const ContentfulQuery = graphql`
     }
 
     moduleContainers: allContentfulModuleContainer(
-      filter: { contentful_id: { in: $modules } }
+      filter: { contentful_id: { in: $modules }, node_locale: { eq: $node_locale } }
     ) {
       edges {
         node {
@@ -258,7 +249,7 @@ export const ContentfulQuery = graphql`
       }
     }
 
-    cards: allContentfulCard(filter: { contentful_id: { in: $modules } }) {
+    cards: allContentfulCard(filter: { contentful_id: { in: $modules }, node_locale: { eq: $node_locale } }) {
       edges {
         node {
           ...ContentfulCardFields
@@ -266,7 +257,7 @@ export const ContentfulQuery = graphql`
       }
     }
 
-    ctas: allContentfulCta(filter: { contentful_id: { in: $modules } }) {
+    ctas: allContentfulCta(filter: { contentful_id: { in: $modules }, node_locale: { eq: $node_locale } }) {
       edges {
         node {
           ...ContentfulCtaFields
@@ -275,7 +266,7 @@ export const ContentfulQuery = graphql`
     }
 
     hubspotForms: allContentfulHubSpotForm(
-      filter: { contentful_id: { in: $modules } }
+      filter: { contentful_id: { in: $modules }, node_locale: { eq: $node_locale } }
     ) {
       edges {
         node {
@@ -284,7 +275,7 @@ export const ContentfulQuery = graphql`
       }
     }
 
-    embeds: allContentfulEmbed(filter: { contentful_id: { in: $modules } }) {
+    embeds: allContentfulEmbed(filter: { contentful_id: { in: $modules }, node_locale: { eq: $node_locale } }) {
       edges {
         node {
           ...ContentfulEmbedFields
@@ -292,7 +283,7 @@ export const ContentfulQuery = graphql`
       }
     }
 
-    faqs: allContentfulFaq(filter: { contentful_id: { in: $modules } }) {
+    faqs: allContentfulFaq(filter: { contentful_id: { in: $modules }, node_locale: { eq: $node_locale } }) {
       edges {
         node {
           ...ContentfulFaqFields
@@ -300,7 +291,7 @@ export const ContentfulQuery = graphql`
       }
     }
 
-    logos: allContentfulLogo(filter: { contentful_id: { in: $modules } }) {
+    logos: allContentfulLogo(filter: { contentful_id: { in: $modules }, node_locale: { eq: $node_locale } }) {
       edges {
         node {
           ...ContentfulLogoFields
@@ -309,7 +300,7 @@ export const ContentfulQuery = graphql`
     }
 
     richTexts: allContentfulRichText(
-      filter: { contentful_id: { in: $modules } }
+      filter: { contentful_id: { in: $modules }, node_locale: { eq: $node_locale } }
     ) {
       edges {
         node {

@@ -278,7 +278,7 @@ const StyledHeader = props => {
                             onClick={() => onChangeLocale(locale)}
                             className="locale-item"
                           >
-                            {locale.name}
+                            {locale.localizedName}
                           </span>
                         ))}
                       </NavMenuChild>
