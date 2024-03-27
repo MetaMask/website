@@ -292,6 +292,26 @@ exports.createPages = async ({ graphql, actions }) => {
             })
             return
           }
+          if (slug === '/download/') {
+            createPage({
+              path: slug,
+              component: path.resolve(
+                `./src/templates/ContentfulDownloadLayout.js`
+              ),
+              context: {
+                headerId,
+                footerId,
+                seoId,
+                modules: moduleIds,
+                themeColor,
+                pathBuild: slug,
+                isFaqLayout,
+                h2FontSize,
+                widerContainer,
+              },
+            })
+            return
+          }
           const extraData = slug === '/developer/' ? devChangelogData : null
           createPage({
             path: slug, // slug validation in Contentful CMS

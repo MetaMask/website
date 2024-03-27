@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import { Section } from './StyledGeneral'
@@ -7,25 +6,30 @@ import Image from './Image'
 import Link from './Link'
 
 const DownloadBrowser = props => {
-  const { browsers } = props
+  const {
+    headline,
+    cta: { downloadBrowsers },
+  } = props.data || {}
+
+  if (!downloadBrowsers || !downloadBrowsers.length) return null
+
+  const browsers = downloadBrowsers.map(browser => {
+    return JSON.parse(browser.internal.content)
+  }, [])
 
   return (
     <Container className={'bg-gray'} sectionPadding={'88px'}>
       <ContentWrapper>
-        <Heading>Supported Browsers</Heading>
+        <Heading>{headline}</Heading>
         {browsers && browsers.length ? (
           <BrowserWrapper>
             <BrowserList>
               {browsers.map(browser => {
-                const { cta, image, label } = browser
+                const { link, icon, text } = browser
                 return (
-                  <BrowserItem
-                    key={label}
-                    to={cta?.ctaLink}
-                    newTab={cta?.newTab}
-                  >
-                    <Image image={image} />
-                    <BrowserName>{label}</BrowserName>
+                  <BrowserItem key={text} to={link} newTab>
+                    <Image src={icon} />
+                    <BrowserName>{text}</BrowserName>
                   </BrowserItem>
                 )
               })}
@@ -38,16 +42,6 @@ const DownloadBrowser = props => {
 }
 
 export default withTheme(DownloadBrowser)
-
-DownloadBrowser.propTypes = {
-  browsers: PropTypes.arrayOf(
-    PropTypes.shape({
-      cta: PropTypes.object,
-      image: PropTypes.object,
-      label: PropTypes.string,
-    })
-  ).isRequired,
-}
 
 const Container = styled(Section)`
   @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
