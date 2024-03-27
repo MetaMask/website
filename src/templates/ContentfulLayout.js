@@ -39,6 +39,7 @@ const ContentfulLayout = props => {
     pageContext: {
       modules,
       pathBuild,
+      slug,
       themeColor,
       isFaqLayout,
       h2FontSize,
@@ -112,6 +113,7 @@ const ContentfulLayout = props => {
         contentfulModuleToComponent({
           ...seoData,
           pagePath: pathBuild,
+          originalSlug: slug,
           translation,
         })}
       {pathname.includes('/uninstalled') && (
