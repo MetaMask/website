@@ -22,10 +22,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const data = await response.json()
 
-  const showLanguageSelector =
-    data.environments[
-      process.env.NODE_ENV !== 'production' ? 'test' : 'production'
-    ]?.on
+  const showLanguageSelector = data.environments['test']?.on
 
   const {
     LOCALES_TRANSLATE,
