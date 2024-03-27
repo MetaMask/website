@@ -10,10 +10,6 @@ const fetch = require('node-fetch')
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions
 
-  console.log(
-    'Fetching LaunchDarkly API )))))))))))))',
-    process.env.GATSBY_LD_API_KEY
-  )
   const response = await fetch(
     'https://app.launchdarkly.com/api/v2/flags/metamask-marketing-sites/show-language-selector',
     {

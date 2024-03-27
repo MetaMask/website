@@ -23,6 +23,7 @@ jobs:
         run: |
           touch gatsby.development.env
           echo GATSBY_LD_CLIENT_ID =${{ secrets.GATSBY_LD_CLIENT_ID }} >> gatsby.development.env
+          echo GATSBY_LD_API_KEY =${{ secrets.GATSBY_LD_API_KEY }} >> gatsby.development.env
           echo GATSBY_CONTENTFUL_API_KEY =${{ secrets.GATSBY_CONTENTFUL_API_KEY }} >> gatsby.development.env
           echo GATSBY_CONTENTFUL_DOWNLOAD_LOCAL =${{ secrets.GATSBY_CONTENTFUL_DOWNLOAD_LOCAL }} >> gatsby.development.env
           echo GATSBY_CONTENTFUL_ENVIRONMENT =${{ secrets.GATSBY_CONTENTFUL_ENVIRONMENT }} >> gatsby.development.env
