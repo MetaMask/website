@@ -1,4 +1,4 @@
-import { useFlags } from 'launchdarkly-react-client-sdk'
+import { useFlags } from 'gatsby-plugin-launchdarkly'
 import { useEffect, useRef, useState } from 'react'
 
 export const useFeatureFlag = (flagName, elementRef) => {

@@ -5,11 +5,33 @@ const redirects = require('./redirects.json')
 const { buildSitemap } = require(`./src/lib/utils/sitemap`)
 const { fetchDevChangeLog } = require('./fetchDataSSR')
 const { writeRedirectsFile } = require('./src/lib/utils/redirect')
+const fetch = require('node-fetch')
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions
 
-  const { LOCALES_TRANSLATE, mapTemplateLayout, DEFAULT_LOCALE_CODE } = await import('./src/lib/config.mjs')
+  const response = await fetch(
+    'https://app.launchdarkly.com/api/v2/flags/metamask-marketing-sites/show-language-selector',
+    {
+      method: 'GET',
+      headers: {
+        Authorization: process.env.GATSBY_LD_API_KEY,
+      },
+    }
+  )
+
+  const data = await response.json()
+
+  const showLanguageSelector =
+    data.environments[
+      process.env.NODE_ENV !== 'production' ? 'test' : 'production'
+    ]?.on
+
+  const {
+    LOCALES_TRANSLATE,
+    mapTemplateLayout,
+    DEFAULT_LOCALE_CODE,
+  } = await import('./src/lib/config.mjs')
 
   // Generally you create redirects while creating pages.
   redirects.forEach(redirect =>
@@ -237,8 +259,9 @@ exports.createPages = async ({ graphql, actions }) => {
             })
             return
           }
+
           const extraData = pageType === 'Developer' ? devChangelogData : null
-          if (translation) {
+          if (showLanguageSelector && translation) {
             LOCALES_TRANSLATE.forEach(locale => {
               const localeSlug = `/${locale.code}${slug}`
               createPage({
@@ -258,11 +281,12 @@ exports.createPages = async ({ graphql, actions }) => {
                   extraData,
                   translation,
                   locale: locale.code,
-                  node_locale: locale.code
+                  node_locale: locale.code,
                 },
               })
             })
           }
+
           createPage({
             path: slug, // slug validation in Contentful CMS
             component: path.resolve(mapTemplateLayout(pageType)),

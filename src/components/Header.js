@@ -11,6 +11,7 @@ import Link from './Link'
 import { DEFAULT_LOCALE_CODE, LOCALES } from '../lib/config.mjs'
 import { navigate } from 'gatsby-link'
 import { useLocation } from '@reach/router'
+import { useFlags } from 'gatsby-plugin-launchdarkly'
 
 const StyledHeader = props => {
   const {
@@ -50,6 +51,7 @@ const StyledHeader = props => {
   const { locale, setLocale } = localization || {}
   const [topMenuMobile, setTopMenuMobile] = useState('88px')
   const [isBrowser, setIsBrowser] = useState(false)
+  const { showLanguageSelector } = useFlags()
 
   useEffect(() => {
     setIsBrowser(true)
@@ -253,7 +255,7 @@ const StyledHeader = props => {
                       value="dark"
                     />
                   </DarkModeWrapper>
-                  {translation && (
+                  {showLanguageSelector && translation && (
                     <NavMenu
                       key="language-selector"
                       active={menuActive === 'language-selector'}
