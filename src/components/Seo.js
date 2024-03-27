@@ -84,7 +84,8 @@ const SEO = props => {
     locale === DEFAULT_LOCALE_CODE ? '' : `/${locale}`
   if (translation) {
     LOCALES.forEach(l => {
-      const localeHref = siteUrl + localeUrl(l.code) + originalSlug
+      const localeHref =
+        siteUrl + localeUrl(l.code) + (originalSlug || pagePath)
       link.push({
         rel: 'alternate',
         hrefLang: l.code,
