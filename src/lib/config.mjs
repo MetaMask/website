@@ -65,7 +65,7 @@ export const mapTemplateLayout = name => {
 export const LOCALES = [
   {
     name: 'English',
-    localizedName: "English",
+    localizedName: 'English',
     code: 'en-US',
     shortName: 'EN',
     htmlLang: 'en',
@@ -73,7 +73,7 @@ export const LOCALES = [
   },
   {
     name: 'Arabic',
-    localizedName: 'عربي',
+    localizedName: 'العربية',
     shortName: 'AR',
     code: 'ar',
     htmlLang: 'ar',
@@ -105,11 +105,7 @@ export const LOCALES_TRANSLATE = LOCALES.slice(1)
 export const DEFAULT_LOCALE = LOCALES.find(l => l.default)
 export const DEFAULT_LOCALE_CODE = DEFAULT_LOCALE.code
 
-export const LOCALIZED_PAGES = [
-  "/",
-  "/swaps/",
-  "/download/"
-]
+export const LOCALIZED_PAGES = ['/', '/swaps/', '/download/']
 
 export const mapCodeToHtmlLang = code => {
   const locale = LOCALES.find(l => l.code === code)
