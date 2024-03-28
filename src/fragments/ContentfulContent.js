@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 export const ContentfulLayoutHeaderFields = graphql`
   fragment ContentfulLayoutHeaderFields on ContentfulLayoutHeader {
     contentful_id
+    node_locale
     internal {
       type
     }
@@ -38,6 +39,7 @@ export const ContentfulLayoutHeaderFields = graphql`
 export const ContentfulLayoutFooterFields = graphql`
   fragment ContentfulLayoutFooterFields on ContentfulLayoutFooter {
     contentful_id
+    node_locale
     internal {
       type
     }
@@ -952,6 +954,7 @@ export const ContentfulNewsFields = graphql`
 export const ContentfulNewsCategoryFields = graphql`
   fragment ContentfulNewsCategoryFields on ContentfulNewsCategory {
     contentful_id
+    node_locale
     internal {
       type
     }
@@ -1036,6 +1039,7 @@ export const ContentfulSeoFields = graphql`
 export const ContentfulPortfolioIntro = graphql`
   fragment ContentfulPortfolioIntroFields on ContentfulPortfolioIntro {
     contentful_id
+    node_locale
     internal {
       type
     }
@@ -1052,6 +1056,7 @@ export const ContentfulPortfolioIntro = graphql`
 export const ContentfulPortfolioInstructions = graphql`
   fragment ContentfulPortfolioInstructionsFields on ContentfulPortfolioInstructions {
     contentful_id
+    node_locale
     internal {
       type
     }
@@ -1071,6 +1076,7 @@ export const ContentfulPortfolioInstructions = graphql`
 export const ContentfulPortfolioListLogo = graphql`
   fragment ContentfulPortfolioListLogoFields on ContentfulPortfolioListLogo {
     contentful_id
+    node_locale
     internal {
       type
     }
@@ -1084,6 +1090,7 @@ export const ContentfulPortfolioListLogo = graphql`
 export const ContentfulPortfolioFeatureDetail = graphql`
   fragment ContentfulPortfolioFeatureDetailFields on ContentfulPortfolioFeatureDetail {
     contentful_id
+    node_locale
     description {
       childMarkdownRemark {
         html
@@ -1123,6 +1130,7 @@ export const ContentfulPortfolioFeatureDetail = graphql`
 export const ContentfulPortfolioFeature = graphql`
   fragment ContentfulPortfolioFeatureFields on ContentfulPortfolioFeature {
     contentful_id
+    node_locale
     internal {
       type
     }
@@ -1155,6 +1163,7 @@ export const ContentfulPortfolioFeature = graphql`
 export const ContentfulPortfolioMap = graphql`
   fragment ContentfulPortfolioMapFields on ContentfulPortfolioMap {
     contentful_id
+    node_locale
     internal {
       type
     }

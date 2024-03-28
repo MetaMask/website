@@ -258,6 +258,7 @@ const StyledHeader = props => {
                   {showLanguageSelector && translation && (
                     <NavMenu
                       key="language-selector"
+                      className="language-selector"
                       active={menuActive === 'language-selector'}
                       onMouseEnter={() =>
                         handleMenuMouseEnter('language-selector')
@@ -445,6 +446,9 @@ const NavMenu = styled.div`
   position: relative;
   align-items: center;
   justify-content: center;
+  &.language-selector {
+    min-width: 85px;
+  }
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     flex-direction: column;
   }
