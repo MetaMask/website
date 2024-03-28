@@ -127,11 +127,17 @@ const PYUSDLayout = ({ data, pageContext }) => {
 }
 
 export const query = graphql`
-  query($seoId: String, $footerId: String) {
-    seo: contentfulSeo(contentful_id: { eq: $seoId }) {
+  query($seoId: String, $footerId: String, $node_locale: String) {
+    seo: contentfulSeo(
+      contentful_id: { eq: $seoId }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulSeoFields
     }
-    footer: contentfulLayoutFooter(contentful_id: { eq: $footerId }) {
+    footer: contentfulLayoutFooter(
+      contentful_id: { eq: $footerId }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulLayoutFooterFields
     }
   }

@@ -7,9 +7,17 @@ import styled, { ThemeProvider } from 'styled-components'
 import globalTheme from '../lib/theme'
 import './layout.scss'
 import './animate.css'
+import { mapCodeToHtmlLang } from '../lib/config.mjs'
 
 const Layout = props => {
-  const { children, theme = {}, h2FontSize, themeColor, widerContainer } = props
+  const {
+    children,
+    theme = {},
+    h2FontSize,
+    themeColor,
+    widerContainer,
+    locale,
+  } = props
   const data = useStaticQuery(
     graphql`
       query {
@@ -45,7 +53,7 @@ const Layout = props => {
             },
           ]}
         >
-          <html lang="en" />
+          <html lang={mapCodeToHtmlLang(locale)} />
         </Helmet>
         {children}
       </Wrapper>

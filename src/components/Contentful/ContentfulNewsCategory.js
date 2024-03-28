@@ -13,7 +13,7 @@ function ContentfulNewsCategory(props) {
     query CategoryQuery {
       stories: allContentfulNews(
         sort: { publishDate: DESC }
-        filter: { isPrivate: { eq: false } }
+        filter: { isPrivate: { eq: false }, node_locale: { eq: "en-US" } }
       ) {
         nodes {
           title

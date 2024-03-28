@@ -30,12 +30,18 @@ const ContentfulAssetLayout = props => {
 export default ContentfulAssetLayout
 
 export const ContentfulQuery = graphql`
-  query($headerId: String, $footerId: String) {
-    header: contentfulLayoutHeader(contentful_id: { eq: $headerId }) {
+  query($headerId: String, $footerId: String, $node_locale: String) {
+    header: contentfulLayoutHeader(
+      contentful_id: { eq: $headerId }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulLayoutHeaderFields
     }
 
-    footer: contentfulLayoutFooter(contentful_id: { eq: $footerId }) {
+    footer: contentfulLayoutFooter(
+      contentful_id: { eq: $footerId }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulLayoutFooterFields
     }
   }

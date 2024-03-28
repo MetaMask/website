@@ -21,7 +21,10 @@ const NotFoundPage = ({ data: { seo }, location }) => (
 
 export const NullPageQuery = graphql`
   query {
-    seo: contentfulSeo(contentful_id: { eq: "5NNWEdsyK6bxwhsYBmzzVc" }) {
+    seo: contentfulSeo(
+      contentful_id: { eq: "5NNWEdsyK6bxwhsYBmzzVc" }
+      node_locale: { eq: "en-US" }
+    ) {
       ...ContentfulSeoFields
     }
   }

@@ -14,6 +14,8 @@ const ContentfulSeo = props => {
       pageType = 'page',
       pagePath,
       canonicalUrl,
+      originalSlug,
+      translation,
     },
   } = props
 
@@ -31,6 +33,8 @@ const ContentfulSeo = props => {
       image={featuredImage}
       metaTags={ex_metaTags}
       linkTags={ex_linkTags}
+      originalSlug={originalSlug}
+      translation={translation}
     />
   )
 }
