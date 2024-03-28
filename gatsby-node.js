@@ -10,19 +10,20 @@ const fetch = require('node-fetch')
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions
 
-  const response = await fetch(
-    'https://app.launchdarkly.com/api/v2/flags/metamask-marketing-sites/show-language-selector',
-    {
-      method: 'GET',
-      headers: {
-        Authorization: process.env.GATSBY_LD_API_KEY,
-      },
-    }
-  )
-
-  const data = await response.json()
-
-  const showLanguageSelector = data.environments['test']?.on
+  let showLanguageSelector = false
+  try {
+    const ldLangResult = await fetch(
+      'https://app.launchdarkly.com/api/v2/flags/metamask-marketing-sites/show-language-selector',
+      {
+        method: 'GET',
+        headers: {
+          Authorization: process.env.GATSBY_LD_API_KEY,
+        },
+      }
+    )
+    const ldLangData = await ldLangResult.json()
+    showLanguageSelector = ldLangData.environments['test']?.on
+  } catch (error) {}
 
   const {
     LOCALES_TRANSLATE,
@@ -43,7 +44,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(`
     {
       allCategories: allContentfulNewsCategory(
-        filter: { name: { regex: "/^(?!.*(?:Latest|example)).*$/" } }
+        filter: { name: { regex: "/^(?!.*(?:Latest|example)).*$/" }, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"} }
       ) {
         nodes {
           contentful_id
@@ -132,6 +133,7 @@ exports.createPages = async ({ graphql, actions }) => {
             h2FontSize
             translation
             pageType
+            node_locale
           }
         }
       }
@@ -157,6 +159,7 @@ exports.createPages = async ({ graphql, actions }) => {
             h2FontSize,
             translation,
             pageType,
+            node_locale,
           } = p.node
           const { contentful_id: footerId = '' } = footer || {}
           const { contentful_id: headerId = '' } = header || {}
@@ -192,6 +195,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   isFaqLayout,
                   widerContainer,
                   h2FontSize,
+                  node_locale,
                 },
               })
               return
@@ -214,6 +218,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   isFaqLayout,
                   widerContainer,
                   h2FontSize,
+                  node_locale,
                 },
               })
             })
@@ -251,6 +256,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   widerContainer,
                   h2FontSize,
                   isStandalone: index === 1,
+                  node_locale,
                 },
               })
             })
@@ -299,9 +305,9 @@ exports.createPages = async ({ graphql, actions }) => {
               widerContainer,
               h2FontSize,
               extraData,
-              locale: DEFAULT_LOCALE_CODE,
+              locale: node_locale,
               translation,
-              node_locale: DEFAULT_LOCALE_CODE,
+              node_locale,
             },
           })
         })
@@ -329,6 +335,7 @@ exports.createPages = async ({ graphql, actions }) => {
               name
             }
             isPrivate
+            node_locale
           }
         }
       }
@@ -340,15 +347,16 @@ exports.createPages = async ({ graphql, actions }) => {
           item => !item.node.isPrivate
         )
         return stories.map(({ node: news }) => {
-          const { contentful_id } = news
+          const { contentful_id, node_locale } = news
           const newsUrl = getNewsUrl(news)
 
           createPage({
             path: newsUrl,
-            component: path.resolve('./src/templates/NewsLayout.js'),
+            component: path.resolve(mapTemplateLayout('Blog')),
             context: {
               news_content_id: contentful_id,
               pathBuild: newsUrl,
+              node_locale,
             },
           })
         })
@@ -362,12 +370,13 @@ exports.createPages = async ({ graphql, actions }) => {
   const contentfulAuthorProfile = graphql(`
     {
       authors: allContentfulNewsAuthor(
-        filter: { createProfilePage: { eq: true } }
+        filter: { createProfilePage: { eq: true }, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"} }
       ) {
         nodes {
           contentful_id
           name
           profileUrl
+          node_locale
         }
       }
     }
@@ -376,7 +385,7 @@ exports.createPages = async ({ graphql, actions }) => {
       if (result.data && result.data.authors) {
         const authors = result.data.authors.nodes
         return authors.map(author => {
-          const { contentful_id, profileUrl } = author
+          const { contentful_id, profileUrl, node_locale } = author
           const slug = '/author/' + profileUrl + '/'
           createPage({
             path: slug,
@@ -384,6 +393,7 @@ exports.createPages = async ({ graphql, actions }) => {
             context: {
               author_id: contentful_id,
               pathBuild: slug,
+              node_locale,
             },
           })
         })
@@ -417,7 +427,7 @@ exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
           path
         }
       }
-      allPrivateContentfulLayout: allContentfulLayout(filter: {isPrivate: {eq: true}}) {
+      allPrivateContentfulLayout: allContentfulLayout(filter: {isPrivate: {eq: true}, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"}}) {
         nodes {
           slug
         }
@@ -432,7 +442,7 @@ exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
           publishDate(formatString: "YYYY-MM-DD")
         }
       }
-      allPrivateContentfulNews: allContentfulNews(filter: {isPrivate: {eq: true}}) {
+      allPrivateContentfulNews: allContentfulNews(filter: {isPrivate: {eq: true}, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"}}) {
         nodes {
           title
           slug
@@ -482,6 +492,10 @@ exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
               `/dev-404-page`,
               `/404`,
               `/404.html`,
+              `/es/`,
+              `/ar/`,
+              `/zh-CN/`,
+              `/de/`,
             ]
             return !excludePages.some(exclude => path.startsWith(exclude))
           },
