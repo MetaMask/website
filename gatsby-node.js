@@ -23,7 +23,9 @@ exports.createPages = async ({ graphql, actions }) => {
     )
     const ldLangData = await ldLangResult.json()
     showLanguageSelector = ldLangData.environments['test']?.on
-  } catch (error) {}
+  } catch (error) {
+    console.error('Error fetching LaunchDarkly flag:', error)
+  }
 
   const {
     LOCALES_TRANSLATE,
