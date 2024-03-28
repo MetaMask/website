@@ -11,7 +11,7 @@ import Embed from './Embed'
 import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
 import ParseMD from './ParseMD'
 import GatsbyBackgroundImage from './GatsbyBackgroundImage'
-import { useFlags } from 'launchdarkly-react-client-sdk'
+import { useFlags } from 'gatsby-plugin-launchdarkly'
 
 const FeatureComponent = props => {
   const {
