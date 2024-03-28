@@ -5,9 +5,30 @@ const { buildSitemap } = require(`./src/lib/utils/sitemap`)
 const { minimatch } = require('minimatch')
 const { fetchDevChangeLog } = require('./fetchDataSSR')
 const { writeRedirectsFile } = require('./src/lib/utils/redirect')
+const fetch = require('node-fetch')
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions
+  const {
+    LOCALES_TRANSLATE,
+    mapTemplateLayout,
+    DEFAULT_LOCALE_CODE,
+  } = await import('./src/lib/config.mjs')
+
+  let showLanguageSelector = false
+  try {
+    const ldLangResult = await fetch(
+      'https://app.launchdarkly.com/api/v2/flags/metamask-marketing-sites/show-language-selector',
+      {
+        method: 'GET',
+        headers: {
+          Authorization: process.env.GATSBY_LD_API_KEY,
+        },
+      }
+    )
+    const ldLangData = await ldLangResult.json()
+    showLanguageSelector = ldLangData.environments['test']?.on
+  } catch (error) {}
 
   const redirects = await graphql(`
     {
@@ -33,7 +54,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(`
     {
       allCategories: allContentfulNewsCategory(
-        filter: { name: { regex: "/^(?!.*(?:Latest|example)).*$/" } }
+        filter: { name: { regex: "/^(?!.*(?:Latest|example)).*$/" }, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"} }
       ) {
         nodes {
           contentful_id
@@ -67,7 +88,9 @@ exports.createPages = async ({ graphql, actions }) => {
   const legalData = legalsQuery?.data?.allMdx?.nodes
   const contentfulLayouts = graphql(`
     {
-      pages: allContentfulLayout(filter: { isPrivate: { eq: false } }) {
+      pages: allContentfulLayout(
+        filter: { isPrivate: { eq: false }, node_locale: { eq: "${DEFAULT_LOCALE_CODE}" } }
+      ) {
         edges {
           node {
             slug
@@ -117,6 +140,9 @@ exports.createPages = async ({ graphql, actions }) => {
             isFaqLayout
             h2FontSize
             widerContainer
+            translation
+            pageType
+            node_locale
           }
         }
       }
@@ -140,13 +166,16 @@ exports.createPages = async ({ graphql, actions }) => {
             isFaqLayout,
             widerContainer,
             h2FontSize,
+            translation,
+            pageType,
+            node_locale,
           } = p.node
           const { contentful_id: footerId = '' } = footer || {}
           const { contentful_id: headerId = '' } = header || {}
           const moduleIds = modules.map(m => m.contentful_id)
           const seoId = seo ? seo.contentful_id : ''
 
-          if (slug === '/assets/') {
+          if (pageType === 'Asset') {
             const assetResponseData = modules[0]?.assets
             const assetUrls = assetResponseData?.map(el => el.url)
             const assetData = assetResponseData?.map(el => ({
@@ -166,9 +195,7 @@ exports.createPages = async ({ graphql, actions }) => {
               })()
               createPage({
                 path: slug,
-                component: path.resolve(
-                  `./src/templates/ContentfulAssetLayout.js`
-                ),
+                component: path.resolve(mapTemplateLayout(pageType)),
                 context: {
                   headerId,
                   footerId,
@@ -177,18 +204,19 @@ exports.createPages = async ({ graphql, actions }) => {
                   isFaqLayout,
                   widerContainer,
                   h2FontSize,
+                  node_locale,
                 },
               })
               return
             }
           }
 
-          if (slug === '/news/') {
+          if (pageType === 'News') {
             const categoriesPath = newsCategories.map(cat => `/news/${cat}/`)
             categoriesPath.forEach(categoryPath => {
               createPage({
-                path: categoryPath, // slug validation in Contentful CMS
-                component: path.resolve(`./src/templates/ContentfulLayout.js`),
+                path: categoryPath,
+                component: path.resolve(mapTemplateLayout(pageType)),
                 context: {
                   headerId,
                   footerId,
@@ -198,6 +226,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   pathBuild: categoryPath,
                   isFaqLayout,
                   h2FontSize,
+                  node_locale,
                 },
               })
             })
@@ -218,7 +247,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }
             createPage({
               path: slug,
-              component: path.resolve(`./src/templates/MarkdownPageLayout.js`),
+              component: path.resolve(mapTemplateLayout(pageType)),
               context: {
                 headerId,
                 footerId,
@@ -228,96 +257,41 @@ exports.createPages = async ({ graphql, actions }) => {
                 pathBuild: slug,
                 isFaqLayout,
                 h2FontSize,
+                node_locale,
               },
             })
             return
           }
-
-          if (slug === '/portfolio/') {
-            createPage({
-              path: slug,
-              component: path.resolve(
-                `./src/templates/ContentfulPortfolioLayout.js`
-              ),
-              context: {
-                headerId,
-                footerId,
-                seoId,
-                pathBuild: slug,
-                modules: moduleIds,
-              },
+          const extraData = pageType === 'Developer' ? devChangelogData : null
+          if (showLanguageSelector && translation) {
+            LOCALES_TRANSLATE.forEach(locale => {
+              const localeSlug = `/${locale.code}${slug}`
+              createPage({
+                path: localeSlug,
+                component: path.resolve(mapTemplateLayout(pageType)),
+                context: {
+                  headerId,
+                  footerId,
+                  seoId,
+                  modules: moduleIds,
+                  themeColor,
+                  pathBuild: localeSlug,
+                  slug,
+                  isFaqLayout,
+                  widerContainer,
+                  h2FontSize,
+                  extraData,
+                  translation,
+                  locale: locale.code,
+                  node_locale: locale.code,
+                },
+              })
             })
-            return
           }
-          if (slug === '/swaps/swap-with-portfolio/') {
-            createPage({
-              path: slug,
-              component: path.resolve(
-                `./src/templates/SwapWithPortfolioLayout.js`
-              ),
-              context: {
-                footerId,
-                seoId,
-                pathBuild: slug,
-                widerContainer,
-              },
-            })
-            return
-          }
-          if (slug === '/swaps/multitoken-swap/') {
-            createPage({
-              path: slug,
-              component: path.resolve(
-                `./src/templates/MultiTokenSwapLayout.js`
-              ),
-              context: {
-                footerId,
-                seoId,
-                pathBuild: slug,
-                widerContainer,
-              },
-            })
-            return
-          }
-          if (slug === '/pyusd/') {
-            createPage({
-              path: slug,
-              component: path.resolve(`./src/templates/PYUSDLayout.js`),
-              context: {
-                footerId,
-                seoId,
-                pathBuild: slug,
-                widerContainer,
-              },
-            })
-            return
-          }
-          if (slug === '/download/') {
-            createPage({
-              path: slug,
-              component: path.resolve(
-                `./src/templates/ContentfulDownloadLayout.js`
-              ),
-              context: {
-                headerId,
-                footerId,
-                seoId,
-                modules: moduleIds,
-                themeColor,
-                pathBuild: slug,
-                isFaqLayout,
-                h2FontSize,
-                widerContainer,
-              },
-            })
-            return
-          }
-          const extraData = slug === '/developer/' ? devChangelogData : null
           createPage({
-            path: slug, // slug validation in Contentful CMS
-            component: path.resolve(`./src/templates/ContentfulLayout.js`),
+            path: slug,
+            component: path.resolve(mapTemplateLayout(pageType)),
             context: {
-              // pass data to page template for configuration and populating modules
               headerId,
               footerId,
               seoId,
@@ -328,6 +302,9 @@ exports.createPages = async ({ graphql, actions }) => {
               h2FontSize,
               widerContainer,
               extraData,
+              locale: node_locale,
+              translation,
+              node_locale,
             },
           })
         })
@@ -342,7 +319,10 @@ exports.createPages = async ({ graphql, actions }) => {
   /* News Pages */
   const contentfulNews = graphql(`
     {
-      stories: allContentfulNews(sort: { publishDate: DESC }) {
+      stories: allContentfulNews(
+        sort: { publishDate: DESC }
+        filter: { node_locale: { eq: "${DEFAULT_LOCALE_CODE}" } }
+      ) {
         edges {
           node {
             contentful_id
@@ -352,6 +332,7 @@ exports.createPages = async ({ graphql, actions }) => {
               name
             }
             isPrivate
+            node_locale
           }
         }
       }
@@ -362,16 +343,17 @@ exports.createPages = async ({ graphql, actions }) => {
         const stories = result.data.stories.edges.filter(
           item => !item.node.isPrivate
         )
-        return stories.map(({ node: news }, index) => {
-          const { contentful_id } = news
+        return stories.map(({ node: news }) => {
+          const { contentful_id, node_locale } = news
           const newsUrl = getNewsUrl(news)
 
           createPage({
             path: newsUrl,
-            component: path.resolve('./src/templates/NewsLayout.js'),
+            component: path.resolve(mapTemplateLayout('Blog')),
             context: {
               news_content_id: contentful_id,
               pathBuild: newsUrl,
+              node_locale,
             },
           })
         })
@@ -384,12 +366,13 @@ exports.createPages = async ({ graphql, actions }) => {
   const contentfulAuthorProfile = graphql(`
     {
       authors: allContentfulNewsAuthor(
-        filter: { createProfilePage: { eq: true } }
+        filter: { createProfilePage: { eq: true }, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"} }
       ) {
         nodes {
           contentful_id
           name
           profileUrl
+          node_locale
         }
       }
     }
@@ -398,14 +381,15 @@ exports.createPages = async ({ graphql, actions }) => {
       if (result.data && result.data.authors) {
         const authors = result.data.authors.nodes
         return authors.map(author => {
-          const { contentful_id, profileUrl } = author
+          const { contentful_id, profileUrl, node_locale } = author
           const slug = '/author/' + profileUrl + '/'
           createPage({
             path: slug,
-            component: path.resolve('./src/templates/AuthorProfileLayout.js'),
+            component: path.resolve(mapTemplateLayout('Author')),
             context: {
               author_id: contentful_id,
               pathBuild: slug,
+              node_locale,
             },
           })
         })
@@ -424,7 +408,8 @@ exports.createPages = async ({ graphql, actions }) => {
   return Promise.all(autoGeneratedPages)
 }
 
-exports.onPostBuild = ({ graphql, store, pathPrefix, reporter }) => {
+exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
+  const { DEFAULT_LOCALE_CODE } = await import('./src/lib/config.mjs')
   const { redirects, program, config } = store.getState()
   buildSitemap({
     query: `
@@ -440,17 +425,19 @@ exports.onPostBuild = ({ graphql, store, pathPrefix, reporter }) => {
         path
       }
     }
-    allPrivateContentfulLayout: allContentfulLayout(filter: {isPrivate: {eq: true}}) {
+    allPrivateContentfulLayout: allContentfulLayout(filter: {isPrivate: {eq: true}, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"}}) {
       nodes {
         slug
       }
     }
-    allContentfulLayoutNonCanonical: allContentfulLayout(filter: {seo: {canonicalUrl: {ne: null}}}) {
+    allContentfulLayoutNonCanonical: allContentfulLayout(
+      filter: {node_locale: {eq: "${DEFAULT_LOCALE_CODE}"}, seo: {canonicalUrl: {ne: null}}}
+    ) {
       nodes {
         slug
       }
     }
-    allContentfulNews(filter: {isPrivate: {eq: false}}) {
+    allContentfulNews(filter: {isPrivate: {eq: false}, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"}}) {
       nodes {
         title
         slug
@@ -460,7 +447,7 @@ exports.onPostBuild = ({ graphql, store, pathPrefix, reporter }) => {
         publishDate(formatString: "YYYY-MM-DD")
       }
     }
-    allPrivateContentfulNews: allContentfulNews(filter: {isPrivate: {eq: true}}) {
+    allPrivateContentfulNews: allContentfulNews(filter: {isPrivate: {eq: true}, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"}}) {
       nodes {
         title
         slug
@@ -469,7 +456,9 @@ exports.onPostBuild = ({ graphql, store, pathPrefix, reporter }) => {
         }
       }
     }
-    allContentfulNewsNonCanonical: allContentfulNews(filter: {canonicalUrl: {ne: null}}) {
+    allContentfulNewsNonCanonical: allContentfulNews(
+      filter: {node_locale: {eq: "${DEFAULT_LOCALE_CODE}"}, canonicalUrl: {ne: null}}
+    ) {
       nodes {
         title
         categories {
@@ -524,6 +513,10 @@ exports.onPostBuild = ({ graphql, store, pathPrefix, reporter }) => {
               `/dev-404-page*`,
               `/404*`,
               `/news/*`,
+              `/es/`,
+              `/ar/`,
+              `/zh-CN/`,
+              `/de/`,
             ]
             return !excludePages.some(exclude => minimatch(path, exclude))
           },

@@ -87,6 +87,15 @@ const HeaderInner = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
+  html:lang(ar) & {
+    direction: ltr;
+
+    * {
+      direction: ltr;
+    }
+  }
+
   ${({ typeLayout, theme }) =>
     typeLayout === 'module'
       ? `

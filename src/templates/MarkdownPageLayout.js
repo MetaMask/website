@@ -31,16 +31,30 @@ const MarkdownPageLayout = props => {
 export default MarkdownPageLayout
 
 export const ContentfulQuery = graphql`
-  query($headerId: String, $footerId: String, $seoId: String) {
-    header: contentfulLayoutHeader(contentful_id: { eq: $headerId }) {
+  query(
+    $headerId: String
+    $footerId: String
+    $seoId: String
+    $node_locale: String
+  ) {
+    header: contentfulLayoutHeader(
+      contentful_id: { eq: $headerId }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulLayoutHeaderFields
     }
 
-    footer: contentfulLayoutFooter(contentful_id: { eq: $footerId }) {
+    footer: contentfulLayoutFooter(
+      contentful_id: { eq: $footerId }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulLayoutFooterFields
     }
 
-    seo: contentfulSeo(contentful_id: { eq: $seoId }) {
+    seo: contentfulSeo(
+      contentful_id: { eq: $seoId }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulSeoFields
     }
   }

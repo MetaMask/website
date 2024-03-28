@@ -28,6 +28,7 @@ const PageLayout = props => {
     themeColor,
     h2FontSize,
     extraData,
+    locale,
     ...rest
   } = props
 
@@ -131,6 +132,7 @@ const PageLayout = props => {
         theme={pageTheme}
         themeColor={themeColor}
         h2FontSize={h2FontSize}
+        locale={locale}
         {...rest}
       >
         <Notifications />

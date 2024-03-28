@@ -1,3 +1,13 @@
+html {
+  &:lang(ar) {
+    direction: rtl;
+
+    * {
+      direction: rtl;
+    }
+  }
+}
+
 @font-face {
   font-family: 'icomoon';
   src: url('/fonts/icon/icomoon.eot?araoaz');
