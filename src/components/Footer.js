@@ -58,7 +58,7 @@ const StyledFooter = props => {
           <SubFooterContainer>
             <PolicyCopy>
               <PolicyCopyLink className="paragraph" as="span">
-                @{new Date().getFullYear()} {copyright}
+                {copyright}
               </PolicyCopyLink>
             </PolicyCopy>
           </SubFooterContainer>
