@@ -1,6 +1,5 @@
 import { polyfillCountryFlagEmojis } from 'country-flag-emoji-polyfill'
 import React, { useEffect, useState } from 'react'
-import list from './countries-payments-providers.json'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
@@ -13,7 +12,7 @@ const isoToEmoji = code =>
     .map(emojiCode => String.fromCodePoint(emojiCode))
     .join('')
 
-const Modal = ({ title, text, setHasModal, setSelectedCountry }) => {
+const Modal = ({ list, title, text, setHasModal, setSelectedCountry }) => {
   const [searchTerm, setSearchTerm] = useState('')
 
   return createPortal(
@@ -75,10 +74,13 @@ const ContentfulLayoutPopupRegionSelector = ({
   headline,
   title,
   text,
+  extraData,
   modulesRender,
   setModulesRender,
 }) => {
   polyfillCountryFlagEmojis()
+
+  const { list } = JSON.parse(extraData.internal.content)
 
   const [hasModal, setHasModal] = useState(false)
   const [selectedCountry, setSelectedCountry] = useState(0)
@@ -106,6 +108,7 @@ const ContentfulLayoutPopupRegionSelector = ({
 
       {hasModal && (
         <Modal
+          list={list}
           title={title}
           text={text}
           setHasModal={setHasModal}

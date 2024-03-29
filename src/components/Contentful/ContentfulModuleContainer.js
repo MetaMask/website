@@ -42,6 +42,7 @@ const ContentfulModuleContainer = props => {
       regionSelectorHeadline,
       regionSelectorPopupTitle,
       regionSelectorPopupText,
+      extraData,
     },
   } = props
 
@@ -153,6 +154,7 @@ const ContentfulModuleContainer = props => {
             headline={regionSelectorHeadline}
             title={regionSelectorPopupTitle}
             text={regionSelectorPopupText}
+            extraData={extraData}
             modulesRender={initialModulesRender}
             setModulesRender={setModulesRender}
           />
@@ -252,6 +254,7 @@ ContentfulModuleContainer.propTypes = {
     regionSelectorHeadline: PropTypes.string,
     regionSelectorPopupTitle: PropTypes.string,
     regionSelectorPopupText: PropTypes.string,
+    extraData: PropTypes.object,
   }),
 }
 
