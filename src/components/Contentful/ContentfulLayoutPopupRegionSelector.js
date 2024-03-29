@@ -153,7 +153,6 @@ ContentfulLayoutPopupRegionSelector.propTypes = {
   }),
 }
 
-// TODO: mobile
 const Wrapper = styled.div`
   color: ${({ theme }) => theme.text.default};
   font-size: 16px;
@@ -212,6 +211,7 @@ const ModalWrapper = styled.div`
     flex-direction: column;
     gap: 16px;
     width: 480px;
+    max-width: 90%;
     padding: 24px 0 0;
     background: ${({ theme }) => theme.background.white};
     border-radius: 24px;
@@ -228,6 +228,7 @@ const ModalWrapper = styled.div`
 
     p {
       text-align: center;
+      margin: 0;
       padding: 0 24px;
     }
 
@@ -276,9 +277,13 @@ const ModalWrapper = styled.div`
     ul {
       overflow-y: auto;
       list-style: none;
-      height: 400px;
+      height: 175px;
       width: calc(100% - 24px);
       margin: 0 auto;
+
+      @media (min-width: ${({ theme }) => theme.device.mobile}) {
+        height: 400px;
+      }
 
       li {
         cursor: pointer;
