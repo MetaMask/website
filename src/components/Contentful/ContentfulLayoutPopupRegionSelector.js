@@ -139,7 +139,7 @@ const Wrapper = styled.div`
   flex-flow: column nowrap;
 `
 
-const OpenPopupBtn = styled.div`
+const OpenPopupBtn = styled.button`
   cursor: pointer;
   color: ${({ theme }) => theme.text.title};
   font-size: 14px;
