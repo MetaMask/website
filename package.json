@@ -31,6 +31,7 @@
     "auth0-js": "^9.8.2",
     "body-scroll-lock": "^4.0.0-beta.0",
     "clsx": "^2.1.0",
+    "country-flag-emoji-polyfill": "^0.1.8",
     "dotenv": "^8.1.0",
     "gatsby": "5.12.10",
     "gatsby-cli": "^5.0.0",

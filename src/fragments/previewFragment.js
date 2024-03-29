@@ -499,6 +499,15 @@ export const ContentfulModuleContainerFields = gql`
     isTrustBar
     displayTitle
     carouselMode
+    hasRegionSelector
+    regionSelectorHeadline
+    regionSelectorPopupTitle
+    regionSelectorPopupText
+    extraData {
+      internal {
+        content
+      }
+    }
     modulesCollection(preview: true) {
       items {
         ...ContentfulCardFields

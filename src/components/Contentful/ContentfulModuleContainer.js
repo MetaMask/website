@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { useContentfulInspectorMode } from '@contentful/live-preview/react'
+import ContentfulLayoutPopupRegionSelector from './ContentfulLayoutPopupRegionSelector'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
-import classnames from 'classnames'
-import FaqList from '../FaqList'
-import kebabCase from 'lodash/kebabCase'
-import { EyebrowStyle } from '../StyledGeneral'
+import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
-import Carousel from '../Carousel'
+import React, { useEffect, useState, useRef } from 'react'
 import { useMediaQuery } from 'react-responsive'
+import { EyebrowStyle } from '../StyledGeneral'
+import kebabCase from 'lodash/kebabCase'
+import styled from 'styled-components'
+import classnames from 'classnames'
+import PropTypes from 'prop-types'
+import Carousel from '../Carousel'
+import FaqList from '../FaqList'
 import { useMemo } from 'react'
 
 const ContentfulModuleContainer = props => {
@@ -37,6 +38,11 @@ const ContentfulModuleContainer = props => {
       columnType,
       carouselMode = false,
       contentful_id,
+      hasRegionSelector,
+      regionSelectorHeadline,
+      regionSelectorPopupTitle,
+      regionSelectorPopupText,
+      extraData,
     },
   } = props
 
@@ -46,6 +52,7 @@ const ContentfulModuleContainer = props => {
   const htmlData = previewMode ? description : html
   const faqList = []
   const modulesOther = []
+
   modules?.forEach(module => {
     let typeName = module.__typename || module.internal?.type
     if (['ContentfulFaq', 'Faq'].includes(typeName)) {
@@ -54,8 +61,10 @@ const ContentfulModuleContainer = props => {
       modulesOther.push(module)
     }
   })
+
   const isFaq = faqList && faqList.length
   const [modulesRender, setModulesRender] = useState(modulesOther)
+  const initialModulesRender = useRef(modulesRender)
   const [shuffled, setShuffled] = useState(false)
 
   const isMobile = useMediaQuery({
@@ -108,6 +117,7 @@ const ContentfulModuleContainer = props => {
                 {eyebrow}
               </EyebrowStyle>
             ) : null}
+
             {title && displayTitle ? (
               <Title
                 isFaq={isFaq}
@@ -121,6 +131,7 @@ const ContentfulModuleContainer = props => {
                 {title}
               </Title>
             ) : null}
+
             {htmlData ? (
               <div
                 className={classnames({
@@ -137,6 +148,18 @@ const ContentfulModuleContainer = props => {
             ) : null}
           </Content>
         ) : null}
+
+        {hasRegionSelector && (
+          <ContentfulLayoutPopupRegionSelector
+            headline={regionSelectorHeadline}
+            title={regionSelectorPopupTitle}
+            text={regionSelectorPopupText}
+            extraData={extraData}
+            modulesRender={initialModulesRender}
+            setModulesRender={setModulesRender}
+          />
+        )}
+
         <ModulesWrapper splitModules={splitModules}>
           {isFaq ? (
             <FaqList
@@ -145,6 +168,7 @@ const ContentfulModuleContainer = props => {
               previewMode={previewMode}
             />
           ) : null}
+
           {!shouldShowCarousel && modulesRender.length ? (
             <Modules
               columnType={columnType}
@@ -172,6 +196,7 @@ const ContentfulModuleContainer = props => {
               )}
             </Modules>
           ) : null}
+
           {shouldShowCarousel && modulesRender.length ? (
             <Carousel
               itemsOnTablet={columnsOnTablet}
@@ -225,6 +250,11 @@ ContentfulModuleContainer.propTypes = {
     isTrustBar: PropTypes.bool,
     centerOnTablet: PropTypes.bool,
     centerOnMobile: PropTypes.bool,
+    hasRegionSelector: PropTypes.bool,
+    regionSelectorHeadline: PropTypes.string,
+    regionSelectorPopupTitle: PropTypes.string,
+    regionSelectorPopupText: PropTypes.string,
+    extraData: PropTypes.object,
   }),
 }
 
@@ -267,6 +297,7 @@ const Wrapper = styled.div`
     }
   }
 `
+
 const Inner = styled.div`
   display: block;
   ${({ splitModules, theme }) =>
@@ -286,6 +317,7 @@ const Inner = styled.div`
     text-align: center;
   }
 `
+
 const ModulesWrapper = styled.div`
   display: block;
   ${({ splitModules, theme }) =>
@@ -340,6 +372,7 @@ const Title = styled.h2`
 const Modules = styled.div`
   display: flex;
   flex-flow: wrap;
+
   ${({ isLiquiditySection }) =>
     isLiquiditySection
       ? `
