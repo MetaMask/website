@@ -6,6 +6,7 @@ import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
+// Convert ISO country code to emoji
 const isoToEmoji = code =>
   code
     .split('')
@@ -30,7 +31,7 @@ const Modal = ({ setHasModal, setSelectedCountry }) => {
           support by our integrations.
         </p>
 
-        <form class="input-container">
+        <form class="input-container" onReset={setSearchTerm.bind(this, '')}>
           <input
             type="search"
             name="search"
@@ -152,9 +153,9 @@ ContentfulLayoutPopupRegionSelector.propTypes = {
   }),
 }
 
-// TODO: mobile + dark mode
+// TODO: mobile
 const Wrapper = styled.div`
-  color: #24292e;
+  color: ${({ theme }) => theme.text.default};
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -167,7 +168,7 @@ const Wrapper = styled.div`
 
 const OpenPopupBtn = styled.div`
   cursor: pointer;
-  color: #141618;
+  color: ${({ theme }) => theme.text.title};
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -179,6 +180,11 @@ const OpenPopupBtn = styled.div`
   border: 1px solid #bbc0c5;
   background: url('/images/selector/arrow-down.svg') calc(100% - 16px) center /
     16px no-repeat;
+
+  body.dark-mode & {
+    background: url('/images/selector/arrow-down-w.svg') calc(100% - 16px)
+      center / 16px no-repeat;
+  }
 
   &::before {
     content: attr(data-flag);
@@ -198,7 +204,7 @@ const ModalWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.8);
 
   .center {
     overflow: hidden;
@@ -207,11 +213,11 @@ const ModalWrapper = styled.div`
     gap: 16px;
     width: 480px;
     padding: 24px 0 0;
-    background: #fff;
+    background: ${({ theme }) => theme.background.white};
     border-radius: 24px;
 
     h3 {
-      color: #000;
+      color: ${({ theme }) => theme.text.title};
       font-size: 20px;
       font-style: normal;
       font-weight: 700;
@@ -226,7 +232,7 @@ const ModalWrapper = styled.div`
     }
 
     .input-container {
-      color: #a8abbe;
+      color: ${({ theme }) => theme.text.darkGray};
       font-size: 16px;
       font-style: normal;
       font-weight: 500;
@@ -237,6 +243,7 @@ const ModalWrapper = styled.div`
       margin: 0 auto;
 
       input[type='search'] {
+        color: currentColor;
         outline: none;
         position: absolute;
         top: 0;
@@ -246,13 +253,13 @@ const ModalWrapper = styled.div`
         height: 100%;
         border-radius: 8px;
         padding: 0 32px 0 52px;
-        border: 1px solid #4f87f6;
+        border: 1px solid ${({ theme }) => theme.linkColor};
         background: url('/images/selector/search.svg') 16px center / 24px
           no-repeat;
       }
 
       button[type='reset'] {
-        color: #a8abbe;
+        color: ${({ theme }) => theme.text.darkGray};
         font-weight: 400;
         font-size: 24px;
         cursor: pointer;
@@ -281,9 +288,10 @@ const ModalWrapper = styled.div`
         margin: 0;
         padding: 8px 12px;
         border-radius: 8px;
+        transition: background 0.1s linear;
 
         &:hover {
-          background: #f2f4f6;
+          background: ${({ theme }) => theme.background.tabModuleOuter};
         }
 
         .flag {
