@@ -1,17 +1,17 @@
-import React, { useEffect, useState, useRef } from 'react'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { useContentfulInspectorMode } from '@contentful/live-preview/react'
-import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
-import classnames from 'classnames'
-import FaqList from '../FaqList'
-import kebabCase from 'lodash/kebabCase'
-import { EyebrowStyle } from '../StyledGeneral'
-import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
-import Carousel from '../Carousel'
-import { useMediaQuery } from 'react-responsive'
-import { useMemo } from 'react'
 import ContentfulLayoutPopupRegionSelector from './ContentfulLayoutPopupRegionSelector'
+import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
+import { useContentfulInspectorMode } from '@contentful/live-preview/react'
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
+import React, { useEffect, useState, useRef } from 'react'
+import { useMediaQuery } from 'react-responsive'
+import { EyebrowStyle } from '../StyledGeneral'
+import kebabCase from 'lodash/kebabCase'
+import styled from 'styled-components'
+import classnames from 'classnames'
+import PropTypes from 'prop-types'
+import Carousel from '../Carousel'
+import FaqList from '../FaqList'
+import { useMemo } from 'react'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -38,6 +38,10 @@ const ContentfulModuleContainer = props => {
       columnType,
       carouselMode = false,
       contentful_id,
+      hasRegionSelector,
+      regionSelectorHeadline,
+      regionSelectorPopupTitle,
+      regionSelectorPopupText,
     },
   } = props
 
@@ -57,7 +61,6 @@ const ContentfulModuleContainer = props => {
     }
   })
 
-  const isPartnerLogos = title === 'Partner Logos'
   const isFaq = faqList && faqList.length
   const [modulesRender, setModulesRender] = useState(modulesOther)
   const initialModulesRender = useRef(modulesRender)
@@ -145,14 +148,15 @@ const ContentfulModuleContainer = props => {
           </Content>
         ) : null}
 
-        {/* WIP : TODO link to contentful */}
-        {isPartnerLogos && (
+        {hasRegionSelector && (
           <ContentfulLayoutPopupRegionSelector
+            headline={regionSelectorHeadline}
+            title={regionSelectorPopupTitle}
+            text={regionSelectorPopupText}
             modulesRender={initialModulesRender}
             setModulesRender={setModulesRender}
           />
         )}
-        {/* WIP */}
 
         <ModulesWrapper splitModules={splitModules}>
           {isFaq ? (
@@ -244,6 +248,10 @@ ContentfulModuleContainer.propTypes = {
     isTrustBar: PropTypes.bool,
     centerOnTablet: PropTypes.bool,
     centerOnMobile: PropTypes.bool,
+    hasRegionSelector: PropTypes.bool,
+    regionSelectorHeadline: PropTypes.string,
+    regionSelectorPopupTitle: PropTypes.string,
+    regionSelectorPopupText: PropTypes.string,
   }),
 }
 

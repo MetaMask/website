@@ -1,4 +1,3 @@
-import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import { polyfillCountryFlagEmojis } from 'country-flag-emoji-polyfill'
 import React, { useEffect, useState } from 'react'
 import list from './countries-payments-providers.json'
@@ -14,7 +13,7 @@ const isoToEmoji = code =>
     .map(emojiCode => String.fromCodePoint(emojiCode))
     .join('')
 
-const Modal = ({ setHasModal, setSelectedCountry }) => {
+const Modal = ({ title, text, setHasModal, setSelectedCountry }) => {
   const [searchTerm, setSearchTerm] = useState('')
 
   return createPortal(
@@ -24,12 +23,8 @@ const Modal = ({ setHasModal, setSelectedCountry }) => {
       }}
     >
       <div className="center">
-        <h3>Select Your Region</h3>
-        <p>
-          The cash out methods and tokens available to you are determined by our
-          third-party integrations and may vary depending on your region and
-          support by our integrations.
-        </p>
+        <h3>{title}</h3>
+        <p>{text}</p>
 
         <form class="input-container" onReset={setSearchTerm.bind(this, '')}>
           <input
@@ -76,23 +71,13 @@ const Modal = ({ setHasModal, setSelectedCountry }) => {
   )
 }
 
-// TODO link to contentful
 const ContentfulLayoutPopupRegionSelector = ({
+  headline,
+  title,
+  text,
   modulesRender,
   setModulesRender,
 }) => {
-  //   const {
-  //     moduleConfig: {
-  //       contentful_id,
-  //       title,
-  //       list,
-  //       customClass,
-  //       previewMode = false,
-  //     },
-  //   } = props
-
-  const title = 'Select a region'
-
   polyfillCountryFlagEmojis()
 
   const [hasModal, setHasModal] = useState(false)
@@ -108,7 +93,7 @@ const ContentfulLayoutPopupRegionSelector = ({
 
   return (
     <Wrapper>
-      <span>{title}</span>
+      <span>{headline}</span>
 
       <OpenPopupBtn
         onClick={() => setHasModal(true)}
@@ -121,6 +106,8 @@ const ContentfulLayoutPopupRegionSelector = ({
 
       {hasModal && (
         <Modal
+          title={title}
+          text={text}
           setHasModal={setHasModal}
           setSelectedCountry={setSelectedCountry}
         />
@@ -129,28 +116,12 @@ const ContentfulLayoutPopupRegionSelector = ({
   )
 }
 
-const parsePreviewData = data => {
-  data = data.moduleConfig.previewContent || data.moduleConfig
-
-  const dataUpdate = {
-    moduleConfig: {
-      previewMode: true,
-      ...data,
-    },
-  }
-  return dataUpdate
-}
-
-export default withProcessPreviewData(parsePreviewData)(
-  ContentfulLayoutPopupRegionSelector
-)
+export default ContentfulLayoutPopupRegionSelector
 
 ContentfulLayoutPopupRegionSelector.propTypes = {
-  moduleConfig: PropTypes.shape({
-    title: PropTypes.string,
-    headline: PropTypes.string,
-    previewMode: PropTypes.bool,
-  }),
+  headline: PropTypes.string,
+  title: PropTypes.string,
+  text: PropTypes.string,
 }
 
 const Wrapper = styled.div`
