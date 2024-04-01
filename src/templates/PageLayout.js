@@ -29,6 +29,7 @@ const PageLayout = props => {
     h2FontSize,
     extraData,
     locale,
+    localizedPages,
     ...rest
   } = props
 
@@ -74,6 +75,7 @@ const PageLayout = props => {
       heroContainerRef,
     },
     extraData,
+    localizedPages,
   }
 
   const [dimensionScript, setDimensionScript] = React.useState('')

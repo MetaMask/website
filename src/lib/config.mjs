@@ -107,8 +107,6 @@ export const LOCALES_TRANSLATE = LOCALES.slice(1)
 export const DEFAULT_LOCALE = LOCALES.find(l => l.default)
 export const DEFAULT_LOCALE_CODE = DEFAULT_LOCALE.code
 
-export const LOCALIZED_PAGES = ['/', '/swaps/', '/download/']
-
 export const mapCodeToHtmlLang = code => {
   const locale = LOCALES.find(l => l.code === code)
   return locale ? locale.htmlLang : DEFAULT_LOCALE.htmlLang

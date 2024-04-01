@@ -12,7 +12,7 @@ import * as styles from '../styles/swap.module.scss'
 
 const SwapWithPortfolio = ({ data, pageContext }) => {
   const { seo, footer } = data
-  const { pathBuild, widerContainer } = pageContext
+  const { pathBuild, widerContainer, localizedPages } = pageContext
 
   useEffect(() => {
     document.documentElement.classList.add(styles.isLanding)
@@ -20,7 +20,7 @@ const SwapWithPortfolio = ({ data, pageContext }) => {
   })
 
   return (
-    <Layout widerContainer={widerContainer}>
+    <Layout widerContainer={widerContainer} localizedPages={localizedPages}>
       {seo &&
         contentfulModuleToComponent({
           ...seo,

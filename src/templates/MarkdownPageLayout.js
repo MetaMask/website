@@ -13,13 +13,24 @@ import MarkdownPageBody from '../components/MarkdownPageBody'
 const MarkdownPageLayout = props => {
   const {
     data: { header, footer, seo },
-    pageContext: { pageData, pathBuild, themeColor, h2FontSize },
+    pageContext: {
+      pageData,
+      pathBuild,
+      themeColor,
+      h2FontSize,
+      localizedPages,
+    },
     path,
     ...rest
   } = props
 
   return (
-    <Layout {...rest} themeColor={themeColor} h2FontSize={h2FontSize}>
+    <Layout
+      {...rest}
+      themeColor={themeColor}
+      h2FontSize={h2FontSize}
+      localizedPages={localizedPages}
+    >
       {seo && contentfulModuleToComponent({ ...seo, pagePath: pathBuild })}
       {header && contentfulModuleToComponent(header)}
       {pageData && <MarkdownPageBody pageData={pageData} />}
