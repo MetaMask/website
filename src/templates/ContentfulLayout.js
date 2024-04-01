@@ -47,6 +47,7 @@ const ContentfulLayout = props => {
       extraData,
       locale = DEFAULT_LOCALE_CODE,
       translation,
+      localizedPages,
     },
     path,
     ...rest
@@ -108,6 +109,7 @@ const ContentfulLayout = props => {
       widerContainer={widerContainer}
       extraData={extraData}
       locale={locale}
+      localizedPages={localizedPages}
     >
       {seo &&
         contentfulModuleToComponent({

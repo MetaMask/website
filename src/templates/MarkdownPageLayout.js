@@ -13,7 +13,14 @@ import MarkdownPageBody from '../components/MarkdownPageBody'
 const MarkdownPageLayout = props => {
   const {
     data: { header, footer, seo },
-    pageContext: { pageData, pathBuild, themeColor, h2FontSize, isStandalone },
+    pageContext: {
+      pageData,
+      pathBuild,
+      themeColor,
+      h2FontSize,
+      isStandalone,
+      localizedPages,
+    },
     path,
     ...rest
   } = props
@@ -25,6 +32,7 @@ const MarkdownPageLayout = props => {
         themeColor={themeColor}
         h2FontSize={h2FontSize}
         isStandalone={isStandalone}
+        localizedPages={localizedPages}
       >
         {pageData && <MarkdownPageBody pageData={pageData} />}
       </Layout>

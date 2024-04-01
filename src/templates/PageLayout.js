@@ -31,6 +31,7 @@ const PageLayout = props => {
     isStandalone,
     extraData,
     locale,
+    localizedPages,
     ...rest
   } = props
   const { pathname, search } = location || {}
@@ -73,6 +74,7 @@ const PageLayout = props => {
       heroContainerRef,
     },
     extraData,
+    localizedPages,
   }
   const [dimensionScript, setDimensionScript] = React.useState('')
   const renderNotification = (state = {}) => {

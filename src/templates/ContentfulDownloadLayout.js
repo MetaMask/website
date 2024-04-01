@@ -11,7 +11,12 @@ import { DEFAULT_LOCALE_CODE } from '../lib/config.mjs'
 const DownloadPage = props => {
   const {
     data: { seo, header, footer, layoutModuleContainers },
-    pageContext: { pathBuild, locale = DEFAULT_LOCALE_CODE, translation },
+    pageContext: {
+      pathBuild,
+      locale = DEFAULT_LOCALE_CODE,
+      translation,
+      localizedPages,
+    },
   } = props
   const modules = layoutModuleContainers.nodes
 
@@ -25,7 +30,7 @@ const DownloadPage = props => {
   )
 
   return (
-    <Layout locale={locale}>
+    <Layout locale={locale} localizedPages={localizedPages}>
       {seo &&
         contentfulModuleToComponent({
           ...seo,

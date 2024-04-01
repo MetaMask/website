@@ -13,13 +13,18 @@ import { graphql } from 'gatsby'
 const ContentfulAssetLayout = props => {
   const {
     data: { header, footer },
-    pageContext: { assetData, themeColor, h2FontSize },
+    pageContext: { assetData, themeColor, h2FontSize, localizedPages },
     path,
     ...rest
   } = props
 
   return (
-    <Layout {...rest} themeColor={themeColor} h2FontSize={h2FontSize}>
+    <Layout
+      {...rest}
+      themeColor={themeColor}
+      h2FontSize={h2FontSize}
+      localizedPages={localizedPages}
+    >
       {header && contentfulModuleToComponent(header)}
       {assetData && <AssetInfo assetData={assetData} />}
       {footer && contentfulModuleToComponent(footer)}

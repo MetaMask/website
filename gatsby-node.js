@@ -42,6 +42,22 @@ exports.createPages = async ({ graphql, actions }) => {
   )
 
   /* Customized Pages Built Inside Contentful CMS */
+  const localizedPages = []
+  const translatedResult = await graphql(`{
+      pages: allContentfulLayout(
+        filter: {translation: {eq: true}, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"}}
+      ) {
+        nodes {
+          slug
+        }
+      }
+    }
+  `)
+  if (translatedResult.data && translatedResult.data.pages) {
+    translatedResult.data.pages.nodes.forEach(page => {
+      localizedPages.push(page.slug)
+    })
+  }
   const newsCategories = []
   const result = await graphql(`
     {
@@ -198,6 +214,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   widerContainer,
                   h2FontSize,
                   node_locale,
+                  localizedPages,
                 },
               })
               return
@@ -221,6 +238,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   widerContainer,
                   h2FontSize,
                   node_locale,
+                  localizedPages,
                 },
               })
             })
@@ -259,6 +277,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   h2FontSize,
                   isStandalone: index === 1,
                   node_locale,
+                  localizedPages,
                 },
               })
             })
@@ -287,6 +306,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   translation,
                   locale: locale.code,
                   node_locale: locale.code,
+                  localizedPages,
                 },
               })
             })
@@ -310,6 +330,7 @@ exports.createPages = async ({ graphql, actions }) => {
               locale: node_locale,
               translation,
               node_locale,
+              localizedPages,
             },
           })
         })
@@ -359,6 +380,7 @@ exports.createPages = async ({ graphql, actions }) => {
               news_content_id: contentful_id,
               pathBuild: newsUrl,
               node_locale,
+              localizedPages,
             },
           })
         })
@@ -396,6 +418,7 @@ exports.createPages = async ({ graphql, actions }) => {
               author_id: contentful_id,
               pathBuild: slug,
               node_locale,
+              localizedPages,
             },
           })
         })
