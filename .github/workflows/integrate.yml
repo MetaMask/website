@@ -24,8 +24,8 @@ jobs:
       - name: Create env file 🗃️
         run: |
           touch .env
-          echo GATSBY_LD_CLIENT_ID =${{ secrets.GATSBY_LD_CLIENT_ID }} >> .env
-          echo GATSBY_LD_API_KEY =${{ secrets.GATSBY_LD_API_KEY }} >> gatsby.development.env
+          echo GATSBY_LD_CLIENT_ID=${{ secrets.GATSBY_LD_CLIENT_ID }} >> .env
+          echo GATSBY_LD_API_KEY=${{ secrets.GATSBY_LD_API_KEY }} >> .env
           echo GATSBY_CONTENTFUL_API_KEY=${{ secrets.GATSBY_CONTENTFUL_API_KEY }} >> .env
           echo GATSBY_CONTENTFUL_DOWNLOAD_LOCAL=${{ secrets.GATSBY_CONTENTFUL_DOWNLOAD_LOCAL }} >> .env
           echo GATSBY_CONTENTFUL_ENVIRONMENT=${{ secrets.GATSBY_CONTENTFUL_ENVIRONMENT }} >> .env
