@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 <url><loc>https://metamask.io/download/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>https://metamask.io/ar/swaps/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>https://metamask.io/zh-CN/swaps/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>https://metamask.io/de/swaps/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>https://metamask.io/es/swaps/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/swaps/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/developer/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/swaps/swap-with-portfolio/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
