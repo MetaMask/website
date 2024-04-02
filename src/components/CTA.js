@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Arrow from './ArrowIcon'
 import Button from './Button'
 import isEmpty from 'lodash/isEmpty'
@@ -43,6 +43,7 @@ const CTA = props => {
     socialLink,
     showCaretRight,
     hideButtonIcon,
+    customClassName,
     previewMode = false,
   } = props
 
@@ -54,10 +55,12 @@ const CTA = props => {
   const isChromium = useIsChromium()
   const [delayShow, setDelayShow] = React.useState(isDownloadBrowser)
   const [showPopup, setShowPopup] = React.useState(false)
+
   let text = textDefault,
     ctaLink = linkDefault,
     lowerBrowserName = lowerCase(browserName),
     iconBrowser = ''
+
   if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
     text = textDefault?.replace('$browser', downloadBrowsers[keyBrowser]?.text)
     if (
@@ -69,11 +72,14 @@ const CTA = props => {
     ctaLink = downloadBrowsers[keyBrowser]?.link
     iconBrowser = downloadBrowsers[keyBrowser]?.icon
   }
+
   const [link, setLink] = React.useState(ctaLink)
   const [newTab, setNewTab] = React.useState(newTabDefault || isDownloadBrowser)
+
   const onClosePopup = () => {
     setShowPopup(false)
   }
+
   const handleCustomClick = e => {
     if (hubSpotForm) {
       e.preventDefault()
@@ -101,7 +107,8 @@ const CTA = props => {
       })
     }
   }
-  React.useEffect(() => {
+
+  useEffect(() => {
     if (isDownloadBrowser) {
       if (
         isMobile &&
@@ -141,7 +148,8 @@ const CTA = props => {
       setDelayShow(false)
     }
   }, [downloadBrowsers, isDownloadBrowser, lowerBrowserName, isChromium])
-  React.useEffect(() => {
+
+  useEffect(() => {
     ;(async () => {
       let isFlask = false
       if (
@@ -167,11 +175,16 @@ const CTA = props => {
       }
     })()
   }, [isDownloadBrowser, keyBrowser, ctaLink, newTabDefault])
+
   let ele = (
     <CTAContainer
-      className={classnames('ctaModuleContainer', {
-        socialLink: socialLink,
-      })}
+      className={classnames(
+        'ctaModuleContainer',
+        {
+          socialLink: socialLink,
+        },
+        customClassName
+      )}
       align={align}
     >
       <ContentWrapper
@@ -205,9 +218,13 @@ const CTA = props => {
         size={buttonSize}
         link={link}
         text={text}
-        className={classnames(keyBrowser, {
-          deeplink: link.includes('metamask.app.link'),
-        })}
+        className={classnames(
+          keyBrowser,
+          {
+            deeplink: link.includes('metamask.app.link'),
+          },
+          customClassName
+        )}
         newTab={newTab}
         color={buttonSecondary ? 'secondary' : color}
         customClick={handleCustomClick}

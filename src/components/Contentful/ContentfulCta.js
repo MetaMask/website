@@ -65,6 +65,7 @@ const ContentfulCta = props => {
       socialLink={activeCta.socialLink}
       showCaretRight={activeCta.showCaretRight}
       hideButtonIcon={activeCta.hideButtonIcon}
+      customClassName={activeCta.customClassName}
       previewMode={activeCta.previewMode}
     />
   )
