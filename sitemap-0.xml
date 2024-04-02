@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-<url><loc>https://metamask.io/developer/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
-<url><loc>https://metamask.io/news/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
-<url><loc>https://metamask.io/swaps/swap-with-portfolio/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
-<url><loc>https://metamask.io/portfolio/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
-<url><loc>https://metamask.io/assets/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/download/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>https://metamask.io/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>https://metamask.io/swaps/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>https://metamask.io/developer/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>https://metamask.io/swaps/swap-with-portfolio/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>https://metamask.io/news/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>https://metamask.io/assets/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>https://metamask.io/portfolio/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/uninstalled/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/sell-crypto/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/custody/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/your-metamask-account/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/beta-terms/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
-<url><loc>https://metamask.io/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/portfolio/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/snaps/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/attributions/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
@@ -28,7 +29,6 @@
 <url><loc>https://metamask.io/institutions/thank-you/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/the-impact-of-the-merge-on-institutions-thank-you/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/buy-crypto/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
-<url><loc>https://metamask.io/swaps/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/security/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/defi/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/overview-amer/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
