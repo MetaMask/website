@@ -2,6 +2,7 @@ import qs from 'query-string'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import PreviewLoading from '../components/PreviewLoading'
+import ContextClientSide from '../Context/ContextClientSide'
 import {
   convertContentfulPreviewTypename,
   fetchContentfulData,
@@ -10,11 +11,13 @@ import {
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Layout from '../templates/PageLayout'
 import ContentfulPortfolioLayout from '../templates/ContentfulPortfolioLayout'
+import { DEFAULT_LOCALE } from '../lib/config.mjs'
 
 const PreviewPage = () => {
   const [loading, setLoading] = useState(true)
   const [moduleConfig, setModuleConfig] = useState(null)
   const [error, setError] = useState(null)
+  const [locale, setLocale] = useState(DEFAULT_LOCALE)
 
   const getModule = async () => {
     const { location } = window
@@ -46,7 +49,7 @@ const PreviewPage = () => {
         return
       }
 
-      const { data } = await fetchContentfulData(type, id)
+      const { data } = await fetchContentfulData(type, id, locale.code)
       if (data) {
         const contentType = data.previewContent?.__typename
         const contentId = data.previewContent?.sys.id || undefined
@@ -71,8 +74,9 @@ const PreviewPage = () => {
   }
 
   useEffect(() => {
+    setLoading(true)
     getModule()
-  }, [])
+  }, [locale])
 
   if (loading) return <PreviewLoading />
   if (moduleConfig?.slug === '/portfolio/') {
@@ -80,14 +84,24 @@ const PreviewPage = () => {
   }
   if (moduleConfig) {
     return (
-      <Layout
-        themeColor={moduleConfig?.themeColor}
-        h2FontSize={moduleConfig?.h2FontSize}
-        widerContainer={moduleConfig?.widerContainer}
+      <ContextClientSide.Provider
+        value={{
+          localization: {
+            locale,
+            setLocale,
+          },
+        }}
       >
-        <PreviewInfo>Preview mode</PreviewInfo>
-        {contentfulModuleToComponent(moduleConfig)}
-      </Layout>
+        <Layout
+          themeColor={moduleConfig?.themeColor}
+          h2FontSize={moduleConfig?.h2FontSize}
+          widerContainer={moduleConfig?.widerContainer}
+          locale={locale.code}
+        >
+          <PreviewInfo>Preview mode</PreviewInfo>
+          {contentfulModuleToComponent(moduleConfig)}
+        </Layout>
+      </ContextClientSide.Provider>
     )
   }
   return <h4>Failed to load preview component: {error?.message}</h4>

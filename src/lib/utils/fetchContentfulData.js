@@ -137,11 +137,11 @@ const mapTypeToQuery = type => {
   return query
 }
 
-export const fetchContentfulData = (type, id) => {
+export const fetchContentfulData = (type, id, locale) => {
   const query = mapTypeToQuery(type, id)
   return apolloClient.query({
     query,
-    variables: { id, preview: true },
+    variables: { id, preview: true, locale },
   })
 }
 
@@ -163,4 +163,8 @@ export const apolloClient = new ApolloClient({
     }
   ),
   cache: new InMemoryCache(),
+  defaultOptions: {
+    watchQuery: { fetchPolicy: 'no-cache' },
+    query: { fetchPolicy: 'no-cache' },
+  },
 })

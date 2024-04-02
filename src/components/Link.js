@@ -6,7 +6,14 @@ import Context from '../Context/ContextPage'
 import { Link } from 'gatsby'
 
 const DefaultLink = props => {
-  const { activeStyle, children, styleOverride, to, ...rest } = props
+  const {
+    activeStyle,
+    children,
+    styleOverride,
+    to,
+    newTab: omitNewTab,
+    ...rest
+  } = props
   let { newTab } = props
   const { localization } = useContext(ContextClientSide)
   const { localizedPages } = useContext(Context)
