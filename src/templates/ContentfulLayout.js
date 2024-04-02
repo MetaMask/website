@@ -161,14 +161,14 @@ export const ContentfulQuery = graphql`
   ) {
     header: contentfulLayoutHeader(
       contentful_id: { eq: $headerId }
-      node_locale: { eq: $node_locale }
+      node_locale: { eq: "en-US" }
     ) {
       ...ContentfulLayoutHeaderFields
     }
 
     footer: contentfulLayoutFooter(
       contentful_id: { eq: $footerId }
-      node_locale: { eq: $node_locale }
+      node_locale: { eq: "en-US" }
     ) {
       ...ContentfulLayoutFooterFields
     }
