@@ -78,6 +78,7 @@ export const ContentfulCtaFields = gql`
     showCaretRight
     launchDarklyFlag
     downloadBrowsers
+    customClassName
     sys {
       id
     }

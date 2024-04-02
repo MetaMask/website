@@ -606,6 +606,7 @@ export const ContentfulCtaBaseFields = graphql`
     socialLink
     showCaretRight
     launchDarklyFlag
+    customClassName
     internal {
       type
     }
