@@ -27,7 +27,7 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     )
     const ldLangData = await ldLangResult.json()
-    showLanguageSelector = ldLangData.environments['test']?.on
+    showLanguageSelector = ldLangData.environments['production']?.on
   } catch (error) {}
 
   const redirects = await graphql(`
