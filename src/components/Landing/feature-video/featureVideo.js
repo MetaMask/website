@@ -26,6 +26,7 @@ const FeatureVideo = ({
         <div>
           <VideoButton
             posterImage={thumbnailUrl}
+            visible
             onClick={() => setVideoEmbedUrl(videoUrl)}
           />
         </div>

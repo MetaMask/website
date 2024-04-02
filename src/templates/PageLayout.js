@@ -28,6 +28,8 @@ const PageLayout = props => {
     themeColor,
     h2FontSize,
     extraData,
+    locale,
+    localizedPages,
     ...rest
   } = props
 
@@ -73,6 +75,7 @@ const PageLayout = props => {
       heroContainerRef,
     },
     extraData,
+    localizedPages,
   }
 
   const [dimensionScript, setDimensionScript] = React.useState('')
@@ -131,6 +134,7 @@ const PageLayout = props => {
         theme={pageTheme}
         themeColor={themeColor}
         h2FontSize={h2FontSize}
+        locale={locale}
         {...rest}
       >
         <Notifications />

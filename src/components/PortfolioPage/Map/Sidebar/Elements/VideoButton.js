@@ -10,8 +10,8 @@ import PlayButtonIcon from '../../../../../images/icons/icon-play.svg'
  */
 
 const VideoButton = props => {
-  const { posterImage, onClick } = props
-  const [imageLoaded, setImageLoaded] = useState(false)
+  const { posterImage, onClick, visible = false } = props
+  const [imageLoaded, setImageLoaded] = useState(visible)
 
   return (
     <VideoPlayerWrapper>

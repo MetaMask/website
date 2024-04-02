@@ -46,7 +46,7 @@ const ContentfulPortfolioLayout = props => {
   }
 
   return (
-    <Layout>
+    <Layout localizedPages={pageContext.localizedPages}>
       <PortfolioHelmet showLoader={showLoader} showIntro={showIntro} />
       {seo && (
         <ContentfulSeo
@@ -141,32 +141,51 @@ export const ContentfulQuery = graphql`
     $footerId: String
     $seoId: String
     $modules: [String]!
+    $node_locale: String
   ) {
-    header: contentfulLayoutHeader(contentful_id: { eq: $headerId }) {
+    header: contentfulLayoutHeader(
+      contentful_id: { eq: $headerId }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulLayoutHeaderFields
     }
-    footer: contentfulLayoutFooter(contentful_id: { eq: $footerId }) {
+    footer: contentfulLayoutFooter(
+      contentful_id: { eq: $footerId }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulLayoutFooterFields
     }
-    seo: contentfulSeo(contentful_id: { eq: $seoId }) {
+    seo: contentfulSeo(
+      contentful_id: { eq: $seoId }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulSeoFields
     }
     portfolioIntro: allContentfulPortfolioIntro(
-      filter: { contentful_id: { in: $modules } }
+      filter: {
+        contentful_id: { in: $modules }
+        node_locale: { eq: $node_locale }
+      }
     ) {
       nodes {
         ...ContentfulPortfolioIntroFields
       }
     }
     portfolioInstructions: allContentfulPortfolioInstructions(
-      filter: { contentful_id: { in: $modules } }
+      filter: {
+        contentful_id: { in: $modules }
+        node_locale: { eq: $node_locale }
+      }
     ) {
       nodes {
         ...ContentfulPortfolioInstructionsFields
       }
     }
     portfolioMap: allContentfulPortfolioMap(
-      filter: { contentful_id: { in: $modules } }
+      filter: {
+        contentful_id: { in: $modules }
+        node_locale: { eq: $node_locale }
+      }
     ) {
       nodes {
         ...ContentfulPortfolioMapFields

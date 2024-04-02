@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const ContentWrapper = props => {
-  const { children, columns, styleOverride, customClass, ...rest } = props
+  const { children, columns, styleOverride, customClass, size, ...rest } = props
   return (
     <Container className={customClass} styleOverride={styleOverride} {...rest}>
-      <ContainerInner>{children}</ContainerInner>
+      <ContainerInner size={size}>{children}</ContainerInner>
     </Container>
   )
 }
@@ -89,6 +89,8 @@ const ContainerInner = styled.div`
     max-width: calc(992px + 200px);
   }
 
+  ${({ size }) => size === 'wide' && 'max-width: 1200px;'}
+
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     max-width: var(--container-width-miniDesktop);
 
@@ -100,15 +102,15 @@ const ContainerInner = styled.div`
   .sideImageOverflow &,
   .sideImageOverflowRight & {
     @media (min-width: ${({ theme }) =>
-        theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
-        theme.device.twoKResolutionMax}) {
+      theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
+  theme.device.twoKResolutionMax}) {
       max-width: 100% !important;
       padding-left: max(calc((100vw - var(--container-width)) / 2), 20px);
     }
 
     @media (min-width: ${({ theme }) =>
-        theme.device.tablet}) and (max-width: ${({ theme }) =>
-        theme.device.miniDesktopMediaMax}) {
+      theme.device.tablet}) and (max-width: ${({ theme }) =>
+  theme.device.miniDesktopMediaMax}) {
       max-width: 100% !important;
       padding-left: max(
         calc((100vw - var(--container-width-miniDesktop)) / 2),
@@ -119,14 +121,14 @@ const ContainerInner = styled.div`
 
   .sideImageOverflowAll & {
     @media (min-width: ${({ theme }) =>
-        theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
-        theme.device.twoKResolutionMax}) {
+      theme.device.miniDesktop}) and (max-width: ${({ theme }) =>
+  theme.device.twoKResolutionMax}) {
       max-width: 100% !important;
     }
 
     @media (min-width: ${({ theme }) =>
-        theme.device.tablet}) and (max-width: ${({ theme }) =>
-        theme.device.miniDesktopMediaMax}) {
+      theme.device.tablet}) and (max-width: ${({ theme }) =>
+  theme.device.miniDesktopMediaMax}) {
       max-width: 100% !important;
     }
   }

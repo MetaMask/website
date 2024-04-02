@@ -30,7 +30,7 @@ function AuthorProfileLayout(props) {
       bgImage,
       bgImageDark,
     },
-    pageContext: { pathBuild },
+    pageContext: { pathBuild, localizedPages },
   } = props
 
   const heroBgUrl = getWebpImage(heroBg?.file?.url)
@@ -44,7 +44,7 @@ function AuthorProfileLayout(props) {
   relatedNews = takeRight(relatedNews, 3)
 
   return (
-    <Layout>
+    <Layout localizedPages={localizedPages}>
       {seo && contentfulModuleToComponent({ ...seo, pagePath: pathBuild })}
       {header && contentfulModuleToComponent(header)}
       <AuthorProfileContent
@@ -75,37 +75,49 @@ AuthorProfileLayout.propTypes = {
 }
 
 export const AuthorProfileLayoutQuery = graphql`
-  query($author_id: String!) {
+  query($author_id: String!, $node_locale: String) {
     header: contentfulLayoutHeader(
       contentful_id: { eq: "6I0knvqLf0DS5PB72DqUlM" }
+      node_locale: { eq: $node_locale }
     ) {
       ...ContentfulLayoutHeaderFields
     }
-    author: contentfulNewsAuthor(contentful_id: { eq: $author_id }) {
+    author: contentfulNewsAuthor(
+      contentful_id: { eq: $author_id }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulNewsAuthorFields
       news {
         ...ContentfulNewsFields
       }
     }
-    heroBg: contentfulAsset(contentful_id: { eq: "2DkHpHReuWGy3rlFwsseg9" }) {
-      file {
-        url
-      }
-    }
-    heroBgDark: contentfulAsset(
-      contentful_id: { eq: "RjpEbmeL6vLPeiSjePDpy" }
+    heroBg: contentfulAsset(
+      contentful_id: { eq: "2DkHpHReuWGy3rlFwsseg9" }
+      node_locale: { eq: $node_locale }
     ) {
       file {
         url
       }
     }
-    bgImage: contentfulAsset(contentful_id: { eq: "3hGSTCAVrdhSMmLJHSHOWT" }) {
+    heroBgDark: contentfulAsset(
+      contentful_id: { eq: "6UanQYPkBrOZaZ2wQKrjkn" }
+      node_locale: { eq: $node_locale }
+    ) {
+      file {
+        url
+      }
+    }
+    bgImage: contentfulAsset(
+      contentful_id: { eq: "3hGSTCAVrdhSMmLJHSHOWT" }
+      node_locale: { eq: $node_locale }
+    ) {
       file {
         url
       }
     }
     bgImageDark: contentfulAsset(
-      contentful_id: { eq: "2StKLJf0XE38EyT9GlzQuO" }
+      contentful_id: { eq: "7jkrYvvMuFweNJ4KL2yhRP" }
+      node_locale: { eq: $node_locale }
     ) {
       file {
         url
@@ -113,6 +125,7 @@ export const AuthorProfileLayoutQuery = graphql`
     }
     footer: contentfulLayoutFooter(
       contentful_id: { eq: "75bFgEllkMxpVsY8wWlroX" }
+      node_locale: { eq: $node_locale }
     ) {
       ...ContentfulLayoutFooterFields
     }

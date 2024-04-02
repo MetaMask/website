@@ -33,7 +33,7 @@ function NewsLayout(props) {
       latest,
       footer,
     },
-    pageContext: { pathBuild },
+    pageContext: { pathBuild, localizedPages },
   } = props
 
   const bgUrl = getWebpImage(news_bg?.file?.url)
@@ -56,7 +56,7 @@ function NewsLayout(props) {
   }
 
   return (
-    <Layout {...props}>
+    <Layout {...props} localizedPages={localizedPages}>
       {contentfulModuleToComponent(seoModuleConfig)}
       {contentfulModuleToComponent(header)}
       <div className="news-page-content">
@@ -231,29 +231,40 @@ NewsLayout.propTypes = {
 }
 
 export const NewsLayoutQuery = graphql`
-  query($news_content_id: String!) {
+  query($news_content_id: String!, $node_locale: String) {
     header: contentfulLayoutHeader(
       contentful_id: { eq: "6I0knvqLf0DS5PB72DqUlM" }
+      node_locale: { eq: $node_locale }
     ) {
       ...ContentfulLayoutHeaderFields
     }
 
-    cta: contentfulCta(contentful_id: { eq: "6iOGB8Fiab9ilS0jfZ8N5I" }) {
+    cta: contentfulCta(
+      contentful_id: { eq: "6iOGB8Fiab9ilS0jfZ8N5I" }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulCtaFields
     }
 
-    news: contentfulNews(contentful_id: { eq: $news_content_id }) {
+    news: contentfulNews(
+      contentful_id: { eq: $news_content_id }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulNewsFields
     }
 
-    news_bg: contentfulAsset(contentful_id: { eq: "3hGSTCAVrdhSMmLJHSHOWT" }) {
+    news_bg: contentfulAsset(
+      contentful_id: { eq: "3hGSTCAVrdhSMmLJHSHOWT" }
+      node_locale: { eq: $node_locale }
+    ) {
       file {
         url
       }
     }
 
     news_dark_bg: contentfulAsset(
-      contentful_id: { eq: "2StKLJf0XE38EyT9GlzQuO" }
+      contentful_id: { eq: "7jkrYvvMuFweNJ4KL2yhRP" }
+      node_locale: { eq: $node_locale }
     ) {
       file {
         url
@@ -262,18 +273,21 @@ export const NewsLayoutQuery = graphql`
 
     hubspot: contentfulHubSpotForm(
       contentful_id: { eq: "5VZVKtbcRMzaaP77nsz3Fs" }
+      node_locale: { eq: $node_locale }
     ) {
       ...ContentfulHubSpotFormFields
     }
 
     latest: contentfulLayoutModuleContainer(
       contentful_id: { eq: "nO1tqQRjoUDUJfdg2B651" }
+      node_locale: { eq: $node_locale }
     ) {
       ...ContentfulLayoutModuleContainerFields
     }
 
     footer: contentfulLayoutFooter(
       contentful_id: { eq: "75bFgEllkMxpVsY8wWlroX" }
+      node_locale: { eq: $node_locale }
     ) {
       ...ContentfulLayoutFooterFields
     }

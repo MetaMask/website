@@ -6,11 +6,17 @@ import Layout from './PageLayout'
 import DownloadBrowser from '../components/DownloadBrowser'
 import DownloadContainer from '../components/DownloadContainer'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
+import { DEFAULT_LOCALE_CODE } from '../lib/config.mjs'
 
 const DownloadPage = props => {
   const {
     data: { seo, header, footer, layoutModuleContainers },
-    pageContext: { pathBuild },
+    pageContext: {
+      pathBuild,
+      locale = DEFAULT_LOCALE_CODE,
+      translation,
+      localizedPages,
+    },
   } = props
   const modules = layoutModuleContainers.nodes
 
@@ -24,13 +30,14 @@ const DownloadPage = props => {
   )
 
   return (
-    <Layout>
+    <Layout locale={locale} localizedPages={localizedPages}>
       {seo &&
         contentfulModuleToComponent({
           ...seo,
           pagePath: pathBuild,
+          translation,
         })}
-      <Header moduleConfig={{ ...header }} hideDownloadBtn />
+      <Header moduleConfig={{ ...header, translation }} hideDownloadBtn />
       <Container>
         <DownloadTitle>Install MetaMask</DownloadTitle>
         {installMetaMaskModule ? (
@@ -51,18 +58,31 @@ export const DownloadPageQuery = graphql`
     $headerId: String
     $footerId: String
     $seoId: String
+    $node_locale: String
   ) {
-    header: contentfulLayoutHeader(contentful_id: { eq: $headerId }) {
+    header: contentfulLayoutHeader(
+      contentful_id: { eq: $headerId }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulLayoutHeaderFields
     }
-    footer: contentfulLayoutFooter(contentful_id: { eq: $footerId }) {
+    footer: contentfulLayoutFooter(
+      contentful_id: { eq: $footerId }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulLayoutFooterFields
     }
-    seo: contentfulSeo(contentful_id: { eq: $seoId }) {
+    seo: contentfulSeo(
+      contentful_id: { eq: $seoId }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulSeoFields
     }
     layoutModuleContainers: allContentfulLayoutModuleContainer(
-      filter: { contentful_id: { in: $modules } }
+      filter: {
+        contentful_id: { in: $modules }
+        node_locale: { eq: $node_locale }
+      }
     ) {
       nodes {
         ...ContentfulLayoutModuleContainerFields

@@ -13,13 +13,18 @@ import { graphql } from 'gatsby'
 const ContentfulAssetLayout = props => {
   const {
     data: { header, footer },
-    pageContext: { assetData, themeColor, h2FontSize },
+    pageContext: { assetData, themeColor, h2FontSize, localizedPages },
     path,
     ...rest
   } = props
 
   return (
-    <Layout {...rest} themeColor={themeColor} h2FontSize={h2FontSize}>
+    <Layout
+      {...rest}
+      themeColor={themeColor}
+      h2FontSize={h2FontSize}
+      localizedPages={localizedPages}
+    >
       {header && contentfulModuleToComponent(header)}
       {assetData && <AssetInfo assetData={assetData} />}
       {footer && contentfulModuleToComponent(footer)}
@@ -30,12 +35,18 @@ const ContentfulAssetLayout = props => {
 export default ContentfulAssetLayout
 
 export const ContentfulQuery = graphql`
-  query($headerId: String, $footerId: String) {
-    header: contentfulLayoutHeader(contentful_id: { eq: $headerId }) {
+  query($headerId: String, $footerId: String, $node_locale: String) {
+    header: contentfulLayoutHeader(
+      contentful_id: { eq: $headerId }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulLayoutHeaderFields
     }
 
-    footer: contentfulLayoutFooter(contentful_id: { eq: $footerId }) {
+    footer: contentfulLayoutFooter(
+      contentful_id: { eq: $footerId }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulLayoutFooterFields
     }
   }

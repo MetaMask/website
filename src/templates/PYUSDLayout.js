@@ -12,7 +12,7 @@ import { graphql } from 'gatsby'
 
 const PYUSDLayout = ({ data, pageContext }) => {
   const { seo, footer } = data
-  const { pathBuild, widerContainer } = pageContext
+  const { pathBuild, widerContainer, localizedPages } = pageContext
 
   useEffect(() => {
     document.documentElement.classList.add(styles.isLanding)
@@ -21,7 +21,7 @@ const PYUSDLayout = ({ data, pageContext }) => {
   })
 
   return (
-    <Layout widerContainer={widerContainer}>
+    <Layout widerContainer={widerContainer} localizedPages={localizedPages}>
       {seo &&
         contentfulModuleToComponent({
           ...seo,
@@ -127,11 +127,17 @@ const PYUSDLayout = ({ data, pageContext }) => {
 }
 
 export const query = graphql`
-  query($seoId: String, $footerId: String) {
-    seo: contentfulSeo(contentful_id: { eq: $seoId }) {
+  query($seoId: String, $footerId: String, $node_locale: String) {
+    seo: contentfulSeo(
+      contentful_id: { eq: $seoId }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulSeoFields
     }
-    footer: contentfulLayoutFooter(contentful_id: { eq: $footerId }) {
+    footer: contentfulLayoutFooter(
+      contentful_id: { eq: $footerId }
+      node_locale: { eq: $node_locale }
+    ) {
       ...ContentfulLayoutFooterFields
     }
   }
