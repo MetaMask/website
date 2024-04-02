@@ -51,6 +51,8 @@ const StyledHeader = props => {
   const [topMenuMobile, setTopMenuMobile] = useState('88px')
   const [isBrowser, setIsBrowser] = useState(false)
   const { showLanguageSelector } = useFlags()
+  const shouldShowLanguageSelector =
+    previewMode || (showLanguageSelector && translation)
 
   useEffect(() => {
     setIsBrowser(true)
@@ -100,17 +102,19 @@ const StyledHeader = props => {
   const onChangeLocale = locale => {
     setMenuActive('')
     setLocale(locale)
-    let localizedPath
-    if (locale.code === DEFAULT_LOCALE_CODE) {
-      localizedPath = pathname.replace(/^\/(ar|zh-CN|de|es)/, '')
-    } else {
-      const newLocale = locale.code === DEFAULT_LOCALE_CODE ? '' : locale.code
-      localizedPath = `/${newLocale}${pathname.replace(
-        /^\/(ar|zh-CN|de|es)\//,
-        '/'
-      )}`
+    if (!previewMode) {
+      let localizedPath
+      if (locale.code === DEFAULT_LOCALE_CODE) {
+        localizedPath = pathname.replace(/^\/(ar|zh-CN|de|es)/, '')
+      } else {
+        const newLocale = locale.code === DEFAULT_LOCALE_CODE ? '' : locale.code
+        localizedPath = `/${newLocale}${pathname.replace(
+          /^\/(ar|zh-CN|de|es)\//,
+          '/'
+        )}`
+      }
+      navigate(localizedPath)
     }
-    navigate(localizedPath)
   }
 
   return (
@@ -244,7 +248,7 @@ const StyledHeader = props => {
                       value="dark"
                     />
                   </DarkModeWrapper>
-                  {showLanguageSelector && translation && (
+                  {shouldShowLanguageSelector && (
                     <NavMenu
                       key="language-selector"
                       className="language-selector"
