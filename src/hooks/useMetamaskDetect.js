@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
+import { persistDeveloper } from '../lib/utils/localStorage'
 
 export const useMetamaskDetect = () => {
-  const [isMetaMaskInstalled, setIsMetaMaskInstalled] = useState(null)
+  const [isMetaMaskInstalled, setIsMetaMaskInstalled] = useState(false)
 
   useEffect(() => {
     // eip6963RequestProvider timed out
@@ -13,12 +14,12 @@ export const useMetamaskDetect = () => {
       clearTimeout(timeoutId)
 
       const isMetaMask = detail?.info?.name === 'MetaMask'
+      const isMetaMaskFlask = detail?.info?.name === 'MetaMask Flask'
 
-      if (isMetaMask) {
-        window.removeEventListener('eip6963:announceProvider', checkMetaMask)
+      isMetaMask && setIsMetaMaskInstalled(isMetaMask)
+      if (isMetaMaskFlask) {
+        persistDeveloper()
       }
-
-      setIsMetaMaskInstalled(isMetaMask)
     }
 
     window.addEventListener('eip6963:announceProvider', checkMetaMask)

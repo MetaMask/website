@@ -621,6 +621,7 @@ export const ContentfulCtaBaseFields = graphql`
         content
       }
     }
+    isForDeveloper
   }
 `
 

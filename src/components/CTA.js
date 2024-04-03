@@ -15,7 +15,7 @@ import classnames from 'classnames'
 import get from 'lodash/get'
 import { gsap } from 'gsap'
 import useIsChromium from '../lib/utils/isChromium'
-import generateUUID from '../lib/utils/helpers'
+import { persistDeveloper } from '../lib/utils/localStorage'
 
 const CTA = props => {
   const {
@@ -45,6 +45,7 @@ const CTA = props => {
     hideButtonIcon,
     customClassName,
     previewMode = false,
+    isForDeveloper,
   } = props
 
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
@@ -81,6 +82,9 @@ const CTA = props => {
   }
 
   const handleCustomClick = e => {
+    if (isForDeveloper) {
+      persistDeveloper()
+    }
     if (hubSpotForm) {
       e.preventDefault()
       setShowPopup(true)

@@ -93,7 +93,12 @@ const PreviewPage = () => {
       case 'Portfolio':
         return <ContentfulPortfolioLayout data={resolvedModuleConfig} />
       case 'Download':
-        return <ContentfulDownloadLayout data={resolvedModuleConfig} locale={locale.code} />
+        return (
+          <ContentfulDownloadLayout
+            data={resolvedModuleConfig}
+            locale={locale.code}
+          />
+        )
       default:
         return (
           <Layout

@@ -67,6 +67,7 @@ const ContentfulCta = props => {
       hideButtonIcon={activeCta.hideButtonIcon}
       customClassName={activeCta.customClassName}
       previewMode={activeCta.previewMode}
+      isForDeveloper={activeCta.isForDeveloper}
     />
   )
 }
