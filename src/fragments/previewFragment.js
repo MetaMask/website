@@ -504,6 +504,7 @@ export const ContentfulModuleContainerFields = gql`
     regionSelectorHeadline
     regionSelectorPopupTitle
     regionSelectorPopupText
+    regionListKey
     extraData {
       internal {
         content

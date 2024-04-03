@@ -778,6 +778,7 @@ export const ContentfulModuleContainerFields = graphql`
     regionSelectorHeadline
     regionSelectorPopupTitle
     regionSelectorPopupText
+    regionListKey
     extraData {
       internal {
         content

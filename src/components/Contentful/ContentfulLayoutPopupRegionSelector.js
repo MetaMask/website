@@ -12,7 +12,14 @@ const isoToEmoji = code =>
     .map(emojiCode => String.fromCodePoint(emojiCode))
     .join('')
 
-const Modal = ({ list, title, text, setHasModal, setSelectedCountry }) => {
+const Modal = ({
+  list,
+  title,
+  text,
+  regionListKey,
+  setHasModal,
+  setSelectedCountry,
+}) => {
   const [searchTerm, setSearchTerm] = useState('')
 
   return createPortal(
@@ -41,7 +48,7 @@ const Modal = ({ list, title, text, setHasModal, setSelectedCountry }) => {
 
         <ul>
           {list
-            .filter(item => item.providers.length > 0)
+            .filter(item => item[regionListKey].length > 0)
             .map(filteredItem => (
               <li
                 key={filteredItem.country.id}
@@ -74,6 +81,7 @@ const ContentfulLayoutPopupRegionSelector = ({
   headline,
   title,
   text,
+  regionListKey,
   extraData,
   modulesRender,
   setModulesRender,
@@ -88,7 +96,9 @@ const ContentfulLayoutPopupRegionSelector = ({
   useEffect(() => {
     setModulesRender(() =>
       modulesRender.current.filter(module =>
-        list[selectedCountry].providers.some(item => item.name === module.title)
+        list[selectedCountry][regionListKey].some(
+          item => item.name === module.title
+        )
       )
     )
   }, [selectedCountry])
@@ -111,6 +121,7 @@ const ContentfulLayoutPopupRegionSelector = ({
           list={list}
           title={title}
           text={text}
+          regionListKey={regionListKey}
           setHasModal={setHasModal}
           setSelectedCountry={setSelectedCountry}
         />
