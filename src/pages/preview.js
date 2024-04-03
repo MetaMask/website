@@ -11,6 +11,7 @@ import {
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Layout from '../templates/PageLayout'
 import ContentfulPortfolioLayout from '../templates/ContentfulPortfolioLayout'
+import ContentfulDownloadLayout from '../templates/ContentfulDownloadLayout'
 import { DEFAULT_LOCALE } from '../lib/config.mjs'
 
 const PreviewPage = () => {
@@ -79,32 +80,44 @@ const PreviewPage = () => {
   }, [locale])
 
   if (loading) return <PreviewLoading />
-  if (moduleConfig?.slug === '/portfolio/') {
-    return <ContentfulPortfolioLayout data={moduleConfig} />
+  if (!moduleConfig) {
+    return <h4>Failed to load preview component: {error?.message}</h4>
   }
-  if (moduleConfig) {
-    return (
-      <ContextClientSide.Provider
-        value={{
-          localization: {
-            locale,
-            setLocale,
-          },
-        }}
-      >
-        <Layout
-          themeColor={moduleConfig?.themeColor}
-          h2FontSize={moduleConfig?.h2FontSize}
-          widerContainer={moduleConfig?.widerContainer}
-          locale={locale.code}
-        >
-          <PreviewInfo>Preview mode</PreviewInfo>
-          {contentfulModuleToComponent(moduleConfig)}
-        </Layout>
-      </ContextClientSide.Provider>
-    )
+  const renderPreview = () => {
+    const { pageType } = moduleConfig
+    switch (pageType) {
+      case 'Portfolio':
+        return <ContentfulPortfolioLayout data={moduleConfig} />
+      case 'Download':
+        return (
+          <ContentfulDownloadLayout data={moduleConfig} locale={locale.code} />
+        )
+      default:
+        return (
+          <Layout
+            themeColor={moduleConfig?.themeColor}
+            h2FontSize={moduleConfig?.h2FontSize}
+            widerContainer={moduleConfig?.widerContainer}
+            locale={locale.code}
+          >
+            <PreviewInfo>Preview mode</PreviewInfo>
+            {contentfulModuleToComponent(moduleConfig)}
+          </Layout>
+        )
+    }
   }
-  return <h4>Failed to load preview component: {error?.message}</h4>
+  return (
+    <ContextClientSide.Provider
+      value={{
+        localization: {
+          locale,
+          setLocale,
+        },
+      }}
+    >
+      {renderPreview()}
+    </ContextClientSide.Provider>
+  )
 }
 
 const PreviewInfo = styled.div`

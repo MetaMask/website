@@ -7,6 +7,7 @@ import DownloadBrowser from '../components/DownloadBrowser'
 import DownloadContainer from '../components/DownloadContainer'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { DEFAULT_LOCALE_CODE } from '../lib/config.mjs'
+import withProcessPreviewData from '../lib/utils/withProcessPreviewData'
 
 const DownloadPage = props => {
   const {
@@ -16,7 +17,8 @@ const DownloadPage = props => {
       locale = DEFAULT_LOCALE_CODE,
       translation,
       localizedPages,
-    },
+    } = {},
+    previewMode,
   } = props
   const modules = layoutModuleContainers.nodes
 
@@ -37,20 +39,54 @@ const DownloadPage = props => {
           pagePath: pathBuild,
           translation,
         })}
-      <Header moduleConfig={{ ...header, translation }} hideDownloadBtn />
+      <Header
+        moduleConfig={{ ...header, translation, previewMode }}
+        hideDownloadBtn
+      />
       <Container>
         <DownloadTitle>Install MetaMask</DownloadTitle>
         {installMetaMaskModule ? (
-          <DownloadContainer data={installMetaMaskModule} />
+          <DownloadContainer
+            data={installMetaMaskModule}
+            previewMode={previewMode}
+          />
         ) : null}
         {supportBrowserModule ? (
-          <DownloadBrowser data={supportBrowserModule} />
+          <DownloadBrowser
+            data={supportBrowserModule}
+            previewMode={previewMode}
+          />
         ) : null}
       </Container>
-      {contentfulModuleToComponent(footer)}
+      {contentfulModuleToComponent({ ...footer, previewMode })}
     </Layout>
   )
 }
+
+const parsePreviewData = data => {
+  const {
+    header,
+    footer,
+    modulesCollection: { items },
+  } = data.data
+
+  const dataUpdate = {
+    previewMode: true,
+    pageContext: {
+      locale: data.locale,
+    },
+    data: {
+      header,
+      footer,
+      layoutModuleContainers: {
+        nodes: items,
+      },
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(DownloadPage)
 
 export const DownloadPageQuery = graphql`
   query(
@@ -98,5 +134,3 @@ const Container = styled.div`
 const DownloadTitle = styled.h1`
   display: none;
 `
-
-export default DownloadPage

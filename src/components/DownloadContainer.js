@@ -9,7 +9,7 @@ import useIsChromium from '../lib/utils/isChromium'
 const TabWrapper = lazy(() => import('./Tab/TabWrapper'))
 const TabContentDownload = lazy(() => import('./DownloadTab'))
 
-const DownloadContainer = ({ data }) => {
+const DownloadContainer = ({ data, previewMode }) => {
   const [device, setDevice] = useState('')
   const isChromium = useIsChromium()
 
@@ -28,7 +28,9 @@ const DownloadContainer = ({ data }) => {
   }, [])
 
   const isSSR = typeof window === 'undefined'
-  const appExtensions = get(data, 'modules[0].modules')
+  const appExtensions = previewMode
+    ? get(data, 'modulesCollection.items[0].modulesCollection.items')
+    : get(data, 'modules[0].modules')
 
   if (!appExtensions) return null
 
@@ -42,7 +44,11 @@ const DownloadContainer = ({ data }) => {
     id: item.title?.toLowerCase() || 'browser',
     content: !isSSR && (
       <Suspense fallback={<Loading />}>
-        <TabContentDownload item={item} id={item.title || 'browser'} />
+        <TabContentDownload
+          item={item}
+          id={item.title || 'browser'}
+          previewMode={previewMode}
+        />
       </Suspense>
     ),
   }))
