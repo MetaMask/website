@@ -8,13 +8,18 @@ import useIsChromium from '../lib/utils/isChromium'
 import ParseMD from './ParseMD'
 
 const TabContentDownload = props => {
-  const { item, id } = props
+  const { item, id, previewMode } = props
   const { image, description } = item
-  const { childMarkdownRemark: { html: title } = {} } = description || {}
+  const title = previewMode
+    ? description
+    : description?.childMarkdownRemark?.html
 
   const isChromium = useIsChromium()
 
-  let ctas = get(item, 'cta[0].downloadBrowsers')
+  let ctas = previewMode
+    ? get(item, 'ctaCollection.items[0].downloadBrowsers')
+    : get(item, 'cta[0].downloadBrowsers')
+
   let ctaFirefox,
     ctaChrome,
     ctaOpera,
@@ -22,7 +27,9 @@ const TabContentDownload = props => {
     ctaChromeBrowser,
     ctaFirefoxBrowser
   if (ctas) {
-    ctas = ctas.map(cta => JSON.parse(cta.internal.content))
+    ctas = previewMode
+      ? ctas
+      : ctas.map(cta => JSON.parse(cta.internal.content))
     ctaFirefox = ctas.find(c => c.name === 'ctaFirefox')
     ctaChrome = ctas.find(c => c.name === 'ctaChrome')
     ctaOpera = ctas.find(c => c.name === 'ctaOpera')
@@ -30,8 +37,7 @@ const TabContentDownload = props => {
     ctaChromeBrowser = ctas.find(c => c.name === 'ctaChromeBrowser')
     ctaFirefoxBrowser = ctas.find(c => c.name === 'ctaFirefoxBrowser')
   }
-  const mobileCta = item.cta
-
+  const mobileCta = previewMode ? get(item, 'ctaCollection.items') : item.cta
   const [downloadForFirefox, setDownloadForFirefox] = useState(ctaFirefox)
 
   useEffect(() => {
@@ -90,6 +96,7 @@ const TabContentDownload = props => {
       ctaLink: c.link,
       buttonDisplay: true,
       fontSize: '20px',
+      __typename: 'Cta',
     }))
   } else {
     ctasDownload = mobileCta
@@ -104,14 +111,16 @@ const TabContentDownload = props => {
       ) : null}
       {image ? (
         <ImageWrapper>
-          <Image image={image} />
+          <Image image={image} previewMode={previewMode} />
         </ImageWrapper>
       ) : null}
       <DownLoadWrapper>
         {ctasHeading ? <HeadingCta>{ctasHeading}</HeadingCta> : null}
         <Buttons>
           {ctasDownload && ctasDownload.length
-            ? ctasDownload.map(cta => contentfulModuleToComponent(cta))
+            ? ctasDownload.map(cta =>
+                contentfulModuleToComponent({ ...cta, previewMode })
+              )
             : null}
         </Buttons>
       </DownLoadWrapper>
