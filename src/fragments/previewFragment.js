@@ -505,11 +505,7 @@ export const ContentfulModuleContainerFields = gql`
     regionSelectorPopupTitle
     regionSelectorPopupText
     regionListKey
-    extraData {
-      internal {
-        content
-      }
-    }
+    extraData
     modulesCollection(preview: true) {
       items {
         ...ContentfulCardFields

@@ -156,7 +156,11 @@ const ContentfulModuleContainer = props => {
             title={regionSelectorPopupTitle}
             text={regionSelectorPopupText}
             regionListKey={regionListKey}
-            extraData={extraData}
+            extraData={
+              previewMode
+                ? { internal: { content: JSON.stringify(extraData) } }
+                : extraData
+            }
             modulesRender={initialModulesRender}
             setModulesRender={setModulesRender}
           />
