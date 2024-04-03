@@ -10,12 +10,15 @@ const DownloadBrowser = props => {
     headline,
     cta: { downloadBrowsers },
   } = props.data || {}
+  const { previewMode } = props
 
   if (!downloadBrowsers || !downloadBrowsers.length) return null
 
-  const browsers = downloadBrowsers.map(browser => {
-    return JSON.parse(browser.internal.content)
-  }, [])
+  const browsers = previewMode
+    ? downloadBrowsers
+    : downloadBrowsers.map(browser => {
+        return JSON.parse(browser.internal.content)
+      }, [])
 
   return (
     <Container className={'bg-gray'} sectionPadding={'88px'}>

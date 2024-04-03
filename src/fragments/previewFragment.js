@@ -910,6 +910,8 @@ export const ContentfulLayoutFields = gql`
     header(preview: true) {
       ...ContentfulLayoutHeaderFields
     }
+    translation
+    pageType
     modulesCollection(preview: true) {
       items {
         ...ContentfulLayoutFeatureFields
