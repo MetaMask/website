@@ -2,7 +2,7 @@ import ContentfulLayoutPopupRegionSelector from './ContentfulLayoutPopupRegionSe
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useMemo, useState, useRef } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { EyebrowStyle } from '../StyledGeneral'
 import kebabCase from 'lodash/kebabCase'
@@ -11,7 +11,6 @@ import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import Carousel from '../Carousel'
 import FaqList from '../FaqList'
-import { useMemo } from 'react'
 
 const ContentfulModuleContainer = props => {
   const {

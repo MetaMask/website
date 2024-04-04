@@ -136,6 +136,7 @@ ContentfulLayoutPopupRegionSelector.propTypes = {
   headline: PropTypes.string,
   title: PropTypes.string,
   text: PropTypes.string,
+  regionListKey: PropTypes.string,
   extraData: PropTypes.object,
   modulesRender: PropTypes.array,
   setModulesRender: PropTypes.func,
