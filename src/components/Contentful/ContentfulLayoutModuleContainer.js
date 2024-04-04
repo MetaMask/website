@@ -128,6 +128,7 @@ const ContentfulModuleContainer = props => {
           <img src={bgUrl} alt="" />
         </BackgroundSection>
       ) : null}
+
       <ContentWrapper customClass={customClass}>
         <Inner hasSideImage={!!sideImageUrl}>
           <MainContent>
@@ -144,6 +145,7 @@ const ContentfulModuleContainer = props => {
                       headlineMarginTop0={headlineMarginTop0}
                       dangerouslySetInnerHTML={{ __html: headline }}
                     />
+
                     {cta ? (
                       <>
                         {contentfulModuleToComponent({
@@ -154,6 +156,7 @@ const ContentfulModuleContainer = props => {
                     ) : null}
                   </div>
                 ) : null}
+
                 {htmlData ? (
                   <>
                     {previewMode || isSecurityPage ? (
@@ -176,6 +179,7 @@ const ContentfulModuleContainer = props => {
                 ) : null}
               </ContentInfo>
             ) : null}
+
             {tabs ? (
               <TabWrapper
                 tabs={tabs}
@@ -186,6 +190,7 @@ const ContentfulModuleContainer = props => {
                 isTabParam={isCategoryTab}
               />
             ) : null}
+
             {!isTab && modules && modules.length && (
               <Modules
                 contentAlignCenter={contentAlignCenter}
@@ -206,6 +211,7 @@ const ContentfulModuleContainer = props => {
                 )}
               </Modules>
             )}
+
             {cta ? (
               <div
                 className={classnames('layout-cta', {
@@ -219,6 +225,7 @@ const ContentfulModuleContainer = props => {
               </div>
             ) : null}
           </MainContent>
+
           {sideImageUrl ? (
             <SideImage sectionPadding={sectionPadding}>
               <img src={sideImageUrl} alt="" />
@@ -291,13 +298,13 @@ const Inner = styled.div`
   display: block;
   ${({ hasSideImage, theme }) =>
     hasSideImage
-      ? ` 
+      ? `
       max-width: 100%;
-      
+
       @media (max-width: ${theme.device.miniDesktopMediaMax}){
         max-width: var(--container-width-miniDesktop);
       }
-      
+
       @media (min-width: ${theme.device.miniDesktop}) and (max-width: ${theme.device.twoKResolutionMax})  {
         display: flex;
 
@@ -332,7 +339,7 @@ const SideImage = styled.div`
       margin-left: 40px;
       ${({ sectionPadding }) =>
         sectionPadding
-          ? ` 
+          ? `
           margin-top: calc(0px - (${sectionPadding} + 40px));
        `
           : ``}
@@ -361,7 +368,7 @@ const BackgroundSection = styled.div`
   }
   ${({ backgroundSize }) =>
     backgroundSize === 'contain'
-      ? ` 
+      ? `
       img {
         width: 100%;
         height: auto;
@@ -379,10 +386,10 @@ const BackgroundSection = styled.div`
 
 const Container = styled(Section)`
   position: relative;
-  
+
   ${({ bgUrl }) =>
     bgUrl
-      ? ` 
+      ? `
     z-index: 3;
    `
       : ''}

@@ -1,14 +1,15 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { useMediaQuery } from 'react-responsive'
-import classnames from 'classnames'
-import kebabCase from 'lodash/kebabCase'
-import FaqList from '../FaqList'
-import { EyebrowStyle } from '../StyledGeneral'
-import Carousel from '../Carousel'
-import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
+import ContentfulLayoutPopupRegionSelector from './ContentfulLayoutPopupRegionSelector'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
+import React, { useEffect, useMemo, useState, useRef } from 'react'
+import { useMediaQuery } from 'react-responsive'
+import { EyebrowStyle } from '../StyledGeneral'
+import kebabCase from 'lodash/kebabCase'
+import styled from 'styled-components'
+import classnames from 'classnames'
+import PropTypes from 'prop-types'
+import Carousel from '../Carousel'
+import FaqList from '../FaqList'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -34,13 +35,21 @@ const ContentfulModuleContainer = props => {
       previewMode = false,
       carouselMode = false,
       columnType,
+      hasRegionSelector,
+      regionSelectorHeadline,
+      regionSelectorPopupTitle,
+      regionSelectorPopupText,
+      regionListKey,
+      extraData,
     },
   } = props
+
   const gridModulesGap = gridModulesGapDefault || '8px'
   const { childMarkdownRemark: { html } = {} } = description || {}
   const htmlData = previewMode ? description : html
   const faqList = []
   const modulesOther = []
+
   modules?.forEach(module => {
     let typeName = module.__typename || module.internal?.type
     if (['ContentfulFaq', 'Faq'].includes(typeName)) {
@@ -49,9 +58,10 @@ const ContentfulModuleContainer = props => {
       modulesOther.push(module)
     }
   })
-  const isFaq = faqList && faqList.length
 
+  const isFaq = faqList && faqList.length
   const [modulesRender, setModulesRender] = useState(modulesOther)
+  const initialModulesRender = useRef(modulesRender)
   const [shuffled, setShuffled] = useState(false)
 
   const isMobile = useMediaQuery({
@@ -92,9 +102,11 @@ const ContentfulModuleContainer = props => {
         {title || htmlData || eyebrow ? (
           <Content splitModules={splitModules}>
             {eyebrow ? <EyebrowStyle>{eyebrow}</EyebrowStyle> : null}
+
             {title && displayTitle ? (
               <Title isFaq={isFaq}>{title}</Title>
             ) : null}
+
             {htmlData ? (
               <div
                 className={classnames({
@@ -105,6 +117,23 @@ const ContentfulModuleContainer = props => {
             ) : null}
           </Content>
         ) : null}
+
+        {hasRegionSelector && (
+          <ContentfulLayoutPopupRegionSelector
+            headline={regionSelectorHeadline}
+            title={regionSelectorPopupTitle}
+            text={regionSelectorPopupText}
+            regionListKey={regionListKey}
+            extraData={
+              previewMode
+                ? { internal: { content: JSON.stringify(extraData) } }
+                : extraData
+            }
+            modulesRender={initialModulesRender}
+            setModulesRender={setModulesRender}
+          />
+        )}
+
         <ModulesWrapper splitModules={splitModules}>
           {isFaq ? (
             <FaqList
@@ -113,6 +142,7 @@ const ContentfulModuleContainer = props => {
               previewMode={previewMode}
             />
           ) : null}
+
           {!shouldShowCarousel && modulesRender.length ? (
             <Modules
               columnType={columnType}
@@ -140,6 +170,7 @@ const ContentfulModuleContainer = props => {
               )}
             </Modules>
           ) : null}
+
           {shouldShowCarousel && modulesRender.length ? (
             <Carousel
               itemsOnTablet={columnsOnTablet}
@@ -193,6 +224,12 @@ ContentfulModuleContainer.propTypes = {
     columnsOnTablet: PropTypes.number,
     centerOnTablet: PropTypes.bool,
     isTrustBar: PropTypes.bool,
+    hasRegionSelector: PropTypes.bool,
+    regionSelectorHeadline: PropTypes.string,
+    regionSelectorPopupTitle: PropTypes.string,
+    regionSelectorPopupText: PropTypes.string,
+    regionListKey: PropTypes.string,
+    extraData: PropTypes.object,
   }),
 }
 
@@ -235,6 +272,7 @@ const Wrapper = styled.div`
     }
   }
 `
+
 const Inner = styled.div`
   display: block;
   ${({ splitModules, theme }) =>
@@ -245,8 +283,8 @@ const Inner = styled.div`
     @media (max-width: ${theme.device.tabletMediaMax}) {
       flex-direction: column;
     }
-    
-    
+
+
   `
       : ``}
 
@@ -254,6 +292,7 @@ const Inner = styled.div`
     text-align: center;
   }
 `
+
 const ModulesWrapper = styled.div`
   display: block;
 
@@ -306,6 +345,7 @@ const Title = styled.h2`
     `
       : ``}
 `
+
 const Modules = styled.div`
   display: flex;
   flex-flow: wrap;
@@ -352,7 +392,7 @@ const Modules = styled.div`
         padding: 16px;
       }
     }
-    
+
     body.dark-mode && {
       background-color: #3c444b;
     }
@@ -372,7 +412,7 @@ const Modules = styled.div`
     columns && gridModules && columnType !== 'tag' && !isTrustBar
       ? `
       margin: -${gridModulesGap} !important;
-      
+
       @media (max-width: ${theme.device.tabletMediaMax}){
         .mobileCardGridModulesGap12 && {
           margin: -12px !important;
@@ -475,7 +515,7 @@ ${({ centerOnMobile, theme }) =>
       width: auto !important;
       margin-right: 20px;
       margin-bottom: 20px;
-      
+
     }
   `
       : ``}

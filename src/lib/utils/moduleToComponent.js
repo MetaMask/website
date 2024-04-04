@@ -28,6 +28,7 @@ export const contentfulModuleToComponent = (moduleConfig = {}) => {
 
   if (!__typename) return null
   const Component = ContenfulComponents[__typename] // route data to component based on auto generated type by Contentful CMS
+
   if (!Component) {
     console.log(`No component defined for - ${__typename} CMS model.
       Check that CMS component names have not been changed.
@@ -35,6 +36,7 @@ export const contentfulModuleToComponent = (moduleConfig = {}) => {
     `)
     return null
   }
+
   const key = `${__typename}__${__id}` // React key for component
   return <Component key={key} moduleConfig={moduleConfig} />
 }

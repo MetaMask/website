@@ -769,6 +769,16 @@ export const ContentfulModuleContainerFields = graphql`
     isTrustBar
     gridModulesGap
     carouselMode
+    hasRegionSelector
+    regionSelectorHeadline
+    regionSelectorPopupTitle
+    regionSelectorPopupText
+    regionListKey
+    extraData {
+      internal {
+        content
+      }
+    }
     modules {
       ... on ContentfulEmbed {
         ...ContentfulEmbedFields
