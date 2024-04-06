@@ -80,7 +80,7 @@ export const LOCALES = [
   },
   {
     name: 'Chinese',
-    localizedName: '日本語',
+    localizedName: '中文',
     shortName: 'CN',
     code: 'zh-CN',
     htmlLang: 'zh',
