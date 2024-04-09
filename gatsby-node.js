@@ -3,7 +3,6 @@ const { download } = require('./src/lib/utils/download')
 const { getNewsUrl } = require(`./src/lib/utils/news`)
 const redirects = require('./redirects.json')
 const { buildSitemap } = require(`./src/lib/utils/sitemap`)
-const { fetchDevChangeLog } = require('./fetchDataSSR')
 const { writeRedirectsFile } = require('./src/lib/utils/redirect')
 const fetch = require('node-fetch')
 
@@ -78,7 +77,6 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     })
   }
-  const devChangelogData = await fetchDevChangeLog(process.env.GH_TOKEN)
   const legalsQuery = await graphql(`
     {
       allMdx {
@@ -284,7 +282,7 @@ exports.createPages = async ({ graphql, actions }) => {
             return
           }
 
-          const extraData = pageType === 'Developer' ? devChangelogData : null
+          const extraData = null;
           if (showLanguageSelector && translation) {
             LOCALES_TRANSLATE.forEach(locale => {
               const localeSlug = `/${locale.code}${slug}`

@@ -42,7 +42,7 @@ const ContentfulCta = props => {
   return (
     // eslint-disable-next-line react/jsx-pascal-case
     <CTA
-      link={activeCta.ctaLink}
+      link={activeCta.ctaLink || ''}
       text={activeCta.displayText || activeCta.ctaText}
       newTab={activeCta.newTab}
       iconConfig={activeCta.iconConfig}
@@ -68,6 +68,7 @@ const ContentfulCta = props => {
       customClassName={activeCta.customClassName}
       previewMode={activeCta.previewMode}
       isForDeveloper={activeCta.isForDeveloper}
+      buttonCaretDown={activeCta.buttonCaretDown}
     />
   )
 }

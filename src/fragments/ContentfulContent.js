@@ -605,6 +605,7 @@ export const ContentfulCtaBaseFields = graphql`
     eventCategory
     socialLink
     showCaretRight
+    buttonCaretDown
     launchDarklyFlag
     customClassName
     internal {
@@ -775,6 +776,10 @@ export const ContentfulModuleContainerFields = graphql`
     carouselMode
     gridModulesGap
     hasRegionSelector
+    loadMoreMode
+    loadMoreCta {
+      ...ContentfulCtaFields
+    }
     regionSelectorHeadline
     regionSelectorPopupTitle
     regionSelectorPopupText
@@ -811,6 +816,9 @@ export const ContentfulModuleContainerFields = graphql`
       }
       ... on ContentfulHubSpotForm {
         ...ContentfulHubSpotFormFields
+      }
+      ... on ContentfulTimeline {
+        ...ContentfulTimelineFields
       }
       ... on ContentfulModuleContainer {
         contentful_id

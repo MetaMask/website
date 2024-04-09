@@ -42,6 +42,8 @@ const ContentfulModuleContainer = props => {
       regionSelectorPopupTitle,
       regionSelectorPopupText,
       regionListKey,
+      loadMoreMode,
+      loadMoreCta,
       extraData,
     },
   } = props
@@ -64,6 +66,7 @@ const ContentfulModuleContainer = props => {
 
   const isFaq = faqList && faqList.length
   const [modulesRender, setModulesRender] = useState(modulesOther)
+  const [visibleModule, setVisibleModule] = useState(numberOfItem)
   const initialModulesRender = useRef(modulesRender)
   const [shuffled, setShuffled] = useState(false)
 
@@ -95,6 +98,21 @@ const ContentfulModuleContainer = props => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shuffled])
+
+  const handleLoadMore = () => {
+    switch (loadMoreMode) {
+      case 'step':
+        setVisibleModule(visibleModule + numberOfItem)
+        break
+      case 'full':
+        setVisibleModule(modulesRender.length)
+        break
+    }
+  }
+
+  const resolvedModules = loadMoreMode
+    ? modulesRender.slice(0, visibleModule)
+    : modulesRender
 
   return (
     <Wrapper
@@ -192,7 +210,7 @@ const ContentfulModuleContainer = props => {
                 [`column-${columns}`]: columns,
               })}
             >
-              {modulesRender.map(m =>
+              {resolvedModules.map(m =>
                 contentfulModuleToComponent({
                   ...m,
                   numberOfItem,
@@ -219,6 +237,15 @@ const ContentfulModuleContainer = props => {
             </Carousel>
           ) : null}
         </ModulesWrapper>
+        {loadMoreMode && visibleModule < modulesRender.length && (
+          <div className="load-more-btn-wrapper">
+            {contentfulModuleToComponent({
+              ...loadMoreCta,
+              previewMode,
+              customClick: handleLoadMore,
+            })}
+          </div>
+        )}
       </Inner>
     </Wrapper>
   )
@@ -306,6 +333,22 @@ const Wrapper = styled.div`
 
 const Inner = styled.div`
   display: block;
+
+  .load-more-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+
+    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+      margin-top: 40px;
+
+      .load-more-cta-left-desktop & {
+        justify-content: flex-start;
+      }
+    }
+  }
+
+  transition: height 0.3s ease;
   ${({ splitModules, theme }) =>
     splitModules
       ? `
