@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 import classnames from 'classnames'
-import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import ContentWrapper from '../ContentWrapper'
 import ImageItem from '../Image'
 import { EyebrowStyle } from '../StyledGeneral'
@@ -20,85 +19,61 @@ const ContentfulTimeline = props => {
       layout,
       customClass,
       previewMode = false,
-      contentful_id,
     },
   } = props
 
-  const inspectorProps = useContentfulInspectorMode()
   const { childMarkdownRemark: { html: htmlDescription } = {} } =
     description || {}
   const { childMarkdownRemark: { html: htmlHeadline } = {} } = headline || {}
+  const isDeveloperLayout = layout === 'Developer'
 
   return (
     <Container
       className={classnames({
-        'timeline-border-left': layout === 'border-left',
+        'layout-developer': isDeveloperLayout,
       })}
     >
       <ContentWrapper customClass={customClass}>
-        <div className="timeline">
-          <div className="container right">
-            <div className="content">
-              {eyebrow ? (
-                <Eyebrow
-                  {...(previewMode
-                    ? inspectorProps({
-                        entryId: contentful_id,
-                        fieldId: 'eyebrow',
-                      })
-                    : {})}
-                >
-                  {eyebrow}
-                </Eyebrow>
-              ) : null}
-              <div className="text-content">
-                {headline ? (
-                  <Headline
-                    hasEyebrow={eyebrow}
-                    {...(previewMode
-                      ? inspectorProps({
-                          entryId: contentful_id,
-                          fieldId: 'headline',
-                        })
-                      : {})}
-                  >
-                    {previewMode ? (
-                      <ParseMD>{headline}</ParseMD>
-                    ) : (
-                      <div dangerouslySetInnerHTML={{ __html: htmlHeadline }} />
-                    )}
-                  </Headline>
+        <div className="time-line-wrapper-inner">
+          {eyebrow && isDeveloperLayout ? (
+            <span className="release-date">{eyebrow}</span>
+          ) : null}
+          <div className="timeline">
+            <div className="container right">
+              <div className="content">
+                {eyebrow && !isDeveloperLayout ? (
+                  <Eyebrow>{eyebrow}</Eyebrow>
                 ) : null}
-                {previewMode ? (
-                  <Description
-                    {...(previewMode
-                      ? inspectorProps({
-                          entryId: contentful_id,
-                          fieldId: 'description',
-                        })
-                      : {})}
-                  >
-                    <ParseMD>{description}</ParseMD>
-                  </Description>
-                ) : (
-                  <Description
-                    dangerouslySetInnerHTML={{ __html: htmlDescription }}
+                <div className="text-content">
+                  {headline ? (
+                    <Headline hasEyebrow={eyebrow}>
+                      {previewMode ? (
+                        <ParseMD>{headline}</ParseMD>
+                      ) : (
+                        <div
+                          dangerouslySetInnerHTML={{ __html: htmlHeadline }}
+                        />
+                      )}
+                    </Headline>
+                  ) : null}
+                  {previewMode ? (
+                    <Description>
+                      <ParseMD>{description}</ParseMD>
+                    </Description>
+                  ) : (
+                    <Description
+                      dangerouslySetInnerHTML={{ __html: htmlDescription }}
+                    />
+                  )}
+                </div>
+                {image ? (
+                  <ImageSrc
+                    image={image}
+                    darkImage={imageDarkMode}
+                    previewMode={previewMode}
                   />
-                )}
+                ) : null}
               </div>
-              {image ? (
-                <ImageSrc
-                  image={image}
-                  darkImage={imageDarkMode}
-                  previewMode={previewMode}
-                  {...(previewMode
-                    ? inspectorProps({
-                        entryId: contentful_id,
-                        fieldId: 'image',
-                      })
-                    : {})}
-                />
-              ) : null}
             </div>
           </div>
         </div>
@@ -135,7 +110,29 @@ ContentfulTimeline.propTypes = {
 
 const Container = styled.article`
   margin-bottom: 0 !important;
-  &.timeline-border-left {
+  &.layout-developer {
+    .time-line-wrapper-inner {
+      display: flex;
+    }
+    .container {
+      padding-left: 23px !important;
+      padding-right: 0 !important;
+    }
+    & > div {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .release-date {
+      color: #8d8d8d;
+      font-size: 14px;
+      flex-basis: 33.33%;
+      min-width: 48px;
+      text-align: left;
+    }
+    .timeline::after {
+      margin-left: 8px;
+      left: 0;
+    }
     &:nth-child(odd) {
       .timeline {
         &::after {
@@ -158,6 +155,7 @@ const Container = styled.article`
     .content {
       padding: 0;
       .text-content {
+        text-align: left;
         p:last-child {
           margin-bottom: 0;
         }
@@ -166,6 +164,10 @@ const Container = styled.article`
           font-weight: 400;
         }
       }
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 16px !important;
     }
   }
   .timeline {
@@ -252,6 +254,9 @@ const Description = styled.div`
   line-height: 22.82px;
   width: 55%;
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    width: 100%;
+  }
+  .layout-developer & {
     width: 100%;
   }
 

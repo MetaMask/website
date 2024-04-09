@@ -76,6 +76,7 @@ export const ContentfulCtaFields = gql`
     eventCategory
     eventLabel
     showCaretRight
+    buttonCaretDown
     launchDarklyFlag
     downloadBrowsers
     customClassName
@@ -479,6 +480,7 @@ export const ContentfulModuleContainerFields = gql`
   ${ContentfulLogoFields}
   ${ContentfulNewsCategoryFields}
   ${ContentfulRichTextFields}
+  ${ContentfulTimelineFields}
   fragment ContentfulModuleContainerFields on ModuleContainer {
     __typename
     sys {
@@ -500,6 +502,10 @@ export const ContentfulModuleContainerFields = gql`
     isTrustBar
     displayTitle
     carouselMode
+    loadMoreMode
+    loadMoreCta(preview: true) {
+      ...ContentfulCtaFields
+    }
     hasRegionSelector
     regionSelectorHeadline
     regionSelectorPopupTitle
@@ -517,6 +523,7 @@ export const ContentfulModuleContainerFields = gql`
         ...ContentfulLogoFields
         ...ContentfulNewsCategoryFields
         ...ContentfulRichTextFields
+        ...ContentfulTimelineFields
         ... on ModuleContainer {
           __typename
           sys {

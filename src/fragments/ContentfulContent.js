@@ -512,6 +512,7 @@ export const ContentfulConsenSysResourcesFields = graphql`
     linkText
     link
     showDate
+    resourceType
   }
 `
 
@@ -605,6 +606,7 @@ export const ContentfulCtaBaseFields = graphql`
     eventCategory
     socialLink
     showCaretRight
+    buttonCaretDown
     launchDarklyFlag
     customClassName
     internal {
@@ -679,6 +681,8 @@ export const ContentfulEmbedFields = graphql`
     layoutType
     playOnPopup
     clickToPlayOnWholeCard
+    hidePlayerIcon
+    duration
   }
 `
 
@@ -775,6 +779,10 @@ export const ContentfulModuleContainerFields = graphql`
     carouselMode
     gridModulesGap
     hasRegionSelector
+    loadMoreMode
+    loadMoreCta {
+      ...ContentfulCtaFields
+    }
     regionSelectorHeadline
     regionSelectorPopupTitle
     regionSelectorPopupText
@@ -811,6 +819,9 @@ export const ContentfulModuleContainerFields = graphql`
       }
       ... on ContentfulHubSpotForm {
         ...ContentfulHubSpotFormFields
+      }
+      ... on ContentfulTimeline {
+        ...ContentfulTimelineFields
       }
       ... on ContentfulModuleContainer {
         contentful_id
