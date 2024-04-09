@@ -1,7 +1,6 @@
 import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import { SectionTitle } from '../StyledGeneral'
 import Embed from '../Embed'
 import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
@@ -19,12 +18,12 @@ const ContentfulEmbed = props => {
       playOnPopup,
       thumbnail,
       clickToPlayOnWholeCard,
-      contentful_id,
+      hidePlayerIcon,
+      duration,
     },
   } = props
 
   const cardRef = useRef(null)
-  const inspectorProps = useContentfulInspectorMode()
   const thumbnailUrl = parseContentfulAssetUrl(thumbnail, previewMode)
 
   return (
@@ -33,32 +32,16 @@ const ContentfulEmbed = props => {
         $clickable={clickToPlayOnWholeCard}
         ref={clickToPlayOnWholeCard ? cardRef : null}
       >
-        {title && displayTitle ? (
-          <Title
-            {...(previewMode
-              ? inspectorProps({
-                  entryId: contentful_id,
-                  fieldId: 'title',
-                })
-              : {})}
-          >
-            {title}
-          </Title>
-        ) : null}
-        <div
-          {...(previewMode
-            ? inspectorProps({
-                entryId: contentful_id,
-                fieldId: 'embed',
-              })
-            : {})}
-        >
+        {title && displayTitle ? <Title>{title}</Title> : null}
+        <div className="embed-wrapper">
           <Embed
             playOnPopup={playOnPopup}
+            hidePlayerIcon={hidePlayerIcon}
             html={previewMode ? props.moduleConfig.embed : embed}
             thumbnailUrl={thumbnailUrl}
             cardRef={cardRef}
           />
+          {duration ? <div className="duration">{duration}</div> : null}
         </div>
       </WrapperInner>
     </Wrapper>
@@ -134,6 +117,22 @@ const Wrapper = styled.div`
 
 const WrapperInner = styled.div`
   ${({ $clickable }) => ($clickable ? `cursor: pointer;` : ``)}
+
+  .embed-wrapper {
+    position: relative;
+    .duration {
+      position: absolute;
+      color: #fff;
+      background-color: #000;
+      padding: 4px 8px;
+      border-radius: 6px;
+      right: 4px;
+      bottom: 4px;
+      z-index: 10;
+      font-size: 12px;
+      line-height: 1;
+    }
+  }
 
   .developer-community-calls & {
     display: flex;

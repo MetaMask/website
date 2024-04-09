@@ -1245,6 +1245,15 @@ body.dark-mode {
     object-fit: cover;
   }
 
+  &.hide-player-icon {
+    .embed-popup-target-icon {
+      display: none;
+    }
+    .embed-popup-target-overlay {
+      background-color: unset;
+    }
+  }
+
   &:hover {
     .embed-popup-target-overlay {
       background-color: rgba(0, 0, 0, 0.3);

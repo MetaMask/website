@@ -512,6 +512,7 @@ export const ContentfulConsenSysResourcesFields = graphql`
     linkText
     link
     showDate
+    resourceType
   }
 `
 
@@ -680,6 +681,8 @@ export const ContentfulEmbedFields = graphql`
     layoutType
     playOnPopup
     clickToPlayOnWholeCard
+    hidePlayerIcon
+    duration
   }
 `
 

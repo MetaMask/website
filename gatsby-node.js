@@ -219,7 +219,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
 
-          if (slug === '/news/') {
+          if (pageType === 'News') {
             const categoriesPath = newsCategories.map(cat => `/news/${cat}/`)
             categoriesPath.forEach(categoryPath => {
               createPage({

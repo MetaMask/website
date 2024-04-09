@@ -27,8 +27,6 @@ const ContentfulTimeline = props => {
   const { childMarkdownRemark: { html: htmlHeadline } = {} } = headline || {}
   const isDeveloperLayout = layout === 'Developer'
 
-  console.log(layout);
-
   return (
     <Container
       className={classnames({
@@ -129,11 +127,15 @@ const Container = styled.article`
       font-size: 14px;
       flex-basis: 33.33%;
       min-width: 48px;
+      text-align: left;
+    }
+    .timeline::after {
+      margin-left: 8px;
+      left: 0;
     }
     &:nth-child(odd) {
       .timeline {
         &::after {
-          margin-left: 8px;
           width: 2px;
           background-color: #88e39d;
         }
@@ -142,7 +144,6 @@ const Container = styled.article`
     &:nth-child(even) {
       .timeline {
         &::after {
-          margin-left: 8px;
           width: 2px;
           background-color: #f5841f;
         }
@@ -154,6 +155,7 @@ const Container = styled.article`
     .content {
       padding: 0;
       .text-content {
+        text-align: left;
         p:last-child {
           margin-bottom: 0;
         }
