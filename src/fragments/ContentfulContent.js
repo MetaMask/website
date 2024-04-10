@@ -138,7 +138,7 @@ export const ContentfulLayoutHeroFields = graphql`
     }
     backgroundColor
     contentAlignment
-    showLearnMore
+    learnMoreText
     headlineBorderBottom
     hideHeadline
     showFavIcon
