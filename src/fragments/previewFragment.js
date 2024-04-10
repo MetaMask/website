@@ -692,7 +692,7 @@ export const ContentfulLayoutHeroFields = gql`
       url
     }
     contentAlignment
-    showLearnMore
+    learnMoreText
     headlineBorderBottom
     hideHeadline
     showFavIcon
