@@ -1778,6 +1778,15 @@ body.dark-mode {
   div.image-dark {
     display: block;
   }
+
+  code[class*='language-'],
+  pre[class*='language-'] {
+    color: #fff;
+    display: none;
+  }
+  pre {
+    background-color: #24292e;
+  }
 }
 
 body .acsb-trigger.acsb-ready {

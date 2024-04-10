@@ -4,6 +4,7 @@ const { getNewsUrl } = require(`./src/lib/utils/news`)
 const redirects = require('./redirects.json')
 const { buildSitemap } = require(`./src/lib/utils/sitemap`)
 const { writeRedirectsFile } = require('./src/lib/utils/redirect')
+const { fetchDevChangeLog } = require('./fetchDataSSR')
 const fetch = require('node-fetch')
 
 exports.createPages = async ({ graphql, actions }) => {
@@ -39,6 +40,8 @@ exports.createPages = async ({ graphql, actions }) => {
       toPath: redirect.toPath,
     })
   )
+
+  const devChangelogData = await fetchDevChangeLog(process.env.GH_TOKEN)
 
   /* Customized Pages Built Inside Contentful CMS */
   const localizedPages = []
@@ -282,7 +285,7 @@ exports.createPages = async ({ graphql, actions }) => {
             return
           }
 
-          const extraData = null;
+          const extraData = pageType === 'Developer' ? devChangelogData : null
           if (showLanguageSelector && translation) {
             LOCALES_TRANSLATE.forEach(locale => {
               const localeSlug = `/${locale.code}${slug}`
