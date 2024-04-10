@@ -11,9 +11,6 @@ async function fetchDevChangeLog(token) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
   const changeLogData = Promise.allSettled([
     axios.get(
-      'https://api.github.com/repos/MetaMask/metamask-sdk/releases/latest'
-    ),
-    axios.get(
       'https://api.github.com/repos/MetaMask/snaps/releases/latest'
     ),
     axios.get(
@@ -25,11 +22,6 @@ async function fetchDevChangeLog(token) {
   ]).then(response => {
     const data = []
     const siteData = [
-      {
-        title: 'MetaMask SDK',
-        type: 'metamask',
-        url: 'https://github.com/MetaMask/metamask-sdk/releases'
-      },
       {
         title: 'MetaMask Snaps',
         type: 'metamask',
@@ -50,8 +42,6 @@ async function fetchDevChangeLog(token) {
       if (site.status === 'fulfilled' && site.value?.status === 200) {
         switch (index) {
           case 0:
-            break;
-          case 1:
             data.push({
               title: siteData[index].title,
               version: site.value.data.tag_name,
@@ -61,7 +51,7 @@ async function fetchDevChangeLog(token) {
               url: siteData[index].url
             })
             break;
-          case 2:
+          case 1:
             const text2 = site.value.data
             const match2 = text2?.match(/## Linea([\s\S]+?)## Linea/)
             if (match2 && match2[1]) {
@@ -73,7 +63,7 @@ async function fetchDevChangeLog(token) {
               })
             }
             break;
-          case 3:
+          case 2:
             const text = site.value.data
             const match = text?.match(/####([\s\S]+?)####/)
             if (match && match[0]) {
