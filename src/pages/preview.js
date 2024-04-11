@@ -20,6 +20,7 @@ const PreviewPage = () => {
   const [moduleConfig, setModuleConfig] = useState(null)
   const [error, setError] = useState(null)
   const [locale, setLocale] = useState(DEFAULT_LOCALE)
+  const [isDarkMode, setDarkMode] = useState(false)
 
   const getModule = async () => {
     const { location } = window
@@ -80,6 +81,23 @@ const PreviewPage = () => {
     getModule()
   }, [locale])
 
+  useEffect(() => {
+    document.body.classList.remove('light-mode')
+    document.body.classList.remove('dark-mode')
+    document.body.classList.add((isDarkMode ? 'dark' : 'light') + '-mode')
+  }, [isDarkMode])
+
+  const valueContext = {
+    darkMode: {
+      isDarkMode,
+      toggleTheme: () => setDarkMode(!isDarkMode),
+    },
+    localization: {
+      locale,
+      setLocale,
+    },
+  }
+
   const updatedEntries = useContentfulLiveUpdates(moduleConfig)
   const resolvedModuleConfig = updatedEntries || moduleConfig
 
@@ -114,14 +132,7 @@ const PreviewPage = () => {
     }
   }
   return (
-    <ContextClientSide.Provider
-      value={{
-        localization: {
-          locale,
-          setLocale,
-        },
-      }}
-    >
+    <ContextClientSide.Provider value={valueContext}>
       {renderPreview()}
     </ContextClientSide.Provider>
   )
