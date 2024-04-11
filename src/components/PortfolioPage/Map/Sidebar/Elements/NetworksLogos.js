@@ -77,6 +77,7 @@ const NetworkInner = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 `
 
 const NetworkIconWrapper = styled.div`
