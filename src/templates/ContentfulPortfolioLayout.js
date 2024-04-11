@@ -46,7 +46,7 @@ const ContentfulPortfolioLayout = props => {
   }
 
   return (
-    <Layout localizedPages={pageContext.localizedPages}>
+    <Layout localizedPages={pageContext?.localizedPages}>
       <PortfolioHelmet showLoader={showLoader} showIntro={showIntro} />
       {seo && (
         <ContentfulSeo
