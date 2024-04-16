@@ -18,6 +18,7 @@ const Button = props => {
     iconUrl,
     iconPosition,
     hide,
+    hasCaretDownIcon,
   } = props
 
   return (
@@ -42,6 +43,9 @@ const Button = props => {
         <Icon hasBg>
           <Image src={iconUrl} alt={text + className || ''} />
         </Icon>
+      ) : null}
+      {hasCaretDownIcon ? (
+        <Icon className="w-icon w-icon-dropdown-toggle" />
       ) : null}
     </ButtonWrapper>
   )

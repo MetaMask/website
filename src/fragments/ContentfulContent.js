@@ -510,6 +510,7 @@ export const ContentfulConsenSysResourcesFields = graphql`
     linkText
     link
     showDate
+    resourceType
   }
 `
 
@@ -617,6 +618,7 @@ export const ContentfulCtaBaseFields = graphql`
       }
     }
     showCaretRight
+    buttonCaretDown
   }
 `
 
@@ -674,6 +676,8 @@ export const ContentfulEmbedFields = graphql`
     layoutType
     playOnPopup
     clickToPlayOnWholeCard
+    hidePlayerIcon
+    duration
   }
 `
 
@@ -768,6 +772,10 @@ export const ContentfulModuleContainerFields = graphql`
     isLiquiditySection
     isTrustBar
     gridModulesGap
+    loadMoreMode
+    loadMoreCta {
+      ...ContentfulCtaFields
+    }
     carouselMode
     hasRegionSelector
     regionSelectorHeadline

@@ -71,7 +71,7 @@ StyledCard.propTypes = {
 }
 
 const Card = styled.div`
-  height: 100%;
+  height: auto;
 `
 
 const CardInner = styled(Link)`
