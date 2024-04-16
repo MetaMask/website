@@ -43,6 +43,7 @@ const CTA = props => {
     previewMode = false,
     showCaretRight,
     hideButtonIcon,
+    buttonCaretDown,
   } = props
 
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
@@ -87,7 +88,7 @@ const CTA = props => {
       e.preventDefault()
       customClick()
     }
-    if (link.startsWith('#')) {
+    if (link.startsWith('#') && link.length > 1) {
       e.preventDefault()
       const target = e.currentTarget
       const href = target.dataset.anchor
@@ -215,6 +216,7 @@ const CTA = props => {
         iconUrl={!delayShow && !hideButtonIcon ? iconBrowser : ''}
         iconPosition={['ios', 'android'].includes(keyBrowser) ? 'start' : 'end'}
         hide={delayShow}
+        hasCaretDownIcon={buttonCaretDown}
       />
     )
   }

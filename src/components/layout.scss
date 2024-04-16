@@ -1377,6 +1377,15 @@ body.dark-mode {
     object-fit: cover;
   }
 
+  &.hide-player-icon {
+    .embed-popup-target-icon {
+      display: none;
+    }
+    .embed-popup-target-overlay {
+      background-color: unset;
+    }
+  }
+
   &:hover {
     .embed-popup-target-overlay {
       background-color: rgba(0, 0, 0, 0.3);
@@ -1952,6 +1961,15 @@ body.dark-mode {
 
   div.image-dark {
     display: block;
+  }
+
+  code[class*='language-'],
+  pre[class*='language-'] {
+    color: #fff;
+    display: none;
+  }
+  pre {
+    background-color: #24292e;
   }
 }
 

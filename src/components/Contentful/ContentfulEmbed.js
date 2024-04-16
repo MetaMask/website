@@ -18,6 +18,8 @@ const ContentfulEmbed = props => {
       playOnPopup,
       thumbnail,
       clickToPlayOnWholeCard,
+      hidePlayerIcon,
+      duration,
     },
   } = props
 
@@ -31,13 +33,15 @@ const ContentfulEmbed = props => {
         ref={clickToPlayOnWholeCard ? cardRef : null}
       >
         {title && displayTitle ? <Title>{title}</Title> : null}
-        <div>
+        <div className="embed-wrapper">
           <Embed
             playOnPopup={playOnPopup}
+            hidePlayerIcon={hidePlayerIcon}
             html={previewMode ? props.moduleConfig.embed : embed}
             thumbnailUrl={thumbnailUrl}
             cardRef={cardRef}
           />
+          {duration ? <div className="duration">{duration}</div> : null}
         </div>
       </WrapperInner>
     </Wrapper>
@@ -113,6 +117,22 @@ const Wrapper = styled.div`
 
 const WrapperInner = styled.div`
   ${({ $clickable }) => ($clickable ? `cursor: pointer;` : ``)}
+
+  .embed-wrapper {
+    position: relative;
+    .duration {
+      position: absolute;
+      color: #fff;
+      background-color: #000;
+      padding: 4px 8px;
+      border-radius: 6px;
+      right: 4px;
+      bottom: 4px;
+      z-index: 10;
+      font-size: 12px;
+      line-height: 1;
+    }
+  }
 
   .developer-community-calls & {
     display: flex;

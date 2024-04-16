@@ -5,7 +5,7 @@ import parseIframe from './parseIframe'
 import Popup from '../Popup'
 
 const EmbedHtml = props => {
-  const { html, playOnPopup, thumbnailUrl, cardRef } = props
+  const { html, playOnPopup, thumbnailUrl, cardRef, hidePlayerIcon } = props
   // image filed is only for iframe image
   const [popupId, setPopupId] = React.useState('')
   const [showOverlay, setShowOverlay] = React.useState(true)
@@ -17,7 +17,8 @@ const EmbedHtml = props => {
     const { htmlString, iframeList, idYoutube } = parseIframe(
       htmlParse,
       playOnPopup,
-      thumbnailUrl
+      thumbnailUrl,
+      hidePlayerIcon
     )
     htmlParse = htmlString
     iframePopupData = iframeList
