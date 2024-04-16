@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<url><loc>https://metamask.io/institutions/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/developer/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/buy-crypto/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/download/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
@@ -25,7 +26,6 @@
 <url><loc>https://metamask.io/institutions/fireblocks/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/fireblocks-request-access/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/newsletter/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
-<url><loc>https://metamask.io/institutions/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/faq/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/fireblocks-onboarding-guide/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/fund-loss-investigation/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
