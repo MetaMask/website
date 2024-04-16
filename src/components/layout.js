@@ -54,6 +54,7 @@ const Layout = props => {
           ]}
         >
           <html lang={mapCodeToHtmlLang(locale)} />
+          <meta name="referrer" content="no-referrer-when-downgrade" />
         </Helmet>
         {children}
       </Wrapper>
