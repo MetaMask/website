@@ -30,7 +30,7 @@ const HeroContainerComponent = props => {
     sideImagePortfolio,
     sideImageDarkMode,
     sideImagePortfolioDarkMode,
-    showLearnMore,
+    learnMoreText,
     eyebrow,
     eyebrowLogo,
     eyebrowMobileLogo,
@@ -345,17 +345,15 @@ const HeroContainerComponent = props => {
           </ContentWrapper>
         </GatsbyBackgroundImage>
       </HeroContainer>
-      {showLearnMore ? (
-        <div>
-          <ContentWrapper>
-            <LearnMoreWrapper>
-              <LearnMoreInner className="text-block">
-                Learn More
-                <Icon className="w-icon w-icon-dropdown-toggle"></Icon>
-              </LearnMoreInner>
-            </LearnMoreWrapper>
-          </ContentWrapper>
-        </div>
+      {learnMoreText ? (
+        <ContentWrapper>
+          <LearnMoreWrapper>
+            <LearnMoreInner className="text-block">
+              {learnMoreText}
+              <Icon className="w-icon w-icon-dropdown-toggle" />
+            </LearnMoreInner>
+          </LearnMoreWrapper>
+        </ContentWrapper>
       ) : null}
     </>
   )
@@ -377,7 +375,7 @@ HeroContainerComponent.propTypes = {
   description: PropTypes.string,
   contentAlignment: PropTypes.string,
   hideHeadline: PropTypes.bool,
-  showLearnMore: PropTypes.bool,
+  learnMoreText: PropTypes.string,
   showFavIcon: PropTypes.bool,
   sideImageFoxAnimation: PropTypes.bool,
   sectionPadding: PropTypes.string,
@@ -1070,7 +1068,6 @@ const LearnMoreInner = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  text-transform: uppercase;
 `
 
 const Icon = styled.span`

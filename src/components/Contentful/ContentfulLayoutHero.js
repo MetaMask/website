@@ -27,7 +27,7 @@ const ContentfulLayoutHero = props => {
       eyebrowLogoDarkMode,
       eyebrowMobileLogoDarkMode,
       hideHeadline,
-      showLearnMore,
+      learnMoreText,
       showFavIcon,
       hubSpotForm,
       contentAlignment,
@@ -72,7 +72,7 @@ const ContentfulLayoutHero = props => {
         sideImagePortfolioDarkMode || sideImageDarkMode
       }
       hideHeadline={hideHeadline}
-      showLearnMore={showLearnMore}
+      learnMoreText={learnMoreText}
       showFavIcon={showFavIcon}
       hubSpotForm={hubSpotForm}
       contentAlignment={contentAlignment}

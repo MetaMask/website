@@ -261,6 +261,7 @@ export const ContentfulCtaFields = gql`
     }
     downloadBrowsers
     showCaretRight
+    buttonCaretDown
     mobileCta {
       ...ContentfulCtaFields
     }
@@ -490,6 +491,10 @@ export const ContentfulModuleContainerFields = gql`
     isTrustBar
     displayTitle
     carouselMode
+    loadMoreMode
+    loadMoreCta(preview: true) {
+      ...ContentfulCtaFields
+    }
     hasRegionSelector
     regionSelectorHeadline
     regionSelectorPopupTitle
@@ -692,7 +697,7 @@ export const ContentfulLayoutHeroFields = gql`
       url
     }
     contentAlignment
-    showLearnMore
+    learnMoreText
     headlineBorderBottom
     hideHeadline
     showFavIcon
