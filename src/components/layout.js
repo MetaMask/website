@@ -51,6 +51,10 @@ const Layout = props => {
               name: 'keywords',
               content: 'blockchain, entrepreneurs, innovation, venture studio',
             },
+            {
+              name: 'referrer',
+              content: 'no-referrer-when-downgrade',
+            },
           ]}
         >
           <html lang={mapCodeToHtmlLang(locale)} />
