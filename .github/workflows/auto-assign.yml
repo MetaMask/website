@@ -28,7 +28,7 @@ jobs:
       - name: Assign PR
         if: github.event.pull_request.number
         run: |
-          gh pr edit "$NUMBER" --add-assignee cuonglt-ync,kevin-chassagne --add-reviewer tannn-younet,viphan007
+          gh pr edit "$NUMBER" --add-assignee cuonglt-ync,kevin-chassagne,blaiseup --add-reviewer tannn-younet,viphan007
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
           NUMBER: ${{ github.event.pull_request.number }}
@@ -38,7 +38,7 @@ jobs:
         if: github.event.issue.number
         run: |
           # Edit issue assignees
-          gh issue edit "$NUMBER" --add-assignee nkkurt,cuonglt-ync,kevin-chassagne
+          gh issue edit "$NUMBER" --add-assignee nkkurt,cuonglt-ync,kevin-chassagne,blaiseup
           # Get issue body
           issue_body=$(gh issue view ${{ github.event.issue.number }} --json body -q '.body')
           # Temporarily replace "*Growth Marketing Intake*" with a placeholder
