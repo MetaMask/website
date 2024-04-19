@@ -263,7 +263,7 @@ export const NewsLayoutQuery = graphql`
     }
 
     news_dark_bg: contentfulAsset(
-      contentful_id: { eq: "7jkrYvvMuFweNJ4KL2yhRP" }
+      contentful_id: { eq: "2StKLJf0XE38EyT9GlzQuO" }
       node_locale: { eq: $node_locale }
     ) {
       file {
