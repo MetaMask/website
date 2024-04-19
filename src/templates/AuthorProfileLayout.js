@@ -100,7 +100,7 @@ export const AuthorProfileLayoutQuery = graphql`
       }
     }
     heroBgDark: contentfulAsset(
-      contentful_id: { eq: "6UanQYPkBrOZaZ2wQKrjkn" }
+      contentful_id: { eq: "RjpEbmeL6vLPeiSjePDpy" }
       node_locale: { eq: $node_locale }
     ) {
       file {
@@ -116,7 +116,7 @@ export const AuthorProfileLayoutQuery = graphql`
       }
     }
     bgImageDark: contentfulAsset(
-      contentful_id: { eq: "7jkrYvvMuFweNJ4KL2yhRP" }
+      contentful_id: { eq: "2StKLJf0XE38EyT9GlzQuO" }
       node_locale: { eq: $node_locale }
     ) {
       file {
