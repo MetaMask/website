@@ -1,5 +1,9 @@
 [
   {
+    "fromPath": "/portfolio/",
+    "toPath": "https://portfolio.metamask.io/"
+  },
+  {
     "fromPath": "/institutions/overview-amer/",
     "toPath": "/institutions/"
   },
