@@ -96,9 +96,13 @@ const Wrapper = styled.div`
   ${({ width }) => (width ? `width: ${width};` : 'min-width: 300px;')}
 
   &.newsletterOnNewsDetail {
-    margin-top: 56px;
-    height: 410px;
     position: relative;
+    margin-top: 56px;
+
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      margin-top: 112px;
+      height: 410px;
+    }
   }
 
   &.newsletterOnSnaps {
@@ -110,6 +114,7 @@ const Wrapper = styled.div`
   &.formMW510 {
     max-width: 510px;
   }
+
   &.mobile-launch-form,
   .newsletterOnNewsletterpage &,
   .registerEventForm &,
@@ -138,10 +143,16 @@ const Content = styled.div`
     box-shadow: rgba(0, 0, 0, 0.1) 0px 7px 29px 0px;
     border-radius: 24px;
     padding: 32px;
-    position: absolute;
+    position: relative;
     z-index: 1;
-    width: calc(100% - 40px);
+    width: 100%;
+
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      position: absolute;
+      width: calc(100% - 40px);
+    }
   }
+
   .accessFireBlockForm & {
     padding: 40px;
     padding-bottom: 3px;
@@ -156,11 +167,13 @@ const Content = styled.div`
 
 const Form = styled.div`
   display: block;
+
   .formHidden & {
     visibility: hidden;
     height: 700px;
     overflow: hidden;
   }
+
   body.dark-mode & {
     color: #24292e;
 
@@ -175,6 +188,7 @@ const Form = styled.div`
       color: inherit;
     }
   }
+
   ${({ hasExternalStyles }) =>
     hasExternalStyles &&
     `
@@ -182,12 +196,14 @@ const Form = styled.div`
     img {
       width: 180px;
     }
+
     fieldset {
       border: 0;
       padding: 0;
       margin: 0;
       max-width: 500px;
     }
+
     .hs-button {
       font-family: 'Euclid Circular B';
       margin: 0;
