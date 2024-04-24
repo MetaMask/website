@@ -39,6 +39,10 @@ const PortfolioHelmet = props => {
       }
       link={[{ rel: 'manifest', href: '/site.portfolio.webmanifest' }]}
     >
+      <meta
+        http-equiv="refresh"
+        content="0; URL='https://portfolio.metamask.io'"
+      />
       <script src="https://www.youtube.com/iframe_api"></script>
     </Helmet>
   )

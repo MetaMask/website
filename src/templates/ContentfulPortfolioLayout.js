@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Layout from './PageLayout'
 import { graphql } from 'gatsby'
 import { gsap } from 'gsap'
@@ -44,10 +44,6 @@ const ContentfulPortfolioLayout = props => {
     portfolioInstructions = portfolioInstructions.nodes[0]
     portfolioMap = portfolioMap.nodes[0]
   }
-
-  useEffect(() => {
-    window.location.href = 'https://portfolio.metamask.io'
-  }, [])
 
   return (
     <Layout localizedPages={pageContext?.localizedPages}>
