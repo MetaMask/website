@@ -75,5 +75,5 @@ export const useCustomEvent = ({ componentName, componentId, elementRef }) => {
     }
   }, [flagValue])
 
-  return flagValue
+  return { flagName, flagValue }
 }

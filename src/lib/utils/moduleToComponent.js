@@ -47,7 +47,7 @@ const ComponentWrapper = ({ id, typename, moduleConfig }) => {
 
   const elementRef = useRef(null)
 
-  const flagValue = useCustomEvent({
+  const { flagName, flagValue } = useCustomEvent({
     componentName: typename,
     componentId: id,
     elementRef,
@@ -63,7 +63,13 @@ const ComponentWrapper = ({ id, typename, moduleConfig }) => {
   }
 
   return (
-    <div ref={elementRef}>
+    <div
+      ref={elementRef}
+      data-componentName={typename}
+      data-componentId={id}
+      data-flagName={flagName}
+      data-flagValue={flagValue}
+    >
       <Component flagValue={flagValue} moduleConfig={moduleConfig} />
     </div>
   )

@@ -67,5 +67,5 @@ export const useFeatureFlag = ({
     }
   }, [flagValue])
 
-  return flagValue
+  return { flagName, flagValue }
 }
