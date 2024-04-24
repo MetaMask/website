@@ -170,5 +170,9 @@
   {
     "fromPath": "/news/latest/",
     "toPath": "/news/"
+  },
+  {
+    "fromPath": "/portfolio/",
+    "toPath": "https://portfolio.metamask.io/"
   }
 ]
