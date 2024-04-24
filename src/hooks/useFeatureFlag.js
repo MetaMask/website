@@ -1,15 +1,29 @@
 import { useFlags } from 'gatsby-plugin-launchdarkly'
 import { useEffect, useRef, useState } from 'react'
 
-export const useFeatureFlag = (flagName, elementRef) => {
+export const useFeatureFlag = ({
+  componentName,
+  componentId,
+  flagName,
+  elementRef,
+}) => {
+  const BASE_DATA = {
+    event: 'component_in_view',
+    componentName,
+    componentId,
+  }
+
   const flags = useFlags()
   const hasDataLayerUpdatedRef = useRef(false)
   const [flagValue, setFlagValue] = useState(null)
+
+  const hasLDinitialized = flags => Object.keys(flags).length > 0
 
   const dataLayerPush = data => {
     if (typeof window !== 'undefined') {
       window.dataLayer = window.dataLayer || []
       window.dataLayer.push(data)
+      //   console.log(data)
     }
   }
 
@@ -18,24 +32,28 @@ export const useFeatureFlag = (flagName, elementRef) => {
       if (entry.isIntersecting) {
         hasDataLayerUpdatedRef.current = true
 
-        dataLayerPush({
-          event: 'ab-test',
-          flagName,
-          flagValue,
-          pagePath: window.location.pathname,
-          inViewport: entry.isIntersecting,
-        })
+        if (typeof flagValue !== 'undefined') {
+          dataLayerPush({
+            ...BASE_DATA,
+            flagName,
+            flagValue,
+            pagePath: window.location.pathname,
+            inViewport: entry.isIntersecting,
+          })
+        }
       }
     }
   }
 
   useEffect(() => {
-    if (flags && flagName in flags) {
-      setFlagValue(flags[flagName])
-    }
+    if (!hasLDinitialized(flags)) return
+
+    setFlagValue(flags[flagName])
   }, [flags])
 
   useEffect(() => {
+    if (!hasLDinitialized(flags)) return
+
     if (elementRef?.current && flagValue !== null) {
       const observer = new IntersectionObserver(onIntersect)
 
@@ -46,13 +64,6 @@ export const useFeatureFlag = (flagName, elementRef) => {
           observer.unobserve(elementRef.current)
         }
       }
-    } else if (!elementRef?.current && flagValue !== null) {
-      dataLayerPush({
-        event: 'ab-test',
-        flagName,
-        flagValue,
-        pagePath: window.location.pathname,
-      })
     }
   }, [flagValue])
 

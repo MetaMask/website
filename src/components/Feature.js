@@ -56,7 +56,13 @@ const FeatureComponent = props => {
 
   const elementRef = useRef()
   const inspectorProps = useContentfulInspectorMode()
-  const showApiPlayground = useFeatureFlag(launchDarklyFlag, elementRef)
+
+  const showApiPlayground = useFeatureFlag({
+    componentName: 'FeatureComponent',
+    componentId: contentfulId,
+    flagName: launchDarklyFlag,
+    elementRef,
+  })
 
   const contentAlignLR = ['left', 'right'].includes(contentAlignment)
     ? contentAlignment

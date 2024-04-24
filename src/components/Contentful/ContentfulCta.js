@@ -10,9 +10,11 @@ import CTA from '../CTA'
 const ContentfulCta = props => {
   const { isMetaMaskInstalled } = useContext(MetaMaskContext)
 
-  const headerAlwaysShowDownload = useFeatureFlag(
-    props.moduleConfig?.launchDarklyFlag
-  )
+  const headerAlwaysShowDownload = useFeatureFlag({
+    componentName: props.moduleConfig?.internal?.type,
+    componentId: props.moduleConfig?.contentful_id,
+    flagName: props.moduleConfig?.launchDarklyFlag,
+  })
 
   const selectedCta =
     !headerAlwaysShowDownload &&
