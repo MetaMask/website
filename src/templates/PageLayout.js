@@ -157,21 +157,13 @@ const PageLayout = props => {
       if (closest) {
         window.dataLayer = window.dataLayer || []
 
-        let data = {
+        window.dataLayer.push({
           ld_user_id: window.localStorage.getItem('ld:$anonUserId'),
           componentName: closest.dataset.componentname,
           componentId: closest.dataset.componentid,
-        }
-
-        if (closest.dataset.flagname && closest.dataset.flagvalue) {
-          data = {
-            ...data,
-            flagName: closest.dataset.flagname,
-            flagValue: closest.dataset.flagvalue,
-          }
-        }
-
-        window.dataLayer.push(data)
+          flagName: closest.dataset.flagname,
+          flagValue: closest.dataset.flagvalue,
+        })
       }
     }
 
