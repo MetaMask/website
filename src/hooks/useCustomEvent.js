@@ -6,7 +6,6 @@ export const useCustomEvent = ({ componentName, componentId, elementRef }) => {
     event: 'component_in_view',
     componentName,
     componentId,
-    ld_user_id: window.localStorage.getItem('ld:$anonUserId'),
   }
 
   const flags = useFlags()
@@ -46,6 +45,7 @@ export const useCustomEvent = ({ componentName, componentId, elementRef }) => {
           ...BASE_DATA,
           pagePath: window.location.pathname,
           inViewport: entry.isIntersecting,
+          ld_user_id: window.localStorage.getItem('ld:$anonUserId'),
         }
 
         if (typeof flagValue !== 'undefined') {

@@ -11,7 +11,6 @@ export const useFeatureFlag = ({
     event: 'component_in_view',
     componentName,
     componentId,
-    ld_user_id: window.localStorage.getItem('ld:$anonUserId'),
   }
 
   const flags = useFlags()
@@ -43,6 +42,7 @@ export const useFeatureFlag = ({
             flagValue,
             pagePath: window.location.pathname,
             inViewport: entry.isIntersecting,
+            ld_user_id: window.localStorage.getItem('ld:$anonUserId'),
           })
         }
       }
