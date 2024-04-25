@@ -1,5 +1,4 @@
-import React, { useRef } from 'react'
-import { useCustomEvent } from '../../hooks/useCustomEvent'
+import React from 'react'
 import * as ContenfulComponents from '../../components/Contentful'
 import { convertContentfulPreviewTypename } from './fetchContentfulData'
 
@@ -29,48 +28,16 @@ export const contentfulModuleToComponent = (moduleConfig = {}) => {
   }
 
   if (!__typename) return null
-
-  const key = `${__typename}__${__id}` // unique key for React
-
-  return (
-    <ComponentWrapper
-      key={key}
-      id={__id}
-      typename={__typename}
-      moduleConfig={moduleConfig}
-    />
-  )
-}
-
-const ComponentWrapper = ({ id, typename, moduleConfig }) => {
-  const Component = ContenfulComponents[typename]
-
-  const elementRef = useRef(null)
-
-  const { flagName, flagValue } = useCustomEvent({
-    componentName: typename,
-    componentId: id,
-    elementRef,
-  })
+  const Component = ContenfulComponents[__typename] // route data to component based on auto generated type by Contentful CMS
 
   if (!Component) {
-    console.log(`No component defined for - ${typename} CMS model.
-		Check that CMS component names have not been changed.
-		If new content-type, define in components/Contentful/[type]
-	`)
-
+    console.log(`No component defined for - ${__typename} CMS model.
+      Check that CMS component names have not been changed.
+      If new content-type, define in components/Contentful/[type]
+    `)
     return null
   }
 
-  return (
-    <div
-      ref={elementRef}
-      data-componentname={typename}
-      data-componentid={id}
-      data-flagname={flagName}
-      data-flagvalue={flagValue}
-    >
-      <Component flagValue={flagValue} moduleConfig={moduleConfig} />
-    </div>
-  )
+  const key = `${__typename}__${__id}` // React key for component
+  return <Component key={key} moduleConfig={moduleConfig} />
 }
