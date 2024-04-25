@@ -140,24 +140,40 @@ const PageLayout = props => {
     if (ldClient) {
       window.dataLayer = window.dataLayer || []
 
-      window.dataLayer.push({
-        event: 'custom_page_view',
-        ld_user_id: window.localStorage.getItem('ld:$anonUserId'),
-        flags: ldClient.allFlags(),
-      })
+      setTimeout(() => {
+        const elems = document.querySelectorAll(
+          '[data-flagname][data-flagvalue]'
+        )
+
+        window.dataLayer.push({
+          event: 'custom_page_view',
+          ld_user_id: ldClient.getContext().key,
+          all_flags: ldClient.allFlags(),
+          flags_active_on_current_page: Array.from(elems).map(el => ({
+            componentName: el.dataset.componentname,
+            componentId: el.dataset.componentid,
+            flagName: el.dataset.flagname,
+            flagValue: el.dataset.flagvalue,
+          })),
+          page_path: window.location.pathname,
+        })
+      }, 10)
     }
   }, [ldClient])
 
   useEffect(() => {
     let timer
     const handleClickDl = event => {
+      window.dataLayer = window.dataLayer || []
+
       if (event.target.closest('.deeplink')) {
         const uuid = generateUUID()
-        window.dataLayer = window.dataLayer || []
+
         window.dataLayer.push({
           event: 'all_clicks',
           unique_attribution_id: uuid,
         })
+
         timer = setTimeout(() => {
           window.dataLayer.push({
             unique_attribution_id: undefined,
@@ -166,26 +182,26 @@ const PageLayout = props => {
       }
 
       const closest = event.target.closest(
-        '[data-componentName][data-componentId]'
+        '[data-componentname][data-flagname]'
       )
+      const closestLink = event.target.closest('a')
 
-      if (closest) {
-        window.dataLayer = window.dataLayer || []
+      const el = closest || closestLink
 
-        const closestLink = event.target.closest('a')
-
-        window.dataLayer.push({
-          event: 'before_all_clicks',
-          ld_user_id: window.localStorage.getItem('ld:$anonUserId'),
-          componentName: closest.dataset.componentname,
-          componentId: closest.dataset.componentid,
-          flagName: closest.dataset.flagname,
-          flagValue: closest.dataset.flagvalue,
-          page_path_before: window.location.pathname,
-          click_url_before: closestLink?.href,
-          click_text_before: closestLink?.innerText,
-        })
+      const data = {
+        event: 'before_all_clicks',
+        ld_user_id: window.localStorage.getItem('ld:$anonUserId'),
+        componentName: el?.dataset.componentname,
+        componentId: el?.dataset.componentid,
+        flagName: el?.dataset.flagname,
+        flagValue: el?.dataset.flagvalue,
+        page_path_before: window.location.pathname,
+        click_url_before: closestLink?.href,
+        click_text_before: closestLink?.innerText,
       }
+
+      window.dataLayer.push(data)
+      // console.log(data)
     }
 
     document.addEventListener('click', handleClickDl, true)

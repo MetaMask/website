@@ -6,6 +6,7 @@ import classnames from 'classnames'
 import Image from './Image'
 const Button = props => {
   const {
+    attr,
     link,
     text,
     newTab,
@@ -23,6 +24,7 @@ const Button = props => {
 
   return (
     <ButtonWrapper
+      {...attr}
       to={link}
       newTab={newTab}
       color={color}

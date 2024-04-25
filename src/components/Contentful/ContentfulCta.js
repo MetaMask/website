@@ -71,6 +71,12 @@ const ContentfulCta = props => {
       previewMode={activeCta.previewMode}
       isForDeveloper={activeCta.isForDeveloper}
       buttonCaretDown={activeCta.buttonCaretDown}
+      attr={{
+        'data-componentname': 'ContentfulCta',
+        'data-componentid': activeCta?.contentful_id || 'n/a',
+        'data-flagname': props.moduleConfig?.launchDarklyFlag,
+        'data-flagvalue': headerAlwaysShowDownload,
+      }}
     />
   )
 }

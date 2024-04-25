@@ -1,4 +1,4 @@
-import { useFlags } from 'gatsby-plugin-launchdarkly'
+import { useFlags, useLDClient } from 'gatsby-plugin-launchdarkly'
 import { useEffect, useRef, useState } from 'react'
 
 export const useCustomEvent = ({ componentName, componentId, elementRef }) => {
@@ -9,11 +9,10 @@ export const useCustomEvent = ({ componentName, componentId, elementRef }) => {
   }
 
   const flags = useFlags()
+  const ldClient = useLDClient()
   const hasDataLayerUpdatedRef = useRef(false)
   const [flagValue, setFlagValue] = useState(null)
   const flagName = componentName + componentId
-
-  const hasLDinitialized = flags => Object.keys(flags).length > 0
 
   const getCaseInsensitive = (obj, key) => {
     for (const objKey in obj) {
@@ -28,10 +27,7 @@ export const useCustomEvent = ({ componentName, componentId, elementRef }) => {
   const dataLayerPush = data => {
     if (typeof window !== 'undefined') {
       window.dataLayer = window.dataLayer || []
-
-      setTimeout(() => {
-        window.dataLayer.push(data)
-      }, 0)
+      window.dataLayer.push(data)
       //   console.log(data)
     }
   }
@@ -45,7 +41,7 @@ export const useCustomEvent = ({ componentName, componentId, elementRef }) => {
           ...BASE_DATA,
           pagePath: window.location.pathname,
           inViewport: entry.isIntersecting,
-          ld_user_id: window.localStorage.getItem('ld:$anonUserId'),
+          ld_user_id: ldClient.getContext().key,
         }
 
         if (typeof flagValue !== 'undefined') {
@@ -58,13 +54,13 @@ export const useCustomEvent = ({ componentName, componentId, elementRef }) => {
   }
 
   useEffect(() => {
-    if (!hasLDinitialized(flags)) return
+    if (!ldClient) return
 
     setFlagValue(getCaseInsensitive(flags, flagName))
-  }, [flags])
+  }, [ldClient])
 
   useEffect(() => {
-    if (!hasLDinitialized(flags)) return
+    if (!ldClient) return
 
     if (elementRef?.current) {
       const observer = new IntersectionObserver(onIntersect)
@@ -77,7 +73,7 @@ export const useCustomEvent = ({ componentName, componentId, elementRef }) => {
         }
       }
     }
-  }, [flagValue])
+  }, [ldClient, flagValue])
 
-  return { flagName, flagValue }
+  return flagValue
 }

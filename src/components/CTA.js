@@ -47,6 +47,7 @@ const CTA = props => {
     previewMode = false,
     isForDeveloper,
     buttonCaretDown,
+    attr,
   } = props
 
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
@@ -191,6 +192,7 @@ const CTA = props => {
         customClassName
       )}
       align={align}
+      {...attr}
     >
       <ContentWrapper
         to={link}
@@ -220,6 +222,7 @@ const CTA = props => {
   if (isButton) {
     ele = (
       <Button
+        attr={attr}
         size={buttonSize}
         link={link}
         text={text}
@@ -251,7 +254,7 @@ const CTA = props => {
     downloadBrowsers['browsers-supported']
   ) {
     ele = (
-      <BrowserWrapper>
+      <BrowserWrapper {...attr}>
         <BrowserInfo>
           <BrowserInfoTitle>
             {downloadBrowsers['browsers-supported'].text}

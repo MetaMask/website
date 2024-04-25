@@ -1,4 +1,4 @@
-import { useFlags } from 'gatsby-plugin-launchdarkly'
+import { useFlags, useLDClient } from 'gatsby-plugin-launchdarkly'
 import { useEffect, useRef, useState } from 'react'
 
 export const useFeatureFlag = ({
@@ -14,18 +14,14 @@ export const useFeatureFlag = ({
   }
 
   const flags = useFlags()
+  const ldClient = useLDClient()
   const hasDataLayerUpdatedRef = useRef(false)
   const [flagValue, setFlagValue] = useState(null)
-
-  const hasLDinitialized = flags => Object.keys(flags).length > 0
 
   const dataLayerPush = data => {
     if (typeof window !== 'undefined') {
       window.dataLayer = window.dataLayer || []
-
-      setTimeout(() => {
-        window.dataLayer.push(data)
-      }, 0)
+      window.dataLayer.push(data)
       //   console.log(data)
     }
   }
@@ -42,7 +38,7 @@ export const useFeatureFlag = ({
             flagValue,
             pagePath: window.location.pathname,
             inViewport: entry.isIntersecting,
-            ld_user_id: window.localStorage.getItem('ld:$anonUserId'),
+            ld_user_id: ldClient.getContext().key,
           })
         }
       }
@@ -50,13 +46,13 @@ export const useFeatureFlag = ({
   }
 
   useEffect(() => {
-    if (!hasLDinitialized(flags)) return
+    if (!ldClient) return
 
     setFlagValue(flags[flagName])
-  }, [flags])
+  }, [ldClient])
 
   useEffect(() => {
-    if (!hasLDinitialized(flags)) return
+    if (!ldClient) return
 
     if (elementRef?.current && flagValue !== null) {
       const observer = new IntersectionObserver(onIntersect)
@@ -65,8 +61,14 @@ export const useFeatureFlag = ({
 
       elementRef.current.dataset.componentname = componentName
       elementRef.current.dataset.componentid = componentId
-      elementRef.current.dataset.flagname = flagName
-      elementRef.current.dataset.flagvalue = flagValue
+
+      if (flagName !== null) {
+        elementRef.current.dataset.flagname = flagName
+      }
+
+      if (typeof flagValue !== 'undefined') {
+        elementRef.current.dataset.flagvalue = flagValue
+      }
 
       return () => {
         if (elementRef?.current) {
@@ -74,7 +76,7 @@ export const useFeatureFlag = ({
         }
       }
     }
-  }, [flagValue])
+  }, [ldClient, flagValue])
 
-  return { flagName, flagValue }
+  return flagValue
 }
