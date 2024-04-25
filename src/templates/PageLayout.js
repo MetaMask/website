@@ -166,9 +166,9 @@ const PageLayout = props => {
           componentId: closest.dataset.componentid,
           flagName: closest.dataset.flagname,
           flagValue: closest.dataset.flagvalue,
-          page_path: window.location.pathname,
-          clik_url: closestLink.href,
-          click_text: closestLink.innerText,
+          page_path_before: window.location.pathname,
+          clik_url_before: closestLink.href,
+          click_text_before: closestLink.innerText,
         })
       }
     }
