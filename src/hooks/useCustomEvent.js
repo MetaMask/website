@@ -1,12 +1,7 @@
 import { useFlags } from 'gatsby-plugin-launchdarkly'
 import { useEffect, useRef, useState } from 'react'
 
-export const useFeatureFlag = ({
-  componentName,
-  componentId,
-  flagName,
-  elementRef,
-}) => {
+export const useCustomEvent = ({ componentName, componentId, elementRef }) => {
   const BASE_DATA = {
     event: 'component_in_view',
     componentName,
@@ -16,8 +11,19 @@ export const useFeatureFlag = ({
   const flags = useFlags()
   const hasDataLayerUpdatedRef = useRef(false)
   const [flagValue, setFlagValue] = useState(null)
+  const flagName = componentName + componentId
 
   const hasLDinitialized = flags => Object.keys(flags).length > 0
+
+  const getCaseInsensitive = (obj, key) => {
+    for (const objKey in obj) {
+      if (objKey.toLowerCase() === key.toLowerCase()) {
+        return obj[objKey]
+      }
+    }
+
+    return undefined
+  }
 
   const dataLayerPush = data => {
     if (typeof window !== 'undefined') {
@@ -32,15 +38,17 @@ export const useFeatureFlag = ({
       if (entry.isIntersecting) {
         hasDataLayerUpdatedRef.current = true
 
-        if (typeof flagValue !== 'undefined') {
-          dataLayerPush({
-            ...BASE_DATA,
-            flagName,
-            flagValue,
-            pagePath: window.location.pathname,
-            inViewport: entry.isIntersecting,
-          })
+        let data = {
+          ...BASE_DATA,
+          pagePath: window.location.pathname,
+          inViewport: entry.isIntersecting,
         }
+
+        if (typeof flagValue !== 'undefined') {
+          data = { ...data, flagName, flagValue }
+        }
+
+        dataLayerPush(data)
       }
     }
   }
@@ -48,13 +56,13 @@ export const useFeatureFlag = ({
   useEffect(() => {
     if (!hasLDinitialized(flags)) return
 
-    setFlagValue(flags[flagName])
+    setFlagValue(getCaseInsensitive(flags, flagName))
   }, [flags])
 
   useEffect(() => {
     if (!hasLDinitialized(flags)) return
 
-    if (elementRef?.current && flagValue !== null) {
+    if (elementRef?.current) {
       const observer = new IntersectionObserver(onIntersect)
 
       observer.observe(elementRef.current)
