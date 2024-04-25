@@ -16,6 +16,7 @@ import Context from '../Context/ContextPage'
 import ContextClientSide from '../Context/ContextClientSide'
 import queryString from 'query-string'
 import generateUUID from '../lib/utils/helpers'
+import { useLDClient } from 'gatsby-plugin-launchdarkly'
 
 /**
  * @name PageLayout
@@ -34,6 +35,8 @@ const PageLayout = props => {
     localizedPages,
     ...rest
   } = props
+
+  const ldClient = useLDClient()
   const { pathname, search } = location || {}
   const [idFaqActive, setIdFaqActive] = React.useState('')
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
@@ -134,6 +137,18 @@ const PageLayout = props => {
   }, [])
 
   useEffect(() => {
+    if (ldClient) {
+      window.dataLayer = window.dataLayer || []
+
+      window.dataLayer.push({
+        event: 'custom_page_view',
+        ld_user_id: window.localStorage.getItem('ld:$anonUserId'),
+        flags: ldClient.allFlags(),
+      })
+    }
+  }, [ldClient])
+
+  useEffect(() => {
     let timer
     const handleClickDl = event => {
       if (event.target.closest('.deeplink')) {
@@ -167,8 +182,8 @@ const PageLayout = props => {
           flagName: closest.dataset.flagname,
           flagValue: closest.dataset.flagvalue,
           page_path_before: window.location.pathname,
-          click_url_before: closestLink.href,
-          click_text_before: closestLink.innerText,
+          click_url_before: closestLink?.href,
+          click_text_before: closestLink?.innerText,
         })
       }
     }

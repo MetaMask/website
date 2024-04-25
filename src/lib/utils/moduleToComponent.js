@@ -65,10 +65,10 @@ const ComponentWrapper = ({ id, typename, moduleConfig }) => {
   return (
     <div
       ref={elementRef}
-      data-componentName={typename}
-      data-componentId={id}
-      data-flagName={flagName}
-      data-flagValue={flagValue}
+      data-componentname={typename}
+      data-componentid={id}
+      data-flagname={flagName}
+      data-flagvalue={flagValue}
     >
       <Component flagValue={flagValue} moduleConfig={moduleConfig} />
     </div>

@@ -63,6 +63,11 @@ export const useFeatureFlag = ({
 
       observer.observe(elementRef.current)
 
+      elementRef.current.dataset.componentname = componentName
+      elementRef.current.dataset.componentid = componentId
+      elementRef.current.dataset.flagname = flagName
+      elementRef.current.dataset.flagvalue = flagValue
+
       return () => {
         if (elementRef?.current) {
           observer.unobserve(elementRef.current)
