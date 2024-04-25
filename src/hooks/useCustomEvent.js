@@ -29,7 +29,10 @@ export const useCustomEvent = ({ componentName, componentId, elementRef }) => {
   const dataLayerPush = data => {
     if (typeof window !== 'undefined') {
       window.dataLayer = window.dataLayer || []
-      window.dataLayer.push(data)
+
+      setTimeout(() => {
+        window.dataLayer.push(data)
+      }, 0)
       //   console.log(data)
     }
   }
