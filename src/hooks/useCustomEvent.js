@@ -6,6 +6,7 @@ export const useCustomEvent = ({ componentName, componentId, elementRef }) => {
     event: 'component_in_view',
     componentName,
     componentId,
+    ld_user_id: window.localStorage.getItem('ld:$anonUserId'),
   }
 
   const flags = useFlags()

@@ -158,6 +158,7 @@ const PageLayout = props => {
         window.dataLayer = window.dataLayer || []
 
         let data = {
+          ld_user_id: window.localStorage.getItem('ld:$anonUserId'),
           componentName: closest.dataset.componentname,
           componentId: closest.dataset.componentid,
         }
