@@ -157,6 +157,8 @@ const PageLayout = props => {
       if (closest) {
         window.dataLayer = window.dataLayer || []
 
+        const closestLink = event.target.closest('a')
+
         window.dataLayer.push({
           event: 'before_all_clicks',
           ld_user_id: window.localStorage.getItem('ld:$anonUserId'),
@@ -164,6 +166,9 @@ const PageLayout = props => {
           componentId: closest.dataset.componentid,
           flagName: closest.dataset.flagname,
           flagValue: closest.dataset.flagvalue,
+          page_path: window.location.pathname,
+          clik_url: closestLink.href,
+          click_text: closestLink.innerText,
         })
       }
     }
