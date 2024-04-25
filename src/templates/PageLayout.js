@@ -149,8 +149,33 @@ const PageLayout = props => {
           })
         }, 500)
       }
+
+      const closest = event.target.closest(
+        '[data-componentName][data-componentId]'
+      )
+
+      if (closest) {
+        window.dataLayer = window.dataLayer || []
+
+        let data = {
+          componentName: closest.dataset.componentname,
+          componentId: closest.dataset.componentid,
+        }
+
+        if (closest.dataset.flagname && closest.dataset.flagvalue) {
+          data = {
+            ...data,
+            flagName: closest.dataset.flagname,
+            flagValue: closest.dataset.flagvalue,
+          }
+        }
+
+        window.dataLayer.push(data)
+      }
     }
+
     document.addEventListener('click', handleClickDl, true)
+
     return () => {
       document.removeEventListener('click', handleClickDl, true)
       timer && clearTimeout(timer)
