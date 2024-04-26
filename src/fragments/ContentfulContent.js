@@ -1040,6 +1040,11 @@ export const ContentfulSeoFields = graphql`
       }
       gatsbyImageData(width: 768, quality: 100)
     }
+    structuredDataSchema {
+      internal {
+        content
+      }
+    }
   }
 `
 
