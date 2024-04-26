@@ -51,6 +51,10 @@ export const TEMPLATE_LAYOUT_LIST = [
     name: 'Author',
     path: './src/templates/AuthorProfileLayout.js',
   },
+  {
+    name: 'News',
+    path: './src/templates/ContentfulNewsCategoryLayout.js',
+  },
 ]
 
 export const mapTemplateLayout = name => {

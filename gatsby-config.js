@@ -13,11 +13,11 @@ if (env.errors) {
   module.exports = {
     siteMetadata: {
       title: 'MetaMask',
-      description: `MetaMask is a ConsenSys Formation.`,
+      description: `MetaMask is a Consensys Formation.`,
       siteUrl:
         activeEnv === 'development'
-          ? 'https://metamask.consensys.io'
-          : 'https://metamask.io',
+          ? 'http://localhost:8000/'
+          : 'https://metamask.consensys.io',
     },
     plugins: [
       {
