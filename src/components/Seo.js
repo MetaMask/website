@@ -23,6 +23,7 @@ const SEO = props => {
     originalSlug,
     canonicalUrl,
     translation,
+    structuredDataSchema,
   } = props
 
   const location = useLocation()
@@ -94,7 +95,15 @@ const SEO = props => {
     })
   }
 
-  return <Helmet meta={meta} link={link} title={seo.title} />
+  return (
+    <Helmet meta={meta} link={link} title={seo.title}>
+      {structuredDataSchema && (
+        <script type="application/ld+json">
+          {structuredDataSchema.internal.content}
+        </script>
+      )}
+    </Helmet>
+  )
 }
 
 SEO.propTypes = {
@@ -105,6 +114,7 @@ SEO.propTypes = {
   metaTags: PropTypes.arrayOf(PropTypes.object),
   linkTags: PropTypes.arrayOf(PropTypes.object),
   image: PropTypes.object,
+  structuredDataSchema: PropTypes.object,
 }
 
 SEO.defaultProps = {
