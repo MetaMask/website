@@ -155,7 +155,7 @@ const PageLayout = props => {
             flagName: el.dataset.flagname,
             flagValue: el.dataset.flagvalue,
           })),
-          page_path: window.location.pathname,
+          custom_page_view_page_path: window.location.pathname,
         })
       }, 10)
     }
