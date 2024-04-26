@@ -14,16 +14,6 @@ export const useCustomEvent = ({ componentName, componentId, elementRef }) => {
   const [flagValue, setFlagValue] = useState(null)
   const flagName = componentName + componentId
 
-  const getCaseInsensitive = (obj, key) => {
-    for (const objKey in obj) {
-      if (objKey.toLowerCase() === key.toLowerCase()) {
-        return obj[objKey]
-      }
-    }
-
-    return undefined
-  }
-
   const dataLayerPush = data => {
     if (typeof window !== 'undefined') {
       window.dataLayer = window.dataLayer || []
@@ -56,7 +46,7 @@ export const useCustomEvent = ({ componentName, componentId, elementRef }) => {
   useEffect(() => {
     if (!ldClient) return
 
-    setFlagValue(getCaseInsensitive(flags, flagName))
+    setFlagValue(flags[flagName])
   }, [ldClient])
 
   useEffect(() => {
@@ -75,5 +65,5 @@ export const useCustomEvent = ({ componentName, componentId, elementRef }) => {
     }
   }, [ldClient, flagValue])
 
-  return flagValue
+  return flags[flagName]
 }

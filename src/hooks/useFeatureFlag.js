@@ -78,5 +78,5 @@ export const useFeatureFlag = ({
     }
   }, [ldClient, flagValue])
 
-  return flagValue
+  return flags[flagName]
 }
