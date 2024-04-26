@@ -16,6 +16,8 @@ const ContentfulSeo = props => {
       canonicalUrl,
       translation,
       structuredDataSchema,
+      paginationNext,
+      paginationPrev,
     },
   } = props
 
@@ -37,6 +39,8 @@ const ContentfulSeo = props => {
       originalSlug={originalSlug}
       translation={translation}
       structuredDataSchema={structuredDataSchema}
+      paginationNext={paginationNext}
+      paginationPrev={paginationPrev}
     />
   )
 }

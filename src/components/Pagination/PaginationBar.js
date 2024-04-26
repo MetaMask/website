@@ -15,7 +15,7 @@ const PaginationBar = props => {
   const { pathname } = location
   const { active, isFirst, isLast, total } = props
   const list = range(total)
-  const baseUrl = pathname.replace(`${active}/`, '')
+  const baseUrl = pathname.replace(`page/${active}/`, '')
 
   const isMobile = useMediaQuery({
     query: '(max-width: 768px)',
@@ -42,14 +42,14 @@ const PaginationBar = props => {
             return (
               <Link
                 key={index}
-                to={`${baseUrl}${item === 1 ? '' : item + '/'}`}
+                to={`${baseUrl}${item === 1 ? '' : 'page/' + item + '/'}`}
               >
                 <Item active={active === item}>{item}</Item>
               </Link>
             )
           }
         })}
-        <Link key={list.length} to={`${baseUrl}${list.length}`}>
+        <Link key={list.length} to={`${baseUrl}page/${list.length}`}>
           <Item active={active === list.length}>{list.length}</Item>
         </Link>
       </>
@@ -59,13 +59,19 @@ const PaginationBar = props => {
   return (
     <Wrapper>
       {!isFirst ? (
-        <Link to={`${baseUrl}${active > 2 ? active - 1 + '/' : ''}`}>
+        <Link
+          rel="prev"
+          to={`${baseUrl}${active > 2 ? 'page/' + (active - 1) + '/' : ''}`}
+        >
           <ArrowIcon className="n-icon icon-arrow-left-thin" />
         </Link>
       ) : null}
       {renderPagination()}
       {!isLast ? (
-        <Link to={`${baseUrl}${active < total ? active + 1 + '/' : ''}`}>
+        <Link
+          rel="next"
+          to={`${baseUrl}page/${active < total ? active + 1 + '/' : ''}`}
+        >
           <ArrowIcon className="n-icon icon-arrow-right-thin" />
         </Link>
       ) : null}

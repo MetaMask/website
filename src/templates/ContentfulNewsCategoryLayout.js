@@ -17,6 +17,7 @@ const ContentfulNewsCategoryLayout = props => {
       currentPage,
       category,
       localizedPages,
+      totalPages,
     } = {},
     path,
   } = props
@@ -29,15 +30,27 @@ const ContentfulNewsCategoryLayout = props => {
   if (path.includes('/news/')) {
     let categoryName = 'Latest'
     categoryName = category ? capitalize(category) : 'Latest'
-    seoData.pageTitle = `${seoData.pageTitle} | ${categoryName} | MetaMask`
+    seoData.pageTitle = `MetaMask | ${seoData.pageTitle} | ${categoryName}`
     seoData.pageDescription = `${seoData.pageDescription} | ${categoryName}`
+    if (currentPage && currentPage < totalPages) {
+      seoData.paginationNext =
+        currentPage === 1
+          ? `${pathBuild}page/${currentPage + 1}/`
+          : pathBuild.replace(currentPage, currentPage + 1)
+    }
+    if (currentPage && currentPage > 1) {
+      seoData.paginationPrev =
+        currentPage === 2
+          ? pathBuild.replace(`page/${currentPage}/`, '')
+          : pathBuild.replace(currentPage, currentPage - 1)
+    }
   }
 
   useEffect(() => {
     const params = queryString.parse(search)
     const { page } = params
-    if (page) {
-      navigate(`${pathname}${page}`)
+    if (page > 1) {
+      navigate(`${pathname}page/${page}`)
     }
   }, [])
 
