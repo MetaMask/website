@@ -45,6 +45,7 @@ const ContentfulModuleContainer = props => {
       loadMoreMode,
       loadMoreCta,
       extraData,
+      storiesData,
     },
   } = props
 
@@ -214,6 +215,7 @@ const ContentfulModuleContainer = props => {
                 contentfulModuleToComponent({
                   ...m,
                   numberOfItem,
+                  storiesData,
                   previewMode,
                 })
               )}

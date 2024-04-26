@@ -6,6 +6,7 @@ const { buildSitemap } = require(`./src/lib/utils/sitemap`)
 const { writeRedirectsFile } = require('./src/lib/utils/redirect')
 const { fetchDevChangeLog } = require('./fetchDataSSR')
 const fetch = require('node-fetch')
+const { minimatch } = require('minimatch')
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions
@@ -64,20 +65,25 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(`
     {
       allCategories: allContentfulNewsCategory(
-        filter: { name: { regex: "/^(?!.*(?:Latest|example)).*$/" }, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"} }
+        filter: { name: { regex: "/^(?!.*example).*$/" }, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"} }
       ) {
         nodes {
           contentful_id
           name
+          news {
+            contentful_id
+          }
         }
       }
     }
   `)
   if (result.data && result.data.allCategories) {
     result.data.allCategories.nodes.forEach(cat => {
-      if (cat.name) {
-        newsCategories.push(cat.name.toLowerCase())
-      }
+      newsCategories.push({
+        name: cat.name === 'Latest' ? '' : cat.name.toLowerCase(),
+        categoryId: cat.contentful_id,
+        total: cat.news?.length || 0,
+      })
     })
   }
   const legalsQuery = await graphql(`
@@ -182,7 +188,7 @@ exports.createPages = async ({ graphql, actions }) => {
           } = p.node
           const { contentful_id: footerId = '' } = footer || {}
           const { contentful_id: headerId = '' } = header || {}
-          const moduleIds = modules.map(m => m.contentful_id)
+          const moduleIds = modules?.map(m => m.contentful_id)
           const seoId = seo ? seo.contentful_id : ''
 
           if (pageType === 'Asset') {
@@ -223,26 +229,40 @@ exports.createPages = async ({ graphql, actions }) => {
           }
 
           if (pageType === 'News') {
-            const categoriesPath = newsCategories.map(cat => `/news/${cat}/`)
-            categoriesPath.forEach(categoryPath => {
-              createPage({
-                path: categoryPath, // slug validation in Contentful CMS
-                component: path.resolve(mapTemplateLayout(pageType)),
-                context: {
-                  headerId,
-                  footerId,
-                  seoId,
-                  modules: moduleIds,
-                  themeColor,
-                  pathBuild: categoryPath,
-                  isFaqLayout,
-                  widerContainer,
-                  h2FontSize,
-                  node_locale,
-                  localizedPages,
-                },
+            newsCategories.forEach(cat => {
+              let totalPage = Math.ceil(cat.total / 4) || 1
+              const itemsPerPage = 4
+              const baseCategoryPath = `/news/${cat.name ? cat.name + '/' : ''}`
+              Array.from({ length: totalPage }, (_, index) => {
+                const categoryPath = index
+                  ? `${baseCategoryPath}${index + 1}/`
+                  : baseCategoryPath
+                createPage({
+                  path: categoryPath,
+                  component: path.resolve(mapTemplateLayout(pageType)),
+                  context: {
+                    headerId,
+                    footerId,
+                    seoId,
+                    modules: moduleIds,
+                    themeColor,
+                    pathBuild: categoryPath,
+                    isFaqLayout,
+                    widerContainer,
+                    h2FontSize,
+                    node_locale,
+                    localizedPages,
+                    limit: itemsPerPage,
+                    skip: index * itemsPerPage,
+                    categoryId: cat.categoryId,
+                    category: cat.name,
+                    totalItems: cat.total,
+                    currentPage: index + 1,
+                  },
+                })
               })
             })
+            return
           }
 
           let legalMatch = -1
@@ -517,13 +537,13 @@ exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
               `/pyusd`,
               `/dev-404-page`,
               `/404`,
-              `/404.html`,
               `/es/`,
               `/ar/`,
               `/zh-CN/`,
               `/de/`,
+              `/*/standalone/`,
             ]
-            return !excludePages.some(exclude => path.startsWith(exclude))
+            return !excludePages.some(exclude => minimatch(path, exclude))
           },
           serializer: ({ path }) => ({
             loc: path,

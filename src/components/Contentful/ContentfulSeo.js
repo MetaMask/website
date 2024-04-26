@@ -15,6 +15,7 @@ const ContentfulSeo = props => {
       originalSlug,
       canonicalUrl,
       translation,
+      structuredDataSchema,
     },
   } = props
 
@@ -35,6 +36,7 @@ const ContentfulSeo = props => {
       linkTags={ex_linkTags}
       originalSlug={originalSlug}
       translation={translation}
+      structuredDataSchema={structuredDataSchema}
     />
   )
 }
@@ -47,6 +49,7 @@ ContentfulSeo.propTypes = {
   featuredImage: PropTypes.object,
   pagePath: PropTypes.string,
   canonicalUrl: PropTypes.string,
+  structuredDataSchema: PropTypes.object,
 }
 
 export default ContentfulSeo

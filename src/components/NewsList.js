@@ -3,7 +3,6 @@ import React from 'react'
 import Card from './Card'
 import { getNewsUrl } from '../lib/utils/news'
 import styled from 'styled-components'
-import Link from './Link'
 import NewsAuthor from './NewsAuthor'
 
 function NewsList(props) {

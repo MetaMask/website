@@ -8,8 +8,8 @@ import linkedInTrackingScript from '../lib/services/lintrk'
 import analyticsUninstalledScript from '../lib/services/analytics'
 import { useLocation } from '@reach/router'
 import Helmet from 'react-helmet'
-import capitalize from 'lodash/capitalize'
 import { DEFAULT_LOCALE_CODE } from '../lib/config.mjs'
+import { generateFaqSchema } from '../lib/utils/schema'
 
 /**
  * @name ContentfulLayout
@@ -92,14 +92,7 @@ const ContentfulLayout = props => {
   }, Array(modules.length - 1)) // prepopulate array so we can insert last elements if they appear first
 
   const allModules = [header, ...orderedPageModules, footer]
-
-  const seoData = { ...seo }
-  if (path.includes('/news/')) {
-    let category = path.match(/\/news\/(.*)\//)
-    category = category ? capitalize(category[1]) : 'Latest'
-    seoData.pageTitle = `${seoData.pageTitle} | ${category} | MetaMask`
-    seoData.pageDescription = `${seoData.pageDescription} | ${category}`
-  }
+  const schema = isFaqLayout ? generateFaqSchema(orderedPageModules) : null
 
   return (
     <Layout
@@ -113,11 +106,16 @@ const ContentfulLayout = props => {
     >
       {seo &&
         contentfulModuleToComponent({
-          ...seoData,
+          ...seo,
           pagePath: pathBuild,
           originalSlug: slug,
           translation,
         })}
+      {schema && (
+        <Helmet>
+          <script type="application/ld+json">{JSON.stringify(schema)}</script>
+        </Helmet>
+      )}
       {pathname.includes('/uninstalled') && (
         <Helmet
           script={[
