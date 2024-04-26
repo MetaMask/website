@@ -230,12 +230,12 @@ exports.createPages = async ({ graphql, actions }) => {
 
           if (pageType === 'News') {
             newsCategories.forEach(cat => {
-              let totalPage = Math.ceil(cat.total / 4) || 1
               const itemsPerPage = 4
+              let totalPages = Math.ceil(cat.total / itemsPerPage) || 1
               const baseCategoryPath = `/news/${cat.name ? cat.name + '/' : ''}`
-              Array.from({ length: totalPage }, (_, index) => {
+              Array.from({ length: totalPages }, (_, index) => {
                 const categoryPath = index
-                  ? `${baseCategoryPath}${index + 1}/`
+                  ? `${baseCategoryPath}page/${index + 1}/`
                   : baseCategoryPath
                 createPage({
                   path: categoryPath,
@@ -258,6 +258,7 @@ exports.createPages = async ({ graphql, actions }) => {
                     category: cat.name,
                     totalItems: cat.total,
                     currentPage: index + 1,
+                    totalPages
                   },
                 })
               })
@@ -537,11 +538,14 @@ exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
               `/pyusd`,
               `/dev-404-page`,
               `/404`,
+              `/404.html`,
               `/es/`,
               `/ar/`,
               `/zh-CN/`,
               `/de/`,
               `/*/standalone/`,
+              `/news/page/+([0-9])`,
+              `/news/*/page/+([0-9])`,
             ]
             return !excludePages.some(exclude => minimatch(path, exclude))
           },

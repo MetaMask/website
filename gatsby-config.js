@@ -14,10 +14,7 @@ if (env.errors) {
     siteMetadata: {
       title: 'MetaMask',
       description: `MetaMask is a Consensys Formation.`,
-      siteUrl:
-        activeEnv === 'development'
-          ? 'http://localhost:8000/'
-          : 'https://metamask.consensys.io',
+      siteUrl: 'https://metamask.consensys.io',
     },
     plugins: [
       {
