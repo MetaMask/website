@@ -10,6 +10,7 @@ import { useLocation } from '@reach/router'
 import Helmet from 'react-helmet'
 import capitalize from 'lodash/capitalize'
 import { DEFAULT_LOCALE_CODE } from '../lib/config.mjs'
+import { generateFaqSchema } from '../lib/utils/schema'
 
 /**
  * @name ContentfulLayout
@@ -101,6 +102,8 @@ const ContentfulLayout = props => {
     seoData.pageDescription = `${seoData.pageDescription} | ${category}`
   }
 
+  const schema = isFaqLayout ? generateFaqSchema(orderedPageModules) : null
+
   return (
     <Layout
       {...rest}
@@ -118,6 +121,11 @@ const ContentfulLayout = props => {
           originalSlug: slug,
           translation,
         })}
+      {schema && (
+        <Helmet>
+          <script type="application/ld+json">{JSON.stringify(schema)}</script>
+        </Helmet>
+      )}
       {pathname.includes('/uninstalled') && (
         <Helmet
           script={[
