@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<url><loc>https://metamask.io/institutions/access-mmi/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/financial-institutions/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/developer/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
@@ -39,7 +40,6 @@
 <url><loc>https://metamask.io/institutions/custody/integration/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/daos/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/web3-connect-2023/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
-<url><loc>https://metamask.io/institutions/access-mmi/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/funds/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/changelog/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/traditional-organizations/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
