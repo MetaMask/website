@@ -3,6 +3,7 @@ import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import { useContentfulInspectorMode } from '@contentful/live-preview/react'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import React, { useEffect, useMemo, useState, useRef } from 'react'
+import { useFeatureFlag } from '../../hooks/useFeatureFlag'
 import { useMediaQuery } from 'react-responsive'
 import { EyebrowStyle } from '../StyledGeneral'
 import kebabCase from 'lodash/kebabCase'
@@ -48,6 +49,16 @@ const ContentfulModuleContainer = props => {
       storiesData,
     },
   } = props
+
+  const elementRef = useRef()
+  console.log(elementRef)
+  const id = useMemo(() => kebabCase(title), [title])
+  const showLocaleProvidersOnBuyCryptoPage = useFeatureFlag({
+    componentName: 'PopupRegionSelector',
+    componentId: contentful_id,
+    flagName: 'showLocaleProvidersOnBuyCryptoPage',
+    elementRef,
+  })
 
   const inspectorProps = useContentfulInspectorMode()
   const gridModulesGap = gridModulesGapDefault || '8px'
@@ -119,7 +130,14 @@ const ContentfulModuleContainer = props => {
     <Wrapper
       isFaq={isFaq}
       className="contentfulModuleContainerWrapper"
-      id={kebabCase(title || '')}
+      id={id}
+      style={{
+        display:
+          id === 'payments-logos' && !showLocaleProvidersOnBuyCryptoPage
+            ? 'none'
+            : 'block',
+      }}
+      ref={id === 'payments-logos' ? elementRef : null}
     >
       <Inner splitModules={splitModules}>
         {title || htmlData || eyebrow ? (
@@ -239,6 +257,7 @@ const ContentfulModuleContainer = props => {
             </Carousel>
           ) : null}
         </ModulesWrapper>
+
         {loadMoreMode && visibleModule < modulesRender.length && (
           <div className="load-more-btn-wrapper">
             {contentfulModuleToComponent({

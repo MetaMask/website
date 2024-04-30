@@ -176,7 +176,7 @@ const PageLayout = props => {
       const closest = event.target.closest(
         '[data-componentname][data-flagname]'
       )
-      const closestLink = event.target.closest('a')
+      const closestLink = event.target.closest('a, button')
 
       const el = closest || closestLink
 
@@ -189,7 +189,11 @@ const PageLayout = props => {
         flagValue: el?.dataset.flagvalue,
         page_path_before: window.location.pathname,
         click_url_before: closestLink?.href,
-        click_text_before: closestLink?.innerText,
+        click_text_before:
+          closestLink?.nodeName === 'BUTTON' &&
+          closestLink?.getAttribute('aria-label')
+            ? closestLink?.getAttribute('aria-label')
+            : closestLink?.innerText,
       }
 
       window.dataLayer.push(data)

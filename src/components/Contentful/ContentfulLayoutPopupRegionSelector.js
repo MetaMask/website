@@ -32,7 +32,10 @@ const Modal = ({
         <h3>{title}</h3>
         <p>{text}</p>
 
-        <form class="input-container" onReset={setSearchTerm.bind(this, '')}>
+        <form
+          className="input-container"
+          onReset={setSearchTerm.bind(this, '')}
+        >
           <input
             type="search"
             name="search"
@@ -59,15 +62,20 @@ const Modal = ({
                     ? 'hidden'
                     : ''
                 }
-                onClick={() => {
-                  setSelectedCountry(list.indexOf(filteredItem))
-                  setHasModal(false)
-                }}
               >
-                <span className="flag">
-                  {isoToEmoji(filteredItem.country.id.replace('/regions/', ''))}{' '}
-                </span>
-                {filteredItem.country.name}
+                <button
+                  onClick={() => {
+                    setSelectedCountry(list.indexOf(filteredItem))
+                    setHasModal(false)
+                  }}
+                >
+                  <span className="flag">
+                    {isoToEmoji(
+                      filteredItem.country.id.replace('/regions/', '')
+                    )}{' '}
+                  </span>
+                  {filteredItem.country.name}
+                </button>
               </li>
             ))}
         </ul>
@@ -112,6 +120,7 @@ const ContentfulLayoutPopupRegionSelector = ({
         data-flag={isoToEmoji(
           list[selectedCountry].country.id.replace('/regions/', '')
         )}
+        aria-label={headline}
       >
         {list[selectedCountry].country.name}
       </OpenPopupBtn>
@@ -138,7 +147,7 @@ ContentfulLayoutPopupRegionSelector.propTypes = {
   text: PropTypes.string,
   regionListKey: PropTypes.string,
   extraData: PropTypes.object,
-  modulesRender: PropTypes.array,
+  modulesRender: PropTypes.object,
   setModulesRender: PropTypes.func,
 }
 
@@ -275,17 +284,24 @@ const ModalWrapper = styled.div`
       }
 
       li {
-        cursor: pointer;
-        display: flex;
-        gap: 12px;
-        flex-flow: row nowrap;
-        margin: 0;
-        padding: 8px 12px;
-        border-radius: 8px;
-        transition: background 0.1s linear;
+        display: block;
 
-        &:hover {
-          background: ${({ theme }) => theme.background.tabModuleOuter};
+        button {
+          cursor: pointer;
+          display: flex;
+          gap: 12px;
+          flex-flow: row nowrap;
+          width: 100%;
+          padding: 8px 12px;
+          margin: 0;
+          border: 0;
+          background: none;
+          border-radius: 8px;
+          transition: background 0.1s linear;
+
+          &:hover {
+            background: ${({ theme }) => theme.background.tabModuleOuter};
+          }
         }
 
         .flag {
