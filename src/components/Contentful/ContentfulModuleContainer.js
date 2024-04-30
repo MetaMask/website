@@ -51,7 +51,6 @@ const ContentfulModuleContainer = props => {
   } = props
 
   const elementRef = useRef()
-  console.log(elementRef)
   const id = useMemo(() => kebabCase(title), [title])
   const showLocaleProvidersOnBuyCryptoPage = useFeatureFlag({
     componentName: 'PopupRegionSelector',
