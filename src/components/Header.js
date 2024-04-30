@@ -11,7 +11,7 @@ import Link from './Link'
 import { DEFAULT_LOCALE_CODE, LOCALES } from '../lib/config.mjs'
 import { navigate } from 'gatsby-link'
 import { useLocation } from '@reach/router'
-import { useFlags } from 'gatsby-plugin-launchdarkly'
+import { useFeatureFlag } from '../hooks/useFeatureFlag'
 
 const StyledHeader = props => {
   const {
@@ -31,6 +31,7 @@ const StyledHeader = props => {
     isSticky,
     previewMode = false,
     translation,
+    contentfulId,
   } = props
 
   const isDesktop = useMediaQuery({
@@ -51,7 +52,14 @@ const StyledHeader = props => {
   const { locale, setLocale } = localization || {}
   const [topMenuMobile, setTopMenuMobile] = useState('88px')
   const [isBrowser, setIsBrowser] = useState(false)
-  const { showLanguageSelector } = useFlags()
+
+  const showLanguageSelector = useFeatureFlag({
+    componentName: 'Header',
+    componentId: contentfulId,
+    flagName: 'showLanguageSelector',
+    elementRef: headerRef,
+  })
+
   const shouldShowLanguageSelector =
     previewMode || (showLanguageSelector && translation)
 
