@@ -139,13 +139,15 @@ const PageLayout = props => {
           window.dataLayer.push({
             event: 'custom_page_view',
             ld_user_id: ldClient.getContext().key,
-            all_flags: ldClient.allFlags(),
-            flags_active_on_current_page: Array.from(elems).map(el => ({
-              componentName: el.dataset.componentname,
-              componentId: el.dataset.componentid,
-              flagName: el.dataset.flagname,
-              flagValue: el.dataset.flagvalue,
-            })),
+            all_flags: JSON.stringify(ldClient.allFlags()),
+            flags_active_on_current_page: JSON.stringify(
+              Array.from(elems).map(el => ({
+                componentName: el.dataset.componentname,
+                componentId: el.dataset.componentid,
+                flagName: el.dataset.flagname,
+                flagValue: el.dataset.flagvalue,
+              }))
+            ),
             custom_page_view_page_path: window.location.pathname,
           })
         }, 50)
