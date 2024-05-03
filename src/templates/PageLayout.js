@@ -136,21 +136,40 @@ const PageLayout = props => {
             '[data-flagname][data-flagvalue]'
           )
 
-          window.dataLayer.push({
+          const flags = ldClient.allFlags()
+
+          const data = {
             event: 'custom_page_view',
             ld_user_id: ldClient.getContext().key,
-            all_flags: JSON.stringify(ldClient.allFlags()),
-            flags_active_on_current_page: JSON.stringify(
-              Array.from(elems).map(el => ({
-                componentName: el.dataset.componentname,
-                componentId: el.dataset.componentid,
-                flagName: el.dataset.flagname,
-                flagValue: el.dataset.flagvalue,
-              }))
-            ),
             custom_page_view_page_path: window.location.pathname,
             custom_page_title: document.title,
+          }
+
+          Array.from(elems).forEach((el, i) => {
+            data[`flags_active_on_current_page_${i + 1}`] = JSON.stringify({
+              componentName: el.dataset.componentname,
+              componentId: el.dataset.componentid,
+              flagName: el.dataset.flagname,
+              flagValue: /^(true|false)$/.test(el.dataset.flagvalue)
+                ? el.dataset.flagvalue
+                  ? 'enabled'
+                  : 'disabled'
+                : el.dataset.flagvalue,
+            })
           })
+
+          Object.entries(flags).forEach(([key, value], i) => {
+            data[`flags_${i + 1}`] = {
+              [key]:
+                typeof value === 'boolean'
+                  ? value
+                    ? 'enabled'
+                    : 'disabled'
+                  : value,
+            }
+          })
+
+          window.dataLayer.push(data)
         }, 50)
       })
     }
