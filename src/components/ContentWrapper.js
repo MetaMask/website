@@ -23,7 +23,10 @@ const Container = styled.div`
 
   &.storiesOnNewsDetail {
     margin-bottom: 96px;
-    margin-top: 96px;
+
+    @media (min-width: ${({ theme }) => theme.device.tablet}) {
+      margin-top: 96px;
+    }
   }
 
   &.overlap-bg-32 {
