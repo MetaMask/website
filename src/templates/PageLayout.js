@@ -14,7 +14,6 @@ import {
 } from '../lib/theme'
 import Context from '../Context/ContextPage'
 import ContextClientSide from '../Context/ContextClientSide'
-import queryString from 'query-string'
 
 /**
  * @name PageLayout
@@ -33,7 +32,7 @@ const PageLayout = props => {
     ...rest
   } = props
 
-  const { pathname, search } = location || {}
+  const { pathname } = location || {}
   const [idFaqActive, setIdFaqActive] = React.useState('')
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
@@ -50,12 +49,6 @@ const PageLayout = props => {
       ? defaultDarkTheme
       : defaultTheme
 
-  const params = queryString.parse(search)
-  const { page } = params
-  const [paginationPage, setPaginationPage] = React.useState(
-    parseInt(page || 1, 10)
-  )
-
   const headerRef = React.useRef()
   const heroContainerRef = React.useRef(null)
 
@@ -63,10 +56,6 @@ const PageLayout = props => {
     faq: {
       idFaqActive,
       setIdFaqActive,
-    },
-    pagination: {
-      paginationPage,
-      setPaginationPage,
     },
     header: {
       headerRef,

@@ -32,6 +32,7 @@ function NewsLayout(props) {
       hubspot,
       latest,
       footer,
+      latestStories,
     },
     pageContext: { pathBuild, localizedPages },
   } = props
@@ -86,6 +87,9 @@ function NewsLayout(props) {
           </NewsContentWrapper>
           {contentfulModuleToComponent({
             ...latest,
+            storiesData: {
+              stories: latestStories.nodes,
+            },
             iconConfig: { news: true, width: '24px', height: '24px' },
             showLeftArrow: true,
           })}
@@ -283,6 +287,22 @@ export const NewsLayoutQuery = graphql`
       node_locale: { eq: $node_locale }
     ) {
       ...ContentfulLayoutModuleContainerFields
+    }
+
+    latestStories: allContentfulNews(
+      sort: { publishDate: DESC }
+      filter: {
+        isPrivate: { eq: false }
+        node_locale: { eq: $node_locale }
+        categories: {
+          elemMatch: { contentful_id: { eq: "3tE0tpmPMGsXezpOhKyWGO" } }
+        }
+      }
+      limit: 3
+    ) {
+      nodes {
+        ...ContentfulNewsFields
+      }
     }
 
     footer: contentfulLayoutFooter(

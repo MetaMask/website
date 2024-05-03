@@ -70,20 +70,25 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(`
     {
       allCategories: allContentfulNewsCategory(
-        filter: { name: { regex: "/^(?!.*(?:Latest|example)).*$/" }, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"} }
+        filter: { name: { regex: "/^(?!.*example).*$/" }, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"} }
       ) {
         nodes {
           contentful_id
           name
+          news {
+            contentful_id
+          }
         }
       }
     }
   `)
   if (result.data && result.data.allCategories) {
     result.data.allCategories.nodes.forEach(cat => {
-      if (cat.name) {
-        newsCategories.push(cat.name.toLowerCase())
-      }
+      newsCategories.push({
+        name: cat.name === 'Latest' ? '' : cat.name.toLowerCase(),
+        categoryId: cat.contentful_id,
+        total: cat.news?.length || 0,
+      })
     })
   }
   const legalsQuery = await graphql(`
@@ -188,7 +193,7 @@ exports.createPages = async ({ graphql, actions }) => {
           } = p.node
           const { contentful_id: footerId = '' } = footer || {}
           const { contentful_id: headerId = '' } = header || {}
-          const moduleIds = modules.map(m => m.contentful_id)
+          const moduleIds = modules?.map(m => m.contentful_id)
           const seoId = seo ? seo.contentful_id : ''
 
           if (pageType === 'Asset') {
@@ -229,25 +234,40 @@ exports.createPages = async ({ graphql, actions }) => {
           }
 
           if (pageType === 'News') {
-            const categoriesPath = newsCategories.map(cat => `/news/${cat}/`)
-            categoriesPath.forEach(categoryPath => {
-              createPage({
-                path: categoryPath,
-                component: path.resolve(mapTemplateLayout(pageType)),
-                context: {
-                  headerId,
-                  footerId,
-                  seoId,
-                  modules: moduleIds,
-                  themeColor,
-                  pathBuild: categoryPath,
-                  isFaqLayout,
-                  h2FontSize,
-                  node_locale,
-                  localizedPages,
-                },
+            newsCategories.forEach(cat => {
+              const itemsPerPage = 4
+              let totalPages = Math.ceil(cat.total / itemsPerPage) || 1
+              const baseCategoryPath = `/news/${cat.name ? cat.name + '/' : ''}`
+              Array.from({ length: totalPages }, (_, index) => {
+                const categoryPath = index
+                  ? `${baseCategoryPath}page/${index + 1}/`
+                  : baseCategoryPath
+                createPage({
+                  path: categoryPath,
+                  component: path.resolve(mapTemplateLayout(pageType)),
+                  context: {
+                    headerId,
+                    footerId,
+                    seoId,
+                    modules: moduleIds,
+                    themeColor,
+                    pathBuild: categoryPath,
+                    isFaqLayout,
+                    h2FontSize,
+                    node_locale,
+                    localizedPages,
+                    limit: itemsPerPage,
+                    skip: index * itemsPerPage,
+                    categoryId: cat.categoryId,
+                    category: cat.name,
+                    totalItems: cat.total,
+                    currentPage: index + 1,
+                    totalPages
+                  },
+                })
               })
             })
+            return
           }
 
           let legalPages = [
@@ -535,11 +555,12 @@ exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
               `/pyusd`,
               `/dev-404-page*`,
               `/404*`,
-              `/news/*`,
               `/es/`,
               `/ar/`,
               `/zh-CN/`,
               `/de/`,
+              `/news/page/+([0-9])`,
+              `/news/*/page/+([0-9])`,
             ]
             return !excludePages.some(exclude => minimatch(path, exclude))
           },
