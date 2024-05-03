@@ -149,6 +149,7 @@ const PageLayout = props => {
               }))
             ),
             custom_page_view_page_path: window.location.pathname,
+            custom_page_title: document.title,
           })
         }, 50)
       })
