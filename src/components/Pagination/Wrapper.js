@@ -1,32 +1,31 @@
 import React from 'react'
-import PaginationBar from './PaginattionBar'
+import PaginationBar from './PaginationBar'
 import PropTypes from 'prop-types'
-import Context from '../../Context/ContextPage'
 
 const PaginationWrapper = props => {
-  const { data, itemPerPage, listingComponent, setActivePage } = props
-  const { pagination: paginationContextValue } = React.useContext(Context)
-  const { paginationPage: pageState, setPaginationPage: setPageState } =
-    paginationContextValue || {}
+  const {
+    data,
+    itemPerPage,
+    listingComponent,
+    totalItems,
+    currentPage = 1,
+  } = props
 
   const itemPage = itemPerPage || 4
-  const total = Math.ceil(data.length / itemPage)
-  const indexOfLast = pageState * itemPage
-  const indexOfFirst = indexOfLast - itemPage
-  const dataShow = data.slice(indexOfFirst, indexOfLast)
+  const totalPage = Math.ceil(totalItems / itemPage) || 1
+
   const Listing = listingComponent
+
   if (!Listing) return null
   return (
     <>
-      <Listing data={dataShow} />
-      {total > 1 ? (
+      <Listing data={data} />
+      {totalPage > 1 ? (
         <PaginationBar
-          active={pageState}
-          isFirst={pageState === 1}
-          isLast={pageState === total}
-          total={total}
-          setPageState={setPageState}
-          setActivePage={setActivePage}
+          active={currentPage}
+          isFirst={currentPage === 1}
+          isLast={currentPage === totalPage}
+          total={totalPage}
         />
       ) : null}
     </>

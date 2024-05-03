@@ -40,6 +40,7 @@ const ContentfulModuleContainer = props => {
       showLeftArrow,
       iconConfig,
       cta,
+      storiesData,
     },
   } = props
 
@@ -61,6 +62,7 @@ const ContentfulModuleContainer = props => {
             <TabContent>
               {contentfulModuleToComponent({
                 ...item,
+                storiesData,
                 previewMode,
               })}
             </TabContent>
@@ -207,6 +209,7 @@ const ContentfulModuleContainer = props => {
                       : 'black',
                     showLeftArrow,
                     iconConfig,
+                    storiesData,
                   })
                 )}
               </Modules>

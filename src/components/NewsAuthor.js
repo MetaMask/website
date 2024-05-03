@@ -6,7 +6,7 @@ function NewsAuthor({ listAuthors }) {
   const generateAuthor = authors =>
     authors.reduce((acc, cur, index) => {
       if (acc.length) {
-        acc.push(<span key={index}>{', '}</span>)
+        acc.push(<span key={`comma ${index}`}>{', '}</span>)
       }
       if (cur.createProfilePage) {
         acc.push(

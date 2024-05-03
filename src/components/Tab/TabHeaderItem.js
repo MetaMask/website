@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import { Link } from 'gatsby'
 import lowerCase from 'lodash/lowerCase'
-import Context from '../../Context/ContextPage'
+
 const TabHeaderItem = props => {
   const {
     activeId,
@@ -12,13 +12,8 @@ const TabHeaderItem = props => {
     setActiveStateId,
     isTabParam,
   } = props
-  const { pagination: paginationContextValue } = React.useContext(Context)
-  const { setPaginationPage } = paginationContextValue || {}
   const changeTab = () => {
     setActiveStateId(id)
-    if (setPaginationPage) {
-      setPaginationPage(1)
-    }
   }
 
   if (isTabParam) {

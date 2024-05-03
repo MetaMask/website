@@ -24,6 +24,8 @@ const SEO = props => {
     canonicalUrl,
     translation,
     structuredDataSchema,
+    paginationNext,
+    paginationPrev,
   } = props
 
   const location = useLocation()
@@ -93,6 +95,18 @@ const SEO = props => {
         hrefLang: l.code,
         href: localeHref,
       })
+    })
+  }
+  if (paginationPrev) {
+    link.push({
+      rel: 'prev',
+      href: siteUrl + paginationPrev,
+    })
+  }
+  if (paginationNext) {
+    link.push({
+      rel: 'next',
+      href: siteUrl + paginationNext,
     })
   }
 
