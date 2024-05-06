@@ -1496,6 +1496,63 @@ body.dark-mode {
   }
 }
 
+.newsletterOnHomepage {
+  .legal-consent-container,
+  .hs_metamask___newsletter_sign_up,
+  .hs-form-field label:not(.hs-error-msg) {
+    display: none;
+  }
+  ul.hs-error-msgs {
+    text-align: left;
+  }
+  form {
+    position: relative;
+    margin-bottom: 0;
+  }
+  .hs-submit {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    border-radius: 50px;
+    
+  }
+  .hs-submit input[type='submit'].hs-button {
+    border-radius: 50px;
+    background-color: #037dd6;
+    padding: 0 24px;
+  }
+  .hs-submit input[placeholder] {
+    color: #cdd6e1;
+  }
+  .hs-form-field input {
+    border-color: #cdd6e1;
+    border-radius: 50px;
+  }
+  div.input {
+    display: flex;
+    input.hs-input {
+      max-width: 300px;
+    }
+  }
+  .hs_recaptcha {
+    display: flex;
+    justify-content: center;
+  }
+  @media (max-width: 479px) {
+    div.input {
+      display: block;
+      input.hs-input {
+        max-width: unset;
+      }
+    }
+    .hs-submit {
+      position: unset;
+    }
+  }
+}
+
 .newsletterOnInstitutional {
   .legal-consent-container,
   .hs-form-field label:not(.hs-error-msg) {
