@@ -95,6 +95,12 @@ const Wrapper = styled.div`
   max-width: 100%;
   ${({ width }) => (width ? `width: ${width};` : 'min-width: 300px;')}
 
+  &.newsletterOnHomepage {
+    @media (min-width: ${({ theme }) => theme.device.mobile}) {
+      width: 420px;
+    }
+  }
+
   &.newsletterOnNewsDetail {
     position: relative;
     margin-top: 56px;

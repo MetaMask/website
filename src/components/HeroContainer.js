@@ -407,7 +407,7 @@ const HeroContainerComponent = props => {
           </ContentWrapper>
         </GatsbyBackgroundImage>
       </HeroContainer>
-      {showLearnMore ? (
+      {showLearnMore && isMetaMaskInstalled ? (
         <div>
           <ContentWrapper>
             <LearnMoreWrapper>
