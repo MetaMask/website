@@ -314,6 +314,7 @@ const ModalWrapper = styled.div`
 
         .flag {
           font-size: 24px;
+          font-family: 'Twemoji Country Flags', 'Helvetica', 'Comic Sans', serif;
         }
       }
     }
