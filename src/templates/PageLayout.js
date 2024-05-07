@@ -146,27 +146,33 @@ const PageLayout = props => {
           }
 
           Array.from(elems).forEach((el, i) => {
-            data[`flags_active_on_current_page_${i + 1}`] = JSON.stringify({
-              componentName: el.dataset.componentname,
-              componentId: el.dataset.componentid,
-              flagName: el.dataset.flagname,
-              flagValue: /^(true|false)$/.test(el.dataset.flagvalue)
-                ? el.dataset.flagvalue
-                  ? 'enabled'
-                  : 'disabled'
-                : el.dataset.flagvalue,
-            })
+            data[`flags_active_on_current_page_componentName_${i + 1}`] =
+              el.dataset.componentname
+
+            data[`flags_active_on_current_page_componentId_${i + 1}`] =
+              el.dataset.componentid
+
+            data[`flags_active_on_current_page_flagName_${i + 1}`] =
+              el.dataset.flagname
+
+            data[
+              `flags_active_on_current_page_flagValue_${i + 1}`
+            ] = /^(true|false)$/.test(el.dataset.flagvalue)
+              ? el.dataset.flagvalue
+                ? 'enabled'
+                : 'disabled'
+              : el.dataset.flagvalue
           })
 
           Object.entries(flags).forEach(([key, value], i) => {
-            data[`flags_${i + 1}`] = {
+            data[`flags_${i + 1}`] = JSON.stringify({
               [key]:
                 typeof value === 'boolean'
                   ? value
                     ? 'enabled'
                     : 'disabled'
                   : value,
-            }
+            })
           })
 
           window.dataLayer.push(data)
