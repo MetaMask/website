@@ -198,6 +198,7 @@ const ContentfulModuleContainer = props => {
             }
             modulesRender={initialModulesRender}
             setModulesRender={setModulesRender}
+            componentId={contentful_id}
           />
         )}
 

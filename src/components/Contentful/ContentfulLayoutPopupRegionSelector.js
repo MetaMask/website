@@ -19,11 +19,16 @@ const Modal = ({
   regionListKey,
   setHasModal,
   setSelectedCountry,
+  componentId,
 }) => {
   const [searchTerm, setSearchTerm] = useState('')
 
   return createPortal(
     <ModalWrapper
+      data-componentName="PopupRegionSelector"
+      data-componentId={componentId}
+      data-flagName="showLocaleProvidersOnBuyCryptoPage"
+      data-flagValue="true"
       onClick={e => {
         if (e.target === e.currentTarget) setHasModal(false)
       }}
@@ -93,6 +98,7 @@ const ContentfulLayoutPopupRegionSelector = ({
   extraData,
   modulesRender,
   setModulesRender,
+  componentId,
 }) => {
   polyfillCountryFlagEmojis()
 
@@ -133,6 +139,7 @@ const ContentfulLayoutPopupRegionSelector = ({
           regionListKey={regionListKey}
           setHasModal={setHasModal}
           setSelectedCountry={setSelectedCountry}
+          componentId={componentId}
         />
       )}
     </Wrapper>
@@ -149,6 +156,7 @@ ContentfulLayoutPopupRegionSelector.propTypes = {
   extraData: PropTypes.object,
   modulesRender: PropTypes.object,
   setModulesRender: PropTypes.func,
+  componentId: PropTypes.string,
 }
 
 const Wrapper = styled.div`
