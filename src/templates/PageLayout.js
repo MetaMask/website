@@ -215,7 +215,11 @@ const PageLayout = props => {
           closestLink?.nodeName === 'BUTTON' &&
           closestLink?.getAttribute('aria-label')
             ? closestLink?.getAttribute('aria-label')
-            : closestLink?.innerText,
+            : closestLink?.innerText
+            ? closestLink?.innerText
+            : event.target?.nodeName === 'IMG'
+            ? event.target.alt
+            : event.target.innerText,
       }
 
       window.dataLayer.push(data)
