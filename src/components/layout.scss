@@ -1526,6 +1526,11 @@ body.dark-mode {
   .hs-submit input[placeholder] {
     color: #cdd6e1;
   }
+  .submitted-message {
+    .dark-mode & {
+      color: #fff;
+    }
+  }
   .hs-form-field input {
     border-color: #cdd6e1;
     border-radius: 50px;
