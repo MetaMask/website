@@ -36,6 +36,16 @@ const HubspotForm = props => {
         hsEmailInput.setAttribute('placeholder', 'Email address')
       }
     }
+
+    if(customClass === "newsletterOnHomepage") {
+      const hsEmailInput = document.querySelector('.legal-consent-container')
+      if (hsEmailInput) {
+        hsEmailInput.innerHTML = `<small>This site is protected by reCAPTCHA and the Google
+        <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+        <a href="https://policies.google.com/terms">Terms of Service</a> apply.</small>`
+      }
+    }
+
     return true
   }
 

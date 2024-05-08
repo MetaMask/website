@@ -1497,7 +1497,13 @@ body.dark-mode {
 }
 
 .newsletterOnHomepage {
-  .legal-consent-container,
+  .legal-consent-container {
+    color: #6A737D;
+
+    .dark-mode & {
+      color: #F7F9FB;
+    }
+  }
   .hs_metamask___newsletter_sign_up,
   .hs-form-field label:not(.hs-error-msg) {
     display: none;
@@ -1541,9 +1547,12 @@ body.dark-mode {
       max-width: 300px;
     }
   }
+  .grecaptcha-badge {
+    position: absolute;
+    visibility: hidden;
+  }
   .hs_recaptcha {
-    display: flex;
-    justify-content: center;
+    margin: 0 !important;
   }
   @media (max-width: 479px) {
     div.input {
