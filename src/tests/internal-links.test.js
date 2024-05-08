@@ -7,7 +7,18 @@ const get = require('lodash/fp/get')
 const startsWith = require('lodash/fp/startsWith')
 const last = require('lodash/last')
 const split = require('lodash/fp/split')
-const eq = require('lodash/fp/eq')
+
+const notIn =
+  /**
+   * Curried function to check if a value is not included in the array
+   * @param {string[]} array
+   */
+  array =>
+    /**
+     * @param {string} value
+     * @returns {boolean}
+     */
+    value => !array.includes(value)
 
 const notAsset =
   /**
@@ -15,11 +26,11 @@ const notAsset =
    * @param {URL} url
    */
   url =>
-    !pipe(
+    pipe(
       get('pathname'),
       split('.'),
       last,
-      eq('svg')
+      notIn(['svg', 'pdf', 'png', 'jpeg'])
     )(url)
 
 describe('Test internal links', () => {
