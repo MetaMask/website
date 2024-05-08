@@ -306,6 +306,7 @@ const ModalWrapper = styled.div`
           background: none;
           border-radius: 8px;
           transition: background 0.1s linear;
+          color: inherit;
 
           &:hover {
             background: ${({ theme }) => theme.background.tabModuleOuter};
