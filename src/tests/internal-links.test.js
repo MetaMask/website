@@ -87,7 +87,7 @@ describe('Test internal links', () => {
         expect(nonTrailingSlashUrls.length).toBe(0)
       } catch (e) {
         throw new Error(
-          `❌ Found missing trailing slash links on ${url}:\n - ${nonTrailingSlashUrls.join(
+          `❌ Found missing trailing slash links on ${url} :\n - ${nonTrailingSlashUrls.join(
             '\n - '
           )}`
         )
