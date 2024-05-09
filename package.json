@@ -14,7 +14,7 @@
     "clean": "rm -rf node_modules; rm -rf .cache; rm -rf public; yarn install;",
     "start": "yarn develop",
     "format": "prettier --write \"src/**/*.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --json --outputFile=payload-results.json",
     "lint:css": "stylelint './src/**/*.js'"
   },
   "dependencies": {
@@ -93,8 +93,10 @@
     "babel-plugin-inline-react-svg": "^2.0.2",
     "fs-extra": "^8.0.0",
     "gatsby-plugin-root-import": "^2.0.8",
+    "jest": "^29.7.0",
     "p-whilst": "^2.0.0",
     "prettier": "^1.15.2",
+    "puppeteer": "^21.7.0",
     "stylelint": "^14.16.1",
     "stylelint-config-property-sort-order-smacss": "^9.1.0",
     "stylelint-config-recommended": "^9.0.0",
