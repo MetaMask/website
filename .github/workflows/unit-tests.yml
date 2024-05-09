@@ -1,0 +1,45 @@
+name: SEO unit tests
+
+on:
+  workflow_run:
+    workflows: ["Build and Deploy"]
+    types:
+      - completed
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    container: buildkite/puppeteer:latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Setup git in container 🛠
+        uses: actions/checkout@v4
+
+      - name: Setup node in container 🪢
+        uses: actions/setup-node@v4
+        with:
+            node-version: 18
+            cache: 'yarn'
+
+      - name: Cache dependencies 📦
+        id: cache-nodemodules
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: node_modules-${{ hashFiles('**/yarn.lock')}}
+
+      - name: Install Dependencies ⏳
+        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+
+      - name: Run tests 🧪
+        id: tests
+        continue-on-error: true
+        run: |
+          npx puppeteer browsers install chrome
+          yarn test
+
+      - name: Send test results to Slack 📬
+        run: node src/tests/send-report.js ${{ github.repository }} ${{ github.run_id }} ${{ secrets.SLACK_WEBHOOK_URL }}
