@@ -42,4 +42,4 @@ jobs:
           yarn test
 
       - name: Send test results to Slack 📬
-        run: node src/tests/send-report.js ${{ github.repository }} ${{ github.run_id }} ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: node src/tests/send-report.js ${{ github.repository }} ${{ github.run_id }} ${{ secrets.SLACK_WEBHOOK_URL_UNIT_TESTS }}
