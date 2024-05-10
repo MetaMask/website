@@ -24,7 +24,7 @@ const Image = props => {
     query: '(max-width: 768px)',
   })
 
-  const { title, description } = image || {}
+  const { title = '', description } = image || {}
 
   if (!image && !src) return null
 
@@ -38,6 +38,8 @@ const Image = props => {
         <StyledGatsbyImage
           alt={description || title}
           image={getImage(imgSrc)}
+          width={getImage(imgSrc).width}
+          height={getImage(imgSrc).height}
           className={classnames(className, { 'image-light': darkImage })}
         />
       ) : (
@@ -56,6 +58,8 @@ const Image = props => {
         <StyledGatsbyImage
           alt={description || title}
           image={getImage(darkImgSrc)}
+          width={getImage(darkImgSrc).width}
+          height={getImage(darkImgSrc).height}
           className={classnames(className, 'image-dark')}
         />
       ) : (
