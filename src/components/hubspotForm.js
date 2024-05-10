@@ -37,12 +37,14 @@ const HubspotForm = props => {
       }
     }
 
-    if(customClass === "newsletterOnHomepage") {
-      const hsEmailInput = document.querySelector('.legal-consent-container')
-      if (hsEmailInput) {
-        hsEmailInput.innerHTML = `<small>This site is protected by reCAPTCHA and the Google
+    if (customClass === 'newsletterOnHomepage') {
+      const legalConsent = document.querySelector('.legal-consent-container')
+      if (legalConsent) {
+        const reCAPTCHA = document.createElement('div')
+        reCAPTCHA.innerHTML = `<small>This site is protected by reCAPTCHA and the Google
         <a href="https://policies.google.com/privacy">Privacy Policy</a> and
         <a href="https://policies.google.com/terms">Terms of Service</a> apply.</small>`
+        legalConsent.appendChild(reCAPTCHA)
       }
     }
 
