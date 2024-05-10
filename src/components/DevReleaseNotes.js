@@ -101,9 +101,9 @@ const Wrapper = styled.div`
           body.dark-mode & {
             background: linear-gradient(
               to top,
-              #ffffff15,
-              transparent 60%,
-              transparent 100%
+              rgba(18, 18, 18, 1),
+              rgba(18, 18, 18, 0.9) 60%,
+              rgba(18, 18, 18, 0) 100%
             );
           }
           position: absolute;
