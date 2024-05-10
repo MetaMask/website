@@ -1498,7 +1498,18 @@ body.dark-mode {
 
 .newsletterOnHomepage {
   .legal-consent-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
     color: #6A737D;
+    line-height: 1.21;
+
+    .hs-richtext {
+      font-size: 80%;
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
 
     .dark-mode & {
       color: #F7F9FB;
@@ -1565,7 +1576,7 @@ body.dark-mode {
       position: unset;
     }
     .hs-email {
-      margin-bottom: 6px;
+      margin-bottom: 12px;
     }
     .legal-consent-container {
       margin-bottom: 12px;
