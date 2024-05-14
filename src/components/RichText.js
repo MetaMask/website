@@ -3,6 +3,12 @@ import styled from 'styled-components'
 import kebabCase from 'lodash/kebabCase'
 import Markdown from './Markdown'
 
+function parseHTML(html) {
+  return html.replace(/<img.*?src="(.*?)"/g, (match, p1) => {
+    return match.replace(p1, `${p1}?w=1280&q=80&fm=webp" width="1280" height="720"`)
+  })
+}
+
 const RichText = props => {
   const { moduleId, title, html, displayTitle = true, content } = props
 
@@ -10,7 +16,7 @@ const RichText = props => {
     <RichTextWrapper id={moduleId || kebabCase(title || '')}>
       {displayTitle && <RichTextTitle> {title} </RichTextTitle>}
       {html && (
-        <HTML className="richText" dangerouslySetInnerHTML={{ __html: html }} />
+        <HTML className="richText" dangerouslySetInnerHTML={{ __html: parseHTML(html) }} />
       )}
       {!html && content && <Markdown content={content} />}
     </RichTextWrapper>

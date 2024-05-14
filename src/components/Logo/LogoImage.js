@@ -13,7 +13,7 @@ const LogoImage = ({ alt = '', src, width, height, srcDarkMode, previewMode }) =
           image={getImage(src)}
           alt={alt}
           $widthCustom={width}
-          width={width || 400}
+          width={width?.replace('px', '') || 400}
           height={height || 400}
           className={classnames({ 'image-light': srcDarkMode })}
         />
@@ -23,7 +23,7 @@ const LogoImage = ({ alt = '', src, width, height, srcDarkMode, previewMode }) =
           alt={alt}
           loading="lazy"
           $widthCustom={width}
-          width={width || 400}
+          width={width?.replace('px', '') || 400}
           height={height || 400}
           className={classnames({ 'image-light': srcDarkMode })}
         />
@@ -33,7 +33,7 @@ const LogoImage = ({ alt = '', src, width, height, srcDarkMode, previewMode }) =
           image={getImage(srcDarkMode)}
           alt={alt}
           $widthCustom={width}
-          width={width || 400}
+          width={width?.replace('px', '') || 400}
           height={height || 400}
           className="image-dark"
         />
@@ -44,7 +44,7 @@ const LogoImage = ({ alt = '', src, width, height, srcDarkMode, previewMode }) =
             alt={alt}
             loading="lazy"
             $widthCustom={width}
-            width={width || 400}
+            width={width?.replace('px', '') || 400}
             height={height || 400}
             className="image-dark"
           />
