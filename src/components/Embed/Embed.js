@@ -68,6 +68,8 @@ const EmbedHtml = props => {
               thumbnailUrl ||
               `https://i.ytimg.com/vi_webp/${youtubeId}/sddefault.webp`
             }
+            width={1200}
+            height={630}
             alt="Youtube overlay image"
           />
           <VideoOverlay onClick={() => setShowOverlay(false)}>

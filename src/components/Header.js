@@ -164,6 +164,8 @@ const StyledHeader = props => {
                     src={logoMobile.logo.file.url}
                     alt={logoMobile.title}
                     $widthCustom={logoMobile.widthLogo}
+                    width={logoMobile.logo.gatsbyImageData.width}
+                    height={logoMobile.logo.gatsbyImageData.height}
                   />
                 )}
               </LogoWrapper>

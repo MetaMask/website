@@ -31,7 +31,7 @@ const GatsbyBackgroundImage = props => {
         mobileImageBreakpoint
           ? theme.device.mobileMediaMax
           : theme.device.tabletMediaMax
-      })`,
+        })`,
     }) && !!imageMobile
 
   if (!image && !imageMobile) {
@@ -41,8 +41,8 @@ const GatsbyBackgroundImage = props => {
   const imageSrc = isMobile
     ? imageMobile
     : isDarkMode && imageDarkMode
-    ? imageDarkMode
-    : image
+      ? imageDarkMode
+      : image
 
   const parsedContentfulAssetUrl = parseContentfulAssetUrl(
     imageSrc,
@@ -60,6 +60,8 @@ const GatsbyBackgroundImage = props => {
             image={getImage(isMobile ? imageMobile : image) || {}}
             alt={title || ''}
             $absolute={absolute}
+            width={getImage(isMobile ? imageMobile : image).width}
+            height={getImage(isMobile ? imageMobile : image).height}
             className={classnames({ 'image-light': imageDarkMode })}
           />
           {imageDarkMode && (
@@ -67,6 +69,8 @@ const GatsbyBackgroundImage = props => {
               image={getImage(isMobile ? imageMobile : imageDarkMode) || {}}
               alt={title || ''}
               $absolute={absolute}
+              width={getImage(isMobile ? imageMobile : imageDarkMode).width}
+              height={getImage(isMobile ? imageMobile : imageDarkMode).height}
               className="image-dark"
             />
           )}
