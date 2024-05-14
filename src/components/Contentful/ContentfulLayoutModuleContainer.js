@@ -13,6 +13,7 @@ import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import ParseMD from '../ParseMD'
 import HeroSubNav from '../HeroSubNav'
 import DevReleaseNotes from '../DevReleaseNotes'
+import Image from '../Image'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -130,7 +131,7 @@ const ContentfulModuleContainer = props => {
     >
       {bgUrl ? (
         <BackgroundSection backgroundSize={backgroundSize}>
-          <img src={bgUrl} alt="" />
+          <Image image={backgroundImage} />
         </BackgroundSection>
       ) : null}
 
@@ -264,7 +265,7 @@ const ContentfulModuleContainer = props => {
 
           {sideImageUrl ? (
             <SideImage sectionPadding={sectionPadding}>
-              <img src={sideImageUrl} alt="" />
+              <Image image={sideImage} />
             </SideImage>
           ) : null}
         </Inner>
