@@ -12,6 +12,7 @@ const HubspotForm = props => {
     campaignId,
     title,
     displayTitle,
+    description,
     width,
     customClass,
     customId,
@@ -34,6 +35,15 @@ const HubspotForm = props => {
       const hsEmailInput = document.querySelector('.hs-email input')
       if (hsEmailInput) {
         hsEmailInput.setAttribute('placeholder', 'Email address')
+      }
+    }
+
+    if (customClass === 'newsletterOnHomepage') {
+      const legalConsent = document.querySelector('.legal-consent-container')
+      if (legalConsent) {
+        const reCAPTCHA = document.createElement('div')
+        reCAPTCHA.innerHTML = description
+        legalConsent.appendChild(reCAPTCHA)
       }
     }
     return true
@@ -94,6 +104,12 @@ const Wrapper = styled.div`
   display: block;
   max-width: 100%;
   ${({ width }) => (width ? `width: ${width};` : 'min-width: 300px;')}
+
+  &.newsletterOnHomepage {
+    @media (min-width: ${({ theme }) => theme.device.mobile}) {
+      width: 420px;
+    }
+  }
 
   &.newsletterOnNewsDetail {
     position: relative;

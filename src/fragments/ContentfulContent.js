@@ -642,6 +642,11 @@ export const ContentfulHubSpotFormFields = graphql`
       type
     }
     title
+    description {
+      childMarkdownRemark {
+        html
+      }
+    }
     portalId
     formId
     campaignId

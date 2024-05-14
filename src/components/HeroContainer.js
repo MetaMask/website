@@ -345,7 +345,7 @@ const HeroContainerComponent = props => {
           </ContentWrapper>
         </GatsbyBackgroundImage>
       </HeroContainer>
-      {learnMoreText ? (
+      {learnMoreText && isMetaMaskInstalled ? (
         <ContentWrapper>
           <LearnMoreWrapper>
             <LearnMoreInner className="text-block">
