@@ -67,6 +67,9 @@ const FullWidthCta = props => {
       ? backgroundImageDarkModeUrl
       : backgroundImageUrl
 
+  if (customClass?.includes('hideOnMMInstalled') && isMetaMaskInstalled)
+    return null
+
   return (
     <Container
       sectionPadding={sectionPadding}

@@ -1642,6 +1642,98 @@ body.dark-mode {
   }
 }
 
+.newsletterOnHomepage {
+  .legal-consent-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    color: #6A737D;
+    line-height: 1.21;
+
+    div > p:last-child {
+      margin-bottom: 0;
+    }
+
+    .hs-richtext {
+      font-size: 80%;
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .dark-mode & {
+      color: #F7F9FB;
+    }
+  }
+  .hs_metamask___newsletter_sign_up,
+  .hs-form-field label:not(.hs-error-msg) {
+    display: none;
+  }
+  ul.hs-error-msgs {
+    text-align: left;
+  }
+  form {
+    position: relative;
+    margin-bottom: 0;
+  }
+  .hs-submit {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    border-radius: 50px;
+    
+  }
+  .hs-submit input[type='submit'].hs-button {
+    border-radius: 50px;
+    background-color: #037dd6;
+    padding: 0 24px;
+  }
+  .hs-submit input[placeholder] {
+    color: #cdd6e1;
+  }
+  .submitted-message {
+    .dark-mode & {
+      color: #fff;
+    }
+  }
+  .hs-form-field input {
+    border-color: #cdd6e1;
+    border-radius: 50px;
+  }
+  div.input {
+    display: flex;
+    input.hs-input {
+      max-width: 300px;
+    }
+  }
+  .grecaptcha-badge {
+    position: absolute;
+    visibility: hidden;
+  }
+  .hs_recaptcha {
+    margin: 0 !important;
+  }
+  @media (max-width: 479px) {
+    div.input {
+      display: block;
+      input.hs-input {
+        max-width: unset;
+      }
+    }
+    .hs-submit {
+      position: unset;
+    }
+    .hs-email {
+      margin-bottom: 12px;
+    }
+    .legal-consent-container {
+      margin-bottom: 12px;
+    }
+  }
+}
+
 .newsletterOnInstitutional {
   .legal-consent-container,
   .hs-form-field label:not(.hs-error-msg) {

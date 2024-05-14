@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types'
 import HubspotForm from '../hubspotForm'
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import React from 'react'
+
 const ContentfulHubSpotForm = props => {
   const {
     moduleConfig: {
@@ -8,12 +10,16 @@ const ContentfulHubSpotForm = props => {
       formId,
       campaignId,
       title,
+      description,
       displayTitle,
       width,
       customClass,
       customId,
+      previewMode,
     },
   } = props
+
+  const { childMarkdownRemark: { html } = {} } = description || {}
 
   return (
     <HubspotForm
@@ -22,6 +28,7 @@ const ContentfulHubSpotForm = props => {
       campaignId={campaignId}
       title={title}
       displayTitle={displayTitle}
+      description={previewMode ? description : html}
       width={width}
       customClass={customClass}
       customId={customId}
@@ -29,7 +36,19 @@ const ContentfulHubSpotForm = props => {
   )
 }
 
-export default ContentfulHubSpotForm
+const parsePreviewData = data => {
+  data = data.moduleConfig.previewContent || data.moduleConfig
+
+  const dataUpdate = {
+    moduleConfig: {
+      previewMode: true,
+      ...data,
+    },
+  }
+  return dataUpdate
+}
+
+export default withProcessPreviewData(parsePreviewData)(ContentfulHubSpotForm)
 
 ContentfulHubSpotForm.propTypes = {
   moduleConfig: PropTypes.shape({
