@@ -1683,7 +1683,10 @@ body.dark-mode {
     right: 0;
     z-index: 10;
     border-radius: 50px;
-    
+    html:lang(ar) & {
+      right: unset;
+      left: 0;
+    }
   }
   .hs-submit input[type='submit'].hs-button {
     border-radius: 50px;
