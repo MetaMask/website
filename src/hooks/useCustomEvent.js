@@ -31,7 +31,6 @@ export const useCustomEvent = ({ componentName, componentId, elementRef }) => {
           ...BASE_DATA,
           pagePath: window.location.pathname,
           inViewport: entry.isIntersecting,
-          ld_user_id: ldClient.getContext().key,
         }
 
         if (typeof flagValue !== 'undefined') {

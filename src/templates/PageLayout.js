@@ -140,7 +140,6 @@ const PageLayout = props => {
 
           const data = {
             event: 'custom_page_view',
-            ld_user_id: ldClient.getContext().key,
             custom_page_view_page_path: window.location.pathname,
             custom_page_title: document.title,
           }
@@ -210,7 +209,6 @@ const PageLayout = props => {
 
       const data = {
         event: 'before_all_clicks',
-        ld_user_id: window.localStorage.getItem('ld:$anonUserId'),
         componentName: el?.dataset.componentname,
         componentId: el?.dataset.componentid,
         flagName: el?.dataset.flagname,

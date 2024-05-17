@@ -38,7 +38,6 @@ export const useFeatureFlag = ({
             flagValue,
             pagePath: window.location.pathname,
             inViewport: entry.isIntersecting,
-            ld_user_id: ldClient.getContext().key,
           })
         }
       }
