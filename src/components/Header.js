@@ -47,6 +47,7 @@ const StyledHeader = props => {
   const { pathname } = location
   const menuRef = useRef()
   const buttonRef = useRef()
+  const languageSelectorRef = useRef()
   const { header: headerREF } = useContext(Context)
   const { headerRef } = headerREF || {}
   const { isDarkMode, toggleTheme } = darkModeContextValue || {}
@@ -59,7 +60,7 @@ const StyledHeader = props => {
     componentName: 'Header',
     componentId: contentfulId,
     flagName: 'showLanguageSelector',
-    elementRef: headerRef,
+    elementRef: languageSelectorRef,
   })
 
   const shouldShowLanguageSelector =
@@ -276,6 +277,7 @@ const StyledHeader = props => {
                   </DarkModeWrapper>
                   {shouldShowLanguageSelector && (
                     <NavMenu
+                      ref={languageSelectorRef}
                       key="language-selector"
                       className="language-selector"
                       active={menuActive === 'language-selector'}
