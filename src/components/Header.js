@@ -12,6 +12,7 @@ import { DEFAULT_LOCALE_CODE, LOCALES } from '../lib/config.mjs'
 import { navigate } from 'gatsby-link'
 import { useLocation } from '@reach/router'
 import { useFeatureFlag } from '../hooks/useFeatureFlag'
+import { useLDClient } from 'gatsby-plugin-launchdarkly'
 
 const StyledHeader = props => {
   const {
@@ -52,6 +53,7 @@ const StyledHeader = props => {
   const { locale, setLocale } = localization || {}
   const [topMenuMobile, setTopMenuMobile] = useState('88px')
   const [isBrowser, setIsBrowser] = useState(false)
+  const ldClient = useLDClient()
 
   const showLanguageSelector = useFeatureFlag({
     componentName: 'Header',
@@ -133,6 +135,9 @@ const StyledHeader = props => {
       }
       navigate(localizedPath)
     }
+
+    ldClient?.track('on-locale-change', { locale })
+    ldClient?.flush()
   }
 
   return (

@@ -1,4 +1,5 @@
 import { polyfillCountryFlagEmojis } from 'country-flag-emoji-polyfill'
+import { useLDClient } from 'gatsby-plugin-launchdarkly'
 import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components'
@@ -21,14 +22,15 @@ const Modal = ({
   setSelectedCountry,
   componentId,
 }) => {
+  const ldClient = useLDClient()
   const [searchTerm, setSearchTerm] = useState('')
 
   return createPortal(
     <ModalWrapper
-      data-componentName="PopupRegionSelector"
-      data-componentId={componentId}
-      data-flagName="showLocaleProvidersOnBuyCryptoPage"
-      data-flagValue="true"
+      data-componentname="PopupRegionSelector"
+      data-componentid={componentId}
+      data-flagname="showLocaleProvidersOnBuyCryptoPage"
+      data-flagvalue="true"
       onClick={e => {
         if (e.target === e.currentTarget) setHasModal(false)
       }}
@@ -71,6 +73,13 @@ const Modal = ({
                 <button
                   onClick={() => {
                     setSelectedCountry(list.indexOf(filteredItem))
+
+                    ldClient?.track(
+                      'on-buy-crypto-page-region-selected',
+                      filteredItem
+                    )
+                    ldClient?.flush()
+
                     setHasModal(false)
                   }}
                 >

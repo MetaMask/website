@@ -157,7 +157,7 @@ const PageLayout = props => {
             data[
               `flags_active_on_current_page_flagValue_${i + 1}`
             ] = /^(true|false)$/.test(el.dataset.flagvalue)
-              ? el.dataset.flagvalue
+              ? el.dataset.flagvalue === 'true'
                 ? 'enabled'
                 : 'disabled'
               : el.dataset.flagvalue
