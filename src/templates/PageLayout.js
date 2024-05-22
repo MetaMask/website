@@ -40,6 +40,7 @@ const PageLayout = props => {
   const [idFaqActive, setIdFaqActive] = React.useState('')
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
+
   const pageTheme =
     themeColor === 'purple'
       ? isDarkMode
@@ -55,6 +56,7 @@ const PageLayout = props => {
 
   const headerRef = React.useRef()
   const heroContainerRef = React.useRef(null)
+
   const valueContext = {
     faq: {
       idFaqActive,
@@ -69,7 +71,9 @@ const PageLayout = props => {
     extraData,
     localizedPages,
   }
+
   const [dimensionScript, setDimensionScript] = React.useState('')
+
   const renderNotification = (state = {}) => {
     if (state.error) {
       const { type, description } = state.error
@@ -227,7 +231,6 @@ const PageLayout = props => {
       }
 
       window.dataLayer.push(data)
-      // console.log(data)
     }
 
     document.addEventListener('click', handleClickDl, true)

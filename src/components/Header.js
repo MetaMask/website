@@ -117,23 +117,28 @@ const StyledHeader = props => {
       const h = headerRef?.current.getBoundingClientRect().height
       setTopMenuMobile(`${h}px`)
     }
+
     setHamburgerActive(!hamburgerActive)
   }
 
   const onChangeLocale = locale => {
     setMenuActive('')
     setLocale(locale)
+
     if (!previewMode) {
       let localizedPath
+
       if (locale.code === DEFAULT_LOCALE_CODE) {
         localizedPath = pathname.replace(/^\/(ar|zh-CN|de|es)/, '')
       } else {
         const newLocale = locale.code === DEFAULT_LOCALE_CODE ? '' : locale.code
+
         localizedPath = `/${newLocale}${pathname.replace(
           /^\/(ar|zh-CN|de|es)\//,
           '/'
         )}`
       }
+
       navigate(localizedPath)
     }
 
@@ -253,6 +258,7 @@ const StyledHeader = props => {
                     </NavMenu>
                   )
                 })}
+
                 {downloadButton ? (
                   <ButtonsWrapper
                     className="download-btn-desktop"
@@ -266,6 +272,7 @@ const StyledHeader = props => {
                     })}
                   </ButtonsWrapper>
                 ) : null}
+
                 <ToggleWrapper>
                   <DarkModeWrapper>
                     <ToggleDarkMode
@@ -275,6 +282,7 @@ const StyledHeader = props => {
                       value="dark"
                     />
                   </DarkModeWrapper>
+
                   {shouldShowLanguageSelector && (
                     <NavMenu
                       ref={languageSelectorRef}
@@ -295,6 +303,7 @@ const StyledHeader = props => {
                         {isBrowser && locale?.shortName}
                         <Icon className="w-icon w-icon-dropdown-toggle" />
                       </NavMenuMain>
+
                       <NavMenuChild active={menuActive === 'language-selector'}>
                         {LOCALES.map(locale => (
                           <span
@@ -309,6 +318,7 @@ const StyledHeader = props => {
                     </NavMenu>
                   )}
                 </ToggleWrapper>
+
                 {downloadButton ? (
                   <ButtonsWrapper
                     className="download-btn-mobile"
