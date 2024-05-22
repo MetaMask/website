@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react'
-import Layout from '../components/layout'
-import { gsap } from 'gsap'
-import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin'
 import { ToastContainer as Notifications, toast } from 'react-toastify'
+import ContextClientSide from '../Context/ContextClientSide'
+import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin'
+import { useLDClient } from 'gatsby-plugin-launchdarkly'
+import generateUUID from '../lib/utils/helpers'
 import 'react-toastify/dist/ReactToastify.css'
+import Context from '../Context/ContextPage'
+import Layout from '../components/layout'
+import React, { useEffect } from 'react'
+import { gsap } from 'gsap'
 import {
   defaultTheme,
   purpleTheme,
@@ -12,10 +16,6 @@ import {
   darkDarkTheme,
   defaultDarkTheme,
 } from '../lib/theme'
-import Context from '../Context/ContextPage'
-import ContextClientSide from '../Context/ContextClientSide'
-import generateUUID from '../lib/utils/helpers'
-import { useLDClient } from 'gatsby-plugin-launchdarkly'
 
 /**
  * @name PageLayout

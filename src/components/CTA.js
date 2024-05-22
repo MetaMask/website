@@ -1,21 +1,21 @@
-import PropTypes from 'prop-types'
+import { isAndroid, isIOS, isMobile, browserName } from 'react-device-detect'
+import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
+import { persistDeveloper } from '../lib/utils/localStorage'
+import useIsChromium from '../lib/utils/isChromium'
+import lowerCase from 'lodash/lowerCase'
 import React, { useEffect } from 'react'
+import styled from 'styled-components'
+import SocialIcon from './SocialIcon'
+import isEmpty from 'lodash/isEmpty'
+import classnames from 'classnames'
+import PropTypes from 'prop-types'
 import Arrow from './ArrowIcon'
 import Button from './Button'
-import isEmpty from 'lodash/isEmpty'
-import lowerCase from 'lodash/lowerCase'
-import { isAndroid, isIOS, isMobile, browserName } from 'react-device-detect'
-import Link from './Link'
-import SocialIcon from './SocialIcon'
-import styled from 'styled-components'
-import Popup from './Popup'
-import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
-import Image from './Image'
-import classnames from 'classnames'
 import get from 'lodash/get'
+import Popup from './Popup'
+import Image from './Image'
 import { gsap } from 'gsap'
-import useIsChromium from '../lib/utils/isChromium'
-import { persistDeveloper } from '../lib/utils/localStorage'
+import Link from './Link'
 
 const CTA = props => {
   const {
@@ -66,12 +66,14 @@ const CTA = props => {
 
   if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
     text = textDefault?.replace('$browser', downloadBrowsers[keyBrowser]?.text)
+
     if (
       ['ios', 'android', 'not-supported'].includes(keyBrowser) &&
       downloadBrowsers[keyBrowser]?.text
     ) {
       text = downloadBrowsers[keyBrowser].text
     }
+
     ctaLink = downloadBrowsers[keyBrowser]?.link
     iconBrowser = downloadBrowsers[keyBrowser]?.icon
   }
@@ -87,19 +89,23 @@ const CTA = props => {
     if (isForDeveloper) {
       persistDeveloper()
     }
+
     if (hubSpotForm) {
       e.preventDefault()
       setShowPopup(true)
       return
     }
+
     if (embedHTML) {
       setShowPopup(true)
       return
     }
+
     if (customClick) {
       e.preventDefault()
       customClick()
     }
+
     if (link.startsWith('#') && link.length > 1) {
       e.preventDefault()
       const target = e.currentTarget
@@ -259,10 +265,12 @@ const CTA = props => {
           <BrowserInfoTitle>
             {downloadBrowsers['browsers-supported'].text}
           </BrowserInfoTitle>
+
           <BrowserInfoDesc>
             {downloadBrowsers['browsers-supported'].description}
           </BrowserInfoDesc>
         </BrowserInfo>
+
         <BrowserList>
           {Object.keys(downloadBrowsers).map(key => {
             const { link, icon, text } = downloadBrowsers[key]
