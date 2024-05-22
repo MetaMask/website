@@ -1,17 +1,17 @@
-import PropTypes from 'prop-types'
-import React, { Fragment, useRef, useEffect } from 'react'
-import styled, { withTheme } from 'styled-components'
-import ContentWrapper from './ContentWrapper'
-import ScrollAnimation from 'react-animate-on-scroll'
-import classnames from 'classnames'
-import { EyebrowStyle, Section } from './StyledGeneral'
-import ImageItem from './Image'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
-import Embed from './Embed'
 import { parseContentfulAssetUrl } from '../lib/utils/urlParser'
-import ParseMD from './ParseMD'
 import GatsbyBackgroundImage from './GatsbyBackgroundImage'
-import { useFlags } from 'gatsby-plugin-launchdarkly'
+import { useFeatureFlag } from '../hooks/useFeatureFlag'
+import { EyebrowStyle, Section } from './StyledGeneral'
+import styled, { withTheme } from 'styled-components'
+import ScrollAnimation from 'react-animate-on-scroll'
+import React, { Fragment, useRef } from 'react'
+import ContentWrapper from './ContentWrapper'
+import classnames from 'classnames'
+import PropTypes from 'prop-types'
+import ImageItem from './Image'
+import ParseMD from './ParseMD'
+import Embed from './Embed'
 
 const FeatureComponent = props => {
   const {
@@ -48,65 +48,32 @@ const FeatureComponent = props => {
     imageLink,
     customClass,
     previewMode = false,
+    contentfulId,
     moduleId,
+    launchDarklyFlag,
   } = props
 
-  const flags = useFlags()
-  const elementRef = useRef(null)
+  const elementRef = useRef()
+
+  const showApiPlayground = useFeatureFlag({
+    componentName: 'FeatureComponent',
+    componentId: contentfulId,
+    flagName: launchDarklyFlag,
+    elementRef,
+  })
 
   const contentAlignLR = ['left', 'right'].includes(contentAlignment)
     ? contentAlignment
     : ''
+
   const isContentAlignVertical = contentAlignment === 'vertical'
   const isAPIPlayground = customClass?.includes('feature-api-playground')
   const isDevMeetFlask = customClass?.includes('feature-meet-flask')
   const isInfuraGas = customClass?.includes('feature-infura-gas')
 
-  const datalayerPush = data => {
-    if (typeof window !== 'undefined') {
-      window.dataLayer = window.dataLayer || []
-      window.dataLayer.push(data)
-    }
-  }
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
-      const observer = new IntersectionObserver(entries => {
-        const [entry] = entries
-
-        if (
-          !entry.target._isDataLayerUpdated &&
-          (isDevMeetFlask || isAPIPlayground)
-        ) {
-          datalayerPush({
-            event: 'featureVisibility',
-            featureName: isDevMeetFlask ? 'meetMetamask' : 'apiPlayground',
-            pagePath: window.location.pathname,
-            inViewport: entry.isIntersecting,
-            flagValue: flags.showApiPlayground,
-          })
-
-          if (entry.isIntersecting) {
-            entry.target._isDataLayerUpdated = true
-          }
-        }
-      })
-
-      if (elementRef.current) {
-        observer.observe(elementRef.current)
-      }
-
-      return () => {
-        if (elementRef.current) {
-          observer.unobserve(elementRef.current)
-        }
-      }
-    }
-  }, [])
-
   if (
-    (flags.showApiPlayground && isDevMeetFlask) ||
-    (!flags.showApiPlayground && isAPIPlayground)
+    (showApiPlayground && isDevMeetFlask) ||
+    (!showApiPlayground && isAPIPlayground)
   ) {
     return null
   }
@@ -179,6 +146,7 @@ const FeatureComponent = props => {
       ) : null}
     </>
   )
+
   const imageContent = (
     <ImageSrc
       image={image}
@@ -366,6 +334,7 @@ FeatureComponent.propTypes = {
   noPaddingBottom: PropTypes.bool,
   removeSectionPaddingBottomOnDesktop: PropTypes.bool,
   previewMode: PropTypes.bool,
+  contentfulId: PropTypes.string.isRequired,
 }
 
 const Container = styled(Section)``

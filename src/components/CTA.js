@@ -1,20 +1,20 @@
+import { isAndroid, isIOS, isMobile, browserName } from 'react-device-detect'
+import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
+import useIsChromium from '../lib/utils/isChromium'
+import lowerCase from 'lodash/lowerCase'
+import React, { useEffect } from 'react'
+import styled from 'styled-components'
+import SocialIcon from './SocialIcon'
+import isEmpty from 'lodash/isEmpty'
+import classnames from 'classnames'
 import PropTypes from 'prop-types'
-import React from 'react'
 import Arrow from './ArrowIcon'
 import Button from './Button'
-import isEmpty from 'lodash/isEmpty'
-import lowerCase from 'lodash/lowerCase'
-import { isAndroid, isIOS, isMobile, browserName } from 'react-device-detect'
-import Link from './Link'
-import SocialIcon from './SocialIcon'
-import styled from 'styled-components'
-import Popup from './Popup'
-import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
-import Image from './Image'
-import classnames from 'classnames'
 import get from 'lodash/get'
+import Popup from './Popup'
+import Image from './Image'
 import { gsap } from 'gsap'
-import useIsChromium from '../lib/utils/isChromium'
+import Link from './Link'
 
 const CTA = props => {
   const {
@@ -40,10 +40,13 @@ const CTA = props => {
     embedHTML,
     buttonSecondary,
     socialLink,
-    previewMode = false,
     showCaretRight,
     hideButtonIcon,
+    customClassName,
+    previewMode = false,
+    isForDeveloper,
     buttonCaretDown,
+    attr,
   } = props
 
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
@@ -54,40 +57,50 @@ const CTA = props => {
   const isChromium = useIsChromium()
   const [delayShow, setDelayShow] = React.useState(isDownloadBrowser)
   const [showPopup, setShowPopup] = React.useState(false)
+
   let text = textDefault,
     ctaLink = linkDefault,
     lowerBrowserName = lowerCase(browserName),
     iconBrowser = ''
+
   if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
     text = textDefault?.replace('$browser', downloadBrowsers[keyBrowser]?.text)
+
     if (
       ['ios', 'android', 'not-supported'].includes(keyBrowser) &&
       downloadBrowsers[keyBrowser]?.text
     ) {
       text = downloadBrowsers[keyBrowser].text
     }
+
     ctaLink = downloadBrowsers[keyBrowser]?.link
     iconBrowser = downloadBrowsers[keyBrowser]?.icon
   }
+
   const [link, setLink] = React.useState(ctaLink)
   const [newTab, setNewTab] = React.useState(newTabDefault || isDownloadBrowser)
+
   const onClosePopup = () => {
     setShowPopup(false)
   }
+
   const handleCustomClick = e => {
     if (hubSpotForm) {
       e.preventDefault()
       setShowPopup(true)
       return
     }
+
     if (embedHTML) {
       setShowPopup(true)
       return
     }
+
     if (customClick) {
       e.preventDefault()
       customClick()
     }
+
     if (link.startsWith('#') && link.length > 1) {
       e.preventDefault()
       const target = e.currentTarget
@@ -101,7 +114,8 @@ const CTA = props => {
       })
     }
   }
-  React.useEffect(() => {
+
+  useEffect(() => {
     if (isDownloadBrowser) {
       if (
         isMobile &&
@@ -141,7 +155,8 @@ const CTA = props => {
       setDelayShow(false)
     }
   }, [downloadBrowsers, isDownloadBrowser, lowerBrowserName, isChromium])
-  React.useEffect(() => {
+
+  useEffect(() => {
     ;(async () => {
       let isFlask = false
       if (
@@ -167,11 +182,16 @@ const CTA = props => {
       }
     })()
   }, [isDownloadBrowser, keyBrowser, ctaLink, newTabDefault])
+
   let ele = (
     <CTAContainer
-      className={classnames('ctaModuleContainer', {
-        socialLink: socialLink,
-      })}
+      className={classnames(
+        'ctaModuleContainer',
+        {
+          socialLink: socialLink,
+        },
+        customClassName
+      )}
       align={align}
     >
       <ContentWrapper
@@ -202,10 +222,11 @@ const CTA = props => {
   if (isButton) {
     ele = (
       <Button
+        attr={attr}
         size={buttonSize}
         link={link}
         text={text}
-        className={keyBrowser}
+        className={classnames(keyBrowser, customClassName)}
         newTab={newTab}
         color={buttonSecondary ? 'secondary' : color}
         customClick={handleCustomClick}
@@ -227,15 +248,17 @@ const CTA = props => {
     downloadBrowsers['browsers-supported']
   ) {
     ele = (
-      <BrowserWrapper>
+      <BrowserWrapper {...attr}>
         <BrowserInfo>
           <BrowserInfoTitle>
             {downloadBrowsers['browsers-supported'].text}
           </BrowserInfoTitle>
+
           <BrowserInfoDesc>
             {downloadBrowsers['browsers-supported'].description}
           </BrowserInfoDesc>
         </BrowserInfo>
+
         <BrowserList>
           {Object.keys(downloadBrowsers).map(key => {
             const { link, icon, text } = downloadBrowsers[key]

@@ -2,6 +2,7 @@ import ContentfulLayoutPopupRegionSelector from './ContentfulLayoutPopupRegionSe
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import React, { useEffect, useMemo, useState, useRef } from 'react'
+import { useFeatureFlag } from '../../hooks/useFeatureFlag'
 import { useMediaQuery } from 'react-responsive'
 import { EyebrowStyle } from '../StyledGeneral'
 import kebabCase from 'lodash/kebabCase'
@@ -33,19 +34,29 @@ const ContentfulModuleContainer = props => {
       isTrustBar,
       containerBgColor,
       previewMode = false,
-      carouselMode = false,
       columnType,
+      carouselMode = false,
+      contentful_id,
       hasRegionSelector,
       regionSelectorHeadline,
       regionSelectorPopupTitle,
       regionSelectorPopupText,
       regionListKey,
-      extraData,
       loadMoreMode,
       loadMoreCta,
+      extraData,
       storiesData,
     },
   } = props
+
+  const elementRef = useRef()
+  const id = useMemo(() => kebabCase(title), [title])
+  const showLocaleProvidersOnBuyCryptoPage = useFeatureFlag({
+    componentName: 'PopupRegionSelector',
+    componentId: contentful_id,
+    flagName: 'showLocaleProvidersOnBuyCryptoPage',
+    elementRef,
+  })
 
   const gridModulesGap = gridModulesGapDefault || '8px'
   const { childMarkdownRemark: { html } = {} } = description || {}
@@ -81,7 +92,7 @@ const ContentfulModuleContainer = props => {
     if (carouselMode === 'tablet' && isTablet) return true
     if (carouselMode === 'mobile' && isMobile) return true
     return false
-  }, [isMobile, isTablet])
+  }, [isMobile, isTablet, carouselMode])
 
   useEffect(() => {
     if (columnType === 'randomize') {
@@ -115,7 +126,14 @@ const ContentfulModuleContainer = props => {
     <Wrapper
       isFaq={isFaq}
       className="contentfulModuleContainerWrapper"
-      id={kebabCase(title || '')}
+      id={id}
+      style={{
+        display:
+          id === 'payments-logos' && !showLocaleProvidersOnBuyCryptoPage
+            ? 'none'
+            : 'block',
+      }}
+      ref={id === 'payments-logos' ? elementRef : null}
     >
       <Inner splitModules={splitModules}>
         {title || htmlData || eyebrow ? (
@@ -150,6 +168,7 @@ const ContentfulModuleContainer = props => {
             }
             modulesRender={initialModulesRender}
             setModulesRender={setModulesRender}
+            componentId={contentful_id}
           />
         )}
 
@@ -318,7 +337,7 @@ const Inner = styled.div`
       }
     }
   }
-  
+
   ${({ splitModules, theme }) =>
     splitModules
       ? `

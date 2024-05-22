@@ -1,17 +1,18 @@
-import PropTypes from 'prop-types'
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import styled, { withTheme } from 'styled-components'
-import Link from './Link'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { DEFAULT_LOCALE_CODE, LOCALES } from '../lib/config.mjs'
+import ContextClientSide from '../Context/ContextClientSide'
+import { useFeatureFlag } from '../hooks/useFeatureFlag'
+import { useLDClient } from 'gatsby-plugin-launchdarkly'
+import styled, { withTheme } from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 import ToggleDarkMode from './ToggleDarkMode'
-import ContextClientSide from '../Context/ContextClientSide'
 import Context from '../Context/ContextPage'
-import classnames from 'classnames'
-import { DEFAULT_LOCALE_CODE, LOCALES } from '../lib/config.mjs'
-import { navigate } from 'gatsby-link'
 import { useLocation } from '@reach/router'
-import { useFlags } from 'gatsby-plugin-launchdarkly'
+import { navigate } from 'gatsby-link'
+import classnames from 'classnames'
+import PropTypes from 'prop-types'
+import Link from './Link'
 
 const StyledHeader = props => {
   const {
@@ -31,7 +32,9 @@ const StyledHeader = props => {
     isSticky,
     previewMode = false,
     translation,
+    contentfulId,
   } = props
+
   const isDesktop = useMediaQuery({
     query: '(min-width: 1025px)',
   })
@@ -44,13 +47,22 @@ const StyledHeader = props => {
   const { pathname } = location
   const menuRef = useRef()
   const buttonRef = useRef()
+  const languageSelectorRef = useRef()
   const { header: headerREF } = useContext(Context)
   const { headerRef } = headerREF || {}
   const { isDarkMode, toggleTheme } = darkModeContextValue || {}
   const { locale, setLocale } = localization || {}
   const [topMenuMobile, setTopMenuMobile] = useState('88px')
   const [isBrowser, setIsBrowser] = useState(false)
-  const { showLanguageSelector } = useFlags()
+  const ldClient = useLDClient()
+
+  const showLanguageSelector = useFeatureFlag({
+    componentName: 'Header',
+    componentId: contentfulId,
+    flagName: 'showLanguageSelector',
+    elementRef: languageSelectorRef,
+  })
+
   const shouldShowLanguageSelector =
     previewMode || (showLanguageSelector && translation)
 
@@ -62,16 +74,20 @@ const StyledHeader = props => {
     if (!menus && isDarkMode) {
       toggleTheme()
     }
+
     const handleOuterClick = e => {
       const ref = menuRef?.current
       const btnRef = buttonRef?.current
+
       if (hamburgerActive && ref && btnRef) {
         if (!ref.contains(e.target) && !btnRef.contains(e.target)) {
           setHamburgerActive(false)
         }
       }
     }
+
     document.addEventListener('click', handleOuterClick)
+
     return () => document.removeEventListener('click', handleOuterClick)
   }, [hamburgerActive])
 
@@ -82,39 +98,51 @@ const StyledHeader = props => {
       setMenuActive(id)
     }
   }
+
   const handleMenuMouseEnter = id => {
     if (isDesktop) {
       setMenuActive(id)
     }
   }
+
   const handleMenuMouseLeave = () => {
     if (isDesktop) {
       setMenuActive('')
     }
   }
+
   const handleHamburgerButton = () => {
     if (headerRef && popupAnnouncement) {
       const h = headerRef?.current.getBoundingClientRect().height
       setTopMenuMobile(`${h}px`)
     }
+
     setHamburgerActive(!hamburgerActive)
   }
+
   const onChangeLocale = locale => {
     setMenuActive('')
     setLocale(locale)
+
     if (!previewMode) {
       let localizedPath
+
       if (locale.code === DEFAULT_LOCALE_CODE) {
         localizedPath = pathname.replace(/^\/(ar|zh-CN|de|es)/, '')
       } else {
         const newLocale = locale.code === DEFAULT_LOCALE_CODE ? '' : locale.code
+
         localizedPath = `/${newLocale}${pathname.replace(
           /^\/(ar|zh-CN|de|es)\//,
           '/'
         )}`
       }
+
       navigate(localizedPath)
     }
+
+    ldClient?.track('on-locale-change', { locale })
+    ldClient?.flush()
   }
 
   return (
@@ -189,6 +217,7 @@ const StyledHeader = props => {
                 {menus.map((menu, index) => {
                   const { title, modules, ctaLink } = menu
                   const active = menuActive === index
+
                   return (
                     <NavMenu
                       key={index}
@@ -228,6 +257,7 @@ const StyledHeader = props => {
                     </NavMenu>
                   )
                 })}
+
                 {downloadButton ? (
                   <ButtonsWrapper
                     className="download-btn-desktop"
@@ -241,6 +271,7 @@ const StyledHeader = props => {
                     })}
                   </ButtonsWrapper>
                 ) : null}
+
                 <ToggleWrapper>
                   <DarkModeWrapper>
                     <ToggleDarkMode
@@ -250,8 +281,10 @@ const StyledHeader = props => {
                       value="dark"
                     />
                   </DarkModeWrapper>
+
                   {shouldShowLanguageSelector && (
                     <NavMenu
+                      ref={languageSelectorRef}
                       key="language-selector"
                       className="language-selector"
                       active={menuActive === 'language-selector'}
@@ -269,6 +302,7 @@ const StyledHeader = props => {
                         {isBrowser && locale?.shortName}
                         <Icon className="w-icon w-icon-dropdown-toggle" />
                       </NavMenuMain>
+
                       <NavMenuChild active={menuActive === 'language-selector'}>
                         {LOCALES.map(locale => (
                           <span
@@ -283,6 +317,7 @@ const StyledHeader = props => {
                     </NavMenu>
                   )}
                 </ToggleWrapper>
+
                 {downloadButton ? (
                   <ButtonsWrapper
                     className="download-btn-mobile"
@@ -321,9 +356,6 @@ StyledHeader.propTypes = {
 
 const HeaderElement = styled.header`
   background-color: #fff;
-  body.dark-mode & {
-    background-color: #121212;
-  }
   bottom: 20px;
   display: block;
   left: 0;
@@ -337,6 +369,10 @@ const HeaderElement = styled.header`
   z-index: 999;
   transition: background 300ms ease;
 
+  body.dark-mode & {
+    background-color: #121212;
+  }
+
   &.sticky {
     position: sticky;
   }
@@ -349,6 +385,7 @@ const HeaderElement = styled.header`
     }
   }
 `
+
 const Announcement = styled.div`
   margin: -24px -20px 16px -20px;
 
@@ -400,6 +437,7 @@ const NavMain = styled.nav`
         : ''}
   }
 `
+
 const NavMainInner = styled.div`
   display: flex;
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
@@ -408,6 +446,7 @@ const NavMainInner = styled.div`
     margin: 0 auto;
   }
 `
+
 const LogoWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -429,6 +468,7 @@ const Logo = styled.img`
     `
       : ''}
 `
+
 const NavMenu = styled.div`
   display: inline-flex;
   position: relative;
@@ -452,6 +492,7 @@ const NavMenuChild = styled.div`
   min-width: 100%;
   position: absolute;
   top: 100%;
+
   a {
     white-space: nowrap;
     width: 100%;
@@ -489,6 +530,7 @@ const NavMenuChild = styled.div`
     `
         : ''}
   }
+
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     width: 100%;
     position: static;
@@ -504,18 +546,22 @@ const NavMenuChild = styled.div`
         : ''}
   }
 `
+
 const NavMenuMain = styled.div`
   display: flex;
   align-items: center;
   height: 40px;
   padding: 0 20px;
   color: #222;
+
   body.dark-mode & {
     color: #FFF;
   }
+
   &:hover {
     color: ${({ theme }) => theme.text.menuHover};
   }
+
   ${({ hasChild }) =>
     hasChild
       ? `
@@ -528,6 +574,7 @@ const NavMenuMain = styled.div`
     justify-content: space-between;
   }
 `
+
 const Icon = styled.span`
   display: inline-block;
   margin-left: 4px;
@@ -562,6 +609,7 @@ const ButtonsWrapper = styled.div`
     min-height: 40px !important;
     height: 40px !important;
   }
+
   a {
     padding: 8px 32px !important;
   }
@@ -583,6 +631,7 @@ const ButtonsWrapper = styled.div`
 
   @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
     margin-top: 12px;
+
     a {
       width: 100%;
     }

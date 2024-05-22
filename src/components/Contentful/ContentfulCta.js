@@ -1,8 +1,8 @@
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import { MetaMaskContext } from '../../Context/MetaMaskContextProvider'
+import { isMobile } from 'react-device-detect'
 import React, { useContext } from 'react'
 import isEmpty from 'lodash/isEmpty'
-import { isMobile } from 'react-device-detect'
 import PropTypes from 'prop-types'
 import CTA from '../CTA'
 
@@ -58,8 +58,15 @@ const ContentfulCta = props => {
       socialLink={activeCta.socialLink}
       showCaretRight={activeCta.showCaretRight}
       hideButtonIcon={activeCta.hideButtonIcon}
+      customClassName={activeCta.customClassName}
       buttonCaretDown={activeCta.buttonCaretDown}
       previewMode={activeCta.previewMode}
+      attr={{
+        'data-componentname': 'ContentfulCta',
+        'data-componentid': activeCta?.contentful_id || 'n/a',
+        'data-flagname': props.moduleConfig?.launchDarklyFlag,
+        // 'data-flagvalue': 'n/a',
+      }}
     />
   )
 }

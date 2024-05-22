@@ -1,11 +1,13 @@
-import PropTypes from 'prop-types'
-import React from 'react'
 import styled from 'styled-components'
-import Link from './Link'
 import classnames from 'classnames'
+import PropTypes from 'prop-types'
 import Image from './Image'
+import React from 'react'
+import Link from './Link'
+
 const Button = props => {
   const {
+    attr,
     link,
     text,
     newTab,
@@ -23,6 +25,7 @@ const Button = props => {
 
   return (
     <ButtonWrapper
+      {...attr}
       to={link}
       newTab={newTab}
       color={color}

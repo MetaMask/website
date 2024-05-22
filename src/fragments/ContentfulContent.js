@@ -253,6 +253,7 @@ export const ContentfulLayoutFeatureFields = graphql`
     removeSectionPaddingBottomOnDesktop
     customClass
     moduleId
+    launchDarklyFlag
     featureItems {
       ... on ContentfulLogo {
         ...ContentfulLogoFields
@@ -590,11 +591,8 @@ export const ContentfulCardFields = graphql`
 
 export const ContentfulCtaBaseFields = graphql`
   fragment ContentfulCtaBaseFields on ContentfulCta {
-    contentful_id
     node_locale
-    internal {
-      type
-    }
+    contentful_id
     fontSize
     ctaLink
     displayText
@@ -605,20 +603,25 @@ export const ContentfulCtaBaseFields = graphql`
     hideButtonIcon
     eventLabel
     eventCategory
+    socialLink
+    showCaretRight
+    buttonCaretDown
+    launchDarklyFlag
+    customClassName
+    internal {
+      type
+    }
     hubSpotForm {
       ...ContentfulHubSpotFormFields
     }
     embedHTML {
       ...ContentfulEmbedFields
     }
-    socialLink
     downloadBrowsers {
       internal {
         content
       }
     }
-    showCaretRight
-    buttonCaretDown
   }
 `
 

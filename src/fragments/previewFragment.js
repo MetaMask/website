@@ -239,9 +239,7 @@ export const ContentfulCtaFields = gql`
   ${ContentfulEmbedFields}
   fragment ContentfulCtaFields on Cta {
     __typename
-    sys {
-      id
-    }
+
     name
     displayText
     ctaLink
@@ -254,15 +252,20 @@ export const ContentfulCtaFields = gql`
     fontSize
     eventCategory
     eventLabel
+    showCaretRight
+    buttonCaretDown
+    launchDarklyFlag
+    downloadBrowsers
+    customClassName
+    sys {
+      id
+    }
     hubSpotForm(preview: true) {
       ...ContentfulHubSpotFormFields
     }
     embedHtml(preview: true) {
       ...ContentfulEmbedFields
     }
-    downloadBrowsers
-    showCaretRight
-    buttonCaretDown
     mobileCta {
       ...ContentfulCtaFields
     }
@@ -772,8 +775,9 @@ export const ContentfulLayoutFeatureFields = gql`
     sectionPadding
     noPaddingBottom
     removeSectionPaddingBottomOnDesktop
-    moduleId
     customClass
+    moduleId
+    launchDarklyFlag
     featureItemsCollection(preview: true) {
       items {
         ...ContentfulCardFields
