@@ -1,7 +1,7 @@
-import React from 'react'
+import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import PropTypes from 'prop-types'
 import Feature from '../Feature'
-import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
+import React from 'react'
 
 const ContentfulLayoutFeature = props => {
   const {
@@ -38,10 +38,10 @@ const ContentfulLayoutFeature = props => {
       showFeatureItemsAsSlideImage,
       imageShadow,
       hideImageOnMobile,
-      customClass,
+      launchDarklyFlag,
       contentful_id,
       moduleId,
-      launchDarklyFlag,
+      customClass,
     },
   } = props
 

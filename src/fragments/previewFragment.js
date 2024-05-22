@@ -895,7 +895,7 @@ export const ContentfulLayoutModuleContainerFields = gql`
     modulesMargin
     isTab
     customClass
-    moduleID
+    moduleId
     sideImage {
       title
       description

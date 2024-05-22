@@ -1,9 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
-import Header from '../Header'
 import cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
+import PropTypes from 'prop-types'
+import Header from '../Header'
+import React from 'react'
 
 const ContentfulLayoutHeader = props => {
   const {

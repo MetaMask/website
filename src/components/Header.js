@@ -1,18 +1,18 @@
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import React, { useContext, useEffect, useRef, useState } from 'react'
+import { DEFAULT_LOCALE_CODE, LOCALES } from '../lib/config.mjs'
 import ContextClientSide from '../Context/ContextClientSide'
+import { useFeatureFlag } from '../hooks/useFeatureFlag'
+import { useLDClient } from 'gatsby-plugin-launchdarkly'
 import styled, { withTheme } from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 import ToggleDarkMode from './ToggleDarkMode'
 import Context from '../Context/ContextPage'
+import { useLocation } from '@reach/router'
+import { navigate } from 'gatsby-link'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import Link from './Link'
-import { DEFAULT_LOCALE_CODE, LOCALES } from '../lib/config.mjs'
-import { navigate } from 'gatsby-link'
-import { useLocation } from '@reach/router'
-import { useFeatureFlag } from '../hooks/useFeatureFlag'
-import { useLDClient } from 'gatsby-plugin-launchdarkly'
 
 const StyledHeader = props => {
   const {

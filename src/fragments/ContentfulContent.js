@@ -609,6 +609,7 @@ export const ContentfulCtaBaseFields = graphql`
     buttonCaretDown
     launchDarklyFlag
     customClassName
+    isForDeveloper
     internal {
       type
     }
@@ -623,7 +624,6 @@ export const ContentfulCtaBaseFields = graphql`
         content
       }
     }
-    isForDeveloper
   }
 `
 
