@@ -113,11 +113,15 @@ const ContentfulLayoutPopupRegionSelector = ({
 
   const { list } = JSON.parse(extraData.internal.content)
 
-  const language = navigator.language.slice(0, 2)
-  const index = list.findIndex(item => item.country.id.includes(language))
-
   const [hasModal, setHasModal] = useState(false)
-  const [selectedCountry, setSelectedCountry] = useState(index)
+  const [selectedCountry, setSelectedCountry] = useState(0)
+
+  useEffect(() => {
+    const language = navigator.language.slice(0, 2)
+    const index = list.findIndex(item => item.country.id.includes(language))
+
+    setSelectedCountry(index)
+  }, [])
 
   useEffect(() => {
     setModulesRender(() =>
