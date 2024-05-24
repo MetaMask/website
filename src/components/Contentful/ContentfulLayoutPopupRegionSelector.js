@@ -120,7 +120,7 @@ const ContentfulLayoutPopupRegionSelector = ({
     const language = navigator.language.slice(0, 2)
     const index = list.findIndex(item => item.country.id.includes(language))
 
-    setSelectedCountry(index)
+    setSelectedCountry(index > 0 ? index : 0)
   }, [])
 
   useEffect(() => {
