@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import styled, { withTheme } from 'styled-components'
-import Image from './Image'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { browserName, isMobile } from 'react-device-detect'
-import get from 'lodash/get'
+import styled, { withTheme } from 'styled-components'
 import useIsChromium from '../lib/utils/isChromium'
+import React, { useEffect, useState } from 'react'
 import ParseMD from './ParseMD'
+import get from 'lodash/get'
+import Image from './Image'
 
 const TabContentDownload = props => {
   const { item, id, previewMode } = props
@@ -26,6 +26,7 @@ const TabContentDownload = props => {
     ctaEdge,
     ctaChromeBrowser,
     ctaFirefoxBrowser
+
   if (ctas) {
     ctas = previewMode
       ? ctas
@@ -37,6 +38,7 @@ const TabContentDownload = props => {
     ctaChromeBrowser = ctas.find(c => c.name === 'ctaChromeBrowser')
     ctaFirefoxBrowser = ctas.find(c => c.name === 'ctaFirefoxBrowser')
   }
+
   const mobileCta = previewMode ? get(item, 'ctaCollection.items') : item.cta
   const [downloadForFirefox, setDownloadForFirefox] = useState(ctaFirefox)
 
@@ -49,6 +51,7 @@ const TabContentDownload = props => {
           )
           const data = await firefoxAddon.json()
           const latestVersion = get(data, 'current_version.file.url')
+
           if (latestVersion) {
             setDownloadForFirefox({
               ...downloadForFirefox,
@@ -73,7 +76,7 @@ const TabContentDownload = props => {
       ctasDownload = [
         {
           ...ctaChrome,
-          displayText: ctaChrome.displayText.replace(/Chrome/g, 'Chromium'),
+          text: ctaChrome.text.replace(/Chrome/g, 'Chromium'),
         },
       ]
     } else if (isChrome || isMobile) {
@@ -88,6 +91,7 @@ const TabContentDownload = props => {
       ctasHeading = `${browserName} is not supported. Please download a browser that supports MetaMask.`
       ctasDownload = [ctaChromeBrowser, ctaFirefoxBrowser]
     }
+
     ctasDownload = ctasDownload.map(c => ({
       displayText: c.text,
       internal: {
@@ -110,11 +114,13 @@ const TabContentDownload = props => {
           <ParseMD>{title}</ParseMD>
         </Heading>
       ) : null}
+
       {image ? (
         <ImageWrapper>
           <Image image={image} previewMode={previewMode} />
         </ImageWrapper>
       ) : null}
+
       <DownLoadWrapper>
         {ctasHeading ? <HeadingCta>{ctasHeading}</HeadingCta> : null}
         <Buttons>
@@ -144,6 +150,7 @@ const ImageWrapper = styled.div`
   max-width: 100%;
   margin: 20px auto 0;
 `
+
 const DownLoadWrapper = styled.div`
   display: flex;
   padding: 40px;
