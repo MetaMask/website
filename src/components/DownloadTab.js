@@ -2,12 +2,14 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { browserName, isMobile } from 'react-device-detect'
 import styled, { withTheme } from 'styled-components'
 import useIsChromium from '../lib/utils/isChromium'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ParseMD from './ParseMD'
 import get from 'lodash/get'
 import Image from './Image'
+import ContextPage from '../Context/ContextPage'
 
 const TabContentDownload = props => {
+  const { sharedCopy } = useContext(ContextPage)
   const { item, id, previewMode } = props
   const { image, description } = item
   const title = previewMode
@@ -88,7 +90,7 @@ const TabContentDownload = props => {
     } else if (isEdge) {
       ctasDownload = [ctaEdge]
     } else {
-      ctasHeading = `${browserName} is not supported. Please download a browser that supports MetaMask.`
+      ctasHeading = `${browserName} ${sharedCopy.browserNotSupported}`
       ctasDownload = [ctaChromeBrowser, ctaFirefoxBrowser]
     }
 
