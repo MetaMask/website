@@ -16,7 +16,7 @@ export default function parseYoutubeIframe(
     const match = url.match(regExp)
     return match && match[2].length === 11 ? match[2] : false
   }
-  let idYoutube 
+  let idYoutube
   if (iframes && iframes.length) {
     // parseYoutubeIframe for lazy load
     Array.from(iframes).forEach((iframe, index) => {

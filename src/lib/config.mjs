@@ -75,7 +75,6 @@ export const LOCALES = [
     code: 'en-US',
     shortName: 'EN',
     htmlLang: 'en',
-    default: true,
   },
   {
     name: 'Arabic',
@@ -108,7 +107,7 @@ export const LOCALES = [
 ]
 
 export const LOCALES_TRANSLATE = LOCALES.slice(1)
-export const DEFAULT_LOCALE = LOCALES.find(l => l.default)
+export const DEFAULT_LOCALE = LOCALES[0]
 export const DEFAULT_LOCALE_CODE = DEFAULT_LOCALE.code
 
 export const mapCodeToHtmlLang = code => {

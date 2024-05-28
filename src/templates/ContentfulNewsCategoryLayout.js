@@ -9,7 +9,15 @@ import capitalize from 'lodash/capitalize'
 
 const ContentfulNewsCategoryLayout = props => {
   const {
-    data: { seo, header, footer, layoutModuleContainer, hero, stories },
+    data: {
+      seo,
+      header,
+      footer,
+      layoutModuleContainer,
+      hero,
+      stories,
+      sharedCopy,
+    },
     pageContext: {
       pathBuild,
       locale = DEFAULT_LOCALE_CODE,
@@ -52,7 +60,11 @@ const ContentfulNewsCategoryLayout = props => {
   }, [])
 
   return (
-    <Layout locale={locale} localizedPages={localizedPages}>
+    <Layout
+      locale={locale}
+      localizedPages={localizedPages}
+      sharedCopy={sharedCopy}
+    >
       {seoData &&
         contentfulModuleToComponent({
           ...seoData,
@@ -130,6 +142,9 @@ export const DownloadPageQuery = graphql`
       nodes {
         ...ContentfulNewsFields
       }
+    }
+    sharedCopy: contentfulSharedCopy(node_locale: { eq: $node_locale }) {
+      ...ContentfulSharedCopyFields
     }
   }
 `

@@ -492,6 +492,7 @@ const NavMenuChild = styled.div`
   min-width: 100%;
   position: absolute;
   top: 100%;
+  user-select: none;
 
   a {
     white-space: nowrap;
