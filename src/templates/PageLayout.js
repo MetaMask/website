@@ -146,6 +146,7 @@ const PageLayout = props => {
     }
 
     let timerOne, timerTwo
+    const flags = ldClient.allFlags()
 
     const handleClickDl = event => {
       window.dataLayer = window.dataLayer || []
@@ -195,8 +196,6 @@ const PageLayout = props => {
 
       window.dataLayer.push(data)
     }
-
-    const flags = ldClient.allFlags()
 
     if (flags) {
       window.dataLayer = window.dataLayer || []
