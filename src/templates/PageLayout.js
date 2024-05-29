@@ -88,7 +88,17 @@ const PageLayout = props => {
     }
   }
 
+  const formatFlagsForGTM = (flags, data) => {
+    Object.entries(flags).forEach(([key, value], i) => {
+      data[`flags_${i + 1}`] = JSON.stringify({
+        [key]:
+          typeof value === 'boolean' ? (value ? 'enabled' : 'disabled') : value,
+      })
+    })
+  }
+
   const navigationState = (location && location.state) || {}
+
   if (navigationState.notification) {
     renderNotification(navigationState.notification)
   }
@@ -160,16 +170,7 @@ const PageLayout = props => {
               : el.dataset.flagvalue
           })
 
-          Object.entries(flags).forEach(([key, value], i) => {
-            data[`flags_${i + 1}`] = JSON.stringify({
-              [key]:
-                typeof value === 'boolean'
-                  ? value
-                    ? 'enabled'
-                    : 'disabled'
-                  : value,
-            })
-          })
+          formatFlagsForGTM(flags, data)
 
           window.dataLayer.push(data)
         }, 50)
@@ -181,6 +182,8 @@ const PageLayout = props => {
     let timer
     const handleClickDl = event => {
       window.dataLayer = window.dataLayer || []
+
+      const flags = ldClient.allFlags()
 
       if (event.target.closest('.deeplink')) {
         const uuid = generateUUID()
@@ -222,6 +225,8 @@ const PageLayout = props => {
             ? event.target.alt
             : event.target.innerText,
       }
+
+      formatFlagsForGTM(flags, data)
 
       window.dataLayer.push(data)
     }
