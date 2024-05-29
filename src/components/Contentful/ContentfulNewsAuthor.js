@@ -3,7 +3,10 @@ import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import Layout from '../layout'
 import AuthorProfileContent from '../AuthorProfileContent'
 
-// For preview only
+/**
+ * For preview only
+ */
+
 const ContentfulLayout = props => {
   const {
     description,
@@ -16,6 +19,7 @@ const ContentfulLayout = props => {
     twitter,
   } = props
 
+  // Hardcode for preview
   const heroBgUrl =
     'https://images.ctfassets.net/9sy2a0egs6zh/2DkHpHReuWGy3rlFwsseg9/3ef9fca08861ff252af636e02e0e38d1/News_Hero.png?q=80&fm=webp'
   const heroBgDarkUrl =

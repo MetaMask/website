@@ -8,7 +8,10 @@ import Image from '../Image'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import moment from 'moment'
 
-// For preview only
+/**
+ * For preview only
+ */
+
 const ContentfulNewsLayout = props => {
   const {
     moduleConfig: {
@@ -46,6 +49,7 @@ const ContentfulNewsLayout = props => {
       return acc
     }, [])
 
+  // Hardcode for preview
   const bgUrl =
     'https://images.ctfassets.net/9sy2a0egs6zh/3hGSTCAVrdhSMmLJHSHOWT/94799532e03716ceb32ad39268bef4b0/news-detail-bg.png?q=80&fm=webp'
   const darkBgUrl =
