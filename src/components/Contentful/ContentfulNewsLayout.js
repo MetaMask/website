@@ -8,17 +8,28 @@ import Image from '../Image'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import moment from 'moment'
 
-// For preview only
+/**
+ * For preview only
+ */
+
 const ContentfulNewsLayout = props => {
   const {
     moduleConfig: {
-      content,
-      image,
-      title,
-      subtitle,
-      previewMode = false,
-      publishDate,
-      authors,
+      header,
+      cta,
+      footer,
+      newsLayout: {
+        content,
+        image,
+        title,
+        subtitle,
+        previewMode = true,
+        publishDate,
+        authors,
+      },
+      hubspot,
+      sharedCopy,
+      latest,
     },
   } = props
 
@@ -38,42 +49,71 @@ const ContentfulNewsLayout = props => {
       return acc
     }, [])
 
+  // Hardcode for preview
+  const bgUrl =
+    'https://images.ctfassets.net/9sy2a0egs6zh/3hGSTCAVrdhSMmLJHSHOWT/94799532e03716ceb32ad39268bef4b0/news-detail-bg.png?q=80&fm=webp'
+  const darkBgUrl =
+    'https://images.ctfassets.net/9sy2a0egs6zh/2StKLJf0XE38EyT9GlzQuO/ed29f2ebdc6b99f7ff32175a192133c3/news-detail-dark-bg.png?q=80&fm=webp'
+
   return (
-    <NewsContainer>
-      <ContentWrapper className="news-content">
-        <Title>{title}</Title>
-        <Subtitle>{subtitle}</Subtitle>
-        <NewsInfo>
-          <span>by&nbsp;</span>
-          <span className="author">
-            {hasAuthors ? authorsName.join(', ') : 'MetaMask'}
-          </span>
-          <span className="separator" />
-          <span className="publishDate">
-            {publishDate ? moment(publishDate).format('MMMM D, YYYY') : ''}
-          </span>
-        </NewsInfo>
-        <Image image={image} previewMode={previewMode} />
-        <SocialShare>
-          <SocialButtonList />
-        </SocialShare>
-      </ContentWrapper>
-      <NewsContentWrapper>
-        {contentfulModuleToComponent(contentConfig)}
-      </NewsContentWrapper>
-    </NewsContainer>
+    <>
+      {contentfulModuleToComponent({ ...header, previewMode })}
+      <NewsContainer className="noPaddingBottom">
+        <ContentWrapper className="news-content">
+          {contentfulModuleToComponent({
+            ...cta,
+            iconConfig: { news: true, width: '24px', height: '24px' },
+            showLeftArrow: true,
+            previewMode,
+          })}
+          <Title>{title}</Title>
+          <Subtitle>{subtitle}</Subtitle>
+          <NewsInfo>
+            <span>{sharedCopy.by}&nbsp;</span>
+            <span className="author">
+              {hasAuthors ? authorsName.join(', ') : 'MetaMask'}
+            </span>
+            <span className="separator" />
+            <span className="publishDate">
+              {publishDate ? moment(publishDate).format('MMMM D, YYYY') : ''}
+            </span>
+          </NewsInfo>
+          <Image image={image} previewMode={previewMode} />
+          <SocialShare>
+            <SocialButtonList />
+          </SocialShare>
+        </ContentWrapper>
+        <NewsContentWrapper bgUrl={bgUrl} darkBgUrl={darkBgUrl}>
+          {contentfulModuleToComponent(contentConfig)}
+          {contentfulModuleToComponent({ ...hubspot, previewMode })}
+        </NewsContentWrapper>
+        {contentfulModuleToComponent({
+          ...latest,
+          storiesData: {
+            stories: [],
+          },
+          iconConfig: { news: true, width: '24px', height: '24px' },
+          showLeftArrow: true,
+          previewMode,
+        })}
+        {contentfulModuleToComponent({ ...footer, previewMode })}
+      </NewsContainer>
+    </>
   )
 }
 
 const parsePreviewData = data => {
   data = data.moduleConfig.previewContent || data.moduleConfig
-  const { authorsCollection } = data
+  const { authorsCollection } = data.newsLayout
 
   const dataUpdate = {
     moduleConfig: {
       previewMode: true,
-      authors: authorsCollection?.items,
       ...data,
+      newsLayout: {
+        ...data.newsLayout,
+        authors: authorsCollection?.items,
+      },
     },
   }
   return dataUpdate
@@ -86,6 +126,28 @@ const NewsContainer = styled(Section)`
 `
 
 const NewsContentWrapper = styled.div`
+${({ bgUrl, darkBgUrl }) =>
+  bgUrl || darkBgUrl
+    ? ` background-size: contain;
+      background-repeat: no-repeat;
+      background-position: bottom;
+   `
+    : ''}
+
+  ${({ bgUrl }) =>
+    bgUrl
+      ? ` background-image: url(${bgUrl});
+  `
+      : ''}
+
+  ${({ darkBgUrl }) =>
+    darkBgUrl
+      ? `
+      body.dark-mode && {
+        background-image: url(${darkBgUrl});
+      }
+   `
+      : ''}
   & > * {
     max-width: 784px;
     margin: 0 auto;
@@ -102,7 +164,7 @@ const Title = styled.h2`
 const Subtitle = styled.p`
   font-size: 16px;
   line-height: 24px;
-  padding-top: 24px;
+  padding-top: 8px;
 `
 
 const SocialShare = styled.div`

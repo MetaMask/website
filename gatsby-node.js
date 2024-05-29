@@ -49,23 +49,66 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   )
 
+  const sharedCopyResult = await graphql(`
+    {
+      sharedCopy: allContentfulSharedCopy {
+        nodes {
+          node_locale
+          copyItem {
+            key
+            value
+          }
+        }
+      }
+    }
+  `)
+  const sharedCopyData = sharedCopyResult?.data?.sharedCopy?.nodes || []
+  const sharedCopy = sharedCopyData.reduce((acc, cur) => {
+    const sharedCopyDict = {}
+    for (const item of cur.copyItem || []) {
+      sharedCopyDict[item.key] = item.value
+    }
+    acc[cur.node_locale] = sharedCopyDict
+    return acc
+  }, {})
+
   /* Customized Pages Built Inside Contentful CMS */
   const localizedPages = []
-  const translatedResult = await graphql(`{
+  const translatedPages = await graphql(`{
       pages: allContentfulLayout(
-        filter: {translation: {eq: true}, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"}}
+        filter: {isPrivate: { eq: false }, translation: {eq: true}, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"}}
       ) {
         nodes {
           slug
         }
       }
+      news: allContentfulNews(
+        filter: {isPrivate: { eq: false }, translation: {eq: true}, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"}}
+      ) {
+        nodes {
+          title
+          slug
+          categories {
+            name
+          }
+        }
+      }
     }
   `)
-  if (translatedResult.data && translatedResult.data.pages) {
-    translatedResult.data.pages.nodes.forEach(page => {
-      localizedPages.push(page.slug)
-    })
+  if (translatedPages.data) {
+    if (translatedPages.data.pages?.nodes) {
+      translatedPages.data.pages.nodes.forEach(page => {
+        localizedPages.push(page.slug)
+      })
+    }
+    if (translatedPages.data.news?.nodes) {
+      translatedPages.data.news.nodes.forEach(news => {
+        const newsUrl = getNewsUrl(news)
+        localizedPages.push(newsUrl)
+      })
+    }
   }
+
   const newsCategories = []
   const result = await graphql(`
     {
@@ -227,6 +270,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   h2FontSize,
                   node_locale,
                   localizedPages,
+                  sharedCopy: sharedCopy[node_locale]
                 },
               })
               return
@@ -262,7 +306,8 @@ exports.createPages = async ({ graphql, actions }) => {
                     category: cat.name,
                     totalItems: cat.total,
                     currentPage: index + 1,
-                    totalPages
+                    totalPages,
+                    sharedCopy: sharedCopy[node_locale]
                   },
                 })
               })
@@ -297,6 +342,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 h2FontSize,
                 node_locale,
                 localizedPages,
+                sharedCopy: sharedCopy[node_locale]
               },
             })
             return
@@ -324,6 +370,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   locale: locale.code,
                   node_locale: locale.code,
                   localizedPages,
+                  sharedCopy: sharedCopy[locale.code]
                 },
               })
             })
@@ -346,6 +393,7 @@ exports.createPages = async ({ graphql, actions }) => {
               translation,
               node_locale,
               localizedPages,
+              sharedCopy: sharedCopy[node_locale]
             },
           })
         })
@@ -362,31 +410,46 @@ exports.createPages = async ({ graphql, actions }) => {
     {
       stories: allContentfulNews(
         sort: { publishDate: DESC }
-        filter: { node_locale: { eq: "${DEFAULT_LOCALE_CODE}" } }
+        filter: { isPrivate: { eq: false }, node_locale: { eq: "${DEFAULT_LOCALE_CODE}" } }
       ) {
-        edges {
-          node {
-            contentful_id
-            title
-            slug
-            categories {
-              name
-            }
-            isPrivate
-            node_locale
+        nodes {
+          contentful_id
+          title
+          slug
+          categories {
+            name
           }
+          translation
+          node_locale
         }
       }
     }
   `)
     .then(result => {
       if (result.data && result.data.stories) {
-        const stories = result.data.stories.edges.filter(
-          item => !item.node.isPrivate
-        )
-        return stories.map(({ node: news }) => {
-          const { contentful_id, node_locale } = news
+        const stories = result.data.stories.nodes
+        return stories.map(news => {
+          const { contentful_id, node_locale, translation } = news
           const newsUrl = getNewsUrl(news)
+
+          if (showLanguageSelector && translation) {
+            LOCALES_TRANSLATE.forEach(locale => {
+              const localeSlug = `/${locale.code}${newsUrl}`
+              createPage({
+                path: localeSlug,
+                component: path.resolve(mapTemplateLayout('Blog')),
+                context: {
+                  news_content_id: contentful_id,
+                  pathBuild: localeSlug,
+                  node_locale: locale.code,
+                  localizedPages,
+                  slug: newsUrl,
+                  translation,
+                  sharedCopy: sharedCopy[locale.code],
+                },
+              })
+            })
+          }
 
           createPage({
             path: newsUrl,
@@ -396,6 +459,8 @@ exports.createPages = async ({ graphql, actions }) => {
               pathBuild: newsUrl,
               node_locale,
               localizedPages,
+              translation,
+              sharedCopy: sharedCopy[node_locale],
             },
           })
         })
@@ -433,6 +498,7 @@ exports.createPages = async ({ graphql, actions }) => {
               pathBuild: slug,
               node_locale,
               localizedPages,
+              sharedCopy: sharedCopy[node_locale]
             },
           })
         })
@@ -561,6 +627,10 @@ exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
               `/de/`,
               `/news/page/+([0-9])`,
               `/news/*/page/+([0-9])`,
+              `/es/news/**`,
+              `/de/news/**`,
+              `/zh-CN/news/**`,
+              `/ar/news/**`,
             ]
             return !excludePages.some(exclude => minimatch(path, exclude))
           },

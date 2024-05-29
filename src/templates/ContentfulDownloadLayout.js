@@ -11,12 +11,13 @@ import withProcessPreviewData from '../lib/utils/withProcessPreviewData'
 
 const DownloadPage = props => {
   const {
-    data: { seo, header, footer, layoutModuleContainers, sharedCopy },
+    data: { seo, header, footer, layoutModuleContainers },
     pageContext: {
       pathBuild,
       locale = DEFAULT_LOCALE_CODE,
       translation,
       localizedPages,
+      sharedCopy,
     } = {},
     previewMode,
   } = props
@@ -117,9 +118,6 @@ export const DownloadPageQuery = graphql`
       node_locale: { eq: $node_locale }
     ) {
       ...ContentfulSeoFields
-    }
-    sharedCopy: contentfulSharedCopy(node_locale: { eq: $node_locale }) {
-      ...ContentfulSharedCopyFields
     }
     layoutModuleContainers: allContentfulLayoutModuleContainer(
       filter: {

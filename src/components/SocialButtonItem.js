@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Link from './Link'
 import SocialIcon from './SocialIcon'
+import ContextPage from '../Context/ContextPage'
 
 const SocialButtonItem = props => {
+  const { sharedCopy } = useContext(ContextPage)
   const { name, text, url, customColor } = props
 
   const [tooltip, setTooltip] = React.useState(false)
@@ -22,7 +24,7 @@ const SocialButtonItem = props => {
       {name === 'copy' ? (
         <CopyLink onClick={handleClick}>
           <SocialIcon name={name} text={text} customColor={customColor} />
-          <Tooltip tooltip={tooltip}>Copied</Tooltip>
+          <Tooltip tooltip={tooltip}>{sharedCopy.copied}</Tooltip>
         </CopyLink>
       ) : (
         <Link aria-label={name} to={url} newTab>

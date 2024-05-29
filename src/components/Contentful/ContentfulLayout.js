@@ -2,7 +2,10 @@ import React from 'react'
 import { contentfulModuleToComponent } from '../../lib/utils/moduleToComponent'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 
-// For preview only
+/**
+ * For preview only
+ */
+
 const ContentfulLayout = props => {
   const {
     moduleConfig: { header, footer, isFaqLayout, modules, previewMode },

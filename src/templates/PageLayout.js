@@ -41,11 +41,6 @@ const PageLayout = props => {
   const { darkMode: darkModeContextValue } = React.useContext(ContextClientSide)
   const { isDarkMode } = darkModeContextValue || {}
 
-  const sharedCopyDict = {}
-  for (const item of sharedCopy.copyItem || []) {
-    sharedCopyDict[item.key] = item.value
-  }
-
   const pageTheme =
     themeColor === 'purple'
       ? isDarkMode
@@ -75,7 +70,7 @@ const PageLayout = props => {
     },
     extraData,
     localizedPages,
-    sharedCopy: sharedCopyDict,
+    sharedCopy: sharedCopy || {},
   }
 
   const [dimensionScript, setDimensionScript] = React.useState('')

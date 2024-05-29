@@ -32,6 +32,7 @@ import {
   ContentfulTimelineQuery,
   ContentfulFeatureSliderItemQuery,
   ContentfulLayoutFeatureSliderQuery,
+  ContentfulSharedCopyQuery,
 } from '../../fragments/previewQuery'
 
 export const fetchContentfulTypename = id => {
@@ -130,6 +131,9 @@ const mapTypeToQuery = type => {
       break
     case 'ContentfulLayoutFeatureSlider':
       query = ContentfulLayoutFeatureSliderQuery
+      break
+    case 'ContentfulSharedCopy':
+      query = ContentfulSharedCopyQuery
       break
     default:
       break
