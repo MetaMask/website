@@ -141,56 +141,14 @@ const PageLayout = props => {
   }, [])
 
   useEffect(() => {
-    if (ldClient) {
-      window.dataLayer = window.dataLayer || []
-
-      ldClient.waitUntilReady().then(() => {
-        setTimeout(() => {
-          const elems = document.querySelectorAll(
-            '[data-flagname][data-flagvalue]'
-          )
-
-          const flags = ldClient.allFlags()
-
-          const data = {
-            event: 'custom_page_view',
-            custom_page_view_page_path: window.location.pathname,
-            custom_page_title: document.title,
-          }
-
-          Array.from(elems).forEach((el, i) => {
-            data[`flags_active_on_current_page_componentName_${i + 1}`] =
-              el.dataset.componentname
-
-            data[`flags_active_on_current_page_componentId_${i + 1}`] =
-              el.dataset.componentid
-
-            data[`flags_active_on_current_page_flagName_${i + 1}`] =
-              el.dataset.flagname
-
-            data[
-              `flags_active_on_current_page_flagValue_${i + 1}`
-            ] = /^(true|false)$/.test(el.dataset.flagvalue)
-              ? el.dataset.flagvalue === 'true'
-                ? 'enabled'
-                : 'disabled'
-              : el.dataset.flagvalue
-          })
-
-          formatFlagsForGTM(flags, data)
-
-          window.dataLayer.push(data)
-        }, 50)
-      })
+    if (!ldClient) {
+      return
     }
-  }, [ldClient])
 
-  useEffect(() => {
-    let timer
+    let timerOne, timerTwo
+
     const handleClickDl = event => {
       window.dataLayer = window.dataLayer || []
-
-      const flags = ldClient.allFlags()
 
       if (event.target.closest('.deeplink')) {
         const uuid = generateUUID()
@@ -200,7 +158,7 @@ const PageLayout = props => {
           unique_attribution_id: uuid,
         })
 
-        timer = setTimeout(() => {
+        timerTwo = setTimeout(() => {
           window.dataLayer.push({
             unique_attribution_id: undefined,
           })
@@ -238,13 +196,55 @@ const PageLayout = props => {
       window.dataLayer.push(data)
     }
 
+    const flags = ldClient.allFlags()
+
+    if (flags) {
+      window.dataLayer = window.dataLayer || []
+
+      timerOne = setTimeout(() => {
+        const elems = document.querySelectorAll(
+          '[data-flagname][data-flagvalue]'
+        )
+
+        const data = {
+          event: 'custom_page_view',
+          custom_page_view_page_path: window.location.pathname,
+          custom_page_title: document.title,
+        }
+
+        Array.from(elems).forEach((el, i) => {
+          data[`flags_active_on_current_page_componentName_${i + 1}`] =
+            el.dataset.componentname
+
+          data[`flags_active_on_current_page_componentId_${i + 1}`] =
+            el.dataset.componentid
+
+          data[`flags_active_on_current_page_flagName_${i + 1}`] =
+            el.dataset.flagname
+
+          data[
+            `flags_active_on_current_page_flagValue_${i + 1}`
+          ] = /^(true|false)$/.test(el.dataset.flagvalue)
+            ? el.dataset.flagvalue === 'true'
+              ? 'enabled'
+              : 'disabled'
+            : el.dataset.flagvalue
+        })
+
+        formatFlagsForGTM(flags, data)
+
+        window.dataLayer.push(data)
+      }, 50)
+    }
+
     document.addEventListener('click', handleClickDl, true)
 
     return () => {
       document.removeEventListener('click', handleClickDl, true)
-      timer && clearTimeout(timer)
+      timerOne && clearTimeout(timerOne)
+      timerTwo && clearTimeout(timerTwo)
     }
-  }, [])
+  }, [ldClient])
 
   return (
     <Context.Provider value={valueContext}>
