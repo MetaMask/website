@@ -17,6 +17,7 @@ import { DEFAULT_LOCALE } from '../lib/config.mjs'
 const PreviewPage = () => {
   const [loading, setLoading] = useState(true)
   const [moduleConfig, setModuleConfig] = useState(null)
+  const [sharedCopy, setSharedCopy] = useState({})
   const [error, setError] = useState(null)
   const [locale, setLocale] = useState(DEFAULT_LOCALE)
   const [isDarkMode, setDarkMode] = useState(false)
@@ -48,6 +49,79 @@ const PreviewPage = () => {
         setError({
           message: 'Failed to fetch contentful type name',
         })
+        return
+      }
+
+      const sharedCopyResult = await fetchContentfulData(
+        'ContentfulSharedCopy',
+        '2vmqTH7Y8rwZVerEOinAC5',
+        locale.code
+      )
+
+      const sharedCopyData = sharedCopyResult?.data?.previewContent || {}
+      const sharedCopyDict = {}
+      for (const item of sharedCopyData.copyItem || []) {
+        sharedCopyDict[item.key] = item.value
+      }
+      setSharedCopy(sharedCopyDict)
+
+      if (type === 'ContentfulNewsLayout') {
+        const newsQuery = [
+          fetchContentfulData(
+            'ContentfulLayoutHeader',
+            '6I0knvqLf0DS5PB72DqUlM',
+            locale.code
+          ),
+          fetchContentfulData(
+            'ContentfulCta',
+            '6iOGB8Fiab9ilS0jfZ8N5I',
+            locale.code
+          ),
+          fetchContentfulData(type, id, locale.code),
+          fetchContentfulData(
+            'ContentfulHubSpotForm',
+            '5VZVKtbcRMzaaP77nsz3Fs',
+            locale.code
+          ),
+          fetchContentfulData(
+            'ContentfulLayoutModuleContainer',
+            'nO1tqQRjoUDUJfdg2B651',
+            locale.code
+          ),
+          fetchContentfulData(
+            'ContentfulLayoutFooter',
+            '75bFgEllkMxpVsY8wWlroX',
+            locale.code
+          ),
+        ]
+        const [
+          headerResult,
+          ctaResult,
+          newsLayoutResult,
+          hubspotResult,
+          latestResult,
+          footerResult,
+        ] = await Promise.allSettled(newsQuery)
+        const header = headerResult?.value?.data
+        const cta = ctaResult?.value?.data
+        const newsLayout = newsLayoutResult?.value?.data
+        const hubspot = hubspotResult?.value?.data
+        const latest = latestResult?.value?.data
+        const footer = footerResult?.value?.data
+        const dataUpdate = {
+          internal: {
+            type: 'ContentfulNewsLayout',
+          },
+          header: header.previewContent,
+          cta: cta.previewContent,
+          footer: footer.previewContent,
+          newsLayout: newsLayout.previewContent,
+          hubspot: hubspot.previewContent,
+          sharedCopy: sharedCopyDict,
+          latest: latest.previewContent,
+        }
+        setLoading(false)
+        setModuleConfig(dataUpdate)
         return
       }
 
@@ -108,7 +182,11 @@ const PreviewPage = () => {
         return <ContentfulPortfolioLayout data={moduleConfig} />
       case 'Download':
         return (
-          <ContentfulDownloadLayout data={moduleConfig} locale={locale.code} />
+          <ContentfulDownloadLayout
+            data={moduleConfig}
+            locale={locale.code}
+            sharedCopy={sharedCopy}
+          />
         )
       default:
         return (
@@ -117,6 +195,7 @@ const PreviewPage = () => {
             h2FontSize={moduleConfig?.h2FontSize}
             widerContainer={moduleConfig?.widerContainer}
             locale={locale.code}
+            sharedCopy={sharedCopy}
           >
             <PreviewInfo>Preview mode</PreviewInfo>
             {contentfulModuleToComponent(moduleConfig)}

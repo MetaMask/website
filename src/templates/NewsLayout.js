@@ -34,7 +34,13 @@ function NewsLayout(props) {
       footer,
       latestStories,
     },
-    pageContext: { pathBuild, localizedPages },
+    pageContext: {
+      pathBuild,
+      localizedPages,
+      slug,
+      translation,
+      sharedCopy = {},
+    },
   } = props
 
   const bgUrl = getWebpImage(news_bg?.file?.url)
@@ -57,9 +63,15 @@ function NewsLayout(props) {
   }
 
   return (
-    <Layout {...props} localizedPages={localizedPages}>
-      {contentfulModuleToComponent(seoModuleConfig)}
-      {contentfulModuleToComponent(header)}
+    <Layout {...props} localizedPages={localizedPages} sharedCopy={sharedCopy}>
+      {seoModuleConfig &&
+        contentfulModuleToComponent({
+          ...seoModuleConfig,
+          pagePath: pathBuild,
+          originalSlug: slug,
+          translation,
+        })}
+      {header && contentfulModuleToComponent({ ...header, translation })}
       <div className="news-page-content">
         <NewsContainer className="noPaddingBottom">
           <ContentWrapper className="news-content">
@@ -71,7 +83,7 @@ function NewsLayout(props) {
             <Title>{title}</Title>
             <Subtitle>{subtitle}</Subtitle>
             <NewsInfo>
-              <span>by&nbsp;</span>
+              <span>{sharedCopy.by}&nbsp;</span>
               <NewsAuthor listAuthors={authors} />
               <span className="separator" />
               <span className="publishDate">{publishDate}</span>

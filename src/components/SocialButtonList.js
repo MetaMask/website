@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import SocialButtonItem from './SocialButtonItem'
 import { useLocation } from '@reach/router'
+import ContextPage from '../Context/ContextPage'
 
 const SocialButtonList = () => {
+  const { sharedCopy } = useContext(ContextPage)
+
   const list = [
-    { name: 'copy', text: 'Copy link' },
+    { name: 'copy', text: sharedCopy.copyLink },
     {
       name: 'twitter',
       url: 'https://twitter.com/intent/tweet?url=',
@@ -24,7 +27,7 @@ const SocialButtonList = () => {
   const { href } = location
 
   const [hrefState, setHrefState] = React.useState('')
-  React.useEffect(() => {
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       setHrefState(window.location?.href)
     } else {

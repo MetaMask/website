@@ -35,7 +35,6 @@ const ContentfulLayout = props => {
       logos: L,
       hubspotForms: HF,
       fullWidthCtas: FWC,
-      sharedCopy,
     },
     pageContext: {
       modules,
@@ -49,6 +48,7 @@ const ContentfulLayout = props => {
       locale = DEFAULT_LOCALE_CODE,
       translation,
       localizedPages,
+      sharedCopy,
     },
     path,
     ...rest
@@ -369,10 +369,6 @@ export const ContentfulQuery = graphql`
           ...ContentfulRichTextFields
         }
       }
-    }
-
-    sharedCopy: contentfulSharedCopy(node_locale: { eq: $node_locale }) {
-      ...ContentfulSharedCopyFields
     }
   }
 `

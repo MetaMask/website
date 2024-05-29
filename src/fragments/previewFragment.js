@@ -945,3 +945,13 @@ export const ContentfulLayoutFields = gql`
     }
   }
 `
+
+export const ContentfulSharedCopyFields = gql`
+  fragment ContentfulSharedCopyFields on SharedCopy {
+    __typename
+    copyItem {
+      key
+      value
+    }
+  }
+`

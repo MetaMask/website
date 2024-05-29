@@ -23,6 +23,7 @@ import {
   ContentfulTimelineFields,
   ContentfulFeatureSliderItemFields,
   ContentfulLayoutFeatureSliderFields,
+  ContentfulSharedCopyFields,
 } from './previewFragment'
 
 export const ContentfulLayoutHeaderQuery = gql`
@@ -228,6 +229,15 @@ export const ContentfulLayoutFeatureSliderQuery = gql`
   query($id: String!) {
     previewContent: featureSlider(id: $id) {
       ...ContentfulLayoutFeatureSliderFields
+    }
+  }
+`
+
+export const ContentfulSharedCopyQuery = gql`
+  ${ContentfulSharedCopyFields}
+  query($id: String!) {
+    previewContent: sharedCopy(id: $id) {
+      ...ContentfulSharedCopyFields
     }
   }
 `

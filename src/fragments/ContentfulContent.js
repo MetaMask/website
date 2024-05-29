@@ -1193,12 +1193,3 @@ export const ContentfulPortfolioMap = graphql`
     }
   }
 `
-
-export const ContentfulSharedCopy = graphql`
-  fragment ContentfulSharedCopyFields on ContentfulSharedCopy {
-    copyItem {
-      key
-      value
-    }
-  }
-`
