@@ -618,7 +618,7 @@ main().catch((error) => {
 solidity: "0.8.0",
 networks: {
 sepolia: {
-url: "<a href="https://linea.infura.io/v3/YOUR_INFURA_PROJECT_ID">https://linea.infura.io/v3/YOUR_INFURA_PROJECT_ID</a>",
+url: "<a href="https://linea-sepolia.infura.io/v3/YOUR_INFURA_KEY">https://linea-sepolia.infura.io/v3/YOUR_INFURA_KEY</a>",
 accounts: [<code>0x${process.env.PRIVATE_KEY}</code>]
 }
 }
@@ -636,7 +636,7 @@ accounts: [<code>0x${process.env.PRIVATE_KEY}</code>]
 <p>Deployment: use:</p>
 </li>
 </ul>
-<pre><code class="language-bash">forge create RandomSum --private-key YOUR_PRIVATE_KEY --rpc-url &#x3C;https://linea.infura.io/v3/YOUR_INFURA_PROJECT_ID>
+<pre><code class="language-bash">forge create RandomSum --private-key YOUR_PRIVATE_KEY --rpc-url &#x3C;https://linea-sepolia.infura.io/v3/YOUR_INFURA_KEY>
 </code></pre>
 <h2>Smart Contract Testing</h2>
 <h3>Hardhat</h3>
@@ -662,6 +662,13 @@ describe("RandomSum", function() {
 </ul>
 <pre><code class="language-bash">npx hardhat test
 </code></pre>
+<p>If you face problems with testing, simply add The <code>loadFixture</code> function from <code>@nomicfoundation/hardhat-toolbox/network-helpers</code>.</p>
+<p>The key benefits of using <code>loadFixture</code> are:</p>
+<ul>
+<li>It sets up a clean environment for each test by reverting to a snapshot.</li>
+<li>It's more efficient than redeploying contracts for each test.</li>
+<li>It allows you to share setup code across multiple tests.</li>
+</ul>
 <h3>Foundry</h3>
 <br/>
 <ul>
