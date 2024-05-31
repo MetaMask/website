@@ -133,7 +133,7 @@ export const PREVIEW_LOCALES = [
   {
     name: 'Hindi',
     localizedName: 'हिन्दी',
-    code: 'hi-IN', 
+    code: 'hi-IN',
     shortName: 'HI',
     htmlLang: 'hi',
   },
