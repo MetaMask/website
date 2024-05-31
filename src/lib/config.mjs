@@ -187,3 +187,5 @@ export const PREVIEW_LOCALES = [
     htmlLang: 'pcm-NG',
   },
 ]
+
+export const GB_BLOCKED_PATHS = ['/buy-crypto/', '/sell-crypto/', '/swaps/']
