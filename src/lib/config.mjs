@@ -133,7 +133,7 @@ export const PREVIEW_LOCALES = [
   {
     name: 'Hindi',
     localizedName: 'हिन्दी',
-    code: 'hi-IN', 
+    code: 'hi-IN',
     shortName: 'HI',
     htmlLang: 'hi',
   },
@@ -187,3 +187,5 @@ export const PREVIEW_LOCALES = [
     htmlLang: 'pcm-NG',
   },
 ]
+
+export const GB_BLOCKED_PATHS = ['/buy-crypto/', '/sell-crypto/', '/swaps/']
