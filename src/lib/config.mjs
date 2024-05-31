@@ -113,3 +113,5 @@ export const mapCodeToHtmlLang = code => {
   const locale = LOCALES.find(l => l.code === code)
   return locale ? locale.htmlLang : DEFAULT_LOCALE.htmlLang
 }
+
+export const GB_BLOCKED_PATHS = ['/buy-crypto/', '/sell-crypto/', '/swaps/']
