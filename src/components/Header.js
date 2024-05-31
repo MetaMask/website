@@ -1,6 +1,10 @@
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { DEFAULT_LOCALE_CODE, LOCALES } from '../lib/config.mjs'
+import {
+  DEFAULT_LOCALE_CODE,
+  GB_BLOCKED_PATHS,
+  LOCALES,
+} from '../lib/config.mjs'
 import ContextClientSide from '../Context/ContextClientSide'
 import { useFeatureFlag } from '../hooks/useFeatureFlag'
 import { useLDClient } from 'gatsby-plugin-launchdarkly'
@@ -13,6 +17,8 @@ import { navigate } from 'gatsby-link'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import Link from './Link'
+import { useCountry } from '../hooks/useCountry'
+import { filterMenuPaths } from '../lib/utils/filterMenuPaths'
 
 const StyledHeader = props => {
   const {
@@ -39,6 +45,7 @@ const StyledHeader = props => {
     query: '(min-width: 1025px)',
   })
   const [menuActive, setMenuActive] = useState('')
+  const [filteredMenus, setFilteredMenus] = useState(menus)
   const [hamburgerActive, setHamburgerActive] = useState(false)
   const { darkMode: darkModeContextValue, localization } = useContext(
     ContextClientSide
@@ -55,6 +62,7 @@ const StyledHeader = props => {
   const [topMenuMobile, setTopMenuMobile] = useState('88px')
   const [isBrowser, setIsBrowser] = useState(false)
   const ldClient = useLDClient()
+  const country = useCountry()
 
   const showLanguageSelector = useFeatureFlag({
     componentName: 'Header',
@@ -146,6 +154,23 @@ const StyledHeader = props => {
     ldClient?.flush()
   }
 
+  // Apply UK(GB) specific temporary geo-blocking rules
+  useEffect(() => {
+    if (country !== 'GB') {
+      return
+    }
+
+    // Hide menu items pointing to paths blocked in the UK
+    const filteredMenus = filterMenuPaths(menus, GB_BLOCKED_PATHS)
+    setFilteredMenus(filteredMenus)
+
+    // Redirect to homepage if current path is blocked
+    if (GB_BLOCKED_PATHS.find(blockedPath => pathname.endsWith(blockedPath))) {
+      const homePath = locale.default ? '/' : `/${locale.code}/`
+      navigate(homePath)
+    }
+  }, [country, pathname, locale, menus])
+
   return (
     <HeaderElement ref={headerRef} className={classnames({ sticky: isSticky })}>
       <Announcement>
@@ -201,7 +226,7 @@ const StyledHeader = props => {
             ) : null}
           </Link>
         </LogoContainer>
-        {menus ? (
+        {filteredMenus ? (
           <>
             <HamburgerButton
               onClick={handleHamburgerButton}
@@ -215,7 +240,7 @@ const StyledHeader = props => {
               topMenuMobile={topMenuMobile}
             >
               <NavMainInner>
-                {menus.map((menu, index) => {
+                {filteredMenus.map((menu, index) => {
                   const { title, modules, ctaLink } = menu
                   const active = menuActive === index
 
