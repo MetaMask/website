@@ -1,13 +1,31 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Link from './Link'
 import Wrapper from './ContentWrapper'
 import ColumnWrapper from './ColumnWrapper'
+import { useCountry } from '../hooks/useCountry'
+import { filterMenuPaths } from '../lib/utils/filterMenuPaths'
+import { GB_BLOCKED_PATHS } from '../lib/config.mjs'
 
 const StyledFooter = props => {
   const { menus, copyright, logoTitle, logoUrl, logoSvg, previewMode } = props
+
+  const [filteredMenus, setFilteredMenus] = useState(menus)
+
+  const country = useCountry()
+
+  // Apply UK(GB) specific temporary geo-blocking rules
+  useEffect(() => {
+    if (country !== 'GB') {
+      return
+    }
+
+    // Hide menu items pointing to paths blocked in the UK
+    const filteredMenus = filterMenuPaths(menus, GB_BLOCKED_PATHS)
+    setFilteredMenus(filteredMenus)
+  }, [country, menus])
 
   return (
     <FooterContainer>
@@ -32,8 +50,8 @@ const StyledFooter = props => {
               </LogoWrapper>
             </Link>
           </LogoContainer>
-          <ColumnWrapper columns={menus.length}>
-            {menus.map((menu, index) => {
+          <ColumnWrapper columns={filteredMenus?.length}>
+            {filteredMenus?.map((menu, index) => {
               const { title, modules } = menu
               return (
                 <MenuItem key={index}>
