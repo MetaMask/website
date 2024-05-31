@@ -114,3 +114,76 @@ export const mapCodeToHtmlLang = code => {
   const locale = LOCALES.find(l => l.code === code)
   return locale ? locale.htmlLang : DEFAULT_LOCALE.htmlLang
 }
+
+export const PREVIEW_LOCALES = [
+  {
+    name: 'English',
+    localizedName: 'English',
+    code: 'en-US',
+    shortName: 'EN',
+    htmlLang: 'en',
+  },
+  {
+    name: 'Chinese',
+    localizedName: '中文',
+    code: 'zh-CN',
+    shortName: 'CN',
+    htmlLang: 'zh',
+  },
+  {
+    name: 'Hindi',
+    localizedName: 'हिन्दी',
+    code: 'hi-IN', 
+    shortName: 'HI',
+    htmlLang: 'hi',
+  },
+  {
+    name: 'Italian',
+    localizedName: 'Italiano',
+    code: 'it',
+    shortName: 'IT',
+    htmlLang: 'it',
+  },
+  {
+    name: 'Japanese',
+    localizedName: '日本語',
+    code: 'ja',
+    shortName: 'JA',
+    htmlLang: 'ja',
+  },
+  {
+    name: 'Korean',
+    localizedName: '한국어',
+    code: 'ko',
+    shortName: 'KO',
+    htmlLang: 'ko',
+  },
+  {
+    name: 'Russian',
+    localizedName: 'Русский',
+    code: 'ru',
+    shortName: 'RU',
+    htmlLang: 'ru',
+  },
+  {
+    name: 'Spanish',
+    localizedName: 'Español',
+    shortName: 'ES',
+    code: 'es',
+    htmlLang: 'es',
+  },
+  {
+    name: 'Turkish',
+    localizedName: 'Türkçe',
+    code: 'tr',
+    shortName: 'TR',
+    htmlLang: 'tr',
+  },
+  {
+    name: 'Nigerian Pidgin',
+    localizedName: 'Nigerian Pidgin',
+    code: 'pcm-NG',
+    shortName: 'NP',
+    htmlLang: 'pcm-NG',
+  },
+]

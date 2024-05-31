@@ -1,6 +1,10 @@
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { DEFAULT_LOCALE_CODE, LOCALES } from '../lib/config.mjs'
+import {
+  DEFAULT_LOCALE_CODE,
+  LOCALES,
+  PREVIEW_LOCALES,
+} from '../lib/config.mjs'
 import ContextClientSide from '../Context/ContextClientSide'
 import { useFeatureFlag } from '../hooks/useFeatureFlag'
 import { useLDClient } from 'gatsby-plugin-launchdarkly'
@@ -144,6 +148,8 @@ const StyledHeader = props => {
     ldClient?.track('on-locale-change', { locale })
     ldClient?.flush()
   }
+
+  const LANGUAGES = previewMode ? PREVIEW_LOCALES : LOCALES
 
   return (
     <HeaderElement ref={headerRef} className={classnames({ sticky: isSticky })}>
@@ -304,7 +310,7 @@ const StyledHeader = props => {
                       </NavMenuMain>
 
                       <NavMenuChild active={menuActive === 'language-selector'}>
-                        {LOCALES.map(locale => (
+                        {LANGUAGES.map(locale => (
                           <span
                             key={locale.code}
                             onClick={() => onChangeLocale(locale)}
