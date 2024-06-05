@@ -614,15 +614,16 @@ main().catch((error) => {
 <ul>
 <li>Network configuration: Configure the desired network in hardhat.config.js, adding a section for the network settings (e.g., Sepolia).</li>
 </ul>
-<p>module.exports = {
-solidity: "0.8.0",
-networks: {
-sepolia: {
-url: "<a href="https://linea-sepolia.infura.io/v3/YOUR_INFURA_KEY">https://linea-sepolia.infura.io/v3/YOUR_INFURA_KEY</a>",
-accounts: [<code>0x${process.env.PRIVATE_KEY}</code>]
-}
-}
-};</p>
+<pre><code>module.exports = {
+  solidity: "0.8.0",
+  networks: {
+    sepolia: {
+      url: "https://linea-sepolia.infura.io/v3/YOUR_INFURA_KEY",
+      accounts: [`0x${process.env.PRIVATE_KEY}`]
+    }
+  }
+};
+</code></pre>
 <ul>
 <li>Deployment: Run the same deployment script with the network option changed to Sepolia.</li>
 </ul>
