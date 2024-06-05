@@ -168,7 +168,8 @@ const StyledHeader = props => {
 
     // Redirect to homepage if current path is blocked
     if (GB_BLOCKED_PATHS.find(blockedPath => pathname.endsWith(blockedPath))) {
-      const homePath = locale.code === DEFAULT_LOCALE_CODE ? '/' : `/${locale.code}/`
+      const homePath =
+        locale.code === DEFAULT_LOCALE_CODE ? '/' : `/${locale.code}/`
       navigate(homePath)
     }
   }, [country, pathname, locale, menus])

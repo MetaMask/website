@@ -79,6 +79,7 @@ const parsePreviewData = data => {
     previewMode: true,
     pageContext: {
       locale: data.locale,
+      sharedCopy: data.sharedCopy,
     },
     data: {
       header,
