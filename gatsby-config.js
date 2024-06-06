@@ -139,8 +139,12 @@ if (env.errors) {
         options: {
           clientSideID: process.env.GATSBY_LD_CLIENT_ID,
           context: {
-            kind: 'user',
             anonymous: true,
+            kind: 'user',
+          },
+          options: {
+            allAttributesPrivate: true,
+            bootstrap: 'localStorage',
           },
         },
       },

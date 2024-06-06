@@ -22,7 +22,9 @@ export const useFeatureFlag = ({
     if (typeof window !== 'undefined') {
       window.dataLayer = window.dataLayer || []
       window.dataLayer.push(data)
-      //   console.log(data)
+
+      ldClient?.track('on-component-in-view', data)
+      ldClient?.flush()
     }
   }
 
