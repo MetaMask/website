@@ -89,13 +89,13 @@ const CTA = props => {
   }
 
   const handleCustomClick = e => {
-    if (customClassName?.includes('ld-portfolio-link')) {
-      ldClient?.track('on-portfolio-cta-click')
-      ldClient?.flush()
-    }
+    const trackableClasses = ['ld-portfolio-link', 'ld-download-link']
 
-    if (customClassName?.includes('ld-download-link')) {
-      ldClient?.track('on-download-cta-click')
+    if (
+      customClassName &&
+      trackableClasses.some(cls => customClassName.includes(cls))
+    ) {
+      ldClient?.track('on-cta-clicks')
       ldClient?.flush()
     }
 
