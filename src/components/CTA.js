@@ -1,6 +1,7 @@
 import { isAndroid, isIOS, isMobile, browserName } from 'react-device-detect'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { persistDeveloper } from '../lib/utils/localStorage'
+import { useLDClient } from 'gatsby-plugin-launchdarkly'
 import useIsChromium from '../lib/utils/isChromium'
 import lowerCase from 'lodash/lowerCase'
 import React, { useEffect } from 'react'
@@ -50,6 +51,8 @@ const CTA = props => {
     attr,
   } = props
 
+  const ldClient = useLDClient()
+
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
   const isButton = buttonDisplay || button
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
@@ -86,6 +89,16 @@ const CTA = props => {
   }
 
   const handleCustomClick = e => {
+    if (customClassName?.includes('ld-portfolio-link')) {
+      ldClient?.track('on-portfolio-cta-click')
+      ldClient?.flush()
+    }
+
+    if (customClassName?.includes('ld-download-link')) {
+      ldClient?.track('on-download-cta-click')
+      ldClient?.flush()
+    }
+
     if (isForDeveloper) {
       persistDeveloper()
     }
