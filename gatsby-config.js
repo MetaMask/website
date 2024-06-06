@@ -144,7 +144,6 @@ if (env.errors) {
           },
           options: {
             allAttributesPrivate: true,
-            bootstrap: 'localStorage',
           },
         },
       },
