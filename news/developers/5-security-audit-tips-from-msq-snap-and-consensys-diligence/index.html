@@ -533,7 +533,7 @@ Documentation transforms the concepts in your head into something visible to oth
   },
 };
 </code></pre>
-<p>In code, this constant object can be used as a guide for accessing the right method, and readers can understand a lot about this method by its identifier in the object. For example, the method SNAP_METHODS.protected.identity.login can only be executed by MSQ's companion dapp and allows the user to log in. This approach enhances code clarity and simplifies refactoring, as changes to method names are centrally managed rather than updated across multiple occurrences.</p>
+<p>In code, this constant object can be used as a guide for accessing the right method, and readers can understand a lot about this method by its identifier in the object. For example, the method <code>SNAP_METHODS.protected.identity.login</code> can only be executed by MSQ's companion dapp and allows the user to log in. This approach enhances code clarity and simplifies refactoring, as changes to method names are centrally managed rather than updated across multiple occurrences.</p>
 <p>To match method names, we use a big switch expression with branches like this:</p>
 <pre><code class="language-JavaScript">case SNAP_METHODS.protected.identity.login: {
   result = protected_handleIdentityLogin(req.params.body);
@@ -542,6 +542,7 @@ Documentation transforms the concepts in your head into something visible to oth
 </code></pre>
 <p>As you can see, it is very hard to misinterpret something while reading here —everything is named precisely, leaving no room for imagination.</p>
 <p><strong>Diligence comment</strong>
+<br />
 Time is a critical factor. While developers have weeks to understand a codebase, security engineers often have just days to identify risks.
 This constraint highlights the importance of reducing cognitive load in code—a practice that benefits both developer efficiency and security.</p>
 <p>What we can learn from MSQ's codebase is, that, clear, navigable code with descriptive naming and strong typing (like TypeScript) reduces misunderstandings, a common source of vulnerabilities.</p>
@@ -573,6 +574,7 @@ export function escapeMarkdown(text: string) {
 </code></pre>
 <p>If you don’t mind AI in your workflow,<a href="https://chat.openai.com/"> ChatGPT</a> is great at generating good comments for such utility functions quickly (just double-check the output it provides).</p>
 <p><strong>Diligence comment</strong>
+<br />
 As security reviewers we use function commentary as roadmaps through unfamiliar code.
 Remember, we only have so much time to review code, and when comments don't match the implementation, it's not just confusing — it's a red flag.</p>
 <p>They often reveal that either the function or its description deviates from the spec, signaling potential vulnerabilities.
@@ -584,6 +586,7 @@ Inline comments are not just notes; they're beacons guiding us through your code
 <p>MSQ's system documentation includes an<a href="https://github.com/fort-major/msq/blob/master/documentation/architecture.md"> architecture overview</a> and an<a href="https://github.com/fort-major/msq/blob/master/documentation/integration.md"> integration guide</a>. These documents, rich with textual descriptions, examples, and diagrams, clarify how different system parts interact.</p>
 <p>Sequence diagrams are invaluable for visualizing component interactions. We recommend using<a href="http://diagrams.net/"> diagrams.net</a> (<a href="http://draw.io/">draw.io</a>), a free tool that has proven versatile across various projects.</p>
 <p><strong>Diligence comment</strong>
+<br />
 Unlike inline comments that detail functions, system docs provide a 10,000-foot view, revealing an application's entire landscape.
 This perspective is crucial for spotting cross-component issues or user-flow vulnerabilities that are often invisible at the code level.</p>
 <p>Think of a security review like a game of Command &#x26; Conquer.
@@ -599,6 +602,7 @@ This helps reviewers focus on high-priority areas and spot deviations from the s
 <p>A newcomer would most likely meet your project through such a material, so keeping this layer as simple and visual as possible is a good idea. Also, this kind of material is usually the only one that shows the software in action - how a user could reach from state A to state B using your software. By seeing it in action, people introduce themself to the main idea of your software, allowing them to make guesses on how this software works under the hood.</p>
 <p>For example,<a href="https://icp.msq.tech/"> MSQ’s landing page hero screen</a> says with big letters: “USE THE INTERNET COMPUTER WITH METAMASK”. After reading through this simple sentence, the reader would probably guess: “Ah, so this is a wallet Snap that can store tokens from the Internet Computer blockchain. So it probably works the same way as other Snaps for other blockchains, just using technologies from the IC’s dev ecosystem,” - which is a 100% correct guess.</p>
 <p><strong>Diligence comment</strong>
+<br />
 Our experience with MSQ and numerous other blockchain projects has consistently shown that clear, high-level documentation is not just beneficial — it's critical for both user adoption and security.
 During our review of MSQ's Snap, we were positively surprised by their multi-layered documentation approach. A video walkthrough from their developer quickly got us up to speed.
 We would quickly understand Snap's features even before looking at the code itself. This high-level overview showcased the user interface, complete with commentary on expected behaviors and typical user flows.
@@ -627,6 +631,7 @@ This part is probably the most important for the security of your project. Your 
 <p>We don’t need <code>endowment: network access</code> because MSQ is only responsible for signing transactions, not for delivering them to the IC—the integrating dapp is responsible for the latter.</p>
 <p>You should do the same thing in your Snap - take the default guideline from MetaMask, extend it with your specific rules, and follow them.</p>
 <p><strong>Diligence comment</strong>
+<br />
 We tell our clients, "Security isn't a feature you add; it's a principle you design around."
 MSQ's establishment of core security principles at the project's outset is what we look for.
 Too often, projects treat security as an afterthought, bolting on measures after the core architecture is set.
@@ -647,6 +652,7 @@ By prioritizing security from the start, they're building a stronger foundation 
 <p>However, this method limits direct integration between dapps, as users have distinct identities on each. MSQ offers solutions for specific scenarios, like allowing identity sharing between dapps with dual consents, useful for situations like domain name changes.</p>
 <p>Additionally, MSQ ensures that the data a dapp can access is strictly tied to the relevant identity, further securing user information and maintaining privacy across different applications.</p>
 <p><strong>Diligence comment</strong>
+<br />
 The trade-off of limited direct dApp integration is a thoughtful one.
 In our risk assessments, we often discuss the "security budget"—acknowledging that perfect security can hamper functionality.
 MSQ has spent this budget wisely.
@@ -681,6 +687,7 @@ export const ZIdentityId = z.number().int().nonnegative();
 <p>Here, <code>ZOrigin</code> and <code>ZIdentityId</code> are not mere strings or numbers but specifically validated subtypes, ensuring inputs are not just correct in type but also contextually appropriate.</p>
 <p>By defining zod schemas as precisely as possible, you can preemptively solve many potential issues. Auditors recommended enforcing strict validation in MSQ, which, upon implementation, identified and rectified several security risks.</p>
 <p><strong>Diligence comment</strong>
+<br />
 This is not the first time we hear from our clients that implementing stricter validation based on our recommendations for a particular attack scenario revealed several other security risks.
 This mirrors our experience precisely and that's why we always advocate for strict input validation to reduce attack surface.
 In many security reviews, we start by scrutinizing input validation. Tightening this often exposes lurking issues — a domino effect where fixing one vulnerability reveals another.
@@ -696,12 +703,13 @@ With reduced attack surface it gets incrementally harder for attackers to succes
 </ul>
 <p>By prioritizing these aspects, MSQ aims to create an ecosystem where both our Snap and the integrating dapps can operate efficiently and securely.</p>
 <p><strong>Diligence comment</strong>
+<br />
 MSQ’s approach to third-party code integration through their library demonstrates a commitment to simplifying development while maintaining security.
 While at its core, security must be strictly enforced in the Snap context, a dapp facing library can provide a convenient way for communicating with the Snap.
 However, it should always be noted that the dapp developer needs to ensure secure interaction with the Snap and safe encoding of data when used within the dapp's context.</p>
 <h2>4 Protect your supply chain</h2>
 <br />
-[Recent XZ backdoor](https://www.wired.com/story/xz-backdoor-everything-you-need-to-know/) another time emphasized how important it is to work against malicious code getting inside some of your dependencies. At MSQ we use[ pnpm](https://pnpm.io/) to manage dependencies, but there is actually no difference in what package manager you prefer. There are two things we do at MSQ to protect against such attack vectors:
+<p><a href="https://www.wired.com/story/xz-backdoor-everything-you-need-to-know">Recent XZ backdoor</a> another time emphasized how important it is to work against malicious code getting inside some of your dependencies. At MSQ we use<a href="https://pnpm.io"> pnpm</a> to manage dependencies, but there is actually no difference in what package manager you prefer. There are two things we do at MSQ to protect against such attack vectors:</p>
 <h3>4.1 Bind packages to specific versions</h3>
 <p>Using <code>pnpm install --save &#x26;lt;package-name></code> typically installs the latest version of a package, adhering to the<a href="https://github.com/semver/semver"> semver spec</a>, which allows auto-updates to non-breaking newer versions. This is denoted by the caret (<code>^</code>) symbol in <code>package.json</code>, signifying a range of acceptable versions:</p>
 <pre><code class="language-JavaScript">"zod": "^3.22.4" // Installs version 3.22.4 or newer up to 4.0.0
@@ -713,6 +721,7 @@ However, it should always be noted that the dapp developer needs to ensure secur
 </ol>
 <p>Trust is a factor in this decision. For example, at MSQ we consider <code>@metamask</code> and <code>@dfinity</code> dependency namespaces safe and allow updates within their semver range. However, while doing so, be cautious of potential vulnerabilities from transitive dependencies.</p>
 <p><strong>Diligence comment</strong>
+<br />
 Shifting projects to exact dependency versions has prevented countless issues:</p>
 <ul>
 <li>It's stopped silent updates from reintroducing patched vulnerabilities.</li>
@@ -727,6 +736,7 @@ Note, that, especially well known packages used by many projects are prime targe
 <br />
 To ensure consistency across your team and maintain reproducible builds, commit your lockfiles to the version control system. In MSQ, we leverage `pnpm workspaces` and `turborepo`, necessitating a single root lockfile, `pnpm-lock.yaml`. However, your setup might require maintaining multiple lockfiles; all should be version-controlled to guarantee environment consistency.
 <p><strong>Diligence comment</strong>
+<br />
 This practice, while sometimes overlooked as a mere development convenience, is in fact a critical component of maintaining a secure and stable codebase.
 Our years of auditing smart contracts, blockchain components, and now MetaMask Snaps have repeatedly shown that reproducible builds are not just a nice-to-have but a fundamental security requirement.
 Committing lockfiles is one puzzle piece to reduce attack surface for supply chain attacks. When <code>npm install</code> is not a lottery anymore, concrete versions and checksums leave an audit trail in the repository, builds are more deterministic, and "Works on my Machine" discussions are no more.</p>
@@ -737,6 +747,7 @@ While this isn’t directly about our Snap, understanding how to address audit f
 <p>For instance, at MSQ, the auditors discovered that it is possible to inject Markdown control characters in our MetaMask consent messages. Instead of fixing each separate consent message, making multiple changes in different parts of the code, we simply redefined <code>text()</code> and <code>heading()</code> elements (from <code>@metamask/snaps-sdk</code>), so they first pass their content through the <code>escapeMarkdown()</code> function and only then render it. This allowed us to simply replace <code>import</code> expressions in all files with consent messages with our custom elements, instead of fixing each invocation of <code>text()</code> and <code>heading()</code> separately, which was a much cleaner fix.</p>
 <p>Effective resolution not only improves the specific issue but also preemptively secures against unseen vulnerabilities.</p>
 <p><strong>Diligence comment</strong>
+<br />
 Too often, we see projects take a whack-a-mole approach to security, patching each individual issue as it appears without considering the underlying vulnerability class.
 By addressing the root cause of issues and not holding back from extinguishing vulnerability classes globally, shows that MSQ understands security not as a series of patches but as a holistic discipline.
 As security experts, we can only recommend our clients to not rush fixes and take enough time for turning a security finding into an event that has a positive effect on the security of the project.</p>
