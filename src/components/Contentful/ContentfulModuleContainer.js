@@ -54,7 +54,7 @@ const ContentfulModuleContainer = props => {
   const showLocaleProvidersOnBuyCryptoPage = useFeatureFlag({
     componentName: 'PopupRegionSelector',
     componentId: contentful_id,
-    flagName: 'showLocaleProvidersOnBuyCryptoPage',
+    flagName: 'show-locale-providers-on-buy-crypto-page',
     elementRef,
   })
 
