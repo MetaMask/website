@@ -1136,10 +1136,10 @@ body.dark-mode {
   h6,
   strong,
   b {
-    color: #ffffff;
+    color: currentColor;
 
     .theme-dark & {
-      background-color: #ffffff;
+      background-color: currentColor;
     }
   }
 
@@ -1501,7 +1501,7 @@ body.dark-mode {
     display: flex;
     flex-direction: column;
     row-gap: 8px;
-    color: #6A737D;
+    color: #6a737d;
     line-height: 1.21;
 
     .hs-richtext {
@@ -1512,7 +1512,7 @@ body.dark-mode {
     }
 
     .dark-mode & {
-      color: #F7F9FB;
+      color: #f7f9fb;
     }
   }
   .hs_metamask___newsletter_sign_up,
@@ -1533,7 +1533,6 @@ body.dark-mode {
     right: 0;
     z-index: 10;
     border-radius: 50px;
-    
   }
   .hs-submit input[type='submit'].hs-button {
     border-radius: 50px;
