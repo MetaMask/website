@@ -1,5 +1,6 @@
 import { isAndroid, isIOS, isMobile, browserName } from 'react-device-detect'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
+import { useLDClient } from 'gatsby-plugin-launchdarkly'
 import useIsChromium from '../lib/utils/isChromium'
 import lowerCase from 'lodash/lowerCase'
 import React, { useEffect } from 'react'
@@ -49,6 +50,8 @@ const CTA = props => {
     attr,
   } = props
 
+  const ldClient = useLDClient()
+
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
   const isButton = buttonDisplay || button
   const defaultIconConfig = { width: '1.5em', height: '0.5em', fill: 'black' }
@@ -85,6 +88,16 @@ const CTA = props => {
   }
 
   const handleCustomClick = e => {
+    const trackableClasses = ['ld-portfolio-link', 'ld-download-link']
+
+    if (
+      customClassName &&
+      trackableClasses.some(cls => customClassName.includes(cls))
+    ) {
+      ldClient?.track('on-cta-clicks')
+      ldClient?.flush()
+    }
+
     if (hubSpotForm) {
       e.preventDefault()
       setShowPopup(true)

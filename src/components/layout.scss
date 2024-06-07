@@ -1133,7 +1133,7 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15;
 }
 
 .bg-blue {
-  background-color: #75BFF8;
+  background-color: #75bff8;
 }
 
 .bg-darkGray {
@@ -1263,10 +1263,10 @@ body.dark-mode {
   h6,
   strong,
   b {
-    color: #ffffff;
+    color: currentColor;
 
     .theme-dark & {
-      background-color: #ffffff;
+      background-color: currentColor;
     }
   }
 
@@ -1647,7 +1647,7 @@ body.dark-mode {
     display: flex;
     flex-direction: column;
     row-gap: 8px;
-    color: #6A737D;
+    color: #6a737d;
     line-height: 1.21;
 
     div > p:last-child {
@@ -1662,7 +1662,7 @@ body.dark-mode {
     }
 
     .dark-mode & {
-      color: #F7F9FB;
+      color: #f7f9fb;
     }
   }
   .hs_metamask___newsletter_sign_up,
