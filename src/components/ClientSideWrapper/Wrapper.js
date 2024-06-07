@@ -5,6 +5,7 @@ import ContextClientSide from '../../Context/ContextClientSide'
 import '@contentful/live-preview/style.css'
 import { DEFAULT_LOCALE, LOCALES_TRANSLATE } from '../../lib/config.mjs'
 import { useLocation } from '@reach/router'
+import { ExperimentFlagsProvider } from '../../Context/ExperimentFlagsContext'
 
 const ClientSideWrapper = ({ children }) => {
   const location = useLocation()
@@ -53,9 +54,11 @@ const ClientSideWrapper = ({ children }) => {
       locale="en-US"
     >
       <MetaMaskContextProvider>
-        <ContextClientSide.Provider value={valueContext}>
-          {children}
-        </ContextClientSide.Provider>
+        <ExperimentFlagsProvider>
+          <ContextClientSide.Provider value={valueContext}>
+            {children}
+          </ContextClientSide.Provider>
+        </ExperimentFlagsProvider>
       </MetaMaskContextProvider>
     </ContentfulLivePreviewProvider>
   )

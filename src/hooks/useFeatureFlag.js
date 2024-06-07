@@ -1,5 +1,6 @@
-import { useFlags, useLDClient } from 'gatsby-plugin-launchdarkly'
+import { useLDClient } from 'gatsby-plugin-launchdarkly'
 import { useEffect, useRef, useState } from 'react'
+import { useExperimentFlags } from '../Context/ExperimentFlagsContext'
 
 export const useFeatureFlag = ({
   componentName,
@@ -13,7 +14,7 @@ export const useFeatureFlag = ({
     componentId,
   }
 
-  const flags = useFlags()
+  const { experimentFlags } = useExperimentFlags()
   const ldClient = useLDClient()
   const hasDataLayerUpdatedRef = useRef(false)
   const [flagValue, setFlagValue] = useState(null)
@@ -47,10 +48,10 @@ export const useFeatureFlag = ({
   }
 
   useEffect(() => {
-    if (!ldClient) return
-
-    setFlagValue(flags[flagName])
-  }, [ldClient])
+    if (experimentFlags?.[flagName]) {
+      setFlagValue(experimentFlags[flagName])
+    }
+  }, [experimentFlags, flagName])
 
   useEffect(() => {
     if (!ldClient) return
@@ -79,5 +80,5 @@ export const useFeatureFlag = ({
     }
   }, [ldClient, flagValue])
 
-  return flags[flagName]
+  return experimentFlags?.[flagName]
 }
