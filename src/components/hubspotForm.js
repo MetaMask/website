@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ReactHubspotForm from 'react-hubspot-form'
+import ReactHubspotForm from '../components/ReactHubspotForm'
 import classnames from 'classnames'
 import styled, { withTheme } from 'styled-components'
 import Loading from './Loading'
