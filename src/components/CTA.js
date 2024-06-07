@@ -98,11 +98,6 @@ const CTA = props => {
       ldClient?.flush()
     }
 
-    if (customClassName?.includes('ld-download-link')) {
-      ldClient?.track('on-download-cta-click')
-      ldClient?.flush()
-    }
-
     if (hubSpotForm) {
       e.preventDefault()
       setShowPopup(true)
