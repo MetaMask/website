@@ -17,6 +17,7 @@ const Layout = props => {
     themeColor,
     widerContainer,
     locale,
+    previewMode,
   } = props
   const data = useStaticQuery(
     graphql`
@@ -57,7 +58,7 @@ const Layout = props => {
             },
           ]}
         >
-          <html lang={mapCodeToHtmlLang(locale)} />
+          <html lang={mapCodeToHtmlLang(locale, previewMode)} />
         </Helmet>
         {children}
       </Wrapper>

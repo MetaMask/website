@@ -583,6 +583,7 @@ const NavMenuMain = styled.div`
   height: 40px;
   padding: 0 20px;
   color: #222;
+  line-height: 1.1;
 
   body.dark-mode & {
     color: #FFF;
@@ -641,7 +642,13 @@ const ButtonsWrapper = styled.div`
   }
 
   a {
-    padding: 8px 32px !important;
+    line-height: 1.1;
+  }
+
+  html:not([lang='pcm-NG']) & {
+    a {
+      padding: 8px 32px !important;
+    }
   }
 
   &.download-btn-desktop {

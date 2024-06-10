@@ -110,8 +110,9 @@ export const LOCALES_TRANSLATE = LOCALES.slice(1)
 export const DEFAULT_LOCALE = LOCALES[0]
 export const DEFAULT_LOCALE_CODE = DEFAULT_LOCALE.code
 
-export const mapCodeToHtmlLang = code => {
-  const locale = LOCALES.find(l => l.code === code)
+export const mapCodeToHtmlLang = (code, previewMode) => {
+  const listLocales = previewMode ? PREVIEW_LOCALES : LOCALES
+  const locale = listLocales.find(l => l.code === code)
   return locale ? locale.htmlLang : DEFAULT_LOCALE.htmlLang
 }
 
