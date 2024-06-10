@@ -196,6 +196,7 @@ const PreviewPage = () => {
             widerContainer={moduleConfig?.widerContainer}
             locale={locale.code}
             sharedCopy={sharedCopy}
+            previewMode
           >
             <PreviewInfo>Preview mode</PreviewInfo>
             {contentfulModuleToComponent(moduleConfig)}
