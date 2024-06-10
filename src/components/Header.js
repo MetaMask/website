@@ -67,7 +67,7 @@ const StyledHeader = props => {
   const showLanguageSelector = useFeatureFlag({
     componentName: 'Header',
     componentId: contentfulId,
-    flagName: 'showLanguageSelector',
+    flagName: 'show-language-selector',
     elementRef: languageSelectorRef,
   })
 
