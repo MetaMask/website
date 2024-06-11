@@ -77,7 +77,7 @@ const RichTextWrapper = styled.div`
     background-color: #fcfaf6;
     text-shadow: none;
     body.dark-mode & {
-      background-color: #fcfaf6;
+      background-color: transparent;
     }
   }
   pre > code[class~='language-javascript']::before {
