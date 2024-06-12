@@ -19,6 +19,7 @@ import PropTypes from 'prop-types'
 import Link from './Link'
 import { useCountry } from '../hooks/useCountry'
 import { filterMenuPaths } from '../lib/utils/filterMenuPaths'
+import HeaderDisclaimer from './HeaderDisclaimer'
 
 const StyledHeader = props => {
   const {
@@ -61,6 +62,8 @@ const StyledHeader = props => {
   const { locale, setLocale } = localization || {}
   const [topMenuMobile, setTopMenuMobile] = useState('88px')
   const [isBrowser, setIsBrowser] = useState(false)
+  const [showDisclaimer, setShowDisclaimer] = useState(false)
+
   const ldClient = useLDClient()
   const country = useCountry()
 
@@ -159,6 +162,9 @@ const StyledHeader = props => {
     if (country !== 'GB') {
       return
     }
+
+    // Show UK Disclaimer
+    setShowDisclaimer(true);
 
     // Hide menu items pointing to paths blocked in the UK
     const filteredMenus = filterMenuPaths(menus, GB_BLOCKED_PATHS)
@@ -362,6 +368,7 @@ const StyledHeader = props => {
           </>
         ) : null}
       </HeaderContainer>
+      {showDisclaimer && <HeaderDisclaimer />}
     </HeaderElement>
   )
 }

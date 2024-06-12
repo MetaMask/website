@@ -15,6 +15,7 @@ const theme = {
   darkerPurple: '#8A42AD',
   darkPurple: '#9F6FF0',
   lightPurple: '#A495FF',
+  disclaimerBg: '#e8f1f9',
   blue: {
     400: '#1098fc',
   },
