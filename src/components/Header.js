@@ -168,7 +168,7 @@ const StyledHeader = props => {
 
     // Show UK Disclaimer
     if (GB_DISCLAIMER_PATHS.includes(currentPath)) {
-      setShowDisclaimer(true);
+      setShowDisclaimer(true)
     }
 
     // Hide menu items pointing to paths blocked in the UK
@@ -177,7 +177,8 @@ const StyledHeader = props => {
 
     // Redirect to homepage if current path is blocked
     if (GB_BLOCKED_PATHS.includes(currentPath)) {
-      const homePath = locale.code === DEFAULT_LOCALE_CODE ? '/' : `/${locale.code}/`
+      const homePath =
+        locale.code === DEFAULT_LOCALE_CODE ? '/' : `/${locale.code}/`
       navigate(homePath)
     }
   }, [country, pathname, locale, menus])
@@ -373,7 +374,11 @@ const StyledHeader = props => {
           </>
         ) : null}
       </HeaderContainer>
-      {showDisclaimer && <HeaderDisclaimer />}
+      {showDisclaimer && (
+        <DisclaimerWrapper>
+          <HeaderDisclaimer />
+        </DisclaimerWrapper>
+      )}
     </HeaderElement>
   )
 }
@@ -567,6 +572,7 @@ const NavMenuChild = styled.div`
         ? `
     opacity: 1;
     visibility: visible;
+    z-index: 999;
     `
         : ''}
   }
@@ -705,4 +711,8 @@ const ToggleWrapper = styled.div`
   @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
     flex-direction: row;
   }
+`
+
+const DisclaimerWrapper = styled.div`
+  margin: 20px -20px -24px -20px;
 `
