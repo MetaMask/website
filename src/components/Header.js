@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import {
   DEFAULT_LOCALE_CODE,
   GB_BLOCKED_PATHS,
+  GB_DISCLAIMER_PATHS,
   LOCALES,
 } from '../lib/config.mjs'
 import ContextClientSide from '../Context/ContextClientSide'
@@ -20,6 +21,7 @@ import Link from './Link'
 import { useCountry } from '../hooks/useCountry'
 import { filterMenuPaths } from '../lib/utils/filterMenuPaths'
 import HeaderDisclaimer from './HeaderDisclaimer'
+import { removeLanguageCode } from '../lib/utils/removeLanguageCode'
 
 const StyledHeader = props => {
   const {
@@ -162,16 +164,19 @@ const StyledHeader = props => {
     if (country !== 'GB') {
       return
     }
+    const currentPath = removeLanguageCode(pathname)
 
     // Show UK Disclaimer
-    setShowDisclaimer(true);
+    if (GB_DISCLAIMER_PATHS.includes(currentPath)) {
+      setShowDisclaimer(true);
+    }
 
     // Hide menu items pointing to paths blocked in the UK
     const filteredMenus = filterMenuPaths(menus, GB_BLOCKED_PATHS)
     setFilteredMenus(filteredMenus)
 
     // Redirect to homepage if current path is blocked
-    if (GB_BLOCKED_PATHS.find(blockedPath => pathname.endsWith(blockedPath))) {
+    if (GB_BLOCKED_PATHS.includes(currentPath)) {
       const homePath = locale.code === DEFAULT_LOCALE_CODE ? '/' : `/${locale.code}/`
       navigate(homePath)
     }

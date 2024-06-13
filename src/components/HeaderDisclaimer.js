@@ -58,7 +58,7 @@ const DisclaimerContainer = styled.div`
   }
 
   a {
-    color: ${({ theme }) => theme.dark};
+    color: ${({ theme }) => theme.dark} !important;
     text-decoration: underline;
   }
 `
