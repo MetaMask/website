@@ -5,6 +5,7 @@ import MetaMaskContextProvider from '../../Context/MetaMaskContextProvider'
 import { DEFAULT_LOCALE, LOCALES_TRANSLATE } from '../../lib/config.mjs'
 import { useLocation } from '@reach/router'
 import { ExperimentFlagsProvider } from '../../Context/ExperimentFlagsContext'
+import { ShowRegionSelectorFlagProvider } from '../../Context/ShowRegionSelectorFlagContext'
 
 const ClientSideWrapper = ({ children }) => {
   const location = useLocation()
@@ -49,9 +50,11 @@ const ClientSideWrapper = ({ children }) => {
   return (
     <MetaMaskContextProvider>
       <ExperimentFlagsProvider>
-        <ContextClientSide.Provider value={valueContext}>
-          {children}
-        </ContextClientSide.Provider>
+        <ShowRegionSelectorFlagProvider>
+          <ContextClientSide.Provider value={valueContext}>
+            {children}
+          </ContextClientSide.Provider>
+        </ShowRegionSelectorFlagProvider>
       </ExperimentFlagsProvider>
     </MetaMaskContextProvider>
   )
