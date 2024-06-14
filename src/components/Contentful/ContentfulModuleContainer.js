@@ -12,6 +12,7 @@ import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import Carousel from '../Carousel'
 import FaqList from '../FaqList'
+import { useShowRegionSelectorFlag } from '../../Context/ShowRegionSelectorFlagContext'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -52,12 +53,29 @@ const ContentfulModuleContainer = props => {
 
   const elementRef = useRef()
   const id = useMemo(() => kebabCase(title), [title])
-  const showLocaleProvidersOnBuyCryptoPage = useFeatureFlag({
+
+  const [showRegionSelector, setShowRegionSelector] = useState(false)
+  const { getShowRegionSelectorFlag } = useShowRegionSelectorFlag()
+
+  useFeatureFlag({
     componentName: 'PopupRegionSelector',
     componentId: contentful_id,
     flagName: 'show-locale-providers-on-buy-crypto-page',
     elementRef,
   })
+
+  useEffect(() => {
+    if (id !== 'payments-logos') {
+      return
+    }
+
+    const init = async () => {
+      const value = await getShowRegionSelectorFlag()
+      setShowRegionSelector(value)
+    }
+
+    init()
+  }, [id, getShowRegionSelectorFlag])
 
   const inspectorProps = useContentfulInspectorMode()
   const gridModulesGap = gridModulesGapDefault || '8px'
@@ -132,9 +150,7 @@ const ContentfulModuleContainer = props => {
       id={id}
       style={{
         display:
-          id === 'payments-logos' && !showLocaleProvidersOnBuyCryptoPage
-            ? 'none'
-            : 'block',
+          id === 'payments-logos' && !showRegionSelector ? 'none' : 'block',
       }}
       ref={id === 'payments-logos' ? elementRef : null}
     >
