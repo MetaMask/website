@@ -74,10 +74,7 @@ const Modal = ({
                   onClick={() => {
                     setSelectedCountry(list.indexOf(filteredItem))
 
-                    ldClient?.track(
-                      'on-buy-crypto-page-region-selected',
-                      filteredItem
-                    )
+                    ldClient?.track('on-buy-crypto-page-region-selected')
                     ldClient?.flush()
 
                     setHasModal(false)
