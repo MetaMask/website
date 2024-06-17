@@ -40,9 +40,9 @@ const SwapWithPortfolio = ({ data, pageContext }) => {
         {country === 'GB' && <HeaderDisclaimer />}
 
         <Intro
-          title="The most trusted way to swap your tokens"
+          title="Swap your tokens with MetaMask"
           subTitle="Swap from anywhere, anytime"
-          description="Swap tokens directly from the MetaMask browser extension, mobile wallet, and <a href='https://portfolio.metamask.io/swap' target='_blank'>MetaMask Portfolio</a>. The swap feature combines data from decentralized exchange aggregators, market makers, and DEXs, to ensure you get competitive rates with the lowest network fees."
+          description="Swap tokens directly from the MetaMask browser extension, mobile wallet, and <a href='https://portfolio.metamask.io/swap' target='_blank'>MetaMask Portfolio</a>. The swap feature combines data from decentralized exchange aggregators, market makers, and DEXs, to ensure you get competitive rates with the lowest network fees that Swaps can find for your trade."
           firstBtnLabel="Swap with MetaMask"
           firstBtnLink="https://portfolio.metamask.io/swap"
           bgColor="blue"
@@ -51,7 +51,7 @@ const SwapWithPortfolio = ({ data, pageContext }) => {
 
         <FeatureVideo
           title="How to Swap with MetaMask"
-          description="Unlike other crypto wallets out there, MetaMask is built to be privacy-first. We empower you to access, store and swap tokens, without having to worry about dapps or exchanges accessing more personal data than you’ve consented to give. Whether you’re participating in decentralized finance or exploring web3, with MetaMask, you are always in complete control of your data."
+          description="MetaMask is built to be privacy-first. We empower you to access, store and swap tokens, without having to worry about dapps or exchanges accessing more personal data than you’ve consented to give. Whether you’re participating in decentralized finance or exploring web3, with MetaMask, you are in control of your data."
           youtubeCode="q9uG6Ra-w54"
         />
 
@@ -61,7 +61,7 @@ const SwapWithPortfolio = ({ data, pageContext }) => {
 
         <Freedom
           title="Connect your wallet and start swapping"
-          text="MetaMask is the leading self-custodial wallet. The safe and simple way to access blockchain applications and web3."
+          text="MetaMask is the leading self-custodial wallet. Access blockchain applications and web3."
           btnLabel="Try Portfolio"
           btnLink="https://portfolio.metamask.io/"
           bgColor="green"

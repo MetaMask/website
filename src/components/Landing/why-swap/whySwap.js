@@ -9,25 +9,25 @@ const whySwap = ({ bgColor }) => {
       id: 1,
       title: 'Find competitive rates every time',
       description:
-        'The swap feature ensures that you always have access to the largest selection of tokens and the most competitive prices by providing prices from multiple aggregators and individual market makers in one place.',
+        'The swap feature ensures that you always have access to the largest selection of tokens and competitive prices by providing prices from multiple aggregators and individual market makers in one place.',
     },
     {
       id: 2,
       title: 'Reduced gas costs',
       description:
-        'We pursue a different path to locate the best trade. Each route requires a varying amount of gas fees to execute the transaction. We source available quotes and determine which liquidity source is the most gas efficient for every trade.',
+        'We pursue a different path to locate the best trade. Each route requires a varying amount of gas fees to execute the transaction. We source available quotes and determine which liquidity source is gas efficient for every trade.',
     },
     {
       id: 3,
       title: 'Fewer approvals',
       description:
-        'You only need to approve each token once to gain access to all the available liquidity on DeFi, reducing time and gas costs.',
+        'You only need to approve each token once to gain access to available liquidity across DeFi, reducing time and gas costs.',
     },
     {
       id: 4,
       title: 'Slippage protection',
       description:
-        'Large swaps are often subject to wild price swings when there is insufficient liquidity available on a particular DEX. When swapping with MetaMask Portfolio, orders are spread across virtually all DEXs to reduce slippage impact on the final price.',
+        'Large swaps are often subject to wild price swings when there is insufficient liquidity available on a particular DEX. When swapping tokens with MetaMask Portfolio, orders are spread across multiple DEXs to reduce slippage impact on the final price.',
     },
   ]
 
