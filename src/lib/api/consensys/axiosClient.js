@@ -1,5 +1,5 @@
 import axios from 'axios'
-import queryString from 'query-string'
+import qs from 'qs'
 import { CONSENSYS_HOST } from '../../config'
 
 const axiosClient = axios.create({
@@ -7,7 +7,10 @@ const axiosClient = axios.create({
   headers: {
     'content-type': 'application/json',
   },
-  paramsSerializer: params => queryString.stringify(params),
+  paramsSerializer: {
+    encode: qs.parse,
+    serialize: qs.stringify,
+  },
 })
 axiosClient.interceptors.request.use(async config => {
   return config
