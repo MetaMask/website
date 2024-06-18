@@ -15,7 +15,7 @@ let getNewsUrl = news => {
     ? kebabCase(news.slug)
     : kebabCase(news.title.toLowerCase())
   if (news.categories && news.categories.length)
-    category = news.categories[0].name
+    category = news.categories[0].slug
   return `/news/${kebabCase(category)}/${slug}/`
 }
 

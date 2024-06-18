@@ -90,6 +90,7 @@ exports.createPages = async ({ graphql, actions }) => {
           slug
           categories {
             name
+            slug
           }
         }
       }
@@ -134,6 +135,13 @@ exports.createPages = async ({ graphql, actions }) => {
       })
     })
   }
+
+  if (localizedPages.includes('/news/')) {
+    newsCategories.forEach(
+      page => page.name && localizedPages.push(`/news/${page.name}/`)
+    )
+  }
+
   const legalsQuery = await graphql(`
     {
       allMdx {
@@ -270,7 +278,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   h2FontSize,
                   node_locale,
                   localizedPages,
-                  sharedCopy: sharedCopy[node_locale]
+                  sharedCopy: sharedCopy[node_locale],
                 },
               })
               return
@@ -286,6 +294,40 @@ exports.createPages = async ({ graphql, actions }) => {
                 const categoryPath = index
                   ? `${baseCategoryPath}page/${index + 1}/`
                   : baseCategoryPath
+
+                if (showLanguageSelector && translation) {
+                  LOCALES_TRANSLATE.forEach(locale => {
+                    const localeSlug = `/${locale.code}${categoryPath}`
+                    createPage({
+                      path: localeSlug,
+                      component: path.resolve(mapTemplateLayout(pageType)),
+                      context: {
+                        headerId,
+                        footerId,
+                        seoId,
+                        modules: moduleIds,
+                        themeColor,
+                        pathBuild: localeSlug,
+                        isFaqLayout,
+                        h2FontSize,
+                        localizedPages,
+                        limit: itemsPerPage,
+                        skip: index * itemsPerPage,
+                        categoryId: cat.categoryId,
+                        category: cat.name,
+                        totalItems: cat.total,
+                        currentPage: index + 1,
+                        totalPages,
+                        sharedCopy: sharedCopy[node_locale],
+                        slug: categoryPath,
+                        translation,
+                        locale: locale.code,
+                        node_locale: locale.code,
+                        newsCategories,
+                      },
+                    })
+                  })
+                }
                 createPage({
                   path: categoryPath,
                   component: path.resolve(mapTemplateLayout(pageType)),
@@ -298,7 +340,6 @@ exports.createPages = async ({ graphql, actions }) => {
                     pathBuild: categoryPath,
                     isFaqLayout,
                     h2FontSize,
-                    node_locale,
                     localizedPages,
                     limit: itemsPerPage,
                     skip: index * itemsPerPage,
@@ -307,7 +348,10 @@ exports.createPages = async ({ graphql, actions }) => {
                     totalItems: cat.total,
                     currentPage: index + 1,
                     totalPages,
-                    sharedCopy: sharedCopy[node_locale]
+                    sharedCopy: sharedCopy[node_locale],
+                    translation,
+                    node_locale,
+                    newsCategories,
                   },
                 })
               })
@@ -342,7 +386,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 h2FontSize,
                 node_locale,
                 localizedPages,
-                sharedCopy: sharedCopy[node_locale]
+                sharedCopy: sharedCopy[node_locale],
               },
             })
             return
@@ -370,7 +414,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   locale: locale.code,
                   node_locale: locale.code,
                   localizedPages,
-                  sharedCopy: sharedCopy[locale.code]
+                  sharedCopy: sharedCopy[locale.code],
                 },
               })
             })
@@ -393,7 +437,7 @@ exports.createPages = async ({ graphql, actions }) => {
               translation,
               node_locale,
               localizedPages,
-              sharedCopy: sharedCopy[node_locale]
+              sharedCopy: sharedCopy[node_locale],
             },
           })
         })
@@ -418,6 +462,7 @@ exports.createPages = async ({ graphql, actions }) => {
           slug
           categories {
             name
+            slug
           }
           translation
           node_locale
@@ -498,7 +543,7 @@ exports.createPages = async ({ graphql, actions }) => {
               pathBuild: slug,
               node_locale,
               localizedPages,
-              sharedCopy: sharedCopy[node_locale]
+              sharedCopy: sharedCopy[node_locale],
             },
           })
         })
@@ -518,7 +563,9 @@ exports.createPages = async ({ graphql, actions }) => {
 }
 
 exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
-  const { DEFAULT_LOCALE_CODE } = await import('./src/lib/config.mjs')
+  const { DEFAULT_LOCALE_CODE, LOCALES_TRANSLATE } = await import(
+    './src/lib/config.mjs'
+  )
   const { redirects, program, config } = store.getState()
   buildSitemap({
     query: `
@@ -548,12 +595,22 @@ exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
     }
     allContentfulNews(filter: {isPrivate: {eq: false}, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"}}) {
       nodes {
+        contentful_id
         title
         slug
         categories {
           name
+          slug
         }
+        translation
         publishDate(formatString: "YYYY-MM-DD")
+      }
+    }
+    allContentfulNewsLocalized: allContentfulNews(filter: {isPrivate: {eq: false}, translation: {eq: true}, node_locale: {ne: "${DEFAULT_LOCALE_CODE}"}}) {
+      nodes {
+        contentful_id
+        title
+        node_locale
       }
     }
     allPrivateContentfulNews: allContentfulNews(filter: {isPrivate: {eq: true}, node_locale: {eq: "${DEFAULT_LOCALE_CODE}"}}) {
@@ -562,6 +619,7 @@ exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
         slug
         categories {
           name
+          slug
         }
       }
     }
@@ -572,6 +630,7 @@ exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
         title
         categories {
           name
+          slug
         }
       }
     }
@@ -621,16 +680,26 @@ exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
               `/pyusd`,
               `/dev-404-page*`,
               `/404*`,
-              `/es/`,
-              `/ar/`,
               `/zh-CN/`,
-              `/de/`,
+              `/hi-IN/`,
+              `/it/`,
+              `/ja/`,
+              `/ko/`,
+              `/ru/`,
+              `/es/`,
+              `/tr/`,
+              `/pcm-NG/`,
               `/news/page/+([0-9])`,
               `/news/*/page/+([0-9])`,
-              `/es/news/**`,
-              `/de/news/**`,
               `/zh-CN/news/**`,
-              `/ar/news/**`,
+              `/hi-IN/news/**`,
+              `/it/news/**`,
+              `/ja/news/**`,
+              `/ko/news/**`,
+              `/ru/news/**`,
+              `/es/news/**`,
+              `/tr/news/**`,
+              `/pcm-NG/news/**`,
             ]
             return !excludePages.some(exclude => minimatch(path, exclude))
           },
@@ -645,8 +714,10 @@ exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
           resolvePages: ({
             site,
             allContentfulNews,
+            allContentfulNewsLocalized,
             allContentfulNewsNonCanonical,
           }) => {
+            const localizedNews = allContentfulNewsLocalized.nodes
             const siteTitle = site.siteMetadata.title
             const privatePages = []
             allContentfulNewsNonCanonical.nodes.forEach(page => {
@@ -658,6 +729,27 @@ exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
               const newsUrl = getNewsUrl(page)
               if (privatePages.indexOf(newsUrl) === -1) {
                 allNews.push({ ...page, path: newsUrl })
+
+                if (page.translation) {
+                  LOCALES_TRANSLATE.forEach(locale => {
+                    const localeSlug = `/${locale.code}${newsUrl}`
+                    let localeTitle = page.title
+                    localizedNews.forEach(news => {
+                      if (
+                        news.contentful_id === page.contentful_id &&
+                        news.node_locale === locale.code
+                      ) {
+                        localeTitle = news.title
+                      }
+                    })
+                    allNews.push({
+                      ...page,
+                      path: localeSlug,
+                      title: localeTitle,
+                      locale: locale.code,
+                    })
+                  })
+                }
               }
             })
             return allNews.map(page => {
@@ -666,6 +758,7 @@ exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
                 siteTitle,
                 publishDate: page.publishDate,
                 title: page.title,
+                locale: page.locale,
               }
             })
           },
@@ -673,14 +766,14 @@ exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
             'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' +
             ' xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"' +
             ' xmlns:xhtml="http://www.w3.org/1999/xhtml"',
-          serializer: ({ path, siteTitle, publishDate, title }) => ({
+          serializer: ({ path, siteTitle, publishDate, title, locale }) => ({
             loc: path,
             changefreq: 'daily',
             priority: path === '' ? '1' : '0.8',
             'news:news': {
               'news:publication': {
                 'news:name': siteTitle,
-                'news:language': 'en',
+                'news:language': locale || 'en-US',
               },
               'news:publication_date': publishDate,
               'news:title': title,

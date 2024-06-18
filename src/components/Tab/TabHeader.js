@@ -15,6 +15,7 @@ const TabHeader = props => {
     setActiveStateId,
     isTabParam,
   } = props
+
   const { header: headerREF } = React.useContext(Context)
   const { headerRef } = headerREF || {}
   const { heroContainer: heroContainerREF } = React.useContext(Context)

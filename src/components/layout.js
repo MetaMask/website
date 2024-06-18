@@ -58,7 +58,7 @@ const Layout = props => {
             },
           ]}
         >
-          <html lang={mapCodeToHtmlLang(locale, previewMode)} />
+          <html lang={mapCodeToHtmlLang(locale)} />
         </Helmet>
         {children}
       </Wrapper>

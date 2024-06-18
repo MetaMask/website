@@ -434,15 +434,7 @@ export const ContentfulNewsCategoryFields = gql`
       id
     }
     name
-    parent(preview: true) {
-      ... on NewsCategory {
-        __typename
-        sys {
-          id
-        }
-        name
-      }
-    }
+    slug
   }
 `
 
