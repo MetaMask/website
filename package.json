@@ -107,7 +107,7 @@
     "url": "https://github.com/gatsbyjs/gatsby-starter-default"
   },
   "resolutions": {
-    "apollo-link-contentful/**/axios": "^0.28.1",
+    "apollo-link-contentful/contentful": "^9.3.5",
     "gatsby-source-contentful/**/axios": "^0.28.1",
     "gatsby/**/engine.io": "~6.4.2",
     "gatsby/**/qs": "^6.11.2",
