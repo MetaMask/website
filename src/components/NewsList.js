@@ -1,17 +1,28 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useContext } from 'react'
 import Card from './Card'
 import { getNewsUrl } from '../lib/utils/news'
 import styled from 'styled-components'
 import NewsAuthor from './NewsAuthor'
+import { formatDateByLocale } from '../lib/utils/helpers'
+import { DEFAULT_LOCALE_CODE } from '../lib/config.mjs'
+import ContextPage from '../Context/ContextPage'
 
 function NewsList(props) {
+  const { sharedCopy } = useContext(ContextPage)
   const { data } = props
 
   return (
     <>
       {data.map((news, index) => {
-        const { title, subtitle, image, publishDate, authors } = news
+        const {
+          title,
+          subtitle,
+          image,
+          publishDate,
+          authors,
+          node_locale,
+        } = news
         const newsUrl = getNewsUrl(news)
         return (
           <NewsListWrapper key={index}>
@@ -23,10 +34,16 @@ function NewsList(props) {
               layoutType={'news'}
             />
             <NewsInfo hasMt={!!subtitle}>
-              <span>by&nbsp;</span>
+              <span>{sharedCopy.by}&nbsp;</span>
               <NewsAuthor listAuthors={authors} />
               <span className="separator" />
-              <span className="publishDate">{publishDate}</span>
+              <span className="publishDate">
+                {publishDate &&
+                  formatDateByLocale(
+                    publishDate,
+                    node_locale || DEFAULT_LOCALE_CODE
+                  )}
+              </span>
             </NewsInfo>
           </NewsListWrapper>
         )
