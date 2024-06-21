@@ -10,6 +10,8 @@ import ContentWrapper from '../components/ContentWrapper'
 import Image from '../components/Image'
 import SocialButtonList from '../components/SocialButtonList'
 import NewsAuthor from '../components/NewsAuthor'
+import { DEFAULT_LOCALE_CODE } from '../lib/config.mjs'
+import { formatDateByLocale } from '../lib/utils/helpers'
 
 function NewsLayout(props) {
   const {
@@ -39,6 +41,7 @@ function NewsLayout(props) {
       localizedPages,
       slug,
       translation,
+      node_locale,
       sharedCopy = {},
     },
   } = props
@@ -86,7 +89,13 @@ function NewsLayout(props) {
               <span>{sharedCopy.by}&nbsp;</span>
               <NewsAuthor listAuthors={authors} />
               <span className="separator" />
-              <span className="publishDate">{publishDate}</span>
+              <span className="publishDate">
+                {publishDate &&
+                  formatDateByLocale(
+                    publishDate,
+                    node_locale || DEFAULT_LOCALE_CODE
+                  )}
+              </span>
             </NewsInfo>
             <Image image={image} />
             <SocialShare>

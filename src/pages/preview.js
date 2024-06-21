@@ -119,6 +119,7 @@ const PreviewPage = () => {
           hubspot: hubspot.previewContent,
           sharedCopy: sharedCopyDict,
           latest: latest.previewContent,
+          locale: locale.code,
         }
         setLoading(false)
         setModuleConfig(dataUpdate)

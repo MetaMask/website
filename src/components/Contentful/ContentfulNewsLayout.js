@@ -6,7 +6,8 @@ import { Section } from '../StyledGeneral'
 import SocialButtonList from '../SocialButtonList'
 import Image from '../Image'
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
-import moment from 'moment'
+import { formatDateByLocale } from '../../lib/utils/helpers'
+import { DEFAULT_LOCALE_CODE } from '../../lib/config.mjs'
 
 /**
  * For preview only
@@ -29,6 +30,7 @@ const ContentfulNewsLayout = props => {
       },
       hubspot,
       sharedCopy,
+      locale,
       latest,
     },
   } = props
@@ -75,7 +77,8 @@ const ContentfulNewsLayout = props => {
             </span>
             <span className="separator" />
             <span className="publishDate">
-              {publishDate ? moment(publishDate).format('MMMM D, YYYY') : ''}
+              {publishDate &&
+                formatDateByLocale(publishDate, locale || DEFAULT_LOCALE_CODE)}
             </span>
           </NewsInfo>
           <Image image={image} previewMode={previewMode} />

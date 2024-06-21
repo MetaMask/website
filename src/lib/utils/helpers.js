@@ -14,3 +14,12 @@ export default function generateUUID() {
   const uuid = `${timestamp.toString(16)}-${randomString}`
   return uuid
 }
+
+export function formatDateByLocale(dateString, locale) {
+  const options = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }
+  return new Date(dateString).toLocaleDateString(locale, options)
+}
