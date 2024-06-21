@@ -318,7 +318,7 @@ exports.createPages = async ({ graphql, actions }) => {
                         totalItems: cat.total,
                         currentPage: index + 1,
                         totalPages,
-                        sharedCopy: sharedCopy[node_locale],
+                        sharedCopy: sharedCopy[locale.code],
                         slug: categoryPath,
                         translation,
                         locale: locale.code,
