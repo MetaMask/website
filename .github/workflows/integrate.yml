@@ -22,6 +22,7 @@ jobs:
       - name: Create development env file 🗃️
         run: |
           touch gatsby.development.env
+          echo GATSBY_ENVIRONMENT =${{ secrets.GATSBY_ENVIRONMENT }} >> gatsby.development.env
           echo GATSBY_LD_CLIENT_ID =${{ secrets.GATSBY_LD_CLIENT_ID }} >> gatsby.development.env
           echo GATSBY_LD_API_KEY =${{ secrets.GATSBY_LD_API_KEY }} >> gatsby.development.env
           echo GATSBY_CONTENTFUL_API_KEY =${{ secrets.GATSBY_CONTENTFUL_API_KEY }} >> gatsby.development.env
