@@ -77,25 +77,11 @@ export const LOCALES = [
     htmlLang: 'en',
   },
   {
-    name: 'Arabic',
-    localizedName: 'العربية',
-    shortName: 'AR',
-    code: 'ar',
-    htmlLang: 'ar',
-  },
-  {
     name: 'Chinese',
     localizedName: '中文',
     shortName: 'CN',
     code: 'zh-CN',
     htmlLang: 'zh',
-  },
-  {
-    name: 'German',
-    localizedName: 'Deutsch',
-    shortName: 'DE',
-    code: 'de',
-    htmlLang: 'de',
   },
   {
     name: 'Spanish',
