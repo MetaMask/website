@@ -212,7 +212,6 @@ export const ContentfulNewsLayoutFields = gql`
         profileUrl
       }
     }
-    publishDate
   }
 `
 

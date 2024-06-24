@@ -30,7 +30,7 @@ function AuthorProfileLayout(props) {
       bgImage,
       bgImageDark,
     },
-    pageContext: { pathBuild, localizedPages },
+    pageContext: { pathBuild, localizedPages, sharedCopy },
   } = props
 
   const heroBgUrl = getWebpImage(heroBg?.file?.url)
@@ -44,7 +44,7 @@ function AuthorProfileLayout(props) {
   relatedNews = takeRight(relatedNews, 3)
 
   return (
-    <Layout localizedPages={localizedPages}>
+    <Layout localizedPages={localizedPages} sharedCopy={sharedCopy}>
       {seo && contentfulModuleToComponent({ ...seo, pagePath: pathBuild })}
       {header && contentfulModuleToComponent(header)}
       <AuthorProfileContent
