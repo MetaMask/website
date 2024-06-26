@@ -187,6 +187,7 @@ const PreviewPage = () => {
             data={moduleConfig}
             locale={locale.code}
             sharedCopy={sharedCopy}
+            previewMode
           />
         )
       default:
