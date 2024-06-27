@@ -66,6 +66,8 @@ describe('Test internal links', () => {
       allUrls = [...allUrls, ...urls]
     }
 
+    let hasError = false
+
     for (const url of allUrls) {
       // console.log('ℹ Testing: %s', url)
       await page.goto(url)
@@ -86,12 +88,16 @@ describe('Test internal links', () => {
       try {
         expect(nonTrailingSlashUrls.length).toBe(0)
       } catch (e) {
-        throw new Error(
+        console.log(
           `❌ Found missing trailing slash links on ${url} :\n - ${nonTrailingSlashUrls.join(
             '\n - '
           )}`
         )
+        hasError = true
       }
     }
-  }, 600000)
+    if (hasError) {
+      throw new Error('Found missing trailing slash url.')
+    }
+  }, 1200000)
 })
