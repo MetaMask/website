@@ -56,17 +56,17 @@ const DisclaimerContainer = styled.div`
     margin: 0;
     font-size: 16px;
     line-height: 22px;
-    color: ${({ theme }) => theme.dark};
+    color: ${({ theme }) => theme.white};
   }
 
   a {
-    color: ${({ theme }) => theme.dark} !important;
+    color: ${({ theme }) => theme.white};
     text-decoration: underline;
   }
 `
 const DisclaimerWrapper = styled.div`
   padding: 20px;
-  background: ${({ theme }) => theme.disclaimerBg};
+  background: ${({ theme }) => theme.dark};
 
   position: -webkit-sticky;
   position: sticky;
