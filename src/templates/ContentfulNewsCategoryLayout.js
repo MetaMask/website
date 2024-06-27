@@ -19,6 +19,8 @@ const ContentfulNewsCategoryLayout = props => {
       localizedPages,
       totalPages,
       sharedCopy,
+      slug,
+      translation,
     } = {},
   } = props
 
@@ -62,8 +64,10 @@ const ContentfulNewsCategoryLayout = props => {
         contentfulModuleToComponent({
           ...seoData,
           pagePath: pathBuild,
+          originalSlug: slug,
+          translation,
         })}
-      {header && contentfulModuleToComponent(header)}
+      {header && contentfulModuleToComponent({ ...header, translation })}
       {hero && contentfulModuleToComponent(hero)}
       {layoutModuleContainer &&
         contentfulModuleToComponent({

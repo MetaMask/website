@@ -59,6 +59,7 @@ const ContentfulModuleContainer = props => {
       ? modules.map(item => ({
           label: item.title,
           id: previewMode ? item.title : item.contentful_id,
+          slug: item.modules?.[0]?.slug,
           content: (
             <TabContent>
               {contentfulModuleToComponent({

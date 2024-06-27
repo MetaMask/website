@@ -981,12 +981,7 @@ export const ContentfulNewsCategoryFields = graphql`
       type
     }
     name
-    parent {
-      ... on ContentfulNewsCategory {
-        contentful_id
-        name
-      }
-    }
+    slug
   }
 `
 

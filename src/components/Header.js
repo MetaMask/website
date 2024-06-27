@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import {
   DEFAULT_LOCALE_CODE,
   LOCALES,
-  PREVIEW_LOCALES,
   GB_BLOCKED_PATHS,
 } from '../lib/config.mjs'
 import ContextClientSide from '../Context/ContextClientSide'
@@ -137,12 +136,15 @@ const StyledHeader = props => {
       let localizedPath
 
       if (locale.code === DEFAULT_LOCALE_CODE) {
-        localizedPath = pathname.replace(/^\/(ar|zh-CN|de|es)/, '')
+        localizedPath = pathname.replace(
+          /^\/(zh-CN|hi-IN|it|ja|ko|ru|es|tr|pcm-NG)/,
+          ''
+        )
       } else {
         const newLocale = locale.code === DEFAULT_LOCALE_CODE ? '' : locale.code
 
         localizedPath = `/${newLocale}${pathname.replace(
-          /^\/(ar|zh-CN|de|es)\//,
+          /^\/(zh-CN|hi-IN|it|ja|ko|ru|es|tr|pcm-NG)\//,
           '/'
         )}`
       }
@@ -153,8 +155,6 @@ const StyledHeader = props => {
     ldClient?.track('on-locale-change', { locale })
     ldClient?.flush()
   }
-
-  const LANGUAGES = previewMode ? PREVIEW_LOCALES : LOCALES
 
   // Apply UK(GB) specific temporary geo-blocking rules
   useEffect(() => {
@@ -333,7 +333,7 @@ const StyledHeader = props => {
                       </NavMenuMain>
 
                       <NavMenuChild active={menuActive === 'language-selector'}>
-                        {LANGUAGES.map(locale => (
+                        {LOCALES.map(locale => (
                           <span
                             key={locale.code}
                             onClick={() => onChangeLocale(locale)}

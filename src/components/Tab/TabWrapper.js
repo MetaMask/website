@@ -28,7 +28,7 @@ const TabWrapper = props => {
 
       if (newsCategory && isTabParam) {
         const tabActive = tabs.find(
-          ({ label }) => encodeURIComponent(lowerCase(label)) === newsCategory
+          ({ slug }) => encodeURIComponent(lowerCase(slug)) === newsCategory
         )
         setActiveStateId(tabActive?.id)
         return
@@ -38,8 +38,7 @@ const TabWrapper = props => {
       const newsCategory = pathname.match('/news/([^/]*)/?')
       if (newsCategory) {
         const tabActive = tabs.find(
-          ({ label }) =>
-            encodeURIComponent(lowerCase(label)) === newsCategory[1]
+          ({ slug }) => encodeURIComponent(lowerCase(slug)) === newsCategory[1]
         )
         setActiveStateId(tabActive?.id || activeTabDefault)
         return

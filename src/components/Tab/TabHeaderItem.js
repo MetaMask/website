@@ -1,23 +1,25 @@
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
-import { Link } from 'gatsby'
+import Link from '../Link'
 import lowerCase from 'lodash/lowerCase'
 
 const TabHeaderItem = props => {
   const {
     activeId,
     label,
+    slug,
     id,
     typeLayout,
     setActiveStateId,
     isTabParam,
   } = props
+
   const changeTab = () => {
     setActiveStateId(id)
   }
 
   if (isTabParam) {
-    const newsCategory = encodeURIComponent(lowerCase(label))
+    const newsCategory = encodeURIComponent(lowerCase(slug))
     let newsCategoryUrl = `/news/${newsCategory}/`
     if (newsCategory === 'latest') {
       newsCategoryUrl = '/news/'

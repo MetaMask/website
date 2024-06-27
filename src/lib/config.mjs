@@ -79,40 +79,6 @@ export const LOCALES = [
   {
     name: 'Chinese',
     localizedName: '中文',
-    shortName: 'CN',
-    code: 'zh-CN',
-    htmlLang: 'zh',
-  },
-  {
-    name: 'Spanish',
-    localizedName: 'Español',
-    shortName: 'ES',
-    code: 'es',
-    htmlLang: 'es',
-  },
-]
-
-export const LOCALES_TRANSLATE = LOCALES.slice(1)
-export const DEFAULT_LOCALE = LOCALES[0]
-export const DEFAULT_LOCALE_CODE = DEFAULT_LOCALE.code
-
-export const mapCodeToHtmlLang = (code, previewMode) => {
-  const listLocales = previewMode ? PREVIEW_LOCALES : LOCALES
-  const locale = listLocales.find(l => l.code === code)
-  return locale ? locale.htmlLang : DEFAULT_LOCALE.htmlLang
-}
-
-export const PREVIEW_LOCALES = [
-  {
-    name: 'English',
-    localizedName: 'English',
-    code: 'en-US',
-    shortName: 'EN',
-    htmlLang: 'en',
-  },
-  {
-    name: 'Chinese',
-    localizedName: '中文',
     code: 'zh-CN',
     shortName: 'CN',
     htmlLang: 'zh',
@@ -174,5 +140,14 @@ export const PREVIEW_LOCALES = [
     htmlLang: 'pcm-NG',
   },
 ]
+
+export const LOCALES_TRANSLATE = LOCALES.slice(1)
+export const DEFAULT_LOCALE = LOCALES[0]
+export const DEFAULT_LOCALE_CODE = DEFAULT_LOCALE.code
+
+export const mapCodeToHtmlLang = (code) => {
+  const locale = LOCALES.find(l => l.code === code)
+  return locale ? locale.htmlLang : DEFAULT_LOCALE.htmlLang
+}
 
 export const GB_BLOCKED_PATHS = ['/buy-crypto/', '/sell-crypto/', '/swaps/']
