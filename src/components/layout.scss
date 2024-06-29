@@ -1223,6 +1223,18 @@ figcaption {
   padding-bottom: 32px;
 }
 
+#delegation-toolkit-getting-started {
+  padding-top: 32px;
+
+  + #lets-talk-about-standards {
+    margin-bottom: 60px;
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+  }
+}
+
 #how-it-works-de-fi-investments-with-meta-mask-institutional {
   .moduleCardWrapper:not(:last-child) {
     margin-bottom: 8px;
