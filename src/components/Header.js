@@ -23,6 +23,7 @@ import HeaderDisclaimer from './HeaderDisclaimer'
 import { removeLanguageCode } from '../lib/utils/removeLanguageCode'
 import { useIsUKBlocked } from '../hooks/useIsUKBlocked'
 import { useCountry } from '../hooks/useCountry'
+import { setLocalStorage } from '../lib/utils/localStorage'
 
 const StyledHeader = props => {
   const {
@@ -155,6 +156,7 @@ const StyledHeader = props => {
       }
 
       navigate(localizedPath)
+      setLocalStorage('preferredLanguage', locale.code)
     }
 
     ldClient?.track('on-locale-change', { locale })

@@ -18,6 +18,7 @@ const ContentfulNewsCategoryLayout = props => {
       category,
       localizedPages,
       totalPages,
+      translation,
     } = {},
     path,
   } = props
@@ -55,7 +56,11 @@ const ContentfulNewsCategoryLayout = props => {
   }, [])
 
   return (
-    <Layout locale={locale} localizedPages={localizedPages}>
+    <Layout
+      locale={locale}
+      localizedPages={localizedPages}
+      translation={translation}
+    >
       {seoData &&
         contentfulModuleToComponent({
           ...seoData,

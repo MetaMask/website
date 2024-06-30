@@ -34,7 +34,7 @@ function NewsLayout(props) {
       latestStories,
       footer,
     },
-    pageContext: { pathBuild, localizedPages },
+    pageContext: { pathBuild, localizedPages, translation },
   } = props
 
   const bgUrl = getWebpImage(news_bg?.file?.url)
@@ -57,7 +57,11 @@ function NewsLayout(props) {
   }
 
   return (
-    <Layout {...props} localizedPages={localizedPages}>
+    <Layout
+      {...props}
+      localizedPages={localizedPages}
+      translation={translation}
+    >
       {contentfulModuleToComponent(seoModuleConfig)}
       {contentfulModuleToComponent(header)}
       <div className="news-page-content">

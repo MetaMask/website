@@ -32,7 +32,11 @@ const DownloadPage = props => {
   )
 
   return (
-    <Layout locale={locale} localizedPages={localizedPages}>
+    <Layout
+      locale={locale}
+      localizedPages={localizedPages}
+      translation={translation}
+    >
       {seo &&
         contentfulModuleToComponent({
           ...seo,

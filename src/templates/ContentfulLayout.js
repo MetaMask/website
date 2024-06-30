@@ -103,6 +103,7 @@ const ContentfulLayout = props => {
       extraData={extraData}
       locale={locale}
       localizedPages={localizedPages}
+      translation={translation}
     >
       {seo &&
         contentfulModuleToComponent({

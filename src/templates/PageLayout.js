@@ -15,6 +15,7 @@ import {
   darkDarkTheme,
   defaultDarkTheme,
 } from '../lib/theme'
+import LocaleSwitcherBanner from '../components/LocaleSwitcherBanner'
 
 /**
  * @name PageLayout
@@ -31,6 +32,7 @@ const PageLayout = props => {
     extraData,
     locale,
     localizedPages,
+    translation,
     ...rest
   } = props
 
@@ -150,6 +152,7 @@ const PageLayout = props => {
             }}
           />
         )}
+        {translation && <LocaleSwitcherBanner />}
       </Layout>
     </Context.Provider>
   )

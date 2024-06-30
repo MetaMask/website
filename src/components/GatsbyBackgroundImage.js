@@ -31,7 +31,7 @@ const GatsbyBackgroundImage = props => {
         mobileImageBreakpoint
           ? theme.device.mobileMediaMax
           : theme.device.tabletMediaMax
-        })`,
+      })`,
     }) && !!imageMobile
 
   if (!image && !imageMobile) {
@@ -41,8 +41,8 @@ const GatsbyBackgroundImage = props => {
   const imageSrc = isMobile
     ? imageMobile
     : isDarkMode && imageDarkMode
-      ? imageDarkMode
-      : image
+    ? imageDarkMode
+    : image
 
   const parsedContentfulAssetUrl = parseContentfulAssetUrl(
     imageSrc,

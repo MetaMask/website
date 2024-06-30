@@ -5,7 +5,14 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { parseContentfulAssetUrl } from '../../lib/utils/urlParser'
 import classnames from 'classnames'
 
-const LogoImage = ({ alt = '', src, width, height, srcDarkMode, previewMode }) => {
+const LogoImage = ({
+  alt = '',
+  src,
+  width,
+  height,
+  srcDarkMode,
+  previewMode,
+}) => {
   return (
     <StyledPartnerImageContainer className={'LogoImageWrapper'}>
       {getImage(src) ? (
