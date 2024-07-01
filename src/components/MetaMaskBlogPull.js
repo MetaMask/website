@@ -51,6 +51,7 @@ const query = graphql`
         subtitle
         categories {
           name
+          slug
         }
         image {
           title
