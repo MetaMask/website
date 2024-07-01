@@ -181,6 +181,7 @@ const RichTextWrapper = styled.div`
     }
 
     & > div > p {
+      font-size: 14px;
       text-transform: uppercase;
       text-align: center;
       color: ${({ theme }) => theme.primaryColor};
