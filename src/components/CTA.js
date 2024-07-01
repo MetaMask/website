@@ -386,7 +386,7 @@ const CTAContainer = styled.div`
 
       > span {
         max-width: 435px;
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         font-weight: 600;
         line-height: 1.3;
         color: ${({ theme }) => theme.text.dark};
