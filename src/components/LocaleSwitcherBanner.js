@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import Wrapper from './ContentWrapper'
 import { DEFAULT_LOCALE_CODE, LOCALES } from '../lib/config.mjs'
 import { setLocalStorage, getLocalStorage } from '../lib/utils/localStorage'
@@ -99,6 +99,15 @@ const LocaleSwitcherBanner = () => {
   )
 }
 
+const slideup = keyframes`
+  0% {
+    bottom: -72px;
+  }
+  100% {
+    bottom: 0;
+  }
+`;
+
 const BannerWrapper = styled.aside`
   position: fixed;
   bottom: 0;
@@ -106,6 +115,8 @@ const BannerWrapper = styled.aside`
   width: 100%;
   color: #fff;
   z-index: 1000;
+  bottom: -72px;
+  animation: ${slideup} 0.25s ease-out 0.25s forwards 1;
 
   .wrapper-inner {
     display: flex;
@@ -136,6 +147,7 @@ const BannerWrapper = styled.aside`
     select {
       border-radius: 8px;
       font-size: 14px;
+      padding: 0 2px;
 
       &:focus {
         outline: none;
