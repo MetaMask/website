@@ -7,12 +7,12 @@ const CardDelegationFeature = props => {
   return (
     <Card>
       <CardInner className="bg-gray">
-        {title ? <Title>{title}</Title> : null}
-        {description ? (
+        {title && <Title>{title}</Title>}
+        {description && (
           <Description>
             <div dangerouslySetInnerHTML={{ __html: description }}></div>
           </Description>
-        ) : null}
+        )}
       </CardInner>
     </Card>
   )
