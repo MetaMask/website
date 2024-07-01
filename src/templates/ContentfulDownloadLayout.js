@@ -37,6 +37,7 @@ const DownloadPage = props => {
       locale={locale}
       localizedPages={localizedPages}
       sharedCopy={sharedCopy}
+      translation={translation}
       previewMode
     >
       {seo &&

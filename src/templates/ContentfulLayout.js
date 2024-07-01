@@ -105,6 +105,7 @@ const ContentfulLayout = props => {
       locale={locale}
       localizedPages={localizedPages}
       sharedCopy={sharedCopy}
+      translation={translation}
     >
       {seo &&
         contentfulModuleToComponent({

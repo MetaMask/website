@@ -59,6 +59,7 @@ const ContentfulNewsCategoryLayout = props => {
       locale={locale}
       localizedPages={localizedPages}
       sharedCopy={sharedCopy}
+      translation={translation}
     >
       {seoData &&
         contentfulModuleToComponent({

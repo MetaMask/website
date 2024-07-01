@@ -19,6 +19,7 @@ import PropTypes from 'prop-types'
 import Link from './Link'
 import { useCountry } from '../hooks/useCountry'
 import { filterMenuPaths } from '../lib/utils/filterMenuPaths'
+import { setLocalStorage } from '../lib/utils/localStorage'
 
 const StyledHeader = props => {
   const {
@@ -150,6 +151,7 @@ const StyledHeader = props => {
       }
 
       navigate(localizedPath)
+      setLocalStorage('preferredLanguage', locale.code)
     }
 
     ldClient?.track('on-locale-change', { locale })
