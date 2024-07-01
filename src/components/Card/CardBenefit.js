@@ -13,12 +13,12 @@ const CardBenefit = props => {
         <Image image={image} darkImage={darkImage} previewMode={previewMode} />
       </ImageWrapper>
       <ContentWrapper>
-        {title ? <Title>{title}</Title> : null}
-        {description ? (
+        {title && <Title>{title}</Title>}
+        {description && (
           <Description>
             <div dangerouslySetInnerHTML={{ __html: description }}></div>
           </Description>
-        ) : null}
+        )}
       </ContentWrapper>
     </Card>
   )
