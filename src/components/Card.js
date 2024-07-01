@@ -18,6 +18,8 @@ import CardDevTutorial from './Card/CardDevTutorial'
 import ContextClientSide from '../Context/ContextClientSide'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import GatsbyBackgroundImage from './GatsbyBackgroundImage'
+import CardBenefit from './Card/CardBenefit'
+import CardDelegationFeature from './Card/CardDelegationFeature'
 
 /**
  * @name Card
@@ -84,6 +86,10 @@ const StyledCard = props => {
       return <CardDevBuilding {...props} isDarkMode={isDarkMode} />
     case 'dev-tutorial':
       return <CardDevTutorial {...props} isDarkMode={isDarkMode} />
+    case 'benefit':
+      return <CardBenefit {...props} />
+    case 'delegation-feature':
+      return <CardDelegationFeature {...props} />
     default:
     // code block
   }
