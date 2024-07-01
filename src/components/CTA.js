@@ -369,6 +369,56 @@ const CTAContainer = styled.div`
       color: ${({ theme }) => theme.lightBlue} !important;
     }
   }
+
+  &.link-card {
+    a {
+      display: flex;
+      width: 623px;
+      height: 100px;
+      padding: 12px 30px;
+      align-items: center;
+      justify-content: space-between;
+
+      border-radius: 10px;
+      background: ${({ theme }) => theme.background.white};
+      box-shadow: ${({ theme }) => theme.shadowActionLink};
+      transition: box-shadow 200ms ease;
+
+      > span {
+        max-width: 435px;
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 1.3;
+        color: ${({ theme }) => theme.text.dark};
+      }
+
+      &::after {
+        content: '';
+        display: block;
+        width: 43px;
+        height: 35px;
+        mask: url('/images/icon-arrow-right.svg');
+        mask-size: cover;
+        background-color: ${({ theme }) => theme.text.dark};
+      }
+
+      &:hover, &:focus {
+        box-shadow: ${({ theme }) => theme.shadowActionLinkHover}
+      }
+
+      @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+        > span {
+          max-width: 75%;
+          font-size: 1rem;
+          text-align: left;
+        }
+
+        &::after {
+          transform: scale(0.5);
+        }
+      }
+    }
+  }
 `
 
 const LinkTitle = styled.span`
