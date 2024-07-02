@@ -155,7 +155,7 @@ const RichTextWrapper = styled.div`
     }
   }
   &#dan-finlay-quote {
-    max-width: 633px;
+    max-width: 720px;
     margin-inline: auto;
 
     &::before {
