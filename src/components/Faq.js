@@ -22,12 +22,13 @@ const Faq = props => {
   const isActive = activeId === id
 
   return (
-    <FaqItem active={isActive} onClick={() => setActiveId(!isActive ? id : '')}>
+    <FaqItem active={isActive}>
       <FaqItemInner $bordered={bordered}>
         <QuestionItem
           backgroundColor={backgroundColor}
           active={isActive}
           $bordered={bordered}
+          onClick={() => setActiveId(!isActive ? id : '')}
         >
           {question}
           <IconClose className="icon">
@@ -68,7 +69,6 @@ Faq.propTypes = {
 }
 
 const FaqItem = styled.div`
-  cursor: pointer;
   display: block;
   width: 100%;
   margin-bottom: 12px;
@@ -102,6 +102,7 @@ const QuestionItem = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   min-height: 80px;
   text-align: left;
+  cursor: pointer;
 
   ${({ $bordered }) =>
     $bordered
