@@ -155,8 +155,9 @@ const StyledHeader = props => {
         )}`
       }
 
-      navigate(localizedPath)
+      window.location.replace(localizedPath)
       setLocalStorage('preferredLanguage', locale.code)
+      setLocalStorage('locale-opt-out', true)
     }
 
     ldClient?.track('on-locale-change', { locale })

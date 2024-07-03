@@ -31,20 +31,17 @@ const LocaleSwitcherBanner = () => {
     let localizedPath
 
     if (dropdownLang === DEFAULT_LOCALE_CODE) {
-      localizedPath = pathname.replace(
-        /^\/(zh-CN|hi-IN|it|ja|ko|ru|es|tr|pcm-NG)/,
-        ''
-      )
+      localizedPath = pathname.replace(/^\/(ar|zh-CN|de|es)/, '')
     } else {
       const newLocale = dropdownLang === DEFAULT_LOCALE_CODE ? '' : dropdownLang
-
       localizedPath = `/${newLocale}${pathname.replace(
-        /^\/(zh-CN|hi-IN|it|ja|ko|ru|es|tr|pcm-NG)\//,
+        /^\/(ar|zh-CN|de|es)\//,
         '/'
       )}`
     }
-    navigate(localizedPath)
+    window.location.replace(localizedPath)
     setLocalStorage('preferredLanguage', dropdownLang)
+    setLocalStorage('locale-opt-out', true)
     setShowBanner(false)
   }
 
@@ -66,6 +63,28 @@ const LocaleSwitcherBanner = () => {
       setDropdownLang(detectedLangCode)
     }
   }, [detectedLang])
+
+  useEffect(() => {
+    const isOptOut = getLocalStorage('locale-opt-out') === 'true'
+    const localLanguage = getLocalStorage('preferredLanguage')
+    const storedLanguage = LOCALES.find(f => f.code === localLanguage)
+
+    if (isOptOut && storedLanguage && storedLanguage.code !== locale.code) {
+      setLocale(storedLanguage)
+      let localizedPath
+      if (storedLanguage.code === DEFAULT_LOCALE_CODE) {
+        localizedPath = pathname.replace(/^\/(ar|zh-CN|de|es)/, '')
+      } else {
+        const newLocale =
+          storedLanguage.code === DEFAULT_LOCALE_CODE ? '' : storedLanguage.code
+        localizedPath = `/${newLocale}${pathname.replace(
+          /^\/(ar|zh-CN|de|es)\//,
+          '/'
+        )}`
+      }
+      navigate(localizedPath)
+    }
+  }, [])
 
   if (!showBanner) return null
 
@@ -106,7 +125,7 @@ const slideup = keyframes`
   100% {
     bottom: 0;
   }
-`;
+`
 
 const BannerWrapper = styled.aside`
   position: fixed;

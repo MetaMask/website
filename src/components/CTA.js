@@ -414,8 +414,9 @@ const CTAContainer = styled.div`
         background-color: ${({ theme }) => theme.text.dark};
       }
 
-      &:hover, &:focus {
-        box-shadow: ${({ theme }) => theme.shadowActionLinkHover}
+      &:hover,
+      &:focus {
+        box-shadow: ${({ theme }) => theme.shadowActionLinkHover};
       }
 
       @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
