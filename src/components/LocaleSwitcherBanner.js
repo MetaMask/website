@@ -8,6 +8,7 @@ import { navigate } from 'gatsby'
 import useLangDetect from '../hooks/useLangDetect'
 import ContextClientSide from '../Context/ContextClientSide'
 import { IconCloseModal } from './StyledGeneral'
+import sanitizeHtml from 'sanitize-html';
 
 const LocaleSwitcherBanner = () => {
   const detectedLang = useLangDetect()
@@ -27,20 +28,21 @@ const LocaleSwitcherBanner = () => {
   }
 
   const handleClickContinue = () => {
-    setLocale(LOCALES.find(l => l.code === dropdownLang))
+    const sanitizedDropdownLang = sanitizeHtml(dropdownLang)
+    setLocale(LOCALES.find(l => l.code === sanitizedDropdownLang))
     let localizedPath
 
-    if (dropdownLang === DEFAULT_LOCALE_CODE) {
+    if (sanitizedDropdownLang === DEFAULT_LOCALE_CODE) {
       localizedPath = pathname.replace(/^\/(ar|zh-CN|de|es)/, '')
     } else {
-      const newLocale = dropdownLang === DEFAULT_LOCALE_CODE ? '' : dropdownLang
+      const newLocale = sanitizedDropdownLang === DEFAULT_LOCALE_CODE ? '' : sanitizedDropdownLang
       localizedPath = `/${newLocale}${pathname.replace(
         /^\/(ar|zh-CN|de|es)\//,
         '/'
       )}`
     }
     window.location.replace(localizedPath)
-    setLocalStorage('preferredLanguage', dropdownLang)
+    setLocalStorage('preferredLanguage', sanitizedDropdownLang)
     setLocalStorage('locale-opt-out', true)
     setShowBanner(false)
   }
