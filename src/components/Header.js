@@ -130,7 +130,7 @@ const StyledHeader = props => {
       setLocalStorage('preferredLanguage', locale.code)
       setLocalStorage('locale-opt-out', true)
 
-      navigate(localizedPath, { replace: true })
+      window.location.replace(localizedPath)
     }
 
     ldClient?.track('on-locale-change', { locale })
