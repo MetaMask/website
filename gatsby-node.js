@@ -5,28 +5,10 @@ const redirects = require('./redirects.json')
 const { buildSitemap } = require(`./src/lib/utils/sitemap`)
 const { writeRedirectsFile } = require('./src/lib/utils/redirect')
 const { fetchDevChangeLog } = require('./fetchDataSSR')
-const fetch = require('node-fetch')
 const { minimatch } = require('minimatch')
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions
-
-  let showLanguageSelector = false
-  try {
-    const ldLangResult = await fetch(
-      'https://app.launchdarkly.com/api/v2/flags/metamask-marketing-sites/show-language-selector',
-      {
-        method: 'GET',
-        headers: {
-          Authorization: process.env.GATSBY_LD_API_KEY,
-        },
-      }
-    )
-    const ldLangData = await ldLangResult.json()
-    showLanguageSelector = ldLangData.environments['test']?.on
-  } catch (error) {
-    console.error('Error fetching LaunchDarkly flag:', error)
-  }
 
   const {
     LOCALES_TRANSLATE,
@@ -258,7 +240,7 @@ exports.createPages = async ({ graphql, actions }) => {
                     category: cat.name,
                     totalItems: cat.total,
                     currentPage: index + 1,
-                    totalPages
+                    totalPages,
                   },
                 })
               })
@@ -307,7 +289,7 @@ exports.createPages = async ({ graphql, actions }) => {
           }
 
           const extraData = pageType === 'Developer' ? devChangelogData : null
-          if (showLanguageSelector && translation) {
+          if (translation) {
             LOCALES_TRANSLATE.forEach(locale => {
               const localeSlug = `/${locale.code}${slug}`
               createPage({

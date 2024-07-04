@@ -1,14 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import Wrapper from './ContentWrapper'
-import { DEFAULT_LOCALE_CODE, LOCALES } from '../lib/config.mjs'
+import {
+  DEFAULT_LOCALE_CODE,
+  getLocalizedPath,
+  LOCALES,
+} from '../lib/config.mjs'
 import { setLocalStorage, getLocalStorage } from '../lib/utils/localStorage'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
 import useLangDetect from '../hooks/useLangDetect'
 import ContextClientSide from '../Context/ContextClientSide'
 import { IconCloseModal } from './StyledGeneral'
-import sanitizeHtml from 'sanitize-html';
+import sanitizeHtml from 'sanitize-html'
 
 const LocaleSwitcherBanner = () => {
   const detectedLang = useLangDetect()
@@ -30,18 +34,10 @@ const LocaleSwitcherBanner = () => {
   const handleClickContinue = () => {
     const sanitizedDropdownLang = sanitizeHtml(dropdownLang)
     setLocale(LOCALES.find(l => l.code === sanitizedDropdownLang))
-    let localizedPath
 
-    if (sanitizedDropdownLang === DEFAULT_LOCALE_CODE) {
-      localizedPath = pathname.replace(/^\/(ar|zh-CN|de|es)/, '')
-    } else {
-      const newLocale = sanitizedDropdownLang === DEFAULT_LOCALE_CODE ? '' : sanitizedDropdownLang
-      localizedPath = `/${newLocale}${pathname.replace(
-        /^\/(ar|zh-CN|de|es)\//,
-        '/'
-      )}`
-    }
+    const localizedPath = getLocalizedPath(pathname, sanitizedDropdownLang)
     window.location.replace(localizedPath)
+
     setLocalStorage('preferredLanguage', sanitizedDropdownLang)
     setLocalStorage('locale-opt-out', true)
     setShowBanner(false)

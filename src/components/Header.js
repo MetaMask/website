@@ -4,10 +4,10 @@ import {
   DEFAULT_LOCALE_CODE,
   GB_BLOCKED_PATHS,
   GB_DISCLAIMER_PATHS,
+  getLocalizedPath,
   LOCALES,
 } from '../lib/config.mjs'
 import ContextClientSide from '../Context/ContextClientSide'
-import { useFeatureFlag } from '../hooks/useFeatureFlag'
 import { useLDClient } from 'gatsby-plugin-launchdarkly'
 import styled, { withTheme } from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
@@ -72,15 +72,7 @@ const StyledHeader = props => {
   const country = useCountry()
   const isUKBlocked = useIsUKBlocked()
 
-  const showLanguageSelector = useFeatureFlag({
-    componentName: 'Header',
-    componentId: contentfulId,
-    flagName: 'show-language-selector',
-    elementRef: languageSelectorRef,
-  })
-
-  const shouldShowLanguageSelector =
-    previewMode || (showLanguageSelector && translation)
+  const shouldShowLanguageSelector = previewMode || translation
 
   useEffect(() => {
     setIsBrowser(true)
@@ -142,18 +134,7 @@ const StyledHeader = props => {
     setLocale(locale)
 
     if (!previewMode) {
-      let localizedPath
-
-      if (locale.code === DEFAULT_LOCALE_CODE) {
-        localizedPath = pathname.replace(/^\/(ar|zh-CN|de|es)/, '')
-      } else {
-        const newLocale = locale.code === DEFAULT_LOCALE_CODE ? '' : locale.code
-
-        localizedPath = `/${newLocale}${pathname.replace(
-          /^\/(ar|zh-CN|de|es)\//,
-          '/'
-        )}`
-      }
+      const localizedPath = getLocalizedPath(pathname, locale.code)
 
       window.location.replace(localizedPath)
       setLocalStorage('preferredLanguage', locale.code)

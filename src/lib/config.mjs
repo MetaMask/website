@@ -114,5 +114,29 @@ export const mapCodeToHtmlLang = code => {
   return locale ? locale.htmlLang : DEFAULT_LOCALE.htmlLang
 }
 
+export const getLocalizedPath = (pathname, newLocaleCode) => {
+  let localizedPath
+
+  if (newLocaleCode === DEFAULT_LOCALE_CODE) {
+    localizedPath = pathname.replace(/^\/(ar|zh-CN|de|es)/, '')
+  } else {
+    const newLocale = newLocaleCode === DEFAULT_LOCALE_CODE ? '' : newLocaleCode
+    localizedPath = `/${newLocale}${pathname.replace(
+      /^\/(ar|zh-CN|de|es)\//,
+      '/'
+    )}`
+  }
+
+  return localizedPath
+}
+
 export const GB_BLOCKED_PATHS = ['/buy-crypto/', '/sell-crypto/', '/swaps/']
-export const GB_DISCLAIMER_PATHS = ['/', '/download/', '/swaps/', '/buy-crypto/', '/sell-crypto/', '/swaps/swap-with-portfolio/', '/news/']
+export const GB_DISCLAIMER_PATHS = [
+  '/',
+  '/download/',
+  '/swaps/',
+  '/buy-crypto/',
+  '/sell-crypto/',
+  '/swaps/swap-with-portfolio/',
+  '/news/',
+]
