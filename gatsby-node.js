@@ -5,7 +5,6 @@ const { buildSitemap } = require(`./src/lib/utils/sitemap`)
 const { minimatch } = require('minimatch')
 const { fetchDevChangeLog } = require('./fetchDataSSR')
 const { writeRedirectsFile } = require('./src/lib/utils/redirect')
-const fetch = require('node-fetch')
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions
@@ -14,21 +13,6 @@ exports.createPages = async ({ graphql, actions }) => {
     mapTemplateLayout,
     DEFAULT_LOCALE_CODE,
   } = await import('./src/lib/config.mjs')
-
-  let showLanguageSelector = false
-  try {
-    const ldLangResult = await fetch(
-      'https://app.launchdarkly.com/api/v2/flags/metamask-marketing-sites/show-language-selector',
-      {
-        method: 'GET',
-        headers: {
-          Authorization: process.env.GATSBY_LD_API_KEY,
-        },
-      }
-    )
-    const ldLangData = await ldLangResult.json()
-    showLanguageSelector = ldLangData.environments['production']?.on
-  } catch (error) {}
 
   const redirects = await graphql(`
     {
@@ -295,7 +279,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   ? `${baseCategoryPath}page/${index + 1}/`
                   : baseCategoryPath
 
-                if (showLanguageSelector && translation) {
+                if (translation) {
                   LOCALES_TRANSLATE.forEach(locale => {
                     const localeSlug = `/${locale.code}${categoryPath}`
                     createPage({
@@ -392,7 +376,7 @@ exports.createPages = async ({ graphql, actions }) => {
             return
           }
           const extraData = pageType === 'Developer' ? devChangelogData : null
-          if (showLanguageSelector && translation) {
+          if (translation) {
             LOCALES_TRANSLATE.forEach(locale => {
               const localeSlug = `/${locale.code}${slug}`
               createPage({
@@ -477,7 +461,7 @@ exports.createPages = async ({ graphql, actions }) => {
           const { contentful_id, node_locale, translation } = news
           const newsUrl = getNewsUrl(news)
 
-          if (showLanguageSelector && translation) {
+          if (translation) {
             LOCALES_TRANSLATE.forEach(locale => {
               const localeSlug = `/${locale.code}${newsUrl}`
               createPage({

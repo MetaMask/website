@@ -4,9 +4,9 @@ import {
   DEFAULT_LOCALE_CODE,
   LOCALES,
   GB_BLOCKED_PATHS,
+  getLocalizedPath,
 } from '../lib/config.mjs'
 import ContextClientSide from '../Context/ContextClientSide'
-import { useFeatureFlag } from '../hooks/useFeatureFlag'
 import { useLDClient } from 'gatsby-plugin-launchdarkly'
 import styled, { withTheme } from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
@@ -19,6 +19,7 @@ import PropTypes from 'prop-types'
 import Link from './Link'
 import { useCountry } from '../hooks/useCountry'
 import { filterMenuPaths } from '../lib/utils/filterMenuPaths'
+import { setLocalStorage } from '../lib/utils/localStorage'
 
 const StyledHeader = props => {
   const {
@@ -38,7 +39,6 @@ const StyledHeader = props => {
     isSticky,
     previewMode = false,
     translation,
-    contentfulId,
   } = props
 
   const isDesktop = useMediaQuery({
@@ -64,15 +64,7 @@ const StyledHeader = props => {
   const ldClient = useLDClient()
   const country = useCountry()
 
-  const showLanguageSelector = useFeatureFlag({
-    componentName: 'Header',
-    componentId: contentfulId,
-    flagName: 'show-language-selector',
-    elementRef: languageSelectorRef,
-  })
-
-  const shouldShowLanguageSelector =
-    previewMode || (showLanguageSelector && translation)
+  const shouldShowLanguageSelector = previewMode || translation
 
   useEffect(() => {
     setIsBrowser(true)
@@ -133,23 +125,12 @@ const StyledHeader = props => {
     setLocale(locale)
 
     if (!previewMode) {
-      let localizedPath
+      const localizedPath = getLocalizedPath(pathname, locale.code)
 
-      if (locale.code === DEFAULT_LOCALE_CODE) {
-        localizedPath = pathname.replace(
-          /^\/(zh-CN|hi-IN|it|ja|ko|ru|es|tr|pcm-NG)/,
-          ''
-        )
-      } else {
-        const newLocale = locale.code === DEFAULT_LOCALE_CODE ? '' : locale.code
+      setLocalStorage('preferredLanguage', locale.code)
+      setLocalStorage('locale-opt-out', true)
 
-        localizedPath = `/${newLocale}${pathname.replace(
-          /^\/(zh-CN|hi-IN|it|ja|ko|ru|es|tr|pcm-NG)\//,
-          '/'
-        )}`
-      }
-
-      navigate(localizedPath)
+      navigate(localizedPath, { replace: true })
     }
 
     ldClient?.track('on-locale-change', { locale })

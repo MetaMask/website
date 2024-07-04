@@ -66,7 +66,12 @@ function NewsLayout(props) {
   }
 
   return (
-    <Layout {...props} localizedPages={localizedPages} sharedCopy={sharedCopy}>
+    <Layout
+      {...props}
+      localizedPages={localizedPages}
+      sharedCopy={sharedCopy}
+      translation={translation}
+    >
       {seoModuleConfig &&
         contentfulModuleToComponent({
           ...seoModuleConfig,
