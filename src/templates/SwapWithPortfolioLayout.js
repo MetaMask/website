@@ -61,7 +61,7 @@ const SwapWithPortfolio = ({ data, pageContext }) => {
 
         <Freedom
           title="Connect your wallet and start swapping"
-          text="MetaMask is the leading self-custodial wallet. Access blockchain applications and web3."
+          text="Access blockchain applications and web3."
           btnLabel="Try Portfolio"
           btnLink="https://portfolio.metamask.io/"
           bgColor="green"
