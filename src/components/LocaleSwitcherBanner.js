@@ -36,11 +36,12 @@ const LocaleSwitcherBanner = () => {
     setLocale(LOCALES.find(l => l.code === sanitizedDropdownLang))
 
     const localizedPath = getLocalizedPath(pathname, sanitizedDropdownLang)
-    window.location.replace(localizedPath)
 
     setLocalStorage('preferredLanguage', sanitizedDropdownLang)
     setLocalStorage('locale-opt-out', true)
     setShowBanner(false)
+
+    navigate(localizedPath, { replace: true })
   }
 
   const handleExit = () => {
@@ -69,18 +70,9 @@ const LocaleSwitcherBanner = () => {
 
     if (isOptOut && storedLanguage && storedLanguage.code !== locale.code) {
       setLocale(storedLanguage)
-      let localizedPath
-      if (storedLanguage.code === DEFAULT_LOCALE_CODE) {
-        localizedPath = pathname.replace(/^\/(ar|zh-CN|de|es)/, '')
-      } else {
-        const newLocale =
-          storedLanguage.code === DEFAULT_LOCALE_CODE ? '' : storedLanguage.code
-        localizedPath = `/${newLocale}${pathname.replace(
-          /^\/(ar|zh-CN|de|es)\//,
-          '/'
-        )}`
-      }
-      navigate(localizedPath)
+      const localizedPath = getLocalizedPath(pathname, storedLanguage.code)
+
+      navigate(localizedPath, { replace: true })
     }
   }, [])
 

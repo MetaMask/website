@@ -43,7 +43,6 @@ const StyledHeader = props => {
     isSticky,
     previewMode = false,
     translation,
-    contentfulId,
   } = props
 
   const isDesktop = useMediaQuery({
@@ -136,9 +135,10 @@ const StyledHeader = props => {
     if (!previewMode) {
       const localizedPath = getLocalizedPath(pathname, locale.code)
 
-      window.location.replace(localizedPath)
       setLocalStorage('preferredLanguage', locale.code)
       setLocalStorage('locale-opt-out', true)
+
+      window.location.replace(localizedPath)
     }
 
     ldClient?.track('on-locale-change', { locale })
