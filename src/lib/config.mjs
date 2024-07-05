@@ -151,16 +151,14 @@ export const mapCodeToHtmlLang = (code) => {
 }
 
 export const getLocalizedPath = (pathname, newLocaleCode) => {
+  const localesRegexPattern = `^/(${LOCALES.map(locale => locale.code).join('|')})`;
   let localizedPath
 
   if (newLocaleCode === DEFAULT_LOCALE_CODE) {
-    localizedPath = pathname.replace(/^\/(zh-CN|hi-IN|it|ja|ko|ru|es|tr|pcm-NG)/, '')
+    localizedPath = pathname.replace(new RegExp(localesRegexPattern), '');
   } else {
     const newLocale = newLocaleCode === DEFAULT_LOCALE_CODE ? '' : newLocaleCode
-    localizedPath = `/${newLocale}${pathname.replace(
-      /^\/(zh-CN|hi-IN|it|ja|ko|ru|es|tr|pcm-NG)\//,
-      '/'
-    )}`
+    localizedPath = `/${newLocale}${pathname.replace(new RegExp(localesRegexPattern + '/'), '/')}`;
   }
 
   return localizedPath
