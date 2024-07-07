@@ -159,6 +159,33 @@ const RichTextWrapper = styled.div`
       content: '';
     }
   }
+  &#dan-finlay-quote {
+    max-width: 720px;
+    margin-inline: auto;
+
+    &::before {
+      content: '“”';
+      display: block;
+      text-align: center;
+      font-weight: 700;
+      font-size: 46px;
+      line-height: 1;
+      user-select: none;
+    }
+
+    blockquote p {
+      font-size: 2rem;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    & > div > p {
+      font-size: 14px;
+      text-transform: uppercase;
+      text-align: center;
+      color: ${({ theme }) => theme.primaryColor};
+    }
+  }
 `
 
 const RichTextTitle = styled.h2`

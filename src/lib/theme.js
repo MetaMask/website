@@ -94,6 +94,8 @@ const theme = {
   shadowCard: 'rgba(0, 0, 0, 0.1)',
   shadowCardGray: 'rgba(15, 15, 15, 0.1)',
   shadowCardFeatureLogo: 'rgba(216, 216, 216, 0.4)',
+  shadowActionLink: '0px 8px 26px 0px rgba(0, 0, 0, 0.08);',
+  shadowActionLinkHover: '0px 8px 26px 0px rgba(0, 0, 0, 0.2);',
 }
 
 export const defaultTheme = {
@@ -181,6 +183,8 @@ export const defaultDarkTheme = {
   shadowCard: 'rgba(0, 0, 0, 0.4)',
   shadowCardGray: 'rgba(255, 255, 255, 0.1)',
   shadowCardFeatureLogo: 'rgba(0, 0, 0, 0.8)',
+  shadowActionLink: '0px 8px 26px 0px rgba(255, 255, 255, 0.08);',
+  shadowActionLinkHover: '0px 8px 26px 0px rgba(255, 255, 255, 0.2);',
   theme: 'default',
 }
 

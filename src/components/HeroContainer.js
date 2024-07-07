@@ -958,6 +958,10 @@ const HeroSideImage = styled.div`
     border-radius: 0;
   }
 
+  .hero-delegation & img {
+    width: 100%;
+  }
+
   .sideImageFlex45 & {
     @media (min-width: ${({ theme }) => theme.device.desktop}) {
       width: 45%;
