@@ -163,16 +163,6 @@ const RichTextWrapper = styled.div`
     max-width: 720px;
     margin-inline: auto;
 
-    &::before {
-      content: '“”';
-      display: block;
-      text-align: center;
-      font-weight: 700;
-      font-size: 46px;
-      line-height: 1;
-      user-select: none;
-    }
-
     blockquote p {
       font-size: 2rem;
       text-align: center;
