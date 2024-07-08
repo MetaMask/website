@@ -371,7 +371,8 @@ const ImageWrapper = styled.div`
     }
   }
 
-  img {
+  img,
+  picture > img {
     height: 100%;
     width: auto;
 
@@ -380,7 +381,9 @@ const ImageWrapper = styled.div`
     }
   }
 
-  ${({ $imageMargin }) => ($imageMargin ? 'margin-left: -15px' : '')}
+  @media (min-width: ${({ theme }) => theme.device.mobile}) {
+    ${({ $imageMargin }) => ($imageMargin ? 'margin-left: -15px' : '')}
+  }
 `
 
 const ImageSrc = styled(Image)`
