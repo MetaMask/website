@@ -5,27 +5,27 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Link from './Link'
 import Wrapper from './ContentWrapper'
 import ColumnWrapper from './ColumnWrapper'
-import { useCountry } from '../hooks/useCountry'
 import { filterMenuPaths } from '../lib/utils/filterMenuPaths'
 import { GB_BLOCKED_PATHS } from '../lib/config.mjs'
+import { useIsUKBlocked } from '../hooks/useIsUKBlocked'
 
 const StyledFooter = props => {
   const { menus, copyright, logoTitle, logoUrl, logoSvg, previewMode } = props
 
   const [filteredMenus, setFilteredMenus] = useState(menus)
 
-  const country = useCountry()
+  const isUKBlocked = useIsUKBlocked()
 
   // Apply UK(GB) specific temporary geo-blocking rules
   useEffect(() => {
-    if (country !== 'GB') {
+    if (!isUKBlocked) {
       return
     }
 
     // Hide menu items pointing to paths blocked in the UK
     const filteredMenus = filterMenuPaths(menus, GB_BLOCKED_PATHS)
     setFilteredMenus(filteredMenus)
-  }, [country, menus])
+  }, [isUKBlocked, menus])
 
   return (
     <FooterContainer>
