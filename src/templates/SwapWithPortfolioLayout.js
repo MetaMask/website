@@ -9,10 +9,14 @@ import WhySwap from '../components/Landing/why-swap'
 import Layout from './PageLayout'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import * as styles from '../styles/swap.module.scss'
+import HeaderDisclaimer from '../components/HeaderDisclaimer'
+import { useCountry } from '../hooks/useCountry'
 
 const SwapWithPortfolio = ({ data, pageContext }) => {
   const { seo, footer } = data
   const { pathBuild, widerContainer, localizedPages } = pageContext
+
+  const country = useCountry()
 
   useEffect(() => {
     document.documentElement.classList.add(styles.isLanding)
@@ -33,6 +37,7 @@ const SwapWithPortfolio = ({ data, pageContext }) => {
           btnLabel="Try Portfolio"
           btnLink="https://portfolio.metamask.io/"
         />
+        {country === 'GB' && <HeaderDisclaimer />}
 
         <Intro
           title="The most trusted way to swap your tokens"

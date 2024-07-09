@@ -2,8 +2,9 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import {
   DEFAULT_LOCALE_CODE,
-  LOCALES,
   GB_BLOCKED_PATHS,
+  GB_DISCLAIMER_PATHS,
+  LOCALES,
   getLocalizedPath,
 } from '../lib/config.mjs'
 import ContextClientSide from '../Context/ContextClientSide'
@@ -17,9 +18,12 @@ import { navigate } from 'gatsby-link'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import Link from './Link'
-import { useCountry } from '../hooks/useCountry'
 import { filterMenuPaths } from '../lib/utils/filterMenuPaths'
 import { setLocalStorage } from '../lib/utils/localStorage'
+import HeaderDisclaimer from './HeaderDisclaimer'
+import { removeLanguageCode } from '../lib/utils/removeLanguageCode'
+import { useIsUKBlocked } from '../hooks/useIsUKBlocked'
+import { useCountry } from '../hooks/useCountry'
 
 const StyledHeader = props => {
   const {
@@ -61,8 +65,11 @@ const StyledHeader = props => {
   const { locale, setLocale } = localization || {}
   const [topMenuMobile, setTopMenuMobile] = useState('88px')
   const [isBrowser, setIsBrowser] = useState(false)
+  const [showDisclaimer, setShowDisclaimer] = useState(false)
+
   const ldClient = useLDClient()
   const country = useCountry()
+  const isUKBlocked = useIsUKBlocked()
 
   const shouldShowLanguageSelector = previewMode || translation
 
@@ -139,21 +146,26 @@ const StyledHeader = props => {
 
   // Apply UK(GB) specific temporary geo-blocking rules
   useEffect(() => {
-    if (country !== 'GB') {
-      return
+    const currentPath = removeLanguageCode(pathname)
+
+    // Show UK Disclaimer
+    if (country === 'GB' && GB_DISCLAIMER_PATHS.includes(currentPath)) {
+      setShowDisclaimer(true)
     }
 
-    // Hide menu items pointing to paths blocked in the UK
-    const filteredMenus = filterMenuPaths(menus, GB_BLOCKED_PATHS)
-    setFilteredMenus(filteredMenus)
+    if (isUKBlocked) {
+      // Hide menu items pointing to paths blocked in the UK
+      const filteredMenus = filterMenuPaths(menus, GB_BLOCKED_PATHS)
+      setFilteredMenus(filteredMenus)
 
-    // Redirect to homepage if current path is blocked
-    if (GB_BLOCKED_PATHS.find(blockedPath => pathname.endsWith(blockedPath))) {
-      const homePath =
-        locale.code === DEFAULT_LOCALE_CODE ? '/' : `/${locale.code}/`
-      navigate(homePath)
+      // Redirect to homepage if current path is blocked
+      if (GB_BLOCKED_PATHS.includes(currentPath)) {
+        const homePath =
+          locale.code === DEFAULT_LOCALE_CODE ? '/' : `/${locale.code}/`
+        navigate(homePath)
+      }
     }
-  }, [country, pathname, locale, menus])
+  }, [isUKBlocked, country, pathname, locale, menus])
 
   return (
     <HeaderElement ref={headerRef} className={classnames({ sticky: isSticky })}>
@@ -346,6 +358,11 @@ const StyledHeader = props => {
           </>
         ) : null}
       </HeaderContainer>
+      {showDisclaimer && (
+        <DisclaimerWrapper>
+          <HeaderDisclaimer />
+        </DisclaimerWrapper>
+      )}
     </HeaderElement>
   )
 }
@@ -538,6 +555,7 @@ const NavMenuChild = styled.div`
         ? `
     opacity: 1;
     visibility: visible;
+    z-index: 999;
     `
         : ''}
   }
@@ -683,4 +701,8 @@ const ToggleWrapper = styled.div`
   @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
     flex-direction: row;
   }
+`
+
+const DisclaimerWrapper = styled.div`
+  margin: 20px -20px -24px -20px;
 `
