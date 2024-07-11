@@ -81,14 +81,14 @@ export const LOCALES = [
     localizedName: '中文',
     code: 'zh-CN',
     shortName: 'CN',
-    htmlLang: 'zh',
+    htmlLang: 'zh-CN',
   },
   {
     name: 'Hindi',
     localizedName: 'हिन्दी',
     code: 'hi-IN',
     shortName: 'HI',
-    htmlLang: 'hi',
+    htmlLang: 'hi-IN',
   },
   {
     name: 'Italian',
@@ -137,7 +137,7 @@ export const LOCALES = [
     localizedName: 'Nigerian Pidgin',
     code: 'pcm-NG',
     shortName: 'NP',
-    htmlLang: 'pcm-NG',
+    htmlLang: 'pcm',
   },
 ]
 

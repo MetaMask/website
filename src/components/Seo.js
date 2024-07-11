@@ -92,9 +92,15 @@ const SEO = props => {
         siteUrl + localeUrl(l.code) + (originalSlug || pagePath)
       link.push({
         rel: 'alternate',
-        hrefLang: l.code,
+        hrefLang: l.htmlLang,
         href: localeHref,
       })
+    })
+
+    link.push({
+      rel: 'alternate',
+      hrefLang: 'x-default',
+      href: siteUrl + (originalSlug || pagePath),
     })
   }
   if (paginationPrev) {
