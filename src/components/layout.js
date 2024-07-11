@@ -17,7 +17,6 @@ const Layout = props => {
     themeColor,
     widerContainer,
     locale,
-    previewMode,
   } = props
   const data = useStaticQuery(
     graphql`
