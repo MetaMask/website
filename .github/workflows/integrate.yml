@@ -47,9 +47,10 @@ jobs:
 
       - name: Cache Gatsby 📦
         id: gatsby-cache-build
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
+            .cache
             node_modules
           key: ${{ runner.os }}-gatsby-build-${{ github.run_id }}-node_modules-${{ hashFiles('**/yarn.lock')}}
           restore-keys: |
