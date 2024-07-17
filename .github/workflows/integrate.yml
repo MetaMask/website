@@ -40,21 +40,17 @@ jobs:
           echo GATSBY_OSANO_CCID_ID=${{ secrets.GATSBY_OSANO_CCID_ID }} >> .env
           echo GH_TOKEN=${{ secrets.GH_TOKEN }} >> .env
 
-      - name: Read .nvmrc 🧑‍🏫
-        run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
-        id: nvm
-
       - name: Setup Node 🔧
         uses: actions/setup-node@v4
         with:
-          node-version: "${{ steps.nvm.outputs.NVMRC }}"
-          cache: 'yarn'
+          node-version-file: ".nvmrc"
 
       - name: Cache Gatsby 📦
         id: gatsby-cache-build
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
+            .cache
             node_modules
           key: ${{ runner.os }}-gatsby-build-${{ github.run_id }}-node_modules-${{ hashFiles('**/yarn.lock')}}
           restore-keys: |
