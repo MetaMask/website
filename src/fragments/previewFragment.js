@@ -41,6 +41,64 @@ export const ContentfulEmbedFields = gql`
   }
 `
 
+export const ContentfulHubSpotFormFields = gql`
+  fragment ContentfulHubSpotFormFields on HubSpotForm {
+    __typename
+    sys {
+      id
+    }
+    title
+    portalId
+    formId
+    campaignId
+    displayTitle
+    width
+    customClass
+    customId
+  }
+`
+
+export const ContentfulCtaFields = gql`
+  ${ContentfulHubSpotFormFields}
+  ${ContentfulEmbedFields}
+  fragment ContentfulCtaFields on Cta {
+    __typename
+    name
+    displayText
+    displayTextTreatment
+    ctaLink
+    socialLink
+    newTab
+    buttonDisplay
+    buttonGradient
+    hideButtonIcon
+    buttonSecondary
+    fontSize
+    eventCategory
+    eventLabel
+    showCaretRight
+    buttonCaretDown
+    launchDarklyFlag
+    downloadBrowsers
+    customClassName
+    sys {
+      id
+    }
+    hubSpotForm(preview: true) {
+      ...ContentfulHubSpotFormFields
+    }
+    embedHtml(preview: true) {
+      ...ContentfulEmbedFields
+    }
+    mobileCta {
+      ...ContentfulCtaFields
+    }
+    alternativeCta {
+      ...ContentfulCtaFields
+    }
+  }
+`
+
 export const ContentfulPortfolioIntroFields = gql`
   fragment ContentfulPortfolioIntroFields on PortfolioIntro {
     __typename
@@ -211,65 +269,6 @@ export const ContentfulNewsLayoutFields = gql`
         createProfilePage
         profileUrl
       }
-    }
-  }
-`
-
-export const ContentfulHubSpotFormFields = gql`
-  fragment ContentfulHubSpotFormFields on HubSpotForm {
-    __typename
-    sys {
-      id
-    }
-    title
-    description
-    portalId
-    formId
-    campaignId
-    displayTitle
-    width
-    customClass
-    customId
-  }
-`
-
-export const ContentfulCtaFields = gql`
-  ${ContentfulHubSpotFormFields}
-  ${ContentfulEmbedFields}
-  fragment ContentfulCtaFields on Cta {
-    __typename
-
-    name
-    displayText
-    ctaLink
-    socialLink
-    newTab
-    buttonDisplay
-    buttonGradient
-    hideButtonIcon
-    buttonSecondary
-    fontSize
-    eventCategory
-    eventLabel
-    showCaretRight
-    buttonCaretDown
-    launchDarklyFlag
-    downloadBrowsers
-    customClassName
-    sys {
-      id
-    }
-    hubSpotForm(preview: true) {
-      ...ContentfulHubSpotFormFields
-    }
-    embedHtml(preview: true) {
-      ...ContentfulEmbedFields
-    }
-    mobileCta {
-      ...ContentfulCtaFields
-    }
-    alternativeCta {
-      ...ContentfulCtaFields
     }
   }
 `

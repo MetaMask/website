@@ -3,7 +3,7 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { useLDClient } from 'gatsby-plugin-launchdarkly'
 import useIsChromium from '../lib/utils/isChromium'
 import lowerCase from 'lodash/lowerCase'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import SocialIcon from './SocialIcon'
 import isEmpty from 'lodash/isEmpty'
@@ -16,11 +16,13 @@ import Popup from './Popup'
 import Image from './Image'
 import { gsap } from 'gsap'
 import Link from './Link'
+import { useLaunchDarklyFlag } from '../Context/LaunchDarklyFlagContext'
 
 const CTA = props => {
   const {
     link: linkDefault,
     text: textDefault,
+    textTreatment,
     align = 'left',
     newTab: newTabDefault,
     iconConfig,
@@ -47,10 +49,12 @@ const CTA = props => {
     previewMode = false,
     isForDeveloper,
     buttonCaretDown,
+    flagName = null,
     attr,
   } = props
 
   const ldClient = useLDClient()
+  const { getLaunchDarklyFlag } = useLaunchDarklyFlag()
 
   const [keyBrowser, setKeyBrowser] = React.useState('chrome')
   const isButton = buttonDisplay || button
@@ -61,24 +65,50 @@ const CTA = props => {
   const [delayShow, setDelayShow] = React.useState(isDownloadBrowser)
   const [showPopup, setShowPopup] = React.useState(false)
 
-  let text = textDefault,
-    ctaLink = linkDefault,
-    lowerBrowserName = lowerCase(browserName),
-    iconBrowser = ''
+  const [text, setText] = useState(textDefault)
+  const [ctaLink, setCtaLink] = useState(linkDefault)
+  const lowerBrowserName = lowerCase(browserName)
+  const [iconBrowser, setIconBrowser] = useState('')
+  const [useTextTreatment, setUseTextTreatment] = useState(false)
 
-  if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
-    text = textDefault?.replace('$browser', downloadBrowsers[keyBrowser]?.text)
+  useEffect(() => {
+    if (useTextTreatment) {
+      setText(textTreatment)
+    } else {
+      setText(textDefault)
+    }
+    setCtaLink(linkDefault)
+    setIconBrowser('')
 
-    if (
-      ['ios', 'android', 'not-supported'].includes(keyBrowser) &&
-      downloadBrowsers[keyBrowser]?.text
-    ) {
-      text = downloadBrowsers[keyBrowser].text
+    if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
+      let newText = textDefault
+
+      newText = newText?.replace('$browser', downloadBrowsers[keyBrowser]?.text)
+
+      if (
+        ['ios', 'android', 'not-supported'].includes(keyBrowser) &&
+        downloadBrowsers[keyBrowser]?.text
+      ) {
+        newText = downloadBrowsers[keyBrowser].text
+      }
+
+      setCtaLink(downloadBrowsers[keyBrowser]?.link)
+      setIconBrowser(downloadBrowsers[keyBrowser]?.icon)
+    }
+  })
+
+  useEffect(() => {
+    const init = async () => {
+      if (flagName !== 'home-portfolio-cta-test') {
+        return
+      }
+      const value = await getLaunchDarklyFlag('home-portfolio-cta-test')
+      console.log(`getLaunchDarklyFlag('home-portfolio-cta-test')`, value)
+      setUseTextTreatment(value === 'treatment')
     }
 
-    ctaLink = downloadBrowsers[keyBrowser]?.link
-    iconBrowser = downloadBrowsers[keyBrowser]?.icon
-  }
+    init()
+  }, [getLaunchDarklyFlag, setUseTextTreatment, flagName])
 
   const [link, setLink] = React.useState(ctaLink)
   const [newTab, setNewTab] = React.useState(newTabDefault || isDownloadBrowser)
@@ -89,6 +119,11 @@ const CTA = props => {
 
   const handleCustomClick = e => {
     const trackableClasses = ['ld-portfolio-link', 'ld-download-link']
+
+    if (flagName === 'home-portfolio-cta-test') {
+      ldClient?.track('home-portfolio-cta-click')
+      ldClient?.flush()
+    }
 
     if (
       customClassName &&
@@ -334,6 +369,7 @@ CTA.propTypes = {
   eventLabel: PropTypes.string,
   socialLink: PropTypes.string,
   previewMode: PropTypes.bool,
+  flagName: PropTypes.string,
 }
 
 const CTAContainer = styled.div`
