@@ -39,7 +39,7 @@ jobs:
       - name: Setup Node.js 🔧
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NVMRC }}
+          node-version-file: ".nvmrc"
 
       - name: Cache Gatsby
         uses: actions/cache@v4
@@ -75,5 +75,5 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: public # The folder the action should deploy.
-          clean: true # Automatically remove deleted files from the deploy branch
+          folder: public
+          clean: true
