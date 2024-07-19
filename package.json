@@ -8,7 +8,7 @@
     "dev": "gatsby develop",
     "build": "gatsby build --log-pages",
     "deploy": "yarn build && touch public/.nojekyll && touch public/CNAME && echo \"metamask.io\" >> public/CNAME",
-    "build:dev": "ACTIVE_ENV=development && yarn build",
+    "build:dev": "ACTIVE_ENV=development yarn build",
     "deploy:dev": "yarn build:dev && touch public/.nojekyll && touch public/CNAME && echo \"metamask.consensys.io\" >> public/CNAME",
     "serve": "gatsby serve --port 8000",
     "clean": "rm -rf node_modules; rm -rf .cache; rm -rf public; yarn install;",
