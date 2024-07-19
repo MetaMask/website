@@ -46,18 +46,28 @@ jobs:
           node-version-file: ".nvmrc"
 
       - name: Cache Gatsby 📦
-        id: gatsby-cache-build
         uses: actions/cache@v4
+        id: cache-gatsby
         with:
           path: |
             .cache
-            node_modules
-          key: ${{ runner.os }}-gatsby-build-${{ github.run_id }}-node_modules-${{ hashFiles('**/yarn.lock')}}
+            public
+          key: ${{ runner.os }}-cache-gatsby-${{ github.run_id }}
           restore-keys: |
-            ${{ runner.os }}-gatsby-build-
+            ${{ runner.os }}-cache-gatsby
+
+      - name: Cache Modules 📦
+        id: cache-modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-cache-modules-${{ hashFiles('**/yarn.lock')}}
+          restore-keys: |
+            ${{ runner.os }}-cache-modules-
 
       - name: Install Dependencies ⏳
-        if: steps.gatsby-cache-build.outputs.cache-hit != 'true'
+        if: steps.cache-modules.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
       - name: Build 🔧
