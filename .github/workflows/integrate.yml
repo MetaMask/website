@@ -58,7 +58,7 @@ jobs:
             ${{ runner.os }}-cache-gatsby
 
       - name: Install Dependencies ⏳
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --prefer-offline
 
       - name: Build 🏗️
         run: yarn deploy:dev
