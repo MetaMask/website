@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "gatsby develop",
-    "build": "gatsby build",
+    "build": "gatsby build --log-pages",
     "deploy": "yarn build && touch public/.nojekyll && touch public/CNAME && echo \"metamask.io\" >> public/CNAME",
     "build:dev": "ACTIVE_ENV=development gatsby build",
     "deploy:dev": "yarn build:dev && touch public/.nojekyll && touch public/CNAME && echo \"metamask.consensys.io\" >> public/CNAME",
