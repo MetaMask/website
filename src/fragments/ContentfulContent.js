@@ -597,6 +597,7 @@ export const ContentfulCtaBaseFields = graphql`
     fontSize
     ctaLink
     displayText
+    displayTextTreatment
     newTab
     buttonDisplay
     buttonGradient

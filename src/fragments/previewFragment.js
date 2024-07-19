@@ -65,6 +65,7 @@ export const ContentfulCtaFields = gql`
     __typename
     name
     displayText
+    displayTextTreatment
     ctaLink
     socialLink
     newTab
