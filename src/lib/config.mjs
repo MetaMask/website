@@ -10,60 +10,27 @@ export const CONTENTFUL_PREVIEW_HOST =
 export const CONTENTFUL_PREVIEW_API_KEY =
   process.env.GATSBY_CONTENTFUL_PREVIEW_API_KEY
 
-export const TEMPLATE_LAYOUT_LIST = [
-  {
-    name: 'Defaut',
-    path: './src/templates/ContentfulLayout.js',
-  },
-  {
-    name: 'Download',
-    path: './src/templates/ContentfulDownloadLayout.js',
-  },
-  {
-    name: 'Asset',
-    path: './src/templates/ContentfulAssetLayout.js',
-  },
-  {
-    name: 'Legal',
-    path: './src/templates/MarkdownPageLayout.js',
-  },
-  {
-    name: 'Portfolio',
-    path: './src/templates/ContentfulPortfolioLayout.js',
-  },
-  {
-    name: 'SwapWithPorfolio',
-    path: './src/templates/SwapWithPortfolioLayout.js',
-  },
-  {
-    name: 'MultiToken',
-    path: './src/templates/MultiTokenSwapLayout.js',
-  },
-  {
-    name: 'PYUSD',
-    path: './src/templates/PYUSDLayout.js',
-  },
-  {
-    name: 'Blog',
-    path: './src/templates/NewsLayout.js',
-  },
-  {
-    name: 'Author',
-    path: './src/templates/AuthorProfileLayout.js',
-  },
-  {
-    name: 'News',
-    path: './src/templates/ContentfulNewsCategoryLayout.js',
-  },
-]
+export const TEMPLATE_LAYOUT_LIST = {
+  Defaut: './src/templates/ContentfulLayout.js',
+  Download: './src/templates/ContentfulDownloadLayout.js',
+  Asset: './src/templates/ContentfulAssetLayout.js',
+  Legal: './src/templates/MarkdownPageLayout.js',
+  Portfolio: './src/templates/ContentfulPortfolioLayout.js',
+  SwapWithPorfolio: './src/templates/SwapWithPortfolioLayout.js',
+  MultiToken: './src/templates/MultiTokenSwapLayout.js',
+  PYUSD: './src/templates/PYUSDLayout.js',
+  Blog: './src/templates/NewsLayout.js',
+  Author: './src/templates/AuthorProfileLayout.js',
+  News: './src/templates/ContentfulNewsCategoryLayout.js',
+}
 
 export const mapTemplateLayout = name => {
-  if (!name) return TEMPLATE_LAYOUT_LIST[0].path
-  const template = TEMPLATE_LAYOUT_LIST.find(l => l.name === name)
-  if (template) {
-    return template.path
+  if (!name) return TEMPLATE_LAYOUT_LIST['Defaut']
+  const path = TEMPLATE_LAYOUT_LIST[name]
+  if (path) {
+    return path
   }
-  return TEMPLATE_LAYOUT_LIST[0].path
+  return TEMPLATE_LAYOUT_LIST['Defaut']
 }
 
 export const LOCALES = [
@@ -73,7 +40,6 @@ export const LOCALES = [
     code: 'en-US',
     shortName: 'EN',
     htmlLang: 'en',
-    default: true,
   },
   {
     name: 'Arabic',
@@ -106,7 +72,7 @@ export const LOCALES = [
 ]
 
 export const LOCALES_TRANSLATE = LOCALES.slice(1)
-export const DEFAULT_LOCALE = LOCALES.find(l => l.default)
+export const DEFAULT_LOCALE = LOCALES[0]
 export const DEFAULT_LOCALE_CODE = DEFAULT_LOCALE.code
 
 export const mapCodeToHtmlLang = code => {
@@ -115,14 +81,19 @@ export const mapCodeToHtmlLang = code => {
 }
 
 export const getLocalizedPath = (pathname, newLocaleCode) => {
-  const localesRegexPattern = `^/(${LOCALES.map(locale => locale.code).join('|')})`;
+  const localesRegexPattern = `^/(${LOCALES.map(locale => locale.code).join(
+    '|'
+  )})`
   let localizedPath
 
   if (newLocaleCode === DEFAULT_LOCALE_CODE) {
-    localizedPath = pathname.replace(new RegExp(localesRegexPattern), '');
+    localizedPath = pathname.replace(new RegExp(localesRegexPattern), '')
   } else {
     const newLocale = newLocaleCode === DEFAULT_LOCALE_CODE ? '' : newLocaleCode
-    localizedPath = `/${newLocale}${pathname.replace(new RegExp(localesRegexPattern + '/'), '/')}`;
+    localizedPath = `/${newLocale}${pathname.replace(
+      new RegExp(localesRegexPattern + '/'),
+      '/'
+    )}`
   }
 
   return localizedPath
