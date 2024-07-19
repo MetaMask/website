@@ -46,6 +46,7 @@ const ContentfulCta = props => {
     <CTA
       link={activeCta.ctaLink || ''}
       text={activeCta.displayText || activeCta.ctaText}
+      textTreatment={activeCta.displayTextTreatment}
       newTab={activeCta.newTab}
       iconConfig={activeCta.iconConfig}
       button={activeCta.buttonDisplay}
@@ -71,6 +72,7 @@ const ContentfulCta = props => {
       previewMode={activeCta.previewMode}
       isForDeveloper={activeCta.isForDeveloper}
       buttonCaretDown={activeCta.buttonCaretDown}
+      flagName={activeCta.launchDarklyFlag}
       attr={{
         'data-componentname': 'ContentfulCta',
         'data-componentid': activeCta?.contentful_id || 'n/a',
@@ -99,6 +101,8 @@ ContentfulCta.propTypes = {
   moduleConfig: PropTypes.shape({
     iconConfig: PropTypes.object,
     ctaAlignment: PropTypes.string,
+    displayText: PropTypes.string,
+    displayTextTreatment: PropTypes.string,
     ctaLink: PropTypes.string,
     newTab: PropTypes.bool,
     ctaText: PropTypes.string,
@@ -111,5 +115,6 @@ ContentfulCta.propTypes = {
     buttonSecondary: PropTypes.bool,
     hideButtonIcon: PropTypes.bool,
     previewMode: PropTypes.bool,
+    launchDarklyFlag: PropTypes.string,
   }),
 }
