@@ -103,7 +103,6 @@ const CTA = props => {
         return
       }
       const value = await getLaunchDarklyFlag('home-portfolio-cta-test')
-      console.log(`getLaunchDarklyFlag('home-portfolio-cta-test')`, value)
       setUseTextTreatment(value === 'treatment')
     }
 
