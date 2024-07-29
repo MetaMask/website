@@ -48,21 +48,15 @@ const ClientSideWrapper = ({ children }) => {
     },
   }
   return (
-    <ContentfulLivePreviewProvider
-      enableInspectorMode
-      enableLiveUpdates
-      locale="en-US"
-    >
-      <MetaMaskContextProvider>
-        <ExperimentFlagsProvider>
-          <ShowRegionSelectorFlagProvider>
-            <ContextClientSide.Provider value={valueContext}>
-              {children}
-            </ContextClientSide.Provider>
-          </ShowRegionSelectorFlagProvider>
-        </ExperimentFlagsProvider>
-      </MetaMaskContextProvider>
-    </ContentfulLivePreviewProvider>
+    <MetaMaskContextProvider>
+      <ExperimentFlagsProvider>
+        <LaunchDarklyFlagProvider>
+          <ContextClientSide.Provider value={valueContext}>
+            {children}
+          </ContextClientSide.Provider>
+        </LaunchDarklyFlagProvider>
+      </ExperimentFlagsProvider>
+    </MetaMaskContextProvider>
   )
 }
 

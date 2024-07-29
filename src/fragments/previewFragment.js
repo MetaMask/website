@@ -48,6 +48,7 @@ export const ContentfulHubSpotFormFields = gql`
       id
     }
     title
+    description
     portalId
     formId
     campaignId
