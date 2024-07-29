@@ -2,6 +2,7 @@ import { isAndroid, isIOS, isMobile, browserName } from 'react-device-detect'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { persistDeveloper } from '../lib/utils/localStorage'
 import { useLDClient } from 'gatsby-plugin-launchdarkly'
+import { useLocation } from '@reach/router'
 import useIsChromium from '../lib/utils/isChromium'
 import lowerCase from 'lodash/lowerCase'
 import React, { useEffect, useMemo, useState } from 'react'
@@ -18,6 +19,7 @@ import Image from './Image'
 import { gsap } from 'gsap'
 import Link from './Link'
 import { useLaunchDarklyFlag } from '../Context/LaunchDarklyFlagContext'
+import { removeLanguageCode } from '../lib/utils/removeLanguageCode'
 
 const CTA = props => {
   const {
@@ -72,6 +74,8 @@ const CTA = props => {
   const [iconBrowser, setIconBrowser] = useState('')
   const [useTextTreatment, setUseTextTreatment] = useState(false)
 
+  const location = useLocation()
+
   useEffect(() => {
     if (useTextTreatment) {
       setText(textTreatment)
@@ -123,6 +127,14 @@ const CTA = props => {
     if (flagName === 'home-portfolio-cta-test') {
       ldClient?.track('home-portfolio-cta-click')
       ldClient?.flush()
+    }
+
+    if (flagName === 'navbar-view-portfolio-cta') {
+      const currentPath = removeLanguageCode(location?.pathname)
+      if (currentPath === '/') {
+        ldClient?.track('navbar-view-portfolio-cta-click')
+        ldClient?.flush()
+      }
     }
 
     if (
