@@ -11,7 +11,7 @@ import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import Carousel from '../Carousel'
 import FaqList from '../FaqList'
-import { useShowRegionSelectorFlag } from '../../Context/ShowRegionSelectorFlagContext'
+import { useLaunchDarklyFlag } from '../../Context/LaunchDarklyFlagContext'
 
 const ContentfulModuleContainer = props => {
   const {
@@ -54,7 +54,7 @@ const ContentfulModuleContainer = props => {
   const id = useMemo(() => kebabCase(title), [title])
 
   const [showRegionSelector, setShowRegionSelector] = useState(false)
-  const { getShowRegionSelectorFlag } = useShowRegionSelectorFlag()
+  const { getLaunchDarklyFlag } = useLaunchDarklyFlag()
 
   useFeatureFlag({
     componentName: 'PopupRegionSelector',
@@ -69,12 +69,12 @@ const ContentfulModuleContainer = props => {
     }
 
     const init = async () => {
-      const value = await getShowRegionSelectorFlag()
+      const value = await getLaunchDarklyFlag('show-locale-providers-on-buy-crypto-page')
       setShowRegionSelector(value)
     }
 
     init()
-  }, [id, getShowRegionSelectorFlag])
+  }, [id, getLaunchDarklyFlag])
 
   const gridModulesGap = gridModulesGapDefault || '8px'
   const { childMarkdownRemark: { html } = {} } = description || {}
