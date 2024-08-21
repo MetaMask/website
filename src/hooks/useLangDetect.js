@@ -17,7 +17,7 @@ const useLangDetect = () => {
     const browserLangFirstCode =
       browserLanguage && browserLanguage.split('-')?.[0]
     const detectedBrowserLang = LOCALES.find(
-      l => l.htmlLang === browserLangFirstCode
+      l => l.htmlLang.startsWith(browserLangFirstCode)
     )
     if (detectedBrowserLang) {
       setLanguage(detectedBrowserLang)
