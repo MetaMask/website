@@ -38,7 +38,7 @@ const HubspotForm = props => {
       }
     }
 
-    if (customClass === 'newsletterOnHomepage') {
+    if (customClass === 'newsletterOnHomepage' && description) {
       const legalConsent = document.querySelector('.legal-consent-container')
       if (legalConsent) {
         const reCAPTCHA = document.createElement('div')
