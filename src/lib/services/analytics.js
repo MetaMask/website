@@ -1,4 +1,4 @@
-export default `
+const analytics = `
 const DEV_WRITE_KEY = "PZkSwsTBxW1BrbyIYEUjFBEumGvTyjcz", PROD_WRITE_KEY = "MHae0tTVRqyHDim9qQ9ablSZpvm3Tvzc";
 const params = new Proxy(new URLSearchParams(window.location.search), { get: (searchParams, prop) => searchParams.get(prop), });
 const WRITE_KEY = (params.env == "production") ? PROD_WRITE_KEY : DEV_WRITE_KEY;
@@ -15,46 +15,48 @@ const WRITE_KEY = (params.env == "production") ? PROD_WRITE_KEY : DEV_WRITE_KEY;
   }
 }}();
 
-window.addEventListener('load', function () {
-    const checkReasons = function () {
-      const checkboxes = document.getElementsByName('reasons');
-      let count = 0;
-      for (var i=0; i<checkboxes.length; i++) {
-         if (checkboxes[i].checked) {
-            count ++;
-         }
-      }
-      document.getElementById('submitSurvey').disabled = !count;
-    };
-  
-    const submitSurvey = function() {
-      let reasons = [];
-      const checkboxes = document.getElementsByName('reasons');
-      for (let i=0; i<checkboxes.length; i++) {
-         if (checkboxes[i].checked) {
-            reasons.push(checkboxes[i].value);
-         }
-      }
-      if(reasons.length > 0) {
-        document.getElementById('submitSurvey').style.display = 'none';
-        analytics.track('Survey Submitted', {
-          survey_type: "mm_ext_uninstall",
-          field_reason: reasons,
-        });
-        document.getElementById('uninstall_survey').innerHTML = 'Thank you for your feedback.';
-      }
-    };
+window.addEventListener('load', setupSurvey)
 
-    const checkboxes = document.getElementsByName('reasons');
-    for (let i=0; i<checkboxes.length; i++) {
-      checkboxes[i].onchange = checkReasons;
+function setupSurvey() {
+	const checkboxes = document.getElementsByName('reasons')
+	const submitSurveyButton = document.getElementById('submitSurvey')
+	const uninstallSurvey = document.getElementById('uninstall_survey')
+
+  console.log('setupSurvey', checkboxes)
+
+	checkboxes.forEach(checkbox => {
+    checkbox.onchange = checkReasons
+	})
+
+	if (submitSurveyButton) {
+    submitSurveyButton.addEventListener('click', submitSurvey)
+	}
+
+	function checkReasons() {
+    const checkedCount = Array.from(checkboxes).filter(
+      checkbox => checkbox.checked
+    ).length
+    submitSurveyButton.disabled = checkedCount === 0
+	}
+
+	function submitSurvey() {
+    const reasons = Array.from(checkboxes)
+      .filter(checkbox => checkbox.checked)
+      .map(checkbox => checkbox.value)
+
+    if (reasons.length > 0) {
+      submitSurveyButton.style.display = 'none'
+
+      analytics.track('Survey Submitted', {
+        survey_type: 'mm_ext_uninstall',
+        field_reason: reasons,
+        wallets_installed: window.walletsInstalled,
+      })
+
+      uninstallSurvey.innerHTML = 'Thank you for your feedback.'
     }
-    
-    const submitSurveyButton = document.getElementById('submitSurvey');
-    if(submitSurveyButton) {
-      submitSurveyButton.addEventListener('click', function () {
-        submitSurvey()
-      })      
-    }
-});
+	}
+}
 `
+
+export default analytics
