@@ -13,7 +13,7 @@ const DEV_WRITE_KEY = "PZkSwsTBxW1BrbyIYEUjFBEumGvTyjcz", PROD_WRITE_KEY = "MHae
 const params = new Proxy(new URLSearchParams(window.location.search), { get: (searchParams, prop) => searchParams.get(prop), });
 const WRITE_KEY = (params.env == "production") ? PROD_WRITE_KEY : DEV_WRITE_KEY;
 
-!function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey=WRITE_KEY;analytics.SNIPPET_VERSION="4.15.2";
+!function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey=WRITE_KEY;analytics.SNIPPET_VERSION="4.15.2";
   analytics.load(WRITE_KEY);
   // only ping Segment if an id exists
   if (params.mmi) {
@@ -25,48 +25,46 @@ const WRITE_KEY = (params.env == "production") ? PROD_WRITE_KEY : DEV_WRITE_KEY;
   }
 }}();
 
-window.addEventListener('load', function () {
-    const checkReasons = function () {
-      const checkboxes = document.getElementsByName('reasons');
-      let count = 0;
-      for (var i=0; i<checkboxes.length; i++) {
-         if (checkboxes[i].checked) {
-            count ++;
-         }
-      }
-      document.getElementById('submitSurvey').disabled = !count;
-    };
-  
-    const submitSurvey = function() {
-      let reasons = [];
-      const checkboxes = document.getElementsByName('reasons');
-      for (let i=0; i<checkboxes.length; i++) {
-         if (checkboxes[i].checked) {
-            reasons.push(checkboxes[i].value);
-         }
-      }
-      if(reasons.length > 0) {
-        document.getElementById('submitSurvey').style.display = 'none';
-        analytics.track('Survey Submitted', {
-          survey_type: "mm_ext_uninstall",
-          field_reason: reasons,
-        });
-        document.getElementById('uninstall_survey').innerHTML = 'Thank you for your feedback.';
-      }
-    };
+window.addEventListener('load', setupSurvey)
 
-    const checkboxes = document.getElementsByName('reasons');
-    for (let i=0; i<checkboxes.length; i++) {
-      checkboxes[i].onchange = checkReasons;
+function setupSurvey() {
+	const checkboxes = document.getElementsByName('reasons')
+	const submitSurveyButton = document.getElementById('submitSurvey')
+	const uninstallSurvey = document.getElementById('uninstall_survey')
+
+	checkboxes.forEach(checkbox => {
+    checkbox.onchange = checkReasons
+	})
+
+	if (submitSurveyButton) {
+    submitSurveyButton.addEventListener('click', submitSurvey)
+	}
+
+	function checkReasons() {
+    const checkedCount = Array.from(checkboxes).filter(
+      checkbox => checkbox.checked
+    ).length
+    submitSurveyButton.disabled = checkedCount === 0
+	}
+
+	function submitSurvey() {
+    const reasons = Array.from(checkboxes)
+      .filter(checkbox => checkbox.checked)
+      .map(checkbox => checkbox.value)
+
+    if (reasons.length > 0) {
+      submitSurveyButton.style.display = 'none'
+
+      analytics.track('Survey Submitted', {
+        survey_type: 'mm_ext_uninstall',
+        field_reason: reasons,
+        wallets_installed: window.walletsInstalled,
+      })
+
+      uninstallSurvey.innerHTML = 'Thank you for your feedback.'
     }
-    
-    const submitSurveyButton = document.getElementById('submitSurvey');
-    if(submitSurveyButton) {
-      submitSurveyButton.addEventListener('click', function () {
-        submitSurvey()
-      })      
-    }
-});
+	}
+}
 </script><style data-styled="" data-styled-version="5.3.10">.kcBTUw{background-color:#fff;bottom:20px;display:block;left:0;margin-left:auto;margin-right:auto;margin-top:0;overflow:visible;padding:24px 20px;right:0;top:0;z-index:999;-webkit-transition:background 300ms ease;transition:background 300ms ease;}/*!sc*/
 body.dark-mode .Header__HeaderElement-sc-1grwj6n-0{background-color:#121212;}/*!sc*/
 .kcBTUw.sticky{position:-webkit-sticky;position:sticky;}/*!sc*/
@@ -292,9 +290,9 @@ window._linkedin_data_partner_ids.push(_linkedin_partner_id);
           <script
             id="gatsby-chunk-mapping"
           >
-            window.___chunkMapping="{\"app\":[\"/app-cc8966e7b9a04abbb532.js\"],\"component---src-pages-404-js\":[\"/component---src-pages-404-js-a4ee3c3fdeea1ad9c54f.js\"],\"component---src-pages-preview-js\":[\"/component---src-pages-preview-js-8c581dc1ab0ef3f7d802.js\"],\"component---src-templates-author-profile-layout-js\":[\"/component---src-templates-author-profile-layout-js-6dd89eb929b670f1f31b.js\"],\"component---src-templates-contentful-asset-layout-js\":[\"/component---src-templates-contentful-asset-layout-js-a5b338a1e6bb9c91f986.js\"],\"component---src-templates-contentful-download-layout-js\":[\"/component---src-templates-contentful-download-layout-js-386c1aa0c7c51169cbf4.js\"],\"component---src-templates-contentful-layout-js\":[\"/component---src-templates-contentful-layout-js-1951d85892c22e6342f4.js\"],\"component---src-templates-contentful-news-category-layout-js\":[\"/component---src-templates-contentful-news-category-layout-js-4ae1dc7f2e0d3329a29c.js\"],\"component---src-templates-markdown-page-layout-js\":[\"/component---src-templates-markdown-page-layout-js-eba99dc1a3dfcde0f50b.js\"],\"component---src-templates-news-layout-js\":[\"/component---src-templates-news-layout-js-4905558299171a2b372a.js\"]}";
+            window.___chunkMapping="{\"app\":[\"/app-f13aefc83a3a4ef678a1.js\"],\"component---src-pages-404-js\":[\"/component---src-pages-404-js-a4ee3c3fdeea1ad9c54f.js\"],\"component---src-pages-preview-js\":[\"/component---src-pages-preview-js-8c581dc1ab0ef3f7d802.js\"],\"component---src-templates-author-profile-layout-js\":[\"/component---src-templates-author-profile-layout-js-6dd89eb929b670f1f31b.js\"],\"component---src-templates-contentful-asset-layout-js\":[\"/component---src-templates-contentful-asset-layout-js-a5b338a1e6bb9c91f986.js\"],\"component---src-templates-contentful-download-layout-js\":[\"/component---src-templates-contentful-download-layout-js-386c1aa0c7c51169cbf4.js\"],\"component---src-templates-contentful-layout-js\":[\"/component---src-templates-contentful-layout-js-d119116629835984074f.js\"],\"component---src-templates-contentful-news-category-layout-js\":[\"/component---src-templates-contentful-news-category-layout-js-4ae1dc7f2e0d3329a29c.js\"],\"component---src-templates-markdown-page-layout-js\":[\"/component---src-templates-markdown-page-layout-js-eba99dc1a3dfcde0f50b.js\"],\"component---src-templates-news-layout-js\":[\"/component---src-templates-news-layout-js-4905558299171a2b372a.js\"]}";
           </script>
-        <script>window.___webpackCompilationHash="676c3d8669512896405f";</script><script src="/webpack-runtime-72f40c482fbd28a9b7f0.js" async></script><script src="/framework-2e62a95777b51c4e857f.js" async></script><script src="/app-cc8966e7b9a04abbb532.js" async></script><!-- slice-end id="_gatsby-scripts-1" --><script type="text/javascript">
+        <script>window.___webpackCompilationHash="62d5d2e4c0b1d7f65d73";</script><script src="/webpack-runtime-cb8c9215cb153488c412.js" async></script><script src="/framework-2e62a95777b51c4e857f.js" async></script><script src="/app-f13aefc83a3a4ef678a1.js" async></script><!-- slice-end id="_gatsby-scripts-1" --><script type="text/javascript">
 (function(){
   var s=document.createElement('script');
   e = !document.body ? document.querySelector('head'):document.body;
