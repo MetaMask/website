@@ -1,0 +1,15 @@
+::part(acsb-trigger) {
+  z-index: 1000;
+  left: 12px;
+  bottom: 60px;
+  width: 40px;
+  height: 40px;
+}
+
+body .acsb-trigger.acsb-ready {
+  display: none !important;
+}
+
+body.ascb-show .acsb-trigger.acsb-ready {
+  display: block !important;
+}
