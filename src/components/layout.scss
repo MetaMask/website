@@ -2093,14 +2093,6 @@ body.dark-mode {
   }
 }
 
-body .acsb-trigger.acsb-ready {
-  display: none !important;
-}
-
-body.ascb-show .acsb-trigger.acsb-ready {
-  display: block !important;
-}
-
 body.disable-scroll {
   -ms-touch-action: none;
   touch-action: none;
@@ -2186,3 +2178,5 @@ a.link-with-caret {
     content: '';
   }
 }
+
+@import '../styles/acsb.scss';
