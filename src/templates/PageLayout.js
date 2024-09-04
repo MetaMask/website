@@ -28,7 +28,6 @@ const PageLayout = props => {
     children,
     themeColor,
     h2FontSize,
-    isStandalone,
     extraData,
     locale,
     localizedPages,
@@ -109,14 +108,6 @@ const PageLayout = props => {
       }
     }
   }, [pathname])
-
-  useEffect(() => {
-    if (isStandalone) {
-      document.body.classList.remove('ascb-show')
-    } else {
-      document.body.classList.add('ascb-show')
-    }
-  }, [isStandalone])
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
