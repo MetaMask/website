@@ -10,7 +10,8 @@ const WRITE_KEY = (params.env == "production") ? PROD_WRITE_KEY : DEV_WRITE_KEY;
     // identify user by anonId
     analytics.identify(atob(params.mmi));
     analytics.track('App Uninstalled', {
-      app_version: params.av
+      app_version: params.av,
+	  wallets_installed: window.walletsInstalled.split(','),
     });
   }
 }}();
@@ -48,7 +49,7 @@ function setupSurvey() {
       analytics.track('Survey Submitted', {
         survey_type: 'mm_ext_uninstall',
         field_reason: reasons,
-        wallets_installed: window.walletsInstalled,
+        wallets_installed: window.walletsInstalled.split(','),
       })
 
       uninstallSurvey.innerHTML = 'Thank you for your feedback.'
