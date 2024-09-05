@@ -11,7 +11,7 @@ const WRITE_KEY = (params.env == "production") ? PROD_WRITE_KEY : DEV_WRITE_KEY;
     analytics.identify(atob(params.mmi));
     analytics.track('App Uninstalled', {
       app_version: params.av,
-	  wallets_installed: window.walletsInstalled.split(','),
+      wallets_installed: window.walletsInstalled.split(','),
     });
   }
 }}();
@@ -19,26 +19,26 @@ const WRITE_KEY = (params.env == "production") ? PROD_WRITE_KEY : DEV_WRITE_KEY;
 window.addEventListener('load', setupSurvey)
 
 function setupSurvey() {
-	const checkboxes = document.getElementsByName('reasons')
-	const submitSurveyButton = document.getElementById('submitSurvey')
-	const uninstallSurvey = document.getElementById('uninstall_survey')
+  const checkboxes = document.getElementsByName('reasons')
+  const submitSurveyButton = document.getElementById('submitSurvey')
+  const uninstallSurvey = document.getElementById('uninstall_survey')
 
-	checkboxes.forEach(checkbox => {
+  checkboxes.forEach(checkbox => {
     checkbox.onchange = checkReasons
-	})
+  })
 
-	if (submitSurveyButton) {
+  if (submitSurveyButton) {
     submitSurveyButton.addEventListener('click', submitSurvey)
-	}
+  }
 
-	function checkReasons() {
+  function checkReasons() {
     const checkedCount = Array.from(checkboxes).filter(
       checkbox => checkbox.checked
     ).length
     submitSurveyButton.disabled = checkedCount === 0
-	}
+  }
 
-	function submitSurvey() {
+  function submitSurvey() {
     const reasons = Array.from(checkboxes)
       .filter(checkbox => checkbox.checked)
       .map(checkbox => checkbox.value)
@@ -54,7 +54,7 @@ function setupSurvey() {
 
       uninstallSurvey.innerHTML = 'Thank you for your feedback.'
     }
-	}
+  }
 }
 `
 
