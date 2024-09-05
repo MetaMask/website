@@ -20,7 +20,8 @@ const WRITE_KEY = (params.env == "production") ? PROD_WRITE_KEY : DEV_WRITE_KEY;
     // identify user by anonId
     analytics.identify(atob(params.mmi));
     analytics.track('App Uninstalled', {
-      app_version: params.av
+      app_version: params.av,
+      wallets_installed: window.walletsInstalled.split(','),
     });
   }
 }}();
@@ -28,26 +29,26 @@ const WRITE_KEY = (params.env == "production") ? PROD_WRITE_KEY : DEV_WRITE_KEY;
 window.addEventListener('load', setupSurvey)
 
 function setupSurvey() {
-	const checkboxes = document.getElementsByName('reasons')
-	const submitSurveyButton = document.getElementById('submitSurvey')
-	const uninstallSurvey = document.getElementById('uninstall_survey')
+  const checkboxes = document.getElementsByName('reasons')
+  const submitSurveyButton = document.getElementById('submitSurvey')
+  const uninstallSurvey = document.getElementById('uninstall_survey')
 
-	checkboxes.forEach(checkbox => {
+  checkboxes.forEach(checkbox => {
     checkbox.onchange = checkReasons
-	})
+  })
 
-	if (submitSurveyButton) {
+  if (submitSurveyButton) {
     submitSurveyButton.addEventListener('click', submitSurvey)
-	}
+  }
 
-	function checkReasons() {
+  function checkReasons() {
     const checkedCount = Array.from(checkboxes).filter(
       checkbox => checkbox.checked
     ).length
     submitSurveyButton.disabled = checkedCount === 0
-	}
+  }
 
-	function submitSurvey() {
+  function submitSurvey() {
     const reasons = Array.from(checkboxes)
       .filter(checkbox => checkbox.checked)
       .map(checkbox => checkbox.value)
@@ -58,12 +59,12 @@ function setupSurvey() {
       analytics.track('Survey Submitted', {
         survey_type: 'mm_ext_uninstall',
         field_reason: reasons,
-        wallets_installed: window.walletsInstalled,
+        wallets_installed: window.walletsInstalled.split(','),
       })
 
       uninstallSurvey.innerHTML = 'Thank you for your feedback.'
     }
-	}
+  }
 }
 </script><style data-styled="" data-styled-version="5.3.10">.kcBTUw{background-color:#fff;bottom:20px;display:block;left:0;margin-left:auto;margin-right:auto;margin-top:0;overflow:visible;padding:24px 20px;right:0;top:0;z-index:999;-webkit-transition:background 300ms ease;transition:background 300ms ease;}/*!sc*/
 body.dark-mode .Header__HeaderElement-sc-1grwj6n-0{background-color:#121212;}/*!sc*/
@@ -290,9 +291,9 @@ window._linkedin_data_partner_ids.push(_linkedin_partner_id);
           <script
             id="gatsby-chunk-mapping"
           >
-            window.___chunkMapping="{\"app\":[\"/app-1e709e7493a2c14dc623.js\"],\"component---src-pages-404-js\":[\"/component---src-pages-404-js-3d16e3e39f8d34f24e77.js\"],\"component---src-pages-preview-js\":[\"/component---src-pages-preview-js-8e112d5fcecbb08a8076.js\"],\"component---src-templates-author-profile-layout-js\":[\"/component---src-templates-author-profile-layout-js-7beb2b5661b0151922b9.js\"],\"component---src-templates-contentful-asset-layout-js\":[\"/component---src-templates-contentful-asset-layout-js-c72c38cd40863ad9ab17.js\"],\"component---src-templates-contentful-download-layout-js\":[\"/component---src-templates-contentful-download-layout-js-e2e57bdd3007ffa91f76.js\"],\"component---src-templates-contentful-layout-js\":[\"/component---src-templates-contentful-layout-js-600c16764bdbcdd248d0.js\"],\"component---src-templates-contentful-news-category-layout-js\":[\"/component---src-templates-contentful-news-category-layout-js-a069c4fb20f2c600c019.js\"],\"component---src-templates-markdown-page-layout-js\":[\"/component---src-templates-markdown-page-layout-js-0b3a1f4b6a6ee63daef6.js\"],\"component---src-templates-news-layout-js\":[\"/component---src-templates-news-layout-js-69fe67d3130f83146f63.js\"]}";
+            window.___chunkMapping="{\"app\":[\"/app-1e709e7493a2c14dc623.js\"],\"component---src-pages-404-js\":[\"/component---src-pages-404-js-3d16e3e39f8d34f24e77.js\"],\"component---src-pages-preview-js\":[\"/component---src-pages-preview-js-8e112d5fcecbb08a8076.js\"],\"component---src-templates-author-profile-layout-js\":[\"/component---src-templates-author-profile-layout-js-7beb2b5661b0151922b9.js\"],\"component---src-templates-contentful-asset-layout-js\":[\"/component---src-templates-contentful-asset-layout-js-c72c38cd40863ad9ab17.js\"],\"component---src-templates-contentful-download-layout-js\":[\"/component---src-templates-contentful-download-layout-js-e2e57bdd3007ffa91f76.js\"],\"component---src-templates-contentful-layout-js\":[\"/component---src-templates-contentful-layout-js-5b216228968b0d5c43db.js\"],\"component---src-templates-contentful-news-category-layout-js\":[\"/component---src-templates-contentful-news-category-layout-js-a069c4fb20f2c600c019.js\"],\"component---src-templates-markdown-page-layout-js\":[\"/component---src-templates-markdown-page-layout-js-0b3a1f4b6a6ee63daef6.js\"],\"component---src-templates-news-layout-js\":[\"/component---src-templates-news-layout-js-69fe67d3130f83146f63.js\"]}";
           </script>
-        <script>window.___webpackCompilationHash="176db80e84951ccfda35";</script><script src="/webpack-runtime-28795f888d27d5a97e60.js" async></script><script src="/framework-97c8755eb44f2add89d2.js" async></script><script src="/app-1e709e7493a2c14dc623.js" async></script><!-- slice-end id="_gatsby-scripts-1" --><script type="text/javascript">
+        <script>window.___webpackCompilationHash="4346726496b7872c9c08";</script><script src="/webpack-runtime-c56d9c0cc86454cd0710.js" async></script><script src="/framework-97c8755eb44f2add89d2.js" async></script><script src="/app-1e709e7493a2c14dc623.js" async></script><!-- slice-end id="_gatsby-scripts-1" --><script type="text/javascript">
 (function(){
   var s=document.createElement('script');
   e = !document.body ? document.querySelector('head'):document.body;
