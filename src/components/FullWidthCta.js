@@ -270,17 +270,23 @@ const FullWidthCtaInner = styled.div`
         border-radius: 8px;
         text-align: left;
         background-color: #F2F4F6;
+
         .dark-mode & {
           background-color: #24292E;
         }
+
         > div {
-          padding-bottom: 16px;
           display: flex;
+          flex-flow: column;
+          gap: 16px;
+          padding-bottom: 16px;
         }
+
         h6 {
           margin-top: 0;
           margin-bottom: 16px;
         }
+
         label {
           font-size: 16px;
           line-height: 24px;
@@ -288,8 +294,10 @@ const FullWidthCtaInner = styled.div`
           cursor: pointer;
           display: flex;
           align-items: flex-start;
-          &:before {
+
+          &::before {
             content: '';
+            flex: none;
             -webkit-appearance: none;
             background-color: transparent;
             border: 1px solid #BBC0C5;
@@ -304,10 +312,12 @@ const FullWidthCtaInner = styled.div`
             margin-top: 2px;
           }
         }
+
         input:checked + label:before {
           background-color: #037DD6;
           border-color: #037DD6;
         }
+
         input:checked + label:after {
           content: '';
           display: block;
@@ -320,12 +330,13 @@ const FullWidthCtaInner = styled.div`
           border-width: 0 2px 2px 0;
           transform: rotate(45deg);
         }
+
         input[type=checkbox] {
           display: none;
         }
       }
 
-      .buttonSurvey > button {
+      .buttonSurvey > button, .buttonSurvey > a {
         width: calc(100% - 64px);
         cursor: pointer;
         transition: all 0.3s ease;
@@ -334,6 +345,7 @@ const FullWidthCtaInner = styled.div`
           background-color: #6A737D;
           cursor: not-allowed;
         }
+
         &:hover:disabled {
           opacity: 0.8;
         }
@@ -343,12 +355,14 @@ const FullWidthCtaInner = styled.div`
         width: 100%;
         background-color: transparent;
         padding-bottom: 0;
+
         .dark-mode & {
           background-color: transparent;
         }
 
         .uninstallSurvey {
           padding: 24px 42px;
+
           h6 {
             text-align: center;
           }
@@ -395,6 +409,7 @@ const CTAWrapper = styled.div`
   .button {
     min-width: 140px;
   }
+
   .button:last-child {
     margin-bottom: 0;
   }
@@ -443,6 +458,7 @@ const Description = styled.div`
 
   .metaMaskUninstalled & {
     margin-bottom: 32px;
+
     p {
       font-size: 18px;
       line-height: 25px;
@@ -455,6 +471,7 @@ const Description = styled.div`
         font-size: 32px;
         padding: 0 32px;
       }
+
       p {
         max-width: 100%;
       }
