@@ -29,3 +29,7 @@ export const setLocalStorage = (name, value) => {
 
   return
 }
+
+export const persistDeveloper = () => {
+  setLocalStorage('isDeveloper', true)
+}
