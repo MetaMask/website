@@ -107,6 +107,14 @@ const PageLayout = props => {
         )
       }
     }
+
+    if (window.HubSpotConversations) {
+      if (pathname.includes('swaps') || pathname.includes('buy-crypto')) {
+        window.HubSpotConversations.widget.load()
+      } else {
+        window.HubSpotConversations.widget.remove()
+      }
+    }
   }, [pathname])
 
   useEffect(() => {
