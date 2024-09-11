@@ -76,16 +76,13 @@ const CTA = props => {
   const location = useLocation()
 
   useEffect(() => {
-    if (useTextTreatment) {
-      setText(textTreatment)
-    } else {
-      setText(textDefault)
-    }
+    const currentText = useTextTreatment ? textTreatment : textDefault
+    setText(currentText)
     setCtaLink(linkDefault)
     setIconBrowser('')
 
     if (isDownloadBrowser && keyBrowser && downloadBrowsers[keyBrowser]) {
-      let newText = textDefault
+      let newText = currentText
 
       newText = newText?.replace('$browser', downloadBrowsers[keyBrowser]?.text)
 
@@ -96,6 +93,7 @@ const CTA = props => {
         newText = downloadBrowsers[keyBrowser].text
       }
 
+      setText(newText)
       setCtaLink(downloadBrowsers[keyBrowser]?.link)
       setIconBrowser(downloadBrowsers[keyBrowser]?.icon)
     }
@@ -103,10 +101,15 @@ const CTA = props => {
 
   useEffect(() => {
     const init = async () => {
-      if (flagName !== 'home-portfolio-cta-test') {
+      const EXPERIMENT_FLAG_NAMES = [
+        'home-portfolio-cta-test',
+        'home-download-cta-test',
+      ]
+
+      if (!EXPERIMENT_FLAG_NAMES.includes(flagName)) {
         return
       }
-      const value = await getLaunchDarklyFlag('home-portfolio-cta-test')
+      const value = await getLaunchDarklyFlag(flagName)
       setUseTextTreatment(value === 'treatment')
     }
 
@@ -125,6 +128,11 @@ const CTA = props => {
 
     if (flagName === 'home-portfolio-cta-test') {
       ldClient?.track('home-portfolio-cta-click')
+      ldClient?.flush()
+    }
+
+    if (flagName === 'home-download-cta-test') {
+      ldClient?.track('home-download-cta-click')
       ldClient?.flush()
     }
 
