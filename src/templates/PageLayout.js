@@ -108,7 +108,7 @@ const PageLayout = props => {
       }
     }
 
-    if (window.HubSpotConversations) {
+    if (window.HubSpotConversations && pathname) {
       if (pathname.includes('swaps') || pathname.includes('buy-crypto')) {
         window.HubSpotConversations.widget.load()
       } else {
