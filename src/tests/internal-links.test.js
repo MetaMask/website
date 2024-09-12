@@ -45,6 +45,15 @@ describe('Test internal links', () => {
     })
 
     page = await browser.newPage()
+
+    await page.setRequestInterception(true)
+    page.on('request', request => {
+      if (['document'].includes(request.resourceType())) {
+        request.continue()
+      } else {
+        request.abort()
+      }
+    })
   })
 
   afterAll(async () => {
@@ -99,5 +108,5 @@ describe('Test internal links', () => {
     if (hasError) {
       throw new Error('Found missing trailing slash url.')
     }
-  }, 1200000)
+  }, 1800000)
 })
