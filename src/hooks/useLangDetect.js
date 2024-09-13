@@ -16,8 +16,8 @@ const useLangDetect = () => {
     const browserLanguage = navigator.language || navigator.userLanguage
     const browserLangFirstCode =
       browserLanguage && browserLanguage.split('-')?.[0]
-    const detectedBrowserLang = LOCALES.find(
-      l => l.htmlLang.startsWith(browserLangFirstCode)
+    const detectedBrowserLang = LOCALES.find(l =>
+      l.htmlLang.startsWith(browserLangFirstCode)
     )
     if (detectedBrowserLang) {
       setLanguage(detectedBrowserLang)

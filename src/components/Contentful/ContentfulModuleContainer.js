@@ -69,7 +69,9 @@ const ContentfulModuleContainer = props => {
     }
 
     const init = async () => {
-      const value = await getLaunchDarklyFlag('show-locale-providers-on-buy-crypto-page')
+      const value = await getLaunchDarklyFlag(
+        'show-locale-providers-on-buy-crypto-page'
+      )
       setShowRegionSelector(value)
     }
 
