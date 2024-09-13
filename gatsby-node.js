@@ -730,7 +730,7 @@ exports.onPostBuild = async ({ graphql, store, pathPrefix, reporter }) => {
                       ...page,
                       path: localeSlug,
                       title: localeTitle,
-                      locale: locale.code,
+                      locale: locale.htmlLang,
                     })
                   })
                 }

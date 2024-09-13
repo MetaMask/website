@@ -644,7 +644,7 @@ const ButtonsWrapper = styled.div`
     line-height: 1.1;
   }
 
-  html:not([lang='pcm-NG']) & {
+  html:not([lang='pcm']) & {
     a {
       padding: 8px 32px !important;
     }
