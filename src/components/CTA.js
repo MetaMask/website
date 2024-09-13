@@ -19,6 +19,7 @@ import { gsap } from 'gsap'
 import Link from './Link'
 import { useLaunchDarklyFlag } from '../Context/LaunchDarklyFlagContext'
 import { removeLanguageCode } from '../lib/utils/removeLanguageCode'
+import { NO_FOLLOW_URLS } from '../lib/config.mjs'
 
 const CTA = props => {
   const {
@@ -263,6 +264,7 @@ const CTA = props => {
     >
       <ContentWrapper
         to={link}
+        rel={NO_FOLLOW_URLS.includes(link) ? 'nofollow' : undefined}
         newTab={newTab}
         color={color}
         $typeLayout={typeLayout}

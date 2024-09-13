@@ -10,7 +10,7 @@ function NewsAuthor({ listAuthors }) {
       }
       if (cur.createProfilePage) {
         acc.push(
-          <Link key={index} to={`/author/${cur.profileUrl}/`}>
+          <Link key={index} rel="nofollow" to={`/author/${cur.profileUrl}/`}>
             {cur.name}
           </Link>
         )
