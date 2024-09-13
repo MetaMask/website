@@ -10,7 +10,7 @@ on:
 
 jobs:
   trailing-slash-test:
-    if: ${{ vars.IS_STAGING != 'true' }}
+    if: ${{ vars.IS_STAGING != 'true' && github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     container: buildkite/puppeteer:latest
     concurrency:
@@ -20,21 +20,23 @@ jobs:
       - name: Setup git in container 🛠
         uses: actions/checkout@v4
 
-      - name: Setup node in container 🪢
+      - name: Setup Node 🔧
         uses: actions/setup-node@v4
         with:
-            node-version: 18
-            cache: 'yarn'
+          node-version-file: ".nvmrc"
 
-      - name: Cache dependencies 📦
-        id: cache-nodemodules
-        uses: actions/cache@v3
+      - name: Cache Modules 📦
+        id: cache-modules
+        uses: actions/cache@v4
         with:
-          path: '**/node_modules'
-          key: node_modules-${{ hashFiles('**/yarn.lock')}}
+          path: |
+            node_modules
+          key: ${{ runner.os }}-cache-modules-${{ hashFiles('**/yarn.lock')}}
+          restore-keys: |
+            ${{ runner.os }}-cache-modules-
 
       - name: Install Dependencies ⏳
-        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+        if: steps.cache-modules.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
       - name: Run tests 🧪
