@@ -24,6 +24,7 @@ import HeaderDisclaimer from './HeaderDisclaimer'
 import { removeLanguageCode } from '../lib/utils/removeLanguageCode'
 import { useIsUKBlocked } from '../hooks/useIsUKBlocked'
 import { useCountry } from '../hooks/useCountry'
+import { useLaunchDarklyFlag } from '../Context/LaunchDarklyFlagContext'
 
 const StyledHeader = props => {
   const {
@@ -32,8 +33,10 @@ const StyledHeader = props => {
     menus,
     downloadButton,
     popupAnnouncement,
+    popupAnnouncementTreatment,
     hideDownloadBtn,
     isSticky,
+    launchDarklyFlag,
     previewMode = false,
     translation,
   } = props
@@ -59,16 +62,36 @@ const StyledHeader = props => {
   const [topMenuMobile, setTopMenuMobile] = useState('88px')
   const [isBrowser, setIsBrowser] = useState(false)
   const [showDisclaimer, setShowDisclaimer] = useState(false)
+  const [
+    usePopupAnnouncementTreatment,
+    setUsePopupAnnouncementTreatment,
+  ] = useState(false)
 
   const ldClient = useLDClient()
   const country = useCountry()
   const isUKBlocked = useIsUKBlocked()
+  const { getLaunchDarklyFlag } = useLaunchDarklyFlag()
 
   const shouldShowLanguageSelector = previewMode || translation
 
   useEffect(() => {
     setIsBrowser(true)
   }, [])
+
+  useEffect(() => {
+    const init = async () => {
+      if (launchDarklyFlag !== 'use-treatment-for-non-uk-and-us-announcement') {
+        return
+      }
+
+      const value = await getLaunchDarklyFlag(launchDarklyFlag)
+      if (value === true && !['GB', 'US'].includes(country)) {
+        setUsePopupAnnouncementTreatment(true)
+      }
+    }
+
+    init()
+  }, [getLaunchDarklyFlag, launchDarklyFlag, country])
 
   useEffect(() => {
     if (!menus && isDarkMode) {
@@ -171,7 +194,9 @@ const StyledHeader = props => {
     <HeaderElement ref={headerRef} className={classnames({ sticky: isSticky })}>
       <Announcement>
         {contentfulModuleToComponent({
-          ...popupAnnouncement,
+          ...(usePopupAnnouncementTreatment
+            ? popupAnnouncementTreatment
+            : popupAnnouncement),
           previewMode,
         })}
       </Announcement>
