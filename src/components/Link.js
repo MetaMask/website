@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { DEFAULT_LOCALE_CODE } from '../lib/config.mjs'
 import ContextClientSide from '../Context/ContextClientSide'
 import Context from '../Context/ContextPage'
@@ -18,11 +18,12 @@ const DefaultLink = props => {
   const { localization } = useContext(ContextClientSide)
   const { localizedPages } = useContext(Context)
   const { locale } = localization || {}
-  if (!to) {
+  const [href, setHref] = useState(to)
+
+  if (!href) {
     return <div {...rest}>{children}</div>
   }
 
-  let href = to
   const isAnchorLink = href.startsWith('#')
   if (isAnchorLink) {
     newTab = false
@@ -36,12 +37,14 @@ const DefaultLink = props => {
     rel: newTab ? 'noopener' : null,
   }
 
-  if (localizedPages && localizedPages.includes(href)) {
-    const localeCode = locale?.code
-    if (localeCode && localeCode !== DEFAULT_LOCALE_CODE) {
-      href = `/${localeCode}${to}`
+  useEffect(() => {
+    if (localizedPages && localizedPages.includes(href)) {
+      const localeCode = locale?.code
+      if (localeCode && localeCode !== DEFAULT_LOCALE_CODE) {
+        setHref(`/${localeCode}${to}`)
+      }
     }
-  }
+  }, [to, localizedPages, locale])
 
   return isInternal ? (
     <Link

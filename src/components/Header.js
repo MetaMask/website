@@ -27,14 +27,7 @@ import { useCountry } from '../hooks/useCountry'
 
 const StyledHeader = props => {
   const {
-    logo: {
-      title: titleLogo,
-      logo: {
-        file: { url: srcLogo },
-        svg: svgLogo,
-      },
-      widthLogo,
-    },
+    logo,
     logoMobile,
     menus,
     downloadButton,
@@ -167,6 +160,13 @@ const StyledHeader = props => {
     }
   }, [isUKBlocked, country, pathname, locale, menus])
 
+  const desktopLogo =
+    isDarkMode && logo?.logoDarkMode ? logo.logoDarkMode : logo?.logo
+  const mobileLogo =
+    isDarkMode && logoMobile?.logoDarkMode
+      ? logoMobile.logoDarkMode
+      : logoMobile?.logo
+
   return (
     <HeaderElement ref={headerRef} className={classnames({ sticky: isSticky })}>
       <Announcement>
@@ -178,46 +178,28 @@ const StyledHeader = props => {
       <HeaderContainer>
         <LogoContainer>
           <Link to="/" aria-label="Go to home page">
-            {srcLogo ? (
+            {desktopLogo?.file ? (
               <LogoWrapper
                 className={classnames({
                   'hidden-mobile': logoMobile,
                 })}
               >
-                {svgLogo?.content ? (
-                  <div
-                    className="logoMetamaskSvg"
-                    dangerouslySetInnerHTML={{
-                      __html: svgLogo?.content,
-                    }}
-                  />
-                ) : (
-                  <Logo
-                    src={srcLogo}
-                    alt={titleLogo}
-                    $widthCustom={widthLogo}
-                  />
-                )}
+                <Logo
+                  src={desktopLogo.file.url}
+                  alt={desktopLogo.title}
+                  $widthCustom={desktopLogo.widthLogo}
+                />
               </LogoWrapper>
             ) : null}
-            {logoMobile ? (
+            {mobileLogo?.file ? (
               <LogoWrapper className={classnames('hidden-desktop')}>
-                {logoMobile.logo.svg?.content ? (
-                  <div
-                    className="logoMetamaskSvg"
-                    dangerouslySetInnerHTML={{
-                      __html: logoMobile.logo.svg?.content,
-                    }}
-                  />
-                ) : (
-                  <Logo
-                    src={logoMobile.logo.file.url}
-                    alt={logoMobile.title}
-                    $widthCustom={logoMobile.widthLogo}
-                    width={logoMobile.logo.gatsbyImageData.width}
-                    height={logoMobile.logo.gatsbyImageData.height}
-                  />
-                )}
+                <Logo
+                  src={mobileLogo.file.url}
+                  alt={mobileLogo.title}
+                  $widthCustom={mobileLogo.widthLogo}
+                  width={mobileLogo.gatsbyImageData?.width}
+                  height={mobileLogo.gatsbyImageData?.height}
+                />
               </LogoWrapper>
             ) : null}
           </Link>
