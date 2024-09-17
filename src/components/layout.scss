@@ -1241,10 +1241,6 @@ figcaption {
   }
 }
 
-.logoMetamaskSvg {
-  width: 100%;
-}
-
 body {
   transition: background 0.3s ease;
 
@@ -1325,14 +1321,6 @@ body.dark-mode {
   }
   .bg-dark {
     background-color: #393e46;
-  }
-
-  .logoMetamaskSvg {
-    svg {
-      path:nth-child(1) {
-        fill: #fff;
-      }
-    }
   }
 
   .logoSvg {

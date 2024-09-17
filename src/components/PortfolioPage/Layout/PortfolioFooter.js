@@ -149,16 +149,12 @@ const PortfolioFooter = props => {
           <ContentInner>
             <LeftColumn>
               <LeftColumnInner>
-                {logo?.logo?.svg?.content ? (
-                  <div
-                    dangerouslySetInnerHTML={{ __html: logo.logo.svg.content }}
-                  />
-                ) : (
+                {logo ? (
                   <img
-                    src={previewMode ? logo?.logo?.url : logo?.file?.url}
+                    src={previewMode ? logo.logo?.url : logo.logo?.file?.url}
                     alt={logo.title}
                   />
-                )}
+                ) : null}
                 <PortfolioLinkWrapper>
                   <PortfolioLink to={logo.link} newTab={logo.newTab}>
                     {logo.title}

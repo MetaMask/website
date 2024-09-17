@@ -11,9 +11,6 @@ const ContentfulLayoutFooter = props => {
   return (
     <Footer
       logo={logo}
-      logoTitle={logo.title}
-      logoUrl={logo.logo.file.url}
-      logoSvg={logo.logo.svg}
       menus={menuItems}
       copyright={copyright}
       previewMode={previewMode}
@@ -43,6 +40,11 @@ const parsePreviewData = data => {
             logo: {
               file: {
                 url: data.logo.logo?.url,
+              },
+            },
+            logoDarkMode: {
+              file: {
+                url: data.logo.logoDarkMode?.url,
               },
             },
           }

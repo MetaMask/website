@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
+import ContextClientSide from '../Context/ContextClientSide'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import Link from './Link'
 import Wrapper from './ContentWrapper'
@@ -10,7 +11,10 @@ import { GB_BLOCKED_PATHS } from '../lib/config.mjs'
 import { useIsUKBlocked } from '../hooks/useIsUKBlocked'
 
 const StyledFooter = props => {
-  const { menus, copyright, logoTitle, logoUrl, logoSvg, previewMode } = props
+  const { menus, copyright, logo, previewMode } = props
+
+  const { darkMode: darkModeContextValue } = useContext(ContextClientSide)
+  const { isDarkMode } = darkModeContextValue || {}
 
   const [filteredMenus, setFilteredMenus] = useState(menus)
 
@@ -27,6 +31,9 @@ const StyledFooter = props => {
     setFilteredMenus(filteredMenus)
   }, [isUKBlocked, menus])
 
+  const footerLogo =
+    isDarkMode && logo?.logoDarkMode ? logo.logoDarkMode : logo?.logo
+
   return (
     <FooterContainer>
       <Wrapper
@@ -36,18 +43,11 @@ const StyledFooter = props => {
         <FooterInner>
           <LogoContainer>
             <Link to="/" aria-label="Go to the home page">
-              <LogoWrapper>
-                {logoSvg?.content ? (
-                  <div
-                    className="logoMetamaskSvg"
-                    dangerouslySetInnerHTML={{
-                      __html: logoSvg?.content,
-                    }}
-                  />
-                ) : (
-                  <Logo src={logoUrl} alt={logoTitle} />
-                )}
-              </LogoWrapper>
+              {footerLogo?.file ? (
+                <LogoWrapper>
+                  <Logo src={footerLogo.file.url} alt={footerLogo.title} />
+                </LogoWrapper>
+              ) : null}
             </Link>
           </LogoContainer>
           <ColumnWrapper columns={filteredMenus?.length}>

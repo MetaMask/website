@@ -25,18 +25,9 @@ const PortfolioHeader = props => {
       <LogoWrapper>
         <Link to="/" aria-label="Go to Homepage">
           <ButtonShadow as="div" short>
-            {logo?.svg?.content ? (
-              <LogoSvgWrapper
-                dangerouslySetInnerHTML={{
-                  __html: logo.svg.content,
-                }}
-              />
-            ) : (
-              <Logo
-                src={previewMode ? logo?.url : logo?.file?.url}
-                alt={title}
-              />
-            )}
+            {logo ? (
+              <Logo src={previewMode ? logo.url : logo.file?.url} alt={title} />
+            ) : null}
           </ButtonShadow>
         </Link>
       </LogoWrapper>

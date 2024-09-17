@@ -56,6 +56,7 @@ const parsePreviewData = data => {
     }
   })
   menuItems = !isEmpty(menuItems) ? menuItems : undefined
+
   const dataUpdate = {
     moduleConfig: {
       previewMode: true,
@@ -64,7 +65,12 @@ const parsePreviewData = data => {
             title: data.logo.title,
             logo: {
               file: {
-                url: data.logo.logo.url,
+                url: data.logo.logo?.url,
+              },
+            },
+            logoDarkMode: {
+              file: {
+                url: data.logo.logoDarkMode?.url,
               },
             },
           }
