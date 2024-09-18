@@ -20,6 +20,20 @@ const DefaultLink = props => {
   const { locale } = localization || {}
   const [href, setHref] = useState(to)
 
+  useEffect(() => {
+    const localeCode = locale?.code
+    if (
+      localizedPages &&
+      localizedPages.includes(href) &&
+      localeCode &&
+      localeCode !== DEFAULT_LOCALE_CODE
+    ) {
+      setHref(`/${localeCode}${to}`)
+      return
+    }
+    setHref(to)
+  }, [to, localizedPages, locale])
+
   if (!href) {
     return <div {...rest}>{children}</div>
   }
@@ -37,15 +51,6 @@ const DefaultLink = props => {
     rel: newTab ? 'noopener' : null,
   }
 
-  useEffect(() => {
-    if (localizedPages && localizedPages.includes(href)) {
-      const localeCode = locale?.code
-      if (localeCode && localeCode !== DEFAULT_LOCALE_CODE) {
-        setHref(`/${localeCode}${to}`)
-      }
-    }
-  }, [to, localizedPages, locale])
-
   return isInternal ? (
     <Link
       to={href}
@@ -59,7 +64,7 @@ const DefaultLink = props => {
     <a
       style={{ textDecoration: 'none' }}
       href={href}
-      {...(isAnchorLink ? { 'data-anchor': to } : {})}
+      {...(isAnchorLink ? { 'data-anchor': href } : {})}
       {...newTabHtmlAttributes}
       {...rest}
     >
