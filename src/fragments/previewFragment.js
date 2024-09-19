@@ -578,6 +578,9 @@ export const ContentfulLayoutHeaderFields = gql`
     popupAnnouncement(preview: true) {
       ...ContentfulPopupAnnouncementFields
     }
+    popupAnnouncementTreatment(preview: true) {
+      ...ContentfulPopupAnnouncementFields
+    }
     logo(preview: true) {
       ...ContentfulLogoFields
     }
@@ -594,6 +597,7 @@ export const ContentfulLayoutHeaderFields = gql`
       ...ContentfulCtaFields
     }
     isSticky
+    launchDarklyFlag
   }
 `
 
