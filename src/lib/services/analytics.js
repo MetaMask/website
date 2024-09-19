@@ -71,14 +71,15 @@ function setupSurvey() {
   }
 
   function submitSurvey() {
+    const textInput = []
     const reasons = Array.from(checkboxes)
               .filter(checkbox => checkbox.checked)
               .map(checkbox => {
                 const wrapper = checkbox.closest('.input-group');
                 const value = checkbox.value;
                 if (wrapper.classList.contains('has-text-input')) {
-                  const textInput = wrapper.querySelector('input[type="text"]');
-                  return textInput && textInput.value ? value + ': ' + textInput.value : value;
+                  const textField = wrapper.querySelector('input[type="text"]');
+                  textField && textField.value && textInput.push(value + ': ' + textField.value);
                 }
                 return value;
               });
@@ -90,6 +91,7 @@ function setupSurvey() {
       analytics.track('Survey Submitted', {
         survey_type: 'mm_ext_uninstall',
         field_reason: reasons,
+        field_text: textInput,
         wallets_installed: window.walletsInstalled?.split(','),
       })
 
