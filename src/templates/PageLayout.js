@@ -15,7 +15,7 @@ import {
   darkDarkTheme,
   defaultDarkTheme,
 } from '../lib/theme'
-import LocaleSwitcherBanner from '../components/LocaleSwitcherBanner'
+import useLocalization from '../hooks/useLocalization'
 
 /**
  * @name PageLayout
@@ -95,6 +95,7 @@ const PageLayout = props => {
   }
 
   useAllClicks()
+  useLocalization(translation)
 
   useEffect(() => {
     if (document) {
@@ -153,7 +154,6 @@ const PageLayout = props => {
             }}
           />
         )}
-        {translation && <LocaleSwitcherBanner />}
       </Layout>
     </Context.Provider>
   )
