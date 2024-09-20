@@ -151,7 +151,6 @@ const StyledHeader = props => {
       const localizedPath = getLocalizedPath(pathname, locale.code)
 
       setLocalStorage('preferredLanguage', locale.code)
-      setLocalStorage('locale-opt-out', true)
 
       window.location.replace(localizedPath)
     }
