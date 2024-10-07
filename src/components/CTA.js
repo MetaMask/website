@@ -101,11 +101,18 @@ const CTA = props => {
   })
 
   useEffect(() => {
+    const initMetaMaskDownloadCTAExperiment = async () => {
+      if (!flagName?.startsWith('mm-download-cta')) {
+        return
+      }
+      const value = await getLaunchDarklyFlag('meta-mask-download-cta-test')
+      setUseTextTreatment(value === 'treatment')
+    }
+
     const init = async () => {
-      const EXPERIMENT_FLAG_NAMES = [
-        'home-portfolio-cta-test',
-        'home-download-cta-test',
-      ]
+
+      // Clean up with portfolio experiment
+      const EXPERIMENT_FLAG_NAMES = ['home-portfolio-cta-test']
 
       if (!EXPERIMENT_FLAG_NAMES.includes(flagName)) {
         return
@@ -115,6 +122,7 @@ const CTA = props => {
     }
 
     init()
+    initMetaMaskDownloadCTAExperiment()
   }, [getLaunchDarklyFlag, setUseTextTreatment, flagName])
 
   const [link, setLink] = React.useState(ctaLink)
@@ -127,13 +135,21 @@ const CTA = props => {
   const handleCustomClick = e => {
     const trackableClasses = ['ld-portfolio-link', 'ld-download-link']
 
-    if (flagName === 'home-portfolio-cta-test') {
-      ldClient?.track('home-portfolio-cta-click')
+    if (flagName === 'mm-download-cta-home-hero') {
+      ldClient?.track('home-hero-download-cta-click')
       ldClient?.flush()
     }
 
-    if (flagName === 'home-download-cta-test') {
-      ldClient?.track('home-download-cta-click')
+    if (flagName === 'mm-download-cta-header') {
+      const currentPath = removeLanguageCode(location?.pathname)
+      if (currentPath === '/') {
+        ldClient?.track('home-header-download-cta-click')
+        ldClient?.flush()
+      }
+    }
+
+    if (flagName === 'home-portfolio-cta-test') {
+      ldClient?.track('home-portfolio-cta-click')
       ldClient?.flush()
     }
 
