@@ -50,7 +50,6 @@ const CTA = props => {
     hideButtonIcon,
     customClassName,
     previewMode = false,
-    isForDeveloper,
     buttonCaretDown,
     flagName = null,
     attr,
@@ -74,9 +73,15 @@ const CTA = props => {
   const [iconBrowser, setIconBrowser] = useState('')
   const [useTextTreatment, setUseTextTreatment] = useState(false)
 
+  const isDeepLink = useMemo(
+    () => linkDefault?.includes('metamask.app.link') ?? false,
+    [linkDefault]
+  )
+
   const location = useLocation()
 
   useEffect(() => {
+    if (isDeepLink) return
     const currentText = useTextTreatment ? textTreatment : textDefault
     setText(currentText)
     setCtaLink(linkDefault)
@@ -163,6 +168,11 @@ const CTA = props => {
     ) {
       ldClient?.track('on-cta-clicks')
       ldClient?.flush()
+    }
+
+    if (isDeepLink) {
+      e.preventDefault()
+      return
     }
 
     if (hubSpotForm) {
@@ -283,6 +293,7 @@ const CTA = props => {
         onClick={handleCustomClick}
         className={classnames({
           'link-with-caret': showCaretRight,
+          deeplink: isDeepLink,
         })}
       >
         {socialLink ? <SocialIcon name={socialLink} /> : null}
@@ -307,7 +318,9 @@ const CTA = props => {
         size={buttonSize}
         link={link}
         text={text}
-        className={classnames(keyBrowser, customClassName)}
+        className={classnames(keyBrowser, customClassName, {
+          deeplink: isDeepLink,
+        })}
         newTab={newTab}
         color={buttonSecondary ? 'secondary' : color}
         customClick={handleCustomClick}
