@@ -25,19 +25,27 @@ export const useAllClicks = () => {
     const handleClickDl = event => {
       window.dataLayer = window.dataLayer || []
 
-      if (event.target.closest('.deeplink')) {
-        const uuid = generateUUID()
+      let uuid = undefined
+      const deeplink = event.target.closest('.deeplink')
 
-        window.dataLayer.push({
-          event: 'all_clicks',
-          unique_attribution_id: uuid,
+      if (deeplink) {
+        uuid = generateUUID()
+
+        const searchParams = new URLSearchParams(window.location.search)
+
+        const utm = JSON.stringify({
+          source: searchParams.get('utm_source'),
+          medium: searchParams.get('utm_medium'),
+          campaign: searchParams.get('utm_campaign'),
+          term: searchParams.get('utm_term'),
+          content: searchParams.get('utm_content'),
         })
 
-        timerTwo = setTimeout(() => {
-          window.dataLayer.push({
-            unique_attribution_id: undefined,
-          })
-        }, 500)
+        const href = new URL(deeplink.href)
+        href.searchParams.set('attributionId', uuid)
+        href.searchParams.set('utm', utm)
+
+        window.open(href.toString())
       }
 
       const closest = event.target.closest(
@@ -64,6 +72,7 @@ export const useAllClicks = () => {
             : event.target?.nodeName === 'IMG'
             ? event.target.alt
             : event.target.innerText,
+        unique_attribution_id: uuid,
       }
 
       formatFlagsForGTM(flags, data)
