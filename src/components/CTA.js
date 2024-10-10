@@ -139,7 +139,7 @@ const CTA = props => {
     if (flagName === 'mm-download-cta-header') {
       const currentPath = removeLanguageCode(location?.pathname)
       if (currentPath === '/') {
-        ldClient?.track('home-header-portfolio-cta-click')
+        ldClient?.track('home-header-download-cta-click')
         ldClient?.flush()
       }
     }
