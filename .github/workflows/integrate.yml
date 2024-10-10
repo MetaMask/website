@@ -10,7 +10,7 @@ on:
 jobs:
   build_deploy:
     runs-on: ubuntu-latest
-	environment: github-pages
+    environment: github-pages
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
