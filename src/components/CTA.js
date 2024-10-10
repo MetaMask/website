@@ -81,9 +81,10 @@ const CTA = props => {
   const location = useLocation()
 
   useEffect(() => {
-    if (isDeepLink) return
     const currentText = useTextTreatment ? textTreatment : textDefault
     setText(currentText)
+
+    if (isDeepLink) return
     setCtaLink(linkDefault)
     setIconBrowser('')
 
