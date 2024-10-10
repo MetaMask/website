@@ -10,7 +10,6 @@ on:
 jobs:
   build_deploy:
     runs-on: ubuntu-latest
-    environment: github-pages
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
@@ -79,6 +78,6 @@ jobs:
       - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@068dc23d9710f1ba62e86896f84735d869951305
         with:
-          personal_token: ${{ secrets.PUBLISH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./public
