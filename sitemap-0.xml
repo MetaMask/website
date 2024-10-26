@@ -42,7 +42,6 @@
 <url><loc>https://metamask.io/institutions/faq/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/fireblocks-onboarding-guide/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/fund-loss-investigation/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
-<url><loc>https://metamask.io/sdk/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/cla/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/thank-you/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/the-impact-of-the-merge-on-institutions-thank-you/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
@@ -63,6 +62,7 @@
 <url><loc>https://metamask.io/about/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/institutions/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/developer/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>https://metamask.io/sdk/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/author/matthieu-saint-olive/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/author/oliver-jl-renwick/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/author/kyle-detz/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
