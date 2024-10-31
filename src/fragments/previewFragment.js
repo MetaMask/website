@@ -30,6 +30,7 @@ export const ContentfulEmbedFields = gql`
     }
     moduleId
     title
+    subTitle
     embed
     thumbnail(preview: true) {
       url

@@ -162,14 +162,24 @@ const RichTextWrapper = styled.div`
   &#dan-finlay-quote {
     max-width: 720px;
     margin-inline: auto;
+    margin-top: 100px;
 
-    blockquote p {
-      font-size: 2rem;
-      text-align: center;
-      line-height: 1.4;
+    blockquote {
+      margin-left: 0;
+      margin-right: 0;
+
+      p {
+        font-size: 1.625rem;
+        text-align: center;
+        line-height: 1.4;
+
+        @media (min-width: ${({ theme }) => theme.device.tablet}) {
+          font-size: 2rem;
+        }
+      }
     }
 
-    & > div > p {
+    blockquote + p {
       font-size: 14px;
       text-transform: uppercase;
       text-align: center;

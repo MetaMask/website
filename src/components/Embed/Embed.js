@@ -236,6 +236,18 @@ const VideoOverlay = styled.div`
   transition: background 300ms ease;
   cursor: pointer;
 
+  #dan-finlay-video & {
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    background: transparent;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+  }
+
   .icon-play {
     width: 60px;
     height: 60px;
@@ -267,6 +279,10 @@ const Wrapper = styled.div`
   margin: 0 auto;
   @media (min-width: ${theme.device.desktop}) {
     width: fit-content;
+
+    #dan-finlay-video & {
+      width: 100%;
+    }
   }
   .thumbnail-image {
     position:absolute;
