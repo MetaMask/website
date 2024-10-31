@@ -37,19 +37,13 @@ export default CardBenefit
 const Card = styled.div`
   display: flex;
   gap: 40px;
-
-  ${({ theme }) => `
-  @media (max-width: ${theme.device.mobileMediaMax}){
-    flex-direction: column;
-    gap: 16px;
-  }`}
+  flex-direction: column;
+  gap: 16px;
 `
 
 const ImageWrapper = styled.div`
-  width: 363px;
-
   img {
-    object-fit: contain;
+    width: 100%;
   }
 
   ${({ theme }) =>
@@ -88,6 +82,11 @@ const Description = styled.div`
 
   p:last-child {
     margin-bottom: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
   }
 
   ${({ theme }) =>

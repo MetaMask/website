@@ -129,7 +129,7 @@ const ContentfulModuleContainer = props => {
     >
       {bgUrl ? (
         <BackgroundSection backgroundSize={backgroundSize}>
-          <Image image={backgroundImage} />
+          <Image image={backgroundImage} previewMode={previewMode} />
         </BackgroundSection>
       ) : null}
 
@@ -584,6 +584,12 @@ const ContentInfo = styled.div`
     }
     @media (max-width: ${({ theme }) => theme.device.mobileMediaMax}) {
       justify-content: center;
+
+      .delegation-toolkit-features &,
+      .delegation-toolkit-benefits &,
+      .delegation-toolkit-use-cases & {
+        justify-content: flex-start;
+      }
     }
   }
 `

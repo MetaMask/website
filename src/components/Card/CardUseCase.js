@@ -2,11 +2,11 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
-const CardDelegationFeature = props => {
-  const { title, description } = props
+const CardUseCase = props => {
+  const { title, description, backgroundColor = 'gray' } = props
   return (
     <Card>
-      <CardInner className="bg-gray">
+      <CardInner className={`bg-${backgroundColor}`}>
         {title && <Title>{title}</Title>}
         {description && (
           <Description>
@@ -18,26 +18,18 @@ const CardDelegationFeature = props => {
   )
 }
 
-CardDelegationFeature.propTypes = {
+CardUseCase.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
 }
 
-export default CardDelegationFeature
+export default CardUseCase
 
 const Card = styled.div``
 
 const CardInner = styled.div`
   padding: 28px;
-  min-height: 333px;
   height: 100%;
-
-  ${({ theme }) =>
-    `
-    @media (max-width: ${theme.device.mobileMediaMax}){
-      min-height: auto;
-    }
-  `}
 `
 
 const Title = styled.div`
@@ -61,11 +53,6 @@ const Description = styled.div`
 
   p:last-child {
     margin-bottom: 0;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: underline;
   }
 
   ${({ theme }) =>

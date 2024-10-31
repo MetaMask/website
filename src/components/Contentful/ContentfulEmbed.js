@@ -11,6 +11,7 @@ const ContentfulEmbed = props => {
     moduleConfig: {
       embed: { embed },
       title,
+      subTitle,
       displayTitle,
       moduleId,
       previewMode = false,
@@ -42,6 +43,7 @@ const ContentfulEmbed = props => {
             cardRef={cardRef}
           />
           {duration ? <div className="duration">{duration}</div> : null}
+          {subTitle ? <h3 className="subtitle">{subTitle}</h3> : null}
         </div>
       </WrapperInner>
     </Wrapper>
@@ -131,6 +133,17 @@ const WrapperInner = styled.div`
       z-index: 10;
       font-size: 12px;
       line-height: 1;
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      text-align: left;
+      color: ${({ theme }) => theme.text.secondary};
+
+      @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+        font-size: 20px;
+        line-height: 1.2;
+      }
     }
   }
 

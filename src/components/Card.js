@@ -19,6 +19,7 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import GatsbyBackgroundImage from './GatsbyBackgroundImage'
 import CardBenefit from './Card/CardBenefit'
 import CardDelegationFeature from './Card/CardDelegationFeature'
+import CardUseCase from './Card/CardUseCase'
 
 /**
  * @name Card
@@ -77,6 +78,8 @@ const StyledCard = props => {
       return <CardBenefit {...props} />
     case 'delegation-feature':
       return <CardDelegationFeature {...props} />
+    case 'use-case':
+      return <CardUseCase {...props} />
     default:
     // code block
   }

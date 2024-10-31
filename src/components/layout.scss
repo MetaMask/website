@@ -1136,6 +1136,15 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15;
   background-color: #75bff8;
 }
 
+.bg-darker-blue {
+  background-color: #037dd6;
+  color: #fff;
+}
+
+.bg-pink {
+  background-color: #ffa4d1;
+}
+
 .bg-darkGray {
   background-color: #6a737d;
   color: #fff;
@@ -1210,17 +1219,19 @@ figcaption {
 }
 
 #delegation-toolkit-benefits {
-  padding-top: 32px;
-  padding-bottom: 32px;
-
   .moduleContainerListModules {
-    gap: 56px;
+    row-gap: 56px;
   }
 }
 
-#delegation-toolkit-feature-cards {
-  padding-top: 32px;
-  padding-bottom: 32px;
+#delegation-toolkit-videos {
+  @media (min-width: 767px) {
+    margin-top: 120px;
+  }
+
+  .moduleContainerListModules {
+    row-gap: 32px;
+  }
 }
 
 #delegation-toolkit-getting-started {
@@ -1320,6 +1331,14 @@ body.dark-mode {
     background-color: #393e46;
   }
   .bg-dark {
+    background-color: #393e46;
+  }
+
+  .bg-darker-blue {
+    background-color: #393e46;
+  }
+
+  .bg-pink {
     background-color: #393e46;
   }
 
