@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 <url><loc>https://metamask.io/institutions/custody/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
-<url><loc>https://metamask.io/news/security/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/news/institutions/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/news/developers/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/news/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>https://metamask.io/news/security/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/zh-CN/download/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/hi-IN/download/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://metamask.io/it/download/</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
