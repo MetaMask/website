@@ -10,6 +10,7 @@ import { useLocation } from '@reach/router'
 import Helmet from 'react-helmet'
 import { DEFAULT_LOCALE_CODE } from '../lib/config.mjs'
 import { generateFaqSchema } from '../lib/utils/schema'
+import UKApprovalNotice from '../components/UKApprovalNotice'
 
 /**
  * @name ContentfulLayout
@@ -49,6 +50,8 @@ const ContentfulLayout = props => {
       translation,
       localizedPages,
       sharedCopy,
+      ukApproved,
+      ukApprovalText,
     },
     path,
     ...rest
@@ -92,7 +95,7 @@ const ContentfulLayout = props => {
     return acc
   }, Array(modules.length - 1)) // prepopulate array so we can insert last elements if they appear first
 
-  const allModules = [header, ...orderedPageModules, footer]
+  const allModules = [header, ...orderedPageModules]
   const schema = isFaqLayout ? generateFaqSchema(orderedPageModules) : null
 
   return (
@@ -134,6 +137,11 @@ const ContentfulLayout = props => {
           { ...module, isFaq: isFaqLayout, translation },
           locale
         )
+      )}
+      <UKApprovalNotice ukApproved={ukApproved} ukApprovalText={ukApprovalText} />
+      {contentfulModuleToComponent(
+        { ...footer, isFaq: isFaqLayout, translation },
+        locale
       )}
       <script
         type="text/javascript"

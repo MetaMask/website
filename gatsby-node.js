@@ -196,6 +196,8 @@ exports.createPages = async ({ graphql, actions }) => {
             isFaqLayout
             h2FontSize
             widerContainer
+            ukApproved
+            ukApprovalText
             translation
             pageType
             node_locale
@@ -221,6 +223,8 @@ exports.createPages = async ({ graphql, actions }) => {
             themeColor,
             isFaqLayout,
             widerContainer,
+            ukApproved,
+            ukApprovalText,
             h2FontSize,
             translation,
             pageType,
@@ -259,6 +263,8 @@ exports.createPages = async ({ graphql, actions }) => {
                   themeColor,
                   isFaqLayout,
                   widerContainer,
+                  ukApproved,
+                  ukApprovalText,
                   h2FontSize,
                   node_locale,
                   localizedPages,
@@ -308,6 +314,8 @@ exports.createPages = async ({ graphql, actions }) => {
                         locale: locale.code,
                         node_locale: locale.code,
                         newsCategories,
+                        ukApproved,
+                        ukApprovalText,
                       },
                     })
                   })
@@ -336,6 +344,8 @@ exports.createPages = async ({ graphql, actions }) => {
                     translation,
                     node_locale,
                     newsCategories,
+                    ukApproved,
+                    ukApprovalText,
                   },
                 })
               })
@@ -392,6 +402,8 @@ exports.createPages = async ({ graphql, actions }) => {
                   slug,
                   isFaqLayout,
                   widerContainer,
+                  ukApproved,
+                  ukApprovalText,
                   h2FontSize,
                   extraData,
                   translation,
@@ -416,6 +428,8 @@ exports.createPages = async ({ graphql, actions }) => {
               isFaqLayout,
               h2FontSize,
               widerContainer,
+              ukApproved,
+              ukApprovalText,
               extraData,
               locale: node_locale,
               translation,

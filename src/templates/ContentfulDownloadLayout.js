@@ -8,6 +8,7 @@ import DownloadContainer from '../components/DownloadContainer'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import { DEFAULT_LOCALE_CODE } from '../lib/config.mjs'
 import withProcessPreviewData from '../lib/utils/withProcessPreviewData'
+import UKApprovalNotice from '../components/UKApprovalNotice'
 
 const DownloadPage = props => {
   const {
@@ -18,6 +19,8 @@ const DownloadPage = props => {
       translation,
       localizedPages,
       sharedCopy,
+      ukApproved,
+      ukApprovalText,
     } = {},
     previewMode,
   } = props
@@ -65,6 +68,7 @@ const DownloadPage = props => {
           />
         ) : null}
       </Container>
+      <UKApprovalNotice ukApproved={ukApproved} ukApprovalText={ukApprovalText} />
       {contentfulModuleToComponent({ ...footer, previewMode })}
     </Layout>
   )
