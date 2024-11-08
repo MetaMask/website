@@ -6,6 +6,7 @@ import { DEFAULT_LOCALE_CODE } from '../lib/config.mjs'
 import queryString from 'query-string'
 import { useLocation } from '@reach/router'
 import capitalize from 'lodash/capitalize'
+import UKApprovalNotice from '../components/UKApprovalNotice'
 
 const ContentfulNewsCategoryLayout = props => {
   const {
@@ -21,6 +22,8 @@ const ContentfulNewsCategoryLayout = props => {
       sharedCopy,
       slug,
       translation,
+      ukApproved,
+      ukApprovalText,
     } = {},
   } = props
 
@@ -79,6 +82,10 @@ const ContentfulNewsCategoryLayout = props => {
             currentPage,
           },
         })}
+      <UKApprovalNotice
+        ukApproved={ukApproved}
+        ukApprovalText={ukApprovalText}
+      />
       {footer && contentfulModuleToComponent(footer)}
     </Layout>
   )

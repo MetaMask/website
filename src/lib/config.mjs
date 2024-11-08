@@ -131,7 +131,7 @@ export const getLocalizedPath = (pathname, newLocaleCode) => {
   return localizedPath
 }
 
-export const GB_BLOCKED_PATHS = ['/buy-crypto/', '/sell-crypto/', '/swaps/', '/news/latest/how-to-sell-crypto-for-cash/', '/news/latest/how-to-buy-crypto/']
+export const GB_BLOCKED_PATHS = ['/news/latest/how-to-sell-crypto-for-cash/', '/news/latest/how-to-buy-crypto/']
 export const GB_DISCLAIMER_PATHS = ['/', '/download/', '/swaps/', '/buy-crypto/', '/sell-crypto/', '/swaps/swap-with-portfolio/', '/news/']
 
 export const NO_FOLLOW_URLS = ['/cla/', '/about/']
