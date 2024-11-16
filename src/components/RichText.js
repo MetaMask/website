@@ -5,9 +5,11 @@ import Markdown from './Markdown'
 
 function parseHTML(html) {
   return html.replace(/<img.*?src="(.*?)"/g, (match, p1) => {
+    const src = p1?.split('?')[0]
+
     return match.replace(
       p1,
-      `${p1}?w=1280&q=80&fm=webp" width="1280" height="720"`
+      `${src}?w=1280&q=80&fm=webp" width="1280" height="720`
     )
   })
 }
