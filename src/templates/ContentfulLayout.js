@@ -138,7 +138,10 @@ const ContentfulLayout = props => {
           locale
         )
       )}
-      <UKApprovalNotice ukApproved={ukApproved} ukApprovalText={ukApprovalText} />
+      <UKApprovalNotice
+        ukApproved={ukApproved}
+        ukApprovalText={ukApprovalText}
+      />
       {contentfulModuleToComponent(
         { ...footer, isFaq: isFaqLayout, translation },
         locale

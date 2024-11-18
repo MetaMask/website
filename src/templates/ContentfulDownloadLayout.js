@@ -68,7 +68,10 @@ const DownloadPage = props => {
           />
         ) : null}
       </Container>
-      <UKApprovalNotice ukApproved={ukApproved} ukApprovalText={ukApprovalText} />
+      <UKApprovalNotice
+        ukApproved={ukApproved}
+        ukApprovalText={ukApprovalText}
+      />
       {contentfulModuleToComponent({ ...footer, previewMode })}
     </Layout>
   )
