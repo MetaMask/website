@@ -42,7 +42,7 @@ const StyledHeader = props => {
   } = props
 
   const isDesktop = useMediaQuery({
-    query: '(min-width: 1025px)',
+    query: '(min-width: 1200px)',
   })
   const [menuActive, setMenuActive] = useState('')
   const [filteredMenus, setFilteredMenus] = useState(menus)
@@ -235,7 +235,7 @@ const StyledHeader = props => {
               active={hamburgerActive}
               ref={buttonRef}
               className="w-icon w-icon-nav-menu"
-            ></HamburgerButton>
+            />
             <NavMain
               hamburgerActive={hamburgerActive}
               ref={menuRef}
@@ -287,7 +287,7 @@ const StyledHeader = props => {
                 })}
 
                 {downloadButton ? (
-                  <ButtonsWrapper
+                  <ButtonWrapper
                     className="download-btn-desktop"
                     hideDownloadBtn={hideDownloadBtn}
                   >
@@ -297,7 +297,7 @@ const StyledHeader = props => {
                       isHeaderMenu: true,
                       previewMode,
                     })}
-                  </ButtonsWrapper>
+                  </ButtonWrapper>
                 ) : null}
 
                 <ToggleWrapper>
@@ -347,7 +347,7 @@ const StyledHeader = props => {
                 </ToggleWrapper>
 
                 {downloadButton ? (
-                  <ButtonsWrapper
+                  <ButtonWrapper
                     className="download-btn-mobile"
                     hideDownloadBtn={hideDownloadBtn}
                   >
@@ -357,7 +357,7 @@ const StyledHeader = props => {
                       isHeaderMenu: true,
                       previewMode,
                     })}
-                  </ButtonsWrapper>
+                  </ButtonWrapper>
                 ) : null}
               </NavMainInner>
             </NavMain>
@@ -447,7 +447,8 @@ const NavMain = styled.nav`
   display: block;
   font-size: 16px;
   line-height: 22px;
-  @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+
+  @media (max-width: ${({ theme }) => theme.device.desktopMediaMax}) {
     opacity: 0;
     visibility: hidden;
     left: 0;
@@ -461,6 +462,12 @@ const NavMain = styled.nav`
     max-height: ${({ topMenuMobile }) => `calc(100% - ${topMenuMobile})`};
     overflow-x: hidden;
     overflow-y: auto;
+    box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.1);
+
+    .dark-mode & {
+      box-shadow: 0px 6px 6px 0px rgba(255, 255, 255, 0.1);
+    }
+
     ${({ hamburgerActive }) =>
       hamburgerActive
         ? `
@@ -473,7 +480,7 @@ const NavMain = styled.nav`
 
 const NavMainInner = styled.div`
   display: flex;
-  @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+  @media (max-width: ${({ theme }) => theme.device.desktopMediaMax}) {
     flex-direction: column;
     max-width: var(--container-width-miniDesktop);
     margin: 0 auto;
@@ -510,7 +517,7 @@ const NavMenu = styled.div`
   &.language-selector {
     min-width: 85px;
   }
-  @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+  @media (max-width: ${({ theme }) => theme.device.desktopMediaMax}) {
     flex-direction: column;
   }
 `
@@ -566,7 +573,7 @@ const NavMenuChild = styled.div`
         : ''}
   }
 
-  @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+  @media (max-width: ${({ theme }) => theme.device.desktopMediaMax}) {
     width: 100%;
     position: static;
     box-shadow: none;
@@ -586,7 +593,7 @@ const NavMenuMain = styled.div`
   display: flex;
   align-items: center;
   height: 40px;
-  padding: 0 20px;
+  padding: 0 16px;
   color: #222;
   line-height: 1.1;
 
@@ -605,7 +612,7 @@ const NavMenuMain = styled.div`
     `
       : ``}
 
-  @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+  @media (max-width: ${({ theme }) => theme.device.desktopMediaMax}) {
     width: 100%;
     justify-content: space-between;
   }
@@ -626,7 +633,7 @@ const HamburgerButton = styled.div`
   cursor: pointer;
   border-radius: 10px;
   color: ${({ theme }) => theme.text.default};
-  @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+  @media (max-width: ${({ theme }) => theme.device.desktopMediaMax}) {
     display: inline-flex;
   }
 
@@ -638,7 +645,7 @@ const HamburgerButton = styled.div`
       : ''}
 `
 
-const ButtonsWrapper = styled.div`
+const ButtonWrapper = styled.div`
   display: block;
 
   .button {
@@ -648,30 +655,26 @@ const ButtonsWrapper = styled.div`
 
   a {
     line-height: 1.1;
-  }
-
-  html:not([lang='pcm']) & {
-    a {
-      padding: 8px 32px !important;
-    }
+    padding: 8px 16px;
+    font-size: 14px;
   }
 
   &.download-btn-desktop {
     display: none;
 
-    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+    @media (min-width: ${({ theme }) => theme.device.desktop}) {
       display: block;
     }
   }
 
   &.download-btn-mobile {
     display: block;
-    @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+    @media (min-width: ${({ theme }) => theme.device.desktop}) {
       display: none;
     }
   }
 
-  @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+  @media (max-width: ${({ theme }) => theme.device.desktopMediaMax}) {
     margin-top: 12px;
 
     a {
@@ -691,9 +694,9 @@ const ButtonsWrapper = styled.div`
 const DarkModeWrapper = styled.div`
   display: inline-flex;
   align-items: center;
-  margin-left: 32px;
+  margin-left: 16px;
 
-  @media (max-width: ${({ theme }) => theme.device.miniDesktopMediaMax}) {
+  @media (max-width: ${({ theme }) => theme.device.desktopMediaMax}) {
     margin-top: 16px;
     margin-left: 0;
     justify-content: center;
@@ -704,7 +707,7 @@ const ToggleWrapper = styled.div`
   display: flex;
   flex-direction: column-reverse;
 
-  @media (min-width: ${({ theme }) => theme.device.miniDesktop}) {
+  @media (min-width: ${({ theme }) => theme.device.desktop}) {
     flex-direction: row;
   }
 `
