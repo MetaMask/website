@@ -138,6 +138,7 @@ const CTA = props => {
     const trackableClasses = ['ld-portfolio-link', 'ld-download-link']
 
     if (flagName === 'mm-download-cta-home-hero') {
+      ldClient?.track('home-hero-cta-click')
       ldClient?.track('home-hero-download-cta-click')
       ldClient?.flush()
     }
@@ -145,12 +146,14 @@ const CTA = props => {
     if (flagName === 'mm-download-cta-header') {
       const currentPath = removeLanguageCode(location?.pathname)
       if (currentPath === '/') {
+        ldClient?.track('home-header-cta-click')
         ldClient?.track('home-header-download-cta-click')
         ldClient?.flush()
       }
     }
 
     if (flagName === 'mm-portfolio-cta-home-hero') {
+      ldClient?.track('home-hero-cta-click')
       ldClient?.track('home-hero-portfolio-cta-click')
       ldClient?.flush()
     }
@@ -158,6 +161,7 @@ const CTA = props => {
     if (flagName === 'mm-portfolio-cta-header') {
       const currentPath = removeLanguageCode(location?.pathname)
       if (currentPath === '/') {
+        ldClient?.track('home-header-cta-click')
         ldClient?.track('home-header-portfolio-cta-click')
         ldClient?.flush()
       }
