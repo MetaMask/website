@@ -1141,6 +1141,10 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15;
   color: #fff;
 }
 
+.bg-lighter-blue {
+  background-color: #f2f9fd;
+}
+
 .bg-pink {
   background-color: #ffa4d1;
 }
@@ -1336,6 +1340,10 @@ body.dark-mode {
 
   .bg-darker-blue {
     background-color: #393e46;
+  }
+
+  .bg-lighter-blue {
+    background-color: #23272a;
   }
 
   .bg-pink {
