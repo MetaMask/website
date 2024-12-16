@@ -14,6 +14,7 @@ import ParseMD from './ParseMD'
 import GatsbyBackgroundImage from './GatsbyBackgroundImage'
 import { MetaMaskContext } from '../Context/MetaMaskContextProvider'
 import { useLaunchDarklyFlag } from '../Context/LaunchDarklyFlagContext'
+import { useMediaQuery } from 'react-responsive'
 
 const FoxAnimation = Loadable(() => import('./FoxAnimation/'))
 
@@ -63,6 +64,10 @@ const HeroContainerComponent = props => {
   const isInstitutions = customClass?.includes('page-institutions')
   const isInstitutionalChild = customClass?.includes('page-institutional-child')
   const isThankYou = customClass?.includes('page-thank-you')
+
+  const isMobile = useMediaQuery({
+    query: '(max-width: 767px)',
+  })
 
   let hubspotWrapper
   if (hubSpotForm) {
@@ -117,7 +122,8 @@ const HeroContainerComponent = props => {
   }
 
   useEffect(() => {
-    if (!isHome) {
+    if (!isHome || !isMetaMaskInstalled || isMobile) {
+      setIsHomeTreatment(false)
       return
     }
 
@@ -127,7 +133,13 @@ const HeroContainerComponent = props => {
     }
 
     init()
-  }, [getLaunchDarklyFlag, isHome, setIsHomeTreatment])
+  }, [
+    getLaunchDarklyFlag,
+    setIsHomeTreatment,
+    isHome,
+    isMetaMaskInstalled,
+    isMobile,
+  ])
 
   return (
     <>
@@ -345,12 +357,10 @@ const HeroContainerComponent = props => {
                     (isStyleHubspot || sideImageFlex || isFlask) ? (
                       <Image
                         image={
-                          isMetaMaskInstalled || isHomeTreatment
-                            ? sideImagePortfolio
-                            : sideImage
+                          isMetaMaskInstalled ? sideImagePortfolio : sideImage
                         }
                         darkImage={
-                          isMetaMaskInstalled || isHomeTreatment
+                          isMetaMaskInstalled
                             ? sideImagePortfolioDarkMode
                             : sideImageDarkMode
                         }
