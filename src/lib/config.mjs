@@ -23,7 +23,7 @@ export const TEMPLATE_LAYOUT_LIST = {
   PYUSD: './src/templates/PYUSDLayout.js',
   Blog: './src/templates/NewsLayout.js',
   Author: './src/templates/AuthorProfileLayout.js',
-  News: './src/templates/ContentfulNewsCategoryLayout.js'
+  News: './src/templates/ContentfulNewsCategoryLayout.js',
 }
 
 export const mapTemplateLayout = name => {
@@ -112,26 +112,43 @@ export const LOCALES_TRANSLATE = LOCALES.slice(1)
 export const DEFAULT_LOCALE = LOCALES[0]
 export const DEFAULT_LOCALE_CODE = DEFAULT_LOCALE.code
 
-export const mapCodeToHtmlLang = (code) => {
+export const mapCodeToHtmlLang = code => {
   const locale = LOCALES.find(l => l.code === code)
   return locale ? locale.htmlLang : DEFAULT_LOCALE.htmlLang
 }
 
 export const getLocalizedPath = (pathname, newLocaleCode) => {
-  const localesRegexPattern = `^/(${LOCALES.map(locale => locale.code).join('|')})`;
+  const localesRegexPattern = `^/(${LOCALES.map(locale => locale.code).join(
+    '|'
+  )})`
   let localizedPath
 
   if (newLocaleCode === DEFAULT_LOCALE_CODE) {
-    localizedPath = pathname.replace(new RegExp(localesRegexPattern), '');
+    localizedPath = pathname.replace(new RegExp(localesRegexPattern), '')
   } else {
     const newLocale = newLocaleCode === DEFAULT_LOCALE_CODE ? '' : newLocaleCode
-    localizedPath = `/${newLocale}${pathname.replace(new RegExp(localesRegexPattern + '/'), '/')}`;
+    localizedPath = `/${newLocale}${pathname.replace(
+      new RegExp(localesRegexPattern + '/'),
+      '/'
+    )}`
   }
 
   return localizedPath
 }
 
-export const GB_BLOCKED_PATHS = ['/news/latest/how-to-sell-crypto-for-cash/', '/news/latest/how-to-buy-crypto/']
-export const GB_DISCLAIMER_PATHS = ['/', '/download/', '/swaps/', '/buy-crypto/', '/sell-crypto/', '/swaps/swap-with-portfolio/', '/news/']
+export const GB_BLOCKED_PATHS = [
+  '/news/latest/how-to-sell-crypto-for-cash/',
+  '/news/latest/how-to-swap-crypto/',
+  '/news/latest/how-to-buy-crypto/',
+]
+export const GB_DISCLAIMER_PATHS = [
+  '/',
+  '/download/',
+  '/swaps/',
+  '/buy-crypto/',
+  '/sell-crypto/',
+  '/swaps/swap-with-portfolio/',
+  '/news/',
+]
 
 export const NO_FOLLOW_URLS = ['/cla/', '/about/']
