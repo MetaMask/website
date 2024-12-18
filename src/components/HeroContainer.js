@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react'
 import styled, { withTheme } from 'styled-components'
 import ContentWrapper from './ContentWrapper'
 import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
@@ -100,7 +100,18 @@ const HeroContainerComponent = props => {
   const sdkRef = useRef(null)
   const [height, setHeight] = useState(0)
   const [headerHeight, setHeaderHeight] = useState(0)
-  const [isHomeTreatment, setIsHomeTreatment] = useState(false)
+
+  const [homeTreatmentStyle, setHomeTreatmentStyle] = useState('')
+  const isHomeColumn = useMemo(() => homeTreatmentStyle === 'column', [
+    homeTreatmentStyle,
+  ])
+  const isHomeWide = useMemo(
+    () => homeTreatmentStyle === 'wide' || homeTreatmentStyle === 'colorful',
+    [homeTreatmentStyle]
+  )
+  const isHomeColorful = useMemo(() => homeTreatmentStyle === 'colorful', [
+    homeTreatmentStyle,
+  ])
 
   useEffect(() => {
     handleWindowSizeChange()
@@ -123,19 +134,19 @@ const HeroContainerComponent = props => {
 
   useEffect(() => {
     if (!isHome || !isMetaMaskInstalled || isMobile) {
-      setIsHomeTreatment(false)
+      setHomeTreatmentStyle('')
       return
     }
 
     const init = async () => {
-      const value = await getLaunchDarklyFlag('home-hero-cta-test')
-      setIsHomeTreatment(value === 'treatment')
+      const value = await getLaunchDarklyFlag('home-hero-style')
+      setHomeTreatmentStyle(value)
     }
 
     init()
   }, [
     getLaunchDarklyFlag,
-    setIsHomeTreatment,
+    setHomeTreatmentStyle,
     isHome,
     isMetaMaskInstalled,
     isMobile,
@@ -154,7 +165,9 @@ const HeroContainerComponent = props => {
       ) : null}
       <HeroContainer
         $isThankYou={isThankYou}
-        isHomeTreatment={isHomeTreatment}
+        isHomeColumn={isHomeColumn}
+        isHomeWide={isHomeWide}
+        isHomeColorful={isHomeColorful}
         sectionPadding={sectionPadding || ''}
         headlineBorderBottom={headlineBorderBottom}
         isStyleCenterSimple={isStyleCenterSimple}
@@ -168,9 +181,11 @@ const HeroContainerComponent = props => {
         headerHeight={headerHeight}
         ref={heroContainerRef}
         className={classnames({
-          [`bg-${backgroundColor}`]: backgroundColor && !isHomeTreatment,
-          [`bg-lighter-blue`]: isHomeTreatment,
+          [`bg-${backgroundColor}`]: backgroundColor && !homeTreatmentStyle,
+          [`bg-lighter-blue`]:
+            homeTreatmentStyle === 'column' || homeTreatmentStyle === 'wide',
           [`custom-${customClass}`]: customClass,
+          [`wider-container`]: homeTreatmentStyle === 'wide',
         })}
       >
         <GatsbyBackgroundImage
@@ -201,7 +216,8 @@ const HeroContainerComponent = props => {
               isSDK={isSDK}
               isInstitutionalChild={isInstitutionalChild}
               $isThankYou={isThankYou}
-              isHomeTreatment={isHomeTreatment}
+              isHomeColumn={isHomeColumn}
+              isHomeWide={isHomeWide}
             >
               <GatsbyBackgroundImage
                 image={
@@ -227,7 +243,8 @@ const HeroContainerComponent = props => {
                   center={!sideImageFlex && !isHome}
                   sideImageFlex={sideImageFlex}
                   isSDK={isSDK}
-                  isHomeTreatment={isHomeTreatment}
+                  isHomeColumn={isHomeColumn}
+                  isHomeWide={isHomeWide}
                 >
                   {eyebrowLogo ? (
                     <EyebrowWrapper
@@ -300,7 +317,8 @@ const HeroContainerComponent = props => {
                       <HeroSideImage
                         sideImageFlex={sideImageFlex}
                         isSDK={isSDK}
-                        isHomeTreatment={isHomeTreatment}
+                        isHomeColumn={isHomeColumn}
+                        isHomeWide={isHomeWide}
                         ref={sdkRef}
                       >
                         <Image
@@ -312,7 +330,7 @@ const HeroContainerComponent = props => {
                     </HeightSlide>
                   ) : null}
                   {description && (
-                    <HeroDescription isFaq={isFaq}>
+                    <HeroDescription isFaq={isFaq} isHomeWide={isHomeWide}>
                       {previewMode ? (
                         <ParseMD>
                           {isMetaMaskInstalled
@@ -331,7 +349,10 @@ const HeroContainerComponent = props => {
                     </HeroDescription>
                   )}
                   {!isEmpty(ctas) && !isFlask ? (
-                    <HeroCTA isHomeTreatment={isHomeTreatment}>
+                    <HeroCTA
+                      isHomeColumn={isHomeColumn}
+                      isHomeWide={isHomeWide}
+                    >
                       {ctas.map(cta =>
                         contentfulModuleToComponent({
                           ...cta,
@@ -350,7 +371,8 @@ const HeroContainerComponent = props => {
                     isStyleHubspot={isStyleHubspot}
                     sideImageFoxAnimation={sideImageFoxAnimation}
                     isFlask={isFlask}
-                    isHomeTreatment={isHomeTreatment}
+                    isHomeColumn={isHomeColumn}
+                    isHomeWide={isHomeWide}
                   >
                     {sideImageFoxAnimation ? <FoxAnimation /> : null}
                     {!sideImageFoxAnimation &&
@@ -371,7 +393,7 @@ const HeroContainerComponent = props => {
                   </HeroSideImage>
                 ) : null}
                 {!isEmpty(ctas) && isFlask ? (
-                  <HeroCTA isHomeTreatment={isHomeTreatment}>
+                  <HeroCTA isHomeColumn={isHomeColumn} isHomeWide={isHomeWide}>
                     {ctas.map(cta =>
                       contentfulModuleToComponent({
                         ...cta,
@@ -386,7 +408,7 @@ const HeroContainerComponent = props => {
           </ContentWrapper>
         </GatsbyBackgroundImage>
       </HeroContainer>
-      {learnMoreText && isMetaMaskInstalled && !isHomeTreatment ? (
+      {learnMoreText && isMetaMaskInstalled && !homeTreatmentStyle ? (
         <ContentWrapper>
           <LearnMoreWrapper>
             <LearnMoreInner className="text-block">
@@ -436,13 +458,70 @@ const HeroContainer = styled(Section)`
     padding-bottom: 0;
   }
 
-  ${({ isHomeTreatment, headerHeight }) =>
-    isHomeTreatment
+  ${({ isHomeColorful, theme }) =>
+    isHomeColorful &&
+    `
+    z-index: 0;
+    border: 2px solid ${theme.black};
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #f9e37a;
+      body.dark-mode & {
+        background-color: #293643;
+      }
+      z-index: -2;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 44%;
+      height: 100%;
+      background-color: #89C3F8;
+      body.dark-mode & {
+        background-color: #1d232b;
+      }
+      z-index: -1;
+      border-left: 2px solid ${theme.black};
+    }
+
+    .button {
+      border: 2px solid ${theme.black};
+    }
+  `}
+
+  ${({ isHomeColumn, headerHeight }) =>
+    isHomeColumn
       ? `
       height: calc(100vh - ${headerHeight}px);
       justify-content: flex-start;
   `
       : ``}
+
+  ${({ isHomeWide, headerHeight }) =>
+    isHomeWide
+      ? `
+      height: calc(100vh - ${headerHeight}px);
+      padding-top: 88px;
+  `
+      : ``}
+
+  @media (min-width: ${({ theme }) => theme.device.tabletMediaMax}) {
+    ${({ isHomeWide }) =>
+      isHomeWide
+        ? `
+      justify-content: flex-start;
+    `
+        : ''}
+  }
 
   ${({ $isThankYou }) =>
     $isThankYou
@@ -548,8 +627,8 @@ const HeroContentContainer = styled.div`
   `
       : ''}
 
-    ${({ isHomeTreatment }) =>
-      isHomeTreatment
+    ${({ isHomeColumn }) =>
+      isHomeColumn
         ? `
       flex-direction: column;
       gap: 70px;
@@ -721,8 +800,14 @@ const HeroImageTextContainer = styled.div`
   min-width: 0;
   `
       : ''}
-  ${({ isHome, isHomeTreatment, theme }) =>
-    isHome && !isHomeTreatment
+  ${({ isHomeWide }) =>
+    isHomeWide
+      ? `
+  min-width: 50%;
+  `
+      : ''}
+  ${({ isHome, isHomeColumn, isHomeWide, theme }) =>
+    isHome && !isHomeColumn && !isHomeWide
       ? `
   @media (min-width: ${theme.device.miniDesktop}){
     margin-top: 50px;
@@ -769,8 +854,8 @@ const HeroImageTextContainer = styled.div`
   `
       : ''}
 
-  ${({ isHomeTreatment }) =>
-    isHomeTreatment
+  ${({ isHomeColumn }) =>
+    isHomeColumn
       ? `
     text-align: center;
   `
@@ -923,6 +1008,13 @@ const HeroDescription = styled.div`
     color: #727272;
   `
       : ''}
+
+  ${({ isHomeWide }) =>
+    isHomeWide
+      ? `
+    margin-bottom: 44px;
+  `
+      : ''}
 `
 
 const HeroSideImage = styled.div`
@@ -972,11 +1064,19 @@ const HeroSideImage = styled.div`
   `
       : ''}
 
-  ${({ isHomeTreatment }) =>
-    isHomeTreatment
+  ${({ isHomeColumn }) =>
+    isHomeColumn
       ? `
     height: auto;
     width: 950px;
+  `
+      : ''}
+
+  ${({ isHomeWide }) =>
+    isHomeWide
+      ? `
+    height: auto;
+    width: calc(55% + 113px);
   `
       : ''}
 
@@ -1063,6 +1163,13 @@ const HeroSideImage = styled.div`
 
   @media (min-width: ${({ theme }) => theme.device.desktop}) {
     padding: 0 !important;
+        ${({ isHomeWide }) =>
+          isHomeWide
+            ? `
+      margin-left: 27px;
+      margin-right: -113px;
+  `
+            : ''}
   }
 
   @media (max-width: ${({ theme }) => theme.device.tabletMediaMax}) {
@@ -1114,8 +1221,8 @@ const HeroCTA = styled.div`
   display: flex;
   flex-flow: wrap;
 
-  ${({ isHomeTreatment }) =>
-    isHomeTreatment
+  ${({ isHomeColumn }) =>
+    isHomeColumn
       ? `
         justify-content: center;
 
