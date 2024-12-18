@@ -1,23 +1,28 @@
 import withProcessPreviewData from '../../lib/utils/withProcessPreviewData'
 import { MetaMaskContext } from '../../Context/MetaMaskContextProvider'
 import { isMobile } from 'react-device-detect'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import isEmpty from 'lodash/isEmpty'
 import PropTypes from 'prop-types'
 import CTA from '../CTA'
 
 const ContentfulCta = props => {
   const { isMetaMaskInstalled } = useContext(MetaMaskContext)
+  const [activeCta, setActiveCta] = useState(props.moduleConfig)
 
-  const selectedCta =
-    isMetaMaskInstalled && !isEmpty(props.moduleConfig.alternativeCta)
-      ? props.moduleConfig.alternativeCta
-      : props.moduleConfig
+  useEffect(() => {
+    const selectedCta =
+      isMetaMaskInstalled && !isEmpty(props.moduleConfig.alternativeCta)
+        ? props.moduleConfig.alternativeCta
+        : props.moduleConfig
 
-  let activeCta = selectedCta
-  if (isMobile && selectedCta.mobileCta) {
-    activeCta = selectedCta.mobileCta
-  }
+    let temp = selectedCta
+    if (isMobile && selectedCta.mobileCta) {
+      temp = selectedCta.mobileCta
+    }
+
+    setActiveCta(temp)
+  }, [props.moduleConfig, isMetaMaskInstalled, isMobile])
 
   // check work with preview
   const extractBrowsers = item =>
@@ -32,9 +37,12 @@ const ContentfulCta = props => {
     {}
   )
 
+  if (!activeCta) return null
+
   return (
     // eslint-disable-next-line react/jsx-pascal-case
     <CTA
+      key={activeCta.contentful_id}
       link={activeCta.ctaLink || ''}
       text={activeCta.displayText || activeCta.ctaText}
       textTreatment={activeCta.displayTextTreatment}
@@ -65,7 +73,7 @@ const ContentfulCta = props => {
       flagName={activeCta.launchDarklyFlag}
       attr={{
         'data-componentname': 'ContentfulCta',
-        'data-componentid': activeCta?.contentful_id || 'n/a',
+        'data-componentid': activeCta.contentful_id || 'n/a',
         'data-flagname': props.moduleConfig?.launchDarklyFlag,
         // 'data-flagvalue': 'n/a',
       }}
