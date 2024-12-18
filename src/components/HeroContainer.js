@@ -182,10 +182,9 @@ const HeroContainerComponent = props => {
         ref={heroContainerRef}
         className={classnames({
           [`bg-${backgroundColor}`]: backgroundColor && !homeTreatmentStyle,
-          [`bg-lighter-blue`]:
-            homeTreatmentStyle === 'column' || homeTreatmentStyle === 'wide',
+          [`bg-lighter-blue`]: isHomeColumn || isHomeWide,
           [`custom-${customClass}`]: customClass,
-          [`wider-container`]: homeTreatmentStyle === 'wide',
+          [`wider-container`]: isHomeWide,
         })}
       >
         <GatsbyBackgroundImage
