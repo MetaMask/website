@@ -472,7 +472,7 @@ const HeroContainer = styled(Section)`
       height: 100%;
       background-color: #f9e37a;
       body.dark-mode & {
-        background-color: #293643;
+        background-color: #24292e;
       }
       z-index: -2;
     }
@@ -486,7 +486,7 @@ const HeroContainer = styled(Section)`
       height: 100%;
       background-color: #89C3F8;
       body.dark-mode & {
-        background-color: #1d232b;
+        background-color: #000000;
       }
       z-index: -1;
       border-left: 2px solid ${theme.black};
