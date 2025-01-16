@@ -16,7 +16,7 @@
   }
 
   @include mobile {
-    background-size: auto 340px;
+    background-size: auto 320px;
     background-position: bottom right;
   }
 
@@ -33,7 +33,7 @@
 
     .wrapper {
       width: 100%;
-      max-width: 625px;
+      max-width: 540px;
       display: flex;
       flex-direction: column;
       gap: 32px;
