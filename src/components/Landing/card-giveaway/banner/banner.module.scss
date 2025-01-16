@@ -1,0 +1,63 @@
+@import '../../../../styles/card-giveaway/mixins.scss';
+
+.banner {
+  position: relative;
+  overflow: hidden;
+  color: #013330;
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  background-color: #e5ffc3;
+  clip-path: polygon(
+    50px 0,
+    100% 0,
+    100% calc(100% - 50px),
+    calc(100% - 50px) 100%,
+    0 100%,
+    0 50px
+  );
+
+  padding: 20px 20px 60px 20px;
+  @include desktop {
+    padding: 100px 0 124px 88px;
+  }
+
+  .content {
+    width: 100%;
+    @include desktop {
+      max-width: 423px;
+    }
+
+    h2 {
+      font-family: 'MM Sans';
+      font-size: 32px;
+      line-height: 1.25;
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+
+    p {
+      font-family: 'CentraNo1';
+      margin-bottom: 32px;
+    }
+  }
+
+  .imageWrapper {
+    height: auto;
+    width: 100%;
+    margin-bottom: 25px;
+
+    @include desktop {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: auto;
+    }
+
+    img {
+      height: 100%;
+      width: auto;
+    }
+  }
+}
