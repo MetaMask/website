@@ -66,13 +66,15 @@ const CardGiveaway = ({ data, pageContext }) => {
             'Use your MetaMask Card now through 20 February to enter. The more you tap, the more chances you have to win.'
           }
           buttons={
-            <LinkButton
-              color="white"
-              href="https://consensys-software.typeform.com/to/XmbxlTR5"
-              target="_blank"
-            >
-              Opt in
-            </LinkButton>
+            !isBlocked && (
+              <LinkButton
+                color="white"
+                href="https://consensys-software.typeform.com/to/XmbxlTR5"
+                target="_blank"
+              >
+                Opt in
+              </LinkButton>
+            )
           }
         />
         <Container width="narrow">
@@ -114,13 +116,15 @@ const CardGiveaway = ({ data, pageContext }) => {
               </li>
             </ol>
             <br />
-            <LinkButton
-              color="primary"
-              href="https://consensys-software.typeform.com/to/XmbxlTR5"
-              target="_blank"
-            >
-              Opt in
-            </LinkButton>
+            {!isBlocked && (
+              <LinkButton
+                color="primary"
+                href="https://consensys-software.typeform.com/to/XmbxlTR5"
+                target="_blank"
+              >
+                Opt in
+              </LinkButton>
+            )}
           </Content>
         </Container>
         <Banner
