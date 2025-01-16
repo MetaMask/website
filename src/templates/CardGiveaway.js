@@ -10,42 +10,12 @@ import Content from '../components/Landing/card-giveaway/content/Content'
 import LinkButton from '../components/Landing/card-giveaway/link-button/LinkButton'
 import Banner from '../components/Landing/card-giveaway/banner/Banner'
 import GeoblockOverlay from '../components/Landing/card-giveaway/geoblock-overlay/GeoblockOverlay'
-import Picture from '../components/Landing/picture'
-
-const euCountryCodes = [
-  'AT',
-  'BE',
-  'BG',
-  'HR',
-  'CY',
-  'CZ',
-  'DK',
-  'EE',
-  'FI',
-  'FR',
-  'DE',
-  'GR',
-  'HU',
-  'IE',
-  'IT',
-  'LV',
-  'LT',
-  'LU',
-  'MT',
-  'NL',
-  'PL',
-  'PT',
-  'RO',
-  'SK',
-  'SI',
-  'ES',
-  'SE',
-  'CH',
-]
+import { EU_COUNTRY_CODES } from '../lib/config.mjs'
 
 const CardGiveaway = ({ data, pageContext }) => {
   const { seo, header, footer } = data
   const { pathBuild, widerContainer, localizedPages } = pageContext
+  const euCountryCodes = EU_COUNTRY_CODES
 
   const country = useCountry()
   const [isBlocked, setIsBlocked] = useState(false)
