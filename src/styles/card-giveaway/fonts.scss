@@ -1,0 +1,59 @@
+@font-face {
+  font-family: 'MM Poly Variable';
+  src: url('/fonts/MM-Poly/MM_Poly-Variable.woff2')
+      format('woff2 supports variations'),
+    url('/fonts/MM-Poly/MM_Poly-Variable.woff2') format('woff2-variations');
+}
+
+@each $weight, $style,
+  $suffix
+    in (
+      (900, normal, 'Black'),
+      (900, italic, 'BlackItalic'),
+      (700, normal, 'Bold'),
+      (700, italic, 'BoldItalic'),
+      (400, normal, 'Book'),
+      (400, italic, 'BookItalic'),
+      (800, normal, 'Extrabold'),
+      (800, italic, 'ExtraboldItalic'),
+      (100, normal, 'Hairline'),
+      (100, italic, 'HairlineItalic'),
+      (300, normal, 'Light'),
+      (300, italic, 'LightItalic'),
+      (500, normal, 'Medium'),
+      (500, italic, 'MediumItalic'),
+      (200, normal, 'Thin'),
+      (200, italic, 'ThinItalic')
+    )
+{
+  @font-face {
+    font-family: 'CentraNo1';
+    src: url('/fonts/CentraNo1/CentraNo1-#{$suffix}.eot');
+    src: url('/fonts/CentraNo1/CentraNo1-#{$suffix}.otf') format('opentype'),
+      url('/fonts/CentraNo1/CentraNo1-#{$suffix}.ttf') format('truetype'),
+      url('/fonts/CentraNo1/CentraNo1-#{$suffix}.woff') format('woff'),
+      url('/fonts/CentraNo1/CentraNo1-#{$suffix}.woff2') format('woff2');
+    font-weight: $weight;
+    font-style: $style;
+  }
+}
+
+@each $weight, $style,
+  $suffix
+    in (
+      (900, normal, 'Black'),
+      (700, normal, 'Bold'),
+      (800, normal, 'Extrabold'),
+      (500, normal, 'Medium'),
+      (400, normal, 'Regular'),
+      (600, normal, 'Semibold')
+    )
+{
+  @font-face {
+    font-family: 'MM Sans';
+    src: url('/fonts/MM-Sans/MM_Sans-#{$suffix}.woff2') format('woff2'),
+      url('/fonts/MM-Sans/MM_Sans-#{$suffix}.woff') format('woff');
+    font-weight: $weight;
+    font-style: $style;
+  }
+}
