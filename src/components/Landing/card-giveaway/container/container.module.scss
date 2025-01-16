@@ -1,0 +1,15 @@
+@import '../../../../styles/card-giveaway/mixins.scss';
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 20px;
+  @include desktop {
+    padding-inline: 0;
+  }
+
+  &.narrow {
+    max-width: 687px;
+  }
+}
