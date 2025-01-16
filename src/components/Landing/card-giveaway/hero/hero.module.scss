@@ -1,0 +1,70 @@
+@import '../../../../styles/card-giveaway/mixins.scss';
+
+.hero {
+  height: 730px;
+  @include desktop {
+    height: 760px;
+  }
+  background-color: #661800;
+  background-image: url('/images/landing/card-giveaway/hero.png');
+  background-size: auto 100%;
+  background-origin: content-box;
+  background-repeat: no-repeat;
+
+  @include desktop {
+    background-position: right;
+  }
+
+  @include mobile {
+    background-size: auto 340px;
+    background-position: bottom right;
+  }
+
+  .container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 43px 16px;
+    @include desktop {
+      padding: 0;
+      max-width: 1200px;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 625px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+
+      @include desktop {
+        justify-content: center;
+      }
+
+      .title {
+        font-family: 'MM Poly Variable';
+        color: #ff5c16;
+        text-transform: uppercase;
+        font-weight: normal;
+        font-size: 4.25rem;
+        line-height: 1;
+        font-variation-settings: 'wdth' 25, 'RESO' 4;
+        @include desktop {
+          font-size: 6.75rem;
+        }
+      }
+
+      .description {
+        font-family: 'CentraNo1';
+        color: #ff5c16;
+        font-size: 1rem;
+        line-height: 1.5;
+        @include desktop {
+          font-size: 1.25rem;
+          line-height: 1.2;
+        }
+      }
+    }
+  }
+}
