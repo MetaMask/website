@@ -32,6 +32,9 @@ export const ContentfulLayoutHeaderFields = graphql`
     popupAnnouncement {
       ...ContentfulPopupAnnouncementFields
     }
+    popupAnnouncementEu {
+      ...ContentfulPopupAnnouncementFields
+    }
     popupAnnouncementTreatment {
       ...ContentfulPopupAnnouncementFields
     }

@@ -14,6 +14,7 @@ const ContentfulLayoutHeader = props => {
       downloadButton,
       previewMode = false,
       popupAnnouncement,
+      popupAnnouncementEu,
       popupAnnouncementTreatment,
       launchDarklyFlag,
       isSticky,
@@ -31,6 +32,7 @@ const ContentfulLayoutHeader = props => {
       downloadButton={downloadButton}
       hideDownloadBtn={hideDownloadBtn}
       popupAnnouncement={popupAnnouncement}
+      popupAnnouncementEu={popupAnnouncementEu}
       popupAnnouncementTreatment={popupAnnouncementTreatment}
       isSticky={isSticky}
       launchDarklyFlag={launchDarklyFlag}
