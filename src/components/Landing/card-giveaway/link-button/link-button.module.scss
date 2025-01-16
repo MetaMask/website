@@ -1,0 +1,46 @@
+.button {
+  display: inline-block;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 0.7;
+  border-radius: 6.25rem;
+  font-family: 'CentraNo1';
+  font-weight: 500;
+  transition: background-color 0.2s, color 0.2s;
+
+  &.white {
+    color: #0a0a0a;
+    background-color: #fff;
+
+    &:hover,
+    &:active {
+      background-color: #0a0a0a;
+      color: #fff;
+    }
+  }
+
+  &.primary {
+    background-color: #ff5c16;
+    color: #000;
+
+    &:hover,
+    &:active {
+      background-color: #0a0a0a;
+      color: #fff;
+    }
+  }
+
+  &.green {
+    background-color: #013330;
+    color: #e5ffc3;
+    font-size: 14px;
+
+    &:hover,
+    &:active {
+      color: #0a0a0a;
+      background-color: #fff;
+    }
+  }
+}
