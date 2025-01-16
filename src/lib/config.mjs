@@ -24,6 +24,7 @@ export const TEMPLATE_LAYOUT_LIST = {
   Blog: './src/templates/NewsLayout.js',
   Author: './src/templates/AuthorProfileLayout.js',
   News: './src/templates/ContentfulNewsCategoryLayout.js',
+  CardGiveaway: './src/templates/CardGiveaway.js'
 }
 
 export const mapTemplateLayout = name => {
