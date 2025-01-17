@@ -61,7 +61,7 @@ const CardGiveaway = ({ data, pageContext }) => {
           </GeoblockOverlay>
         )}
         <Hero
-          title={'Win $1000 in ETH'}
+          title={'Win €1000 in ETH'}
           description={
             'Use your MetaMask Card now through 20 February to enter. The more you tap, the more chances you have to win.'
           }
@@ -83,7 +83,7 @@ const CardGiveaway = ({ data, pageContext }) => {
             <br />
             <p>
               MetaMask Card is live in Europe! To celebrate, we’re doing a
-              giveaway of 30 prizes of $1000 in ETH. To enter, just use your
+              giveaway of 30 prizes of €1000 in ETH. To enter, just use your
               MetaMask Card from 22 January 2025 to 20 February 2025 – every
               purchase is an additional chance to win. Check out the Official
               Rules below for further information, including an alternative way
@@ -101,7 +101,7 @@ const CardGiveaway = ({ data, pageContext }) => {
                 Opt-in by minting an NFT on MetaMask Portfolio using the wallet
                 address associated with your MetaMask Card. Note: only one
                 wallet address can be entered per person. Minting the NFT is
-                free, you only pay gas determined by the blockchain.
+                free, you only pay gas determined by the network.
               </li>
               <li>
                 Use your MetaMask Card to make purchases. Each transaction is a
@@ -248,9 +248,9 @@ const CardGiveaway = ({ data, pageContext }) => {
                 conducting transactions of) any prize.
               </li>
               <li>
-                Prizes comprise of $30K equivalent of ETH. A total prize fund of
-                $30,000 USD equivalent of ETH is available. 30 prizes are
-                available, and each prize is valued at $1,000 USD equivalent of
+                Prizes comprise of €30K equivalent of ETH. A total prize fund of
+                €30,000 EUR equivalent of ETH is available. 30 prizes are
+                available, and each prize is valued at €1,000 EUR equivalent of
                 ETH.
               </li>
               <li>
