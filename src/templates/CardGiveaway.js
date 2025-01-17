@@ -44,7 +44,7 @@ const CardGiveaway = ({ data, pageContext }) => {
       <div className={styles.page}>
         {isBlocked && (
           <GeoblockOverlay>
-            <h2>This giveaway is only open to Europe.</h2>
+            <h2>This giveaway is only open to the EU and Switzerland.</h2>
             <p>
               Unfortunately this MetaMask Card giveaway isn’t available in your
               area.
