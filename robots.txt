@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://metamask.io/sitemap-index.xml
-Host: https://metamask.io
