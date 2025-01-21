@@ -69,7 +69,7 @@ const CardGiveaway = ({ data, pageContext }) => {
             !isBlocked && (
               <LinkButton
                 color="white"
-                href="https://consensys-software.typeform.com/to/XmbxlTR5"
+                href="https://portfolio.metamask.io/explore/nfts?phosphor_id=4b684185-b02b-47c6-a881-0b7d4686ab2c"
                 target="_blank"
               >
                 Opt in
@@ -119,7 +119,7 @@ const CardGiveaway = ({ data, pageContext }) => {
             {!isBlocked && (
               <LinkButton
                 color="primary"
-                href="https://consensys-software.typeform.com/to/XmbxlTR5"
+                href="https://portfolio.metamask.io/explore/nfts?phosphor_id=4b684185-b02b-47c6-a881-0b7d4686ab2c"
                 target="_blank"
               >
                 Opt in
@@ -193,14 +193,21 @@ const CardGiveaway = ({ data, pageContext }) => {
                     Method 1: you must opt-in to the giveaway, and complete a
                     transaction using your MetaMask Card. You can opt-in to the
                     giveaway by minting an NFT using the wallet address
-                    associated with your MetaMask Card through this link. You
-                    will not be a part of the giveaway if you make a transaction
-                    without opting in by minting an NFT. You can only mint one
-                    NFT per person. Every card transaction is an entry into the
-                    promotion. The Sponsor shall not be held liable for any
-                    incorrect or inaccurate submissions by participants.
-                    Participants are solely responsible for ensuring the correct
-                    wallet address is provided during the NFT minting process.
+                    associated with your MetaMask Card{' '}
+                    <a
+                      href="https://portfolio.metamask.io/explore/nfts?phosphor_id=4b684185-b02b-47c6-a881-0b7d4686ab2c"
+                      target="_blank"
+                    >
+                      through this link
+                    </a>
+                    . You will not be a part of the giveaway if you make a
+                    transaction without opting in by minting an NFT. You can
+                    only mint one NFT per person. Every card transaction is an
+                    entry into the promotion. The Sponsor shall not be held
+                    liable for any incorrect or inaccurate submissions by
+                    participants. Participants are solely responsible for
+                    ensuring the correct wallet address is provided during the
+                    NFT minting process.
                   </li>
                   <li>
                     Method 2: you may also enter the promotion without making a
