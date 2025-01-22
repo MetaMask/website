@@ -157,9 +157,9 @@ const CardGiveaway = ({ data, pageContext }) => {
             <br />
             <br />
             <p>
-              NO PURCHASE OR TRANSACTION NECESSARY TO ENTER AND/OR WIN. A
-              PURCHASE OR TRANSACTION WILL NOT INCREASE YOUR CHANCES OF WINNING.
-              VOID WHERE PROHIBITED.
+              NO PURCHASE NECESSARY TO ENTER AND/OR WIN. AN ENTRY MADE WITHOUT A
+              PURCHASE HAS THE SAME CHANCES OF WINNING AS AN ENTRY MADE WITH A
+              PURCHASE. VOID WHERE PROHIBITED.
             </p>
             <br />
             <ol>
@@ -187,47 +187,27 @@ const CardGiveaway = ({ data, pageContext }) => {
                 February (14:00 UTC).
               </li>
               <li>
-                You may enter the promotion by either method outlined below:
-                <ol style={{ listStyleType: 'lower-alpha' }}>
-                  <li>
-                    Method 1: you must opt-in to the giveaway, and complete a
-                    transaction using your MetaMask Card. You can opt-in to the
-                    giveaway by minting an NFT using the wallet address
-                    associated with your MetaMask Card{' '}
-                    <a
-                      href="https://portfolio.metamask.io/explore/nfts?phosphor_id=4b684185-b02b-47c6-a881-0b7d4686ab2c"
-                      target="_blank"
-                    >
-                      through this link
-                    </a>
-                    . You will not be a part of the giveaway if you make a
-                    transaction without opting in by minting an NFT. You can
-                    only mint one NFT per person. Every card transaction is an
-                    entry into the promotion. The Sponsor shall not be held
-                    liable for any incorrect or inaccurate submissions by
-                    participants. Participants are solely responsible for
-                    ensuring the correct wallet address is provided during the
-                    NFT minting process.
-                  </li>
-                  <li>
-                    Method 2: you may also enter the promotion without making a
-                    purchase or conducting a transaction by filling out a form{' '}
-                    <a
-                      href="https://consensys-software.typeform.com/to/ApLoCtMc"
-                      target="_blank"
-                    >
-                      here
-                    </a>
-                    . Requests for confirmation of receipt of entries of this
-                    method will not be acknowledged. Sponsor is not responsible
-                    for late, incomplete, illegible or misdirected entries.
-                    Winners that entered via this method will be required to
-                    provide their wallet address on the form. If you do not, you
-                    will be ineligible to receive a prize. You can only enter
-                    one wallet address into the promotion, and it must be
-                    associated with your MetaMask Card.
-                  </li>
-                </ol>
+                To enter the giveaway, mint an NFT using the wallet address
+                associated with your MetaMask Card through{' '}
+                <a
+                  href="https://portfolio.metamask.io/explore/nfts?phosphor_id=4b684185-b02b-47c6-a881-0b7d4686ab2c"
+                  target="_blank"
+                >
+                  through this link
+                </a>
+                . Minting the NFT is required to participate in the giveaway and
+                counts as a single entry. When you mint the NFT, you only pay
+                gas determined by the network. Once you have minted the NFT,
+                every transaction made using your MetaMask Card will count as an
+                additional entry into the promotion.
+                <br />
+                You can only mint one NFT per person, and it must be associated
+                with your MetaMask Card. Requests for confirmation of receipt of
+                entries will not be acknowledged. The Sponsor shall not be held
+                liable for any incorrect or inaccurate submissions by
+                participants. Participants are solely responsible for ensuring
+                the correct wallet address is provided during the NFT minting
+                process.
               </li>
               <li>
                 You may be disqualified from participating if you violate these
