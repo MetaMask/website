@@ -188,7 +188,7 @@ const CardGiveaway = ({ data, pageContext }) => {
               </li>
               <li>
                 To enter the giveaway, mint an NFT using the wallet address
-                associated with your MetaMask Card through{' '}
+                associated with your MetaMask Card {' '}
                 <a
                   href="https://portfolio.metamask.io/explore/nfts?phosphor_id=4b684185-b02b-47c6-a881-0b7d4686ab2c"
                   target="_blank"
