@@ -24,6 +24,7 @@ export const TEMPLATE_LAYOUT_LIST = {
   Blog: './src/templates/NewsLayout.js',
   Author: './src/templates/AuthorProfileLayout.js',
   News: './src/templates/ContentfulNewsCategoryLayout.js',
+  CardGiveaway: './src/templates/CardGiveaway.js',
 }
 
 export const mapTemplateLayout = name => {
@@ -141,6 +142,7 @@ export const GB_BLOCKED_PATHS = [
   '/news/latest/how-to-swap-crypto/',
   '/news/latest/how-to-buy-crypto/',
 ]
+
 export const GB_DISCLAIMER_PATHS = [
   '/',
   '/download/',
@@ -152,3 +154,34 @@ export const GB_DISCLAIMER_PATHS = [
 ]
 
 export const NO_FOLLOW_URLS = ['/cla/', '/about/']
+
+export const EU_COUNTRY_CODES = [
+  'AT',
+  'BE',
+  'BG',
+  'HR',
+  'CY',
+  'CZ',
+  'DK',
+  'EE',
+  'FI',
+  'FR',
+  'DE',
+  'GR',
+  'HU',
+  'IE',
+  'IT',
+  'LV',
+  'LT',
+  'LU',
+  'MT',
+  'NL',
+  'PL',
+  'PT',
+  'RO',
+  'SK',
+  'SI',
+  'ES',
+  'SE',
+  'CH',
+]

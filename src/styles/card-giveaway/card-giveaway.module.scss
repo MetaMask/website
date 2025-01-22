@@ -1,0 +1,38 @@
+@import './fonts.scss';
+
+html.isLanding {
+  :global {
+    body {
+      &.scroll-block {
+        overflow: hidden;
+      }
+
+      &.dark-mode {
+        color: #000;
+        background: #fff;
+
+        h2 {
+          color: inherit;
+        }
+
+        &::before {
+          content: none;
+        }
+      }
+    }
+  }
+}
+
+.page {
+  --font-mm-poly: 'MM Poly Variable';
+  --font-centra-no-1: 'CentraNo1';
+  --font-mm-sans: 'MM Sans';
+
+  font-family: var(--font-centra-no-1), sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+
+  > * {
+    margin-bottom: 80px;
+  }
+}

@@ -1,0 +1,27 @@
+.content {
+  --text-color: #393d46;
+  --title-color: #0a0a0a;
+
+  font-family: var(--font-centra-no-1);
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--text-color);
+
+  h2 {
+    font-family: var(--font-mm-sans);
+    font-size: 24px;
+    line-height: 1.3;
+    font-weight: 400;
+    color: var(--title-color);
+  }
+
+  > * a {
+    color: var(--text-color);
+    text-decoration: underline;
+  }
+
+  hr {
+    margin-block: 60px;
+  }
+}

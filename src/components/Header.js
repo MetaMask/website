@@ -2,6 +2,7 @@ import { contentfulModuleToComponent } from '../lib/utils/moduleToComponent'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import {
   DEFAULT_LOCALE_CODE,
+  EU_COUNTRY_CODES,
   GB_BLOCKED_PATHS,
   GB_DISCLAIMER_PATHS,
   LOCALES,
@@ -33,6 +34,7 @@ const StyledHeader = props => {
     menus,
     downloadButton,
     popupAnnouncement,
+    popupAnnouncementEu,
     popupAnnouncementTreatment,
     hideDownloadBtn,
     isSticky,
@@ -66,6 +68,7 @@ const StyledHeader = props => {
     usePopupAnnouncementTreatment,
     setUsePopupAnnouncementTreatment,
   ] = useState(false)
+  const [usePopupAnnouncementEu, setUsePopupAnnouncementEu] = useState(false)
 
   const ldClient = useLDClient()
   const country = useCountry()
@@ -92,6 +95,14 @@ const StyledHeader = props => {
 
     init()
   }, [getLaunchDarklyFlag, launchDarklyFlag, country])
+
+  useEffect(() => {
+    if (EU_COUNTRY_CODES.includes(country)) {
+      setUsePopupAnnouncementEu(true)
+    } else {
+      setUsePopupAnnouncementEu(false)
+    }
+  }, [country])
 
   useEffect(() => {
     if (!menus && isDarkMode) {
@@ -193,7 +204,9 @@ const StyledHeader = props => {
     <HeaderElement ref={headerRef} className={classnames({ sticky: isSticky })}>
       <Announcement>
         {contentfulModuleToComponent({
-          ...(usePopupAnnouncementTreatment
+          ...(usePopupAnnouncementEu && popupAnnouncementEu
+            ? popupAnnouncementEu
+            : usePopupAnnouncementTreatment && popupAnnouncementTreatment
             ? popupAnnouncementTreatment
             : popupAnnouncement),
           previewMode,
