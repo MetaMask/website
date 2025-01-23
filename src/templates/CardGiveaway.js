@@ -54,8 +54,7 @@ const CardGiveaway = ({ data, pageContext }) => {
               <a href="https://x.com/metamask" target="_blank">
                 @MetaMask
               </a>{' '}
-              on Twitter/X and sign up for our MetaMask newsletter to hear about
-              future giveaways.
+              on Twitter/X to hear about future giveaways.
             </p>
             <LinkButton href="/">Return to Metamask.io</LinkButton>
           </GeoblockOverlay>
@@ -188,7 +187,7 @@ const CardGiveaway = ({ data, pageContext }) => {
               </li>
               <li>
                 To enter the giveaway, mint an NFT using the wallet address
-                associated with your MetaMask Card {' '}
+                associated with your MetaMask Card{' '}
                 <a
                   href="https://portfolio.metamask.io/explore/nfts?phosphor_id=4b684185-b02b-47c6-a881-0b7d4686ab2c"
                   target="_blank"
