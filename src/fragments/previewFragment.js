@@ -579,6 +579,9 @@ export const ContentfulLayoutHeaderFields = gql`
     popupAnnouncement(preview: true) {
       ...ContentfulPopupAnnouncementFields
     }
+    popupAnnouncementUs(preview: true) {
+      ...ContentfulPopupAnnouncementFields
+    }
     popupAnnouncementEu(preview: true) {
       ...ContentfulPopupAnnouncementFields
     }

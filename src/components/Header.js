@@ -6,6 +6,7 @@ import {
   GB_BLOCKED_PATHS,
   GB_DISCLAIMER_PATHS,
   LOCALES,
+  US_COUNTRY_CODE,
   getLocalizedPath,
 } from '../lib/config.mjs'
 import ContextClientSide from '../Context/ContextClientSide'
@@ -34,6 +35,7 @@ const StyledHeader = props => {
     menus,
     downloadButton,
     popupAnnouncement,
+    popupAnnouncementUs,
     popupAnnouncementEu,
     popupAnnouncementTreatment,
     hideDownloadBtn,
@@ -69,6 +71,7 @@ const StyledHeader = props => {
     setUsePopupAnnouncementTreatment,
   ] = useState(false)
   const [usePopupAnnouncementEu, setUsePopupAnnouncementEu] = useState(false)
+  const [usePopupAnnouncementUs, setUsePopupAnnouncementUs] = useState(false)
 
   const ldClient = useLDClient()
   const country = useCountry()
@@ -97,11 +100,8 @@ const StyledHeader = props => {
   }, [getLaunchDarklyFlag, launchDarklyFlag, country])
 
   useEffect(() => {
-    if (EU_COUNTRY_CODES.includes(country)) {
-      setUsePopupAnnouncementEu(true)
-    } else {
-      setUsePopupAnnouncementEu(false)
-    }
+    setUsePopupAnnouncementEu(EU_COUNTRY_CODES.includes(country))
+    setUsePopupAnnouncementUs(country === US_COUNTRY_CODE)
   }, [country])
 
   useEffect(() => {
@@ -206,6 +206,8 @@ const StyledHeader = props => {
         {contentfulModuleToComponent({
           ...(usePopupAnnouncementEu && popupAnnouncementEu
             ? popupAnnouncementEu
+            : usePopupAnnouncementUs && popupAnnouncementUs
+            ? popupAnnouncementUs
             : usePopupAnnouncementTreatment && popupAnnouncementTreatment
             ? popupAnnouncementTreatment
             : popupAnnouncement),
