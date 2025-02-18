@@ -185,3 +185,5 @@ export const EU_COUNTRY_CODES = [
   'SE',
   'CH',
 ]
+
+export const US_COUNTRY_CODE = 'US'
