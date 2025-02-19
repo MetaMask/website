@@ -6,7 +6,6 @@ import {
   GB_BLOCKED_PATHS,
   GB_DISCLAIMER_PATHS,
   LOCALES,
-  US_COUNTRY_CODE,
   getLocalizedPath,
 } from '../lib/config.mjs'
 import ContextClientSide from '../Context/ContextClientSide'
@@ -101,7 +100,7 @@ const StyledHeader = props => {
 
   useEffect(() => {
     setUsePopupAnnouncementEu(EU_COUNTRY_CODES.includes(country))
-    setUsePopupAnnouncementUs(country === US_COUNTRY_CODE)
+    setUsePopupAnnouncementUs(country === 'US')
   }, [country])
 
   useEffect(() => {
