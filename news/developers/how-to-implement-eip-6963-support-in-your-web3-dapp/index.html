@@ -515,7 +515,6 @@ data-styled.g331[id="sc-keyframes-caSHIZ"]{content:"caSHIZ,"}/*!sc*/
 <p>Additionally, dapps that rely on <code>window.ethereum</code> are assured continued support. However, we encourage implementing EIP-6963 support into all dapps as the preferred provider discovery mechanism. The easiest way to do this is by integrating with third-party libraries supporting EIP-6963. Visit the <a href="https://docs.metamask.io/wallet/how-to/detect-wallet/multiple-wallets/#use-third-party-libraries">MetaMask documentation</a> for a growing list of available libraries.</p>
 <p>This tutorial will walk you through the basic steps to implementing EIP-6963 support in your dapp if you decide not to use the available third-party libraries. It uses React and TypeScript however, any JavaScript developer should be able to follow through and implement this in their framework of choice.</p>
 <h2>Define the Supported Interfaces and Types for Web3 Wallets</h2>
-<br />
 <p>The first step to supporting multi-wallet discovery in your dapp is to define all the supported interfaces and types as outlined in the <a href="https://eips.ethereum.org/EIPS/eip-6963">improvement proposal</a>. These interfaces and types provide a structured and standardized way to handle Ethereum wallet providers, facilitating the integration and discovery of multiple Ethereum wallets.</p>
 <pre><code class="language-javascript">// EthereumProviderTypes.d.ts
 
