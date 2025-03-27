@@ -59,7 +59,7 @@
     "minimatch": "^9.0.1",
     "node-html-parser": "^5.2.0",
     "path": "^0.12.7",
-    "prismjs": "^1.29.0",
+    "prismjs": "^1.30.0",
     "qs": "^6.11.2",
     "react": "^18.0.0",
     "react-animate-height": "^2.0.23",
