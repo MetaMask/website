@@ -20,7 +20,6 @@ const HTML = props => {
     <html {...htmlAttributes}>
       <head>
         <meta charSet="utf-8" />
-        <meta httpEquiv="refresh" content="0; url=https://metamask.io" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <meta
           name="viewport"
