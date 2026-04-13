@@ -120,18 +120,9 @@ if (env.errors) {
       },
       {
         resolve: 'gatsby-plugin-robots-txt',
-        options:
-          activeEnv === 'production'
-            ? {
-                host: 'https://metamask.io',
-                sitemap: 'https://metamask.io/sitemap-index.xml',
-                policy: [{ userAgent: '*', allow: '/' }],
-              }
-            : {
-                host: 'https://metamask.consensys.io',
-                sitemap: 'https://metamask.consensys.io/sitemap-index.xml',
-                policy: [{ userAgent: '*', disallow: '/' }],
-              },
+        options: {
+          policy: [{ userAgent: '*', disallow: '/' }],
+        },
       },
       {
         resolve: 'gatsby-plugin-launchdarkly',
