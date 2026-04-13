@@ -125,12 +125,10 @@ if (env.errors) {
           activeEnv === 'production'
             ? {
                 host: 'https://metamask.io',
-                sitemap: 'https://metamask.io/sitemap-index.xml',
-                policy: [{ userAgent: '*', allow: '/' }],
+                policy: [{ userAgent: '*', disallow: '/' }],
               }
             : {
                 host: 'https://metamask.consensys.io',
-                sitemap: 'https://metamask.consensys.io/sitemap-index.xml',
                 policy: [{ userAgent: '*', disallow: '/' }],
               },
       },
